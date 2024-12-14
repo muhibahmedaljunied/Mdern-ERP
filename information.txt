@@ -1,0 +1,93 @@
+Main Domain: 	xgtpgouq.infinityfree.com
+FTP hostname: 	ftpupload.net
+FTP username: 	if0_37793769
+MySQL hostname: 	sql211.infinityfree.com
+MySQL username: 	if0_37793769
+Hosting Volume: 	vol9_3
+https://www.youtube.com/watch?v=0rkK4x-rGGE
+
+
+-------------
+https://www.youtube.com/watch?v=epCCyuMsrQw
+https://www.youtube.com/watch?v=d6Z3qkxQvoE
+https://www.youtube.com/watch?v=YeejG1vYR8M
+https://www.youtube.com/watch?v=sawhL0TycRo
+------------------------------------------------------------------------------
+
+
+FTP Settings
+	
+FTP user name 	if0_37793769
+FTP password 	Same as your cpanel password
+FTP host name 	ftp.infinityfree.com
+FTP port 	21
+FTP software
+	
+	
+MySQL Settings
+	
+MySQL user name 	if0_37793769
+MySQL password 	Same as your cpanel password
+MySQL host name 	sql211.infinityfree.com
+MySQL port 	3306
+MySQL databases 	
+MySQL external access
+	
+
+	
+DNS / Name servers
+	
+Name servers for addon
+and parked domains
+	ns1.infinityfree.com
+ns2.infinityfree.com
+
+	
+Your Domains
+	
+Sub domains
+	
+Addon domains 	
+
+Parked domains on account 	
+
+
+	
+PHP Setting
+	
+Safe mode
+	Off
+cURL
+	Enabled
+Fsocket functions
+	Enabled
+Register globals
+	Off
+PHP version
+	8.2 
+Mod_rewrite & .htaccess
+	Enabled
+Ioncube & Zend
+	Enabled
+GD Library
+	Enabled
+ImageMagik
+	Off
+Phpinfo()
+	View your phpinfo()
+----------
+
+ض
+
+
+
+ about to be   على وشك أن يكون
+ So whereas  في حين أن
+
+7ec3b14833f97ee0ca4cd25085fd5fa750e39892d4053c290c3a4dd89b42f1d0
+
+ git reset -–hard <ORIGINAL_COMMIT 4>    Undo the last merge
+
+ git reset -–hard <ORIGINAL_COMMIT 9>   undo the rebasing
+
+ git branch -D paul_branch  delete branch 

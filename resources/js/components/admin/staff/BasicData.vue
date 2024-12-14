@@ -1,0 +1,249 @@
+<template>
+  <div class="container-fluid">
+    <div class="row row-sm">
+      <div class="col-lg-12 col-md-12">
+        <div class="card" id="basic-alert">
+          <div class="card-header">
+            البيانات الاساسيه
+          </div>
+          <div class="card-body">
+            <!-- <div>
+					<h6 class="card-title mb-1">Basic Style Tabs</h6>
+					<p class="text-muted card-sub-title">It is Very Easy to Customize and it uses in your website apllication.</p>
+				</div> -->
+            <div class="text-wrap">
+              <div class="example">
+                <div class="panel panel-primary tabs-style-1">
+                  <div class="tab-menu-heading">
+                    <div class="tabs-menu1">
+                      <!-- Tabs -->
+                      <ul class="nav panel-tabs main-nav-line">
+                        <li class="nav-item">
+                          <a href="#tab1" class="nav-link" data-toggle="tab">الفروع</a>
+                        </li>
+                    
+                        <!-- <li class="nav-item">
+                          <a href="#tab4" class="nav-link" data-toggle="tab">انواع الموظفين</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                          <a href="#tab5" class="nav-link" data-toggle="tab">المؤهلات العلميه</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                          <a href="#tab6" class="nav-link" data-toggle="tab">الديانه</a>
+                        </li> -->
+                        <li class="nav-item">
+                          <a href="#tab11" class="nav-link" data-toggle="tab"> الجنسيه</a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a href="#tab8" class="nav-link" data-toggle="tab"> البدلات</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#tab12" class="nav-link" data-toggle="tab">انواع الاجازات</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#tab18" class="nav-link" data-toggle="tab">العطل الرسميه</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#tab7" class="nav-link" data-toggle="tab">انواع الغياب</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#tab5" class="nav-link" data-toggle="tab">انواع الانصراف</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                          <a href="#tab14" class="nav-link" data-toggle="tab"> جزاءات الغياب</a>
+                        </li> -->
+                       
+                        <li class="nav-item">
+                          <a href="#tab9" class="nav-link" data-toggle="tab">انواع التاخير</a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                          <a href="#tab13" class="nav-link" data-toggle="tab"> جزاءات التأخير</a>
+                        </li> -->
+
+                        <li class="nav-item">
+                          <a href="#tab10" class="nav-link" data-toggle="tab">انواع الاضافي</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#tab19" class="nav-link" data-toggle="tab"> اجزاء الوقت</a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                          <a href="#tab15" class="nav-link" data-toggle="tab"> جزاءات الاضافي</a>
+                        </li> -->
+                       
+                        <!-- <li class="nav-item">
+                          <a href="#tab16" class="nav-link" data-toggle="tab"> جزاءات الانصراف المبكر</a>
+                        </li> -->
+
+<!--                     
+                        <li class="nav-item">
+                          <a href="#tab23" class="nav-link" data-toggle="tab"> فترات الدوام </a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                          <a href="#tab17" class="nav-link" data-toggle="tab"> نظام الدوام </a>
+                        </li> -->
+                        <li class="nav-item">
+                          <a href="#tab21" class="nav-link" data-toggle="tab"> اوقات فترات الدوام  </a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a href="#tab24" class="nav-link" data-toggle="tab"> انواع الدوام </a>
+                        </li>
+
+
+                        <!-- <li class="nav-item">
+                          <a href="#tab22" class="nav-link" data-toggle="tab">انواع انظمه الدوام</a>
+                        </li> -->
+
+                        
+                  
+
+
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="
+                      panel-body
+                      tabs-menu-body
+                      main-content-body-right
+                      border-top-0 border
+                    ">
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="tab1">
+                        <branch></branch>
+                      </div>
+                  
+                      <!-- <div class="tab-pane" id="tab4">
+                        <staff-type></staff-type>
+                      </div> -->
+                      <!-- <div class="tab-pane" id="tab5">
+                        <qualifications></qualifications>
+                      </div> -->
+                      <div class="tab-pane" id="tab6">
+                        <religion></religion>
+                      </div>
+
+                      <div class="tab-pane" id="tab7">
+                        <absence-type></absence-type>
+                      </div>
+                      <div class="tab-pane" id="tab5">
+                        <leave-type></leave-type>
+                      </div>
+                      <div class="tab-pane" id="tab8">
+                        <allowance></allowance>
+                      </div>
+                      <div class="tab-pane" id="tab9">
+                        <delay-type></delay-type>
+                      </div>
+           
+
+                      <div class="tab-pane" id="tab10">
+                        <extra-type></extra-type>
+                      </div>
+                      <div class="tab-pane" id="tab11">
+                        <nationality></nationality>
+                      </div>
+
+                      <div class="tab-pane" id="tab12">
+                        <vacation-type></vacation-type>
+                      </div>
+
+                    
+                      <!-- <div class="tab-pane" id="tab17">
+                        <work-system></work-system>
+                      </div> -->
+
+                      <div class="tab-pane" id="tab18">
+                        <official-holiday></official-holiday> 
+                      </div>
+
+                      <div class="tab-pane" id="tab19">
+                        <extra-part></extra-part> 
+                      </div>
+
+                      <div class="tab-pane" id="tab21">
+                        <period-time></period-time> 
+                      </div>
+
+
+             
+
+                      <!-- <div class="tab-pane" id="tab23">
+                        <period></period> 
+                      </div> -->
+
+                      <div class="tab-pane" id="tab24">
+                        <work-type></work-type> 
+                      </div>
+
+                      <!-- <div class="tab-pane" id="tab22">
+                        <work-system-type></work-system-type> 
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- End Prism Precode -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import Branch from "./BasicData/Branch";
+import StaffType from "./BasicData/StaffType";
+import AbsenceType from "./BasicData/AbsenceType";
+import LeaveType from "./BasicData/LeaveType";
+import DelayType from "./BasicData/DelayType";
+import VacationType from "./BasicData/VacationType";
+import ExtraType from "./BasicData/ExtraType";
+import Qualifications from "./BasicData/Qualifications";
+import Religion from "./BasicData/Religion";
+import Allowance from "./BasicData/Allowance";
+import Nationality from "./BasicData/Nationality";
+import OfficialHoliday from "./BasicData/OfficialHoliday";
+import ExtraPart from "./BasicData/ExtraPart";
+// import WorkSystem from "./BasicData/WorkSystem";
+import WorkType from "./BasicData/WorkType";
+// import Period from "./BasicData/Period";
+import PeriodTime from "./BasicData/PeriodTime";
+// import WorkSystemType from "./BasicData/WorkSystemType";
+
+
+
+export default {
+  components: {
+    Branch,
+    StaffType,
+    Qualifications,
+    Religion,
+    AbsenceType,
+    LeaveType,
+    Allowance,
+    DelayType,
+    VacationType,
+    ExtraType,
+    Nationality,
+    OfficialHoliday,
+    ExtraPart,
+    // WorkSystem,
+    WorkType,
+    // Period,
+    PeriodTime,
+    // WorkSystemType
+
+
+  },
+
+
+
+
+
+};
+
+</script>

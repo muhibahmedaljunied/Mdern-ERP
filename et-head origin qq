@@ -1,0 +1,144 @@
+* [33m936175a3[m[33m ([m[1;32mmaster[m[33m)[m Add design file
+*   [33md7cca27d[m last commit
+[32m|[m[33m\[m  
+[32m|[m *   [33mc8ed1cd7[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/master[m[33m)[m Merge pull request #8 from muhibahmedaljunied/account2
+[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m *   [33m4a284b70[m Merge pull request #7 from muhibahmedaljunied/master
+[32m|[m [34m|[m [36m|[m[34m\[m  
+[32m|[m [34m|[m [36m|[m[34m/[m  
+[32m|[m [34m|[m[34m/[m[36m|[m   
+[32m|[m * [36m|[m [33mabb5554f[m Merge pull request #6 from muhibahmedaljunied/account2
+[32m|[m [1;32m|[m[36m\[m[36m|[m 
+[32m|[m [1;32m|[m * [33m26ec5d6d[m Update .gitignore
+[32m|[m [1;32m|[m[1;32m/[m  
+[32m|[m * [33mab7c7d68[m Delete storage/logs/laravel.log
+[32m|[m *   [33m9d56a4d8[m Merge pull request #4 from muhibahmedaljunied/HR
+[32m|[m [1;34m|[m[1;35m\[m  
+[32m|[m [1;34m|[m *   [33m1345c98f[m Merge pull request #5 from muhibahmedaljunied/master
+[32m|[m [1;34m|[m [1;36m|[m[1;34m\[m  
+[32m|[m [1;34m|[m [1;36m|[m[1;34m/[m  
+[32m|[m [1;34m|[m[1;34m/[m[1;36m|[m   
+[32m|[m * [1;36m|[m   [33m53b72ac3[m Merge pull request #3 from muhibahmedaljunied/HR
+[32m|[m [32m|[m[33m\[m [1;36m\[m  
+[32m|[m * [33m\[m [1;36m\[m   [33m48f2cfdb[m Merge pull request #2 from muhibahmedaljunied/HR
+[32m|[m [34m|[m[35m\[m [33m\[m [1;36m\[m  
+[32m|[m * [35m\[m [33m\[m [1;36m\[m   [33m1f9a8636[m Merge pull request #1 from muhibahmedaljunied/HR
+[32m|[m [36m|[m[1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+* [36m|[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m   [33maab7fb7a[m Merge branch 'master' of https://github.com/muhibahmedaljunied/sale-purchase-warehouse
+[1;32m|[m[1;33m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[1;32m|[m * [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m   [33mf3cbae2f[m Merge pull request #8 from muhibahmedaljunied/account2
+[1;32m|[m [1;34m|[m[1;35m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[1;32m|[m [1;34m|[m * [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m   [33mf69beb97[m Merge pull request #7 from muhibahmedaljunied/master
+[1;32m|[m [1;34m|[m [1;36m|[m[1;34m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[1;32m|[m [1;34m|[m [1;36m|[m[1;34m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+[1;32m|[m [1;34m|[m[1;34m/[m[1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   
+* [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   [33m06382b02[m merge master with master2
+[32m|[m[33m\[m [1;34m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[32m|[m * [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m6fef1011[m apply sanction level0
+[32m|[m * [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m00c514bc[m remove modal from form in hr basic data
+[32m|[m * [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   [33m42716503[m remove conflict on account2 branch
+[32m|[m [34m|[m[35m\[m [1;34m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[32m|[m [34m|[m * [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33mfa3dba2a[m remove conflict on account2 branch
+[32m|[m [34m|[m * [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33mdeef6ef9[m update gitignore file on account2 branch
+[32m|[m [34m|[m * [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m3a060ca7[m an updated commit message
+[32m|[m [34m|[m * [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   [33ma728ba5c[m an updated commit message
+[32m|[m [34m|[m [36m|[m[1;31m\[m [1;34m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[32m|[m [34m|[m * [1;31m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m20f2c30b[m update hr
+[32m|[m [34m|[m * [1;31m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m045bdb0f[m dfd
+[32m|[m [34m|[m * [1;31m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   [33m5089f69e[m fddf
+[32m|[m [34m|[m [1;32m|[m[1;33m\[m [1;31m\[m [1;34m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[32m|[m [34m|[m * [1;33m|[m [1;31m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m830980f2[m fg branch
+[32m|[m [34m|[m * [1;33m|[m [1;31m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m5f2c5654[m 14/10/24
+[32m|[m [34m|[m * [1;33m|[m [1;31m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m63cf1b22[m 14/10/24
+[32m|[m * [1;33m|[m [1;33m|[m [1;31m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m224f9d6e[m merge master with account
+[32m|[m [1;31m|[m [1;33m|[m[1;31m_[m[1;33m|[m[1;31m/[m [1;34m/[m [1;36m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+[32m|[m [1;31m|[m[1;31m/[m[1;33m|[m [1;33m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   
+[32m|[m * [1;33m|[m [1;33m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m56a18b53[m df2
+[32m|[m * [1;33m|[m [1;33m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   [33me65caa1e[m df
+[32m|[m [1;34m|[m[1;33m\[m [1;33m\[m [1;33m\[m [1;34m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[32m|[m [1;34m|[m [1;33m|[m [1;33m|[m[1;33m/[m [1;34m/[m [1;36m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+[32m|[m [1;34m|[m [1;33m|[m[1;33m/[m[1;33m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   
+[32m|[m * [1;33m|[m [1;33m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m1a91bd8d[m last
+[32m|[m [1;33m|[m [1;33m|[m[1;33m/[m [1;34m/[m [1;36m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+[32m|[m [1;33m|[m[1;33m/[m[1;33m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   
+* [1;33m|[m [1;33m|[m [1;34m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   [33mf4b5c1f2[m merge remote with local
+[1;36m|[m[1;34m\[m [1;33m\[m [1;33m\[m [1;34m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[1;36m|[m [1;34m|[m [1;33m|[m[1;34m_[m[1;33m|[m[1;34m/[m [1;36m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+[1;36m|[m [1;34m|[m[1;34m/[m[1;33m|[m [1;33m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   
+[1;36m|[m * [1;33m|[m [1;33m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   [33mfb26fbfc[m Merge pull request #6 from muhibahmedaljunied/account2
+[1;36m|[m [1;33m|[m[1;36m\[m [1;33m\[m [1;33m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[1;36m|[m [1;33m|[m [1;36m|[m[1;33m_[m[1;33m|[m[1;33m/[m [1;36m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+[1;36m|[m [1;33m|[m[1;33m/[m[1;36m|[m [1;33m|[m [1;36m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m   
+[1;36m|[m [1;33m|[m [1;36m|[m [1;33m|[m[1;36m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m    
+[1;36m|[m [1;33m|[m [1;36m|[m[1;36m/[m[1;33m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m     
+[1;36m|[m [1;33m|[m * [1;33m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33me61080be[m Update .gitignore
+[1;36m|[m [1;33m|[m[1;33m/[m [1;33m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+* [1;33m|[m [1;33m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m64877229[m remove debugbar
+* [1;33m|[m [1;33m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m238dbd29[m remove log
+[34m|[m[1;33m\[m[1;33m|[m [1;33m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m 
+[34m|[m * [1;33m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33md11d9648[m Delete storage/logs/laravel.log
+* [35m|[m [1;33m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m2aa0866b[m remove log
+[1;33m|[m [35m|[m[1;33m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+[1;33m|[m[1;33m/[m[35m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   
+* [35m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m [33m7819f749[m add feature system without finincial
+[35m|[m[35m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+* [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m|[m   [33m2d6c9dde[m Merge pull request #4 from muhibahmedaljunied/HR
+[36m|[m[1;31m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[36m|[m * [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m   [33m25c45f9e[m Merge pull request #5 from muhibahmedaljunied/master
+[36m|[m [1;36m|[m[36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m [1;36m\[m  
+[36m|[m [1;36m|[m[36m/[m [36m/[m [1;31m/[m [35m/[m [33m/[m [1;36m/[m  
+[36m|[m[36m/[m[1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m [1;36m/[m   
+[36m|[m [1;36m|[m [36m|[m[1;36m_[m[1;31m|[m[1;36m_[m[35m|[m[1;36m_[m[33m|[m[1;36m/[m    
+[36m|[m [1;36m|[m[1;36m/[m[36m|[m [1;31m|[m [35m|[m [33m|[m     
+* [1;36m|[m [36m|[m [1;31m|[m [35m|[m [33m|[m   [33m7769f06f[m Merge pull request #3 from muhibahmedaljunied/HR
+[1;34m|[m[33m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m [33m\[m  
+[1;34m|[m [33m|[m [1;36m|[m[33m_[m[36m|[m[33m_[m[1;31m|[m[33m_[m[35m|[m[33m/[m  
+[1;34m|[m [33m|[m[33m/[m[1;36m|[m [36m|[m [1;31m|[m [35m|[m   
+* [33m|[m [1;36m|[m [36m|[m [1;31m|[m [35m|[m   [33m2a159cf8[m Merge pull request #2 from muhibahmedaljunied/HR
+[1;36m|[m[35m\[m [33m\[m [1;36m\[m [36m\[m [1;31m\[m [35m\[m  
+[1;36m|[m [35m|[m [33m|[m[35m_[m[1;36m|[m[35m_[m[36m|[m[35m_[m[1;31m|[m[35m/[m  
+[1;36m|[m [35m|[m[35m/[m[33m|[m [1;36m|[m [36m|[m [1;31m|[m   
+* [35m|[m [33m|[m [1;36m|[m [36m|[m [1;31m|[m   [33m12f65080[m Merge pull request #1 from muhibahmedaljunied/HR
+[36m|[m[1;31m\[m [35m\[m [33m\[m [1;36m\[m [36m\[m [1;31m\[m  
+[36m|[m [1;31m|[m[36m_[m[35m|[m[36m_[m[33m|[m[36m_[m[1;36m|[m[36m/[m [1;31m/[m  
+[36m|[m[36m/[m[1;31m|[m [35m|[m [33m|[m [1;36m|[m [1;31m/[m   
+[36m|[m [1;31m|[m [35m|[m[1;31m_[m[33m|[m[1;31m_[m[1;36m|[m[1;31m/[m    
+[36m|[m [1;31m|[m[1;31m/[m[35m|[m [33m|[m [1;36m|[m     
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33mdcefd1fc[m updating stock
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33mde3d115a[m feature of multible units
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33ma83a51bc[m stock
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33mefa8ffd2[m update operation of stock
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m3255db6c[m update accounts in sale and purchase
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m65347cf1[m accounting of hr stage first
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m65ab6738[m add accounting into HR first stage
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m984e14c0[m  complete updating on accounting
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m33307525[m  complete updating on accounting
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m0e2d2d2f[m update warehouse
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33mefe05a7f[m update return
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m17ec3f50[m update return
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m0403d1df[m refactor
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33mc03b035e[m refactor
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m9e4c41ab[m f
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33mdbf7ec73[m refacturing
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33m392bcad0[m refactor sale-purchase-transfer
+[36m|[m [1;31m|[m [35m|[m [33m|[m[33m/[m  
+[36m|[m [1;31m|[m [35m|[m * [33mfe5b523e[m last update
+[36m|[m [1;31m|[m [35m|[m[35m/[m  
+[36m|[m [1;31m|[m * [33m7ce4feec[m update attendance sanctions
+[36m|[m [1;31m|[m[1;31m/[m  
+[36m|[m * [33mfda4a480[m updating HR
+[36m|[m * [33m4c2d5e49[m 'create-package'
+[36m|[m * [33m77e85c93[m ffff
+[36m|[m * [33m15410655[m dfdf
+[36m|[m[36m/[m  
+* [33m6b158a94[m acoounting
+* [33m00113d7d[m update transfer
+* [33m28acdb45[m add facade Return
+* [33mb732eb5e[m muhib
+* [33mc7a75bc2[m change accounting
+* [33m5356ebdc[m update tree of accounts
+* [33m8e476a8c[m update tree of accounts
+* [33macc966f0[m update sale and purchase temporale
+* [33mc68a8d08[m update sale and purchase
+* [33m7a6b9712[m update staff
+* [33mea8bc367[m First Commit
