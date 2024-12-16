@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupTypesTable extends Migration
+class CreateGroupAccountDailyDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,14 +15,15 @@ class CreateGroupTypesTable extends Migration
     {
 
         // Schema::connection('mysql2')->create('some_table', function($table)
-        Schema::create('group_types', function (Blueprint $table) {
-
-
+        Schema::create('group_account_daily_details', function (Blueprint $table) {
 
             $table->Increments('id');
-            $table->string('name');
-            $table->string('code')->nullable();
-            $table->string('status')->nullable();
+
+             $table->morphs('dailyable');
+
+            $table->unsignedInteger('daily_detail_id')->nullable();
+            $table->foreign('daily_detail_id')->references('id')->on('daily_details');
+
             $table->timestamps();
             
             
@@ -39,6 +40,6 @@ class CreateGroupTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_types');
+        Schema::dropIfExists('group_account_daily_details');
     }
 }

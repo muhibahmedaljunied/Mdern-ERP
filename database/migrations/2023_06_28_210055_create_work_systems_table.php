@@ -24,7 +24,7 @@ class CreateWorkSystemsTable extends Migration
             $table->unsignedInteger('period_time_id')->nullable();
             $table->foreign('period_time_id')->references('id')->on('period_times');
 
-            $table->json('day_id');
+            $table->json('days');
 
 
             $table->timestamps();

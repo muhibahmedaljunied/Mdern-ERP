@@ -17,12 +17,6 @@ class CreateStocksTable extends Migration
             
             $table->Increments('id');
 
-            // $table->unsignedInteger('product_id');
-            // $table->foreign('product_id')->references('id')->on('products');
-
-            // $table->unsignedInteger('store_id')->unsigned()->nullable();
-            // $table->foreign('store_id')->references('id')->on('stores');
-
             
             $table->unsignedInteger('store_product_id')->unsigned()->nullable();
             $table->foreign('store_product_id')->references('id')->on('store_products')->onDelete('cascade');
@@ -37,7 +31,6 @@ class CreateStocksTable extends Migration
 
             $table->morphs('stockable');
 
-            $table->string('desc')->nullable();
             $table->integer('quantity')->default(0);
 
 

@@ -19,7 +19,6 @@ class CreateAttendanceDetailsTable extends Migration
             $table->unsignedInteger('attendance_id');
             $table->foreign('attendance_id')->references('id')->on('attendances');
             
-         
             $table->unsignedInteger('period_id');
             $table->foreign('period_id')->references('id')->on('periods');
 

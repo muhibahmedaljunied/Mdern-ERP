@@ -16,14 +16,8 @@ class CreateDelaySanctionsTable extends Migration
         Schema::create('delay_sanctions', function (Blueprint $table) {
             $table->Increments('id');
 
-            // $table->unsignedInteger('staff_id');
-            // $table->foreign('staff_id')->references('id')->on('staff');
-
             $table->unsignedInteger('delay_type_id');
             $table->foreign('delay_type_id')->references('id')->on('delay_types');
-
-            // $table->unsignedInteger('delay_part_id');
-            // $table->foreign('delay_part_id')->references('id')->on('delay_parts');
 
             $table->unsignedInteger('part_id');
             $table->foreign('part_id')->references('id')->on('parts');
@@ -33,10 +27,9 @@ class CreateDelaySanctionsTable extends Migration
 
             $table->integer('discount');
             
+            $table->integer('iteration');
 
-            $table->integer('iteration')->nullable();
-
-            $table->integer('sanction')->nullable();
+            $table->integer('sanction');
 
             $table->timestamps();
         });

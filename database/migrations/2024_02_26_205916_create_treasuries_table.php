@@ -16,7 +16,7 @@ class CreateTreasuriesTable extends Migration
         Schema::create('treasuries', function (Blueprint $table) {
             $table->Increments('id');
             // --------------------------------------------------------------
-            $table->unsignedInteger('group_id');
+            $table->unsignedInteger('group_id')->nullable();
             $table->foreign('group_id')->references('id')->on('groups');
            // --------------------------------------------------------------
             $table->string('name');

@@ -17,8 +17,6 @@ class CreateAccountYearsTable extends Migration
         // Schema::connection('mysql2')->create('some_table', function($table)
         Schema::create('account_years', function (Blueprint $table) {
 
-
-
             $table->Increments('id');
             $table->string('name');
             $table->date('start_date')->nullable();

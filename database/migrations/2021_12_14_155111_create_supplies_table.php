@@ -26,17 +26,9 @@ class CreateSuppliesTable extends Migration
             $table->date('due_date')->nullable();
             $table->string('note')->nullable();
             $table->string('supplier_name');
-            // $table->string('sub_total')->nullable();
-            // $table->decimal('discount')->nullable();
-            // $table->decimal('tax_amount')->nullable();
             $table->integer('grand_total');
             $table->string('status')->nullable();
 
-            // $table->integer('quantity')->nullable();
-            // $table->integer('qty_return')->default(0);
-
-            // $table->unsignedInteger('store_id');
-            // $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             
             $table->timestamps();
         });
