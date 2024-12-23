@@ -8,9 +8,9 @@
               <span class="h2"> المشتريات</span>
             </div>
 
-            <div class="d-flex justify-content-between"></div>
+<!--             
             <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" />
+              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" /> -->
           </div>
           <div class="card-body">
             <div class="table-responsive">

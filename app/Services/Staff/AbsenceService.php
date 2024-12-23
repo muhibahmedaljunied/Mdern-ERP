@@ -22,9 +22,8 @@ class AbsenceService
     public function create()
     {
 
-        // dd($this->core->data_sanction);
+  
         $this->get();  //this get absence_sanctions
-       
         // $absence = DB::table('absences')->get(); //this calc from absence_table
         for ($i = 0; $i < count($this->core->data_sanction); $i++) {
             

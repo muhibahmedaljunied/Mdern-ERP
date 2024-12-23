@@ -8,6 +8,10 @@ export default {
         type: Object,
         default: null,
       },
+
+
+    check_state: [],
+
       discounttypeselected: [],
       discountselected: [],
       sanctionselected: [],

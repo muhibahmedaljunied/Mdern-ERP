@@ -21,8 +21,18 @@
                                 <label for="status"> نوع الغياب</label>
 
                                 <select v-model="absenceselected" name="type" class="form-control " required>
-                                    <option v-for="absence in absence_types" v-bind:value="absence.id">
+                                    <option v-for="absence in absence_types" v-bind:value="[absence.id, absence.code]">
                                         {{ absence.name }}
+                                    </option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-2">
+                                <label for="status"> الموظف</label>
+
+                                <select v-model="staffselected" name="type" class="form-control " required>
+                                    <option v-for="staff in staffs" v-bind:value="staff.id">
+                                        {{ staff.name }}
                                     </option>
                                 </select>
 
@@ -104,7 +114,7 @@
                                             <th class="wd-10p border-bottom-0">نوع الغياب</th>
                                             <th class="wd-10p border-bottom-0">عدد المرات</th>
 
-
+                                            <th class="wd-10p border-bottom-0">الحاله</th>
                                             <th class="wd-10p border-bottom-0"> اللائحه </th>
 
 
@@ -113,47 +123,206 @@
                                         </tr>
                                     </thead>
                                     <tbody v-if="value_list && value_list.data.length > 0">
-                                        <tr v-for="(staff, indexs) in value_list.data" :key="indexs">
+                                        <tr v-for="(staff, indexs) in value_list.data" :key="indexs"
+                                            v-if="staff.attendance > 0">
 
 
 
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{ staff.name }}</td>
+
+                                            <td v-for="absence in absence_types"
+                                                v-if="absence.code == absenceselected[1]">
+
+
+                                                {{ absence.name }}
+                                            </td>
+
+
+                                            <td>{{ staff.attendance }}</td>
+
+
+
                                             <td>
+                                                <span class="badge bg-danger" v-if="staff.absence.length"> ضمن
+                                                    اللائحه</span>
+                                                <span class="badge bg-success" v-else>ليس ضمن اللائحه</span>
+                                            </td>
+
+
+                                            <td>
+
+
+                                                <template v-if="staff.absence.length">
+
+                                                    <button type="button" data-toggle="modal"
+                                                        class="tn btn-success btn-sm waves-effect btn-agregar"
+                                                        :data-target="'#addAbsence' + indexs"> فحص
+                                                        اللائحه</button>
+
+
+
+                                                    <button data-toggle="tooltip"
+                                                        class="tn btn-success btn-sm waves-effect btn-agregar">
+                                                        تطبيق</button>
+
+
+
+
+
+
+                                                    <div class="modal fade bs-example-modal-lg" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myLargeModalLabel"
+                                                        aria-hidden="true" style="display: none"
+                                                        :id="'addAbsence' + indexs">
+                                                        <div class="modal-dialog modal-lg" style="width: 100%">
+                                                            <div class="modal-content">
+                                                                <!-- <div class="modal-header">
+
+
+                                                                <div class="col-md-4">
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" placeholder="بحث"
+                                                                            class="form-control" name="buscar_producto"
+                                                                            id="buscar_producto" v-model="word_search"
+                                                                            @input="get_search()" />
+                                                                    </div>
+                                                                </div>
+                                                            </div> -->
+                                                                <div class="modal-body">
+                                                                    <div class="row row-sm">
+                                                                        <div class="col-xl-12">
+                                                                            <div class="card">
+
+                                                                                <div class="card-body">
+                                                                                    <form method="post">
+
+                                                                                        <div class="table-responsive">
+                                                                                            <table
+                                                                                                class="table table-bordered text-right"
+                                                                                                style="width: 100%; font-size: x-large">
+                                                                                                <thead>
+                                                                                                    <tr>
+
+                                                                                                        <th> نوع
+                                                                                                            الغياب
+                                                                                                        </th>
+                                                                                                        <th> نوع
+                                                                                                            الخصم
+                                                                                                        </th>
+
+
+                                                                                                        <th>
+                                                                                                            عدد المرات
+                                                                                                        </th>
+                                                                                                        <th> قيمه
+                                                                                                            الخصم
+                                                                                                        </th>
+
+
+
+
+                                                                                                        <th>اضافه
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr v-for="(absence, index_absence) in staff.absence"
+                                                                                                        :key="index_absence">
+
+                                                                                                        <td>
+
+                                                                                                            {{
+                                                                                                                absence.absence_name
+                                                                                                            }}
+                                                                                                        </td>
+                                                                                                        <td>
+
+                                                                                                            {{
+                                                                                                                absence.name
+                                                                                                            }}
+                                                                                                        </td>
+
+                                                                                                        <td>
+
+                                                                                                            {{
+                                                                                                                absence.iteration
+                                                                                                            }}
+                                                                                                        </td>
+
+                                                                                                        <td>
+
+                                                                                                            {{
+                                                                                                                absence.sanction
+                                                                                                            }}
+                                                                                                        </td>
+
+
+
+                                                                                                        <td>
+
+
+                                                                                                            <input
+                                                                                                                @change="
+                                                                                                                    check_row(
+
+                                                                                                                        index_absence
+
+                                                                                                                    )
+                                                                                                                    "
+                                                                                                                type="checkbox"
+                                                                                                                v-model="check_state[index_absence]"
+                                                                                                                class="btn btn-info waves-effect" />
+
+                                                                                                        </td>
+
+
+
+                                                                                                    </tr>
+
+                                                                                                </tbody>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </form>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        @click="Add_new()">حفظ </button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+
+                                                                </div>
+
+
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </template>
+
+                                                <template v-else>
+
+
+
+                                                </template>
+
+
+
+
+
 
 
 
                                             </td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                         </tr>
 
@@ -214,6 +383,24 @@ export default {
     methods: {
 
 
+        check_row(index) {
+
+
+            if (this.check_state[index] == true) {
+
+                this.counts[index] = index;
+                // this.staff[index] = staff_id;
+                // this.period[index] = period_id;
+
+            }
+            else if (this.check_state[index] == false) {
+
+                this.$delete(this.counts[index], index);
+
+
+            }
+
+        },
         list(page = 1) {
             this.axios
                 .post(`/absence_sanction?page=${page}`)
@@ -222,6 +409,7 @@ export default {
 
                     this.absence_types = data.absence_types;
                     this.iteration = data.iteration;
+                    this.staffs = data.staffs;
                     this.value_list = data.list;
                 })
                 .catch(({ response }) => {
@@ -231,12 +419,16 @@ export default {
 
         search() {
 
-            axios.post(`/absence_sanction/show`, {
-                absence_type: this.absenceselected,
+            axios.post(`/absence_sanction_attendance`, {
+                absence_type_code: this.absenceselected[1],
+                absence_type_id: this.absenceselected[0],
+                staff_id: this.staffselected,
+
+
             }).then(
                 (response) => {
 
-                    this.value_list = response.data.periods;
+                    this.value_list = response.data.list;
 
 
 

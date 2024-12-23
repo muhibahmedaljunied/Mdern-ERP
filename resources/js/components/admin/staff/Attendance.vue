@@ -23,18 +23,18 @@
                         <li class="nav-item">
                           <a href="#tab2" class="nav-link" data-toggle="tab">التحضير بالبصمه</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                           <a href="#tab3" class="nav-link" data-toggle="tab"> تأخير</a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item">
                           <a href="#tab4" class="nav-link" data-toggle="tab"> غياب</a>
                         </li>
 
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                           <a href="#tab5" class="nav-link" data-toggle="tab"> انصراق مبكر</a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item">
                           <a href="#tab6" class="nav-link" data-toggle="tab">اجازه</a>
@@ -68,19 +68,19 @@
                         <auto-attendance></auto-attendance>
                       </div>
 
-
+<!-- 
                       <div class="tab-pane active" id="tab3">
                         <delay></delay>
-                      </div>
+                      </div> -->
 
                       <div class="tab-pane active" id="tab4">
                         <absence></absence>
                       </div>
 
 
-                      <div class="tab-pane active" id="tab5">
+                      <!-- <div class="tab-pane active" id="tab5">
                         <leaveout></leaveout>
-                      </div>
+                      </div> -->
 
                       <div class="tab-pane" id="tab6">
                         <leave></leave>
@@ -107,9 +107,9 @@
 import Attendance from "./Attendance/Attendance";
 import AutoAttendance from "./Attendance/AutoAttendance";
 import Leave from "./Attendance/Leave";
-import Delay from "./Attendance/Delay";
+// import Delay from "./Attendance/Delay";
 import Absence from "./Attendance/Absence";
-import Leaveout from "./Attendance/Leaveout";
+// import Leaveout from "./Attendance/Leaveout";
 
 
 
@@ -120,9 +120,9 @@ export default {
     Attendance,
     AutoAttendance,
     Leave,
-    Delay,
+    // Delay,
     Absence,
-    Leaveout
+    // Leaveout
 
 
   },

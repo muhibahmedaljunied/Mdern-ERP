@@ -64,18 +64,18 @@
                                   </select>
                                 </td> -->
                           <td>
-                            <select v-model="leaveselected[index]" name="type" id="type" class="form-control " required>
-                              <option v-for="leave in leave_types" v-bind:value="leave.id">
-                                {{ leave.name }}
+                            <select v-model="leaveoutselected[index]" name="type" id="type" class="form-control " required>
+                              <option v-for="leaveout in leaveout_types" v-bind:value="leaveout.id">
+                                {{ leaveout.name }}
                               </option>
                             </select>
                           </td>
 
                           <td>
-                            <select v-model="leavepartselected[index]" name="type" id="type" class="form-control "
+                            <select v-model="leaveoutpartselected[index]" name="type" id="type" class="form-control "
                               required>
-                              <option v-for="leave_part in leave_parts" v-bind:value="leave_part.id">
-                                {{ leave_part.name }}
+                              <option v-for="leaveout_part in leaveout_parts" v-bind:value="leaveout_part.id">
+                                {{ leaveout_part.name }}
                               </option>
                             </select>
                           </td>
@@ -195,28 +195,28 @@
             </tr>
           </thead>
           <tbody v-if="value_list.data && value_list.data.length > 0">
-            <tr v-for="(leave_sanction, index) in value_list.data" :key="index">
+            <tr v-for="(leaveout_sanction, index) in value_list.data" :key="index">
               <td>{{ index + 1 }}</td>
-              <!-- <td>{{ leave_sanction.staff_name }}</td> -->
-              <td>{{ leave_sanction.leave }}</td>
-              <td>{{ leave_sanction.duration }}</td>
+              <!-- <td>{{ leaveout_sanction.staff_name }}</td> -->
+              <td>{{ leaveout_sanction.leaveout }}</td>
+              <td>{{ leaveout_sanction.duration }}</td>
              
-              <td v-if="leave_sanction.iteration == 1"> مره واحده</td>
-              <td v-if="leave_sanction.iteration == 2">  مرتين</td>
-              <td v-if="leave_sanction.iteration == 3">ثلاث مرات</td>
-              <td v-if="leave_sanction.iteration == 4">اربع مرات</td>
-              <td v-if="leave_sanction.iteration == 5"> خمس مرات او اكثر</td>
-              <td v-if="leave_sanction.iteration == 6"> اي مره</td>
+              <td v-if="leaveout_sanction.iteration == 1"> مره واحده</td>
+              <td v-if="leaveout_sanction.iteration == 2">  مرتين</td>
+              <td v-if="leaveout_sanction.iteration == 3">ثلاث مرات</td>
+              <td v-if="leaveout_sanction.iteration == 4">اربع مرات</td>
+              <td v-if="leaveout_sanction.iteration == 5"> خمس مرات او اكثر</td>
+              <td v-if="leaveout_sanction.iteration == 6"> اي مره</td>
 
-              <td>{{ leave_sanction.discount_name }}</td>
-              <td v-if="leave_sanction.discount == 1">قيمه</td>
-              <td v-if="leave_sanction.discount == 2">نسبه</td>
-              <td>{{ leave_sanction.sanction }}</td>
+              <td>{{ leaveout_sanction.discount_name }}</td>
+              <td v-if="leaveout_sanction.discount == 1">قيمه</td>
+              <td v-if="leaveout_sanction.discount == 2">نسبه</td>
+              <td>{{ leaveout_sanction.sanction }}</td>
        
 
               <td>
                 <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="btn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
-                <button type="button" @click="delete_item(leave_sanction.id)" class="btn btn-danger btn-sm waves-effect">
+                <button type="button" @click="delete_item(leaveout_sanction.id)" class="btn btn-danger btn-sm waves-effect">
                   <i class="fa fa-trash"></i>
                 </button>
                 <a class="btn btn-info btn-sm waves-effect btn-agregar" data-target="#updateSLA" data-toggle="modal"
@@ -262,12 +262,12 @@ export default {
         default: null,
       },
 
-      leave_types:'',
-      leave_parts:'',
+      leaveout_types:'',
+      leaveout_parts:'',
       discount_types:'',
       discountselected: [],
-      leaveselected: [],
-      leavepartselected:[],
+      leaveoutselected: [],
+      leaveoutpartselected:[],
       iterationselected: [],
       discounttypeselected: [],
       sanctionselected: [],
@@ -278,7 +278,7 @@ export default {
   mounted() {
     this.list();
     this.counts[0] = 1;
-    this.type = 'leave_sanction';
+    this.type = 'leaveout_sanction';
   },
   methods: {
 
@@ -291,8 +291,8 @@ export default {
           // staff:this.staffselected,
           discount: this.discountselected,
 
-          leave: this.leaveselected,
-          leave_part:this.leavepartselected,
+          leaveout: this.leaveoutselected,
+          leaveout_part:this.leaveoutpartselected,
           iteration: this.iterationselected,
           discount_type: this.discounttypeselected,
           sanction: this.sanctionselected,
@@ -304,10 +304,10 @@ export default {
 
     list(page = 1) {
       this.axios
-        .post(`/leave_sanction?page=${page}`)
+        .post(`/leaveout_sanction?page=${page}`)
         .then(({ data }) => {
-          this.leave_types = data.leave_types;
-          this.leave_parts = data.leave_parts;
+          this.leaveout_types = data.leaveout_types;
+          this.leaveout_parts = data.leaveout_parts;
           this.discount_types = data.discount_types;
           this.staffs = data.staffs;
           this.value_list = data.list;

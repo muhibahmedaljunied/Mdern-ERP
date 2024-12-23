@@ -58,6 +58,9 @@
                               <td>
                                 <select style="background-color: beige;" v-model="staffselected[index]" name="type"
                                   id="type" class="form-control " required>
+                                  <option  v-bind:value="0">
+                                    الكل
+                                  </option>
                                   <option style="background-color: beige;" v-for="staff in staffs"
                                     v-bind:value="staff.id">
                                     {{ staff.name }}
@@ -67,9 +70,13 @@
                               <td>
                                 <select style="background-color: beige;" v-model="typeselected[index]" name="type"
                                   id="type" class="form-control" required>
+                                  <option  v-bind:value="0">
+                                    الافتراضي
+                                  </option>
                                   <option v-for="absence_type in absence_types" v-bind:value="absence_type.id">
                                     {{ absence_type.name }}
                                   </option>
+                             
                                 </select>
                               </td>
 

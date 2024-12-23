@@ -14,6 +14,7 @@ use App\Models\Part;
 use App\Models\LeaveType;
 use App\Repository\StaffSaction\StaffLeaveSanctionRepository;
 use App\Services\PayrollService;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,11 +38,11 @@ class LeaveSanctionController extends Controller
         $this->get_attendance();
 
         return response()->json([
-            'list' => $this->get_leave_sanction(),
-            'leave_types' => LeaveType::all(),
+            'list' => $this->get_leaveout_sanction(),
+            'leaveout_types' => LeaveType::all(),
             'staffs' => $staffs,
             'discount_types' => SanctionDiscount::all(),
-            'leave_parts' => Part::all()
+            'leaveout_parts' => Part::all()
         ]);
     }
 
@@ -55,12 +56,104 @@ class LeaveSanctionController extends Controller
         // --------------------------------------------------------------------------------------------------
 
         return response()->json([
-            'leave_types' => LeaveType::all(),
-            'leave_parts' => Part::all(),
+            'leaveout_types' => LeaveType::all(),
+            'leaveout_parts' => Part::all(),
             'staffs' => $staffs
         ]);
     }
-    public function get_leave_sanction()
+
+
+    public function leaveout_sanction_attendance(Request $request)
+    {
+
+        // dd(date('l', strtotime('2024-11-19')), '2024-11-19');           
+        // Tuesday,Thursday,Saturday,Monday,Wednesday,Friday,Sunday
+
+        // dd($request->all());
+        $array_filter = [];
+        $array_filter2 = [];
+
+        $attendances =  DB::table('attendances');
+        if ($request->staff_id) {
+
+            $attendances = $attendances->where('staff_id', $request->staff_id);
+        }
+        $attendances = $attendances->where('staff_id', $request->staff_id)
+            ->where('attendance_status', 1)
+            ->addSelect(['attendance_details' => function (Builder $builder) {
+                $builder->from('attendance_details')
+                    ->selectRaw('sum(leaveout)')
+                    ->whereColumn('attendances.id', 'attendance_details.attendance_id');
+            }])
+            ->get();
+
+        // dd($attendances);
+        // ----------------------------------------------------------------------------------------------------------------
+        foreach ($attendances as $key => $value) {
+
+            // dd($value);
+            if (
+                date('l', strtotime($value->attendance_date)) == $request->leaveout_type_code
+                &&
+                $value->attendance_details == $request->leaveout_part_duration
+            ) {
+
+                if (!in_array($value->attendance_date, $array_filter)) {
+
+                    $array_filter[$key] =  $value->attendance_date;
+                    $array_filter2[$key] =  date('l', strtotime($value->attendance_date));
+                }
+            }
+        }
+
+        // dd($array_filter,$array_filter2);
+        // ----------------------------------------------------------------------------------------------------------------
+
+        $attendances =  DB::table('staff')
+            ->addSelect(['attendance' => function (Builder $builder) use ($array_filter) {
+                $builder->from('attendances')
+                    ->selectRaw('count(*) as attendance')
+                    ->whereColumn('staff.id', 'attendances.staff_id')
+                    ->whereIn('attendance_date', $array_filter);
+            }])
+            ->get();
+
+        // dd($attendances);
+        // ----------------------------------------------------------------------------------------------------------------
+
+
+
+        foreach ($attendances as $key => $value) {
+
+
+            // dd($request->leaveout_part_id, $request->leaveout_type_id, $value->attendance);
+            $leaveout =  DB::table('leave_sanctions')
+                ->join('sanction_discounts', 'sanction_discounts.id', '=', 'leave_sanctions.sanction_discount_id')
+                ->join('leave_types', 'leave_types.id', '=', 'leave_sanctions.leave_type_id')
+                ->where('leave_sanctions.part_id', $request->leaveout_part_id)
+                ->where('leave_sanctions.leave_type_id', $request->leaveout_type_id)
+                ->where('leave_sanctions.iteration', $value->attendance)
+                ->select(
+                    'leave_sanctions.*',
+                    'sanction_discounts.*',
+                    'leave_types.name as leaveout_name'
+                )->get();
+
+            $value->part = $request->leaveout_part_duration;
+            $value->leaveout = $leaveout;
+            // dd($leaveout);
+        }
+
+        // ----------------------------------------------------------------------------------------------------------------
+
+
+        // dd($attendances);
+        return response()->json([
+            'list' => $attendances,
+
+        ]);
+    }
+    public function get_leaveout_sanction()
     {
 
 
@@ -69,19 +162,10 @@ class LeaveSanctionController extends Controller
             ->join('leave_types', 'leave_types.id', '=', 'leave_sanctions.leave_type_id')
             ->join('parts', 'parts.id', '=', 'leave_sanctions.part_id')
             ->join('sanction_discounts', 'sanction_discounts.id', '=', 'leave_sanctions.sanction_discount_id')
-            ->select('leave_sanctions.*', 'leave_types.name as leave', 'parts.name as duration', 'sanction_discounts.name as discount_name')
+            ->select('leave_sanctions.*', 'leave_types.name as leaveout', 'parts.name as duration', 'sanction_discounts.name as discount_name')
             ->paginate(10);
 
 
-        // $leave_sanctions = Cache::rememberForever('leave_sanctions_index', function () {
-
-        //     return DB::table('leave_sanctions')
-        //         ->join('leave_types', 'leave_types.id', '=', 'leave_sanctions.leave_type_id')
-        //         ->join('parts', 'parts.id', '=', 'leave_sanctions.part_id')
-        //         ->join('sanction_discounts', 'sanction_discounts.id', '=', 'leave_sanctions.sanction_discount_id')
-        //         ->select('leave_sanctions.*', 'leave_types.name as leave', 'parts.name as duration', 'sanction_discounts.name as discount_name')
-        //         ->paginate(10);
-        // });
 
         return $leave_sanctions;
     }
@@ -100,7 +184,7 @@ class LeaveSanctionController extends Controller
     }
 
 
-    public function get_staff_leave_sanction()
+    public function get_staff_leaveout_sanction()
     {
 
         $staff = StaffSanction::with(['Sanctionable' => function (MorphTo $morphTo) {
@@ -166,7 +250,7 @@ class LeaveSanctionController extends Controller
             DB::beginTransaction();
 
             $staff_sanction->update_sanction();
-            $payroll->payroll('total_leave_sanction');
+            $payroll->payroll('total_leaveout_sanction');
 
 
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB

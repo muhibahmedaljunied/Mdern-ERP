@@ -1,11 +1,11 @@
 <template>
 
 
-  <div class="content container-fluid">
+    <div class="content container-fluid">
 
 
-  
-    <div class="row row-sm">
+
+        <div class="row row-sm">
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header pb-0">
@@ -55,7 +55,7 @@
 
                             </div>
 
-                             <!--<div class="col-md-2">
+                            <!--<div class="col-md-2">
                                 <label for="status"> الفتره</label>
                                 <select id='select_period' v-model="period_selected" name="type" class="form-control "
                                     required>
@@ -94,59 +94,55 @@
         </div>
 
 
-      <div class="row row-sm">
-          <div class="col-xl-12">
-              <div class="card">
+        <div class="row row-sm">
+            <div class="col-xl-12">
+                <div class="card">
 
-                  <div class="card-body" id="printme">
-
-
-                      <form action="post">
-                          <div class="table-responsive">
-                              <table class="table table-bordered text-center">
-                                  <thead>
-                                      <tr>
-                                    
-                                          <th class="wd-10p border-bottom-0">اسم المؤظف</th>
-                                    
-                                          <th class="wd-10p border-bottom-0">عدد المرات</th>
-                                          <th class="wd-10p border-bottom-0">اليوم</th>
-                                          <th class="wd-10p border-bottom-0">المده</th>
-                                          <th class="wd-10p border-bottom-0"> اللائحه </th>
+                    <div class="card-body" id="printme">
 
 
+                        <form action="post">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-center">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="wd-10p border-bottom-0">اسم المؤظف</th>
+                                            <th class="wd-10p border-bottom-0">نوع الاضافي</th>
+                                            <th class="wd-10p border-bottom-0">المده</th>
+                                            <th class="wd-10p border-bottom-0">عدد المرات</th>
+
+                                            <th class="wd-10p border-bottom-0"> اللائحه </th>
 
 
-                                      </tr>
-                                  </thead>
-                                  <tbody v-if="value_list && value_list.data.length > 0">
-                                      <tr v-for="(staff, indexs) in value_list.data" :key="indexs">
-                                          <!-- <td>{{ staff.id }}</td> -->
 
-                                          <!-- <input v-model="staff_id = staff.id" type="hidden" name="name" id="name"
+
+                                        </tr>
+                                    </thead>
+                                    <tbody v-if="value_list && value_list.data.length > 0">
+                                        <tr v-for="(staff, indexs) in value_list.data" :key="indexs">
+                                            <!-- <td>{{ staff.id }}</td> -->
+
+                                            <!-- <input v-model="staff_id = staff.id" type="hidden" name="name" id="name"
                                           class="form-control" /> -->
 
 
-                                          <td>{{ staff.attendance.staff.name }}</td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td>
+                                            <td>{{ staff.attendance.staff.name }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
 
-                                      
+                                                <button data-toggle="tooltip"
+                                                    class="tn btn-success btn-sm waves-effect btn-agregar"> فحص
+                                                    اللائحه</button>
 
-                                          </td>
-
-                                      
-
-                    
-
-
+                                                <button data-toggle="tooltip"
+                                                    class="tn btn-success btn-sm waves-effect btn-agregar">
+                                                    تطبيق</button>
 
 
-
-
-                                     
+                                            </td>
 
 
 
@@ -166,32 +162,43 @@
 
 
 
-                                      </tr>
 
-                                
 
-                                  </tbody>
-                                  <tbody v-else>
-                                      <tr>
-                                          <td align="center" colspan="3">لايوجد بياتات.</td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                          <!-- <a href="javascript:void" @click="Add_new()" class="btn btn-success"><span>تاكيد
+
+
+
+
+
+
+
+
+
+                                        </tr>
+
+
+
+                                    </tbody>
+                                    <tbody v-else>
+                                        <tr>
+                                            <td align="center" colspan="3">لايوجد بياتات.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- <a href="javascript:void" @click="Add_new()" class="btn btn-success"><span>تاكيد
                   العمليه</span></a> -->
-                      </form>
-                      <pagination align="center" :data="staff_attendance" @pagination-change-page="list"></pagination>
-                  </div>
+                        </form>
+                        <pagination align="center" :data="staff_attendance" @pagination-change-page="list"></pagination>
+                    </div>
 
 
-              </div>
-          </div>
-      </div>
+                </div>
+            </div>
+        </div>
 
 
 
-  </div>
+    </div>
 
 </template>
 
@@ -201,137 +208,137 @@ import pagination from "laravel-vue-pagination";
 import operation from '../../../../staff/operation/operation.js';
 
 export default {
-  components: {
-      pagination,
-  },
-  mixins: [operation],
-  data() {
-      return {
+    components: {
+        pagination,
+    },
+    mixins: [operation],
+    data() {
+        return {
 
-          value_list: {
-              type: Object,
-              default: null,
-          },
-
-
-          attendance_type: '',
-          attendance_date: new Date().toISOString().substr(0, 10),
-          attendance_final: 'pendding',
-          show: true,
-          // attendance_date:0,
-          status: [],
-          check_in: [],
-          check_out: [],
-          time_in: [],
-          time_out: [],
-          check_attend: [],
-          duration: [],
-          delay: [],
-          leave: [],
-          extra: [],
-          extra_after: [],
-
-          check_state: [],
-          date: [],
-          fieldset1: [],
-          fieldset2: [],
-          fieldset3: [],
-          staff: [],
-
-          work_type_selected: '',
-          staff_search: '',
-          attendance_in_out: '',
-          work_selected: '',
-          period_selected: '',
-          period_times: '',
-          work_types: '',
-          work_system_types: '',
+            value_list: {
+                type: Object,
+                default: null,
+            },
 
 
+            attendance_type: '',
+            attendance_date: new Date().toISOString().substr(0, 10),
+            attendance_final: 'pendding',
+            show: true,
+            // attendance_date:0,
+            status: [],
+            check_in: [],
+            check_out: [],
+            time_in: [],
+            time_out: [],
+            check_attend: [],
+            duration: [],
+            delay: [],
+            leave: [],
+            extra: [],
+            extra_after: [],
 
-      };
-  },
-  mounted() {
-      this.list();
-      this.type = 'attendance';
-  },
-  methods: {
+            check_state: [],
+            date: [],
+            fieldset1: [],
+            fieldset2: [],
+            fieldset3: [],
+            staff: [],
+
+            work_type_selected: '',
+            staff_search: '',
+            attendance_in_out: '',
+            work_selected: '',
+            period_selected: '',
+            period_times: '',
+            work_types: '',
+            work_system_types: '',
 
 
 
-      get_period(id) {
-
-
-          axios.post(`/attendance/get_period/${id}`).then((response) => {
-
-              console.log('muhib', response.data);
-              this.period_times = response.data.periods
-              this.work_types = response.data.work_types
-              var arrayLength = response.data.periods.length
-              var html = '<option></option>';
-
-              for (var i = 0; i < arrayLength; i++) {
-
-                  html = html + `<option data-period-${id}= ${response.data.periods[i].period_id}   value= ${response.data.periods[i].period_id} >${response.data.periods[i].name} من   ${response.data.periods[i].from_time}  الي ${response.data.periods[i].into_time}</option>`
-
-              }
-
-
-              $(`#select_period`).html(html);
+        };
+    },
+    mounted() {
+        this.list();
+        this.type = 'attendance';
+    },
+    methods: {
 
 
 
-
-          });
-      },
-      get_staff_attendance(id) {
-
-          axios.post(`/attendance/get_staff_attendance/${id}`, {
-              date: this.attendance_date,
-              work_system_id: this.work_selected,
-              period_id: this.period_selected
-          }).then( //get_time_for_current_period
-              (response) => {
+        get_period(id) {
 
 
-                  this.value_list = response.data.staff_attendance;
+            axios.post(`/attendance/get_period/${id}`).then((response) => {
+
+                console.log('muhib', response.data);
+                this.period_times = response.data.periods
+                this.work_types = response.data.work_types
+                var arrayLength = response.data.periods.length
+                var html = '<option></option>';
+
+                for (var i = 0; i < arrayLength; i++) {
+
+                    html = html + `<option data-period-${id}= ${response.data.periods[i].period_id}   value= ${response.data.periods[i].period_id} >${response.data.periods[i].name} من   ${response.data.periods[i].from_time}  الي ${response.data.periods[i].into_time}</option>`
+
+                }
+
+
+                $(`#select_period`).html(html);
 
 
 
 
+            });
+        },
+        get_staff_attendance(id) {
+
+            axios.post(`/attendance/get_staff_attendance/${id}`, {
+                date: this.attendance_date,
+                work_system_id: this.work_selected,
+                period_id: this.period_selected
+            }).then( //get_time_for_current_period
+                (response) => {
 
 
-              });
-      },
-
-
-
-
-
-      list(page = 1) {
-
-
-          axios.post(`/attendance/get_staff_attendance?page=${page}`).then(
-              (response) => {
-
-
-                  this.staffs = response.data.staffs;
-                  this.work_system_types = response.data.work_system_types;
-                  this.value_list = response.data.staff_attendance;
+                    this.value_list = response.data.staff_attendance;
 
 
 
 
 
 
-              });
+                });
+        },
 
 
 
-      },
+
+
+        list(page = 1) {
+
+
+            axios.post(`/attendance/get_staff_attendance?page=${page}`).then(
+                (response) => {
+
+
+                    this.staffs = response.data.staffs;
+                    this.work_system_types = response.data.work_system_types;
+                    this.value_list = response.data.staff_attendance;
 
 
 
-  },
+
+
+
+                });
+
+
+
+        },
+
+
+
+    },
 };
 </script>

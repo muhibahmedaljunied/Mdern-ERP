@@ -36,6 +36,7 @@ class AttendanceService
     {
 
 
+ 
         $this->details_service->init_data();
         $this->get_sort_period();  //this get sort of period for calculate sanction with last period
         $this->get_attendance();
@@ -66,9 +67,17 @@ class AttendanceService
     public function get_sort_period()
     {
 
+
+        // dd($this->attendance_core->data['staff'][$this->attendance_core->value]);
+        // dd(    $this->attendance_core->sort_period =  WorkSystem::where([
+
+        //     'staff_id' => $this->attendance_core->data['staff'],
+        // ])
+          
+        //     ->get());
         $this->attendance_core->sort_period =  WorkSystem::where([
 
-            'staff_id' => $this->attendance_core->data['staff'],
+            'staff_id' => $this->attendance_core->data['staff'][$this->attendance_core->value],
         ])
           
             ->get()->last()->sort;

@@ -15,6 +15,7 @@ use App\Models\Staff;
 use App\Models\WorkSystem;
 use App\Models\WorkType;
 
+use function PHPSTORM_META\type;
 
 class AttendanceController extends Controller
 
@@ -28,12 +29,47 @@ class AttendanceController extends Controller
     {
 
 
-        $staff_list = Cache::rememberForever('staff_eager_load', function () {
+        // $staff_list = Cache::rememberForever('staff_eager_load', function () {
 
-            return DB::table('staff')
-                ->select('staff.id as staff_id', 'staff.name')
-                ->paginate(10);
-        });
+
+        $staff_list =  DB::table('staff')
+            ->join('work_systems', 'work_systems.staff_id', '=', 'staff.id')
+            ->join('work_system_types', 'work_systems.work_system_type_id', '=', 'work_system_types.id')
+            ->join('period_times', 'work_systems.period_time_id', '=', 'period_times.id')
+            ->select(
+
+                'staff.*',
+                'staff.name as staff_name',
+                'work_systems.*',
+                'work_system_types.*',
+                'period_times.name as period_name',
+                'period_times.from_time',
+                'period_times.into_time',
+
+            )->orderBy('staff.name')
+            ->paginate();
+
+        foreach ($staff_list as $key => $value) {
+
+            $ss = DB::table('attendances');
+
+            $ss =   $ss->leftJoin('attendance_details', 'attendance_details.attendance_id', '=', 'attendances.id');
+
+
+            $value->period =   $ss->where('attendances.staff_id', '=', $value->staff_id)
+                ->where('attendances.attendance_date', '=', NOW())
+                ->where(
+                    function ($query) use ($value) {
+                        return $query
+                            ->where('attendances.attendance_status', '=', 0)
+                            ->orWhere('attendance_details.period_id', '=', $value->period_time_id);
+                    }
+                )
+                ->get();
+        }
+
+
+        // });
 
         $minutes = 60;
         $staffs = Cache::remember('staff', $minutes, function () {
@@ -188,45 +224,6 @@ class AttendanceController extends Controller
     }
 
 
-    // public function get_time(Request $request)
-    // {
-
-
-
-    //     $period = DB::table('attendances')->where([
-    //         'attendances.attendance_date' => $request['date']
-    //     ])
-    //         ->join('staff', 'staff.id', '=', 'attendances.staff_id')
-    //         ->select('staff.id as staff_id', 'staff.name', 'attendances.*')
-    //         ->paginate(10);
-
-
-    //     foreach ($period as $key => $value) {
-
-
-    //         $periods = DB::table('attendance_details')->where([
-    //             'attendance_details.period_id' => $request->period_id,
-    //             'attendance_details.attendance_id' => $value->id,
-    //         ])
-    //             ->select('attendance_details.*')
-    //             ->get();
-
-    //         $value->details = (count($periods) == 0) ? 0 : $periods;
-    //     }
-
-
-    //     if ($period->isEmpty()) {
-
-    //         $period =  DB::table('staff')
-    //             ->join('staff_work_systems', 'staff.id', '=', 'staff_work_systems.staff_id')
-    //             ->where('staff_work_systems.work_system_id', $request->work_system_id)
-    //             ->select('staff.id as staff_id', 'staff.name')
-    //             ->paginate(10);
-    //     }
-
-
-    //     return response()->json(['periods' => $period]);
-    // }
 
 
     public function get_time(Request $request)
@@ -234,79 +231,55 @@ class AttendanceController extends Controller
 
         // dd($request->all());
         // DB::enableQueryLog();
-        $period = AttendanceDetail::with('attendance');
+        
 
-        if ($request->date) {
-
-            $period = $period->whereHas('attendance', function ($query) use ($request) {
-
-                $query->where('attendances.attendance_date', '=', $request->date);
-            });
-        }
-        if ($request->period_id != null) {
-
-
-            $period = $period->whereHas('attendance', function ($query) use ($request) {
-
-
-                $query->where('period_id', '=', $request->period_id);
-            });
-        }
+        $staff =  DB::table('staff')
+            ->join('work_systems', 'work_systems.staff_id', '=', 'staff.id')
+            ->join('work_system_types', 'work_systems.work_system_type_id', '=', 'work_system_types.id')
+            ->join('period_times', 'work_systems.period_time_id', '=', 'period_times.id');
         if ($request->work_system_id) {
 
+            $staff =   $staff->where('work_system_types.id', '=', $request->work_system_id);
+        }
+        $staff = $staff->orderBy('staff.name')->select(
 
-            $period = $period->whereHas('attendance.staff.work_system_type', function ($query) use ($request) {
+            'staff.*',
+            'staff.name as staff_name',
+            'work_systems.*',
+            'work_system_types.*',
+            'period_times.name as period_name',
+            'period_times.from_time',
+            'period_times.into_time',
 
-                $query->where('work_system_types.id', '=', $request->work_system_id);
-            });
+        )
+            ->paginate();
+
+        foreach ($staff as $key => $value) {
+
+            $ss = DB::table('attendances');
+
+            $ss =   $ss->leftJoin('attendance_details', 'attendance_details.attendance_id', '=', 'attendances.id');
+
+            if ($request->date) {
+
+                $ss =   $ss->where('attendances.attendance_date', '=', $request->date);
+            }
+            $value->period =   $ss->where('attendances.staff_id', '=', $value->staff_id)
+                ->where(
+                    function ($query) use ($value) {
+                        return $query
+                            ->where('attendances.attendance_status', '=', 0)
+                            ->orWhere('attendance_details.period_id', '=', $value->period_time_id);
+                    }
+                )->get();
         }
 
-        $period = $period->with('attendance.staff');
-
-        $period = $period->paginate();
 
         // dd(DB::getQueryLog());
 
-        if ($period->isEmpty()) {
-
-
-            // DB::enableQueryLog();
-
-            $period = DB::table('staff')
-                ->join('work_systems', 'work_systems.staff_id', '=', 'staff.id')
-                ->join('work_system_types', 'work_systems.work_system_type_id', '=', 'work_system_types.id')
-                ->join('period_times', 'period_times.id', '=', 'work_systems.period_time_id')
-                ->where('work_system_types.id', $request->work_system_id)
-                ->select(
-
-                    'work_systems.sort',
-                    'period_times.*',
-                    'period_times.id as period_id',
-                    'period_times.name as period',
-                    'work_system_types.*',
-                    'work_system_types.name as type',
-                    'staff.*',
-                    'staff.id as staff_id',
-
-
-                )
-                ->paginate();
-
-            //    --------------------------------------------------------------------------------------
-            // $period = Staff::with(['period_time.work_system_type' => function ($query) use ($request) {
-
-            //     $query->where('work_system_types.id', $request->work_system_id);
-            // }])
-            //     // ->with('period_time')
-            //     ->select()
-            //     ->paginate();
-
-            // dd(DB::getQueryLog());
-        }
-
-
-        return response()->json(['periods' => $period]);
+        return response()->json(['periods' => $staff]);
     }
+
 
     public function staff_attendance(Request $request)
     {
@@ -359,6 +332,8 @@ class AttendanceController extends Controller
 
         // dd($attendance_core->data);
 
+
+
         try {
 
             DB::beginTransaction();
@@ -375,6 +350,7 @@ class AttendanceController extends Controller
 
 
 
+                // dd($request->all());
                 $service->attende();
 
 

@@ -48,7 +48,7 @@ class AttendanceDetailService
             'check_in' => $this->attendance_core->data['time_in'][$this->attendance_core->value],
             'check_out' => $this->attendance_core->data['time_out'][$this->attendance_core->value],
             'delay' => $this->attendance_core->data['delay'][$this->attendance_core->value],
-            'leave' => $this->attendance_core->data['leave'][$this->attendance_core->value],
+            'leaveout' => $this->attendance_core->data['leaveout'][$this->attendance_core->value],
             'extra' => $this->attendance_core->data['extra'][$this->attendance_core->value],
             'extra_after' => $this->attendance_core->data['extra_after'][$this->attendance_core->value],
             'duration' => $this->attendance_core->data['duration'][$this->attendance_core->value],

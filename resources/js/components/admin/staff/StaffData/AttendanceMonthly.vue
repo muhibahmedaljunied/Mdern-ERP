@@ -111,9 +111,9 @@
                                             <th class="wd-10p border-bottom-0">التاريخ</th>
                                             <!-- <th class="wd-10p border-bottom-0">الفتره</th> -->
 
-                                            <th class="wd-10p border-bottom-0"> الحضور</th>
+                                            <th class="wd-10p border-bottom-0"> الحاله</th>
 
-                                            <th class="wd-10p border-bottom-0"> الغياب</th>
+                                            <!-- <th class="wd-10p border-bottom-0"> الغياب</th> -->
 
                                      
                                             <th class="wd-10p border-bottom-0"> التأخير</th>
@@ -137,11 +137,6 @@
                                             <td>{{ staff.attendance.staff.name }}</td>
                                             <td>{{ staff.attendance.attendance_date }}</td>
 
-                                            <td>
-
-                                        
-
-                                            </td>
 
                                             <td>
 

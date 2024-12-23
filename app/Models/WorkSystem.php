@@ -15,6 +15,11 @@ class WorkSystem extends Model
     ];
 
     
+    public function staff()
+    {
+        return $this->belongsToMany(Staff::class);
+    }
+
     public function work_system_type()
     {
         

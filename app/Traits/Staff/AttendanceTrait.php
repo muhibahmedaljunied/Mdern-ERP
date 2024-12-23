@@ -140,6 +140,7 @@ trait AttendanceTrait
     public function add_into_attendance_table()
     {
 
+        $this->data['attendance_status'] =1;
         // dd($this->data);
         $attendance = new Attendance();
         $attendance->staff_id =  $this->data['staff'][$this->value];
@@ -242,12 +243,12 @@ trait AttendanceTrait
 
 
 
-
+// dd($data['period']);
 
         $Details = new AttendanceDetail();
         $Details->attendance_id = $id;
         $Details->period_id = $data['period'][$value];
-        $Details->attendance_status = 1;
+        // $Details->attendance_status = 1;
 
 
         // if ($data['attendance_in_out'] == 1) {
@@ -257,7 +258,7 @@ trait AttendanceTrait
 
         $Details->duration = $data['duration'][$value];
         $Details->delay = $data['delay'][$value];
-        $Details->leave = $data['leave'][$value];
+        $Details->leaveout = $data['leaveout'][$value];
         $Details->extra = $data['extra'][$value];
         $Details->extra_after = $data['extra_after'][$value];
 

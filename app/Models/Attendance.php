@@ -8,6 +8,12 @@ class Attendance extends Model
 {
 
 
+    protected $fillable = [
+        'staff_id','attendance_date','attendance_status','attendance_final'
+    ];
+
+
+
     public function scopeDetails($query, $keyword)
     {
         if ($keyword != '') {

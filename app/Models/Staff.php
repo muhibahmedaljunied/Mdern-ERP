@@ -15,9 +15,9 @@ class Staff extends Model
 
 
 
-    public function work_system_type()
+    public function work_system()
     {
-        return $this->belongsToMany(WorkSystemType::class,'work_systems');
+        return $this->hasMany(WorkSystem::class);
     }
 
     public function period_time()

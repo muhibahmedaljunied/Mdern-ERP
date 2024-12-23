@@ -12,10 +12,7 @@ class WorkSystemType extends Model
  
 
 
-    public function staff()
-    {
-        return $this->belongsToMany(Staff::class,'work_systems');
-    }
+ 
 
     public function period_time()
     {
