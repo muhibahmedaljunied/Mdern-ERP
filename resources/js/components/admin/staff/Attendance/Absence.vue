@@ -363,10 +363,7 @@ export default {
     return {
 
 
-      value_list: {
-        type: Object,
-        default: null,
-      },
+   
 
       typeselected: [],
       date: [],

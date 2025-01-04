@@ -16,6 +16,7 @@ use App\Models\Status;
 use App\Models\Supply;
 use App\Repository\Qty\QtyStockRepository;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
@@ -103,7 +104,10 @@ class StockController extends Controller
 
     public function movement_repo()
     {
-        return response()->json(['statuses' => Status::all()]);
+        return response()->json([
+            'statuses' => Status::all(),
+            'users' => Auth::user()
+        ]);
     }
 
 
@@ -114,42 +118,52 @@ class StockController extends Controller
 
         // DB::enableQueryLog();
 
-        $repo_movement = Stock::with(
-            [
-                'stockable' => function (MorphTo $morphTo) {
-                    // $morphTo->constrain([
-                    //     Purchase::class => function ($query) {
-                    //         $query->join('suppliers', 'suppliers.id', '=', 'purchases.supplier_id');
-                    //         $query->select('purchases.*', 'purchases.id as purchase_id', 'suppliers.name as supplier_name');
-                    //     }
-                    // ]);
+        $select = [];
+        $repo_movement = DB::table('stocks')
+            ->join('store_products', 'store_products.id', 'stocks.store_product_id');
 
-                    $morphTo->constrain([
-                        Sale::class => function ($query) {
-                            $query->join('customers', 'customers.id', '=', 'sales.customer_id');
-                            $query->select('sales.*', 'sales.id as sale_id', 'customers.name as customer_name');
-                        }
-                    ]);
-                },
+        $select[0] =  'store_products.*';
 
-                'store_product' => function ($query) use ($request) {
-                    $query->join('stores', 'stores.id', 'store_products.store_id');
-                    $query->join('products', 'products.id', 'store_products.product_id');
-                    $query->join('statuses', 'statuses.id', 'store_products.status_id');
-                    $query->where([
-                        'store_products.store_id' => $request->store_id,
-                        'store_products.product_id' => $request->product_id,
-                        'store_products.status_id' => $request->status_id[0],
-                        'store_products.desc' => $request->desc,
-                    ]);
+        if ($request->store_id > 0) {
 
-                    $query->select('store_products.*', 'stores.text as store', 'products.text as product', 'statuses.name');
-                }
-            ]
-        )
-            ->where('stockable_type', 'App\\Models\\Sale')
-            // ->select('store_products.*', 'stores.text as store', 'products.text as product')
-            ->paginate();
+            $repo_movement = $repo_movement->join('stores', 'stores.id', 'store_products.store_id')
+                ->where('store_products.store_id', $request->store_id);
+
+            $select[1] =  'stores.*';
+            $select[2] =  'stores.text as store';
+        }
+
+        if ($request->product_id > 0) {
+
+
+            $repo_movement = $repo_movement->join('products', 'products.id', 'store_products.product_id')
+                ->where('store_products.product_id', $request->product_id);
+
+            $select[3] =  'products.text as product';
+        }
+
+        if ($request->status_id > 0) {
+
+
+            $repo_movement = $repo_movement->join('statuses', 'statuses.id', 'store_products.status_id')
+                ->where('store_products.status_id', $request->status_id[0]);
+
+            $select[4] =  'statuses.name';
+        }
+
+        $repo_movement = $repo_movement->join('supplies', 'supplies.id', 'stockable_id')
+            ->where('stockable_type', 'App\Models\Supply');
+        $select[5] =  'supplies.*';
+        $repo_movement = $repo_movement->select(
+            $select
+
+
+        )->paginate();
+
+
+        // dd($repo_movement);
+        // --------------------------------------------------------------------------------------------------------------------------------------------------
+
 
         // $repo_movement = Stock::with(
         //     [
@@ -198,41 +212,83 @@ class StockController extends Controller
 
         // dd(DB::getQueryLog());
 
-        return response()->json(['repo_movement' => $repo_movement]);
+        return response()->json([
+            'repo_movement' => $repo_movement
+
+        ]);
     }
 
     public function stock_repo()
     {
 
-        return response()->json(['statuses' => Status::all()]);
+        return response()->json([
+            'statuses' => Status::all(),
+            'users' => Auth::user()
+        ]);
     }
 
     public function show_repo_stock(Request $request)
     {
 
+
         // dd($request->all());
 
         // DB::enableQueryLog();
 
-        $repo_stock = DB::table('store_products')
-            ->join('stores', 'stores.id', 'store_products.store_id')
-            ->join('products', 'products.id', 'store_products.product_id')
-            ->join('statuses', 'statuses.id', 'store_products.status_id')
-            // ->where([
-            //     'store_products.store_id' => $request->store_id,
-            //     'store_products.product_id' => $request->product_id,
-            //     'store_products.status_id' => $request->status_id[0],
-            //     'store_products.desc' => $request->desc,
-            // ])
 
-            ->select('store_products.*', 'stores.text as store', 'products.text as product', 'statuses.name')
+
+
+        $select = [];
+
+
+        $repo_stock = DB::table('store_products');
+        $select[0] =  'store_products.*';
+        if ($request->store_id > 0) {
+
+            $repo_stock = $repo_stock->join('stores', 'stores.id', 'store_products.store_id')
+                ->where('store_products.store_id', $request->store_id);
+
+            $select[1] =  'stores.*';
+            $select[2] =  'stores.text as store';
+        }
+        // ---------------------------------------------------------------------------------------------
+        if ($request->product_id > 0) {
+
+
+            $repo_stock = $repo_stock->join('products', 'products.id', 'store_products.product_id')
+                ->where('store_products.product_id', $request->product_id);
+
+            $select[3] =  'products.text as product';
+        }
+        // ---------------------------------------------------------------------------------------------
+
+        if ($request->status_id > 0) {
+
+
+            $repo_stock = $repo_stock->join('statuses', 'statuses.id', 'store_products.status_id')
+                ->where('store_products.status_id', $request->status_id[0]);
+
+            $select[4] =  'statuses.name';
+        }
+        // ---------------------------------------------------------------------------------------------
+
+        if ($request->desc != null) {
+
+            $repo_stock = $repo_stock->Where([
+
+                'store_products.desc' => $request->desc,
+            ]);
+        }
+
+
+
+        $repo_stock = $repo_stock->select($select)
             ->paginate();
 
-
-
-
         // dd(DB::getQueryLog());
+        return response()->json([
+            'repo_stock' => $repo_stock
 
-        return response()->json(['repo_stock' => $repo_stock]);
+        ]);
     }
 }

@@ -2,11 +2,15 @@ import Try from './components/admin/try'
 import Dashboard from './components/Dashboard'
 import Company from './components/admin/setting/Company'
 import RepoAuditBalance from './components/admin/FinancialAccounting/report/RepoAuditBalance'
+import Balance from './components/admin/FinancialAccounting/report/Balance'
+import Lose from './components/admin/FinancialAccounting/report/Lose'
 import AccountsGuide from './components/admin/FinancialAccounting/accounting/AccountsGuide'
+import OpeningBalances from './components/admin/FinancialAccounting/accounting/OpeningBalances'
 import AccountList from './components/admin/FinancialAccounting/accounting/AccountList'
 import DailyRestrictions from './components/admin/FinancialAccounting/operation/DailyRestrictions'
 import AccountBasicData from './components/admin/FinancialAccounting/AccountBasicData'
 import ClosingYears from './components/admin/FinancialAccounting/ClosingYears'
+
 import MarkAccount from './components/admin/FinancialAccounting/MarkAccount'
 import SystemMark from './components/admin/FinancialAccounting/SystemMark'
 
@@ -138,6 +142,7 @@ import RepoCashingReturn from './components/admin/report/RepoCashingReturn'
 import RepoStock from './components/admin/report/RepoStock'
 import RepoSupply from './components/admin/report/RepoSupply'
 import RepoSupplyReturn from './components/admin/report/RepoSupplyReturn'
+// import Balance from './components/admin/FinancialAccounting/report/Balance.vue'
 // -------------------------------------------------------------------------------------------------------------------------------------------
 const routes = [
   {
@@ -158,12 +163,26 @@ const routes = [
     component: AccountsGuide
   },
   {
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    path: '/opening_balances',
+    component: OpeningBalances
+  },
+
+  {
     path: '/auditBalance',
     component: RepoAuditBalance
   },
   {
     path: '/accounts_basic_data',
     component: AccountBasicData
+  },
+  {
+    path: '/balance',
+    component: Balance
+  },
+  {
+    path: '/lose',
+    component: Lose
   },
   {
     path: '/closing_year',

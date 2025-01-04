@@ -43,7 +43,7 @@ export default {
 
                 // this.units = response.data.units;
 
-                console.log('almuhib',this.units);
+                console.log("almuhib", this.units);
                 var arrayLength = response.data.units.length;
                 var html = "";
 
@@ -65,7 +65,7 @@ export default {
                 var ds = 0;
                 for (const key in count) {
                     ds = count[key];
-                  
+
                     this.units = response.data.units;
                     var arrayLength = response.data.units.length;
                     var html = "";

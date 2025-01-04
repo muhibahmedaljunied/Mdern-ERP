@@ -317,13 +317,7 @@ export default {
   mixins: [operation],
   data() {
     return {
-      // category: "yes",
-
-      value_list: {
-        type: Object,
-        default: null,
-      },
-
+ 
       allowance_types: "",
       allowance_type: [],
       allowance_status: [],

@@ -429,58 +429,36 @@
                                 </thead>
 
                                 <tbody>
+                              
                                   <tr class="item" v-for="(datas, index) in report.data" :key="index">
 
                                     <td>{{ index + 1 }}</td>
-                                    <td v-if="productselected == 0">
-                                      {{ datas.store_product.product }}
+                                    <td>
+                                      {{ datas.product }}
                                     </td>
-                                    <td v-if="datas.stockable.customer_name">
-                                      {{ datas.stockable.customer_name }}
+                                    <td v-if="datas.customer_name">
+                                      {{ datas.customer_name }}
                                     </td>
-                                    <td v-else>
-                                      {{ datas.stockable.supplier_name }}
+                                    <td v-if="datas.supplier_name">
+                                      {{ datas.supplier_name }}
                                     </td>
 
 
                                     <div v-if="moveselected == 0">
 
-                                      <!-- <td v-if="datas.stockable_type == 'App\\Models\\Supply'">
-                                توريد
-                              </td> -->
+                                 
                                       <td v-if="datas.stockable_type == 'App\\Models\\Purchase'">
                                         شراء
                                       </td>
-                                      <!--<td v-if="datas.type_operation == 'App\\Models\\Sale'">
-                                بيع
-                              </td>
-                              <td v-if="datas.type_operation == 'App\\Models\\Cash'">
-                                صرف
-
-
-                              </td>
-                          <td v-if="datas.type_operation == 'App\\Models\\Transfer'">
-                                تحويل</td> 
-                               <td v-if="datas.type_operation == 'App\\Models\\Purchase'">
-                                مرتجع توريد
-                              </td>
-                              <td v-if="datas.type_operation == 'App\\Models\\Purchase'">
-                                مرتجع صرف
-                              </td>
-                              <td v-if="datas.type_operation == 'App\\Models\\Purchase'">
-                                مرتجع بيع
-                              </td>
-                              <td v-if="datas.type_operation == 'App\\Models\\Purchase'">
-                                مرتجع شراء
-                              </td> -->
+                  
 
 
 
                                     </div>
-                                    <td v-if="storeselected == 0">{{ datas.store_product.store }}</td>
-                                    <td v-if="statusselected == 0">{{ datas.store_product.name }}</td>
+                                    <td v-if="storeselected == 0">{{ datas.store }}</td>
+                                    <td v-if="statusselected == 0">{{ datas.name }}</td>
 
-                                    <td v-if="descselected == 0">{{ datas.store_product.desc }}</td>
+                                    <td v-if="descselected == 0">{{ datas.desc }}</td>
 
                                     <td>{{ datas.quantity }}</td>
                                     <td>{{ datas.date }}</td>
@@ -737,10 +715,6 @@ export default {
       ],
       timestamp: '',
       index: 1,
-
-
-
-
       // type_report: 0,
       // from_date: "2021-11-24",
       // to_date: new Date().toISOString().substr(0, 10),
@@ -768,7 +742,7 @@ export default {
 
       this.status = response.data.statuses;
       // this.unit = response.data.unit;
-      // this.user = response.data.users.name;
+      this.user = response.data.users.name;
     });
   },
 

@@ -71,6 +71,7 @@ class SupplyController extends Controller
     public function get_store()
     {
 
+
         return DB::table('stores')
             ->select(
                 'stores.account_id as store_account_id',
@@ -127,7 +128,7 @@ class SupplyController extends Controller
         //     ], 400);
         // }
 
-        // dd($this->core->data);
+        // dd($this->qty->request);
 
 
         try {

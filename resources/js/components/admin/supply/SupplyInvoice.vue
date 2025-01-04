@@ -27,10 +27,10 @@
                         <img :src="`/assets/img/images3.jpg`" height="150px" alt="products image" />
                       </td>
                       <td rowspan="4" style="text-align: center; line-height: 1px">
-                        <h2>رقم السند :{{ supplies[0].supply_id }}</h2>
+                        <h2>رقم السند :{{ supplies[0].cash_id }}</h2>
                         <br />
 
-                        <h2>تاريخ السند : {{ supplies[0].supply_date }}</h2>
+                        <h2>تاريخ السند : {{ supplies[0].date }}</h2>
                         <br />
 
                         <h2>
@@ -47,7 +47,7 @@
                       <td colspan="1"></td>
 
                       <td style="text-align: left">
-                        <button @click="printDiv('printme')">
+                        <button @click="report_style('printme', '')">
                           <i class="fas fa-print" style="font-size: 24px; color: rgb(34, 192, 60)"></i>
                         </button>
                       </td>
@@ -204,7 +204,9 @@ temx.name }}</span>
   </div>
 </template>
 <script>
+import InvoiceOperation from '../../../../js/InvoiceOperation.js';
 export default {
+  mixins: [InvoiceOperation],
   data() {
     return {
       supplies: 0,

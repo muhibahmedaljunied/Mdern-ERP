@@ -30,7 +30,7 @@ class CreateSalesTable extends Migration
 
             $table->string('sub_total')->nullable();
        
-            $table->integer('grand_total');
+            $table->integer('grand_total')->default(0);
             
             // $table->integer('quantity')->nullable();
             // $table->integer('qty_return')->default(0);

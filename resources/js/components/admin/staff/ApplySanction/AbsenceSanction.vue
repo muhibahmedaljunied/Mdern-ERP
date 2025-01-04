@@ -38,6 +38,15 @@
 
                             </div>
 
+
+                            <div class="col-md-2">
+                                <label for="status"> التأريخ</label>
+                                <input class="form-control" type="date" name="" id="" v-model="apply_date">
+
+
+                            </div>
+
+
                             <!-- <div class="col-md-2">
                                 <label for="status">عدد المرات</label>
                                 <select v-model="iterationselected" class="form-control " required>
@@ -70,7 +79,7 @@
 
                             <!-- <div class="col-md-2">
                                 <label for="status"> التأريخ</label>
-                                <input class="form-control" type="date" name="" id="" v-model="attendance_date">
+                                <input class="form-control" type="date" name="" id="" v-model="apply_date">
 
 
                             </div> -->
@@ -143,16 +152,47 @@
 
 
                                             <td>
-                                                <span class="badge bg-danger" v-if="staff.absence.length"> ضمن
-                                                    اللائحه</span>
-                                                <span class="badge bg-success" v-else>ليس ضمن اللائحه</span>
+                                                <span v-if="staff.absence">
+
+                                                    <!-- <span v-for="sanctions in staff.absence"> -->
+                                                    <!-- 
+                                                        <span v-if="sanctions.staff_sanction.length > 0">
+
+                                                            <span v-for="staff_sanction in sanctions.staff_sanction"> -->
+
+                                                    <span class = 'badge bg-danger'> ضمن اللائحه</span>
+
+
+                                                    <!-- </span> -->
+
+
+
+                                                    <!-- </span> -->
+
+
+
+                                                    <!-- </span> -->
+                                                </span>
+
+                                                <span  v-if="staff.staff_sanction">
+
+                                                    <span class = 'badge bg-success'> تم تطبيق اللائحه</span>
+                                                </span>
+
+                                                
+                                                <span v-if="!staff.staff_sanction && !staff.absence" >
+                                                    <span class='badge bg-success'>   ليس ضمن اللائحه</span>
+                                                </span>
+
                                             </td>
 
 
                                             <td>
 
 
-                                                <template v-if="staff.absence.length">
+
+
+                                                <template v-if="staff.absence">
 
                                                     <button type="button" data-toggle="modal"
                                                         class="tn btn-success btn-sm waves-effect btn-agregar"
@@ -160,14 +200,10 @@
                                                         اللائحه</button>
 
 
-
-                                                    <button data-toggle="tooltip"
+                                                    <button type="button" @click="apply(staff.absence, staff.staff_id)"
+                                                        data-toggle="tooltip"
                                                         class="tn btn-success btn-sm waves-effect btn-agregar">
                                                         تطبيق</button>
-
-
-
-
 
 
                                                     <div class="modal fade bs-example-modal-lg" tabindex="-1"
@@ -176,18 +212,7 @@
                                                         :id="'addAbsence' + indexs">
                                                         <div class="modal-dialog modal-lg" style="width: 100%">
                                                             <div class="modal-content">
-                                                                <!-- <div class="modal-header">
 
-
-                                                                <div class="col-md-4">
-                                                                    <div class="col-sm-12">
-                                                                        <input type="text" placeholder="بحث"
-                                                                            class="form-control" name="buscar_producto"
-                                                                            id="buscar_producto" v-model="word_search"
-                                                                            @input="get_search()" />
-                                                                    </div>
-                                                                </div>
-                                                            </div> -->
                                                                 <div class="modal-body">
                                                                     <div class="row row-sm">
                                                                         <div class="col-xl-12">
@@ -212,7 +237,8 @@
 
 
                                                                                                         <th>
-                                                                                                            عدد المرات
+                                                                                                            عدد
+                                                                                                            المرات
                                                                                                         </th>
                                                                                                         <th> قيمه
                                                                                                             الخصم
@@ -225,7 +251,8 @@
                                                                                                         </th>
                                                                                                     </tr>
                                                                                                 </thead>
-                                                                                                <tbody>
+                                                                                                <tbody
+                                                                                                    v-if="staff.absence">
                                                                                                     <tr v-for="(absence, index_absence) in staff.absence"
                                                                                                         :key="index_absence">
 
@@ -280,6 +307,15 @@
                                                                                                     </tr>
 
                                                                                                 </tbody>
+                                                                                                <tbody v-else>
+                                                                                                    <tr>
+
+                                                                                                        <td colspan="4">
+                                                                                                            لايوجد
+                                                                                                            بيانات
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
 
                                                                                             </table>
                                                                                         </div>
@@ -309,11 +345,9 @@
 
                                                 </template>
 
-                                                <template v-else>
+                                                
 
 
-
-                                                </template>
 
 
 
@@ -365,23 +399,16 @@ export default {
     mixins: [operation],
     data() {
         return {
-
-
-
             absence_types: '',
             absenceselected: [],
-
-
-
 
         };
     },
     mounted() {
         this.list();
-        this.type = 'attendance';
+        this.type = 'absence';
     },
     methods: {
-
 
         check_row(index) {
 
@@ -416,7 +443,6 @@ export default {
                     console.error(response);
                 });
         },
-
         search() {
 
             axios.post(`/absence_sanction_attendance`, {

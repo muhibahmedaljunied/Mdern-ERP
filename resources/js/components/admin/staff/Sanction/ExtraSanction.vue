@@ -247,11 +247,7 @@ export default {
     return {
 
 
-      value_list: {
-        type: Object,
-        default: null,
-      },
-
+ 
       extra_types:'',
       extra_parts:'',
       discount_types:'',

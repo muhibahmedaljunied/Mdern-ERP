@@ -16,19 +16,19 @@ class CreateCashDetailsTable extends Migration
         
         Schema::create('cash_details', function (Blueprint $table) {
             $table->Increments('id');
+
             $table->unsignedInteger('cash_id');
             $table->foreign('cash_id')->references('id')->on('cashes')->onDelete('cascade');
 
-          
             $table->unsignedInteger('store_product_id');
             $table->foreign('store_product_id')->references('id')->on('store_products');
 
             $table->unsignedInteger('unit_id')->unsigned()->nullable();
             $table->foreign('unit_id')->references('id')->on('units');
     
-            $table->integer('qty');
-            $table->float('price');
-            $table->float('total');
+            $table->integer('qty')->default(0);
+            $table->float('price')->default(0);
+            $table->float('total')->default(0);
             $table->integer('qty_return')->default(0);
             $table->timestamps();
         });

@@ -18,7 +18,7 @@ class StoreSupplyRepository extends StoreRepository implements StoreRepositoryIn
 
     $this->get_store_product_tow();
     $this->check_founded_store();
-  
+
   }
 
   

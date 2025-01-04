@@ -24,21 +24,6 @@ class CreateCustomersTable extends Migration
             $table->string('status')->default('1')->nullable();
 
 
-            // $table->string('name');
-
-            // $table->string('phone')->default('776165784')->nullable();
-
-            // $table->string('email')->unique()->nullable();
-
-            // $table->timestamp('email_verified_at');
-
-            // $table->string('address')->default('taiz')->nullable();
-
-            // $table->string('password');
-
-            // $table->string('status')->default('1')->nullable();
-
-            // $table->rememberToken();
             $table->timestamps();
         });
     }

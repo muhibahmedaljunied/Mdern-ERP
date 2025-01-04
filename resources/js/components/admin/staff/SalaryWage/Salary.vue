@@ -25,12 +25,13 @@
                 <!-- <input v-model="debit" type="hidden" class="form-control" required /> -->
                 <div class="custom-search">
 
-                  <input style="background-color: beige;" :id="'Advance_account_advance_tree'" type="text" readonly
+                  <input style="background-color: beige;" :id="'AdministrativeStructure_account_tree'" type="text"
+                    readonly class="custom-search-input">
+                  <input :id="'AdministrativeStructure_account_tree_id'" type="hidden" readonly
                     class="custom-search-input">
-                  <input :id="'Advance_account_advance_tree_id'" type="hidden" readonly class="custom-search-input">
 
                   <button class="custom-search-botton" type="button" data-toggle="modal"
-                    data-target="#exampleModalAccountAdvance">
+                    data-target="#exampleModalAccountAdministrativeStructure">
                     <i class="fa fa-plus-circle"></i></button>
                 </div>
 
@@ -242,187 +243,25 @@
               </table>
             </div>
 
-            <div class="modal fade" id="addAd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <form method="post">
-                <div class="modal-dialog modal-fullscreen">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
 
+            <div class="modal fade" id="exampleModalAccountAdministrativeStructure" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
 
-                    <div class="modal-body">
-
-
-                      <div class="row row-sm">
-                        <div class="col-xl-12">
-                          <!-- <form method="post"> -->
-                          <div class="card">
-                            <div class="card-header pb-0">
-                              <div class="d-flex justify-content-between">
-                                <h4 class="modal-title" id="myLargeModalLabel">السلف</h4>
-                                <i class="mdi mdi-dots-horizontal text-gray"></i>
-                              </div>
-                            </div>
-
-                            <div class="card-body">
-
-
-                              <div class="row">
-                                <div class="col-md-4">
-
-                                  <label for="">التاريخ</label>
-                                  <input v-model="date" type="date" class="form-control" name="name" id="name"
-                                    required />
-                                </div>
-                              </div>
-                              <br>
-                              <div class="row">
-                                <div class="form">
-
-                                  <form method="post">
-                                    <div class="table-responsive">
-                                      <table class="table table-bordered text-right">
-                                        <thead>
-                                          <tr>
-
-
-
-
-                                            <th>اسم الموظف</th>
-                                            <th>الحساب </th>
-
-                                            <th>المبلغ</th>
-                                            <th>ظريقه الخصم</th>
-                                            <!-- <th>التاريخ</th> -->
-
-                                            <th>اضافه</th>
-
-
-                                          </tr>
-
-                                        </thead>
-                                        <tbody>
-
-
-                                          <tr v-for="index in count" :key="index">
-
-
-
-                                            <td>
-
-                                              <select v-model="staffselected[index]" name="type" id="type"
-                                                class="form-control" required>
-                                                <option v-for="staff in staffs" v-bind:value="staff.id">
-                                                  {{ staff.name }}
-                                                </option>
-                                              </select>
-
-                                            </td>
-
-                                            <td>
-                                              <input v-model="debit" type="hidden" class="form-control" required />
-                                              <div class="custom-search">
-
-                                                <input style="background-color: beige;"
-                                                  :id="'Advance_account_advance_tree' + index" type="text" readonly
-                                                  class="custom-search-input">
-                                                <input :id="'Advance_account_advance_tree_id' + index" type="hidden"
-                                                  readonly class="custom-search-input" v-model="account[index]">
-
-                                                <button class="custom-search-botton" type="button" data-toggle="modal"
-                                                  data-target="#exampleModalAccountAdvance"
-                                                  @click="detect_index(index)">
-                                                  <i class="fa fa-plus-circle"></i></button>
-                                              </div>
-
-
-                                            </td>
-
-
-                                            <td>
-
-
-                                              <input @input="calc_grand_total(index)" v-model="quantity[index]"
-                                                type="number" class="form-control" required />
-                                            </td>
-                                            <td>
-
-
-
-                                              <label for="">من الراتب</label>
-                                              <input type="checkbox" name="" id="">
-                                            </td>
-
-
-                                            <!-- <td>
-
-                                            <input v-model="date[index]" type="date" class="form-control" name="name"
-                                              id="name" required />
-
-                                          </td> -->
-
-                                            <td v-if="index == 1">
-                                              <a class="btn btn-info btn-sm waves-effect btn-agregar"
-                                                v-on:click="addComponent(count)">
-                                                <i class="fa fa-plus-circle"></i></a>
-
-                                              <a class="btn btn-info btn-sm waves-effect btn-agregar"
-                                                v-on:click="disComponent(count)">
-                                                <i class="fa fa-minus-circle"></i></a>
-                                            </td>
-
-
-                                          </tr>
-                                          <tr>
-                                            <td colspan="2">الاجمالي</td>
-                                            <td colspan="2">
-
-
-                                              <input v-model="grand_total" type="number" class="form-control"
-                                                name="name" id="name" readonly />
-                                            </td>
-
-                                          </tr>
-
-                                        </tbody>
-
-                                      </table>
-                                    </div>
-
-
-
-
-                                  </form>
-                                </div>
-                              </div>
-
-
-
-                              <div class="card-footer pb-0">
-                                <div class="d-flex justify-content-between">
-                                  <i class="mdi mdi-dots-horizontal text-gray"></i>
-                                </div>
-                              </div>
-                            </div>
-
-
-                            <!-- </form> -->
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
-                        <!-- <button type="button" class="btn btn-primary btn-lg btn-block" @click="submitForm()"@click="submitForm()">
-                        حفظ
-                      </button> -->
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
+                  <div class="modal-body">
+
+                    <div class="well" id="treeview_json_administrative_structure"></div>
+
+                  </div>
+
                 </div>
-              </form>
+              </div>
             </div>
             <div class="modal fade" id="exampleModalAccountSalary" tabindex="-1" role="dialog"
               aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -436,21 +275,21 @@
                   </div>
                   <div class="modal-body">
 
-                    <div class="well" id="treeview_json_account"></div>
+                    <div class="well" id="treeview_json_account_Salary"></div>
 
                   </div>
 
                 </div>
               </div>
             </div>
-            <pagination align="center" :data="list_data" @pagination-change-page="list"></pagination>
+            <!-- <pagination align="center" :data="list_data" @pagination-change-page="list"></pagination> -->
           </div>
 
         </div>
       </div>
       <!--/div-->
     </div>
-    
+
   </div>
 
   <!-- /row -->
@@ -458,8 +297,13 @@
 
 <script>
 import pagination from "laravel-vue-pagination";
-import operation from '../../../../../js/staff/StaffData/staff_data.js';
+// import staffdata from '../../../../../js/staff/StaffData/staff_data.js';
+// import operation from '../../../../../js/staff/operation/operation.js';
+// import operation2 from '../../../../../js/operation.js';
+// import operation2 from '../../../../operation.js';
 import tree from '../../../../../js/tree/tree.js';
+import operation from '../../../../operation.js';
+
 
 
 
@@ -476,40 +320,33 @@ export default {
         type: Object,
         default: null,
       },
-      operationselected: [],
 
+
+      account: [],
       table: '',
       staff_selected: 1,
       staffs: '',
-      branchselected: "",
-      staff_allowances: "",
-      salaryselected: "",
 
-      allowances: "",
-      allowance: [],
-      checkselected: [],
+
+
+      operationselected: [],
+
       staffselected: 1,
       jobselected: 1,
-      brancheselected: 1,
-      staff_typeselected: 1,
+
+
       prove_account: '',
 
-      salaries: "",
-      jobs: "",
-      branches: "",
-      staff_types: "",
-      allowance_types: "",
-      table: 'salary',
-      word_search: "",
-      net_salary: '',
-      basic_salary: '',
+
+
+
 
     };
   },
   mounted() {
     this.list();
-    this.type_of_tree = 1;
     this.type = 'Salary';
+    this.type_of_tree = 1;
     this.showtree('account', 'tree_account');
   },
   methods: {
@@ -584,11 +421,16 @@ export default {
           type: this.type,
           date: this.date,
           credit: {
-            credit_account_id: this.prove_account,
+            account_id:this.prove_account[0]['account_second_id'],
+            value:'',
+            account_details: '',
           },
-          debit: {
-            debit_account_id: this.prove_account,
+          debit: {  
+            account_id: this.prove_account[0]['account_id'],
+            value: this.basic_salary,
+            account_details: '',
           },
+          daily_index: 0,
           grand_total: this.basic_salary,
           type_daily: 'hr_all_prove_salary',
 

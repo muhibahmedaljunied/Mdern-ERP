@@ -105,7 +105,7 @@ Route::post('/stock_repo', 'Warehouse\StockController@stock_repo');
 // -------------------------------------OpeningInventury----------------------------------------------------------
 Route::post('/add_Opening', 'Warehouse\InventuryController@store');
 Route::post('/opening/newopening', 'Warehouse\InventuryController@index');
-// -------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------
 Route::post('/Warehouse/pricing', 'Warehouse\InventuryController@pricing');
 Route::post('/movement_repo','Warehouse\StockController@movement_repo');
 Route::post('/show_repo_movement','Warehouse\StockController@show_repo_movement');

@@ -23,7 +23,7 @@ class CreateSaleReturnsTable extends Migration
             $table->foreign('daily_id')->references('id')->on('dailies')->onDelete('cascade');
 
            
-            $table->integer('quantity')->nullable();
+            $table->integer('quantity');
             $table->date('date')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();

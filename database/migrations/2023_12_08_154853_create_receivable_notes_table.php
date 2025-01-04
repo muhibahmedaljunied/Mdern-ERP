@@ -21,7 +21,7 @@ class CreateReceivableNotesTable extends Migration
             $table->unsignedInteger('daily_id');
             $table->foreign('daily_id')->references('id')->on('dailies');
 
-            // $table->string('paid')->default(0);
+            $table->string('paid')->default(0);
             $table->date('date')->nullable();
             $table->timestamps();
         });

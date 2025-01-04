@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header pb-0">
           <div class="d-flex justify-content-between">
-            <span class="h2">دفتر الاستاذ العام</span>
+            <span class="h2"> كشف حساب</span>
           </div>
           <p class="tx-12 tx-gray-500 mb-2">
 
@@ -40,43 +40,73 @@
 
 
                   </div>
-            
+
+                  <div class="col-md-3">
+                    <label for="cliente">  نوع كشف الحساب</label>
+
+                    <select class="form-control" style="background-color: beige;" name="forma_pago"
+                    >
+
+                      
+                    <option v-bind:value="1">اجمالي</option>
+                    <option v-bind:value="2">تحليلي</option>
+
+                    </select>
+
+                  </div>
+
+
+           
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-md-3">
+                    <label for="cliente"> الحساب التفصيلي</label>
+
+                    <select class="form-control" style="background-color: beige;" name="forma_pago"
+                      id="select_account_AccountReport_group">
+
+                    </select>
+
+                  </div>
+                  
 
                   <div class="col-md-3">
                     <label for="desde">من تاريخ </label>
                     <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
-                      name="modal_reporte_venta_inicio" v-model="daily_date" onkeypress="return controltag(event)"
+                      name="modal_reporte_venta_inicio" v-model="from_date" onkeypress="return controltag(event)"
                       style="background-color: white" />
                   </div>
 
                   <div class="col-md-3">
                     <label for="desde">الي تاريخ </label>
                     <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
-                      name="modal_reporte_venta_inicio" v-model="daily_date" onkeypress="return controltag(event)"
+                      name="modal_reporte_venta_inicio" v-model="into_date" onkeypress="return controltag(event)"
                       style="background-color: white" />
                   </div>
-                  <div class="col-sm-2 col-md-3" style="margin-top: auto;">
-                                <a @click="onwaychange()" href="#"><img src="/assets/img/search.png" alt=""
-                                        style="width: 10%;"> </a>
-                            </div>
-
+                  <div class="col-sm-3 col-md-3" style="margin-top: auto;">
+                    <a @click="onwaychange()" href="#"><img src="/assets/img/search.png" alt="" style="width: 10%;">
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
 
-       
+
 
 
           <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
         </div>
       </div>
       <div class="card">
-    
+
         <div class="card-body">
 
-       
+
           <div class="row">
 
             <div class="col-sm-12">
@@ -86,8 +116,9 @@
                     <tr>
                       <th class="wd-15p border-bottom-0">#</th>
                       <th class="wd-15p border-bottom-0">رقم الحساب</th>
-                      <th class="wd-15p border-bottom-0"> اسم الحساب</th>
-                      <th class="wd-15p border-bottom-0"> نوع الحركه</th>
+                      <th class="wd-15p border-bottom-0">  الحساب</th>
+                      <th class="wd-15p border-bottom-0">  الحساب التحليلي</th>
+                      <!-- <th class="wd-15p border-bottom-0"> نوع الحركه</th> -->
                       <th class="wd-15p border-bottom-0">التاريخ</th>
 
                       <th> مدين</th>
@@ -114,11 +145,11 @@
                       <td colspan="5">الاجمالي</td>
                       <td>
                         <span style="color:green">{{ sum_debit }}</span>
-                        
+
                       </td>
 
                       <td>
-                  
+
                         <span style="color:green">{{ sum_credit }}</span>
                       </td>
 
@@ -142,8 +173,8 @@
       </div>
     </div>
 
-    <div class="modal fade" id="exampleModalAccountReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
+    <div class="modal fade" id="exampleModalAccountReport" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -168,14 +199,15 @@
 <script>
 
 import pagination from "laravel-vue-pagination";
-import operation from '../../../../operation1.js';
+import operation1 from '../../../../operation1.js';
+// import operation from '../../../../operation.js';
 import tree from '../../../../../js/tree/tree.js';
 export default {
 
   components: {
-    pagination,
+    pagination
   },
-  mixins: [tree, operation],
+  mixins: [operation1, tree],
 
   data() {
     return {
@@ -185,10 +217,13 @@ export default {
         type: Object,
         default: null,
       },
-      sum_debit:'',
-      sum_credit:'',
+      sum_debit: '',
+      sum_credit: '',
       word_search: "",
+      from_date: new Date().toISOString().substr(0, 10),
+      into_date: new Date().toISOString().substr(0, 10),
 
+      Way_to_note_selected:'',
 
     }
   },
@@ -196,7 +231,7 @@ export default {
     this.list();
     this.type = 'AccountReport';
     this.type_of_tree = 1;
-    this.showtree('account','tree_account');
+    this.showtree('account', 'tree_account');
 
   },
   methods: {
@@ -209,7 +244,7 @@ export default {
 
     //   });
     // },
-    onwaychange(){
+    onwaychange() {
 
       var account_id = $('#AccountReport_account_tree_id').val();
       let uri = `/account_report/${account_id}`;
@@ -244,6 +279,3 @@ export default {
   }
 }
 </script>
-  
-  
-  

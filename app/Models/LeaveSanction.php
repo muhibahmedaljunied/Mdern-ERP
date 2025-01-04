@@ -15,8 +15,8 @@ class LeaveSanction extends Model
     {
 
         return $query->where([
-            'leave_type_id' => $value['leave'][$val],
-            'part_id' => $value['leave_part'][$val], 
+            'leave_type_id' => $value['leaveout'][$val],
+            'part_id' => $value['leaveout_part'][$val], 
             'iteration' => $value['iteration'][$val],
             'sanction_discount_id' => $value['discount_type'][$val],
             'discount' => $value['discount'][$val]

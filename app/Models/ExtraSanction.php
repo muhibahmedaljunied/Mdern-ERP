@@ -29,10 +29,10 @@ class ExtraSanction extends Model
     //     return $this->hasMany(Extra::class);
     // }
 
-    public function extra_detail()
-    {
-        return $this->hasMany(ExtraDetail::class);
-    }
+    // public function extra_detail()
+    // {
+    //     return $this->hasMany(ExtraDetail::class);
+    // }
 
 
 

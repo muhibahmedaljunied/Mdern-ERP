@@ -1,171 +1,315 @@
 <template>
     <div class="container-fluid">
 
+
+
         <div class="row row-sm">
+
             <div class="col-xl-12">
+
                 <div class="card">
 
+
+
                     <div class="card-header">
+
                         <h2> الموارد البشريه </h2>
+
                     </div>
+
                     <div class="card-body">
 
 
 
+
+
+
+
                         <a @click="exports_excel()">
+
                             <img src="/assets/img/export.png" alt="" style="width: 2%;"></a>
 
+
+
                         <a @click="imports_excel()">
+
                             <img src="/assets/img/import.png" alt="" style="width: 2%;"></a>
 
 
 
+
+
+
+
                         <template>
+
                             <div v-for="(group_types, index) in list_data">
 
+
+
                                 <fieldset class="border rounded-3 p-3">
+
                                     <legend class="float-none w-auto px-3"> {{ group_types.name }}</legend>
+
+
 
                                     <div v-for="(accounts, index) in group_types.group" :key="index" class="row">
 
 
+
+
+
                                         <div class="modal fade" :id="'exampleModal' + accounts.code" tabindex="-1"
                                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
                                             <div class="modal-dialog" role="document">
+
                                                 <div class="modal-content">
+
                                                     <div class="modal-header">
+
+
 
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
+
                                                             <span aria-hidden="true">&times;</span>
+
                                                         </button>
+
                                                     </div>
+
                                                     <div class="modal-body">
 
+
+
                                                         <div class="well" :id="'treeview_json_' + accounts.code">
+
                                                         </div>
+
+
 
                                                     </div>
 
+
+
                                                 </div>
+
                                             </div>
+
                                         </div>
+
+
 
                                         <div class="modal fade" :id="'exampleModal' + accounts.code + group_types.type"
                                             tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                             aria-hidden="true">
+
                                             <div class="modal-dialog" role="document">
+
                                                 <div class="modal-content">
+
                                                     <div class="modal-header">
+
+
 
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
+
                                                             <span aria-hidden="true">&times;</span>
+
                                                         </button>
+
                                                     </div>
+
                                                     <div class="modal-body">
+
+
 
                                                         <div class="well"
                                                             :id="'treeview_json_' + accounts.code + group_types.type">
+
                                                         </div>
+
+
 
                                                     </div>
 
+
+
                                                 </div>
+
                                             </div>
+
                                         </div>
 
-                                        <div v-for="(accounts2, index) in accounts.group_account" :key="index"
-                                            class="col-md-4">
 
 
-
-                                            <div class="custom-search" v-if="accounts2.account_id">
-
-
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + '_tree'" type="text" readonly
-                                                    class="custom-search-input"
-                                                    :value="accounts2.account_id + accounts.name">
-
-
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + '_tree_id'" type="hidden"
-                                                    readonly class="custom-search-input" :value="accounts2.account_id">
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + '_tree_hraccount_id'"
-                                                    type="hidden" readonly class="custom-search-input"
-                                                    :value="accounts2.id">
-                                                <button class="custom-search-botton" type="button" data-toggle="modal"
-                                                    :data-target="'#exampleModal' + accounts.code"> <i
-                                                        class="fa fa-plus-circle"></i></button>
-                                            </div>
-                                            <div class="custom-search" v-else>
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + '_tree'" type="text" readonly
-                                                    class="custom-search-input">
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + '_tree_id'" type="hidden"
-                                                    readonly class="custom-search-input">
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + '_tree_hraccount_id'"
-                                                    type="hidden" readonly class="custom-search-input"
-                                                    :value="accounts.id">
-
-                                                <button class="custom-search-botton" type="button" data-toggle="modal"
-                                                    :data-target="'#exampleModal' + accounts.code"> <i
-                                                        class="fa fa-plus-circle"></i></button>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <label for="inputAddress">الحساب المقابل</label>
-                                        </div>
-                                        <div class="col-md-4" v-for="(accounts3, index) in accounts.group_account "
+                                        <div class="row" v-for="(accounts2, index) in accounts.group_account"
                                             :key="index">
 
 
 
+                                            <div class="col-md-4">
 
-                                            <div class="custom-search" v-if="accounts3.account_id">
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + group_types.type + '_tree'"
-                                                    type="text" readonly class="custom-search-input"
-                                                    :value="accounts3.account.id + accounts3.account.text">
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + group_types.type + '_tree_id'"
-                                                    type="hidden" readonly class="custom-search-input"
-                                                    :value="accounts3.account.id">
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + group_types.type + '_tree_hraccount_id'"
-                                                    type="hidden" readonly class="custom-search-input"
-                                                    :value="accounts.id">
-                                                <button class="custom-search-botton" type="button" data-toggle="modal"
-                                                    :data-target="'#exampleModal' + accounts.code + group_types.type">
-                                                    <i class="fa fa-plus-circle"></i></button>
-                                            </div>
-                                            <div class="custom-search" v-else>
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + group_types.type + '_tree'"
-                                                    type="text" readonly class="custom-search-input">
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + group_types.type + '_tree_id'"
-                                                    type="hidden" readonly class="custom-search-input">
-                                                <input style="background-color: beige;"
-                                                    :id="'Structure_' + accounts.code + group_types.type + '_tree_hraccount_id'"
-                                                    type="hidden" readonly class="custom-search-input"
-                                                    :value="accounts.id">
 
-                                                <button class="custom-search-botton" type="button" data-toggle="modal"
-                                                    :data-target="'#exampleModal' + accounts.code + group_types.type">
-                                                    <i class="fa fa-plus-circle"></i></button>
+
+
+
+
+
+                                                <div class="custom-search" v-if="accounts2.account_id">
+
+
+
+
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + '_tree'" type="text"
+                                                        readonly class="custom-search-input"
+                                                        :value="accounts2.account_id + accounts.name">
+
+
+
+
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + '_tree_id'" type="hidden"
+                                                        readonly class="custom-search-input"
+                                                        :value="accounts2.account_id">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + '_tree_hraccount_id'"
+                                                        type="hidden" readonly class="custom-search-input"
+                                                        :value="accounts2.id">
+
+                                                    <button class="custom-search-botton" type="button"
+                                                        data-toggle="modal"
+                                                        :data-target="'#exampleModal' + accounts.code"> <i
+                                                            class="fa fa-plus-circle"></i></button>
+
+                                                </div>
+
+                                                <div class="custom-search" v-else>
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + '_tree'" type="text"
+                                                        readonly class="custom-search-input">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + '_tree_id'" type="hidden"
+                                                        readonly class="custom-search-input">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + '_tree_hraccount_id'"
+                                                        type="hidden" readonly class="custom-search-input"
+                                                        :value="accounts.id">
+
+
+
+                                                    <button class="custom-search-botton" type="button"
+                                                        data-toggle="modal"
+                                                        :data-target="'#exampleModal' + accounts.code"> <i
+                                                            class="fa fa-plus-circle"></i></button>
+
+                                                </div>
+
                                             </div>
+
+
+
+
+
+
+
+                                            <div class="col-md-2">
+
+                                                <label for="inputAddress">الحساب المقابل</label>
+
+                                            </div>
+
+                                            <div class="col-md-4"
+                                                v-for="(accounts3, index) in accounts2.group_account_detail"
+                                                :key="index">
+
+
+                                                <div class="custom-search" v-if="accounts3.id">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + group_types.type + '_tree'"
+                                                        type="text" readonly class="custom-search-input"
+                                                        :value="accounts3.account.id + accounts3.account.text">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + group_types.type + '_tree_id'"
+                                                        type="hidden" readonly class="custom-search-input"
+                                                        :value="accounts3.account.id">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + group_types.type + '_tree_hraccount_id'"
+                                                        type="hidden" readonly class="custom-search-input"
+                                                        :value="accounts.id">
+
+                                                    <button class="custom-search-botton" type="button"
+                                                        data-toggle="modal"
+                                                        :data-target="'#exampleModal' + accounts.code + group_types.type">
+
+                                                        <i class="fa fa-plus-circle"></i></button>
+
+                                                </div>
+
+
+
+                                            </div>
+                                            <div v-if="!accounts2.group_account_detail.length" class="col-md-4">
+
+                                                <div class="custom-search">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + group_types.type + '_tree'"
+                                                        type="text" readonly class="custom-search-input">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + group_types.type + '_tree_id'"
+                                                        type="hidden" readonly class="custom-search-input">
+
+                                                    <input style="background-color: beige;"
+                                                        :id="'Structure_' + accounts.code + group_types.type + '_tree_hraccount_id'"
+                                                        type="hidden" readonly class="custom-search-input"
+                                                        :value="accounts.id">
+
+
+
+                                                    <button class="custom-search-botton" type="button"
+                                                        data-toggle="modal"
+                                                        :data-target="'#exampleModal' + accounts.code + group_types.type">
+
+                                                        <i class="fa fa-plus-circle"></i></button>
+
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
                                         </div>
+
+
+
+
 
                                     </div>
 
 
+
+
+
                                 </fieldset>
+
+
 
                             </div>
                         </template>
@@ -230,8 +374,7 @@ export default {
                     code: this.code,
                     type_account: this.type_account,
 
-                }
-                )
+                })
                 .then((response) => {
                     console.log(response);
                     toastMessage("تم الاضافه بنجاح");

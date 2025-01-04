@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Warehouse;
 
 use App\Repository\Unit\UnitTransferRepository;
-// use App\Services\StockService;
 use App\Repository\StoreInventury\StoreTransferRepository;
 use App\Repository\StockInventury\StockTransferRepository;
 use App\Repository\CheckData\CheckTransferRepository;
@@ -17,10 +16,8 @@ use Illuminate\Http\Request;
 use App\Models\Transfer;
 use App\Models\TransferDetail;
 use App\Services\CoreService;
-
 use App\Http\Controllers\Controller;
 use App\Repository\Qty\QtyStockRepository;
-use App\RepositoryInterface\UnitRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 class TransferController extends Controller
@@ -160,12 +157,12 @@ class TransferController extends Controller
             )
             ->get();
 
-            foreach ($this->details as $value) {
+        foreach ($this->details as $value) {
 
 
-                $value->unit_id = 0;
-            }
-            return $this->details;
+            $value->unit_id = 0;
+        }
+        return $this->details;
     }
 
 
@@ -193,29 +190,29 @@ class TransferController extends Controller
 
 
 
-       
+
         try {
 
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
             $warehouse->add(); // this handle data in transfer table
 
-   
+
             foreach ($this->core->data['count'] as $value) {
 
-     
-             
+
+
                 $this->core->setValue($value);  //this set index of data
-      
+
                 $unit->handle_unit(); // this make decode for unit and convert qty into miqro
 
                 $store->store(); // this handle data in store table
-            
+
                 $warehouse->init_details(); // this make initial for details table
-               
+
                 $stock->stock(); // this handle data in stock table
 
-  
+
 
 
 
@@ -243,25 +240,95 @@ class TransferController extends Controller
 
 
 
+    // public function show(Request $request)
+    // {
+
+    //     // --------------------------------new---------------------------
+    //     $this->qty->set_compare_array(['qty']);
+
+    //     $this->init();
+    //     // ----------------------------------------------------------------------------
+    //     $transfer_details = DB::table('transfer_details')
+    //         ->join('store_products', 'transfer_details.store_product_id', '=', 'store_products.id')
+    //         // ->join('statuses', 'transfer_details.status_id', '=', 'statuses.id')
+    //         // ->join('stores', 'transfer_details.store_id', '=', 'stores.id')
+    //         // ->join('units', 'transfer_details.unit_id', '=', 'units.id')
+    //         ->select(
+    //             'store_products.*',
+    //             // 'units.name as unit',
+    //             'transfer_details.*',
+    //             // 'statuses.*',
+    //             // 'statuses.name as status',
+    //             // 'stores.*'
+    //         )
+    //         ->get();
+
+    //     // dd($transfer_details);
+    //     // ----------------------------new--------------------------------------
+    //     $this->qty->details = $transfer_details;
+
+
+    //     foreach ($this->qty->details as $value) {
+
+    //         $value->qty_return_now = 0;
+
+
+    //         $value->unit_selected = [];
+    //     }
+
+    //     // ------------------------------------------------------------------
+
+    //     // foreach ($transfer_details as $value) {
+
+    //     //     $value->qty_transfer = 0;
+    //     //     $value->unit_selected = [];
+    //     // }
+    //     // ----------------------------new----------------------------------
+    //     $this->qty->handle_qty();
+    //     // --------------------------------------------------------------
+
+    //     $this->units();
+    //     // --------------------------------new------------------------------
+    //     return response()->json(['details' => $this->qty->details]);
+    //     // --------------------------------------------------------------
+    //     return response()->json(['transfer_details' => $transfer_details]);
+    // }
+
+
     public function show(Request $request)
     {
 
 
 
         $transfer_details = DB::table('transfer_details')
-            ->join('products', 'transfer_details.product_id', '=', 'products.id')
-            ->join('statuses', 'transfer_details.status_id', '=', 'statuses.id')
-            ->join('stores', 'transfer_details.store_id', '=', 'stores.id')
-            ->join('units', 'transfer_details.unit_id', '=', 'units.id')
+            ->join('store_products', 'transfer_details.store_product_id', '=', 'store_products.id')
+            // ->join('statuses', 'transfer_details.status_id', '=', 'statuses.id')
+            // ->join('stores', 'transfer_details.store_id', '=', 'stores.id')
+            // ->join('units', 'transfer_details.unit_id', '=', 'units.id')
             ->select(
-                'products.*',
-                'units.name as unit',
+                'store_products.*',
+                // 'units.name as unit',
                 'transfer_details.*',
-                'statuses.*',
-                'statuses.name as status',
-                'stores.*'
+                // 'statuses.*',
+                // 'statuses.name as status',
+                // 'stores.*'
             )
             ->get();
+
+        // $transfer_details = DB::table('transfer_details')
+        //     ->join('products', 'transfer_details.product_id', '=', 'products.id')
+        //     ->join('statuses', 'transfer_details.status_id', '=', 'statuses.id')
+        //     ->join('stores', 'transfer_details.store_id', '=', 'stores.id')
+        //     ->join('units', 'transfer_details.unit_id', '=', 'units.id')
+        //     ->select(
+        //         'products.*',
+        //         'units.name as unit',
+        //         'transfer_details.*',
+        //         'statuses.*',
+        //         'statuses.name as status',
+        //         'stores.*'
+        //     )
+        //     ->get();
 
         foreach ($transfer_details as $value) {
 

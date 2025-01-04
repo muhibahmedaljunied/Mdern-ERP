@@ -28,12 +28,12 @@ class SupplierController extends Controller
 
 
         $suppliers =  DB::table('suppliers')
-            ->join('groups', 'groups.id', '=', 'suppliers.group_id')
-            ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
-            ->where('group_types.code', 'supplier')
+            // ->join('groups', 'groups.id', '=', 'suppliers.group_id')
+            // ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
+            // ->where('group_types.code', 'supplier')
             ->select(
                 'suppliers.*',
-                'groups.name as group_name'
+                // 'groups.name as group_name'
             )
             ->paginate(10);
 

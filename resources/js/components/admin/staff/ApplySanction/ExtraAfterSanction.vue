@@ -2,9 +2,6 @@
 
 
     <div class="content container-fluid">
-
-
-
         <div class="row row-sm">
             <div class="col-xl-12">
                 <div class="card">
@@ -12,7 +9,6 @@
                         <div class="d-flex justify-content-between">
                             <span class="h4">تطبيق لوائح الاضافي بعد الدوام</span>
                         </div>
-
                     </div>
                     <div class="card-body">
 
@@ -66,8 +62,6 @@
                             <div class="col-md-2">
                                 <label for="status"> التأريخ</label>
                                 <input class="form-control" type="date" name="" id="" v-model="attendance_date">
-
-
                             </div>
 
                             <div class="col-sm-6 col-md-2" style="margin-top: auto;">
@@ -111,11 +105,7 @@
                                             <th class="wd-10p border-bottom-0">نوع الاضافي</th>
                                             <th class="wd-10p border-bottom-0">المده</th>
                                             <th class="wd-10p border-bottom-0">عدد المرات</th>
-
                                             <th class="wd-10p border-bottom-0"> اللائحه </th>
-
-
-
 
                                         </tr>
                                     </thead>
@@ -143,35 +133,6 @@
 
 
                                             </td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                         </tr>
 
@@ -203,10 +164,8 @@
 </template>
 
 <script>
-
 import pagination from "laravel-vue-pagination";
 import operation from '../../../../staff/operation/operation.js';
-
 export default {
     components: {
         pagination,
@@ -220,12 +179,10 @@ export default {
                 default: null,
             },
 
-
             attendance_type: '',
             attendance_date: new Date().toISOString().substr(0, 10),
             attendance_final: 'pendding',
             show: true,
-            // attendance_date:0,
             status: [],
             check_in: [],
             check_out: [],
@@ -237,14 +194,12 @@ export default {
             leave: [],
             extra: [],
             extra_after: [],
-
             check_state: [],
             date: [],
             fieldset1: [],
             fieldset2: [],
             fieldset3: [],
             staff: [],
-
             work_type_selected: '',
             staff_search: '',
             attendance_in_out: '',
@@ -279,7 +234,8 @@ export default {
 
                 for (var i = 0; i < arrayLength; i++) {
 
-                    html = html + `<option data-period-${id}= ${response.data.periods[i].period_id}   value= ${response.data.periods[i].period_id} >${response.data.periods[i].name} من   ${response.data.periods[i].from_time}  الي ${response.data.periods[i].into_time}</option>`
+                    html = html + `<option data-period-${id}= ${response.data.periods[i].period_id}   
+                    value= ${response.data.periods[i].period_id} >${response.data.periods[i].name} من   ${response.data.periods[i].from_time}  الي ${response.data.periods[i].into_time}</option>`
 
                 }
 
@@ -310,11 +266,6 @@ export default {
 
                 });
         },
-
-
-
-
-
         list(page = 1) {
 
 

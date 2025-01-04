@@ -26,30 +26,38 @@
                     <div class="card">
 
 
-                      <div class="card-header">
-
-                        <a @click="exports_excel()">
-                          <img src="/assets/img/export.png" alt="" style="width: 5%;"></a>
-
-                        <a @click="imports_excel()">
-                          <img src="/assets/img/import.png" alt="" style="width: 5%;"></a>
-                      </div>
 
                       <div class="card-body">
-                        <!-- <div class="container">
-                          <div class="well" id="treeview_json_account"></div>
-                        </div> -->
+
 
                         <div class="container">
                           <div class="row">
-                            <div class="col-xs-12">
-                              <div class="input-group">
+                            <div class="col-md-8">
 
-                                <input type="text" id="ricerca-enti" class="form-control" placeholder="بحث"
-                                  aria-describedby="search-addon">
+                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti" placeholder="بحث"
+                                aria-describedby="search-addon">
 
-                              </div>
+
+
                             </div>
+
+
+                            <div class="col-md-4">
+
+
+
+                              <button class="btn btn-primary btn-sm btn-inline" type="button"
+                                @click="imports_excel()">استيراد</button>
+                              <button class="btn btn-primary btn-sm btn-inline" type="button"
+                                @click="exports_excel()">تصدير</button>
+
+
+
+                            </div>
+
+
+
+
                           </div>
                           <div class="row">
                             <div class="col-xs-12" id="treeview_json_account">
@@ -91,15 +99,7 @@
 
                     <div class="card-body">
                       <div class="row">
-                        <!-- <h3 class="text-center">اضافه حساب</h3> -->
 
-                        <!-- <div class="col-md-4">
-                          <ul>
-                            <div v-for="error in errors">
-                              <li>{{ error[0] }}</li>
-                            </div>
-                          </ul>
-                        </div> -->
 
                         <div class="col-md-4">
                           <label for="Product">رقم الحساب</label>
@@ -118,15 +118,92 @@
                       </div>
 
                       <br>
+
                       <div class="row">
 
-                        <div class="col-md-4">
-                          <label for="radio-example-one">متفرع </label>
+                        <div class="col-md-6">
 
-                          <input type="checkbox" name='fieldset2' v-model="status_account" id="status" />
+                          <label for="FormaPago"> الحساب الختامي</label>
+                          <select v-model="final_account" class="form-control" style="background-color: beige;"
+                            name="forma_pago" id="forma_pago">
+
+                            <option v-bind:value="1">ميزانيه</option>
+                            <option v-bind:value="2">ارباح وخساير</option>
+
+                            <option v-bind:value="3">متاجره</option>
+                            <option v-bind:value="4"> تشغيل</option>
+                          </select>
+
+
+
+
+
                         </div>
 
 
+
+
+
+
+
+                      </div>
+
+                      <br>
+                      <div class="row">
+
+
+                        <div class="col-md-4">
+
+
+                          <label for="FormaPago"> طبيعه الحساب</label>
+                          <select class="form-control" v-model="account_type_debit_credit"
+                            style="background-color: beige;" name="forma_pago" id="forma_pago">
+
+                            <option v-bind:value="1">مدين</option>
+                            <option v-bind:value="2"> داين</option>
+
+
+                          </select>
+
+
+
+
+
+                        </div>
+
+                        <div class="col-md-4">
+
+
+                          <label for="FormaPago"> نوع الحساب</label>
+                          <select class="form-control" v-model="account_type" style="background-color: beige;"
+                            name="forma_pago" id="forma_pago">
+
+                            <option v-bind:value="1">اصول ثابته</option>
+                            <option v-bind:value="2"> اصول متداوله</option>
+                            <option v-bind:value="3"> خصوم ثابته</option>
+                            <option v-bind:value="4"> خصوم متداوله</option>
+                            <option v-bind:value="5"> حقوق الملكيه</option>
+                            <option v-bind:value="6"> مصروفات </option>
+                            <option v-bind:value="7"> ايرادات </option>
+
+
+
+                          </select>
+
+
+
+
+
+                        </div>
+
+                        <div style="text-align: center;" class="col-md-2">
+                          <label for="FormaPago"> متفرع</label>
+
+                          <input class="btn btn-lg btn-block" type="checkbox" name='fieldset2' v-model="status_account"
+                            id="status" />
+                            <input id='parent' type="hidden" />
+                          <input id='rank' type="hidden" />
+                        </div>
 
 
                       </div>
@@ -135,34 +212,14 @@
 
 
 
-                        <div class="col-md-4">
-                          <label for="radio-example-one">مدين </label>
-
-                          <input type="checkbox" name='field1' id="attend" @change="check()" />
-
-                          <label for="radio-example-one">داين </label>
-
-                          <input type="checkbox" name='field2' id="attend" @change="check()" />
-
-                        </div>
-
-                        <input id='parent' type="hidden" />
-
-                        <input id='rank' type="text" />
-
-
-                      </div>
-
-                      <div class="row">
-
                         <div class="col-md-12">
 
-                          <button type="button" class="btn btn-primary btn-lg btn-inline" @click="addnode_account"> حفظ
+
+                          <button type="button" class="btn btn-primary btn-sm btn-inline" @click="addnode_account"> حفظ
                           </button>
-
-
                         </div>
                       </div>
+
 
                     </div>
                     <!-- <div class="card-footer">
@@ -277,20 +334,23 @@
 </template>
 <script>
 
+
 import tree from '../../../../../js/tree/tree.js';
 export default {
   mixins: [tree],
   data() {
     return {
       file: '',
-      table:'',
+      table: '',
       text: '',
       status: false,
-      status_account:false,
-      rank: 0,
+      status_account: false,
+      account_type: '',
+      account_type_debit_credit: '',
       id: 0,
       trees: "",
       errors: "",
+      final_account: '',
 
       add: 0,
       // type_of_tree:0,
@@ -300,7 +360,10 @@ export default {
 
   created() {
     this.type_of_tree = 0;
-    this.table = 'account';
+    this.type = 'account';
+    localStorage.setItem('id', 0);
+    localStorage.setItem('rank', 0);
+    localStorage.setItem('table', 'account');
 
     this.showtree('account', 'tree_account');
   },
@@ -310,6 +373,7 @@ export default {
       e.preventDefault();
       updatenode($("#update_account_number").val(), this.text);
     },
+
 
     exports_excel() {
 

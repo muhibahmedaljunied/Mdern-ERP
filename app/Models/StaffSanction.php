@@ -18,6 +18,13 @@ class StaffSanction extends Model
 
   }
 
+  public function daily()
+  {
+      return $this->morphMany(GroupAccountDailyDetail::class, 'dailyable');
+  }
+
+  
+
   public function staff()
   {
       return $this->belongsTo(Staff::class);

@@ -17,9 +17,10 @@ trait StoreProductTrait
 
 
 
+        // dd($this->core->data['old'][$this->core->value]);
             $this->core->data_store_product =  new StoreProduct();
             $this->core->data_store_product->product_id = $this->core->data['old'][$this->core->value]['product_id'];
-            $this->core->data_store_product->product_code = $this->core->data['old'][$this->core->value]['product_code'];
+            $this->core->data_store_product->qr_code = $this->core->data['old'][$this->core->value]['qr_code'];
             $this->core->data_store_product->store_id = $this->core->data['intostore_id'];
             $this->core->data_store_product->status_id = $this->core->data['old'][$this->core->value]['status_id'];
             $this->core->data_store_product->desc = $this->core->data['old'][$this->core->value]['desc'];

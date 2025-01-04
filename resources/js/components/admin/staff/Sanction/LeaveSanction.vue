@@ -257,10 +257,7 @@ export default {
     return {
 
 
-      value_list: {
-        type: Object,
-        default: null,
-      },
+
 
       leaveout_types:'',
       leaveout_parts:'',

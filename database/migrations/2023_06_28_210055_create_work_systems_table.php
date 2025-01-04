@@ -18,13 +18,16 @@ class CreateWorkSystemsTable extends Migration
             
             $table->Increments('id');
 
+            $table->unsignedInteger('staff_id')->nullable();
+            $table->foreign('staff_id')->references('id')->on('staff');
+
             $table->unsignedInteger('work_system_type_id')->nullable();
             $table->foreign('work_system_type_id')->references('id')->on('work_system_types');
 
             $table->unsignedInteger('period_time_id')->nullable();
             $table->foreign('period_time_id')->references('id')->on('period_times');
-
-            $table->json('day_id');
+            $table->integer('sort');
+            $table->json('days');
 
 
             $table->timestamps();

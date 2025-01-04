@@ -15,11 +15,13 @@ use App\Models\Part;
 use App\Models\StaffSanction;
 use App\Repository\StaffSaction\StaffDelaySanctionRepository;
 use App\Services\PayrollService;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
 class DelaySanctionController extends Controller
 {
+
+
+
 
 
     public function __construct(
@@ -46,96 +48,215 @@ class DelaySanctionController extends Controller
         ]);
     }
 
+    function get_day_name($date)
+    {
+        // Convert the date to a timestamp
+        $timestamp = strtotime($date);
+        // Return the day name
+        return date('D', $timestamp);
+    }
+
+
+    // dd(date('l', strtotime('2024-11-19')), '2024-11-19');           
+    // Tuesday,Thursday,Saturday,Monday,Wednesday,Friday,Sunday
+    // dd($request->all());
 
     public function delay_sanction_attendance(Request $request)
     {
 
-        // dd(date('l', strtotime('2024-11-19')), '2024-11-19');           
-        // Tuesday,Thursday,Saturday,Monday,Wednesday,Friday,Sunday
-
-        // dd($request->staff_id);
-        $array_filter = [];
-        $array_filter2 = [];
-
-        $attendances =  DB::table('attendances');
-
-        if ($request->staff_id) {
-
-            $attendances = $attendances->where('staff_id', $request->staff_id);
-        }
-
-
-        $attendances = $attendances->where('attendance_status', 1)
-            ->addSelect(['attendance_details' => function (Builder $builder) {
-                $builder->from('attendance_details')
-                    ->selectRaw('sum(delay) as delay')
-                    ->whereColumn('attendances.id', 'attendance_details.attendance_id');
-            }])
-            ->get();
-
-        // dd($attendances);
+        $this->filter_date($request);
         // ----------------------------------------------------------------------------------------------------------------
+        $this->staff_attendance($request);
+        // ----------------------------------------------------------------------------------------------------------------
+        $this->final_sanction($request);
 
-        foreach ($attendances as $key => $value) {
+        // dd($this->core->attendances);
+        return response()->json([
+            'list' => $this->core->attendances,
 
-            // dd($value);
-            if (
-                date('l', strtotime($value->attendance_date)) == $request->delay_type_code &&
-                $value->attendance_details == $request->delay_part_duration
-            ) {
+        ]);
+    }
 
-                if (!in_array($value->attendance_date, $array_filter)) {
 
-                    $array_filter[$key] =  $value->attendance_date;
-                    $array_filter2[$key] =  date('l', strtotime($value->attendance_date));
-                }
+
+
+    public function filter_date($request)
+    {
+
+        $request->staff_id = collect($request->staff_id)->toArray();
+
+
+        $this->core->array_filter = [];
+        $year = intval(date("2024"));
+        $month = intval(date("11"));
+        $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+
+        for ($i = 1; $i < $days; $i++) {
+
+            if ($this->get_day_name("$year-$month-$i") == $request->delay_type_code) {
+
+                $this->core->array_filter[$i] =  $year . '-' . $month . '-' . $i;
             }
         }
+    }
 
-        // dd($array_filter,$array_filter2);
-        // ----------------------------------------------------------------------------------------------------------------
+    public function staff_attendance($request)
+    {
 
-        $attendances =  DB::table('staff')
-            ->addSelect(['attendance' => function (Builder $builder) use ($array_filter) {
-                $builder->from('attendances')
-                    ->selectRaw('count(*) as attendance')
-                    ->whereColumn('staff.id', 'attendances.staff_id')
-                    ->whereIn('attendance_date', $array_filter);
-            }])
+
+
+        $this->core->attendances = DB::table('attendances')
+            ->select(
+                'staff.name',
+                'staff.id as staff_id',
+                DB::raw('count(attendances.id) as attendance'),
+                'revenue',
+            )
+            ->groupBy(
+                'staff.name',
+                'staff.id',
+                'revenue',
+            )
+            ->Join(
+                DB::raw('(SELECT attendance_id,SUM(delay) AS revenue FROM attendance_details 
+                GROUP BY attendance_id) AS n'),
+                'n.attendance_id',
+                '=',
+                'attendances.id'
+            )
+            ->where('revenue', $request->delay_part_duration)
+            ->whereIn('attendance_date', $this->core->array_filter)
+            ->join('staff', 'staff.id', '=', 'attendances.staff_id');
+
+        if (count($request->staff_id) > 0) {
+
+            $this->core->attendances = $this->core->attendances->where('staff.id', $request->staff_id[0]);
+        }
+        $this->core->attendances = $this->core->attendances->orderBy('revenue')
             ->paginate();
 
-        // dd($attendances);
-        // ----------------------------------------------------------------------------------------------------------------
+
+
+        // dd($this->core->attendances);
+    }
 
 
 
-        foreach ($attendances as $key => $value) {
+
+    public function final_sanction($request)
+    {
+
+        // dd($request->delay_type_id);
+
+        foreach ($this->core->attendances as $value) {
 
 
-            // dd($request->delay_part_id, $request->delay_type_id, $value->attendance);
-            $delay =  DB::table('delay_sanctions')
-                ->join('sanction_discounts', 'sanction_discounts.id', '=', 'delay_sanctions.sanction_discount_id')
+
+
+
+            $delay =  collect(DelaySanction::join('sanction_discounts', 'sanction_discounts.id', '=', 'delay_sanctions.sanction_discount_id')
                 ->join('delay_types', 'delay_types.id', '=', 'delay_sanctions.delay_type_id')
                 ->where('delay_sanctions.part_id', $request->delay_part_id)
                 ->where('delay_sanctions.delay_type_id', $request->delay_type_id)
                 ->where('delay_sanctions.iteration', $value->attendance)
                 ->select(
                     'delay_sanctions.*',
-                    'sanction_discounts.*',
+                    'sanction_discounts.name',
                     'delay_types.name as delay_name'
-                )->get();
+                )
+                ->get())->toArray();
 
-            $value->part = $request->delay_part_duration;
-            $value->delay = $delay;
-            // dd($delay);
+
+
+            if (count($delay) > 0) {
+
+
+                foreach ($delay as $key => $value2) {
+
+                    $staff_sanction =  collect(StaffSanction::where('sanctionable_type', 'App\Models\DelaySanction')
+                        ->where('sanctionable_id', $value2['id'])
+                        ->where('staff_id', $value->staff_id)
+                        ->select(
+                            '*'
+                        )
+                        ->get())->toArray();
+
+
+
+                    if (count($staff_sanction) > 0) {   //if found staff_sanction do not return sanction
+
+                        $value->staff_sanction[$key] = $staff_sanction;
+                    } else {
+
+                        $value->delay[$key] = $value2;
+                    }
+                }
+            }
+
+
+            // if (count(collect($delay)->toArray()) > 0) {
+
+            //     $value->delay = $delay;
+            // }
         }
 
-        // ----------------------------------------------------------------------------------------------------------------
 
 
-        // dd($attendances);
+        // foreach ($this->core->attendances as $value) {
+
+        //     $delay =  DelaySanction::with(['staff_sanction' => function ($query) use ($request) {
+
+        //         $query->where('staff_sanctions.sanctionable_type', 'App\Models\DelaySanction')->select('*');
+        //     }])
+        //         ->join('sanction_discounts', 'sanction_discounts.id', '=', 'delay_sanctions.sanction_discount_id')
+        //         ->join('delay_types', 'delay_types.id', '=', 'delay_sanctions.delay_type_id')
+        //         ->where('delay_sanctions.part_id', $request->delay_part_id)
+        //         ->where('delay_sanctions.delay_type_id', $request->delay_type_id)
+        //         ->where('delay_sanctions.iteration', $value->attendance);
+
+        //     $delay = $delay->select(
+        //         'delay_sanctions.*',
+        //         'sanction_discounts.*',
+        //         'delay_types.name as delay_name'
+        //     )
+        //         ->get();
+
+        //     $value->part = $request->delay_part_duration;
+
+        //     if (count(collect($delay)->toArray()) > 0) {
+
+        //         $value->delay = $delay;
+        //     }
+        // }
+
+        // dd(count(collect($delay)->toArray()));
+    }
+
+
+    public function apply_delay_sanction_attendance(Request $request)
+    {
+
+
+
+        // dd($request->sanction);
+        // unset( $array_name['key_to_be_removed'] );
+        foreach ($request->sanction as $value) {
+
+            $delay = new StaffSanction();
+            $delay->staff_id = $request->staff_id;
+            $delay->sanctionable()->associate(DelaySanction::find($value['id']));
+            $delay->date = $request->date;
+            $delay->save();
+        }
+
+
+
+
+
+        // dd($request->all());
         return response()->json([
-            'list' => $attendances,
+            'status' => 'successfully',
 
         ]);
     }
@@ -156,7 +277,7 @@ class DelaySanctionController extends Controller
             )
             ->paginate(10);
 
-
+        // ----------------------------------------------------------------------------------------
         $delay_sanctions = Cache::rememberForever('delay_sanctions_index', function () {
 
             return DB::table('delay_sanctions')
@@ -196,8 +317,6 @@ class DelaySanctionController extends Controller
             ]);
         }])
             ->join('staff', 'staff.id', '=', 'staff_sanctions.staff_id')
-
-
             ->where('sanctionable_type', 'App\\Models\\DelaySanction')
             ->select(
                 'staff_sanctions.date as sanction_date',
@@ -265,16 +384,3 @@ class DelaySanctionController extends Controller
         }
     }
 }
-
-
-
-            // tap(StaffSanction::where([
-            //     'staff_id' => $request->staff,
-            //     'sanctionable_id' => $request->sanctionable_id,
-            //     'sanctionable_type' => $request->sanctionable_type,
-            //     'date' => $request->date
-
-
-            // ]))
-            //     ->update(['status' => $request->status])
-            //     ->get('id');

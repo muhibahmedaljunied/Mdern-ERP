@@ -21,7 +21,7 @@ class CreateGroupTypesTable extends Migration
 
             $table->Increments('id');
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
             

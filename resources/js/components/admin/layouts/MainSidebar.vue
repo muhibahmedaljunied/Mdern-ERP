@@ -110,7 +110,7 @@
             ><i class="angle fe fe-chevron-down"></i
           ></router-link>
 
-          <!-- <router-link class="side-menu__item" data-toggle="slide" to="status"
+         <router-link class="side-menu__item" data-toggle="slide" to="status"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               class="side-menu__icon"
@@ -242,7 +242,7 @@
               <router-link class="slide-item" to="/user">المستخدمين</router-link>
             </li>
 
-            
+
             <li>
               <router-link class="slide-item" to="/group_types">انواع التصنيفات</router-link>
             </li>
@@ -255,12 +255,12 @@
                 تصنيفات النظام </router-link>
             </li>
 
-            
+
             <li class="slide">
               <router-link class="slide-item" to="/financial_accounting/mark_accounts">
                 ترميز الجسابات </router-link>
             </li>
-       
+
             <li class="slide">
               <router-link class="slide-item" to="/financial_accounting/setting_account">
                 ربط الجسابات </router-link>
@@ -290,8 +290,8 @@
             <li class="slide">
               <router-link class="slide-item" to="/accounts_basic_data">البيانات الاساسيه </router-link>
             </li>
-       
 
+            
 
             <li class="slide">
               <router-link class="slide-item" to="/accounts_guide">الدليل المجاسبي</router-link>
@@ -301,29 +301,32 @@
                 قيود اليوميه</router-link>
             </li>
 
-            <li>
+          
+
+            <li class="slide">
               <router-link class="slide-item" to="/expence">المصروفات والايرادات</router-link>
             </li>
             <li class="slide">
               <router-link class="slide-item" to="/account_list">
-                دفتر الاستاذ العام</router-link>
+                  كشف حساب</router-link>
             </li>
-
-            <!-- <li>
-              <router-link class="slide-item" to="/income">الايرادات </router-link>
-            </li> -->
-            <!-- <li class="slide">
-              <router-link class="slide-item" to="auditBalance">
-                دفتر الاستاذ العام</router-link>
-            </li> -->
+            <li class="slide">
+              <router-link class="slide-item" to="/opening_balances"> الارصده الافتتاحيه
+                 </router-link>
+            </li>
+          
             <li class="slide">
               <router-link class="slide-item" to="auditBalance">
                 ميزان المراجعه</router-link>
             </li>
-            <!-- <li class="slide">
-              <router-link class="slide-item" to="auditBalance">
+            <li class="slide">
+              <router-link class="slide-item" to="lose">
                 الارباح والخسائر</router-link>
-            </li> -->
+            </li>
+            <li class="slide">
+              <router-link class="slide-item" to="balance">
+                 الميزانيه العموميه</router-link>
+            </li>
             <li class="slide">
               <router-link class="slide-item" to="/closing_year"> الاقفالات السنويه </router-link>
             </li>
@@ -367,7 +370,7 @@
           </ul>
 
 
-          
+
           <ul class="slide-menu">
             <li>
               <router-link class="slide-item" to="/staff/salary_wage">الرواتب والاجور</router-link>
@@ -379,19 +382,20 @@
             </li>
           </ul>
 
-        
+
           <ul class="slide-menu">
             <li>
-              <router-link class="slide-item" to="/staff/apply_sanction">تطبيق لوايج الجضور والغياب والاضافي </router-link>
+              <router-link class="slide-item" to="/staff/apply_sanction">تطبيق لوايج الجضور والغياب والاضافي
+              </router-link>
             </li>
           </ul>
           <ul class="slide-menu">
             <li>
-              <router-link class="slide-item" to="/staff/staff_sanction"> مكافئات وجزاءات الموظف  </router-link>
+              <router-link class="slide-item" to="/staff/staff_sanction"> مكافئات وجزاءات الموظف </router-link>
             </li>
           </ul>
 
-          
+
 
           <ul class="slide-menu">
             <li>
@@ -400,7 +404,7 @@
           </ul>
 
 
-      
+
 
           <ul class="slide-menu">
             <li>
@@ -445,7 +449,7 @@
             </li>
           </ul>
           <ul class="slide-menu">
-          <li>
+            <li>
               <router-link class="slide-item" to="/newcash">امر صرف مخزني</router-link>
             </li>
           </ul>
@@ -455,11 +459,11 @@
             </li>
           </ul>
           <ul class="slide-menu">
-          <li>
+            <li>
               <router-link class="slide-item" to="/newsupply">امر توريد مخزني</router-link>
             </li>
           </ul>
-   
+
           <ul class="slide-menu">
             <li>
               <router-link class="slide-item" to="/listsupply">اوامر التوريد</router-link>
@@ -490,7 +494,7 @@
               <router-link class="slide-item" to="/opening_inventory">المخزون الافتتاحي</router-link>
             </li>
           </ul>
-    
+
 
           <ul class="slide-menu">
             <li>
@@ -500,7 +504,7 @@
           </ul>
         </li>
 
-     
+
 
         <li class="slide">
           <a class="side-menu__item" data-toggle="slide" href=""><svg xmlns="http://www.w3.org/2000/svg"
@@ -512,11 +516,11 @@
                 d="M22 9h-4.79l-4.38-6.56c-.19-.28-.51-.42-.83-.42s-.64.14-.83.43L6.79 9H2c-.55 0-1 .45-1 1 0 .09.01.18.04.27l2.54 9.27c.23.84 1 1.46 1.92 1.46h13c.92 0 1.69-.62 1.93-1.46l2.54-9.27L23 10c0-.55-.45-1-1-1zM12 4.8L14.8 9H9.2L12 4.8zM18.5 19l-12.99.01L3.31 11H20.7l-2.2 8zM12 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
             </svg><span class="side-menu__label">اداره المشتريات </span><i class="angle fe fe-chevron-down"></i></a>
           <ul class="slide-menu">
-         
+
             <li>
               <router-link class="slide-item" to="/supplier">الموردين</router-link>
             </li>
-         
+
 
             <li>
               <router-link class="slide-item" to="/newpurchase"> فاتوره مشتريات</router-link>
@@ -530,8 +534,8 @@
             <li>
               <router-link class="slide-item" to="/supplier_account_list">حساب الموردين</router-link>
             </li>
-    
-          
+
+
 
             <li>
               <router-link class="slide-item" to="/PaymentBondList">سندات الصرف</router-link>
@@ -570,8 +574,8 @@
             <li>
               <router-link class="slide-item" to="/customer">العملاء</router-link>
             </li>
-        
-          
+
+
             <li>
               <router-link class="slide-item" to="/newsale">فاتوره مبيعات</router-link>
             </li>
@@ -581,7 +585,7 @@
             <li>
               <router-link class="slide-item" to="/listsale"> المبيعات</router-link>
             </li>
-        
+
             <li>
               <router-link class="slide-item" to="/ReceivableBondList">سندات القبض</router-link>
             </li>
@@ -693,9 +697,9 @@
             <li>
               <router-link class="slide-item" to="/reportcashing">التحويل المخزني</router-link>
             </li>
-            <li>
+            <!-- <li>
               <router-link class="slide-item" to="/try"> try</router-link>
-            </li>
+            </li> -->
             <!-- <li>
               <router-link class="slide-item" to="reportstock"
                 >المخزون</router-link

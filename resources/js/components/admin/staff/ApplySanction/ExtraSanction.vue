@@ -49,6 +49,13 @@
                                 </select>
 
                             </div>
+
+                            <div class="col-md-2">
+                                <label for="status"> التأريخ</label>
+                                <input class="form-control" type="date" name="" id="" v-model="apply_date">
+
+
+                            </div>
                             <!-- <div class="col-md-2">
                                 <label for="status"> عدد المرات</label>
                                 <select v-model="iterationselected" name="type" class="form-control " required>
@@ -136,26 +143,57 @@
                                             </td>
                                             <td>{{ staff.attendance }}</td>
 
+
+
                                             <td>
-                                                <span class="badge bg-danger" v-if="staff.extra.length"> ضمن
-                                                    اللائحه</span>
-                                                <span class="badge bg-success" v-else>ليس ضمن اللائحه</span>
+                                                <span class="badge bg-danger" v-if="staff.extra">
+
+                                                    ضمن
+                                                    اللائحه
+
+
+                                                </span>
+
+
+                                                <span v-if="staff.staff_sanction">
+                                                    <span class='badge bg-info'> تم تطبيق اللائحه</span>
+                                                </span>
+
+
+                                                <span v-if="!staff.staff_sanction && !staff.extra">
+                                                    <span class='badge bg-success'> ليس ضمن اللائحه</span>
+                                                </span>
+
                                             </td>
 
 
 
+
+
+
+
                                             <td>
 
-                                                <template v-if="staff.extra.length">
+
+
+
+                                                <template v-if="staff.extra">
+
+
+
                                                     <button type="button" data-toggle="modal"
                                                         class="tn btn-success btn-sm waves-effect btn-agregar"
-                                                        :data-target="'#addDelay' + indexs"> فحص
+                                                        :data-target="'#addAbsence' + indexs"> فحص
                                                         اللائحه</button>
 
 
-                                                    <button data-toggle="tooltip"
+
+                                                    <button type="button" @click="apply(staff.extra, staff.staff_id)"
+                                                        data-toggle="tooltip"
                                                         class="tn btn-success btn-sm waves-effect btn-agregar">
                                                         تطبيق</button>
+
+
 
 
 
@@ -163,10 +201,21 @@
                                                     <div class="modal fade bs-example-modal-lg" tabindex="-1"
                                                         role="dialog" aria-labelledby="myLargeModalLabel"
                                                         aria-hidden="true" style="display: none"
-                                                        :id="'addDelay' + indexs">
+                                                        :id="'addAbsence' + indexs">
                                                         <div class="modal-dialog modal-lg" style="width: 100%">
                                                             <div class="modal-content">
+                                                                <!-- <div class="modal-header">
 
+
+<div class="col-md-4">
+<div class="col-sm-12">
+<input type="text" placeholder="بحث"
+class="form-control" name="buscar_producto"
+id="buscar_producto" v-model="word_search"
+@input="get_search()" />
+</div>
+</div>
+</div> -->
                                                                 <div class="modal-body">
                                                                     <div class="row row-sm">
                                                                         <div class="col-xl-12">
@@ -191,7 +240,8 @@
 
 
                                                                                                         <th>
-                                                                                                            عدد المرات
+                                                                                                            عدد
+                                                                                                            المرات
                                                                                                         </th>
                                                                                                         <th> قيمه
                                                                                                             الخصم
@@ -204,9 +254,11 @@
                                                                                                         </th>
                                                                                                     </tr>
                                                                                                 </thead>
-                                                                                                <tbody>
+                                                                                                <tbody
+                                                                                                    v-if="staff.extra">
                                                                                                     <tr v-for="(extra, index_extra) in staff.extra"
                                                                                                         :key="index_extra">
+
                                                                                                         <td>
 
                                                                                                             {{
@@ -243,7 +295,7 @@
                                                                                                                 @change="
                                                                                                                     check_row(
 
-                                                                                                                    index_extra
+                                                                                                                        index_extra
 
                                                                                                                     )
                                                                                                                     "
@@ -257,6 +309,15 @@
 
                                                                                                     </tr>
 
+                                                                                                </tbody>
+                                                                                                <tbody v-else>
+                                                                                                    <tr>
+
+                                                                                                        <td colspan="4">
+                                                                                                            لايوجد
+                                                                                                            بيانات
+                                                                                                        </td>
+                                                                                                    </tr>
                                                                                                 </tbody>
 
                                                                                             </table>
@@ -284,14 +345,12 @@
 
 
                                                     </div>
+
+
+
+
+
                                                 </template>
-                                                <template v-else>
-
-                                                    <span>لايوجد</span>
-
-                                                </template>
-
-
 
 
                                             </td>
@@ -338,25 +397,18 @@ export default {
     data() {
         return {
 
-
             extra_types: '',
             extra_parts: '',
             extraselected: [],
             extra_part_selected: [],
 
-
-
-
-
-
         };
     },
     mounted() {
         this.list();
-        this.type = 'attendance';
+        this.type = 'extra';
     },
     methods: {
-
 
 
 

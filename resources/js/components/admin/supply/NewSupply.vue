@@ -264,9 +264,11 @@
                         <div id="factura_producto">
                           <select v-model="status[index]" name="type" id="type" class="form-control" required>
 
-                            <option v-for="status in statuses" v-bind:value="status.id">
+                            <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  >
                               {{ status.name }}
                             </option>
+
+                          
                           </select>
                         </div>
                       </td>
@@ -598,6 +600,7 @@ export default {
       not_qty: true,
       seen: false,
       id: '',
+      selected:1,
 
 
 
@@ -665,6 +668,7 @@ export default {
         this.treasuries = data.treasuries;
 
 
+   
 
 
 
@@ -714,16 +718,64 @@ export default {
       for (let index = 0; index < this.count; index++) {
 
 
-        if (!this.qty[index + 1] || !this.unit || !this.unit_price[index + 1]) {
+        // if (!this.qty[index + 1] || !this.unit || !this.unit_price[index + 1]) {
 
-          this.$delete(this.counts, index);
+
+
+        //   this.$delete(this.counts, index);
+
+        // }
+
+        if (this.unit_price[index + 1]) {
+          
+        }else{
+          this.unit_price[index + 1] = 0;
 
         }
+
+        if (this.desc[index + 1]) {
+          
+        }else{
+          this.desc[index + 1] = 'default';
+
+        }
+
+        if (!this.status[index + 1]) {
+          
+          toastMessage("فشل", ` ادخل حاله المنتج في الصف رقم ${index+1}`);
+          return 0;
+          
+
+
+        }
+        
+        if (!this.unit[index + 1]) {
+          
+          toastMessage("فشل", ` ادخل الوحده في الصف رقم ${index+1}`);
+          return 0;
+          
+        }
+
+
+        if (!this.supplier[0]) {
+          
+
+          toastMessage("فشل", " ادخل المورد");
+          return 0;
+        }
+
+
+        if (!this.qty[index+1]) {
+          
+
+          toastMessage("فشل", ` ادخل الكميه في الصف ${index+1}`);
+          return 0;
+        }
+
 
       }
 
       // ----------------------------------------------------
-
       this.axios
         .post(`/paySupply`, {
           type: 'Supply',
@@ -736,7 +788,6 @@ export default {
           status: this.status,
           price: this.unit_price,
           total: this.total,
-
           payment_type: this.Way_to_pay_selected,
           // store: $('#Supply_store_tree_id').val(),
           store: this.storem,

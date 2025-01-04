@@ -24,11 +24,11 @@ class CreatePurchaseDetailsTable extends Migration
             $table->unsignedInteger('unit_id')->unsigned()->nullable();
             $table->foreign('unit_id')->references('id')->on('units');
             
-            $table->string('qty');
-            $table->string('price');
+            $table->string('qty')->default(0);
+            $table->string('price')->default(0);
             $table->integer('qty_return')->default(0);
             
-            $table->string('total');
+            $table->string('total')->default(0);
 
             $table->timestamps();
         });

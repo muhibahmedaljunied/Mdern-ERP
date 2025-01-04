@@ -8,6 +8,7 @@ use App\Models\StaffType;
 use App\Models\Allowance;
 use App\Models\AllowanceType;
 use App\Models\Group;
+use App\Models\GroupAccountDetail;
 use App\Models\HrAccount;
 use App\Models\Staff;
 use App\Services\CoreStaffService;
@@ -124,6 +125,7 @@ class SalaryController extends Controller
     public function prove_salary(Request $request)
     {
 
+        dd($request->all());
 
         $this->core->setData($request->all());
         try {
@@ -131,8 +133,9 @@ class SalaryController extends Controller
             // dd($this->core->data);
             DB::beginTransaction();
 
-            // $this->daily->daily()->debit()->credit();
-            $this->daily->daily()->exicute('debit')->exicute('credit');
+            $this->daily->daily()->debit()->credit();
+            // $this->daily->daily()->exicute('debit')->exicute('credit');
+
             $this->payroll->refresh_payroll_status($this->core->data['staff'], 'prove');
 
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
@@ -154,8 +157,20 @@ class SalaryController extends Controller
     public function prove_all_salary(Request $request)
     {
 
+        // dd($request->all());
 
-        $this->core->setData($request->all());
+        $req = $request->except('data_staff');
+        $account_details = [];
+        $values = [];
+        foreach ($request['data_staff'] as $key => $value) {
+
+            $account_details[$key] = $value['id'];
+            $values[$key] = $value['salary'];
+        }
+        $req['credit']['account_details'] = $account_details;
+        $req['credit']['value'] = $values;
+
+        $this->core->setData($req);
 
 
         try {
@@ -163,10 +178,15 @@ class SalaryController extends Controller
             DB::beginTransaction();
 
             $this->daily->daily();
-            foreach ($this->core->data['data_staff'] as $key => $value) {
-                $this->staff = $this->core->data['data_staff'][$this->core->value]['id'];
+
+            foreach ($this->core->data['credit']['account_details'] as $key => $value) {
+                // dd($key);
                 $this->core->setValue($key);
-                $this->daily->debit()->credit();
+
+                $this->staff = $value; // id of staff
+
+                $this->daily->exicute('credit');
+                // $this->daily->exicute('debit')->exicute('credit');
                 $this->payroll->refresh_payroll_status($this->staff, 'prove');
             }
 
@@ -191,7 +211,7 @@ class SalaryController extends Controller
     public function paid_salary(Request $request)
     {
 
-
+        // dd($request->all());
         $this->core->setData($request->all());
         $this->salary->staff = $this->core->data['staff'];
 
@@ -221,7 +241,7 @@ class SalaryController extends Controller
     public function paid_all_salary(Request $request)
     {
 
-
+        // dd($request->all());
         $this->core->setData($request->all());
         try {
 
@@ -452,6 +472,8 @@ class SalaryController extends Controller
 
 
 
+
+
         return response()->json([
             'list' => $salaries,
             'net_salary' => $net_salary,
@@ -459,24 +481,53 @@ class SalaryController extends Controller
             'staff' => DB::table('staff')
                 ->select('staff.name', 'staff.id', 'staff.salary')
                 ->get(),
-            'prove_account' => Group::join('group_types', 'group_types.id', 'groups.group_type_id')
-                ->join('group_accounts', 'groups.id', 'group_accounts.group_id')
+            'prove_account' => GroupAccountDetail::join('group_accounts', 'group_account_details.group_account_id', 'group_accounts.id')
+                ->join('accounts', 'accounts.id', 'group_accounts.account_id')
+                ->join('groups', 'groups.id', 'group_accounts.group_id')
+                ->join('group_types', 'group_types.id', 'groups.group_type_id')
                 ->where('group_types.code', 'salary')
                 ->select(
                     'group_accounts.account_id',
-                    'group_accounts.account_second_id'
+                    'group_account_details.account_id as account_second_id',
+
                 )
+
+
                 ->get(),
 
-            'paid_account' => Group::join('group_types', 'group_types.id', 'groups.group_type_id')
-                ->join('group_accounts', 'groups.id', 'group_accounts.group_id')
+            'paid_account' => GroupAccountDetail::join('group_accounts', 'group_account_details.group_account_id', 'group_accounts.id')
+                ->join('accounts', 'accounts.id', 'group_accounts.account_id')
+                ->join('groups', 'groups.id', 'group_accounts.group_id')
+                ->join('group_types', 'group_types.id', 'groups.group_type_id')
                 ->whereIn('group_types.code', ['salary', 'extra', 'allowance'])
                 ->select(
                     'group_accounts.account_id',
-                    'group_accounts.account_second_id',
+                    'group_account_details.account_id as account_second_id',
                     'group_types.code'
                 )
+
+
                 ->get(),
+
+            //     'prove_account' => Group::join('group_types', 'group_types.id', 'groups.group_type_id')
+            //     ->join('group_accounts', 'groups.id', 'group_accounts.group_id')
+            //     ->where('group_types.code', 'salary')
+            //     ->select(
+            //         'group_accounts.account_id',
+            //         'group_accounts.account_second_id'
+            //     )
+            //     ->get(),
+
+            // 'paid_account' => Group::join('group_types', 'group_types.id', 'groups.group_type_id')
+            //     ->join('group_accounts', 'groups.id', 'group_accounts.group_id')
+            //     ->whereIn('group_types.code', ['salary', 'extra', 'allowance'])
+            //     ->select(
+            //         'group_accounts.account_id',
+            //         'group_accounts.account_second_id',
+            //         'group_types.code'
+            //     )
+            //     ->get(),
+
         ]);
     }
 }

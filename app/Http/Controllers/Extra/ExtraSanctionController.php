@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Extra;
 
+use App\Repository\StaffSaction\StaffExtraSanctionRepository;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Repository\HR\ExtraSanctionRepository;
 use App\Services\CoreStaffService;
 use App\Models\ExtraType;
@@ -9,19 +11,18 @@ use App\Models\Part;
 use App\Models\SanctionDiscount;
 use App\Http\Controllers\Controller;
 use App\Models\ExtraSanction;
+use App\Models\Staff;
 use App\Models\StaffSanction;
-use App\Repository\StaffSaction\StaffExtraSanctionRepository;
 use App\Services\DailyStockService;
 use App\Services\PayrollService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+
 use Illuminate\Database\Query\Builder;
 
 class ExtraSanctionController extends Controller
 {
-
 
     public function __construct(
         protected CoreStaffService $core,
@@ -53,126 +54,329 @@ class ExtraSanctionController extends Controller
     {
 
         // dd(date('l', strtotime('2024-11-19')), '2024-11-19');
-
-
         // dd($request->all());
-        $array_filter = [];
+        // $this->check_type($request);
+        // ----------------------------------------------------------------------------------------------------------------
+        // $this->filter_date($request);
+        // ----------------------------------------------------------------------------------------------------------------
+        $this->staff_attendance($request);
+        // ----------------------------------------------------------------------------------------------------------------
+        $this->final_sanction($request);
+
+        // dd($this->core->attendances);
+        return response()->json([
+            'list' => $this->core->attendances,
+
+        ]);
+    }
+
+
+
+
+    // public function check_type($request)
+    // {
+
+    //     $request->staff_id = collect($request->staff_id)->toArray();
+    //     // ----------------------------------------------------------------------------------------------------------------
+
+    //     if ($request->extra_type_code == 'before_work') {
+
+    //         $this->core->attendances =  DB::table('attendances');
+
+    //         $this->core->attendances = $this->core->attendances->where('attendance_status', 1)
+    //             ->addSelect(['attendance_details' => function (Builder $builder) {
+    //                 $builder->from('attendance_details')
+    //                     ->selectRaw('sum(extra) as extra')
+    //                     ->whereColumn('attendances.id', 'attendance_details.attendance_id');
+    //             }])
+    //             ->paginate();
+    //     }
+
+    //     if ($request->extra_type_code == 'after_work') {
+
+    //         $this->core->attendances =  DB::table('attendances');
+
+    //         $this->core->attendances = $this->core->attendances->where('attendance_status', 1)
+    //             ->addSelect(['attendance_details' => function (Builder $builder) {
+    //                 $builder->from('attendance_details')
+    //                     ->selectRaw('sum(extra_after) as extra_after')
+    //                     ->whereColumn('attendances.id', 'attendance_details.attendance_id');
+    //             }])
+    //             ->paginate();
+    //     }
+    // }
+
+
+    // public function filter_date($request)
+    // {
+
+
+
+    //     $request->staff_id = collect($request->staff_id)->toArray();
+
+
+    //     $this->core->array_filter = [];
+    //     $year = intval(date("2024"));
+    //     $month = intval(date("11"));
+    //     $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+
+    //     for ($i = 1; $i < $days; $i++) {
+
+    //         if ($this->get_day_name("$year-$month-$i") == $request->extra_type_code) {
+
+    //             $this->core->array_filter[$i] =  $year . '-' . $month . '-' . $i;
+    //         }
+    //     }
+    // }
+
+    public function staff_attendance($request)
+    {
+
+
+
+        $this->core->attendances = DB::table('attendances')
+            ->select(
+                'staff.name',
+                'staff.id as staff_id',
+                DB::raw('count(attendances.id) as attendance'),
+                'revenue',
+            )
+            ->groupBy(
+                'staff.name',
+                'staff.id',
+                'revenue',
+            );
+
         if ($request->extra_type_code == 'before_work') {
 
-            $attendances =  DB::table('attendances');
-
-            if ($request->staff_id) {
-
-                $attendances = $attendances->where('staff_id', $request->staff_id);
-            }
-
-
-            $attendances = $attendances->where('attendance_status', 1)
-                ->addSelect(['attendance_details' => function (Builder $builder) {
-                    $builder->from('attendance_details')
-                        ->selectRaw('sum(extra) as extra')
-                        ->whereColumn('attendances.id', 'attendance_details.attendance_id');
-                }])
-                ->get();
+            $this->core->attendances = $this->core->attendances->Join(
+                DB::raw('(SELECT attendance_id,SUM(extra) AS revenue FROM attendance_details 
+                    GROUP BY attendance_id) AS n'),
+                'n.attendance_id',
+                '=',
+                'attendances.id'
+            );
         }
 
         if ($request->extra_type_code == 'after_work') {
 
-            $attendances =  DB::table('attendances');
-
-            if ($request->staff_id) {
-
-                $attendances = $attendances->where('staff_id', $request->staff_id);
-            }
-            $attendances = $attendances->where('attendance_status', 1)
-                ->addSelect(['attendance_details' => function (Builder $builder) {
-                    $builder->from('attendance_details')
-                        ->selectRaw('sum(extra_after) as extra_after')
-                        ->whereColumn('attendances.id', 'attendance_details.attendance_id');
-                }])
-                ->get();
+            $this->core->attendances = $this->core->attendances->Join(
+                DB::raw('(SELECT attendance_id,SUM(extra_after) AS revenue FROM attendance_details 
+                    GROUP BY attendance_id) AS n'),
+                'n.attendance_id',
+                '=',
+                'attendances.id'
+            );
         }
 
 
-        // if ($request->extra_type_code != 'after_work' || $request->extra_type_code == 'before_work') {
 
-        //     $attendances =  DB::table('attendances')
-        //         ->where('attendance_status', 1)
-        //         ->addSelect(['attendance_details' => function (Builder $builder) {
-        //             $builder->from('attendance_details')
-        //                 ->selectRaw('sum(extra_after) as extra_after')
-        //                 ->whereColumn('attendances.id', 'attendance_details.attendance_id');
-        //         }])
-        //         ->paginate();
-        // }
+        $this->core->attendances = $this->core->attendances->where('revenue', $request->extra_part_duration)
+            // ->whereIn('attendance_date', $this->core->array_filter)
+            ->join('staff', 'staff.id', '=', 'attendances.staff_id');
 
+        if (count($request->staff_id) > 0) {
 
-        // dd($attendances);
-        // ----------------------------------------------------------------------------------------------------------------
-
-        foreach ($attendances as $key => $value) {
-
-
-            // Tuesday,Thursday,Saturday,Monday,Wednesday,Friday,Sunday
-            if (
-                $value->attendance_details == $request->extra_part_duration
-            ) {
-
-                if (!in_array($value->attendance_date, $array_filter)) {
-
-                    $array_filter[$key] =  $value->attendance_date;
-                }
-            }
+            $this->core->attendances = $this->core->attendances->where('staff.id', $request->staff_id[0]);
         }
-
-        // dd($array_filter);
-
-        // ----------------------------------------------------------------------------------------------------------------
-
-        $attendances =  DB::table('staff')
-            ->addSelect(['attendance' => function (Builder $builder) use ($array_filter) {
-                $builder->from('attendances')
-                    ->selectRaw('count(*) as attendance')
-                    ->whereColumn('staff.id', 'attendances.staff_id')
-                    ->whereIn('attendance_date', $array_filter);
-            }])
+        $this->core->attendances = $this->core->attendances->orderBy('revenue')
+            ->paginate();
 
 
-            ->get();
 
-        // dd($attendances);
-        // ----------------------------------------------------------------------------------------------------------------
-
-        foreach ($attendances as $key => $value) {
+        // dd($this->core->attendances);
+    }
 
 
-            // dd($request->extra_part_id, $request->extra_type_id, $value->attendance);
-            $extra =  DB::table('extra_sanctions')
-                ->join('sanction_discounts', 'sanction_discounts.id', '=', 'extra_sanctions.sanction_discount_id')
+
+
+    public function final_sanction($request)
+    {
+
+        // dd($request->extra_type_id);
+
+        foreach ($this->core->attendances as $value) {
+
+
+
+
+
+            $extra =  collect(ExtraSanction::join('sanction_discounts', 'sanction_discounts.id', '=', 'extra_sanctions.sanction_discount_id')
                 ->join('extra_types', 'extra_types.id', '=', 'extra_sanctions.extra_type_id')
                 ->where('extra_sanctions.part_id', $request->extra_part_id)
                 ->where('extra_sanctions.extra_type_id', $request->extra_type_id)
                 ->where('extra_sanctions.iteration', $value->attendance)
                 ->select(
                     'extra_sanctions.*',
-                    'sanction_discounts.*',
+                    'sanction_discounts.name',
                     'extra_types.name as extra_name'
-                )->get();
+                )
+                ->get())->toArray();
 
-            $value->part = $request->extra_part_duration;
-            $value->extra = $extra;
-            // dd($extra);
+
+
+            if (count($extra) > 0) {
+
+              
+                foreach ($extra as $key => $value2) {
+
+                    $staff_sanction =  collect(StaffSanction::where('sanctionable_type', 'App\Models\ExtraSanction')
+                        ->where('sanctionable_id', $value2['id'])
+                        ->where('staff_id', $value->staff_id)
+                        ->select(
+                            '*'
+                        )
+                        ->get())->toArray();
+
+
+
+                    if (count($staff_sanction) > 0) {   //if found staff_sanction do not return sanction
+
+                        $value->staff_sanction[$key] = $staff_sanction;
+                    } else {
+
+                        $value->extra[$key] = $value2;
+                    }
+                }
+            }
         }
 
-        // ----------------------------------------------------------------------------------------------------------------
 
 
+        // dd($this->core->attendances);
+        // foreach ($this->core->attendances as $value) {
+
+        //     $extra =  DelaySanction::with(['staff_sanction' => function ($query) use ($request) {
+
+        //         $query->where('staff_sanctions.sanctionable_type', 'App\Models\DelaySanction')->select('*');
+        //     }])
+        //         ->join('sanction_discounts', 'sanction_discounts.id', '=', 'extra_sanctions.sanction_discount_id')
+        //         ->join('extra_types', 'extra_types.id', '=', 'extra_sanctions.extra_type_id')
+        //         ->where('extra_sanctions.part_id', $request->extra_part_id)
+        //         ->where('extra_sanctions.extra_type_id', $request->extra_type_id)
+        //         ->where('extra_sanctions.iteration', $value->attendance);
+
+        //     $extra = $extra->select(
+        //         'extra_sanctions.*',
+        //         'sanction_discounts.*',
+        //         'extra_types.name as extra_name'
+        //     )
+        //         ->get();
+
+        //     $value->part = $request->extra_part_duration;
+
+        //     if (count(collect($extra)->toArray()) > 0) {
+
+        //         $value->extra = $extra;
+        //     }
+        // }
+
+        // dd(count(collect($extra)->toArray()));
+    }
+
+
+    // public function filter_date($request)
+    // {
+
+    //     // ----------------------------------------------------------------------------------------------------------------
+
+    //     foreach ($this->core->attendances as $key => $value) {
+
+    //         // Tuesday,Thursday,Saturday,Monday,Wednesday,Friday,Sunday
+    //         if (
+    //             $value->attendance_details == $request->extra_part_duration
+    //         ) {
+
+    //             if (!in_array($value->attendance_date, $this->core->array_filter)) {
+
+    //                 $this->core->array_filter[$key] =  $value->attendance_date;
+    //             }
+    //         }
+    //     }
+
+    //     // dd($array_filter);
+
+    // }
+
+    // public function staff_attendance($request)
+    // {
+
+
+    //     $this->core->attendances =  Staff::with('staff_sanction');
+    //     if (count($request->staff_id) > 0) {
+
+    //         $this->core->attendances = $this->core->attendances->where('staff.id', $request->staff_id[0]);
+    //     }
+    //     $this->core->attendances = $this->core->attendances->addSelect(['attendance' => function (Builder $builder) {
+    //         $builder->from('attendances')
+    //             ->selectRaw('count(*) as attendance')
+    //             ->where('attendance_status',1)
+    //             ->whereColumn('staff.id', 'attendances.staff_id')
+    //             ->whereIn('attendance_date', $this->core->array_filter);
+    //     }])
+
+
+    //         ->paginate();
+
+    //     // dd($attendances);
+
+    // }
+
+
+
+
+    // public function final_sanction($request)
+    // {
+
+
+
+    //     $extrat =  DB::table('extra_sanctions')
+    //         ->join('sanction_discounts', 'sanction_discounts.id', '=', 'extra_sanctions.sanction_discount_id')
+    //         ->join('extra_types', 'extra_types.id', '=', 'extra_sanctions.extra_type_id')
+    //         ->where('extra_sanctions.part_id', $request->extrat_part_id)
+    //         ->where('extra_sanctions.extra_type_id', $request->extrat_type_id)
+    //         ->where('extra_sanctions.iteration', $value->attendance);
+
+    //     if ($check == 'positive') {
+
+    //         $extrat = $extrat->where('extra_sanctions.id', '!=', $value2->sanctionable_id);
+    //     }
+
+    //     $extrat = $extrat->select(
+    //         'extra_sanctions.*',
+    //         'sanction_discounts.*',
+    //         'extra_types.name as extrat_name'
+    //     )->get();
+
+    //     $value->part = $request->extrat_part_duration;
+    //     $value->extrat = $extrat;
+    // }
+
+
+
+
+    public function apply_extra_sanction_attendance(Request $request)
+    {
+
+
+        // unset( $array_name['key_to_be_removed'] );
+        foreach ($request->sanction as $value) {
+
+            // AbsenceSanction::find($value->id);
+            // dd($value);
+            $extra = new StaffSanction();
+            $extra->staff_id = $request->staff_id;
+            $extra->sanctionable()->associate(ExtraSanction::find($value['id']));
+            $extra->date = $request->date;
+            $extra->save();
+        }
+        // dd($request->all());
         return response()->json([
-            'list' => $attendances,
+            'status' => 'successfully',
 
         ]);
     }
-
 
 
     public function get_extra_sanction()
@@ -195,9 +399,12 @@ class ExtraSanctionController extends Controller
         $group_account =  DB::table('groups')
             ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
             ->join('group_accounts', 'groups.id', '=', 'group_accounts.group_id')
+            ->join('group_account_details', 'group_account_details.group_account_id', '=', 'group_accounts.id')
+
             ->where('group_types.code', 'extra')
             ->select(
                 'group_accounts.*',
+                'group_account_details.account_id as account_second_id',
 
             )
             ->get();
@@ -326,7 +533,6 @@ class ExtraSanctionController extends Controller
 
             $staff_sanction->update_sanction();
             $payroll->payroll('total_extra_sanction');
-
             $this->daily->daily()->exicute('debit')->exicute('credit');
 
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB

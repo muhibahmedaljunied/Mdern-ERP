@@ -613,7 +613,7 @@ export default {
 
       // this.unit = response.data.unit;
       // console.log(response.data.users);
-      // this.user = response.data.users.name;
+      this.user = response.data.users.name;
     });
   },
 

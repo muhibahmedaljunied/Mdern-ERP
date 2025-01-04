@@ -7,10 +7,10 @@
 
           <div class="card-header pb-0">
             <div class="d-flex justify-content-between">
-              <span class="h2">اضافه قيد</span>
+              <span class="h2"> قيود اليوميه</span>
             </div>
           </div>
-          <div class="card-body" id="printme">
+          <div class="card-body">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
@@ -23,13 +23,13 @@
                     </div>
                     <div class="col-md-2">
                       <label for="desde"> اجمالي المدين </label>
-                      <input type="text" class="form-control hasDatepicker" onkeypress="return controltag(event)"
-                        readonly />
+                      <input v-model="total_debit" type="text" class="form-control hasDatepicker"
+                        onkeypress="return controltag(event)" readonly />
                     </div>
                     <div class="col-md-2">
                       <label for="desde"> اجمالي الدائن </label>
-                      <input type="text" class="form-control hasDatepicker" onkeypress="return controltag(event)"
-                        readonly />
+                      <input v-model="total_credit" type="text" class="form-control hasDatepicker"
+                        onkeypress="return controltag(event)" readonly />
                     </div>
 
 
@@ -38,50 +38,93 @@
               </div>
             </div>
 
-            <div class="table-responsive">
-              <table class="table table-bordered text-center">
-                <thead>
-                  <tr>
-                    <th class="wd-15p border-bottom-0">رقم الحساب</th>
-                    <th class="wd-15p border-bottom-0">اسم الحساب</th>
-                    <th class="wd-15p border-bottom-0">البيان</th>
-                    <th class="wd-15p border-bottom-0">مدين</th>
 
-                    <th class="wd-15p border-bottom-0">داين</th>
-                    <th>+</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="index in count" :key="index">
-                    <!-- <tr > -->
-                    <td>
-                      <input required type="number" :id="'Daily_account_tree_id' + index" name="account_id"
-                        class="form-control input_cantidad" readonly />
-                    </td>
-                    <td>
 
-                      <!-- <div class="custom-search">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+
+                <div class="well" id="treeview_json_account"></div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- ----------------------------------------------------------------------------------- -->
+    <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+          <!-- <form method="post" @submit.prevent="submitForm"> -->
+
+
+          <div class="card-body">
+
+
+            <div class="row">
+
+              <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                  <thead>
+                    <tr>
+                      <th class="wd-15p border-bottom-0">رقم الحساب</th>
+                      <th class="wd-15p border-bottom-0">اسم الحساب</th>
+                      <th class="wd-15p border-bottom-0">البيان</th>
+                      <th class="wd-15p border-bottom-0">مدين</th>
+
+                      <th class="wd-15p border-bottom-0">داين</th>
+                      <th>+</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="index in count" :key="index">
+                      <!-- <tr > -->
+                      <td>
+                        <input required type="number" :id="'Daily_account_tree_id' + index" name="account_id"
+                          class="form-control input_cantidad" readonly />
+                      </td>
+                      <td>
+
+                        <!-- <div class="custom-search">
                       <input type="text" class="custom-search-input">
                       <button class="custom-search-botton" type="submit" data-toggle="modal" data-target="#exampleModal">
                         <i class="fa fa-plus-circle"></i></button>
                     </div> -->
 
 
-                      <div class="custom-search">
-                        <!-- <select v-model="product[index]" id="supplier" class="custom-search-input">
+                        <div class="custom-search">
+                          <!-- <select v-model="product[index]" id="supplier" class="custom-search-input">
 
                                       </select> -->
-                        <input :id="'Daily_account_tree' + index" type="text" readonly class="custom-search-input">
-                        <!-- <input :id="'Daily_account_tree_id' + index" type="hidden" readonly class="custom-search-input"> -->
+                          <input :id="'Daily_account_tree' + index" type="text" readonly class="custom-search-input">
+                          <!-- <input :id="'Daily_account_tree_id' + index" type="hidden" readonly class="custom-search-input"> -->
 
-                        <button class="custom-search-botton" type="button" data-toggle="modal" data-target="#exampleModal"
-                          @click="detect_index(index)"> <i class="fa fa-plus-circle"></i></button>
-                      </div>
+                          <button class="custom-search-botton" type="button" data-toggle="modal"
+                            data-target="#exampleModal" @click="detect_index(index)"> <i
+                              class="fa fa-plus-circle"></i></button>
+                        </div>
 
 
 
 
-                      <!-- <input
+                        <!-- <input
                         v-model="account_name[index]"
                         required
                        
@@ -90,52 +133,54 @@
                         class="form-control input_cantidad"
                         onkeypress="return valida(event)"
                       /> -->
-                    </td>
-                    <td>
-                      <input v-model="description[index]" required type="text" style="width: 500px" id="qty"
-                        class="form-control input_cantidad" onkeypress="return valida(event)" />
-                    </td>
-                    <td>
-                      <input v-model="debit[index]" type="number" style="width: 150px" id="qty"
-                        class="form-control input_cantidad" onkeypress="return valida(event)" />
-                    </td>
-                    <td>
-                      <input v-model="credit[index]" type="number" style="width: 150px" id="qty"
-                        class="form-control input_cantidad" onkeypress="return valida(event)" />
-                    </td>
-                    <!-- <button v-on:click="addComponent" class="tn btn-info btn-sm waves-effect btn-agregar">
+                      </td>
+                      <td>
+                        <input v-model="description[index]" required type="text" style="width: 500px" id="qty"
+                          class="form-control input_cantidad" onkeypress="return valida(event)" />
+                      </td>
+                      <td>
+                        <input @input="calculate_total('debit')" v-model="debit[index]" type="number" style="width: 150px" id="qty"
+                          class="form-control input_cantidad" onkeypress="return valida(event)" />
+                      </td>
+                      <td>
+                        <input @input="calculate_total('credit')" v-model="cred[index]" type="number" style="width: 150px" id="qty"
+                          class="form-control input_cantidad" onkeypress="return valida(event)" />
+                      </td>
+                      <!-- <button v-on:click="addComponent" class="tn btn-info btn-sm waves-effect btn-agregar">
                       <i class="fa fa-plus-circle"></i>
                     </button> -->
 
-                    <td v-if="index == 1">
+                      <td v-if="index == 1">
 
-                      <button class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent">
-                        <i class="fa fa-plus-circle"></i></button>
+                        <button class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(index)">
+                          <i class="fa fa-plus-circle"></i></button>
 
-                      <button class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent">
-                        <i class="fa fa-minus-circle"></i></button>
-
-
-
-                    </td>
-                  </tr>
-                  <tr>
-
-                    <td colspan="3" style="text-align:center;color:red;font-size:large">الاجمالي</td>
-                    <td colspan="2" style="text-align:center;color:red;font-size:large">
-
-                      <input type="hidden" style="width: 250px" class="form-control input_cantidad"
-                        onkeypress="return valida(event)" />
-
-                    </td>
+                        <button class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(index)">
+                          <i class="fa fa-minus-circle"></i></button>
 
 
-                    <td> <a href="javascript:void" @click="addDaily()" class="btn btn-primary"><span>تاكيد
-                          العمليه</span></a></td>
-                  </tr>
-                </tbody>
-              </table>
+
+                      </td>
+                    </tr>
+                    <tr>
+
+                      <td colspan="3" style="text-align:center;color:red;font-size:large">الاجمالي</td>
+                      <td colspan="2" style="text-align:center;color:red;font-size:large">
+
+                        <input type="hidden" style="width: 250px" class="form-control input_cantidad"
+                          onkeypress="return valida(event)" />
+
+                      </td>
+
+
+                      <td> <a href="javascript:void" @click="addDaily()" class="btn btn-primary"><span>تاكيد
+                            العمليه</span></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+
 
           </div>
         </div>
@@ -171,13 +216,9 @@
         <div class="card">
           <!-- <form method="post" @submit.prevent="submitForm"> -->
 
-          <div class="card-header pb-0">
-            <div class="d-flex justify-content-between">
-              <span class="h2"> قيود اليوميه</span>
-            </div>
-          </div>
-          <div class="card-body" id="printme">
-            <div class="row">
+
+          <div class="card-body">
+            <!-- <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
                   <div class="row">
@@ -202,64 +243,67 @@
                   </div>
                 </div>
               </div>
+            </div> -->
+
+            <div class="row">
+              <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                  <thead>
+                    <tr>
+                      <th class="wd-15p border-bottom-0">رقم الحساب</th>
+                      <th class="wd-15p border-bottom-0">اسم الحساب</th>
+                      <th class="wd-15p border-bottom-0">البيان</th>
+                      <th class="wd-15p border-bottom-0">مدين</th>
+                      <th class="wd-15p border-bottom-0">داين</th>
+
+                    </tr>
+                  </thead>
+                  <tbody v-if="value_list && value_list.data.length > 0">
+                    <tr v-for="(daily, index) in value_list.data" :key="index">
+                      <!-- <tr > -->
+                      <td>
+                        {{ daily.id }}
+                      </td>
+                      <td>
+
+                        {{ daily.text }}
+
+                      </td>
+                      <td>
+
+                        {{ daily.description }}
+                      </td>
+                      <td>
+                        {{ daily.debit }}
+                      </td>
+                      <td>
+                        {{ daily.credit }}
+                      </td>
+
+
+
+                    </tr>
+                    <tr>
+                      <td colspan="3">الاجمالي</td>
+                      <td> <span style="color:green">{{ sum_debit }}</span></td>
+                      <td> <span style="color:green">{{ sum_credit }}</span></td>
+                      <!-- <td></td> -->
+
+
+                    </tr>
+
+                  </tbody>
+                  <tbody v-else>
+                    <tr>
+                      <td align="center" colspan="5">
+                        <h3> لايوجد بيانات </h3>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            <div class="table-responsive">
-              <table class="table table-bordered text-center">
-                <thead>
-                  <tr>
-                    <th class="wd-15p border-bottom-0">رقم الحساب</th>
-                    <th class="wd-15p border-bottom-0">اسم الحساب</th>
-                    <th class="wd-15p border-bottom-0">البيان</th>
-                    <th class="wd-15p border-bottom-0">مدين</th>
-                    <th class="wd-15p border-bottom-0">داين</th>
-
-                  </tr>
-                </thead>
-                <tbody v-if="value_list && value_list.data.length > 0">
-                  <tr v-for="(daily, index) in value_list.data" :key="index">
-                    <!-- <tr > -->
-                    <td>
-                      {{ daily.id }}
-                    </td>
-                    <td>
-
-                      {{ daily.text }}
-
-                    </td>
-                    <td>
-
-                      {{ daily.description }}
-                    </td>
-                    <td>
-                      {{ daily.debit }}
-                    </td>
-                    <td>
-                      {{ daily.credit }}
-                    </td>
-
-
-
-                  </tr>
-                  <tr>
-                    <td colspan="3">الاجمالي</td>
-                    <td> <span style="color:green">{{ sum_debit }}</span></td>
-                    <td> <span style="color:green">{{ sum_credit }}</span></td>
-                    <!-- <td></td> -->
-
-
-                  </tr>
-
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="5">
-                      <h3> لايوجد بيانات </h3>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
 
           </div>
         </div>
@@ -273,9 +317,10 @@
 </div></template>
 <script>
 import tree from '../../../../../js/tree/tree.js';
+import operation from '../../../../operation.js';
 
 export default {
-  mixins: [tree],
+  mixins: [tree, operation],
   data() {
     return {
 
@@ -302,13 +347,13 @@ export default {
       account_name: [],
       description: [],
       debit: [],
-      credit: [],
+      cred: [],
       jsonTreeData: '',
       type_of_tree: 1,
       indexselected: '',
       indexselectedaccount: '',
-      sum_debit:'',
-      sum_credit:'',
+      sum_debit: '',
+      sum_credit: '',
       last_nodes: '',
 
       index: 0,
@@ -357,15 +402,15 @@ export default {
         });
     },
 
-    addComponent(index) {
-      // alert(index);
-      this.count += 1;
-      this.counts[index] = this.count;
-    },
-    disComponent(index) {
-      this.count -= 1;
-      this.$delete(this.counts, index);
-    },
+    // addComponent(index) {
+    //   // alert(index);
+    //   this.count += 1;
+    //   this.counts[index] = this.count;
+    // },
+    // disComponent(index) {
+    //   this.count -= 1;
+    //   this.$delete(this.counts, index);
+    // },
 
     addDaily() {
 
@@ -379,7 +424,7 @@ export default {
           description: this.description,
           // account_name: this.account_name,
           debit: this.debit,
-          credit: this.credit,
+          credit: this.cred,
         })
         .then(function (response) {
           console.log(response);
@@ -395,10 +440,62 @@ export default {
 
       // this.$router.go(-1);
     },
+
+    calculate_total(type) {
+
+
+
+
+      if (type == 'debit') {
+
+        this.total_debit = 0;
+
+      }
+
+      if (type == 'credit') {
+
+        this.total_credit = 0;
+      }
+
+      this.calc_total(type);
+
+
+    },
+
+    calc_total(type) {
+
+      for (let i = 1; i <= this.count; i++) {
+
+
+        if (type == 'debit') {
+
+          if (this.debit[i]) {
+
+            this.total_debit = parseInt(this.debit[i]) + parseInt(this.total_debit);
+
+          } else {
+
+            this.total_debit = parseInt(0) + parseInt(this.total_debit);
+          }
+
+        }
+
+        if (type == 'credit') {
+
+          if (this.cred[i]) {
+
+            this.total_credit = parseInt(this.cred[i]) + parseInt(this.total_credit);
+
+          } else {
+
+            this.total_credit = parseInt(0) + parseInt(this.total_credit);
+          }
+        }
+
+
+
+      }
+    },
   },
 };
 </script>
-
-
-
-

@@ -36,6 +36,7 @@ class QtyStockRepository
 
         foreach ($this->details as $value) {
 
+            // dd($value);
             $this->value = $value;
             $this->units();
             $this->init_qty();
@@ -71,6 +72,7 @@ class QtyStockRepository
     {
 
 
+        // dd($this->compare_array);
 
         foreach ($this->compare_array as $value0) {
 
@@ -98,8 +100,11 @@ class QtyStockRepository
 
   
 
+        // dd($variable);
         $min = intval(min($variable));
+        // dd($min);
         $keyOfMaxValue = array_keys($variable, min($variable))[0];
+        // dd($keyOfMaxValue);
         $this->all_qty[$value0][$this->ix] = array(
 
             [
@@ -110,6 +115,7 @@ class QtyStockRepository
 
         );
 
+  
         $this->qty[$value0] = $this->qty[$value0] - ($min * $this->value->units[$keyOfMaxValue]->rate);
 
         if ($this->qty[$value0] >= 1) {
@@ -118,6 +124,8 @@ class QtyStockRepository
             $this->ix = $this->ix + 1;
             $this->check_qty($value0);
         }
+
+        // dd($this->qty[$value0]);
     }
 }
 

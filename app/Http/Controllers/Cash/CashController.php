@@ -149,6 +149,7 @@ class CashController extends Controller
     ) {
 
 
+        // dd($this->qty->request);
         // dd($stock->core->data);
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction

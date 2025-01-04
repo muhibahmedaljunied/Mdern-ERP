@@ -35,7 +35,7 @@
                           <h2>رقم السند :{{ cashes[0].cash_id }}</h2>
                           <br />
 
-                          <h2>تاريخ السند : {{ cashes[0].cash_date }}</h2>
+                          <h2>تاريخ السند : {{ cashes[0].date }}</h2>
                           <br />
 
                           <h2>اسم العميل : {{ cashes[0].name }}</h2>
@@ -48,7 +48,7 @@
                         <td colspan="1"></td>
 
                         <td style="text-align: left">
-                          <button @click="printDiv('printme')">
+                          <button @click="report_style('printme', '')">
                             <i class="fas fa-print" style="font-size: 24px; color: rgb(34, 192, 60)"></i>
                           </button>
                         </td>
@@ -213,9 +213,9 @@ temx.name }}</span>
 </template>
 
 <script>
-import ReportOperation from '../../../ReportOperation.js';
+import InvoiceOperation from '../../../../js/InvoiceOperation.js';
 export default {
-  mixins: [ReportOperation],
+  mixins: [InvoiceOperation],
   data() {
     return {
       cashes: 0,

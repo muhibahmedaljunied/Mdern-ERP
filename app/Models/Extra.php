@@ -9,10 +9,10 @@ class Extra extends Model
     protected $fillable = ['staff_id','date', 'extra_type_id', 'start_time', 'end_time','number_hours'];
 
   
-    public function daily()
-    {
-        return $this->morphMany(GroupAccountDailyDetail::class, 'dailyable');
-    }
+    // public function daily()
+    // {
+    //     return $this->morphMany(GroupAccountDailyDetail::class, 'dailyable');
+    // }
     public function staff()
     {
         return $this->belongsTo(Staff::class);
