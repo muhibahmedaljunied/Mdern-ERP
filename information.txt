@@ -91,3 +91,21 @@ Phpinfo()
  git reset -–hard <ORIGINAL_COMMIT 9>   undo the rebasing
 
  git branch -D paul_branch  delete branch 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---------------------------------------------------------------------
+
+
+ SELECT *,attendance_details.* FROM `attendances` join  attendance_details on  attendances.id = attendance_details.attendance_id
+WHERE  attendances.attendance_date IN ('2024-11-20','2024-12-18') && attendances.staff_id = 2

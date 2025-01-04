@@ -24,14 +24,14 @@
                 <div class="row justify-content-left">
                   <div class="col-md-12">
                     <div class="card">
-                      <div class="card-header">
+                      <!-- <div class="card-header">
 
                         <a @click="exports_excel()">
                           <img src="/assets/img/export.png" alt="" style="width: 5%;"></a>
 
                         <a @click="imports_excel()">
                           <img src="/assets/img/import.png" alt="" style="width: 5%;"></a>
-                      </div>
+                      </div> -->
 
                       <div class="card-body">
                         <!-- <div class="container">
@@ -40,6 +40,37 @@
 
                         <div class="container">
                           <div class="row">
+                            <div class="col-md-8">
+
+                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti"
+                                placeholder="بحث" aria-describedby="search-addon">
+
+
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
+
+
+                              <button class="btn btn-primary btn-sm btn-inline" type="button"
+                                @click="imports_excel()">استيراد</button>
+                              <button class="btn btn-primary btn-sm btn-inline" type="button"
+                                @click="exports_excel()">تصدير</button>
+
+
+
+                            </div>
+
+
+
+
+                          </div>
+
+                          <!-- <div class="row">
+
+                            
                             <div class="col-xs-12">
                               <div class="input-group">
 
@@ -48,7 +79,7 @@
 
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                           <div class="row">
                             <div class="col-xs-12" id="treeview_json_store">
 
@@ -89,13 +120,14 @@
 
                         <div class="col-md-4">
                           <label for="store">رقم المخزن</label>
-                          <input style="background-color: beige;" id='store_number' type="text" class="form-control" required readonly />
+                          <input style="background-color: beige;" id='store_number' type="text" class="form-control"
+                            required readonly />
 
                         </div>
                         <div class="col-md-4">
                           <label for="store">اسم المخزن</label>
-                          <input style="background-color: beige;" v-model="text" type="text" name="store" id="store" class="form-control"
-                            required /><span style="color:red">{{ error_text[0] }}</span>
+                          <input style="background-color: beige;" v-model="text" type="text" name="store" id="store"
+                            class="form-control" required /><span style="color:red">{{ error_text[0] }}</span>
 
                         </div>
 
@@ -109,7 +141,8 @@
                         <div class="col-md-12">
                           <label for="radio-example-one">متفرع </label>
 
-                          <input style="background-color: beige;" type="checkbox" name='fieldset2' v-model="status" id="status">
+                          <input style="background-color: beige;" type="checkbox" name='fieldset2' v-model="status"
+                            id="status">
 
                           <input id='parent' type="hidden" />
 

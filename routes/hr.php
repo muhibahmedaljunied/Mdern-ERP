@@ -200,6 +200,7 @@ Route::post('/store_absence', 'Absence\AbsenceController@store');
 Route::post('/change_status_absence_sanction', 'Absence\AbsenceSanctionController@change_status');
 Route::post('/absence_sanction', 'Absence\AbsenceSanctionController@index');
 Route::post('/absence_sanction_attendance', 'Absence\AbsenceSanctionController@absence_sanction_attendance');
+Route::post('/apply_absence_sanction_attendance', 'Absence\AbsenceSanctionController@apply_absence_sanction_attendance');
 Route::post('/absence_sanction/show', 'Absence\AbsenceSanctionController@show');
 Route::post('/store_absence_sanction', 'Absence\AbsenceSanctionController@store');
 Route::post('/staff_absence_sanction','Absence\AbsenceSanctionController@get_staff_absence_sanction');
@@ -211,6 +212,7 @@ Route::post('/store_delay', 'Delay\DelayController@store');
 Route::post('/change_status_delay_sanction', 'Delay\DelaySanctionController@change_status');
 Route::post('/delay_sanction', 'Delay\DelaySanctionController@index');
 Route::post('/delay_sanction_attendance', 'Delay\DelaySanctionController@delay_sanction_attendance');
+Route::post('/apply_delay_sanction_attendance', 'Delay\DelaySanctionController@apply_delay_sanction_attendance');
 Route::post('/store_delay_sanction', 'Delay\DelaySanctionController@store');
 Route::post('/staff_delay_sanction','Delay\DelaySanctionController@get_staff_delay_sanction');
 /* --------------------------------------------------------Extra---------------------------------------------------------------------*/
@@ -220,6 +222,7 @@ Route::post('/extra/select_staff', 'Extra\ExtraController@select_staff');
 Route::post('/change_status_extra_sanction', 'Extra\ExtraSanctionController@change_status');
 Route::post('/extra_sanction', 'Extra\ExtraSanctionController@index');
 Route::post('/extra_sanction_attendance', 'Extra\ExtraSanctionController@extra_sanction_attendance');
+Route::post('/apply_extra_sanction_attendance', 'Extra\ExtraSanctionController@apply_extra_sanction_attendance');
 
 Route::post('/store_extra_sanction', 'Extra\ExtraSanctionController@store');
 Route::post('/staff_extra_sanction','Extra\ExtraSanctionController@get_staff_extra_sanction');
@@ -245,7 +248,9 @@ Route::post('/change_status_leaveout_sanction', 'Leave\LeaveSanctionController@c
 Route::post('/leaveout_sanction', 'Leave\LeaveSanctionController@index');
 Route::post('/leaveout_sanction_attendance', 'Leave\LeaveSanctionController@leaveout_sanction_attendance');
 Route::post('/store_leaveout_sanction', 'Leave\LeaveSanctionController@store');
+
 Route::post('/staff_leaveout_sanction','Leave\LeaveSanctionController@get_staff_leaveout_sanction');
+Route::post('/apply_leave_sanction_attendance', 'Leave\LeaveSanctionController@apply_leave_sanction_attendance');
 
 /* --------------------------------------------------------loan---------------------------------------------------------------------*/
 Route::post('/loan', 'Staff\LoanController@index');

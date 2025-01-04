@@ -245,10 +245,6 @@ export default {
     return {
 
 
-      value_list: {
-        type: Object,
-        default: null,
-      },
       leave_parts: '',
       typeselected: [],
       leave_part_selected: [],

@@ -391,10 +391,6 @@ export default {
     return {
 
 
-      value_list: {
-        type: Object,
-        default: null,
-      },
       absence_types:'',
       discount_types:'',
       discountselected: [],

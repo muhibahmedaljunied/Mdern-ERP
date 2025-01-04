@@ -16,8 +16,6 @@ class CreateExpencesTable extends Migration
         Schema::create('expences', function (Blueprint $table) {
             $table->Increments('id');
          
-            // $table->unsignedInteger('expence_type_id');
-            // $table->foreign('expence_type_id')->references('id')->on('expence_types');
 
             $table->unsignedInteger('daily_id');
             $table->foreign('daily_id')->references('id')->on('dailies');

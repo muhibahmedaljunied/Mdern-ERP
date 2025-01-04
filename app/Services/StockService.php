@@ -57,9 +57,10 @@ class  StockService
       
         $this->payment->pay();
    
-        $this->daily->daily()->exicute('debit')->exicute('credit');
+
+        // $this->daily->daily()->exicute('debit')->exicute('credit');
     
-        $this->warehouse->refresh(); //this update purchase_return table by daily_id
+        // $this->warehouse->refresh(); //this update purchase_return table by daily_id
 
 
         // dd(GroupAccountDailyDetail::all());
@@ -75,7 +76,9 @@ class  StockService
 
         $this->detail->details();
     
+
         $this->stock->stock();
+
     }
 
     public function check_return_qty()

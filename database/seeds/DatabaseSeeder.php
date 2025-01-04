@@ -262,12 +262,14 @@ class DatabaseSeeder extends Seeder
         DB::table('leave_types')->insert([
             'id'        => 1,
             'name'    => 'يوم السبت',
+            'code'    => 'Sat',
 
 
         ]);
         DB::table('leave_types')->insert([
             'id'        => 2,
             'name'    => 'يوم الخميس',
+            'code'    => 'Thu',
 
 
         ]);
@@ -419,48 +421,48 @@ class DatabaseSeeder extends Seeder
 
         // --------------------------------WorkSyatem-------------------------------------------
 
-        DB::table('work_types')->insert([
-            'id'        => 1,
-            'name'    => 'فتره',
+        // DB::table('work_types')->insert([
+        //     'id'        => 1,
+        //     'name'    => 'فتره',
 
 
-        ]);
+        // ]);
 
 
-        DB::table('work_types')->insert([
-            'id'        => 2,
-            'name'    => 'فترتين',
+        // DB::table('work_types')->insert([
+        //     'id'        => 2,
+        //     'name'    => 'فترتين',
 
 
-        ]);
+        // ]);
 
       
         // --------------------------------periods-------------------------------------------
-          DB::table('periods')->insert([
-            'id'        => 1,
-            'name'    => 'فتره صباحيه',
+        //   DB::table('periods')->insert([
+        //     'id'        => 1,
+        //     'name'    => 'فتره صباحيه',
         
 
 
 
-        ]);
+        // ]);
 
-        DB::table('periods')->insert([
-            'id'        => 2,
-            'name'    => 'فتره مسائيه',
+        // DB::table('periods')->insert([
+        //     'id'        => 2,
+        //     'name'    => 'فتره مسائيه',
            
 
 
-        ]);
+        // ]);
 
 
-        DB::table('periods')->insert([
-            'id'        => 3,
-            'name'    => 'فتره ليليه',
+        // DB::table('periods')->insert([
+        //     'id'        => 3,
+        //     'name'    => 'فتره ليليه',
            
 
 
-        ]);
+        // ]);
 
         
     }

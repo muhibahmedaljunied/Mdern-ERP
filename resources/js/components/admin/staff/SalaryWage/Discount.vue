@@ -306,11 +306,11 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                <!-- <div class="modal-body">
 
                   <div class="well" id="treeview_json_account_discount"></div>
 
-                </div>
+                </div> -->
 
               </div>
             </div>

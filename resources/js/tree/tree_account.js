@@ -27,28 +27,23 @@ export default {
                 this.type == "ReceivableBond" ||
                 this.type == "PaymentBond" ||
                 this.type == "Expence" ||
-                this.type == "Advance"
+                this.type == "Advance" ||
+                this.type == "OpenningBalance" ||
+                this.type == "AccountReport"
             ) {
                 // console.log('almuheeb',3);
                 this.group_accounts_details(data.node.id);
             }
 
-            // if (this.type == 'Purchase' || this.type == 'Supply') {
-
-            //     // this.store = data.node.id;
-            //     this.group_accounts_details(data.node.id)
-            //     // this.get_account_for_store();
-            // }
-
-            // if (this.type == 'PurchaseReturn') {
-
-            //     this.group_accounts_details(data.node.id)
-            //     // this.get_account_for_store();
-            // }
+      
         },
         get_account_for_store(length) {
+            //this called when selected store in top
+
             axios.post(`/get_account_store/${this.store}`).then((response) => {
                 var arrayLength = response.data.accounts.length;
+
+                console.log(response.data.accounts);
 
                 if (arrayLength == 0) {
                     $(`#select_account_${this.type}`).html("");
@@ -75,28 +70,44 @@ export default {
                             element = key;
                         }
 
-                        console.log("aljunied");
-                        this.get_account_for_storem_by_store(
-                            element,
-                            response.data.accounts
-                        );
+                        if (!response.data.accounts.account_id) {
+                            this.get_storem_by_store(
+                                element,
+                                response.data.accounts
+                            );
+                        } else {
+                            this.get_account_for_storem_by_store(
+                                element,
+                                response.data.accounts
+                            );
+                        }
                     }
                 }
             });
         },
 
-        get_account_for_storem_by_store(index, response_id) {
-            console.log("al3", response_id);
-            $(`#${this.type}_storem_tree${index}`).val(response_id[0].text);
+        get_storem_by_store(index, response_id) {
+            //this called for return stores in bottom when selected store in top
+
+            $(`#${this.type}_storem_tree${index}`).val(response_id[0].text+'   '+response_id[0].id);
 
             this.storem[index] = this.store;
-            // console.log($(`#select_account_${this.type}`).val());
+  
+        },
+
+        get_account_for_storem_by_store(index, response_id) {
+            //this called for return accounts of stores in bottom when selected store in top
+
+            $(`#${this.type}_storem_tree${index}`).val(response_id[0].text+'   '+response_id[0].id);
+
+            this.storem[index] = this.store;
             this.storem_account[index] = response_id[0].id;
         },
         get_account_for_storem(d) {
+            // this called when selected store on dedecated rows
             // console.log('almuhib',this.storem[this.indexselected]);
 
-            var uh = 0;
+            // alert('yes');
 
             axios
                 .post(`/get_account_store/${this.storem[this.indexselected]}`)
@@ -106,11 +117,7 @@ export default {
                         return;
                     }
 
-                    // uh = new Promise(function (resolve) {
 
-                    //     resolve(response.data.accounts[0].id);
-                    // });
-                    // uh = response.data.accounts[0].id;
                     this.storem_account[this.indexselected] =
                         response.data.accounts[0].id;
                 });
@@ -124,22 +131,24 @@ export default {
             // this.storem_account[this.indexselected] = await uh;
         },
 
-        gr(h) {
-            this.storem_account[this.indexselected] = h;
-        },
+        // gr(h) {
+        //     this.storem_account[this.indexselected] = h;
+        // },
 
         group_accounts_details(id) {
-            
             axios
                 .post(`/get_group_accounts_details_details/${id}`)
                 .then((response) => {
                     var arrayLength = response.data.result_data.length;
 
-                    console.log("ffffffffffffffffffffff",response.data.group_type);
+                    console.log(
+                        "ffffffffffffffffffffff",
+                        response.data.group_type
+                    );
                     if (response.data.result_data == 0) {
                         arrayLength = 0;
                     }
-                    console.log('dfffffff',this.type);
+                    console.log("dfffffff", this.type);
                     var html = "";
                     if (arrayLength == 0) {
                         $(`#select_account_${this.type}`).html("");

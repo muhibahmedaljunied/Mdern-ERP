@@ -14,4 +14,12 @@ class Payroll extends Model
     }
 
 
+    public function daily()
+    {
+        return $this->morphMany(GroupAccountDailyDetail::class, 'dailyable');
+    }
+
+    
+    
+
 }

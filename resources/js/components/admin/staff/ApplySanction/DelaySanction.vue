@@ -47,6 +47,14 @@
                                 </select>
 
                             </div>
+
+
+                            <div class="col-md-2">
+                                <label for="status"> التأريخ</label>
+                                <input class="form-control" type="date" name="" id="" v-model="apply_date">
+
+
+                            </div>
                             <div class="col-sm-6 col-md-2" style="margin-top: auto;">
 
 
@@ -138,17 +146,33 @@
                                             </td>
                                             <td>{{ staff.attendance }}</td>
 
+
+
                                             <td>
-                                                <span class="badge bg-danger" v-if="staff.delay.length"> ضمن
-                                                    اللائحه</span>
-                                                <span class="badge bg-success" v-else>ليس ضمن اللائحه</span>
+                                                <span class="badge bg-danger" v-if="staff.delay">
+
+                                                    ضمن
+                                                    اللائحه
+
+
+                                                </span>
+
+                                                <span class="badge bg-info" v-if="staff.staff_sanction">
+                                                    تم تطبيق اللائحه
+                                                </span>
+                                                <span v-if="!staff.staff_sanction && !staff.delay">
+                                                    <span class='badge bg-success'> ليس ضمن اللائحه</span>
+                                                </span>
+
+
+
                                             </td>
 
 
 
                                             <td>
 
-                                                <template v-if="staff.delay.length">
+                                                <!-- <template v-if="staff.delay.length">
                                                     <button type="button" data-toggle="modal"
                                                         class="tn btn-success btn-sm waves-effect btn-agregar"
                                                         :data-target="'#addDelay' + indexs"> فحص
@@ -245,7 +269,7 @@
                                                                                                                 @change="
                                                                                                                     check_row(
 
-                                                                                                                    index_delay
+                                                                                                                        index_delay
 
                                                                                                                     )
                                                                                                                     "
@@ -286,12 +310,185 @@
 
 
                                                     </div>
-                                                </template>
-                                                <template v-else>
+                                                </template> -->
 
-                                                    <span>لايوجد</span>
+
+
+                                                <template v-if="staff.delay">
+
+
+
+                                                    <button type="button" data-toggle="modal"
+                                                        class="tn btn-success btn-sm waves-effect btn-agregar"
+                                                        :data-target="'#addAbsence' + indexs"> فحص
+                                                        اللائحه</button>
+
+
+
+                                                    <button type="button" @click="apply(staff.delay, staff.staff_id)"
+                                                        data-toggle="tooltip"
+                                                        class="tn btn-success btn-sm waves-effect btn-agregar">
+                                                        تطبيق</button>
+
+
+
+
+
+
+                                                    <div class="modal fade bs-example-modal-lg" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myLargeModalLabel"
+                                                        aria-hidden="true" style="display: none"
+                                                        :id="'addAbsence' + indexs">
+                                                        <div class="modal-dialog modal-lg" style="width: 100%">
+                                                            <div class="modal-content">
+                                                                <!-- <div class="modal-header">
+
+
+            <div class="col-md-4">
+                <div class="col-sm-12">
+                    <input type="text" placeholder="بحث"
+                        class="form-control" name="buscar_producto"
+                        id="buscar_producto" v-model="word_search"
+                        @input="get_search()" />
+                </div>
+            </div>
+        </div> -->
+                                                                <div class="modal-body">
+                                                                    <div class="row row-sm">
+                                                                        <div class="col-xl-12">
+                                                                            <div class="card">
+
+                                                                                <div class="card-body">
+                                                                                    <form method="post">
+
+                                                                                        <div class="table-responsive">
+                                                                                            <table
+                                                                                                class="table table-bordered text-right"
+                                                                                                style="width: 100%; font-size: x-large">
+                                                                                                <thead>
+                                                                                                    <tr>
+
+                                                                                                        <th> نوع
+                                                                                                            التأخير
+                                                                                                        </th>
+                                                                                                        <th> نوع
+                                                                                                            الخصم
+                                                                                                        </th>
+
+
+                                                                                                        <th>
+                                                                                                            عدد
+                                                                                                            المرات
+                                                                                                        </th>
+                                                                                                        <th> قيمه
+                                                                                                            الخصم
+                                                                                                        </th>
+
+
+
+
+                                                                                                        <th>اضافه
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody
+                                                                                                    v-if="staff.delay">
+                                                                                                    <tr v-for="(delay, index_delay) in staff.delay"
+                                                                                                        :key="index_delay">
+
+                                                                                                        <td>
+
+                                                                                                            {{
+                                                                                                                delay.delay_name
+                                                                                                            }}
+                                                                                                        </td>
+                                                                                                        <td>
+
+                                                                                                            {{
+                                                                                                                delay.name
+                                                                                                            }}
+                                                                                                        </td>
+
+                                                                                                        <td>
+
+                                                                                                            {{
+                                                                                                                delay.iteration
+                                                                                                            }}
+                                                                                                        </td>
+
+                                                                                                        <td>
+
+                                                                                                            {{
+                                                                                                                delay.sanction
+                                                                                                            }}
+                                                                                                        </td>
+
+
+
+                                                                                                        <td>
+
+
+                                                                                                            <input
+                                                                                                                @change="
+                                                                                                                    check_row(
+
+                                                                                                                        index_delay
+
+                                                                                                                    )
+                                                                                                                    "
+                                                                                                                type="checkbox"
+                                                                                                                v-model="check_state[index_delay]"
+                                                                                                                class="btn btn-info waves-effect" />
+
+                                                                                                        </td>
+
+
+
+                                                                                                    </tr>
+
+                                                                                                </tbody>
+                                                                                                <tbody v-else>
+                                                                                                    <tr>
+
+                                                                                                        <td colspan="4">
+                                                                                                            لايوجد
+                                                                                                            بيانات
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </form>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        @click="Add_new()">حفظ </button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+
+                                                                </div>
+
+
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
+
+
+
+
 
                                                 </template>
+
 
 
 
@@ -339,30 +536,39 @@ export default {
     mixins: [operation],
     data() {
         return {
-
-
             delay_part_selected: [],
             delay_types: '',
             delay_parts: '',
             delayselected: [],
 
-
-
-
-
-
-
-
-
         };
     },
     mounted() {
         this.list();
-        this.type = 'attendance';
+        this.type = 'delay';
     },
     methods: {
 
+        // apply(delay,staff_id) {
 
+
+        //     axios.post(`/apply_delay_sanction_attendance`, {
+        //         delay: delay,
+        //         staff_id: staff_id,
+        //         date: this.apply_date
+
+
+        //     }).then(
+        //         (response) => {
+
+        //             this.value_list = response.data.list;
+
+
+
+        //         });
+
+
+        // },
         check_row(index) {
 
 

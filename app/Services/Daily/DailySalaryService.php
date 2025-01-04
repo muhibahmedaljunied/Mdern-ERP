@@ -67,7 +67,7 @@ class DailySalaryService
     public function set_daily_data_allowance_hr($type)
     {
 
-
+        // dd($this->core->paid);
         foreach ($this->core->paid as $key => $value) {
 
             if (gettype($value) === 'array') {
@@ -82,7 +82,11 @@ class DailySalaryService
 
                 $this->handle($type, $value, $key);
             }
+
+            
         }
+
+      
     }
 
 
@@ -93,8 +97,11 @@ class DailySalaryService
 
             $this->get_debit_credit($type, $value);
             $this->get_account($type, $key);
+
             $r = $this->store_data($type, $key);
         }
+
+    
     }
     public function get_debit_credit($type, $value2)
     {

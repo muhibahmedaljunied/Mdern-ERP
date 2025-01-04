@@ -24,11 +24,12 @@ class CreateAccountsTable extends Migration
             $table->string('account_name_en')->nullable();
             $table->unsignedInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('accounts');
-            $table->integer('rank')->nullable();
-            $table->string('account_type')->nullable();
+            $table->integer('rank')->nullable()->default(0);
+            $table->integer('account_type_debit_credit')->nullable();
+            $table->integer('account_type')->nullable();
             $table->string('currency')->nullable();
-            $table->integer('type_branch')->nullable();
-            $table->string('status_account');
+            $table->integer('final_account')->nullable(1);
+            $table->string('status_account')->default('true');
             $table->timestamps();
             
             

@@ -428,7 +428,7 @@ class StaffController extends Controller
                 'group.group_account' => function ($query) {
                     $query->select('*');
                 },
-                'group.group_account.group_account_detail' => function ($query) {
+                'group.group_account.group_account_detail.account' => function ($query) {
                     $query->select('*');
                 },
                 'group.group_account.account' => function ($query) {

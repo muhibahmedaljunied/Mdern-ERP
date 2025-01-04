@@ -24,14 +24,9 @@ class CreateProductsTable extends Migration
 
             $table->string('text');
             $table->integer('rank')->nullable();
+            $table->string('status')->default('true');
 
-            // $table->float('cost_rate')->nullable();
-            // $table->float('sale_price')->nullable();
-            // $table->float('purchase_price')->nullable();
-            // $table->string('status')->nullable();
-            // $table->integer('rate')->nullable();
-
-            $table->integer('product_minimum')->nullable();
+            $table->integer('product_minimum')->nullable()->default(1);
             $table->string('image')->nullable();
 
 

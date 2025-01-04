@@ -18,13 +18,13 @@ class CustomerController extends Controller
     {
 
         $customers = DB::table('customers')
-            ->join('groups', 'groups.id', '=', 'customers.group_id')
-            ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
-            ->where('group_types.code', 'customer')
+            // ->join('groups', 'groups.id', '=', 'customers.group_id')
+            // ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
+            // ->where('group_types.code', 'customer')
             ->select(
                 'customers.*',
                 // 'customer_accounts.account_id',
-                'groups.name as group_name'
+                // 'groups.name as group_name'
             )
             ->paginate(10);
 

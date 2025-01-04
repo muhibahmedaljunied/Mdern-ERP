@@ -16,6 +16,8 @@ Route::post('/delete_account/{id}', 'Account\AccountController@destroy');
 Route::post('/store_account', 'Account\AccountController@store');
 Route::post('/account_list', 'Account\DailyController@index');
 Route::post('/account_report/{id}', 'Account\DailyController@account_report');
+Route::post('/balance_report', 'Account\AccountController@balance_report');
+
 // Route::post('/account_list/{id}', 'Account\AccountController@AccountStatement');
 Route::post('/account_details_node/{id}', 'Account\AccountController@account_details_node');
 Route::post('/account_update_node/{id}', 'Account\AccountController@account_update_node');
@@ -28,6 +30,8 @@ Route::post('/account_rename_node/{id}', 'Account\AccountController@account_rena
 Route::post('/daily', 'Account\DailyController@index');
 Route::post('/daily/{id}', 'Account\DailyController@show');
 Route::post('/store_daily', 'Account\DailyController@store');
+Route::post('/daily_close', 'Account\DailyController@daily_close');
+Route::post('/store_daily_openning_balance', 'Account\DailyController@store_daily_openning_balance');
 // ---------------------------------------------
 Route::post('/get_account_main/{id}', 'Account\AccountController@get_account_main');
 Route::post('/get_account_name/{id}', 'Account\AccountController@get_account_name');

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Absence;
-
 use App\Repository\StaffSaction\StaffAbsenceSanctionRepository;
 use App\Repository\HR\AbsenceSanctionRepository;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -14,12 +13,8 @@ use App\Services\CoreStaffService;
 use App\Models\SanctionDiscount;
 use Illuminate\Http\Request;
 use App\Models\AbsenceType;
-use App\Models\Attendance;
-use App\Models\AttendanceDetail;
-use App\Models\Staff;
 use App\Models\StaffSanction;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\Builder as QueryBuilder;
+
 
 class AbsenceSanctionController extends Controller
 {
@@ -46,73 +41,29 @@ class AbsenceSanctionController extends Controller
         ]);
     }
 
-
+    function get_day_name($date)
+    {
+        // Convert the date to a timestamp
+        $timestamp = strtotime($date);
+        // Return the day name
+        return date('D', $timestamp);
+    }
     public function absence_sanction_attendance(Request $request)
     {
 
+
+
         // dd(date('l', strtotime('2024-11-19')), '2024-11-19');
         // Tuesday,Thursday,Saturday,Monday,Wednesday,Friday,Sunday
-
-        $array_filter = [];
-        $attendances =  DB::table('attendances');
-
-        if ($request->staff_id) {
-
-            $attendances = $attendances->where('staff_id', $request->staff_id);
-        }
-
-        $attendances = $attendances->where('attendance_status', 0)
-            ->select(
-                'attendances.*'
-            )->get();
-
-        // dd($attendances);
+        $this->filter_date($request);
+        // ----------------------------------------------------------------------------------------------------------------
+        $this->staff_attendance($request);
+        // ----------------------------------------------------------------------------------------------------------------
+        $this->final_sanction($request);
         // ----------------------------------------------------------------------------------------------------
-        foreach ($attendances as $key => $value) {
-
-            if (date('l', strtotime($value->attendance_date)) == $request->absence_type_code) {
-
-                if (!in_array($value->attendance_date, $array_filter)) {
-
-                    $array_filter[$key] =  $value->attendance_date;
-                }
-            }
-        }
-        // dd($array_filter);
-        // ----------------------------------------------------------------------------------------------------
-
-        $attendances =  DB::table('staff')
-            ->addSelect(['attendance' => function (QueryBuilder $builder) use ($array_filter) {
-                $builder->from('attendances')
-                    ->selectRaw('count(*) as attendance')
-                    ->whereColumn('staff.id', 'attendances.staff_id')
-                    ->whereIn('attendance_date', $array_filter);
-            }])
-            ->get();
-        // ----------------------------------------------------------------------------------------------------    
-
-
-        foreach ($attendances as $key => $value) {
-
-
-            $absence =  DB::table('absence_sanctions')
-                ->join('sanction_discounts', 'sanction_discounts.id', '=', 'absence_sanctions.sanction_discount_id')
-                ->join('absence_types', 'absence_types.id', '=', 'absence_sanctions.absence_type_id')
-                ->where('absence_sanctions.absence_type_id', $request->absence_type_id)
-                ->where('absence_sanctions.iteration', $value->attendance)
-                ->select(
-                    'absence_sanctions.*',
-                    'sanction_discounts.*',
-                    'absence_types.name as absence_name'
-                )->get();
-            $value->absence = $absence;
-            // dd($absence);
-        }
-
-        // ----------------------------------------------------------------------------------------------------
-        // dd($attendances);
+        // dd($this->core->attendances);
         return response()->json([
-            'list' => $attendances,
+            'list' => $this->core->attendances,
 
         ]);
 
@@ -151,6 +102,34 @@ class AbsenceSanctionController extends Controller
         //     ->get();
 
     }
+
+    public function apply_absence_sanction_attendance(Request $request)
+    {
+
+        // dd($request->all());
+        // unset( $array_name['key_to_be_removed'] );
+        foreach ($request->sanction as $value) {
+
+            // AbsenceSanction::find($value->id);
+            // dd($value);
+            $absence = new StaffSanction();
+            $absence->staff_id = $request->staff_id;
+            $absence->sanctionable()->associate(AbsenceSanction::find($value['id']));
+            $absence->date = $request->date;
+            $absence->save();
+        }
+
+
+
+
+
+        // dd($request->all());
+        return response()->json([
+            'status' => 'successfully',
+
+        ]);
+    }
+
     public function show()
     {
 
@@ -165,8 +144,126 @@ class AbsenceSanctionController extends Controller
             ->selectRaw('select * from attendance_details')
             ->get();
 
-        dd($absence_sanctions);
+        // dd($absence_sanctions);
     }
+
+
+
+    public function filter_date($request)
+    {
+
+        $request->staff_id = collect($request->staff_id)->toArray();
+
+
+        $this->core->array_filter = [];
+        $year = intval(date("2024"));
+        $month = intval(date("11"));
+        $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+
+        for ($i = 1; $i < $days; $i++) {
+
+            if ($this->get_day_name("$year-$month-$i") == $request->absence_type_code) {
+
+                $this->core->array_filter[$i] =  $year . '-' . $month . '-' . $i;
+            }
+        }
+    }
+
+
+    public function staff_attendance($request)
+    {
+
+
+
+        $this->core->attendances = DB::table('attendances')
+            ->select(
+                'staff.name',
+                'staff.id as staff_id',
+                DB::raw('count(attendances.id) as attendance'),
+
+            )
+            ->groupBy(
+                'staff.name',
+                'staff.id',
+
+            )
+
+
+            ->whereIn('attendance_date', $this->core->array_filter)
+            ->join('staff', 'staff.id', '=', 'attendances.staff_id');
+
+        if (count($request->staff_id) > 0) {
+
+            $this->core->attendances = $this->core->attendances->where('staff.id', $request->staff_id[0]);
+        }
+
+        $this->core->attendances = $this->core->attendances->paginate();
+
+
+
+        // dd($this->core->attendances);
+    }
+
+
+
+
+    public function final_sanction($request)
+    {
+
+        // dd($request->absence_type_id);
+        foreach ($this->core->attendances as $value) {
+
+
+
+
+
+            $absence =  collect(AbsenceSanction::join('sanction_discounts', 'sanction_discounts.id', '=', 'absence_sanctions.sanction_discount_id')
+                ->join('absence_types', 'absence_types.id', '=', 'absence_sanctions.absence_type_id')
+                ->where('absence_sanctions.absence_type_id', $request->absence_type_id)
+                ->where('absence_sanctions.iteration', $value->attendance)
+                ->select(
+                    'absence_sanctions.*',
+                    'sanction_discounts.name',
+                    'absence_types.name as absence_name'
+                )
+                ->get())->toArray();
+
+
+
+            if (count($absence) > 0) {
+
+
+                foreach ($absence as $key => $value2) {
+
+                    $staff_sanction =  collect(StaffSanction::where('sanctionable_type', 'App\Models\AbsenceSanction')
+                        ->where('sanctionable_id', $value2['id'])
+                        ->where('staff_id', $value->staff_id)
+                        ->select(
+                            '*'
+                        )
+                        ->get())->toArray();
+
+
+
+                    if (count($staff_sanction) > 0) {   //if found staff_sanction do not return sanction
+
+                        $value->staff_sanction[$key] = $staff_sanction;
+                    } else {
+
+                        $value->absence[$key] = $value2;
+                    }
+                }
+            }
+
+
+         
+        }
+
+        // dd($this->core->attendances);
+    }
+
+
     public function get_absence_sanction()
     {
 
@@ -181,7 +278,7 @@ class AbsenceSanctionController extends Controller
             )
             ->paginate(10);
 
-
+        // ----------------------------------------------------------------------------------------
         $absence_sanctions = Cache::rememberForever('absence_sanctions_index', function () {
 
             return DB::table('absence_sanctions')

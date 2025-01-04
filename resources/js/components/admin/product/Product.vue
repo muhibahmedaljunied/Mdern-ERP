@@ -27,30 +27,39 @@
                     <div class="card">
 
 
-                      <div class="card-header">
 
-                        <a @click="exports_excel()">
-                          <img src="/assets/img/export.png" alt="" style="width: 5%;"></a>
-
-                        <a @click="imports_excel()">
-                          <img src="/assets/img/import.png" alt="" style="width: 5%;"></a>
-                      </div>
 
                       <div class="card-body">
-                        <!-- <div class="container">
-                          <div class="well" id="treeview_json_product"></div>
-                        </div> -->
+              
 
                         <div class="container">
                           <div class="row">
-                            <div class="col-xs-12">
-                              <div class="input-group">
+                            <div class="col-md-8">
 
-                                <input type="text" id="ricerca-enti" class="form-control" placeholder="بحث"
-                                  aria-describedby="search-addon">
+                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti" placeholder="بحث"
+                                aria-describedby="search-addon">
 
-                              </div>
+
+
                             </div>
+
+
+                            <div class="col-md-4">
+
+
+
+                              <button class="btn btn-primary btn-sm btn-inline" type="button"
+                                @click="imports_excel()">استيراد</button>
+                              <button class="btn btn-primary btn-sm btn-inline" type="button"
+                                @click="exports_excel()">تصدير</button>
+
+
+
+                            </div>
+
+
+
+
                           </div>
                           <div class="row">
                             <div class="col-xs-12" id="treeview_json_product">
@@ -88,7 +97,8 @@
 
                 <div class="col-md-4">
                   <label for="Product">رقم المنتج</label>
-                  <input style="background-color: beige;" id='product_number' type="text" class="form-control" required readonly />
+                  <input style="background-color: beige;" id='product_number' type="text" class="form-control" required
+                    readonly />
 
                 </div>
                 <div class="col-md-4">
@@ -179,7 +189,7 @@
                       <img src="" id="previewHolder" width="150px" />
                     </div>
 
-                    
+
 
                   </div>
 
@@ -191,16 +201,16 @@
 
               </div>
 
-              
+
               <br>
 
-<div class="row">
+              <div class="row">
 
-  <div class="col-md-12">
-    <button type="button" class="btn btn-primary btn-lg btn-inline" @click="addnode()"> حفظ </button>
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-primary btn-lg btn-inline" @click="addnode()"> حفظ </button>
 
-  </div>
-</div>
+                </div>
+              </div>
             </div>
             <!-- <div class="card-footer">
               <button type="button" class="btn btn-primary" @click="addnode()"> حفظ </button>

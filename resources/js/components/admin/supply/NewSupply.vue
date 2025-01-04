@@ -264,7 +264,7 @@
                         <div id="factura_producto">
                           <select v-model="status[index]" name="type" id="type" class="form-control" required>
 
-                            <option v-for="status in statuses" v-bind:value="status.id">
+                            <option selected v-for="status in statuses" v-bind:value="status.id"   >
                               {{ status.name }}
                             </option>
                           </select>
@@ -598,6 +598,7 @@ export default {
       not_qty: true,
       seen: false,
       id: '',
+      selected:1,
 
 
 
@@ -665,6 +666,7 @@ export default {
         this.treasuries = data.treasuries;
 
 
+   
 
 
 
@@ -715,6 +717,8 @@ export default {
 
 
         if (!this.qty[index + 1] || !this.unit || !this.unit_price[index + 1]) {
+
+
 
           this.$delete(this.counts, index);
 

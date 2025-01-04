@@ -26,15 +26,15 @@
               <table class="table text-md-nowrap" id="example1">
                 <thead>
                   <tr>
-                    <th class="wd-15p border-bottom-0">رقم الفاتوره</th>
+                    <th class="wd-15p border-bottom-0">رقم السند</th>
                     <th class="wd-15p border-bottom-0">جهه الصرف</th>
                     <!-- <th class="wd-15p border-bottom-0">الكميه </th> -->
                     <!-- <th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
                     <th class="wd-15p border-bottom-0">تاريخ الصرف</th>
-                    <th class="wd-15p border-bottom-0"> المدفوع</th>
-                    <th class="wd-15p border-bottom-0">المتبقي</th>
-                    <th class="wd-15p border-bottom-0">اجمالي الفاتوره</th>
-                    <th class="wd-15p border-bottom-0">حاله الفاتوره</th>
+                    <!-- <th class="wd-15p border-bottom-0"> المدفوع</th> -->
+                    <!-- <th class="wd-15p border-bottom-0">المتبقي</th> -->
+                    <!-- <th class="wd-15p border-bottom-0">اجمالي الفاتوره</th> -->
+                    <!-- <th class="wd-15p border-bottom-0">حاله الفاتوره</th> -->
 
                     <th class="wd-15p border-bottom-0">العمليات</th>
                   </tr>
@@ -49,17 +49,17 @@
                     <!-- <td>{{ cash.quantity }}</td>
                   <td>{{ cash.qty_return }}</td> -->
                     <td>{{ cash.paymentable.date }}</td>
-                    <td>{{ cash.paid }}</td>
-                    <td>{{ cash.remaining }}</td>
-                    <td>{{ cash.paymentable.grand_total }}</td>
+                    <!-- <td>{{ cash.paid }}</td> -->
+                    <!-- <td>{{ cash.remaining }}</td> -->
+                    <!-- <td>{{ cash.paymentable.grand_total }}</td> -->
                     <!-- <td>{{ cash.cash_status }}</td> -->
-                    <td>
+                    <!-- <td>
 
                       <span class="badge bg-warning" v-if="cash.payment_status == 'pendding'">غير مدفوعه</span>
                       <span class="badge bg-success" v-if="cash.payment_status == 'paiding'">مدفوعه</span>
                       <span class="badge bg-info" v-if="cash.payment_status == 'partialy'">مدفوعه جزئيا</span>
 
-                    </td>
+                    </td> -->
 
                     <td>
 
@@ -79,7 +79,7 @@
                           </option>
 
                           <option class="btn btn-success" v-bind:value="['cash_invoice', cash.paymentable.cash_id, 3]">
-                            عرض الفاتوره
+                            عرض السند
                           </option>
                           <option class="btn btn-success"
                             v-bind:value="['ReceivableBond', cash.paymentable.cash_id, 4]">
@@ -157,7 +157,7 @@
                     <th>الحاله</th>
                     <th>المخزن</th>
                     <th class="wd-15p border-bottom-0"> الكميه </th>
-                    <th class="wd-15p border-bottom-0"> السعر </th>
+                    <!-- <th class="wd-15p border-bottom-0"> السعر </th> -->
                     <!-- <th class="wd-15p border-bottom-0"> الاجمالي </th> -->
                     <!-- <th class="wd-15p border-bottom-0">  الكميه المرتحعه</th> -->
 
@@ -208,7 +208,7 @@ temx.name }}</span>
                       </div>
                       <!-- {{ cash_details.qty }} {{ cash_details.unit }} -->
                     </td>
-                    <td>{{ cash_details.price }}</td>
+                    <!-- <td>{{ cash_details.price }}</td> -->
                     <!-- <td>{{ cash_details.total }}</td> -->
                     <!-- <td>{{ cash_details.qty_return }}</td> -->
 

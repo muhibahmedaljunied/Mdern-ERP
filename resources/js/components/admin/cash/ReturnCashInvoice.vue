@@ -44,7 +44,7 @@
                       <td colspan="1"></td>
 
                       <td style="text-align: left">
-                        <button @click="printDiv('printme')">
+                        <button @click="report_style('printme', '')">
                           <i class="fas fa-print" style="font-size: 24px; color: rgb(34, 192, 60)"></i>
                         </button>
                       </td>
@@ -57,7 +57,7 @@
                           border-radius: 10px;
                           background-color: red;
                         ">
-                        <h1> فاتوره مرتجع صرف </h1>
+                        <h1> سند مرتجع صرف </h1>
                       </td>
                       <td></td>
                     </tr>
@@ -188,7 +188,9 @@ temx.name }}</span>
   </div>
 </template>
 <script>
+import InvoiceOperation from '../../../../js/InvoiceOperation.js';
 export default {
+  mixins: [InvoiceOperation],
   data() {
     return {
       return_cashes: {

@@ -20,7 +20,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                         <div class="input-group">
-                                                            <input type="text" id="ricerca-enti" class="form-control"
+                                                            <input style="background-color: azure;" type="text" id="ricerca-enti" class="form-control"
                                                                 placeholder="بحث" aria-describedby="search-addon" />
                                                         </div>
                                                     </div>

@@ -45,13 +45,15 @@ contextmenu = function (node) {
       action: function (data) {
 
         var id = $.jstree.reference(data.reference).get_node(data.reference).id
+        console.log('nnnnnnnاضافهhhhhhh',localStorage.getItem('table'));
 
-
+        
         axios
           .post(`/${localStorage.getItem('table')}_details_node/${id}`)
           .then(function (response) {
 
 
+            console.log('nnnnnnnhhhhhh',response.data);
             $("#parent").val(response.data.details[0].id);
 
             $("#rank").val(response.data.details[0].rank + 1);

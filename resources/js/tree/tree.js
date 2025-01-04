@@ -4,11 +4,14 @@ export default {
     mixins: [tree_account, tree_product],
     methods: {
         showtree(table, uri, value = null) {
-      
             let gf = this;
             var id = `treeview_json_${table}`;
 
-    
+            if (gf.type == "Salary" || gf.type == "Advance") {
+                var id = `treeview_json_${table}_${gf.type}`;
+            }
+            console.log("ididididid", id);
+
             this.axios
                 .post(`/${uri}`, {
                     value: value,
@@ -24,6 +27,8 @@ export default {
                         this.last_nodes = response.data.last_nodes;
                         $(`#${table}_number`).val(response.data.last_nodes + 1);
                     }
+
+                    console.log(`muhiiiiiiiiiiiiii${id}`, this.jsonTreeData);
 
                     $(`#${id}`)
                         .jstree({
@@ -89,21 +94,26 @@ export default {
                                 gf.To_pay = 0;
                             }
 
-                            console.log('rrrrrrr',table);
-                            console.log('rrrrrrrrr1',gf.type);
+                            console.log("rrrrrrr", table);
+                            console.log(
+                                "rrrrrrrrr1",
+                                gf.type,
+                                gf.indexselected
+                            );
                             // indexselected == 0 when operation is sale or what is same when start index from 0
                             if (gf.indexselected || gf.indexselected == 0) {
                                 $(
                                     `#${gf.type}_${table}_tree${gf.indexselected}`
-                                ).val(data.node.id + " " + data.node.text);
+                                ).val(data.node.text + "   " + data.node.id);
                                 $(
                                     `#${gf.type}_${table}_tree_id${gf.indexselected}`
                                 ).val(data.node.id);
 
-                                console.log("yamaha", gf.indexselected);
-
                                 if (uri == "tree_account") {
-                                    if (table == "accounts") {
+                                    if (
+                                        table == "accounts" &&
+                                        gf.type == "Expence"
+                                    ) {
                                         //this if type expence_income accounts
 
                                         // console.log('accounts',gf.indexselected);
@@ -115,14 +125,13 @@ export default {
                                             data.node.id;
                                     }
                                 }
-
-                                // if (table == 'accounts') {
-
-                                //     gf.expence_income_account_list[gf.indexselected] = data.node.id;
-                                // }
                             } else {
                                 $(`#${gf.type}_${table}_tree`).val(
-                                    data.node.text
+                                    data.node.text + "  " + data.node.id
+                                );
+                                console.log(
+                                    "nowwwwwwwwwwwwww",
+                                    `#${gf.type}_${table}_tree_id`
                                 );
                                 $(`#${gf.type}_${table}_tree_id`).val(
                                     data.node.id
@@ -148,7 +157,7 @@ export default {
 
                             // ----------------------------------------product-----------------------------------------------------------
 
-                            if (table == "account" || table == "accounts" ) {
+                            if (table == "account" || table == "accounts") {
                                 gf.check_account(data);
                             }
                             if (table == "product") {
@@ -176,7 +185,6 @@ export default {
                                     gf.type == "Purchase" ||
                                     gf.type == "Supply"
                                 ) {
-                                    console.log("aljunied123", gf.counts);
                                     gf.get_account_for_store(gf.counts);
                                 }
                                 if (
@@ -202,7 +210,6 @@ export default {
                                         "store",
                                         data.node.id
                                     );
-                                 
                                 }
 
                                 if (gf.type == "Opening") {
@@ -233,7 +240,6 @@ export default {
         },
 
         detect_index(index) {
-    
             this.indexselected = index;
         },
 
@@ -244,7 +250,7 @@ export default {
 
                 for (var i = 0; i < arrayLength; i++) {
                     console.log("muhib_job", response.data.jobs[i].text);
-                    
+
                     html =
                         html +
                         `<option data-period-${id}= ${response.data.jobs[i].id}   value= ${response.data.jobs[i].id} >${response.data.jobs[i].text}</option>`;
@@ -252,7 +258,7 @@ export default {
                 $(`#select_structure`).html(html);
             });
         },
-// e1f6c764
+        // e1f6c764
         addnode() {
             let currentObj = this;
             const config = {
@@ -275,9 +281,9 @@ export default {
             formData.append("rank", $("#rank").val());
             formData.append("unit", this.unit);
             formData.append("purchase_price", this.purchase_price);
+            formData.append("status", this.status);
             // formData.append("status", this.status);
             if (localStorage.getItem("table") == "product") {
-                // formData.append("status", this.status);
                 // formData.append("count", this.counts);
                 // formData.append("unit", this.unit);
                 // formData.append('purchase_price', this.purchase_price);
@@ -316,15 +322,7 @@ export default {
                 }
 
                 formData.append("product_minimum", this.product_minimum);
-                // formData.append("purchase_price", this.purchase_price);
-                // formData.append("purchase_price_for_retail_unit", this.purchase_price_for_retail_unit);
-                // formData.append("hash_rate", this.hash_rate);
-                // formData.append("retail_unit", this.retail_unit);
             }
-            //  else {
-            //     formData.append("status", this.status);
-
-            // }
 
             axios
                 .post(
@@ -361,21 +359,28 @@ export default {
             console.log("counts", this.counts);
             let formData = new FormData();
             formData.append(
-                `${this.table}_id`,
-                $(`#${this.table}_number`).val()
+                `${localStorage.getItem("table")}_id`,
+                $(`#${localStorage.getItem("table")}_number`).val()
             );
+
             formData.append("text", this.text);
             // formData.append(`${localStorage.getItem('table')}_name_en`, this.store_name_en);
             formData.append("parent", $("#parent").val());
             // formData.append("account", this.account);
             formData.append("rank", $("#rank").val());
             formData.append("status_account", this.status_account);
+            formData.append("account_type", this.account_type);
+            formData.append(
+                "account_type_debit_credit",
+                this.account_type_debit_credit
+            );
+            formData.append("final_account", this.final_account);
+
             // formData.append("purchase_price", this.purchase_price);
-           
 
             axios
                 .post(
-                    `store_${this.table}`,
+                    `store_${localStorage.getItem("table")}`,
                     formData,
                     config
                 )

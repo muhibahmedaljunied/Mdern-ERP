@@ -49,6 +49,13 @@
                                 </select>
 
                             </div>
+
+                            <div class="col-md-2">
+                                <label for="status"> التأريخ</label>
+                                <input class="form-control" type="date" name="" id="" v-model="apply_date">
+
+
+                            </div>
                             <!-- <div class="col-md-2">
                                 <label for="status"> عدد المرات</label>
                                 <select v-model="iterationselected" name="type"
@@ -135,35 +142,65 @@
                                             </td>
                                             <td>{{ staff.attendance }}</td>
 
-
+                                            <!-- 
                                             <td>
                                                 <span class="badge bg-danger" v-if="staff.leaveout.length"> ضمن
                                                     اللائحه</span>
                                                 <span class="badge bg-success" v-else>ليس ضمن اللائحه</span>
+                                            </td> -->
+
+
+
+                                            <td>
+                                                <span v-if="staff.Leaveout">
+
+
+
+                                                    <span class='badge bg-danger'> ضمن اللائحه</span>
+
+
+
+                                                </span>
+
+                                                <span v-if="staff.staff_sanction">
+
+                                                    <span class='badge bg-info'> تم تطبيق اللائحه</span>
+                                                </span>
+
+                                                <span v-if="!staff.staff_sanction && !staff.Leaveout">
+                                                    <span class='badge bg-success'> ليس ضمن اللائحه</span>
+                                                </span>
                                             </td>
 
 
 
                                             <td>
 
-                                                <template v-if="staff.leaveout.length">
+
+                                                <template v-if="staff.Leaveout">
+
+
                                                     <button type="button" data-toggle="modal"
                                                         class="tn btn-success btn-sm waves-effect btn-agregar"
-                                                        :data-target="'#addDelay' + indexs"> فحص
+                                                        :data-target="'#addAbsence' + indexs"> فحص
                                                         اللائحه</button>
 
 
-                                                    <button data-toggle="tooltip"
+                                                    <button type="button" @click="apply(staff.Leaveout, staff.staff_id)"
+                                                        data-toggle="tooltip"
                                                         class="tn btn-success btn-sm waves-effect btn-agregar">
                                                         تطبيق</button>
 
 
 
 
-                                                    <div class="modal fade bs-example-modal-lg" tabindex="-1"
+
+
+
+                                                        <div class="modal fade bs-example-modal-lg" tabindex="-1"
                                                         role="dialog" aria-labelledby="myLargeModalLabel"
                                                         aria-hidden="true" style="display: none"
-                                                        :id="'addDelay' + indexs">
+                                                        :id="'addAbsence' + indexs">
                                                         <div class="modal-dialog modal-lg" style="width: 100%">
                                                             <div class="modal-content">
 
@@ -191,7 +228,8 @@
 
 
                                                                                                         <th>
-                                                                                                            عدد المرات
+                                                                                                            عدد
+                                                                                                            المرات
                                                                                                         </th>
                                                                                                         <th> قيمه
                                                                                                             الخصم
@@ -204,13 +242,15 @@
                                                                                                         </th>
                                                                                                     </tr>
                                                                                                 </thead>
-                                                                                                <tbody>
-                                                                                                    <tr v-for="(leaveout, index_leaveout) in staff.leaveout"
+                                                                                                <tbody
+                                                                                                    v-if="staff.Leaveout">
+                                                                                                    <tr v-for="(leaveout, index_leaveout) in staff.Leaveout"
                                                                                                         :key="index_leaveout">
+
                                                                                                         <td>
 
                                                                                                             {{
-                                                                                                                leaveout.leaveout_name
+                                                                                                                leaveout.Leaveout_name
                                                                                                             }}
                                                                                                         </td>
                                                                                                         <td>
@@ -243,8 +283,8 @@
                                                                                                                 @change="
                                                                                                                     check_row(
 
+                                                                                                                        index_leaveout
 
-                                                                                                                    index_leaveout
                                                                                                                     )
                                                                                                                     "
                                                                                                                 type="checkbox"
@@ -257,6 +297,15 @@
 
                                                                                                     </tr>
 
+                                                                                                </tbody>
+                                                                                                <tbody v-else>
+                                                                                                    <tr>
+
+                                                                                                        <td colspan="4">
+                                                                                                            لايوجد
+                                                                                                            بيانات
+                                                                                                        </td>
+                                                                                                    </tr>
                                                                                                 </tbody>
 
                                                                                             </table>
@@ -284,12 +333,35 @@
 
 
                                                     </div>
-                                                </template>
-                                                <template v-else>
 
-                                                    <span>لايوجد</span>
+                                                    <!-- <template v-if="staff.leaveout.length">
+
+        <button type="button" data-toggle="modal"
+            class="tn btn-success btn-sm waves-effect btn-agregar"
+            :data-target="'#addAbsence' + indexs"> فحص
+            اللائحه</button>
+
+
+
+        <button type="button"
+            @click="apply(staff.leaveout, staff.staff_id)"
+            data-toggle="tooltip"
+            class="tn btn-success btn-sm waves-effect btn-agregar">
+            تطبيق</button>
+
+
+
+
+
+
+
+
+    </template> -->
+
+
 
                                                 </template>
+
 
 
 
@@ -337,27 +409,17 @@ export default {
     mixins: [operation],
     data() {
         return {
-
             leaveout_part_selected: [],
             leaveout_types: '',
             leaveout_parts: '',
             leaveoutselected: [],
-
-
-
         };
     },
     mounted() {
         this.list();
-        this.type = 'attendance';
+        this.type = 'leave';
     },
     methods: {
-
-
-
-
-
-
 
 
         check_row(index) {

@@ -265,10 +265,7 @@ export default {
   data() {
     return {
 
-      value_list: {
-        type: Object,
-        default: null,
-      },
+    
 
       vaction_typeselected: [],
       vactionselected: [],

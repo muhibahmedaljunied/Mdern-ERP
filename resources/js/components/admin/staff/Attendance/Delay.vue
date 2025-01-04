@@ -388,11 +388,6 @@ export default {
   data() {
     return {
 
-
-      value_list: {
-        type: Object,
-        default: null,
-      },
       delay_part_selected: [],
       typeselected: [],
       date: [],

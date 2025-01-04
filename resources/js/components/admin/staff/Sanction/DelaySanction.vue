@@ -423,10 +423,6 @@ export default {
     return {
 
 
-      value_list: {
-        type: Object,
-        default: null,
-      },
 
       delay_types:'',
       delay_parts:'',

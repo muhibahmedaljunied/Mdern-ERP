@@ -15,6 +15,7 @@ use App\Imports\AccountImport;
 use App\Models\Allowance;
 use App\Models\Bank;
 use App\Models\Customer;
+use App\Models\Store;
 use App\Models\Supplier;
 use App\Models\Treasury;
 
@@ -47,7 +48,7 @@ class AccountController extends Controller
         // dd($groups);
 
 
-     
+
 
         foreach ($groups as $key => $value) {
 
@@ -86,7 +87,7 @@ class AccountController extends Controller
                 $type = $value->code;
             }
 
-            
+
             // if ($value->code == 'salary') {
 
             //     $data = Bank::where('banks.group_id', $value->id)
@@ -106,14 +107,14 @@ class AccountController extends Controller
         }
 
 
-        
-       
+
+
 
         if ($data == null) {
 
             return response()->json([
                 'result_data' => 0,
-               
+
             ]);
         }
 
@@ -126,15 +127,130 @@ class AccountController extends Controller
     public function get_account(Request $request)
     {
 
-        $accounts = DB::table('stores')->where('stores.id', $request->id)
-            ->join('accounts', 'stores.account_id', '=', 'accounts.id')
-            ->select('accounts.id', 'accounts.text')
-            ->get();
+        $stores = DB::table('stores')->where('stores.id', $request->id)
+        ->select(
+            'stores.*'
+        )
+        ->get();
+    
+        foreach ($stores as  $value) {
+
+
+            if ($value->account_id) {
+
+                $accounts = DB::table('stores')->where('stores.id', $request->id)
+                    ->join('accounts', 'stores.account_id', '=', 'accounts.id')
+                    ->select(
+                        'accounts.id',
+                        'accounts.text',
+
+                    )
+                    ->get();
+            } else {
+
+                $accounts = DB::table('stores')->where('stores.id', $request->id)
+                    ->select(
+                        'stores.*'
+                    )
+                    ->get();
+            }
+        }
+
 
         return response()->json(['accounts' => $accounts]);
     }
 
 
+    public function balance_report()
+    {
+
+
+        $assest_fixed =  Account::Join(
+            DB::raw('(SELECT account_id,SUM(debit) AS sum_debit,SUM(credit) AS sum_credit FROM daily_details 
+            GROUP BY account_id) AS n'),
+            'n.account_id',
+            '=',
+            'accounts.id'
+        )
+            ->where([
+                'account_type' =>
+                1,
+                'status_account' =>
+                false,
+
+            ])
+
+            ->get();
+
+        $assest_changed =  Account::Join(
+            DB::raw('(SELECT account_id,SUM(debit) AS sum_debit,SUM(credit) AS sum_credit FROM daily_details 
+            GROUP BY account_id) AS n'),
+            'n.account_id',
+            '=',
+            'accounts.id'
+        )
+            ->where([
+                'account_type' =>
+                2,
+                'status_account' =>
+                false,
+
+            ])
+
+            ->get();
+
+
+        $big_fixed =  Account::Join(
+            DB::raw('(SELECT account_id,SUM(debit) AS sum_debit,SUM(credit) AS sum_credit FROM daily_details 
+            GROUP BY account_id) AS n'),
+            'n.account_id',
+            '=',
+            'accounts.id'
+        )
+            ->where([
+                'account_type' =>
+                3,
+                'status_account' =>
+                false,
+
+            ])
+
+            ->get();
+
+
+
+        $big_changed =  Account::Join(
+            DB::raw('(SELECT account_id,SUM(debit) AS sum_debit,SUM(credit) AS sum_credit FROM daily_details 
+            GROUP BY account_id) AS n'),
+            'n.account_id',
+            '=',
+            'accounts.id'
+        )
+            ->where([
+                'account_type' =>
+                4,
+                'status_account' =>
+                false,
+
+            ])
+
+            ->get();
+
+
+        $data = [
+            'assest_fixed' => $assest_fixed,
+            'assest_changed' => $assest_changed,
+            'big_fixed' => $big_fixed,
+            'big_changed' => $big_changed,
+
+        ];
+
+        // dd($data);
+        return response()->json([
+            'list' => $data,
+
+        ]);
+    }
     public function auditBalance()
     {
 
@@ -192,6 +308,11 @@ class AccountController extends Controller
 
         $account->rank = $request->post('rank');
         $account->status_account = $request->post('status_account');
+        $account->final_account = $request->post('final_account');
+        $account->account_type = $request->post('account_type');
+        $account->account_type_debit_credit = $request->post('account_type_debit_credit');
+
+
         // $account->account_type = $request->post('account_type');
         // $account->currency = $request->post('currency');
 

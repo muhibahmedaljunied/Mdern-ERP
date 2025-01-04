@@ -34,8 +34,8 @@ class LeaveSanctionRepository
 
             $temporale = LeaveSanction::updateOrCreate(
                 [
-                    'leave_type_id' => $this->core->data['leave'][$this->core->value],
-                    'part_id' => $this->core->data['leave_part'][$this->core->value],
+                    'leave_type_id' => $this->core->data['leaveout'][$this->core->value],
+                    'part_id' => $this->core->data['leaveout_part'][$this->core->value],
                     'sanction_discount_id' => $this->core->data['discount_type'][$this->core->value],
                     'discount' => $this->core->data['discount'][$this->core->value],
                     'iteration' => $this->core->data['iteration'][$this->core->value],

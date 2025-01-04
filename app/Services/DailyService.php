@@ -64,11 +64,12 @@ class DailyService
     {
 
         $debit_data = $this->set_daily_data(0, $type);
+
+        // dd('one',$debit_data);
         DailyDetail::create($debit_data);
     }
     public function multble_daily($type)
     {
-
 
 
         if ($this->core->data['type_daily']) {
@@ -106,6 +107,8 @@ class DailyService
 
             $this->another_daily($type);
         }
+
+
     }
 
 
@@ -219,9 +222,11 @@ class DailyService
         if ($type == 'debit') {
 
             $this->debit = $this->core->data['data_staff'][$this->core->value]['salary'];
-            $this->account_id = $this->core->data[$type]['debit_account_id'][0]['account_second_id'];
+            $this->account_id = $this->core->data[$type]['debit_account_id'][0]['account_id'];
         }
 
+       
+        // dd('prove_salary_daily_all',$this->debit,$this->credit);
         return $this->data_daily_detail($type);
     }
 
@@ -332,6 +337,8 @@ class DailyService
 
         $daily_detail = DailyDetail::create($debit_data);
 
+
+        dd($this->core->data[$type]['debit_account_id'][0],$debit_data);
 
         if ($type == 'credit') {
 

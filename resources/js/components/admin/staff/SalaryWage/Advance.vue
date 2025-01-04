@@ -343,7 +343,7 @@
                 </div>
                 <div class="modal-body">
 
-                  <div class="well" id="treeview_json_account"></div>
+                  <div class="well" id="treeview_json_account_Advance"></div>
 
                 </div>
 
@@ -374,10 +374,7 @@ export default {
   data() {
     return {
 
-      value_list: {
-        type: Object,
-        default: null,
-      },
+    
 
       debit: '',
       grand_total: '',

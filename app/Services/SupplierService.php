@@ -50,7 +50,7 @@ class SupplierService
         $user->email = $this->request['email'];
         $user->phone = $this->request['phone'];
         // $user->account_id = $this->id;
-        $user->group_id = $this->request['group'];
+        // $user->group_id = $this->request['group'];
         $user->address = $this->request['address'];
         $user->save();
     }

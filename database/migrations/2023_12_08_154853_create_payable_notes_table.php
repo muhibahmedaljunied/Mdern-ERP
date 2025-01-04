@@ -16,6 +16,10 @@ class CreatePayableNotesTable extends Migration
             $table->Increments('id');
             $table->unsignedInteger('purchase_id');
             $table->foreign('purchase_id')->references('id')->on('purchases');
+
+            $table->unsignedInteger('daily_id');
+            $table->foreign('daily_id')->references('id')->on('dailies');
+
             $table->string('paid')->default(0);
             $table->date('date')->nullable();
 

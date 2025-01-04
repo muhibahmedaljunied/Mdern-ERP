@@ -20,8 +20,10 @@ class CreateStaffGroupDailyDetailsTable extends Migration
             $table->Increments('id');
             $table->unsignedInteger('group_id')->nullable();
             $table->foreign('group_id')->references('id')->on('groups');
+            
             $table->unsignedInteger('staff_id')->nullable();
             $table->foreign('staff_id')->references('id')->on('staff');
+
             $table->unsignedInteger('daily_detail_id')->nullable();
             $table->foreign('daily_detail_id')->references('id')->on('daily_details');
             $table->timestamps();

@@ -50,12 +50,17 @@ class SupplyReturnController extends Controller
 
         $this->qty->set_compare_array([
             'qty',
+            'qty_remain',
             'quantity',
-            'qty_remain'
+            // 'avilable_qty',
+            // 'qty_return'
         ]);
         $this->init();
         $this->get_details();
+        // dd($this->qty->details);
         $this->qty->handle_qty();
+
+      
         return response()->json([
             'details' => $this->qty->details,
 
@@ -105,7 +110,6 @@ class SupplyReturnController extends Controller
             'supply_return_details' => $this->qty->details,
             'users' => Auth::user()
         ]);
-
     }
 
     public function get_supply_return()
@@ -140,7 +144,7 @@ class SupplyReturnController extends Controller
         ]);
     }
 
-   
+
     public function show($id)
     {
 
@@ -183,6 +187,8 @@ class SupplyReturnController extends Controller
 
 
 
+        // dd($this->qty->request);
+
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
@@ -206,7 +212,6 @@ class SupplyReturnController extends Controller
                 'status' => 'failed'
             ], 400);
         }
-
     }
 
     public function return_supply_daily(Request $request)

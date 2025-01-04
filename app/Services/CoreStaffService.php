@@ -4,6 +4,11 @@ namespace App\Services;
 
 class CoreStaffService extends CoreService
 {
+
+    public $attendances;
+    public $array_filter = [];
+    public $array_filter2 = [];
+    
     public $data_sanction;
     public $id;
     public $temporale_f;
