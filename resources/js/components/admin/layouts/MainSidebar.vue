@@ -10,7 +10,8 @@
       <div class="app-sidebar__user clearfix">
         <div class="dropdown user-pro-body">
           <div class="">
-            <img alt="user-img" class="avatar avatar-xl brround" src="/assets/img/logo_muhib.jpg" /><span
+            <!-- <img alt="user-img" class="avatar avatar-xl brround" src="/assets/img/logo_muhib.jpg" /> -->
+            <span
               class="avatar-status profile-status bg-green"></span>
           </div>
           <div class="user-info">
@@ -40,9 +41,9 @@
           >
         </li> -->
 
-        <li class="side-item side-item-category">Main</li>
+        <li class="side-item side-item-category">Mains</li>
         <li class="slide">
-          <router-link class="side-menu__item" to="dashboard"><svg xmlns="http://www.w3.org/2000/svg"
+          <router-link class="side-menu__item" to="/dashboard"><svg xmlns="http://www.w3.org/2000/svg"
               class="side-menu__icon" viewBox="0 0 24 24">
               <path d="M0 0h24v24H0V0z" fill="none" />
               <path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3" />
@@ -725,6 +726,7 @@ export default {
     };
   },
   mounted() {
+
     this.axios.post("/user_name").then((response) => {
       this.username = response.data.user.name;
       this.email = response.data.user.email;

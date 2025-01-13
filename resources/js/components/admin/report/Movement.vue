@@ -223,15 +223,15 @@
                       <div class="col-md-2" v-show="showoperation">
                         <label for="status"> نوع العمليه</label>
                         <select v-model="moveselected" class="form-control">
-                          <option v-bind:value="1">كل العمليات</option>
-                          <option v-bind:value="2">صرف</option>
-                          <option v-bind:value="3">توريد</option>
-                          <option v-bind:value="4">مرتجع صرف</option>
-                          <option v-bind:value="5">مرتجع توريد</option>
-                          <option v-bind:value="6"> بيع</option>
-                          <option v-bind:value="7">شراء</option>
-                          <option v-bind:value="8">مرتجع بيع</option>
-                          <option v-bind:value="9">مرتجع شراء</option>
+                          <option v-bind:value="[1,'all']">كل العمليات</option>
+                          <option v-bind:value="[2,'App\\Models\\Cash']">صرف</option>
+                          <option v-bind:value="[3,'App\\Models\\Supply']">توريد</option>
+                          <option v-bind:value="[4,'App\\Models\\CashReturn']">مرتجع صرف</option>
+                          <option v-bind:value="[5,'App\\Models\\SupplyReturn']">مرتجع توريد</option>
+                          <option v-bind:value="[6,'App\\Models\\Sale']"> بيع</option>
+                          <option v-bind:value="[7,'App\\Models\\Purchase']">شراء</option>
+                          <option v-bind:value="[8,'App\\Models\\SaleReturn']">مرتجع بيع</option>
+                          <option v-bind:value="[9,'App\\Models\\PurchaseReturn']">مرتجع شراء</option>
 
                         </select>
                       </div>
@@ -409,9 +409,9 @@
                               <table class="table text-md-nowrap" id="example1">
                                 <thead>
                                   <tr class="heading" style="font-size:large">
-                                    <td>#</td>
-                                    <td v-if="productselected == 0">المنتج</td>
-
+                                    <td>الرقم التسلسلي</td>
+                                    <!-- <td v-if="productselected == 0">المنتج</td> -->
+                                    <td>المنتج</td>
                                     <td>اسم المورد او العميل</td>
 
 
@@ -420,7 +420,9 @@
                                     <td v-if="storeselected == 0">المخزن</td>
                                     <td v-if="statusselected == 0">الحاله</td>
 
-                                    <td v-if="descselected == 0">الطراز والمواصفات</td>
+                                    <!-- <td v-if="descselected == 0">الطراز والمواصفات</td> -->
+                                    <td>الطراز والمواصفات</td>
+
 
 
                                     <td>الكميه</td>
@@ -458,7 +460,9 @@
                                     <td v-if="storeselected == 0">{{ datas.store }}</td>
                                     <td v-if="statusselected == 0">{{ datas.name }}</td>
 
-                                    <td v-if="descselected == 0">{{ datas.desc }}</td>
+                                    <!-- <td v-if="descselected == 0">{{ datas.desc }}</td> -->
+                                    <td>{{ datas.desc }}</td>
+
 
                                     <td>{{ datas.quantity }}</td>
                                     <td>{{ datas.date }}</td>

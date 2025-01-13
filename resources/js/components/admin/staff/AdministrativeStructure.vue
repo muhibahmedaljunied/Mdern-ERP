@@ -31,13 +31,25 @@
                                             <div class="card">
                                                 <div class="card-header">
 
-                                                    <a @click="exports_excel()">
+
+                                                    <button @click="exports_excel()">
+                                                        <i class="fas fa-file-export"
+                                                            style="font-size: 24px; color: #ee335e"></i>
+                                                    </button>
+
+                                                    <button @click="imports_excel()">
+                                                        <i class="fas fa-file-import"
+                                                            style="font-size: 24px; color: #22c03c"></i>
+                                                    </button>
+
+
+                                                    <!-- <a @click="exports_excel()">
                                                         <img src="/assets/img/export.png" alt=""
                                                             style="width: 5%;"></a>
 
                                                     <a @click="imports_excel()">
                                                         <img src="/assets/img/import.png" alt=""
-                                                            style="width: 5%;"></a>
+                                                            style="width: 5%;"></a> -->
                                                 </div>
 
 

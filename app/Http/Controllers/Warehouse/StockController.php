@@ -118,12 +118,21 @@ class StockController extends Controller
 
         // DB::enableQueryLog();
 
+
+        $count = 0;
         $select = [];
         $repo_movement = DB::table('stocks')
             ->join('store_products', 'store_products.id', 'stocks.store_product_id');
 
         $select[0] =  'store_products.*';
+        if ($request->desc) {
 
+            $repo_movement = $repo_movement
+                ->where('store_products.desc', $request->desc);
+        }
+
+        $repo_movement = $repo_movement
+            ->whereBetween('date', $request->from_date, $request->to_date);
         if ($request->store_id > 0) {
 
             $repo_movement = $repo_movement->join('stores', 'stores.id', 'store_products.store_id')
@@ -131,6 +140,7 @@ class StockController extends Controller
 
             $select[1] =  'stores.*';
             $select[2] =  'stores.text as store';
+            $count += 2;
         }
 
         if ($request->product_id > 0) {
@@ -138,8 +148,8 @@ class StockController extends Controller
 
             $repo_movement = $repo_movement->join('products', 'products.id', 'store_products.product_id')
                 ->where('store_products.product_id', $request->product_id);
-
-            $select[3] =  'products.text as product';
+            $count += 1;
+            $select[$count] =  'products.text as product';
         }
 
         if ($request->status_id > 0) {
@@ -147,13 +157,67 @@ class StockController extends Controller
 
             $repo_movement = $repo_movement->join('statuses', 'statuses.id', 'store_products.status_id')
                 ->where('store_products.status_id', $request->status_id[0]);
-
-            $select[4] =  'statuses.name';
+            $count += 1;
+            $select[$count] =  'statuses.name';
         }
 
-        $repo_movement = $repo_movement->join('supplies', 'supplies.id', 'stockable_id')
-            ->where('stockable_type', 'App\Models\Supply');
-        $select[5] =  'supplies.*';
+        // for ($i=1; $i < 10; $i++) { 
+
+        //     if ($request->type_operation[0] == 2) {
+
+        //         $repo_movement = $repo_movement->join('cashes', 'cashes.id', 'stockable_id')->where('stockable_type', 'App\Models\Cash');
+        //         $select[5] =  'cashes.*';
+        //     }
+
+
+        // }
+        if ($request->type_operation[0] == 2) {
+
+            $repo_movement = $repo_movement->join('cashes', 'cashes.id', 'stockable_id')
+                ->where('stockable_type', 'App\Models\Cash');
+            $count += 1;
+            $select[$count] =  'cashes.*';
+        }
+        if ($request->type_operation[0] == 3) {
+
+            $repo_movement = $repo_movement->join('supplies', 'supplies.id', 'stockable_id')
+                ->where('stockable_type', 'App\Models\Supply');
+            $count += 1;
+            $select[$count] =  'supplies.*';
+        }
+        if ($request->type_operation[0] == 4) {
+
+            $repo_movement = $repo_movement->join('cash_returns', 'cash_returns.id', 'stockable_id')
+                ->where('stockable_type', 'App\Models\CashReturn');
+            $count += 1;
+            $select[$count] =  'cash_returns.*';
+        }
+        if ($request->type_operation[0] == 5) {
+
+            $repo_movement = $repo_movement->join('supply_returns', 'supply_returns.id', 'stockable_id')
+                ->where('stockable_type', 'App\Models\SupplyReturn');
+            $count += 1;
+            $select[$count] =  'supply_returns.*';
+        }
+
+        if ($request->type_operation[0] == 6) {
+
+            $repo_movement = $repo_movement->join('sales', 'sales.id', 'stockable_id')
+                ->where('stockable_type', 'App\Models\Sale');
+            $count += 1;
+            $select[$count] =  'supplies.*';
+        }
+
+        if ($request->type_operation[0] == 7) {
+
+            $repo_movement = $repo_movement->join('purchases', 'purchases.id', 'stockable_id')
+                ->where('stockable_type', 'App\Models\Purchase');
+            $count += 1;
+            $select[$count] =  'supplies.*';
+        }
+
+        $count += 1;
+        $select[$count] =  'stocks.*';
         $repo_movement = $repo_movement->select(
             $select
 
@@ -161,6 +225,7 @@ class StockController extends Controller
         )->paginate();
 
 
+        // dd($select);
         // dd($repo_movement);
         // --------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -30,14 +30,14 @@
 
 
                       <div class="card-body">
-              
+
 
                         <div class="container">
                           <div class="row">
                             <div class="col-md-8">
 
-                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti" placeholder="بحث"
-                                aria-describedby="search-addon">
+                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti"
+                                placeholder="بحث" aria-describedby="search-addon">
 
 
 
@@ -48,12 +48,15 @@
 
 
 
-                              <button class="btn btn-primary btn-sm btn-inline" type="button"
-                                @click="imports_excel()">استيراد</button>
-                              <button class="btn btn-primary btn-sm btn-inline" type="button"
-                                @click="exports_excel()">تصدير</button>
 
 
+                              <button @click="exports_excel()">
+                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+                              </button>
+
+                              <button @click="imports_excel()">
+                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+                              </button>
 
                             </div>
 
@@ -207,7 +210,7 @@
               <div class="row">
 
                 <div class="col-md-12">
-                  <button type="button" class="btn btn-primary btn-lg btn-inline" @click="addnode()"> حفظ </button>
+                  <button type="button" class="btn btn-primary btn-lg btn-inline" @click="add()"> حفظ </button>
 
                 </div>
               </div>
@@ -455,7 +458,7 @@ export default {
       trees: "",
       errors: "",
       counts: [],
-      add: 0,
+      // add: 0,
 
 
 
@@ -499,7 +502,8 @@ export default {
         .post(`export_product`)
         .then(function (response) {
 
-          // console.log(1);
+          toastMessage("تم تصدير المنتجات  ");
+          console.log(1);
         })
         .catch(error => {
 
@@ -511,12 +515,20 @@ export default {
         .post(`import_product`)
         .then(function (response) {
 
-          // console.log(1);
+          toastMessage("تم استيراد المنتجات  ");
+          console.log(1);
         })
         .catch(error => {
 
         });
     },
+
+    add() {
+      var result = this.addnode();
+
+      console.log(result);
+      // this.$router.go(0);
+    }
 
 
 

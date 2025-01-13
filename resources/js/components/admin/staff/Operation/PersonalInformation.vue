@@ -28,108 +28,107 @@
               <div class="col-xl-12">
                 <!-- <form method="post"> -->
                 <div class="card">
-             
+
                   <div class="card-body">
 
-                  
-                  
-                        <div class="row" style="line-height: 44px;">
-                          <div class="col-md-2">
-                            <label for="inputEmail4">اسم المؤظف</label>
-                            <input style="background-color: beige;" v-model="name" type="text" class="form-control"
-                              placeholder="ادخل اسم المؤظف" />
-                          </div>
-                          <div class="col-md-2">
-                            <label for="inputAddress">الفرع</label>
-                            <select style="background-color: beige;" v-model="branchselected" class="form-control"
-                              required>
-                              <option v-for="branch in branches" v-bind:value="branch.id">
-                                {{ branch.name }}
-                              </option>
-                            </select>
-                          </div>
-                          <div class="col-md-2">
-                            <label for="inputPassword4">الهويه</label>
-                            <input v-model="card" type="number" class="form-control" />
-                          </div>
-                          <div class="col-md-2">
-                            <label for="inputPassword4">الهاتف</label>
-                            <input v-model="phone" type="number" class="form-control" />
-                          </div>
-                          <div class="col-md-2">
-                            <label for="inputZip">تاريخ المبلاد </label>
-                            <input v-model="barth_date" type="date" class="form-control" id="inputZip" />
-                          </div>
-                          <div class="col-md-3">
-                            <label for="inputZip">المؤهلات </label>
-                            <select v-model="qualificationselected" name="type" id="type" class="form-control" required>
-                              <option v-for="qualification in qualifications" v-bind:value="qualification.id">
-                                {{ qualification.name }}
-                              </option>
-                            </select>
-                          </div>
-                          <div class="col-md-3">
-                            <label for="inputZip">الجنسيه </label>
-                            <select style="background-color: beige;" v-model="nationalityselected" name="type" id="type"
-                              class="form-control" required>
-                              <option v-for="nationality in nationalities" v-bind:value="nationality.id">
-                                {{ nationality.name }}
-                              </option>
-                            </select>
-                          </div>
 
-                          <div class="col-md-3">
-                            <label for="inputZip">الجنس </label>
-                            <select style="background-color: beige;" v-model="genderselected" name="type" id="type"
-                              class="form-control" required>
-                              <option v-bind:value="1">ذكر</option>
-                              <option v-bind:value="2">انثى</option>
-                            </select>
-                          </div>
 
-                          <div class="col-md-3">
-                            <label for="inputZip">توع المؤظف </label>
-                            <select v-model="social_statusselected" name="type" id="type" class="form-control" required>
-                              <option v-bind:value="1">متعاقد</option>
-                              <option v-bind:value="2">رسمي</option>
-                            </select>
-                          </div>
-                          <div class="col-md-2">
-                            <label for="inputZip">الديانه </label>
-                            <select style="background-color: beige;" v-model="religionselected" name="type" id="type"
-                              class="form-control" required>
-                              <option v-for="religion in religions" v-bind:value="religion.id">
-                                {{ religion.name }}
-                              </option>
-                            </select>
-                          </div>
-                          <div class="col-md-2">
-                            <label for="inputZip"> الحاله الاجتماعيه </label>
-                            <select style="background-color: beige;" v-model="staff_statusselected" name="type"
-                              id="type" class="form-control" required>
-                              <option v-bind:value="1">عازب</option>
-                              <option v-bind:value="2">متزوج</option>
-                            </select>
-                          </div>
+                    <div class="row" style="line-height: 44px;">
+                      <div class="col-md-2">
+                        <label for="inputEmail4">اسم المؤظف</label>
+                        <input style="background-color: beige;" v-model="name" type="text" class="form-control"
+                          placeholder="ادخل اسم المؤظف" />
+                      </div>
+                      <div class="col-md-2">
+                        <label for="inputAddress">الفرع</label>
+                        <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                          <option v-for="branch in branches" v-bind:value="branch.id">
+                            {{ branch.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-2">
+                        <label for="inputPassword4">الهويه</label>
+                        <input v-model="card" type="number" class="form-control" />
+                      </div>
+                      <div class="col-md-2">
+                        <label for="inputPassword4">الهاتف</label>
+                        <input v-model="phone" type="number" class="form-control" />
+                      </div>
+                      <div class="col-md-2">
+                        <label for="inputZip">تاريخ المبلاد </label>
+                        <input v-model="barth_date" type="date" class="form-control" id="inputZip" />
+                      </div>
+                      <div class="col-md-3">
+                        <label for="inputZip">المؤهلات </label>
+                        <select v-model="qualificationselected" name="type" id="type" class="form-control" required>
+                          <option v-for="qualification in qualifications" v-bind:value="qualification.id">
+                            {{ qualification.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="inputZip">الجنسيه </label>
+                        <select style="background-color: beige;" v-model="nationalityselected" name="type" id="type"
+                          class="form-control" required>
+                          <option v-for="nationality in nationalities" v-bind:value="nationality.id">
+                            {{ nationality.name }}
+                          </option>
+                        </select>
+                      </div>
 
-                          <div class="col-md-4">
-                            <label for="inputZip"> البريد الالكتروني</label>
-                            <input style="background-color: beige;" v-model="email" type="text" class="form-control"
-                              id="inputZip" />
-                          </div>
-                          <!-- 
+                      <div class="col-md-3">
+                        <label for="inputZip">الجنس </label>
+                        <select style="background-color: beige;" v-model="genderselected" name="type" id="type"
+                          class="form-control" required>
+                          <option v-bind:value="1">ذكر</option>
+                          <option v-bind:value="2">انثى</option>
+                        </select>
+                      </div>
+
+                      <div class="col-md-3">
+                        <label for="inputZip">توع المؤظف </label>
+                        <select v-model="social_statusselected" name="type" id="type" class="form-control" required>
+                          <option v-bind:value="1">متعاقد</option>
+                          <option v-bind:value="2">رسمي</option>
+                        </select>
+                      </div>
+                      <div class="col-md-2">
+                        <label for="inputZip">الديانه </label>
+                        <select style="background-color: beige;" v-model="religionselected" name="type" id="type"
+                          class="form-control" required>
+                          <option v-for="religion in religions" v-bind:value="religion.id">
+                            {{ religion.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-2">
+                        <label for="inputZip"> الحاله الاجتماعيه </label>
+                        <select style="background-color: beige;" v-model="staff_statusselected" name="type" id="type"
+                          class="form-control" required>
+                          <option v-bind:value="1">عازب</option>
+                          <option v-bind:value="2">متزوج</option>
+                        </select>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label for="inputZip"> البريد الالكتروني</label>
+                        <input style="background-color: beige;" v-model="email" type="text" class="form-control"
+                          id="inputZip" />
+                      </div>
+                      <!-- 
                           <div class="col-md-2">
                             <label for="inputZip"> الراتب الاساسي</label>
                             <input v-model="salary" type="text" class="form-control" id="inputZip" />
                           </div> -->
-                        </div>
-
-           
+                    </div>
 
 
 
 
-          
+
+
+
                     <!--  <div class="row">
 
                               <fieldset class="scheduler-border">
@@ -166,9 +165,9 @@
 
 
                             </div>-->
-                
 
-                 
+
+
 
                   </div>
 
@@ -186,14 +185,14 @@
 
         </div>
         <div class="card">
-      
+
           <div class="card-body">
 
             <div class="row row-sm">
               <div class="col-xl-12">
                 <!-- <form method="post"> -->
                 <div class="card">
-             
+
                   <div class="card-body">
 
                     <!--  <div class="row">
@@ -232,54 +231,54 @@
 
 
                             </div>-->
-                
-
-       
-                        <div class="row" style="line-height: 44px;">
-                          <div class="col-md-3">
-                            <label for="inputAddress">الهيكل الاداري</label>
-
-                            <div class="custom-search">
-                              <input style="background-color: beige;" :id="'Structure_structure_tree'" type="text"
-                                readonly class="custom-search-input">
-                              <input style="background-color: beige;" :id="'Structure_structure_tree_id'" type="hidden"
-                                readonly class="custom-search-input">
-
-                              <button class="custom-search-botton" type="button" data-toggle="modal"
-                                data-target="#exampleModalStructure"> <i class="fa fa-plus-circle"></i></button>
-                            </div>
-                          </div>
-                          <div class="col-md-3">
-                            <label for="inputAddress"> الوظيفه</label>
-
-                            <div class="custom-search">
-                              <select style="background-color: beige;" v-model="jobselected" id="select_structure"
-                                class="form-control" required>
-
-                              </select>
-
-                            </div>
 
 
-                          </div>
-                          <div class="col-md-3">
-                            <label for="inputCity">تاريخ التعين</label>
-                            <input v-model="date" type="date" class="form-control" />
-                          </div>
 
-                          <div class="col-md-2">
-                            <label for="inputCity">الراتب</label>
-                            <input v-model="salary" type="number" class="form-control" />
-                          </div>
+                    <div class="row" style="line-height: 44px;">
+                      <div class="col-md-3">
+                        <label for="inputAddress">الهيكل الاداري</label>
 
-                          <div class="col-md-3">
-                            <label for="inputState">حاله المؤظف</label>
-                            <select v-model="statusselected" name="type" id="type" class="form-control" required>
-                              <option v-bind:value="1">بدء العمل</option>
-                              <option v-bind:value="2">لم يبدء العمل</option>
-                            </select>
-                          </div>
-                          <!-- <div class="col-md-3">
+                        <div class="custom-search">
+                          <input style="background-color: beige;" :id="'Structure_structure_tree'" type="text" readonly
+                            class="custom-search-input">
+                          <input style="background-color: beige;" :id="'Structure_structure_tree_id'" type="hidden"
+                            readonly class="custom-search-input">
+
+                          <button class="custom-search-botton" type="button" data-toggle="modal"
+                            data-target="#exampleModalStructure"> <i class="fa fa-plus-circle"></i></button>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="inputAddress"> الوظيفه</label>
+
+                        <div class="custom-search">
+                          <select style="background-color: beige;" v-model="jobselected" id="select_structure"
+                            class="form-control" required>
+
+                          </select>
+
+                        </div>
+
+
+                      </div>
+                      <div class="col-md-3">
+                        <label for="inputCity">تاريخ التعين</label>
+                        <input v-model="date" type="date" class="form-control" />
+                      </div>
+
+                      <div class="col-md-2">
+                        <label for="inputCity">الراتب</label>
+                        <input v-model="salary" type="number" class="form-control" />
+                      </div>
+
+                      <div class="col-md-3">
+                        <label for="inputState">حاله المؤظف</label>
+                        <select v-model="statusselected" name="type" id="type" class="form-control" required>
+                          <option v-bind:value="1">بدء العمل</option>
+                          <option v-bind:value="2">لم يبدء العمل</option>
+                        </select>
+                      </div>
+                      <!-- <div class="col-md-3">
                                     <label for="inputAddress"> ح/راتب الموظف</label>
 
                                     <div class="custom-search">
@@ -310,16 +309,16 @@
                                   </div> -->
 
 
-                              
-                        </div>
-                
+
+                    </div>
 
 
 
 
-         
 
-                  
+
+
+
 
                   </div>
 
@@ -330,25 +329,25 @@
               </div>
             </div>
 
-       
 
 
 
+
+
+
+          </div>
 
 
         </div>
 
-        
-      </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
 
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-          
-          <button type="button" class=" form-control btn btn-primary" @click="submitForm()">حفظ </button>
-        </div>
+              <button type="button" class=" form-control btn btn-primary" @click="submitForm()">حفظ </button>
+            </div>
 
-</div>
+          </div>
         </div>
       </div>
       <!--/div-->
@@ -359,7 +358,27 @@
       <div class="col-xl-12">
         <div class="card">
 
-          <div class="card-body" id="printme">
+          <div class="card-header">
+            <!-- <span class="h2"> الموردين</span> -->
+
+            <div style="display: flex;float: left; margin: 5px">
+
+
+              <button @click="Export()">
+                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+              </button>
+
+              <button @click="Import()">
+                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث عن موظف" v-model="word_search"
+                @input="get_search()" />
+            </div>
+          </div>
+
+          <div class="card-body" >
             <div class="table-responsive">
               <table class="table table-bordered text-center">
                 <thead>

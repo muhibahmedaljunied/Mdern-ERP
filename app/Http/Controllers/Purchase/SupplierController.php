@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Purchase;
 
+use App\Exports\SupplierExport;
 use Illuminate\Http\Request;
 use App\Services\SupplierService;
 use App\Models\Supplier;
 use App\Models\Purchase;
 use App\Http\Controllers\Controller;
+use App\Imports\SupplierImport;
 use App\Models\Group;
 use App\Models\GroupAccountDailyDetail;
 use App\Models\Payment;
 use App\Models\Supply;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 use function GuzzleHttp\Promise\all;
 
@@ -36,6 +39,8 @@ class SupplierController extends Controller
                 // 'groups.name as group_name'
             )
             ->paginate(10);
+
+            
 
 
 
@@ -101,7 +106,7 @@ class SupplierController extends Controller
     public function store(Request $request, SupplierService $supplier_service)
     {
 
-        $supplier_service->request = $request->all();
+        // $supplier_service->request = $request->all();
         // $validator = Validator::make($request->all(), [
         //     'name' => 'required|max:2',
         //     'email' => 'required|email|unique:users',
@@ -113,7 +118,7 @@ class SupplierController extends Controller
         // }
 
 
-
+        // dd($request->all());
 
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
@@ -127,7 +132,23 @@ class SupplierController extends Controller
             // // -------------------------------------------------------------------------
             // $supplier_service->add_account();
             // // -------------------------------------------------------------------------
-            $supplier_service->add_supplier();
+
+            foreach ($request->post('count') as $value) {
+
+
+                $user = new Supplier();
+                $user->name = $request['name'][$value];
+                // $user->last_name = $this->request['last_name'];
+                $user->email = $request['email'][$value];
+                $user->phone = $request['phone'][$value];
+                // $user->account_id = $this->id;
+                // $user->group_id = $this->request['group'];
+                $user->address = $request['address'][$value];
+                $user->save();
+
+                // $supplier_service->add_supplier($value);
+
+            }
 
 
 
@@ -147,7 +168,29 @@ class SupplierController extends Controller
         return back();
     }
 
+    public function import(Request $request)
+    {
 
+        Excel::import(new SupplierImport, storage_path('supplier.xlsx'));
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv imported'
+        ]);
+    }
+
+
+    public function export()
+    {
+
+        Excel::download(new SupplierExport, 'supplier.xlsx');
+
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv exporteded'
+        ]);
+    }
 
 
 
@@ -158,23 +201,23 @@ class SupplierController extends Controller
         $results = [];
 
         $results['purchases'] = collect(GroupAccountDailyDetail::with(['Dailyable'])
-        ->where('dailyable_type', 'App\\Models\\Supplier')
-        ->where('dailyable_id', $request->id)
-        ->join('daily_details', 'daily_details.id', '=', 'group_account_daily_details.daily_details_id')
-        ->join('dailies', 'dailies.id', '=', 'daily_details.daily_id')
-        ->join('purchases', 'dailies.id', '=', 'purchases.daily_id')
-        ->get())->toArray();
+            ->where('dailyable_type', 'App\\Models\\Supplier')
+            ->where('dailyable_id', $request->id)
+            ->join('daily_details', 'daily_details.id', '=', 'group_account_daily_details.daily_details_id')
+            ->join('dailies', 'dailies.id', '=', 'daily_details.daily_id')
+            ->join('purchases', 'dailies.id', '=', 'purchases.daily_id')
+            ->get())->toArray();
 
 
 
         $results['payable_notes'] = collect(GroupAccountDailyDetail::with(['Dailyable'])
-        ->where('dailyable_type', 'App\\Models\\Supplier')
-        ->where('dailyable_id', $request->id)
-        ->join('daily_details', 'daily_details.id', '=', 'group_account_daily_details.daily_details_id')
-        ->join('dailies', 'dailies.id', '=', 'daily_details.daily_id')
-        ->join('payable_notes', 'payable_notes.daily_id', '=', 'dailies.id')
+            ->where('dailyable_type', 'App\\Models\\Supplier')
+            ->where('dailyable_id', $request->id)
+            ->join('daily_details', 'daily_details.id', '=', 'group_account_daily_details.daily_details_id')
+            ->join('dailies', 'dailies.id', '=', 'daily_details.daily_id')
+            ->join('payable_notes', 'payable_notes.daily_id', '=', 'dailies.id')
 
-        ->get())->toArray();
+            ->get())->toArray();
 
 
         $total_debit = 0;

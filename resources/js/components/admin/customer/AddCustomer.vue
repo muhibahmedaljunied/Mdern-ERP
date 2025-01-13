@@ -144,21 +144,21 @@ export default {
   },
 
 
-  mounted() {
-    this.type = 'Customer';
-    // this.type_of_tree=1;
-    // this.showtree('account');
+  // mounted() {
+  //   this.type = 'Customer';
+  //   // this.type_of_tree=1;
+  //   // this.showtree('account');
 
-    this.axios
-        .post(`/customer_groups`)
-        .then(({ data }) => {
-          this.customer_groups = data.groups;
-        })
-        .catch(({ response }) => {
-          console.error(response);
-        });
+  //   this.axios
+  //       .post(`/customer_groups`)
+  //       .then(({ data }) => {
+  //         this.customer_groups = data.groups;
+  //       })
+  //       .catch(({ response }) => {
+  //         console.error(response);
+  //       });
 
-  },
+  // },
   methods: {
 
     

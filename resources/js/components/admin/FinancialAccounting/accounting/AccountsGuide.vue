@@ -34,8 +34,8 @@
                           <div class="row">
                             <div class="col-md-8">
 
-                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti" placeholder="بحث"
-                                aria-describedby="search-addon">
+                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti"
+                                placeholder="بحث" aria-describedby="search-addon">
 
 
 
@@ -46,10 +46,10 @@
 
 
 
-                              <button class="btn btn-primary btn-sm btn-inline" type="button"
-                                @click="imports_excel()">استيراد</button>
-                              <button class="btn btn-primary btn-sm btn-inline" type="button"
-                                @click="exports_excel()">تصدير</button>
+                              <button  type="button" @click="imports_excel()">
+                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i> </button>
+                              <button  type="button" @click="exports_excel()">
+                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i> </button>
 
 
 
@@ -201,7 +201,7 @@
 
                           <input class="btn btn-lg btn-block" type="checkbox" name='fieldset2' v-model="status_account"
                             id="status" />
-                            <input id='parent' type="hidden" />
+                          <input id='parent' type="hidden" />
                           <input id='rank' type="hidden" />
                         </div>
 

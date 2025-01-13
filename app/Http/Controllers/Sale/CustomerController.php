@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Sale;
 
+use App\Exports\CustomerExport;
 use App\Models\Customer;
 use App\Models\Sale;
 use App\Http\Controllers\Controller;
+use App\Imports\CustomerImport;
 use App\Models\Group;
 use App\Models\GroupAccountDailyDetail;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
@@ -41,21 +44,21 @@ class CustomerController extends Controller
         $results = [];
 
         $results['sales'] = collect(GroupAccountDailyDetail::with(['Dailyable'])
-        ->where('dailyable_type', 'App\\Models\\Customer')
-        ->where('dailyable_id', $request->id)
-        ->join('daily_details', 'daily_details.id', '=', 'group_account_daily_details.daily_details_id')
-        ->join('dailies', 'dailies.id', '=', 'daily_details.daily_id')
-        ->join('sales', 'dailies.id', '=', 'sales.daily_id')
-        ->get())->toArray();
+            ->where('dailyable_type', 'App\\Models\\Customer')
+            ->where('dailyable_id', $request->id)
+            ->join('daily_details', 'daily_details.id', '=', 'group_account_daily_details.daily_details_id')
+            ->join('dailies', 'dailies.id', '=', 'daily_details.daily_id')
+            ->join('sales', 'dailies.id', '=', 'sales.daily_id')
+            ->get())->toArray();
 
         $results['receivable_notes'] = collect(GroupAccountDailyDetail::with(['Dailyable'])
-        ->where('dailyable_type', 'App\\Models\\Customer')
-        ->where('dailyable_id', $request->id)
-        ->join('daily_details', 'daily_details.id', '=', 'group_account_daily_details.daily_details_id')
-        ->join('dailies', 'dailies.id', '=', 'daily_details.daily_id')
-        ->join('receivable_notes', 'receivable_notes.daily_id', '=', 'dailies.id')
+            ->where('dailyable_type', 'App\\Models\\Customer')
+            ->where('dailyable_id', $request->id)
+            ->join('daily_details', 'daily_details.id', '=', 'group_account_daily_details.daily_details_id')
+            ->join('dailies', 'dailies.id', '=', 'daily_details.daily_id')
+            ->join('receivable_notes', 'receivable_notes.daily_id', '=', 'dailies.id')
 
-        ->get())->toArray();
+            ->get())->toArray();
 
 
         $total_debit = 0;
@@ -81,6 +84,31 @@ class CustomerController extends Controller
 
 
         return response()->json(['sales' => $results]);
+    }
+
+
+    public function import(Request $request)
+    {
+
+        Excel::import(new CustomerImport, storage_path('customer.xlsx'));
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv imported'
+        ]);
+    }
+
+
+    public function export()
+    {
+
+        Excel::download(new CustomerExport, 'supplier.xlsx');
+
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv exporteded'
+        ]);
     }
 
 
@@ -180,7 +208,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
 
-
+        // dd($request->all());
 
 
         try {
@@ -228,16 +256,19 @@ class CustomerController extends Controller
             // $account->save();
 
             // -------------------------------------------------------------------------
-            $customer = new Customer();
-            $customer->name = $request->post('name');
-            $customer->phone = $request->post('phone');
-            $customer->email = $request->post('email');
-            $customer->address = $request->post('address');
-            // $customer->account_id = $id;
-            $customer->group_id = $request->post('group');
-            $customer->status = $request->post('status');
-            $customer->save();
 
+            foreach ($request->post('count') as $value) {
+                
+                $customer = new Customer();
+                $customer->name = $request->post('name')[$value];
+                $customer->phone = $request->post('phone')[$value];
+                $customer->email = $request->post('email')[$value];
+                $customer->address = $request->post('address')[$value];
+                // $customer->account_id = $id;
+                // $customer->group_id = $request->post('group')[$value];
+                // $customer->status = $request->post('status')[$value];
+                $customer->save();
+            }
 
 
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB

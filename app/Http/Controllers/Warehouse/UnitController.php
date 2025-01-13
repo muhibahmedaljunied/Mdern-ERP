@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Warehouse;
 
 
 use App\Models\Unit;
-use App\Models\Product;
-use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -42,13 +40,19 @@ class UnitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     $unit = new Unit();
-    //     $unit->name = $request->post('unit');
-    //     $unit->save();
-    //     return response()->json();
-    // }
+    public function store(Request $request)
+    {
+    //    dd($request['count']);
+        foreach ($request['count'] as $value) {
+
+            $unit = new Unit();
+            $unit->name = $request['name'][$value];
+            $unit->save();
+
+        }
+   
+        return response()->json();
+    }
 
     /**
      * Display the specified resource.
@@ -88,7 +92,7 @@ class UnitController extends Controller
      * @param  \App\Absence  $absence
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Absence $absence)
+    public function update(Request $request)
     {
         //
     }
@@ -99,7 +103,7 @@ class UnitController extends Controller
      * @param  \App\Absence  $absence
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Absence $absence)
+    public function destroy()
     {
         //
     }

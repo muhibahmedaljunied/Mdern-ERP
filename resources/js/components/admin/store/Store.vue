@@ -54,10 +54,15 @@
 
 
 
-                              <button class="btn btn-primary btn-sm btn-inline" type="button"
-                                @click="imports_excel()">استيراد</button>
-                              <button class="btn btn-primary btn-sm btn-inline" type="button"
-                                @click="exports_excel()">تصدير</button>
+                    
+
+                                <button @click="exports_excel()" >
+                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+                              </button>
+
+                              <button @click="imports_excel()">
+                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+                              </button>
 
 
 
@@ -159,7 +164,7 @@
                       <div class="row">
 
                         <div class="col-md-12">
-                          <button type="button" class="btn btn-primary btn-lg btn-inline" @click="addnode()"> حفظ
+                          <button type="button" class="btn btn-primary btn-lg btn-inline" @click="add()"> حفظ
                           </button>
 
                         </div>
@@ -401,7 +406,8 @@ export default {
         .post(`export_store`)
         .then(function (response) {
 
-          // console.log(1);
+          toastMessage("تم تصدير المخازن  ");
+          console.log(1);
         })
         .catch(error => {
 
@@ -413,12 +419,19 @@ export default {
         .post(`import_store`)
         .then(function (response) {
 
-          // console.log(1);
+          toastMessage("تم استيراد المخازن  ");
+        
         })
         .catch(error => {
 
         });
     },
+
+    add(){
+
+      this.addnode();
+   
+    }
 
 
 

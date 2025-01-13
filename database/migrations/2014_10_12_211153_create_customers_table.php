@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('group_id')->nullable();
             $table->foreign('group_id')->references('id')->on('groups');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('phone')->default('776165784')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('address')->default('taiz')->nullable();

@@ -25,7 +25,6 @@
 				<h3 class="text-center" style="color:blue">
 					
 
-				
 						النظام المحاسبي الحديث
 				
 			
@@ -66,7 +65,7 @@
 									</div>
 								</div>
 							</div>
-							<a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
+							<a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>dcdcdc
 							<a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
 							<a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
 							<a class="dropdown-item" href="logout"><i class="bx bx-log-out"></i> Sign Out</a>
@@ -91,11 +90,12 @@ export default {
 		}
 	},
 	mounted() {
-		this.axios.post('/user_name').then(response => {
-			this.username = response.data.user.name
-			this.email = response.data.user.email
+		
+		// this.axios.post('/ERP/user_name').then(response => {
+		// 	this.username = response.data.user.name
+		// 	this.email = response.data.user.email
 
-		});
+		// });
 	}
 
 }

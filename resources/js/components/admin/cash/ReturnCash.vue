@@ -390,8 +390,8 @@
                         </tbody>
                         <tbody v-else>
                           <tr>
-                            <td align="center" colspan="3">
-                              <h3>
+                            <td  align="center" colspan="12">
+                              <h3 style="color:red">
                                 لايوجد كمبه متوفره في المخزن
                               </h3>
                             </td>

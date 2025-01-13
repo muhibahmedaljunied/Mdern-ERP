@@ -15,7 +15,7 @@
         <div class="card-body">
           <div class="form">
             <h3 class="text-center">اضافه مستخدم </h3>
-            <form method="post" @submit.prevent="adduser">
+            <form method="post">
               <div class="form-group">
                 <label for="name">الاسم</label>
                 <input
@@ -95,7 +95,7 @@
                   class="form-control"
                 />
               </div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block">
+              <button type="button" @click="adduser()" class="btn btn-primary btn-lg btn-block">
                 اضافه
               </button>
             </form>
@@ -138,8 +138,8 @@ export default {
     //     this.$router.push("user");
     //   });
     // },
-    adduser(event) {
-      event.preventDefault();
+    adduser() {
+      // event.preventDefault();
       let currentObj = this;
       const config = {
         headers: {
@@ -164,7 +164,7 @@ export default {
           currentObj.success = response.data.success;
           currentObj.filename = "";
 
-          event.preventDefault();
+          // event.preventDefault();
           toastMessage("تم الاضافه بنجاح");
          
         })

@@ -14,6 +14,8 @@
 </head>
 
 <body class="main-body app sidebar-mini">
+
+
 	<!-- Loader -->
 	<div id="global-loader">
 		<img src="{{URL::asset('assets/img/loader.svg')}}" class="loader-img" alt="Loader">
@@ -23,6 +25,7 @@
 
 
 	<div id='app'>
+
 		<main-sidebar></main-sidebar>
 		<div class="main-content app-content">
 			<main-header></main-header>

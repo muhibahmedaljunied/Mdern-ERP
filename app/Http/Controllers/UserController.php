@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 // use App\RepositoryInterface\UserRepositoryInterface;
 use Illuminate\Http\Request;
 // use App\RepositoryInterface\UsersRepositoryInterface;
-use App\Models\User;
+
 use App\Models\Role;
-use DB;
+use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -46,7 +47,7 @@ class UserController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:10',
+            'name' => 'required|max:30',
             'email' => 'required|email|unique:users',
             'phone'=>'required'
         ]);
@@ -87,10 +88,10 @@ class UserController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        $product = Product::find($request->id);
-        $product->update($request->post());
-        return response()->json($request);
-    }
+    // public function update(Request $request)
+    // {
+    //     $product = Product::find($request->id);
+    //     $product->update($request->post());
+    //     return response()->json($request);
+    // }
 }

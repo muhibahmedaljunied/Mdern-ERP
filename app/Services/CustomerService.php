@@ -40,12 +40,12 @@ class CustomerService
         
     }
 
-    public function add_supplier(){
+    public function add_customer(){
         
 
         $user = new Customer();
         $user->name = $this->request->post('name');
-        $user->last_name = $this->request->post('last_name');
+        // $user->last_name = $this->request->post('last_name');
         $user->email = $this->request->post('email');
         $user->phone = $this->request->post('phone');
         $user->account_id = $this->id;

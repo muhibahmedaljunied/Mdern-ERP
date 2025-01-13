@@ -26,6 +26,7 @@ define('LARAVEL_START', microtime(true));
 */
 
 require __DIR__ . '/../vendor/autoload.php';
+// require __DIR__ . '/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,9 @@ require __DIR__ . '/../vendor/autoload.php';
 // https://www.youtube.com/watch?v=gpjFP6RJMXA
 
 $app = require_once __DIR__ . '/../bootstrap/app.php';
+// $app = require_once __DIR__ . '/bootstrap/app.php';
+
+
 
 // KV(sW5Qu#riHRZF   passwor of paypal
 // $r = new ReflectionClass(get_class($app));

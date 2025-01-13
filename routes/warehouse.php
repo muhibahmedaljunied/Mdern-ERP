@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('import_product', [ProductController::class, 'import']);
 Route::post('export_product', [ProductController::class, 'export']);
-Route::post('/product', 'Warehouse\ProductController@index');
+Route::post('product', 'Warehouse\ProductController@index');
 Route::post('/create_product', 'Warehouse\ProductController@create');
 Route::post('/store_product', 'Warehouse\ProductController@store');
 Route::post('/update_product/{id}', 'Warehouse\ProductController@update');

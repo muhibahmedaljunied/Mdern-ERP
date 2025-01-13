@@ -5,7 +5,7 @@ namespace App\Services\Product;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductUnit;
-
+use App\Models\Unit;
 
 class ProductService
 {
@@ -33,7 +33,8 @@ class ProductService
         return $this;
     }
 
-    public function productCodeExists($number){
+    public function productCodeExists($number)
+    {
         return product::whereProductCode($number)->exists();
     }
 
@@ -42,7 +43,7 @@ class ProductService
 
 
 
-     
+
         // Product::create($request->all());
 
 
@@ -67,41 +68,71 @@ class ProductService
     {
 
 
-       
-        if ($this->request->post('unit')) {
-
-            $product_unit = new ProductUnit();
-            $product_unit->unit_id = $this->request->post('unit');
-            $product_unit->rate = 1;
-            $product_unit->product_id = $this->id;
-            $product_unit->purchase_price = $this->request->post('purchase_price');
-            // $product_unit->unit_type = 1;
-
-            $product_unit->save();
-
-            foreach ($this->request['count'] as $value) {
-
-                if (
-                    $this->request->post('retail_unit')[$value] ||
-                    // $this->request->post('purchase_price_for_retail_unit')[$value] ||
-                    $this->request->post('hash_rate')[$value]
-                ) {
+        // purchase_price_for_retail_unit
+        // hash_rate
+        // retail_unit
 
 
 
-                    $product_unit = new ProductUnit();
-                    $product_unit->unit_id = $this->request->post('retail_unit')[$value];
-                    // $product_unit->rate = $this->request->post('hash_rate');
-                    $product_unit->product_id = $this->id;
-                    $product_unit->purchase_price = $this->request->post('purchase_price_for_retail_unit')[$value];
-                    $product_unit->rate = $this->request->post('hash_rate')[$value];
-                    // $product_unit->unit_type = 0;
+        if ($this->request->post('status') =='false') {
 
-                    $product_unit->save();
+
+            if ($this->request->post('unit')) {
+
+                $product_unit = new ProductUnit();
+                $product_unit->unit_id = $this->request->post('unit');
+                $product_unit->rate = 1;
+                $product_unit->product_id = $this->id;
+                $product_unit->purchase_price = $this->request->post('purchase_price');
+                // $product_unit->unit_type = 1;
+
+                $product_unit->save();
+
+
+                foreach ($this->request['count'] as $value) {
+
+
+
+
+                    if (
+                        $this->request->post('retail_unit')[$value] !==  'null' ||
+                        // $this->request->post('purchase_price_for_retail_unit')[$value] ||
+                        $this->request->post('hash_rate')[$value] !==  'null'
+                    ) {
+
+
+
+                        $product_unit = new ProductUnit();
+
+                        $product_unit->unit_id = $this->request->post('retail_unit')[$value];
+                        // $product_unit->rate = $this->request->post('hash_rate');
+                        $product_unit->product_id = $this->id;
+                        $product_unit->purchase_price = $this->request->post('purchase_price_for_retail_unit')[$value];
+                        $product_unit->rate = $this->request->post('hash_rate')[$value];
+                        // $product_unit->unit_type = 0;
+
+                        $product_unit->save();
+                    }
+
+                    // return response()->json($value);
                 }
+            } else {
 
-                // return response()->json($value);
+                $unit = collect(Unit::where('name', 'default')->get('id'))->toArray();
+
+                $product_unit = new ProductUnit();
+
+                $product_unit->unit_id = $unit[0]['id'];
+                // $product_unit->rate = $this->request->post('hash_rate');
+                $product_unit->product_id = $this->id;
+                $product_unit->purchase_price = 0;
+                $product_unit->rate = 1;
+                // $product_unit->unit_type = 0;
+
+                $product_unit->save();
             }
         }
+
+
     }
 }

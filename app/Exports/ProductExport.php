@@ -32,7 +32,7 @@ class ProductExport implements FromCollection,WithMapping, WithHeadings
 
             $registration->rank,
 
-            $registration->purchase_price,
+            // $registration->purchase_price,
 
             $registration->status,
 

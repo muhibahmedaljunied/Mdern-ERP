@@ -5,8 +5,8 @@
 
 
 
-
-<link href="{{URL::asset('assets/css/custom-search.css')}}" rel="stylesheet">   <!-- this style for button of show tree and select item  -->
+ <!-- this style for button of show tree and select item  -->
+<link href="{{URL::asset('assets/css/custom-search.css')}}" rel="stylesheet">  
 <link href="{{URL::asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{URL::asset('assets/css/jstree.css')}}" >
 <link href="{{URL::asset('assets/css/jquery-ui.min.css')}}" rel="stylesheet">
@@ -20,9 +20,8 @@
 <link href="{{URL::asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/css-rtl/skin-modes.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/css/style copy.css')}}" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-
+<link href="{{URL::asset('assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
 

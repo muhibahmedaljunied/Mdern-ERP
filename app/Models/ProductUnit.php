@@ -16,7 +16,7 @@ class ProductUnit extends Authenticatable
      * @var array
      */
     protected $fillable = [
-       'product_id','unit_id','rate_convert',
+       'product_id','unit_id','rate',
     ];
 
    

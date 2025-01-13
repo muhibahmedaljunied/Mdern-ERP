@@ -61,7 +61,7 @@
                     <tr>
                       <td></td>
                       <td>
-                        <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
+                        <button type="button" class="btn btn-primary" @click="addunit()">حفظ </button>
 
                       </td>
                     </tr>
@@ -78,7 +78,7 @@
     </div>
     <div class="row row-sm">
       <div class="col-xl-12">
-        <div class="card">  
+        <div class="card">
 
           <div class="card-body">
             <div class="table-responsive">
@@ -139,7 +139,7 @@ export default {
         default: null,
       },
 
-      unit:[],
+      unit: [],
       word_search: "",
     };
   },
@@ -171,6 +171,30 @@ export default {
         .catch(({ response }) => {
           console.error(response);
         });
+    },
+
+    addunit() {
+
+
+      this.axios
+        .post("/store_unit", {
+
+          count: this.counts,
+          name: this.unit
+
+
+        })
+        .then(function (response) {
+
+          toastMessage("تم الاضافه بنجاح");
+
+        })
+        .catch(function (error) {
+          currentObj.output = error;
+        });
+
+      // this.$router.go(-1);
+
     },
   },
 };

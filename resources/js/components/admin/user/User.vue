@@ -53,7 +53,7 @@
                   <th class="wd-15p border-bottom-0">الهاتف</th>
                   <th class="wd-15p border-bottom-0">البريد الالكتروني</th>
                   <th class="wd-15p border-bottom-0">العنوان</th>
-                  <th class="wd-15p border-bottom-0">كلمه السر</th>
+                  <!-- <th class="wd-15p border-bottom-0">كلمه السر</th> -->
                   <th class="wd-15p border-bottom-0">الصلاحيه</th>
                   <!-- <th class="wd-15p border-bottom-0">الحاله</th> -->
 
@@ -67,7 +67,7 @@
                   <td>{{ user.phone }}</td>
                   <td>{{ user.email }}</td>
                   <td>{{ user.address }}</td>
-                  <td>{{ user.password }}</td>
+                  <!-- <td>{{ user.password }}</td> -->
                   <td>{{ user.role_name }}</td>
                   <!-- <td>{{ user.status }}</td> -->
                   <!-- <td v-if="user.status == 1">

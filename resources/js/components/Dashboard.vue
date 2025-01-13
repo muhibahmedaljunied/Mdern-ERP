@@ -196,11 +196,12 @@ export default {
 		}
 	},
 	mounted() {
+
+
 		this.axios.post(`/dashboard`).then(response => {
 			this.category = response.data.category
 			this.product = response.data.product
 			this.order = response.data.order
-			this.$root.logo = 'Dashboard'
 
 		});
 

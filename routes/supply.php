@@ -7,8 +7,7 @@ Route::post('/update_supplier/{id}', 'Supply\SupplierController@update');
 Route::post('/supplier/{id}', 'Supply\SupplierController@edit');
 Route::post('/delete_supplier/{id}', 'Supply\SupplierController@destroy');
 Route::post('/suppliersearch', 'Supply\SupplierController@search');
-Route::post('/SupplierExport', 'Supply\SupplierController@Export');
-Route::post('/SupplierImport', 'Supply\SupplierController@Import');
+
 /*------------------------------------------------supply----------------------------------*/
 Route::post('/supply/newsupply', 'Supply\SupplyController@index');
 Route::post('/Supply/delete', 'Supply\SupplyController@destroy');

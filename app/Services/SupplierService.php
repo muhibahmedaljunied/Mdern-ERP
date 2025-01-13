@@ -40,18 +40,18 @@ class SupplierService
         
     }
 
-    public function add_supplier(){
+    public function add_supplier($value){
         
 
 
         $user = new Supplier();
-        $user->name = $this->request['name'];
-        $user->last_name = $this->request['last_name'];
-        $user->email = $this->request['email'];
-        $user->phone = $this->request['phone'];
+        $user->name = $this->request['name'][$value];
+        // $user->last_name = $this->request['last_name'];
+        $user->email = $this->request['email'][$value];
+        $user->phone = $this->request['phone'][$value];
         // $user->account_id = $this->id;
         // $user->group_id = $this->request['group'];
-        $user->address = $this->request['address'];
+        $user->address = $this->request['address'][$value];
         $user->save();
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
+
 use Illuminate\Support\Facades\Validator;
 use App\Services\Product\ProductService;
 use App\Http\Controllers\Controller;
@@ -8,36 +9,30 @@ use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductImport;
 use App\Exports\ProductExport;
+use App\Exports\ProductUnitExport;
+use App\Imports\ProductUnitImport;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-use DB;
 class ProductController extends Controller
 {
- 
+
     public function __construct(protected ProductService $product)
     {
         // $this->middleware('Admin');
 
 
     }
-    public function index(Request $request)
-    {
-    }
+    public function index(Request $request) {}
 
     protected function random($length = 14)
     {
         $pool = '123456789';
         return substr(str_shuffle(str_repeat($pool, $length)), 0, $length - 2);
     }
-    
 
-    // public function import(Request $request)
-    // {
-    //     $file = $request->file('file');
-    //     Excel::import(new Status, $file);
-    //     return back()->with('success', 'Products imported successfully.');
-    // }
+
 
     public function search(Request $request)
     {
@@ -72,25 +67,37 @@ class ProductController extends Controller
 
     public function import(Request $request)
     {
-   
+
         Excel::import(new ProductImport, storage_path('product.xlsx'));
+        Excel::import(new ProductUnitImport, storage_path('product_unit.xlsx'));
 
         return response()->json([
             'status' =>
-            'The file has been excel/csv imported to database in laravel 9'
+            'The file has been excel/csv imported'
+        ]);
+    }
+
+
+    public function export()
+    {
+
+        Excel::download(new ProductExport, 'product.xlsx');
+        Excel::download(new ProductUnitExport, 'product_unit.xlsx');
+
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv exporteded'
         ]);
 
     }
 
-   
-    public function export()
-    {
 
-        return Excel::download(new ProductExport, 'product.xlsx');
-    }
+
 
     public function store(Request $request)
     {
+
 
 
 
@@ -102,30 +109,52 @@ class ProductController extends Controller
         // ]);
 
         // if ($validator->fails()) {
-        //     return response()->json(['error' => $validator->errors()], 401);
+
+
+        //     return response([
+        //         'message' => $validator->errors(),
+        //         'status' => 'failed'
+        //     ], 401);
         // }
 
-        // -------------------------------------------------------
-
-        // dd($request->all());
-        // foreach (json_encode($request->post('count')) as $key => $value) {
-          
-        //     dd($value);
-        // }
-        // dd($request->all());
-        $this->product
-        ->check()
-        ->product()
-        ->unit();
-
-        Cache::forget('tree_product_products');
-        Cache::forget('tree_product_last_nodes');
-        Cache::forget('stock');
 
 
 
+        try {
+            DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
-        return response()->json($request->file('image'));
+
+
+            $this->product
+                ->check()
+                ->product()
+                ->unit();
+
+
+            Cache::forget('tree_product_products');
+            Cache::forget('tree_product_last_nodes');
+            Cache::forget('stock');
+
+
+
+            DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
+
+
+
+            return response([
+                'message' => "product created successfully",
+                'status' => "success"
+            ], 200);
+        } catch (\Exception $exp) {
+            DB::rollBack(); // Tell Laravel, "It's not you, it's me. Please don't persist to DB"
+            return response([
+                'message' => $exp->getMessage(),
+                'status' => 'failed'
+            ], 400);
+        }
+
+
+        // return response()->json($request->file('image'));
     }
 
 

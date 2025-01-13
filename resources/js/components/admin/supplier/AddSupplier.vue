@@ -136,14 +136,14 @@ export default {
     // this.type_of_tree = 1;
     // this.showtree('account','tree_account');
 
-    this.axios
-      .post(`/supplier_groups`)
-      .then(({ data }) => {
-        this.supplier_groups = data.groups;
-      })
-      .catch(({ response }) => {
-        console.error(response);
-      });
+    // this.axios
+    //   .post(`/supplier_groups`)
+    //   .then(({ data }) => {
+    //     this.supplier_groups = data.groups;
+    //   })
+    //   .catch(({ response }) => {
+    //     console.error(response);
+    //   });
 
   },
   methods: {

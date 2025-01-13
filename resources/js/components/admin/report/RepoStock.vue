@@ -358,7 +358,7 @@
                         <table class="table table-bordered text-right" style="width: 100%; font-size: large">
                           <thead>
                             <tr class="heading" style="font-size: large">
-                              <td>#</td>
+                              <td>الرقم التسلسلي</td>
 
                               <!-- <td v-if="productselected == 0">المنتج</td> -->
                               <td>المنتج</td>

@@ -36,7 +36,6 @@ Route::post('/get_purchase_account_setting', 'Purchase\PurchaseController@get_pu
 
 Route::post('/return_purchase_invoice/{id}', 'Purchase\PurchaseReturnController@return_invoice');
 
-
 // Route::post('/payment_bond', 'PayableNoteController@index');
 // Route::post('/payment_bond_list', 'PayableNoteController@paymentBondlist');
 // Route::post('/payment_bond_store/{id}', 'PayableNoteController@store');

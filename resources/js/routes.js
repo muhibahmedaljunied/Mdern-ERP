@@ -35,7 +35,6 @@ import AddUser from './components/admin/user/AddUser'
 // ----------------------------------------------Unit---------------------------------------------------------------
 import Unit from './components/admin/unit/Unit'
 import UpdateUnit from './components/admin/unit/UpdateUnit'
-import AddUnit from './components/admin/unit/AddUnit'
 // ----------------------------------User---------------------------------------------------------------------------------------------------
 import Product from './components/admin/product/Product'
 
@@ -343,11 +342,6 @@ const routes = [
     path: '/edit_unit/:id',
     name: 'edit_unit',
     component: UpdateUnit
-  },
-  {
-    path: '/create_unit',
-    name: 'create_unit',
-    component: AddUnit
   },
   // ------------------------------------------------------
 

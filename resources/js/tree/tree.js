@@ -28,7 +28,7 @@ export default {
                         $(`#${table}_number`).val(response.data.last_nodes + 1);
                     }
 
-                    console.log(`muhiiiiiiiiiiiiii${id}`, this.jsonTreeData);
+                    console.log(`muhiiiiiiiiiiiiii${id}`, id);
 
                     $(`#${id}`)
                         .jstree({
@@ -283,6 +283,9 @@ export default {
             formData.append("purchase_price", this.purchase_price);
             formData.append("status", this.status);
             // formData.append("status", this.status);
+
+            console.log("eeeeeeeeeeeeeee", this.status);
+
             if (localStorage.getItem("table") == "product") {
                 // formData.append("count", this.counts);
                 // formData.append("unit", this.unit);
@@ -326,25 +329,28 @@ export default {
 
             axios
                 .post(
-                    `store_${localStorage.getItem("table")}`,
+                    `/store_${localStorage.getItem("table")}`,
                     formData,
                     config
                 )
                 .then(function (response) {
-                    console.log(response);
-                    currentObj.success = response.data.success;
-                    currentObj.filename = "";
+                    console.log("dfdf", response);
+                    // currentObj.success = response.data.success;
+                    // currentObj.filename = "";
 
                     toastMessage("تم الاضافه بنجاح");
-                    // console.log(1);
                 })
                 .catch((error) => {
-                    console.error(error);
-
-                    this.error_text = error.response.data.error.text;
-                    this.error_hash_rate = error.response.data.error.hash_rate;
-                    this.error_purchase_price =
-                        error.response.data.error.purchase_price;
+                    // message = {
+                    //     error_text:error.response.data.error.text,
+                    //     error_hash_rate:error.response.data.error.text,
+                    //     error_purchase_price:error.response.data.error.text,
+                    // }
+                    // return message;
+                    // this.error_text = error.response.data.error.text;
+                    // this.error_hash_rate = error.response.data.error.hash_rate;
+                    // this.error_purchase_price =
+                    //     error.response.data.error.purchase_price;
                 });
         },
         addnode_account() {
@@ -390,7 +396,6 @@ export default {
                     currentObj.filename = "";
 
                     toastMessage("تم الاضافه بنجاح");
-                    // console.log(1);
                 })
                 .catch((error) => {
                     console.error(error);

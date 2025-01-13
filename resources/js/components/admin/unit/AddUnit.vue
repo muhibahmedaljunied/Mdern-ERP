@@ -15,19 +15,12 @@
         <div class="card-body">
           <div class="form">
             <h3 class="text-center">اضافه وحده </h3>
-            <form method="post" @submit.prevent="addunit">
+            <form method="post" @submit.prevent="addunit()">
               <div class="form-group">
                 <label for="name">الاسم</label>
-                <input
-                  v-model="name"
-                  type="text"
-                  name="name"
-                  id="name"
-                  class="form-control"
-                     required
-                />
+                <input v-model="name" type="text" name="name" id="name" class="form-control" required />
               </div>
-           
+
               <button type="submit" class="btn btn-primary btn-lg btn-block">
                 اضافه
               </button>
@@ -50,14 +43,14 @@ export default {
       address: "",
       password: 123,
       status: 1,
-      role:'',
-      roleselected:1,
+      role: '',
+      roleselected: 1,
     };
   },
   created() {
     let uri = `/create_unit`;
     this.axios.post(uri).then((response) => {
-   console.log(response.data);
+      console.log(response.data);
       this.role = response.data;
     });
   },
@@ -68,8 +61,8 @@ export default {
     //     this.$router.push("unit");
     //   });
     // },
-    addunit(event) {
-      event.preventDefault();
+    addunit() {
+      // event.preventDefault();
       let currentObj = this;
       const config = {
         headers: {
@@ -84,20 +77,20 @@ export default {
 
       // send upload request
       this.axios
-        .post("store_unit", formData, config)
+        .post("/store_unit", formData, config)
         .then(function (response) {
           currentObj.success = response.data.success;
           currentObj.filename = "";
 
-          event.preventDefault();
+          // event.preventDefault();
           toastMessage("تم الاضافه بنجاح");
-         
+
         })
         .catch(function (error) {
           currentObj.output = error;
         });
 
-                this.$router.go(-1);
+      this.$router.go(-1);
 
     },
   },
