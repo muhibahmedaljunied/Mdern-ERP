@@ -264,7 +264,11 @@
                         <div id="factura_producto">
                           <select v-model="status[index]" name="type" id="type" class="form-control" required>
 
+<<<<<<< HEAD
                             <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  >
+=======
+                            <option selected v-for="status in statuses" v-bind:value="status.id"   >
+>>>>>>> 7836c6a1b4b522d8f52f02837e3be52dda69be9a
                               {{ status.name }}
                             </option>
 
@@ -722,6 +726,7 @@ export default {
 
 
 
+<<<<<<< HEAD
         //   this.$delete(this.counts, index);
 
         // }
@@ -730,6 +735,9 @@ export default {
           
         }else{
           this.unit_price[index + 1] = 0;
+=======
+          this.$delete(this.counts, index);
+>>>>>>> 7836c6a1b4b522d8f52f02837e3be52dda69be9a
 
         }
 
