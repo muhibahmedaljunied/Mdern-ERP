@@ -110,49 +110,7 @@
             <div class="row">
 
 
-              <!-- <div class="col-md-2">
-                <label for="FormaPago">طريقه الدفع</label>
-                <select class="form-control" style="background-color: beige;" name="forma_pago" id="forma_pago"
-                  v-model="Way_to_pay_selected" v-on:change="onwaychange">
-
-                  <option v-bind:value="1">نقد</option>
-                  <option v-bind:value="2">أجل</option>
-                  <option v-bind:value="3">بنك</option>
-                </select>
-              </div>
-
-              
-              <div class="col-md-2">
-                <label for="cliente"> المورد</label>
-
-                <select class="form-control" style="background-color: beige;" v-model="supplier" id="supplier">
-                  <option v-for="sup in suppliers" v-bind:value="[sup.id, sup.name, sup.account_id]">
-                    {{ sup.name }}
-                  </option>
-                </select>
-              </div>
-
-              <div class="col-md-2" v-if="show_treasury == true">
-                <label for="pagoPrevio">الصندوق</label>
-                <select class="form-control" style="background-color: beige;" v-model="treasury" id="supplier">
-                  <option v-for="tre in treasuries" v-bind:value="[tre.id, tre.name, tre.account_id]">
-                    {{ tre.name }}
-                  </option>
-                </select>
-
-              </div>
-
-              <div class="col-md-2" v-if="show_bank == true">
-                <label for="pagoPrevio">البنك</label>
-                <select class="form-control" style="background-color: beige;" v-model="treasury" id="supplier">
-                  <option v-for="tre in treasuries" v-bind:value="[tre.id, tre.name, tre.account_id]">
-                    {{ tre.name }}
-                  </option>
-                </select>
-
-              </div> -->
-
-
+         
 
 
               <div class="col-md-2" v-if="Way_to_pay_selected != 2">
@@ -264,7 +222,13 @@
                         <div id="factura_producto">
                           <select v-model="status[index]" name="type" id="type" class="form-control" required>
 
-                            <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  >
+
+                            <!-- <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  >
+
+                            <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  > -->
+
+                            <option selected v-for="status in statuses" v-bind:value="status.id"   >
+
                               {{ status.name }}
                             </option>
 
@@ -722,6 +686,7 @@ export default {
 
 
 
+
         //   this.$delete(this.counts, index);
 
         // }
@@ -730,6 +695,9 @@ export default {
           
         }else{
           this.unit_price[index + 1] = 0;
+
+          this.$delete(this.counts, index);
+
 
         }
 

@@ -4,129 +4,140 @@
             <div class="container-fluid">
 
                 <div class="card text-right">
-          <div class="card-header">
+                    <div class="card-header">
 
 
-            <h3>  <span id="codigo">المخزون الافتتاحي</span></h3>
+                        <h3> <span id="codigo">المخزون الافتتاحي</span></h3>
 
-            <!-- <h1 class="card-title"> المخزون الافتتاحي</h1> -->
-          </div>
-          <div class="card-body">
-
-
-            <div class="row">
+                        <!-- <h1 class="card-title"> المخزون الافتتاحي</h1> -->
+                    </div>
+                    <div class="card-body">
 
 
-
-              <div class="col-md-4">
-                <label for="pagoPrevio">المخزن</label>
-                <div class="custom-search">
-
-                  <input style="background-color: beige;font-size: 15px;" :id="'OpeningInventory_store_tree'" type="text"
-                    readonly class="custom-search-input">
-                  <input :id="'OpeningInventory_store_tree_id'" type="hidden" readonly class="custom-search-input">
-                  <input :id="'select_account_Purchase'" type="hidden" readonly class="custom-search-input">
+                        <div class="row">
 
 
-                  <button class="custom-search-botton" type="button" data-toggle="modal" @click="detect_index(null)"
-                    data-target="#exampleModalStore">
-                    <i class="fa fa-plus-circle"></i></button>
+
+                            <div class="col-md-4">
+                                <label for="pagoPrevio">المخزن</label>
+                                <div class="custom-search">
+
+                                    <input style="background-color: beige;font-size: 15px;"
+                                        :id="'OpeningInventory_store_tree'" type="text" readonly
+                                        class="custom-search-input">
+                                    <input :id="'OpeningInventory_store_tree_id'" type="hidden" readonly
+                                        class="custom-search-input">
+                                    <input :id="'select_account_Purchase'" type="hidden" readonly
+                                        class="custom-search-input">
+
+
+                                    <button class="custom-search-botton" type="button" data-toggle="modal"
+                                        @click="detect_index(null)" data-target="#exampleModalStore">
+                                        <i class="fa fa-plus-circle"></i></button>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <label for="pagoPrevio">المنتج</label>
+                                <div class="custom-search">
+
+                                    <input style="background-color: beige;font-size: 15px;"
+                                        :id="'OpeningInventory_product_tree'" type="text" readonly
+                                        class="custom-search-input">
+                                    <input :id="'OpeningInventory_product_tree_id'" type="hidden" readonly
+                                        class="custom-search-input">
+                                    <input :id="'select_account_Purchase'" type="hidden" readonly
+                                        class="custom-search-input">
+
+
+                                    <button class="custom-search-botton" type="button" data-toggle="modal"
+                                        @click="detect_index(null)" data-target="#exampleModalProduct">
+                                        <i class="fa fa-plus-circle"></i></button>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <label> الحساب</label>
+                                <div class="custom-search">
+
+                                    <input :id="'OpeningInventory_account_tree'" type="text" readonly
+                                        class="custom-search-input">
+                                    <input :id="'OpeningInventory_account_tree_id'" type="hidden" readonly
+                                        class="custom-search-input">
+
+
+                                    <button @click="detect_index(null)" class="custom-search-botton" type="button"
+                                        data-toggle="modal" data-target="#exampleModalAccount">
+                                        <i class="fa fa-plus-circle"></i></button>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <br />
+                        <hr>
+
+
+                        <br />
+
+                        <div class="row">
+
+
+
+
+
+                            <div class="col-md-3">
+                                <label for="cliente"> الحساب التفصيلي</label>
+
+                                <select class="form-control" style="background-color: beige;" name="forma_pago"
+                                    id="select_account_Purchase_group">
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label for="pagoPrevio">البيان</label>
+
+
+                                <input class="form-control" style="background-color: beige;" type="text"
+                                    v-model="description">
+
+
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="date">التاريخ</label><br />
+
+                                <input class="form-control" style="background-color: beige;" name="date" type="date"
+                                    v-model="date" />
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
                 </div>
-
-              </div>
-              <div class="col-md-4">
-                <label for="pagoPrevio">المنتج</label>
-                <div class="custom-search">
-
-                  <input style="background-color: beige;font-size: 15px;" :id="'OpeningInventory_product_tree'" type="text"
-                    readonly class="custom-search-input">
-                  <input :id="'OpeningInventory_product_tree_id'" type="hidden" readonly class="custom-search-input">
-                  <input :id="'select_account_Purchase'" type="hidden" readonly class="custom-search-input">
-
-
-                  <button class="custom-search-botton" type="button" data-toggle="modal" @click="detect_index(null)"
-                    data-target="#exampleModalProduct">
-                    <i class="fa fa-plus-circle"></i></button>
-                </div>
-
-              </div>
-
-              <div class="col-md-4">
-                <label > الحساب</label>
-                <div class="custom-search">
-
-                  <input :id="'OpeningInventory_account_tree'" type="text" readonly class="custom-search-input">
-                  <input :id="'OpeningInventory_account_tree_id'" type="hidden" readonly class="custom-search-input">
-
-
-                  <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
-                    data-target="#exampleModalAccount">
-                    <i class="fa fa-plus-circle"></i></button>
-                </div>
-              </div>
-
-              
-
-
-
-
-
-
-
-
-            </div>
-            <br />
-            <hr>
-       
-
-            <br />
-
-            <div class="row">
-
-
-
-
-
-              <div class="col-md-3">
-                <label for="cliente"> الحساب التفصيلي</label>
-
-                <select class="form-control" style="background-color: beige;" name="forma_pago"
-                  id="select_account_Purchase_group">
-
-                </select>
-
-              </div>
-
-
-              <div class="col-md-4">
-                <label for="pagoPrevio">البيان</label>
-
-
-                <input class="form-control" style="background-color: beige;" type="text" v-model="description">
-
-
-              </div>
-
-              <div class="col-md-2">
-                <label for="date">التاريخ</label><br />
-
-                <input class="form-control" style="background-color: beige;" name="date" type="date" v-model="date" />
-              </div>
-            </div>
-
-
-
-          </div>
-
-        </div>
 
                 <div class="card text-right">
                     <!-- <div class="card-header">
 
                         <h1 class="card-title"> المخزون الافتتاحي</h1>
                     </div> -->
+
                     <div class="card-body">
-                        <h5 class="card-title">المخزون الافتتاحي  </h5>
+                        <h5 class="card-title">المخزون الافتتاحي </h5>
                         <div class="table-responsive">
                             <table class="table table-bordered text-right" style="width: 100%; font-size: x-large">
                                 <thead>
@@ -161,10 +172,10 @@
 
                                             <div class="custom-search">
 
-                                                <input :id="'OpeningInventory_product_tree' + index" type="text" readonly
-                                                    class="custom-search-input">
-                                                <input :id="'OpeningInventory_product_tree_id' + index" type="hidden" readonly
-                                                    class="custom-search-input">
+                                                <input :id="'OpeningInventory_product_tree' + index" type="text"
+                                                    readonly class="custom-search-input">
+                                                <input :id="'OpeningInventory_product_tree_id' + index" type="hidden"
+                                                    readonly class="custom-search-input">
 
                                                 <button class="custom-search-botton" type="button" data-toggle="modal"
                                                     data-target="#exampleModalProduct" @click="detect_index(index)"> <i
@@ -208,8 +219,8 @@
 
                                                 <input :id="'OpeningInventory_store_tree' + index" type="text" readonly
                                                     class="custom-search-input">
-                                                <input :id="'OpeningInventory_store_tree_id' + index" type="hidden" readonly
-                                                    class="custom-search-input">
+                                                <input :id="'OpeningInventory_store_tree_id' + index" type="hidden"
+                                                    readonly class="custom-search-input">
 
                                                 <button class="custom-search-botton" type="button" data-toggle="modal"
                                                     data-target="#exampleModalStore" @click="detect_index(index)">
@@ -333,60 +344,86 @@
                     </div>
                 </div>
                 <div class="row" style="font-size: 10pt">
+
                     <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered text-right m-t-30"
-                                style="width: 100%; font-size: x-small">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 60px">#</th>
-                                        <th style="width: 60px">المنتج</th>
-                                        <th style="width: 60px">المخزن</th>
-                                        <th style="width: 60px">الحاله</th>
-                                        <th style="width: 60px">المواصفات والطراز</th>
-                                        <th style="width: 60px">الكميه </th>
-                                        <th style="width: 60px">التكلفه</th>
-                                        <th style="width: 60px">الاجمالي</th>
-                                        <th style="width: 60px">العمليات</th>
-                                    </tr>
-                                </thead>
-                                <tbody v-if="opening && opening.data.length > 0">
-                                    <tr v-for="(openings, index) in opening.data" :key="index">
-                                        <td style="width: 40px">{{ index + 1 }}</td>
-                                        <td style="width: 40px">{{ openings.product }}</td>
+                        <div class="card">
 
-                                        <td style="width: 40px">
-                                            {{ openings.store }}
-                                        </td>
+                            <div class="card-header">
 
-                                        <td style="width: 40px">{{ openings.status }}</td>
-                                        <td style="width: 40px">{{ openings.desc }}</td>
 
-                                        <td>{{ openings.tem_qty }} {{ openings.unit }}</td>
-                                        <td>{{ openings.price }}</td>
-                                        <td>{{ openings.total }}</td>
-                                        <td>
-                                            <button data-toggle="modal" data-target="#modal_vaciar1"
-                                                @click="show_modal(openings.product_id)"
-                                                class="tn btn-danger btn-sm waves-effect btn-agregar">
-                                                <i class="fa fa-trash"></i></button>
+                                <div style="display: flex;float: left; margin: 5px">
 
-                                            <router-link to="/opening_supply"
-                                                class="tn btn-info btn-sm waves-effect btn-agregar"
-                                                data-toggle="tooltip" title="تعديل">
-                                                <i class="fa fa-edit"></i></router-link>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tbody v-else>
-                                    <tr>
-                                        <td align="center" colspan="7">
-                                            <h3> لايوجد بيانات </h3>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                                    <button @click="Export()">
+                                        <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+                                    </button>
+
+                                    <button @click="Import()">
+                                        <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+                                    </button>
+
+                                    <input type="search" autocomplete="on" name="search" data-toggle="dropdown"
+                                        role="button" aria-haspopup="true" aria-expanded="true" placeholder="بحث "
+                                        v-model="word_search" @input="get_search()" />
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-right m-t-30"
+                                        style="width: 100%; font-size: x-small">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 60px">#</th>
+                                                <th style="width: 60px">المنتج</th>
+                                                <th style="width: 60px">المخزن</th>
+                                                <th style="width: 60px">الحاله</th>
+                                                <th style="width: 60px">المواصفات والطراز</th>
+                                                <th style="width: 60px">الكميه </th>
+                                                <th style="width: 60px">التكلفه</th>
+                                                <th style="width: 60px">الاجمالي</th>
+                                                <th style="width: 60px">العمليات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody v-if="opening && opening.data.length > 0">
+                                            <tr v-for="(openings, index) in opening.data" :key="index">
+                                                <td style="width: 40px">{{ index + 1 }}</td>
+                                                <td style="width: 40px">{{ openings.product }}</td>
+
+                                                <td style="width: 40px">
+                                                    {{ openings.store }}
+                                                </td>
+
+                                                <td style="width: 40px">{{ openings.status }}</td>
+                                                <td style="width: 40px">{{ openings.desc }}</td>
+
+                                                <td>{{ openings.tem_qty }} {{ openings.unit }}</td>
+                                                <td>{{ openings.price }}</td>
+                                                <td>{{ openings.total }}</td>
+                                                <td>
+                                                    <button data-toggle="modal" data-target="#modal_vaciar1"
+                                                        @click="show_modal(openings.product_id)"
+                                                        class="tn btn-danger btn-sm waves-effect btn-agregar">
+                                                        <i class="fa fa-trash"></i></button>
+
+                                                    <router-link to="/opening_supply"
+                                                        class="btn btn-info btn-sm waves-effect btn-agregar"
+                                                        data-toggle="tooltip" title="تعديل">
+                                                        <i class="fa fa-edit"></i></router-link>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody v-else>
+                                            <tr>
+                                                <td align="center" colspan="7">
+                                                    <h3> لايوجد بيانات </h3>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>

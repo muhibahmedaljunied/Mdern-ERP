@@ -6,7 +6,7 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-header">
-            <span class="h4"> اضافه تصنيف</span>
+            <span class="h4">  التصنيفات</span>
 
 
           </div>
@@ -106,7 +106,7 @@
                         </tr>
 
                         <tr>
-                          <td colspan="2"></td>
+                          <td colspan="3"></td>
                           <td>
 
                             <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
@@ -159,13 +159,24 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-header">
+                        <!-- <span class="h2"> الموردين</span> -->
+
+                        <div style="display: flex;float: left; margin: 5px">
 
 
+                            <button @click="Export()">
+                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+                            </button>
 
-            <h4 class="modal-title" id="myLargeModalLabel">التصنيفات </h4>
+                            <button @click="Import()">
+                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+                            </button>
 
-
-          </div>
+                            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="true" placeholder="بحث"
+                                v-model="word_search" @input="get_search()" />
+                        </div>
+                    </div>
           <div class="card-body" id="printme">
             <div class="table-responsive">
               <table class="table table-bordered text-center">

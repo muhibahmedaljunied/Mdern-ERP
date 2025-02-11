@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('role_id')->default('3');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
 
-            $table->string('name');
+            $table->string('name')->unique();
 
             $table->string('phone')->default('776165784')->nullable();
 

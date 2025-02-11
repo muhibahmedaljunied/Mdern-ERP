@@ -9,12 +9,7 @@
           </div>
 
           <div class="d-flex justify-content-right">
-            <!-- <router-link
-              to="create_category"
-              id="agregar_productos"
-              class="tn btn-info btn-lg waves-effect btn-agregar"
-              ><i class="fa fa-plus-circle"></i
-            ></router-link> -->
+         
             <a
               class="tn btn-info btn-lg waves-effect btn-agregar"
               data-toggle="modal"

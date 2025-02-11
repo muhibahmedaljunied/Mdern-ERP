@@ -1,49 +1,42 @@
 <template>
- <div class="container-fluid">
+  <div class="container-fluid">
 
 
-  <div class="row row-sm">
-    <div class="col-xl-12">
-      <div class="card">
-        <div class="card-header">
+    <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-header">
 
-          <span class="h2"> اوقات الدوام </span>
-          <div style="display: flex;float: left; margin: 5px">
-         
+            <span class="h2"> اوقات الدوام </span>
 
-            <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-              placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-              @input="get_search()">
 
-            <div>
-
-            </div>
           </div>
         </div>
-        <div class="card-body">
-                        <form method="post"  enctype="multipart/form-data">
+      </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
 
-                          <div class="table-responsive">
-                            <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
-                              <thead>
-                                <tr>
-                                  <th> الفتره </th>
-                                  <th> من</th>
-
-
-                                  <th> الي </th>
-
-                                  <th> عدد الساعات </th>
+          <div class="table-responsive">
+            <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
+              <thead>
+                <tr>
+                  <th> الفتره </th>
+                  <th> من</th>
 
 
-                                  <th>اضافه</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr v-for="index in count" :key="index">
-                                  <td>
-                                    <div class="col-md-12">
-                                      <!-- <select style="background-color:beige" v-model="period_selected[index]"
+                  <th> الي </th>
+
+                  <th> عدد الساعات </th>
+
+
+                  <th>اضافه</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="index in count" :key="index">
+                  <td>
+                    <div class="col-md-12">
+                      <!-- <select style="background-color:beige" v-model="period_selected[index]"
                                         class="form-control " required>
                                         <option v-for="period in periods" v-bind:value="period.id">
                                           {{ period.name }}
@@ -51,144 +44,140 @@
 
                                       </select> -->
 
-                                      <input v-model="name[index]" type="text" class="form-control" 
-                                      required />
+                      <input v-model="name[index]" type="text" class="form-control" required />
 
-                                    </div>
+                    </div>
 
-                                  </td>
-                                  <td>
-                                    <input type="time" v-model="from_period[index]" class="form-control" name="name"
-                                      required />
+                  </td>
+                  <td>
+                    <input type="time" v-model="from_period[index]" class="form-control" name="name" required />
 
-                                  </td>
-
-                                  <td>
-                                    <input type="time" v-model="into_period[index]" class="form-control" name="name"
-                                      required />
-
-                                  </td>
-                                  <td>
-                                    <input type="text" @keypress="calc_duration(index)" class="form-control"
-                                      id="duration_period" name="name" required />
-
-                                    <input type="hidden" v-model="duration_period[index]">
-
-                                  </td>
-
-
-                                  <td v-if="index == 1">
-                                    <a class="tn btn-info btn-sm waves-effect btn-agregar"
-                                      v-on:click="addComponent(count)">
-                                      <i class="fa fa-plus-circle"></i></a>
-
-                                    <a class="tn btn-info btn-sm waves-effect btn-agregar"
-                                      v-on:click="disComponent(count)">
-                                      <i class="fa fa-minus-circle"></i></a>
-                                  </td>
-
-
-
-                                </tr>
-
-                                <tr>
-
-                                  <td colspan="4"></td>
-                                  <td>
-                                    <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
-
-                                  </td>
-                                </tr>
-
-                              </tbody>
-                            </table>
-                          </div>
-                        </form>
-
-                      </div>
-
-
-
-      </div>
-    </div>
-    <!--/div-->
-  </div>
-
-  <div class="row row-sm">
-    <div class="col-xl-12">
-      <div class="card">
-        <div class="card-header">
-
-          <span class="h2"> اوقات الدوام </span>
-          <div style="display: flex;float: left; margin: 5px">
-            <a class="tn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal" id="agregar_productos"
-              data-target="#addperiod">
-              <i class="fa fa-plus-circle"></i></a>
-
-            <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-              placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-              @input="get_search()">
-
-            <div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="card-body" id="printme">
-          <div class="table-responsive">
-            <table class="table table-bordered text-center">
-              <thead>
-                <tr>
-                  <th class="wd-15p border-bottom-0">#</th>
-                  <th class="wd-15p border-bottom-0">الفتره</th>
-                  <th class="wd-15p border-bottom-0">من</th>
-                  <th class="wd-15p border-bottom-0">الي</th>
-                  <th class="wd-15p border-bottom-0"> عدد الساعات </th>
-
-
-                  <th class="wd-15p border-bottom-0">العمليات</th>
-                </tr>
-              </thead>
-              <tbody v-if="period_times && period_times.length > 0">
-                <tr v-for="(period, index) in period_times" :key="index">
-
-                  <td>{{ index + 1 }}</td>
-                  <td>{{ period.name }}</td>
-                  <td>{{ period.from_time }}</td>
-                  <td>{{ period.into_time }}</td>
-                  <td>{{ period.duration }}</td>
+                  </td>
 
                   <td>
-                    <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="tn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
-                    <button type="button" @click="delete_period(period.id)" class="btn btn-sm waves-effect btn-danger">
-                      <i class="fa fa-trash"></i>
-                    </button>
+                    <input type="time" v-model="into_period[index]" class="form-control" name="name" required />
 
-                    <router-link :to="{
-                      name: 'edit_branch',
-                      params: { id: period.id },
-                    }" class="edit btn btn-sm waves-effect btn-success">
-                      <i class="fa fa-edit"></i></router-link>
+                  </td>
+                  <td>
+                    <input type="text" @keypress="calc_duration(index)" class="form-control" id="duration_period"
+                      name="name" required />
+
+                    <input type="hidden" v-model="duration_period[index]">
+
+                  </td>
+
+
+                  <td v-if="index == 1">
+                    <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
+                      <i class="fa fa-plus-circle"></i></a>
+
+                    <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
+                      <i class="fa fa-minus-circle"></i></a>
+                  </td>
+
+
+
+                </tr>
+
+                <tr>
+
+                  <td colspan="4"></td>
+                  <td>
+                    <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
+
                   </td>
                 </tr>
-              </tbody>
-              <tbody v-else>
-                <tr>
-                  <td align="center" colspan="3">لايوجد بياتات.</td>
-                </tr>
+
               </tbody>
             </table>
           </div>
-          <pagination align="center" :data="period_times" @pagination-change-page="list"></pagination>
-        </div>
-
+        </form>
 
       </div>
+
+
+
     </div>
-    <!--/div-->
+
+
+    <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <!-- <span class="h2"> الموردين</span> -->
+
+            <div style="display: flex;float: left; margin: 5px">
+
+
+              <button @click="Export()">
+                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+              </button>
+
+              <button @click="Import()">
+                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                @input="get_search()" />
+            </div>
+          </div>
+
+          <div class="card-body" id="printme">
+            <div class="table-responsive">
+              <table class="table table-bordered text-center">
+                <thead>
+                  <tr>
+                    <th class="wd-15p border-bottom-0">#</th>
+                    <th class="wd-15p border-bottom-0">الفتره</th>
+                    <th class="wd-15p border-bottom-0">من</th>
+                    <th class="wd-15p border-bottom-0">الي</th>
+                    <th class="wd-15p border-bottom-0"> عدد الساعات </th>
+
+
+                    <th class="wd-15p border-bottom-0">العمليات</th>
+                  </tr>
+                </thead>
+                <tbody v-if="period_times && period_times.length > 0">
+                  <tr v-for="(period, index) in period_times" :key="index">
+
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ period.name }}</td>
+                    <td>{{ period.from_time }}</td>
+                    <td>{{ period.into_time }}</td>
+                    <td>{{ period.duration }}</td>
+
+                    <td>
+                      <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="tn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
+                      <button type="button" @click="delete_period(period.id)"
+                        class="btn btn-sm waves-effect btn-danger">
+                        <i class="fa fa-trash"></i>
+                      </button>
+
+                      <router-link :to="{
+                        name: 'edit_branch',
+                        params: { id: period.id },
+                      }" class="edit btn btn-sm waves-effect btn-success">
+                        <i class="fa fa-edit"></i></router-link>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody v-else>
+                  <tr>
+                    <td align="center" colspan="3">لايوجد بياتات.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <pagination align="center" :data="period_times" @pagination-change-page="list"></pagination>
+          </div>
+
+
+        </div>
+      </div>
+      <!--/div-->
+    </div>
   </div>
- </div>
 </template>
 
 <script>
@@ -213,8 +202,8 @@ export default {
       from_period: [],
       into_period: [],
       duration_period: [],
-      period_selected:[],
-      periods:'',
+      period_selected: [],
+      periods: '',
 
     };
   },
@@ -304,4 +293,3 @@ export default {
   },
 };
 </script>
-

@@ -8,32 +8,17 @@
 
             <span class="h2"> الاضافي</span>
 
-
-
-            <div style="display: flex;float: left; margin: 5px">
-
-
-
-
-              <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-                placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-                @input="get_search()">
-
-
-
-              <div></div>
-            </div>
           </div>
           <div class="card-body">
 
             <div class="row row-sm">
               <div class="col-xl-12">
-                <!-- <form method="post"> -->
+
                 <div class="card">
 
 
                   <div class="card-body">
-                    <form method="post" @submit.prevent="submitForm" enctype="multipart/form-data">
+                    <form method="post"  enctype="multipart/form-data">
 
                       <div class="table-responsive">
                         <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">

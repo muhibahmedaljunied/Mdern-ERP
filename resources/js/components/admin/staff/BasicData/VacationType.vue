@@ -11,9 +11,6 @@
           <div style="display: flex;float: left; margin: 5px">
   
 
-            <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-              placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-              @input="get_search()">
 
             <div>
 
@@ -94,20 +91,21 @@
     <div class="col-xl-12">
       <div class="card">
         <div class="card-header">
+          <!-- <span class="h2"> الموردين</span> -->
 
-          <span class="h2"> اتواع الاجازات</span>
           <div style="display: flex;float: left; margin: 5px">
-            <a class="tn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal" id="agregar_productos"
-              data-target="#addvac">
-              <i class="fa fa-plus-circle"></i></a>
 
-            <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-              placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-              @input="get_search()">
 
-            <div>
+            <button @click="Export()">
+              <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+            </button>
 
-            </div>
+            <button @click="Import()">
+              <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+            </button>
+
+            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" />
           </div>
         </div>
 

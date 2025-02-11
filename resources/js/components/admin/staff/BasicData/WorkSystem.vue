@@ -11,8 +11,7 @@
               data-target="#addwork">
               <i class="fa fa-plus-circle"></i></a>
 
-            <input autocomplete="on" type="text" class="form-control input-text" placeholder="بحث ...."
-              aria-label="Recipient's username" aria-describedby="basic-addon2" @input="get_search()">
+   
 
             <div>
 

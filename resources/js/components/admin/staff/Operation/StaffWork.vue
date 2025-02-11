@@ -8,17 +8,7 @@
           <div class="card-header">
 
             <span class="h2"> الدوام</span>
-            <div style="display: flex;float: left; margin: 5px">
-      
-
-              <input autocomplete="on" type="text" class="form-control input-text" placeholder="بحث ...."
-                aria-label="Recipient's username" aria-describedby="basic-addon2" @input="get_search()">
-
-              <div>
-
-
-              </div>
-            </div>
+            
           </div>
           <div class="card-body">
 

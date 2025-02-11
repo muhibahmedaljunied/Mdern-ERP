@@ -18,66 +18,30 @@
             <form method="post">
               <div class="form-group">
                 <label for="name">الاسم</label>
-                <input
-                  v-model="name"
-                  type="text"
-                  name="name"
-                  id="name"
-                  class="form-control"
-                     required
-                /><span style="color:red">{{ error_name[0] }}</span>
+                <input v-model="name" type="text" name="name" id="name" class="form-control" required /><span
+                  style="color:red">{{ error_name[0] }}</span>
               </div>
               <div class="form-group">
                 <label for="phone">الهاتف</label>
-                <input
-                  v-model="phone"
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  class="form-control"
-                />
+                <input v-model="phone" type="text" name="phone" id="phone" class="form-control" />
               </div>
               <div class="form-group">
                 <label for="name">البريد الالكتروني</label>
-                <input
-                  v-model="email"
-                  type="text"
-                  name="email"
-                  id="email"
-                  class="form-control"
-                /><span style="color:red">{{ error_email[0] }}</span>
+                <input v-model="email" type="text" name="email" id="email" class="form-control" /><span
+                  style="color:red">{{ error_email[0] }}</span>
               </div>
-               <div class="form-group">
+              <div class="form-group">
                 <label for="password">كلمه السر</label>
-                <input
-                  v-model="password"
-                  type="text"
-                  name="password"
-                  id="password"
-                  class="form-control"
-                     required
-                />
+                <input v-model="password" type="text" name="password" id="password" class="form-control" required />
                 <span style="color:red">{{ error_password[0] }}</span>
               </div>
               <div class="form-group">
                 <label for="address">العنوان</label>
-                <input
-                  v-model="address"
-                  type="text"
-                  name="address"
-                  id="address"
-                  class="form-control"
-                />
+                <input v-model="address" type="text" name="address" id="address" class="form-control" />
               </div>
               <div class="form-group">
                 <label for="role">الصلاحيه</label>
-                <select
-                  v-model="roleselected"
-                  name="role"
-                  id="role"
-                  class="form-control"
-                     required
-                >
+                <select v-model="roleselected" name="role" id="role" class="form-control" required>
                   <option value="">select</option>
                   <option v-for="roles in role" v-bind:value="roles.id">
                     {{ roles.name }}
@@ -87,13 +51,7 @@
 
               <div class="form-group">
                 <label for="status">الحاله</label>
-                <input
-                  v-model="status"
-                  type="text"
-                  name="status"
-                  id="status"
-                  class="form-control"
-                />
+                <input v-model="status" type="text" name="status" id="status" class="form-control" />
               </div>
               <button type="button" @click="adduser()" class="btn btn-primary btn-lg btn-block">
                 اضافه
@@ -111,23 +69,23 @@
 export default {
   data() {
     return {
-      error_name:'',
-      error_email:'',
-      error_password:'',
+      error_name: '',
+      error_email: '',
+      error_password: '',
       name: "",
       phone: "",
       email: "",
       address: "",
       password: 123,
       status: 1,
-      role:'',
-      roleselected:1,
+      role: '',
+      roleselected: 1,
     };
   },
   created() {
     let uri = `/create_user`;
     this.axios.post(uri).then((response) => {
-   console.log(response.data);
+      console.log(response.data);
       this.role = response.data;
     });
   },
@@ -166,18 +124,18 @@ export default {
 
           // event.preventDefault();
           toastMessage("تم الاضافه بنجاح");
-         
+
         })
         .catch(error => {
-                       console.error(error)
-                       
-                       this.error_name = error.response.data.error.name
-                       this.error_email = error.response.data.error.email
-                       this.error_password = error.response.data.error.password
-                       
-                     });
+          console.error(error)
 
-                this.$router.go(-1);
+          this.error_name = error.response.data.error.name
+          this.error_email = error.response.data.error.email
+          this.error_password = error.response.data.error.password
+
+        });
+
+      this.$router.go(-1);
 
     },
   },

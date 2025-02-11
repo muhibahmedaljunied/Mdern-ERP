@@ -6,7 +6,7 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-header">
-            <span class="h4"> اضافه نوع تصنيف</span>
+            <span class="h4"> انوع التصنيفات</span>
 
 
           </div>
@@ -52,14 +52,14 @@
                       <thead>
                         <tr>
 
-                        
+
 
                           <th>النوع </th>
 
                           <th>الكود </th>
 
                           <th>الحاله </th>
-                         
+
 
 
 
@@ -68,24 +68,24 @@
                       </thead>
                       <tbody>
                         <tr v-for="index in count" :key="index">
-                    
+
 
 
                           <td>
-                            <input style="background-color:beige" v-model="name[index]" type="text" class="form-control" 
+                            <input style="background-color:beige" v-model="name[index]" type="text" class="form-control"
                               required />
 
                           </td>
 
                           <td>
-                            <input style="background-color:beige" v-model="code[index]" type="text" class="form-control" 
+                            <input style="background-color:beige" v-model="code[index]" type="text" class="form-control"
                               required />
 
                           </td>
 
                           <td>
-                            <input style="background-color:beige" v-model="status[index]" type="number" class="form-control" 
-                              required />
+                            <input style="background-color:beige" v-model="status[index]" type="number"
+                              class="form-control" required />
 
                           </td>
 
@@ -158,12 +158,23 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-header">
+            <!-- <span class="h2"> الموردين</span> -->
+
+            <div style="display: flex;float: left; margin: 5px">
 
 
+              <button @click="Export()">
+                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+              </button>
 
-            <h4 class="modal-title" id="myLargeModalLabel">انواع التصنيفات </h4>
+              <button @click="Import()">
+                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+              </button>
 
-
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث " v-model="word_search"
+                @input="get_search()" />
+            </div>
           </div>
           <div class="card-body" id="printme">
             <div class="table-responsive">
@@ -224,7 +235,7 @@
     </div>
 
 
-   
+
 
   </div>
 </template>
@@ -245,7 +256,7 @@ export default {
   data() {
 
     return {
-   
+
       name: [],
       code: [],
       status: [],
@@ -300,7 +311,7 @@ export default {
       this.axios
         .post(`/group_types`)
         .then(({ data }) => {
- 
+
 
           this.group_types = data.group_types;
 

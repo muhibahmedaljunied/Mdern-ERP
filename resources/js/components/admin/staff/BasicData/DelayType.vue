@@ -2,52 +2,44 @@
   <div class="container-fluid">
 
     <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-          <div class="card-header">
-
-            <span class="h2">نوع التاخير</span>
-            <div style="display: flex;float: left; margin: 5px">
+      <div class="card">
 
 
-              <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-                placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-                @input="get_search()">
+        <div class="card-header">
 
-              <div>
+          <span class="h2">نوع التاخير</span>
 
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <form method="post" enctype="multipart/form-data">
 
-              <div class="table-responsive">
-                <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
-                  <thead>
-                    <tr>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
 
-                      <th> النوع</th>
+            <div class="table-responsive">
+              <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
+                <thead>
+                  <tr>
+
+                    <th> النوع</th>
 
 
 
-                      <!-- <th >التصنيف</th> -->
+                    <!-- <th >التصنيف</th> -->
 
 
 
 
-                      <th>اضافه</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="index in count" :key="index">
-                      <td>
-                        <input v-model="name[index]" type="text" class="form-control" name="name" id="name" required />
+                    <th>اضافه</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="index in count" :key="index">
+                    <td>
+                      <input v-model="name[index]" type="text" class="form-control" name="name" id="name" required />
 
-                      </td>
+                    </td>
 
 
-                      <!-- <td>
+                    <!-- <td>
                         <select v-model="group[index]" id="inputState" class="form-control">
                           <option v-for="group in groups" v-bind:value="group.id">
                             {{ group.name }}
@@ -57,40 +49,56 @@
                       </td> -->
 
 
-                      <td v-if="index == 1">
-                        <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
-                          <i class="fa fa-plus-circle"></i></a>
+                    <td v-if="index == 1">
+                      <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
+                        <i class="fa fa-plus-circle"></i></a>
 
-                        <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
-                          <i class="fa fa-minus-circle"></i></a>
-                      </td>
+                      <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
+                        <i class="fa fa-minus-circle"></i></a>
+                    </td>
 
 
 
-                    </tr>
+                  </tr>
 
-                    <tr>
-                      <td></td>
-                      <td>
-                        <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
-                      </td>
-                    </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
+                    </td>
+                  </tr>
 
-                  </tbody>
-                </table>
-              </div>
-            </form>
-
-          </div>
+                </tbody>
+              </table>
+            </div>
+          </form>
 
         </div>
       </div>
-      <!--/div-->
+
     </div>
     <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
+          <div class="card-header">
+            <!-- <span class="h2"> الموردين</span> -->
 
+            <div style="display: flex;float: left; margin: 5px">
+
+
+              <button @click="Export()">
+                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+              </button>
+
+              <button @click="Import()">
+                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                @input="get_search()" />
+            </div>
+          </div>
           <div class="card-body" id="printme">
             <div class="table-responsive">
               <table class="table table-bordered text-center">
@@ -156,7 +164,7 @@ export default {
     return {
 
 
-      delay_types:'',
+      delay_types: '',
 
 
 

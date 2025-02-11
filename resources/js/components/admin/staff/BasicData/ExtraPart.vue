@@ -8,18 +8,12 @@
           <div class="card-header">
 
             <span class="h2">اجزاء الوقت</span>
-            <div style="display: flex;float: left; margin: 5px">
 
 
-              <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-                placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-                @input="get_search()">
 
-              <div>
 
-              </div>
-            </div>
           </div>
+
 
           <div class="card-body">
             <form method="post" enctype="multipart/form-data">
@@ -67,9 +61,9 @@
                     </tr>
 
                     <tr>
-                    <td colspan="2"></td>
-                    <td> <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button></td>
-                  </tr>
+                      <td colspan="2"></td>
+                      <td> <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button></td>
+                    </tr>
 
                   </tbody>
                 </table>
@@ -86,7 +80,25 @@
       <div class="col-xl-12">
         <div class="card">
 
+          <div class="card-header">
+            <!-- <span class="h2"> الموردين</span> -->
 
+            <div style="display: flex;float: left; margin: 5px">
+
+
+              <button @click="Export()">
+                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+              </button>
+
+              <button @click="Import()">
+                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                @input="get_search()" />
+            </div>
+          </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered text-center">
@@ -119,7 +131,7 @@
                         <i class="fa fa-edit"></i></router-link>
                     </td>
                   </tr>
-               
+
                 </tbody>
                 <tbody v-else>
                   <tr>
