@@ -772,6 +772,10 @@ export default {
     payment() {
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> de678336a3531b3e8fe1998001a019d19a644b39
 
 
 
@@ -806,6 +810,12 @@ export default {
 
 
 
+<<<<<<< HEAD
+=======
+=======
+    
+>>>>>>> 7836c6a1b4b522d8f52f02837e3be52dda69be9a
+>>>>>>> de678336a3531b3e8fe1998001a019d19a644b39
 
       if (this.Way_to_pay_selected == 1) { //this is default if user not detect any way
 
