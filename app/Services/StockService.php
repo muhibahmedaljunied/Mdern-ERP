@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\DailyDetail;
-use App\Models\GroupAccountDailyDetail;
-use App\Models\PurchaseDetail;
+
 use App\Repository\CheckData\CheckSaleReturnRepository;
 use Illuminate\Http\Request;
 use App\Repository\StockInventury\StockRepository;

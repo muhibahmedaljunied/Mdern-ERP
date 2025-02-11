@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Models;
+
+use App\RelationshipsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use RelationshipsTrait;
+
     protected $fillable = ['id','parent_id','text','rank','purchase_price','status','rate','product_minimum','image','created_at','updated_at'];
 
 

@@ -24,13 +24,10 @@ class UnitServiceProvider extends ServiceProvider
 
 
         $core = app(CoreService::class);
-        // $request = app(\Illuminate\Http\Request::class);
-
         $this->app->bind(UnitRepositoryInterface::class, function () use ($core) {
 
             $request = app(\Illuminate\Http\Request::class);
 
-            // dd($request->all());
 
             if ($request->type == 'Purchase' || $request->type == 'Supply') {
 
@@ -46,6 +43,11 @@ class UnitServiceProvider extends ServiceProvider
             if ($request->type == 'Transfer') {
 
                 return new UnitTransferRepository($core);
+            }
+
+            if ($request->type == 'OpeningInventory') {
+
+                return new UnitDecodeRepository($core);
             }
 
             if (
@@ -65,7 +67,5 @@ class UnitServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-    }
+    public function boot() {}
 }

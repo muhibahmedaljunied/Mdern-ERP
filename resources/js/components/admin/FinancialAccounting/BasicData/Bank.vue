@@ -9,7 +9,7 @@
 
                     <div class="card-header">
 
-                        <span class="h4">  البنوك</span>
+                        <span class="h4"> البنوك</span>
 
                     </div>
                     <div class="card-body">
@@ -54,7 +54,7 @@
 
 
 
-<th>الرقم التسلسلي</th>
+                                                    <th>الرقم التسلسلي</th>
                                                     <th>البنك </th>
 
                                                     <!-- <th> التصنيف </th> -->
@@ -90,7 +90,7 @@
                                                         </select>
 
                                                     </td> -->
-<!-- 
+                                                    <!-- 
                                                     <td>
 
                                                         <input v-model="currency[index]" type="text"
@@ -120,7 +120,7 @@
                                                         <button type="button" class="btn btn-primary"
                                                             @click="Add_new()">حفظ
                                                         </button>
-                                                    
+
 
                                                     </td>
                                                 </tr>
@@ -153,8 +153,26 @@
 
             <div class="col-xl-12">
                 <div class="card">
-                   
-                    <div class="card-body" >
+                    <div class="card-header">
+                        <!-- <span class="h2"> الموردين</span> -->
+
+                        <div style="display: flex;float: left; margin: 5px">
+
+
+                            <button @click="Export()">
+                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+                            </button>
+
+                            <button @click="Import()">
+                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+                            </button>
+
+                            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="true" placeholder="بحث عن بنك"
+                                v-model="word_search" @input="get_search()" />
+                        </div>
+                    </div>
+                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered text-center">
                                 <thead>
@@ -174,12 +192,12 @@
                                 <tbody v-if="banks && banks.data.length > 0">
                                     <tr v-for="(bank, index) in banks.data" :key="index">
                                         <td>
-                                            {{ index+1 }}
+                                            {{ index + 1 }}
                                         </td>
                                         <td>
                                             {{ bank.name }}
                                         </td>
-                                    
+
                                         <td>
                                             <button data-toggle="modal"
                                                 class="tn btn-danger btn-sm waves-effect btn-agregar">

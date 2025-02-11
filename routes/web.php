@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth']], function () {
         return view('admin/layouts/master');
     });
     Route::get('/', function () {
+        // dd(12);
+  
         return view('admin/layouts/master');
     });
     Route::post('/dashboard', 'HomeController@show');

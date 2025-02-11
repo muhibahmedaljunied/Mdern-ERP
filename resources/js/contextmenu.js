@@ -23,7 +23,7 @@ contextmenu = function (node) {
           var rm = $.jstree.reference(data.reference).get_node(data.reference).id;
           axios.post(`/delete_${localStorage.getItem('table')}/${rm}`).then((response) => {
             toastMessage("تم الحذف بنجاح");
-
+         
 
 
           }).catch((error) => {

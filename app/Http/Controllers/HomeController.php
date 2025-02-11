@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\category;
 use App\Models\order;
+
 class HomeController extends Controller
 {
     /**
@@ -26,21 +28,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-            return view('admin.layouts.master');
-
+        return view('admin.layouts.master');
     }
     public function show()
     {
-            $product = count(Product::all());
-            $category = count(Category::all());
-            $order = count(Order::all());
 
-            return response()->json(['product'=>$product,'category'=>$category,'order'=>$order,'user'=>Auth::user()]);
+        $product = count(Product::all());
+        $category = count(Category::all());
+        $order = count(Order::all());
 
+        return response()->json([
+            'product' => $product,
+            'category' => $category,
+            'order' => $order,
+            'user' => Auth::user()
+        ]);
     }
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
         session()->forget('cart');
         return redirect('/login');
-      }
+    }
 }

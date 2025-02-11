@@ -467,12 +467,12 @@ export default {
   },
   mounted() {
     // this.list();
+    console.log('ffhghghhghhghghhg',window.axios.defaults.baseURL);
     this.counts[0] = 1;
     this.type_of_tree = 0;
     this.axios.post("/unit").then((response) => {
       // console.log(response);
       this.units = response.data.units;
-
 
     });
 
@@ -525,9 +525,9 @@ export default {
 
     add() {
       var result = this.addnode();
+      toastMessage("تم الاضافه بنجاح");
 
-      console.log(result);
-      // this.$router.go(0);
+      this.$router.go(0);
     }
 
 

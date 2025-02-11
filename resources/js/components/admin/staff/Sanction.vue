@@ -5,6 +5,7 @@
         <div class="card" id="basic-alert">
           <div class="card-header">
             لوائح الحضور والغياب
+
           </div>
           <div class="card-body">
             <!-- <div>
@@ -21,17 +22,25 @@
                         <li class="nav-item">
                           <a href="#tab1" class="nav-link" data-toggle="tab">غياب</a>
                         </li>
+
+                    
                         <li class="nav-item">
-                          <a href="#tab2" class="nav-link" data-toggle="tab">تأخير</a>
+                          <a href="#tab2" class="nav-link" data-toggle="tab"> تأخير</a>
                         </li>
+
                         <li class="nav-item">
-                          <a href="#tab3" class="nav-link" data-toggle="tab">اضافي</a>
+                          <a href="#tab3" class="nav-link" data-toggle="tab"> اضافي</a>
                         </li>
                         <li class="nav-item">
                           <a href="#tab4" class="nav-link" data-toggle="tab"> انصراف المبكر</a>
                         </li>
-                    
+                  
+
+
                        
+
+                        
+                  
 
 
                       </ul>
@@ -47,21 +56,24 @@
                       <div class="tab-pane active" id="tab1">
                         <absence-sanction></absence-sanction>
                       </div>
-                      <div class="tab-pane active" id="tab2">
-                        <delay-sanction></delay-sanction>
-                      </div>
-                      <div class="tab-pane active" id="tab3">
-                        <extra-sanction></extra-sanction>
-                      </div>
-                      <div class="tab-pane active" id="tab4">
-                        <leave-sanction></leave-sanction>
-                      </div>
-                  
+
                     
 
-                      <!-- <div class="tab-pane" id="tab22">
-                        <work-system-type></work-system-type> 
-                      </div> -->
+                  
+                 
+                      <div class="tab-pane" id="tab2">
+                        <delay-sanction></delay-sanction>
+                      </div>
+
+                      <div class="tab-pane" id="tab3">
+                        <extra-sanction></extra-sanction>
+                      </div>
+                      <div class="tab-pane" id="tab4">
+                        <leave-sanction></leave-sanction>
+                      </div>
+                     
+
+                
                     </div>
                   </div>
                 </div>
@@ -87,9 +99,10 @@ import LeaveSanction from "./Sanction/LeaveSanction";
 export default {
   components: {
     AbsenceSanction,
-     DelaySanction,
+    DelaySanction,
     ExtraSanction,
     LeaveSanction,
+
 
 
 

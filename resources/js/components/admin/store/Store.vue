@@ -54,9 +54,9 @@
 
 
 
-                    
 
-                                <button @click="exports_excel()" >
+
+                              <button @click="exports_excel()">
                                 <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
                               </button>
 
@@ -319,11 +319,11 @@
 </template>
 
 <script>
-// import jtree from '../../../../js/jtree.js';
 import tree from '../../../../js/tree/tree.js';
 
+
 export default {
-  // mixins: [jtree],
+
   mixins: [tree],
 
   data() {
@@ -375,22 +375,6 @@ export default {
   methods: {
 
 
-    // add_store(e) {
-
-
-    //   addnode(this);
-
-    //   // this.$router.go(0);
-    // },
-
-    // update_store(e) {
-
-    //   e.preventDefault();
-
-    //   updatenode($("#update_store_number").val(), this.text);
-
-    //   // this.$router.go(0);
-    // },
 
     data_for_select_node(node_id) {
 
@@ -420,17 +404,18 @@ export default {
         .then(function (response) {
 
           toastMessage("تم استيراد المخازن  ");
-        
+
         })
         .catch(error => {
 
         });
     },
 
-    add(){
+    add() {
 
       this.addnode();
-   
+      toastMessage("تم الاضافه بنجاح");
+      this.$router.go(0);
     }
 
 

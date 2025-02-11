@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-
-use Illuminate\Support\Facades\Validator;
 use App\Services\Product\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -15,8 +13,12 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class ProductController extends Controller
 {
+
+
+
 
     public function __construct(protected ProductService $product)
     {
@@ -50,17 +52,22 @@ class ProductController extends Controller
     {
 
 
-        $products = Cache::rememberForever('tree_product_products', function () {
+        // $products = Cache::rememberForever('tree_product_products', function () {
 
-            return Product::where('parent_id', null)->with('children')->get();
-        });
+        // return Product::where('parent_id', null)->with('children')->get();
+        $products = Product::where('parent_id', null)->with('children')->get();
+        // });
 
-        $last_nodes = Cache::rememberForever('tree_product_last_nodes', function () {
+        // $last_nodes = Cache::rememberForever('tree_product_last_nodes', function () {
 
-            return Product::where('parent_id', null)->select('products.*')->max('id');
-        });
+        // return Product::where('parent_id', null)->select('products.*')->max('id');
+        $last_nodes = Product::where('parent_id', null)->select('products.*')->max('id');
+        // });
 
-        return response()->json(['trees' => $products, 'last_nodes' => $last_nodes]);
+        return response()->json([
+            'trees' => $products,
+            'last_nodes' => $last_nodes
+        ]);
     }
 
 
@@ -89,7 +96,6 @@ class ProductController extends Controller
             'status' =>
             'The file has been excel/csv exporteded'
         ]);
-
     }
 
 
@@ -245,8 +251,16 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        
+        // $rr = Product::first()->getTable();
+        // $rr = app(Product::class)->getTable();
+        // Is there a way to list all relationships of a model?
+        $article = new Product;
+        dd($article->relationships());
         $product = Product::find($id);
-
+        $product_unit = DB::table('product_units')
+            ->where('product_id', '=', $id)
+            ->delete();
         $product->delete();
 
         return response()->json('successfully deleted');

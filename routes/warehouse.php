@@ -103,7 +103,7 @@ Route::post('/listtransfer', 'Warehouse\TransferController@index');
 Route::post('/details_transfer/{id}', 'Warehouse\TransferController@details_transfer');
 Route::post('/stock_repo', 'Warehouse\StockController@stock_repo');
 // -------------------------------------OpeningInventury----------------------------------------------------------
-Route::post('/add_Opening', 'Warehouse\InventuryController@store');
+Route::post('/payOpening', 'Warehouse\InventuryController@store');
 Route::post('/opening/newopening', 'Warehouse\InventuryController@index');
 // ---------------------------------------------------------------------------------------------------------------
 Route::post('/Warehouse/pricing', 'Warehouse\InventuryController@pricing');

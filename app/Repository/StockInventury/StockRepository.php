@@ -13,29 +13,7 @@ use App\Models\Stock;
     {
     }
 
-    // abstract function Stock();
-    
-
-    // function refresh_stock_table($type_refresh = null)
-    // {
-
-    //     if ($this->core->stock_f != 0) {
-    //         return 0;
-    //     }
-
-    //     $type = ($type_refresh) ? $type_refresh : $this->core->data['type_refresh'];
-
-    //     // return $type;
-    //     $stock_f = DB::table('stocks')
-    //         ->where('type_operation', $this->core->data['type'])
-    //         ->where('unit_id', $this->core->unit_array[0])
-    //         ->$type('quantity', $this->core->micro_unit_qty);
-    //         // ->$type('quantity', $this->core->data['qty'][$this->core->value]);
-
-
-    //     $this->core->stock_f = $stock_f;
-    //     return $this;
-    // }
+  
 
     function stock()
     {
@@ -57,7 +35,6 @@ use App\Models\Stock;
         $stocks->save();
 
 
-        // }
     }
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Warehouse;
 
-use App\RepositoryInterface\DetailRepositoryInterface;
+
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
 use App\Traits\Invoice\InvoiceTrait;
@@ -11,15 +11,17 @@ use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use App\Models\Temporale;
 use App\Models\Status;
-
-use DB;
-
+use App\Services\OpeningService;
+use Illuminate\Support\Facades\DB;
 
 class InventuryController extends Controller
 {
     use InvoiceTrait, DetailsTrait, GeneralTrait;
-    protected DetailRepositoryInterface $details;
-  
+
+
+
+
+
     public function index()
     {
 
@@ -27,56 +29,36 @@ class InventuryController extends Controller
         $statuses = Status::all();
 
         return response()->json([
-     
+
             'statuses' => $statuses
         ]);
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, OpeningService $stock)
     {
 
 
-        $data = [];
-        // dd($request->all());
+
+        dd($request->all());
         // -------------------------------------------------------------------------------------
 
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
-            foreach ($request->post('count') as $value) {
+            foreach ($stock->core->data['count'] as $value) {
 
+                $stock->core->setValue($value);
 
-
-                $stock_f = 0;
-                $store_product_f = 0;
-
-                $store_product_f = $this->refresh_store(data: $data); // this make updating for store_products
-
-                $id_store_product = $this->get($data);  //this get data from store_products
-
-                if ($store_product_f == 0) {
-                    $id_store_product = $this->init_store(data: $data);
-                } // this make intial for store_products if it is empty
-
-                $r = $this->details->init_details(
-                    id_store_product: $id_store_product,
-                    data: $data
-                );
-                // dd($r);
-
-                $stock_f = $this->refresh_stock(data: $data); // this make update for stock table
-
-                if ($stock_f == 0) {
-
-                    $this->init_stock(data: $data); //this make intial for stock table if it is empty 
-                }
+                $stock->handle_core();
             }
+
+
 
             // ------------------------------------------------------------------------------------------------------
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
             return response([
-                'message' => "purchase created successfully",
+                'message' => " created successfully",
                 'status' => "success"
             ], 200);
         } catch (\Exception $exp) {
@@ -90,6 +72,10 @@ class InventuryController extends Controller
 
         return response()->json(['message' => 'success']);
     }
+
+
+
+
 
 
     public function show(Request $request)

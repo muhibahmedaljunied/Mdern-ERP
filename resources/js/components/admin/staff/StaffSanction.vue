@@ -4,8 +4,8 @@
       <div class="col-lg-12 col-md-12">
         <div class="card" id="basic-alert">
           <div class="card-header">
-              مكافئات وجزاءات الموظف
-            </div>
+            مكافئات وجزاءات الموظف
+          </div>
           <div class="card-body">
             <!-- <div>
 					<h6 class="card-title mb-1">Basic Style Tabs</h6>
@@ -18,9 +18,12 @@
                     <div class="tabs-menu1">
                       <!-- Tabs -->
                       <ul class="nav panel-tabs main-nav-line">
+                       
+                    
+                   
                         <li class="nav-item">
-                          <a href="#tab1" class="nav-link" data-toggle="tab"> الغياب </a>
-                        </li>
+                          <a href="#tab1" class="nav-link" data-toggle="tab"> الغياب </a>                        </li>
+
                         <li class="nav-item">
                           <a href="#tab2" class="nav-link" data-toggle="tab"> التأخير </a>
                         </li>
@@ -30,8 +33,10 @@
                         <li class="nav-item">
                           <a href="#tab4" class="nav-link" data-toggle="tab"> الانصراف المبكر</a>
                         </li>
-                    
                        
+
+                        
+                  
 
 
                       </ul>
@@ -47,22 +52,24 @@
                       <div class="tab-pane active" id="tab1">
                         <staff-absence-sanction></staff-absence-sanction>
                       </div>
-                      <div class="tab-pane active" id="tab2">
+                 
+                      <div class="tab-pane" id="tab2">
                         <staff-delay-sanction></staff-delay-sanction>
                       </div>
-                      <div class="tab-pane active" id="tab3">
+
+                      <div class="tab-pane" id="tab3">
                         <staff-extra-sanction></staff-extra-sanction>
                       </div>
-                      <div class="tab-pane active" id="tab4">
+                      <div class="tab-pane" id="tab4">
                         <staff-leave-sanction></staff-leave-sanction>
                       </div>
-                  
                     
-
+                     
                     </div>
                   </div>
                 </div>
 
+                <!-- End Prism Precode -->
               </div>
             </div>
           </div>

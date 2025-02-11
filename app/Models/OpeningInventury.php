@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class OpeningInventury extends Model
 {
 
-    protected $fillable = [
-    ];
+    protected $fillable = [];
 
 
-    
-    
+
+    public function stock()
+    {
+        return $this->morphMany(Stock::class, 'stockable');
+    }
 }

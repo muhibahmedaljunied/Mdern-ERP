@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repository\Stock\CashRepository;
 use App\Repository\Stock\CashReturnRepository;
+use App\Repository\Stock\OpeningRepository;
 use Illuminate\Support\ServiceProvider;
 use App\RepositoryInterface\WarehouseRepositoryInterface;
 use App\Repository\Stock\PurchaseReturnRepository;
@@ -73,6 +74,7 @@ class WarehouseServiceProvider extends ServiceProvider
                 return new TransferRepository();
             }
 
+        
 
             // return new PurchaseRepository();
         });

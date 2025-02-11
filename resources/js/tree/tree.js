@@ -1,5 +1,6 @@
 import tree_product from "./tree_product.js";
 import tree_account from "./tree_account.js";
+
 export default {
     mixins: [tree_account, tree_product],
     methods: {
@@ -212,9 +213,10 @@ export default {
                                     );
                                 }
 
-                                if (gf.type == "Opening") {
-                                    gf.store[gf.indexselected] = data.node.id;
-                                }
+                                // if (gf.type == "OpeningInventory") {
+                                //     gf.store[gf.indexselected] = data.node.id;
+
+                                // }
 
                                 if (
                                     gf.type == "Stock" ||
@@ -334,11 +336,11 @@ export default {
                     config
                 )
                 .then(function (response) {
-                    console.log("dfdf", response);
+                    // console.log("dfdf", response);
                     // currentObj.success = response.data.success;
                     // currentObj.filename = "";
 
-                    toastMessage("تم الاضافه بنجاح");
+                    // toastMessage("تم الاضافه بنجاح");
                 })
                 .catch((error) => {
                     // message = {

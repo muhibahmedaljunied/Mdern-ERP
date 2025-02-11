@@ -1,21 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-
-use Milon\Barcode\DNS1D;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Stock;
 use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use App\Traits\Unit\UnitsTrait;
 use App\Http\Controllers\Controller;
-use App\Models\Cash;
-use App\Models\Purchase;
-use App\Models\Sale;
 use App\Models\Status;
-use App\Models\Supply;
 use App\Repository\Qty\QtyStockRepository;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -50,10 +43,6 @@ class StockController extends Controller
 
 
         $qty->handle_qty();
-
-
-
-
 
         return response()->json(['stocks' => $qty->details]);
     }

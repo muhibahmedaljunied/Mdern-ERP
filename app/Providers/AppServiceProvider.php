@@ -29,10 +29,9 @@ class AppServiceProvider extends ServiceProvider
     {
 
 
-      
-        
 
 
+   
         $this->app->singleton(CoreStaffAttendanceService::class);
 
         $this->app->singleton('delay_sanction', function () {

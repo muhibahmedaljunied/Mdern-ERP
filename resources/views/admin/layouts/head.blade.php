@@ -4,28 +4,18 @@
 <title> Valex -  Premium dashboard ui bootstrap rwd admin html5 template </title>
 
 
-
- <!-- this style for button of show tree and select item  -->
-<link href="{{URL::asset('assets/css/custom-search.css')}}" rel="stylesheet">  
-<link href="{{URL::asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{URL::asset('assets/css/jstree.css')}}" >
-<link href="{{URL::asset('assets/css/jquery-ui.min.css')}}" rel="stylesheet">
-<link rel="icon" href="{{URL::asset('assets/img/brand/favicon.png')}}" type="image/x-icon"/>
+<link href="{{URL::asset('css/app.css')}}" rel="stylesheet">  
+<!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> -->
 <link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/css/estilos_factura.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet"/>
-<link href="{{URL::asset('assets/plugins/sidebar/sidebar.css')}}" rel="stylesheet">                   
-<link rel="stylesheet" href="{{URL::asset('assets/css-rtl/sidemenu.css')}}">
-<link href="{{URL::asset('assets/css-rtl/style.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/css-rtl/skin-modes.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/css/style copy.css')}}" rel="stylesheet">
-
-<link href="{{URL::asset('assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
 
-    
+
+
+
+
+
+
 <style>
     #invoice{
         padding: 30px;

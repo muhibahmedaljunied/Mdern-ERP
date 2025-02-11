@@ -40,7 +40,7 @@
 
 	@include('admin.layouts.footer-scripts')
 	<!-- this for multiple select  -->
-	<script>
+	<!-- <script>
 		$(document).ready(function() {
 
 			var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
@@ -52,7 +52,7 @@
 
 
 		});
-	</script>
+	</script> -->
 	
 </body>
 

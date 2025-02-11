@@ -4,12 +4,129 @@
             <div class="container-fluid">
 
                 <div class="card text-right">
-                    <div class="card-header">
+          <div class="card-header">
+
+
+            <h3>  <span id="codigo">المخزون الافتتاحي</span></h3>
+
+            <!-- <h1 class="card-title"> المخزون الافتتاحي</h1> -->
+          </div>
+          <div class="card-body">
+
+
+            <div class="row">
+
+
+
+              <div class="col-md-4">
+                <label for="pagoPrevio">المخزن</label>
+                <div class="custom-search">
+
+                  <input style="background-color: beige;font-size: 15px;" :id="'OpeningInventory_store_tree'" type="text"
+                    readonly class="custom-search-input">
+                  <input :id="'OpeningInventory_store_tree_id'" type="hidden" readonly class="custom-search-input">
+                  <input :id="'select_account_Purchase'" type="hidden" readonly class="custom-search-input">
+
+
+                  <button class="custom-search-botton" type="button" data-toggle="modal" @click="detect_index(null)"
+                    data-target="#exampleModalStore">
+                    <i class="fa fa-plus-circle"></i></button>
+                </div>
+
+              </div>
+              <div class="col-md-4">
+                <label for="pagoPrevio">المنتج</label>
+                <div class="custom-search">
+
+                  <input style="background-color: beige;font-size: 15px;" :id="'OpeningInventory_product_tree'" type="text"
+                    readonly class="custom-search-input">
+                  <input :id="'OpeningInventory_product_tree_id'" type="hidden" readonly class="custom-search-input">
+                  <input :id="'select_account_Purchase'" type="hidden" readonly class="custom-search-input">
+
+
+                  <button class="custom-search-botton" type="button" data-toggle="modal" @click="detect_index(null)"
+                    data-target="#exampleModalProduct">
+                    <i class="fa fa-plus-circle"></i></button>
+                </div>
+
+              </div>
+
+              <div class="col-md-4">
+                <label > الحساب</label>
+                <div class="custom-search">
+
+                  <input :id="'OpeningInventory_account_tree'" type="text" readonly class="custom-search-input">
+                  <input :id="'OpeningInventory_account_tree_id'" type="hidden" readonly class="custom-search-input">
+
+
+                  <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
+                    data-target="#exampleModalAccount">
+                    <i class="fa fa-plus-circle"></i></button>
+                </div>
+              </div>
+
+              
+
+
+
+
+
+
+
+
+            </div>
+            <br />
+            <hr>
+       
+
+            <br />
+
+            <div class="row">
+
+
+
+
+
+              <div class="col-md-3">
+                <label for="cliente"> الحساب التفصيلي</label>
+
+                <select class="form-control" style="background-color: beige;" name="forma_pago"
+                  id="select_account_Purchase_group">
+
+                </select>
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="pagoPrevio">البيان</label>
+
+
+                <input class="form-control" style="background-color: beige;" type="text" v-model="description">
+
+
+              </div>
+
+              <div class="col-md-2">
+                <label for="date">التاريخ</label><br />
+
+                <input class="form-control" style="background-color: beige;" name="date" type="date" v-model="date" />
+              </div>
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+                <div class="card text-right">
+                    <!-- <div class="card-header">
 
                         <h1 class="card-title"> المخزون الافتتاحي</h1>
-                    </div>
+                    </div> -->
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
+                        <h5 class="card-title">المخزون الافتتاحي  </h5>
                         <div class="table-responsive">
                             <table class="table table-bordered text-right" style="width: 100%; font-size: x-large">
                                 <thead>
@@ -44,9 +161,9 @@
 
                                             <div class="custom-search">
 
-                                                <input :id="'Opening_product_tree' + index" type="text" readonly
+                                                <input :id="'OpeningInventory_product_tree' + index" type="text" readonly
                                                     class="custom-search-input">
-                                                <input :id="'Opening_product_tree_id' + index" type="hidden" readonly
+                                                <input :id="'OpeningInventory_product_tree_id' + index" type="hidden" readonly
                                                     class="custom-search-input">
 
                                                 <button class="custom-search-botton" type="button" data-toggle="modal"
@@ -59,8 +176,8 @@
 
                                         <td>
                                             <div id="factura_producto">
-                                                <select v-model="status[index]" name="type" id="type" class="form-control"
-                                                    required>
+                                                <select v-model="status[index]" name="type" id="type"
+                                                    class="form-control" required>
 
                                                     <option v-for="status in statuses" v-bind:value="status.id">
                                                         {{ status.name }}
@@ -71,7 +188,8 @@
 
                                         <td>
                                             <div id="factura_producto">
-                                                <input type="text" v-model="desc[index]" id="desc" class="form-control" />
+                                                <input type="text" v-model="desc[index]" id="desc"
+                                                    class="form-control" />
                                             </div>
                                         </td>
 
@@ -88,13 +206,13 @@
 
                                             <div class="custom-search">
 
-                                                <input :id="'Opening_store_tree' + index" type="text" readonly
+                                                <input :id="'OpeningInventory_store_tree' + index" type="text" readonly
                                                     class="custom-search-input">
-                                                <input :id="'Opening_store_tree_id' + index" type="hidden" readonly
+                                                <input :id="'OpeningInventory_store_tree_id' + index" type="hidden" readonly
                                                     class="custom-search-input">
 
                                                 <button class="custom-search-botton" type="button" data-toggle="modal"
-                                                    data-target="#exampleModalStore" @click="detect_index_store(index)">
+                                                    data-target="#exampleModalStore" @click="detect_index(index)">
                                                     <i class="fa fa-plus-circle"></i></button>
                                             </div>
                                         </td>
@@ -118,8 +236,8 @@
                                         </td>
 
                                         <td>
-                                            <input @input="calculate_price(price[index], qty[index], index)" type="number"
-                                                v-model="qty[index]" id="qty" class="form-control" />
+                                            <input @input="calculate_price(price[index], qty[index], index)"
+                                                type="number" v-model="qty[index]" id="qty" class="form-control" />
                                         </td>
 
 
@@ -153,17 +271,23 @@
 
                                         </td>
                                     </tr>
+                                    <tr>
+
+                                        <td colspan="9"></td>
+                                        <td>
+                                            <a href="javascript:void" @click="add_opening()"
+                                                class="btn btn-primary"><span>تاكيد
+                                                    العمليه</span></a>
+                                        </td>
+                                    </tr>
 
 
                                 </tbody>
                             </table>
                         </div>
-                        <a href="javascript:void" @click="add_opening()" class="btn btn-primary"><span>تاكيد
-                                العمليه</span></a>
+
                     </div>
-                    <div class="card-footer text-muted">
-                        2 days ago
-                    </div>
+
                 </div>
 
 
@@ -211,7 +335,8 @@
                 <div class="row" style="font-size: 10pt">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
+                            <table class="table table-bordered text-right m-t-30"
+                                style="width: 100%; font-size: x-small">
                                 <thead>
                                     <tr>
                                         <th style="width: 60px">#</th>
@@ -247,8 +372,8 @@
                                                 <i class="fa fa-trash"></i></button>
 
                                             <router-link to="/opening_supply"
-                                                class="tn btn-info btn-sm waves-effect btn-agregar" data-toggle="tooltip"
-                                                title="تعديل">
+                                                class="tn btn-info btn-sm waves-effect btn-agregar"
+                                                data-toggle="tooltip" title="تعديل">
                                                 <i class="fa fa-edit"></i></router-link>
                                         </td>
                                     </tr>
@@ -280,11 +405,11 @@ export default {
 
     mixins: [tree, operation],
 
-    data(){
+    data() {
 
-        return{
+        return {
 
-                  all_products: '',
+            all_products: '',
             jsonTreeData: '',
             type_of_tree: 1,
             indexselected: '',
@@ -315,11 +440,11 @@ export default {
 
     mounted() {
         this.list();
-        this.type_of_tree = 1;
-        this.showtree('product');
-        this.showtree('store');
         this.counts[0] = 1;
-        this.type = 'Opening';
+        this.type = 'OpeningInventory';
+        this.type_of_tree = 1;
+        this.showtree('store', 'tree_store');
+        this.showtree('product', 'tree_product');
         this.type_refresh = 'increment';
 
 
@@ -352,9 +477,9 @@ export default {
         add_opening() {
 
             this.axios
-                .post("add_Opening", {
-                    date: this.date,
+                .post("/payOpening", {
                     count: this.counts,
+                    date: this.date,
                     product_id: this.product,
                     store_id: this.store,
                     type: this.type,
@@ -373,7 +498,7 @@ export default {
                 .then(function (response) {
                     console.log(response);
                     if (response.data.message != 0) {
-                        toastMessage("تم التحويل بنجاح");
+                        toastMessage("تمت العمليه بنجاح");
                         this.$router.go(0);
                     } else {
                         toastMessage("فشل", response.data.text);
@@ -408,12 +533,10 @@ export default {
     },
 };
 </script>
-  
+
 <style scoped>
 th,
 td {
     text-align: center;
 }
 </style>
-
-

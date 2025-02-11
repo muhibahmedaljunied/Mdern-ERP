@@ -6,7 +6,6 @@ use App\Models\Account;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
-use App\Models\StoreAccount;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\StoreImport;
@@ -44,15 +43,19 @@ class StoreController extends Controller
     public function tree_store()
     {
 
-        $stores =  Cache::rememberForever('tree_store_stores', function () {
+        // $stores =  Cache::rememberForever('tree_store_stores', function () {
+        // return Store::where('parent_id', null)->with('children')->get();
+        $stores = Store::where('parent_id', null)->with('children')->get();
+        // });
+        // $last_nodes = Cache::rememberForever('tree_store_last_nodes', function () {
 
-            return Store::where('parent_id', null)->with('children')->get();
-        });
-        $last_nodes = Cache::rememberForever('tree_store_last_nodes', function () {
-
-            return Store::where('parent_id', null)->select('stores.*')->max('id');
-        });
-        return response()->json(['trees' => $stores, 'last_nodes' => $last_nodes]);
+        // return Store::where('parent_id', null)->select('stores.*')->max('id');
+        $last_nodes =  Store::where('parent_id', null)->select('stores.*')->max('id');
+        // });
+        return response()->json([
+            'trees' => $stores,
+            'last_nodes' => $last_nodes
+        ]);
     }
 
 
@@ -130,19 +133,18 @@ class StoreController extends Controller
 
         $filter->store_id =  $request->store_id;
         // dd($request->store_id,$request['account_id']);
-        $this->update_store($request->store_id,$request['account_id']);
+        $this->update_store($request->store_id, $request['account_id']);
         $filter->queryfilter();
 
         foreach ($filter->data as $key => $value) {
 
-         $this->update_store($value,$request['account_id']);
+            $this->update_store($value, $request['account_id']);
         }
 
         return response()->json(['message' => 'sucess']);
-
     }
 
-    public function update_store($value,$account_id)
+    public function update_store($value, $account_id)
     {
         $stores = Store::find($value);
         $stores->update(['account_id' => $account_id]);

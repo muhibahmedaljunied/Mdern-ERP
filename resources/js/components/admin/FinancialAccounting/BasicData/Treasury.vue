@@ -115,25 +115,7 @@
             </div>
           </div>
 
-          <!-- <div class="modal fade" id="exampleModalTreasury" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-
-                  <div class="well" id="treeview_json_account_treasury"></div>
-
-                </div>
-
-              </div>
-            </div>
-          </div> -->
+          
 
 
         </div>
@@ -142,7 +124,25 @@
     <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
- 
+          <div class="card-header">
+          <!-- <span class="h2"> الموردين</span> -->
+
+          <div style="display: flex;float: left; margin: 5px">
+
+
+            <button @click="Export()">
+              <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+            </button>
+
+            <button @click="Import()">
+              <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+            </button>
+
+            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+              aria-haspopup="true" aria-expanded="true" placeholder="بحث عن صندوق" v-model="word_search"
+              @input="get_search()" />
+          </div>
+        </div>
           <div class="card-body" >
             <div class="table-responsive">
               <table class="table table-bordered text-center">

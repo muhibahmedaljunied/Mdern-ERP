@@ -90,6 +90,8 @@ class DetailServiceProvider extends ServiceProvider
 
             } 
 
+      
+
            
 
 
