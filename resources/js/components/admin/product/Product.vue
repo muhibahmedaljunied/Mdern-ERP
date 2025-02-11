@@ -467,6 +467,7 @@ export default {
   },
   mounted() {
     // this.list();
+    alert(111);
     console.log('ffhghghhghhghghhg',window.axios.defaults.baseURL);
     this.counts[0] = 1;
     this.type_of_tree = 0;

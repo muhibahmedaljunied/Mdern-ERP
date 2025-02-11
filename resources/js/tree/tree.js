@@ -5,6 +5,7 @@ export default {
     mixins: [tree_account, tree_product],
     methods: {
         showtree(table, uri, value = null) {
+
             let gf = this;
             var id = `treeview_json_${table}`;
 
