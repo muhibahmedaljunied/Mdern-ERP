@@ -1,73 +1,77 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <!-- row opened -->
 
-    <div class="row row-sm">
+    <div class="card">
+      <div class="card-header pb-0">
+        <div class="d-flex justify-content-between">
+          <span class="h3"> تحويل مخزني</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
           <!-- <form method="post" @submit.prevent="submitForm"> -->
-          <form method="post">
-            <div class="card-header pb-0">
-              <div class="d-flex justify-content-between">
-                <span class="h3"> تحويل مخزني</span>
-              </div>
-            </div>
-            <div class="card-body" id="printme">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <div class="row">
 
 
-                      <div class="col-md-3">
-                        <label for="desde"> المخزن</label>
+          <div class="card-body" id="printme">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <div class="row">
 
-                        <div class="custom-search">
-                          <!-- <input id='product_tree' type="text" class="custom-search-input" readonly> -->
 
-                          <input :id="'Transfer_store_tree'" type="text" readonly class="custom-search-input" />
-                          <input :id="'Transfer_store_tree_id'" type="hidden" readonly class="custom-search-input" />
+                    <div class="col-md-3">
+                      <label for="desde"> المخزن</label>
 
-                          <button class="custom-search-botton" type="button" data-toggle="modal"
-                            data-target="#exampleModalStore">
-                            <i class="fa fa-plus-circle"></i>
-                          </button>
-                        </div>
+                      <div class="custom-search">
+                        <!-- <input id='product_tree' type="text" class="custom-search-input" readonly> -->
+
+                        <input :id="'Transfer_store_tree'" type="text" readonly class="custom-search-input" />
+                        <input :id="'Transfer_store_tree_id'" type="hidden" readonly class="custom-search-input" />
+
+                        <button class="custom-search-botton" type="button" data-toggle="modal"
+                          data-target="#exampleModalStore">
+                          <i class="fa fa-plus-circle"></i>
+                        </button>
                       </div>
-
-
-                      <div class="col-md-3">
-                        <label for="desde"> المخزن المحول اليه</label>
-
-                        <div class="custom-search">
-                          <!-- <input id='product_tree' type="text" class="custom-search-input" readonly> -->
-
-                          <input style="background-color: beige;" :id="'Transfer_intostore_tree'" type="text" readonly class="custom-search-input" />
-                          <input :id="'Transfer_intostore_tree_id'" type="hidden" readonly
-                            class="custom-search-input" />
-
-                          <button class="custom-search-botton" type="button" data-toggle="modal"
-                            data-target="#exampleModalIntoStore">
-                            <i class="fa fa-plus-circle"></i>
-                          </button>
-                        </div>
-                      </div>
-
                     </div>
+
+
+                    <div class="col-md-3">
+                      <label for="desde"> المخزن المحول اليه</label>
+
+                      <div class="custom-search">
+                        <!-- <input id='product_tree' type="text" class="custom-search-input" readonly> -->
+
+                        <input style="background-color: beige;" :id="'Transfer_intostore_tree'" type="text" readonly
+                          class="custom-search-input" />
+                        <input :id="'Transfer_intostore_tree_id'" type="hidden" readonly class="custom-search-input" />
+
+                        <button class="custom-search-botton" type="button" data-toggle="modal"
+                          data-target="#exampleModalIntoStore">
+                          <i class="fa fa-plus-circle"></i>
+                        </button>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
-              <hr>
-              <br>
+            </div>
+            <hr>
+            <br>
 
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <div class="row">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <div class="row">
 
 
 
-                      <!-- <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <label for="pagoPrevio">البيان</label>
 
 
@@ -75,29 +79,29 @@
 
 
                       </div> -->
-                      <div class="col-md-3">
-                        <label for="pagoPrevio">سبب التحويل</label>
+                    <div class="col-md-3">
+                      <label for="pagoPrevio">سبب التحويل</label>
 
 
-                        <input class="form-control"  type="text" v-model="note">
+                      <input class="form-control" type="text" v-model="note">
 
-
-                      </div>
-                      <div class="col-md-3">
-                        <label for="desde">تاريخ التحويل </label>
-                        <input style="background-color: beige;" type="date" class="form-control hasDatepicker"
-                          id="modal_reporte_venta_inicio" name="modal_reporte_venta_inicio" v-model="date"
-                          onkeypress="return controltag(event)" />
-                      </div>
 
                     </div>
+                    <div class="col-md-3">
+                      <label for="desde">تاريخ التحويل </label>
+                      <input style="background-color: beige;" type="date" class="form-control hasDatepicker"
+                        id="modal_reporte_venta_inicio" name="modal_reporte_venta_inicio" v-model="date"
+                        onkeypress="return controltag(event)" />
+                    </div>
+
                   </div>
                 </div>
               </div>
-  
-
             </div>
-          </form>
+
+
+          </div>
+
           <!-- </form> -->
         </div>
         <div class="modal fade" id="exampleModalProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -156,9 +160,9 @@
         <div class="card">
           <!-- <form method="post" @submit.prevent="submitForm"> -->
           <form method="post">
-          
+
             <div class="card-body" id="printme">
-      
+
 
               <div class="row">
 
@@ -334,12 +338,15 @@ temx.name }}</span>
           </form>
           <!-- </form> -->
         </div>
-     
 
-  
+
+
       </div>
 
     </div>
+      </div>
+    </div>
+
   </div>
 
 </template>

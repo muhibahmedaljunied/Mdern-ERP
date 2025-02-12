@@ -1,12 +1,16 @@
 <template>
   <div class="row row-sm">
-    <div class="col-xl-12">
-      <div class="card">
-        <div class="card-header">
+
+    <div class="card">
+      <div class="card-header">
           <span class="h2"> الموردين</span>
 
 
         </div>
+      <div class="card-body">
+        <div class="col-xl-12">
+      <div class="card">
+      
 
         <div class="card-body">
           <form method="post" enctype="multipart/form-data">
@@ -165,6 +169,9 @@
         </div>
       </div>
     </div>
+      </div>
+    </div>
+   
   </div>
 </template>
 <script>

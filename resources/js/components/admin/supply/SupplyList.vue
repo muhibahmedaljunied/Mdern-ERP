@@ -1,23 +1,29 @@
 <template>
-  <div>
-    <div class="row row-sm">
+  <div class="container-fluid">
+
+    <div class="card">
+
+      <div class="card-header pb-0">
+
+<span class="h3"> اوامرالتوريد</span>
+<div style="display: flex;float: left; margin: 5px">
+
+  <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+    aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+    @input="get_search()" />
+
+
+  <!-- 774899393 -->
+
+</div>
+
+</div>
+
+<div class="card-body">
+  <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
-          <div class="card-header pb-0">
-
-            <span class="h3"> اوامرالتوريد</span>
-            <div style="display: flex;float: left; margin: 5px">
-
-              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
-                @input="get_search()" />
-
-
-              <!-- 774899393 -->
-
-            </div>
-
-          </div>
+      
 
 
 
@@ -143,7 +149,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <span class="h2">تفاصيل الوارد</span>
+            <span class="h2">التفاصيل</span>
 
 
           </div>
@@ -243,6 +249,9 @@ temx.name }}</span>
         </div>
       </div>
     </div>
+</div>
+    </div>
+
   </div>
 </template>
 <script>

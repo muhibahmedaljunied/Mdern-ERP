@@ -3,242 +3,246 @@
     <div class="container-fluid">
 
 
-      <div class="row">
-
-        <div class="card text-right">
-          <div class="card-header">
-            <h3>فاتوره مبيعات <span id="codigo"></span></h3>
-          </div>
-          <div class="card-body">
-            <div class="row">
-
-              <div class="col-md-4">
-                <h5 class="card-title"> المنتج</h5>
-                <div class="custom-search">
-
-                  <input :id="'Sale_product_tree'" type="text" class="custom-search-input">
-                  <input :id="'Sale_product_tree_id'" type="hidden" class="custom-search-input">
-
-                  <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
-                    data-target="#exampleModalProduct">
-                    <i class="fa fa-plus-circle"></i></button>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <h5 class="card-title"> المخزن</h5>
-                <div class="custom-search">
-
-                  <input :id="'Sale_store_tree'" type="text" class="custom-search-input">
-                  <input :id="'Sale_store_tree_id'" type="hidden" class="custom-search-input">
-                  <input :id="'select_account_Sale'" type="hidden" class="custom-search-input">
-
-
-                  <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
-                    data-target="#exampleModalStore">
-                    <i class="fa fa-plus-circle"></i></button>
-                </div>
-              </div>
-
-
-            </div>
-            <br />
-            <hr>
-            <div class="row">
-
-              <div class="col-md-2">
-                <label for="FormaPago">طريقه الدفع</label>
-                <select style="background-color: beige;" name="forma_pago" class="form-control" id="forma_pago"
-                  v-model="Way_to_pay_selected" v-on:change="onwaychange">
-                  text
-
-                  <option v-bind:value="1">نقد</option>
-                  <option v-bind:value="2">أجل</option>
-                  <option v-bind:value="3">بنك</option>
-                </select>
-              </div>
-
-              <div class="col-md-3" v-if="Way_to_pay_selected != 2">
-                <label for="cliente"> العميل</label>
-
-                <select class="form-control" style="background-color: beige;" v-model="customer" id="customer">
-                  <option v-for="cus in customers" v-bind:value="[cus.id, cus.name]">
-                    {{ cus.name }}
-                  </option>
-                </select>
-              </div>
-
-              <div class="col-md-2"> <label for="pagoPrevio">نوع العمله</label>
-                <select name="forma_pago" class="form-control" id="forma_pago">
-                  <option v-bind:value="2">ريال يمني </option>
-                  <option v-bind:value="1">دولار امريكي</option>
-                  <option v-bind:value="2">ريال سعودي </option>
-                </select>
-              </div>
-
-              <div class="col-md-3">
-                <label for="date">التاريخ</label><br />
-
-                <input style="background-color: beige;" name="date" type="date" v-model="date" class="form-control" />
-              </div>
-
-
-
-
-
-
-
-
-            </div>
-            <br />
-            <hr>
-
-            <div class="row">
-
-
-              <div class="col-md-4">
-                <h5 class="card-title"> الحساب</h5>
-                <div class="custom-search">
-
-                  <input :id="'Sale_account_tree'" type="text" class="custom-search-input">
-                  <input :id="'Sale_account_tree_id'" type="hidden" class="custom-search-input">
-                  <!-- <input :id="'Sale_store_tree_id'" type="hidden"  class="custom-search-input"> -->
-
-
-                  <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
-                    data-target="#exampleModalAcoount">
-                    <i class="fa fa-plus-circle"></i></button>
-                </div>
-              </div>
-              <div class="col-md-2">
-                <label for="cliente"> الحساب التفصيلي</label>
-
-
-                <select class="form-control" style="background-color: beige;" name="forma_pago"
-                  id="select_account_Sale_group">
-
-                </select>
-
-              </div>
-
-
-
-              <div class="col-md-4">
-                <label for="pagoPrevio">البيان</label>
-
-
-                <input class="form-control" style="background-color: beige;" type="text" v-model="description">
-
-
-              </div>
-
-
-
-
-            </div>
-          
-      
-
-          </div>
-
+      <div class="card">
+        <div class="card-header">
+          <h3>فاتوره مبيعات <span id="codigo"></span></h3>
         </div>
+        <div class="card-body">
+
+          <div class="row">
+
+<div class="card text-right">
+
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-md-4">
+        <h5 class="card-title"> المنتج</h5>
+        <div class="custom-search">
+
+          <input :id="'Sale_product_tree'" type="text" class="custom-search-input">
+          <input :id="'Sale_product_tree_id'" type="hidden" class="custom-search-input">
+
+          <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
+            data-target="#exampleModalProduct">
+            <i class="fa fa-plus-circle"></i></button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5 class="card-title"> المخزن</h5>
+        <div class="custom-search">
+
+          <input :id="'Sale_store_tree'" type="text" class="custom-search-input">
+          <input :id="'Sale_store_tree_id'" type="hidden" class="custom-search-input">
+          <input :id="'select_account_Sale'" type="hidden" class="custom-search-input">
+
+
+          <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
+            data-target="#exampleModalStore">
+            <i class="fa fa-plus-circle"></i></button>
+        </div>
+      </div>
+
+
+    </div>
+    <br />
+    <hr>
+    <div class="row">
+
+      <div class="col-md-2">
+        <label for="FormaPago">طريقه الدفع</label>
+        <select style="background-color: beige;" name="forma_pago" class="form-control" id="forma_pago"
+          v-model="Way_to_pay_selected" v-on:change="onwaychange">
+          text
+
+          <option v-bind:value="1">نقد</option>
+          <option v-bind:value="2">أجل</option>
+          <option v-bind:value="3">بنك</option>
+        </select>
+      </div>
+
+      <div class="col-md-3" v-if="Way_to_pay_selected != 2">
+        <label for="cliente"> العميل</label>
+
+        <select class="form-control" style="background-color: beige;" v-model="customer" id="customer">
+          <option v-for="cus in customers" v-bind:value="[cus.id, cus.name]">
+            {{ cus.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-2"> <label for="pagoPrevio">نوع العمله</label>
+        <select name="forma_pago" class="form-control" id="forma_pago">
+          <option v-bind:value="2">ريال يمني </option>
+          <option v-bind:value="1">دولار امريكي</option>
+          <option v-bind:value="2">ريال سعودي </option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="date">التاريخ</label><br />
+
+        <input style="background-color: beige;" name="date" type="date" v-model="date" class="form-control" />
+      </div>
+
+
+
+
+
+
+
+
+    </div>
+    <br />
+    <hr>
+
+    <div class="row">
+
+
+      <div class="col-md-4">
+        <h5 class="card-title"> الحساب</h5>
+        <div class="custom-search">
+
+          <input :id="'Sale_account_tree'" type="text" class="custom-search-input">
+          <input :id="'Sale_account_tree_id'" type="hidden" class="custom-search-input">
+          <!-- <input :id="'Sale_store_tree_id'" type="hidden"  class="custom-search-input"> -->
+
+
+          <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
+            data-target="#exampleModalAcoount">
+            <i class="fa fa-plus-circle"></i></button>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="cliente"> الحساب التفصيلي</label>
+
+
+        <select class="form-control" style="background-color: beige;" name="forma_pago"
+          id="select_account_Sale_group">
+
+        </select>
 
       </div>
 
-      <div class="row">
 
-        <div class="card text-right">
-       
-          <div class="card-body">
-      
 
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table table-bordered text-right" style="width: 100%; font-size: x-large">
-                  <thead>
-                    <tr>
-                      <!-- <th>Code</th> -->
-                      <th>المنتج</th>
-                      <th>الباركود</th>
-                      <th>المخزن</th>
-                      <th>الحاله</th>
-                      <th> المواصفات والطراز</th>
-                      <th>الكميه المنوفره</th>
-                      <th>الوحده</th>
-                      <!-- <th>التكلفه</th> -->
-                      <!-- <th>التكلفه</th> -->
-                      <th> سعر البيع </th>
+      <div class="col-md-4">
+        <label for="pagoPrevio">البيان</label>
 
-                      <th>الكميه</th>
-                      <th>الضريبه</th>
-                      <th>الاجمالي</th>
 
-                      <th>ملاحظه</th>
-                      <th>اضافه</th>
-                    </tr>
-                  </thead>
-                  <tbody v-if="detail && detail.length > 0">
-                    <!-- <tr v-for="(products, index) in product"> -->
-                    <tr v-for="(product, index) in detail" :key="index">
-                      <!-- <td><input type="text" value="123" id="codigo0" class="form-control input_codigo" =""></td> -->
-                      <td>
-                        <div id="factura_producto" class="input_nombre">
-                          {{
-                            product.product
-                          }}<input type="hidden" v-model="product.id" id="id" />
-                        </div>
-                      </td>
+        <input class="form-control" style="background-color: beige;" type="text" v-model="description">
+
+
+      </div>
 
 
 
-                      <td>
 
-                        <vue-barcode :value="product.product_code" tag="svg"></vue-barcode>
-                      </td>
-
+    </div>
+  
 
 
-                      <td>
-                        <div id="factura_producto" class="input_nombre">
-                          {{
-                            product.store
-                          }}<input type="hidden" v-model="product.store_id" id="store_temporale" />
-                        </div>
-                      </td>
+  </div>
 
-                      <td>
-                        <div id="factura_producto" class="input_nombre">
-                          {{ product.status }}
-                        </div>
-                      </td>
-                      <td>
-                        <div id="factura_producto" class="input_nombre">
-                          {{ product.desc }}
-                        </div>
-                      </td>
-                      <td>
-                        <div id="factura_producto" class="input_nombre" v-if="product.availabe_qty">
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="card text-right">
+
+  <div class="card-body">
 
 
-                          <div v-for="temx in product.qty_after_convert['quantity']">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered text-right" style="width: 100%; font-size: x-large">
+          <thead>
+            <tr>
+              <!-- <th>Code</th> -->
+              <th>المنتج</th>
+              <th>الباركود</th>
+              <th>المخزن</th>
+              <th>الحاله</th>
+              <th> المواصفات والطراز</th>
+              <th>الكميه المنوفره</th>
+              <th>الوحده</th>
+              <!-- <th>التكلفه</th> -->
+              <!-- <th>التكلفه</th> -->
+              <th> سعر البيع </th>
+
+              <th>الكميه</th>
+              <th>الضريبه</th>
+              <th>الاجمالي</th>
+
+              <th>ملاحظه</th>
+              <th>اضافه</th>
+            </tr>
+          </thead>
+          <tbody v-if="detail && detail.length > 0">
+            <!-- <tr v-for="(products, index) in product"> -->
+            <tr v-for="(product, index) in detail" :key="index">
+              <!-- <td><input type="text" value="123" id="codigo0" class="form-control input_codigo" =""></td> -->
+              <td>
+                <div id="factura_producto" class="input_nombre">
+                  {{
+                    product.product
+                  }}<input type="hidden" v-model="product.id" id="id" />
+                </div>
+              </td>
 
 
 
-                            <span v-for="temx2 in temx">
+              <td>
 
-
-                              <span style="float: right;">
-                                {{ temx2[0] }}
-                                <span style="color: red;">
-                                  {{ temx2[1] }}
-                                </span>
-
-                              </span>
+                <vue-barcode :value="product.product_code" tag="svg"></vue-barcode>
+              </td>
 
 
 
-                            </span>
+              <td>
+                <div id="factura_producto" class="input_nombre">
+                  {{
+                    product.store
+                  }}<input type="hidden" v-model="product.store_id" id="store_temporale" />
+                </div>
+              </td>
 
-                            <!-- <span v-if="temx.unit_type == 0">
+              <td>
+                <div id="factura_producto" class="input_nombre">
+                  {{ product.status }}
+                </div>
+              </td>
+              <td>
+                <div id="factura_producto" class="input_nombre">
+                  {{ product.desc }}
+                </div>
+              </td>
+              <td>
+                <div id="factura_producto" class="input_nombre" v-if="product.availabe_qty">
+
+
+                  <div v-for="temx in product.qty_after_convert['quantity']">
+
+
+
+                    <span v-for="temx2 in temx">
+
+
+                      <span style="float: right;">
+                        {{ temx2[0] }}
+                        <span style="color: red;">
+                          {{ temx2[1] }}
+                        </span>
+
+                      </span>
+
+
+
+                    </span>
+
+                    <!-- <span v-if="temx.unit_type == 0">
 
 
 <span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
@@ -248,269 +252,272 @@ temx.name }}</span>
 
 </span> -->
 
-                          </div>
+                  </div>
 
-                          <!-- <div v-for="temx in product.units">
-
-
-
-
-
-
-                  <span v-if="temx.unit_type == 0">
-
-                    <span v-if="product.quantity / product.rate >= 1">
-                      {{ Math.floor((product.quantity / product.rate)) }}{{
-          product.units[0].name
-        }}
-                    </span>
-
-                    <span v-if="product.quantity % product.rate >= 1">
-                      {{ Math.floor((product.quantity % product.rate)) }}{{
-          product.units[1].name
-        }}
-                    </span>
-                  </span>
-
-
-
-                </div> -->
-
-
-
-                        </div>
-
-                      </td>
-
-
-                      <td>
-                        <div id="factura_producto" class="input_nombre">
+                  <!-- <div v-for="temx in product.units">
 
 
 
 
 
-                          <select v-if="check_state[index] == true" style="background-color: beige;"
-                            :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control" required>
 
-                            <option disabled v-for="unit in product.units" v-bind:value="[unit.unit_id, unit.rate]">
-                              {{ unit.name }}
-                            </option>
+          <span v-if="temx.unit_type == 0">
 
+            <span v-if="product.quantity / product.rate >= 1">
+              {{ Math.floor((product.quantity / product.rate)) }}{{
+  product.units[0].name
+}}
+            </span>
 
-                          </select>
-
-
-                          <select v-on:change="calculate_total(index)" v-else style="background-color: beige;"
-                            :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control" required>
-
-                            <option v-for="unit in product.units" v-bind:value="[unit.unit_id, unit.rate]">
-                              {{ unit.name }}
-                            </option>
-
-
-                          </select>
+            <span v-if="product.quantity % product.rate >= 1">
+              {{ Math.floor((product.quantity % product.rate)) }}{{
+  product.units[1].name
+}}
+            </span>
+          </span>
 
 
 
-
-
-                        </div>
-                      </td>
-                      <td>
-
-
-                        {{ unit_price[index] }}
-                      </td>
-
-                      <!-- <td>
-
-
-              <input v-if="check_state[index] == true" v-model="unit_price[index]"
-                class="form-control input_cantidad" onkeypress="return " readonly />
-
-
-              <input v-else v-model="unit_price[index]" v-on:input="calculate_total(index)"
-                class="form-control input_cantidad" onkeypress="return " />
-            </td> -->
-                      <td>
+        </div> -->
 
 
 
-                        <input v-if="check_state[index] == true" style="background-color: beige;" type="number"
-                          v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeypress="return "
-                          readonly />
+                </div>
 
-                        <input v-else style="background-color: beige;" type="number" @input="calculate_total(index)"
-                          v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeypress="return " />
-                      </td>
-                      <td>
-                        <input v-if="check_state[index] == true" type="number" v-model="tax[index]" id="qty"
-                          class="form-control input_cantidad" onkeypress="return " readonly />
+              </td>
 
-                        <input v-else type="number" v-model="tax[index]" id="qty" class="form-control input_cantidad"
-                          onkeypress="return " @input="calculate_total(index)" />
-                      </td>
 
-                      <td>
-
-                        <input v-if="check_state[index] == true" type="number" v-model="total[index]"
-                          :id="'total_row' + index" class="form-control" readonly />
-
-                        <input v-else @input="calculate_total(index)" type="number" v-model="total[index]"
-                          :id="'total_row' + index" class="form-control" />
-                      </td>
-
-                      <td>
-
-                        <span style="color: red;" :id="'message_validation' + index"></span>
-
-                      </td>
-                      <td>
-                        <input :id="'check_state' + index" v-model="check_state[index]" @change="calculate()"
-                          type="checkbox" class="btn btn-info waves-effect">
-                      </td>
-
-                    </tr>
+              <td>
+                <div id="factura_producto" class="input_nombre">
 
 
 
-                  </tbody>
-                  <tbody v-else>
-                    <tr>
-                      <td align="center" colspan="10">
-                        <h3> لايوجد بيانات </h3>
-                      </td>
-                    </tr>
-                  </tbody>
+
+
+                  <select v-if="check_state[index] == true" style="background-color: beige;"
+                    :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control" required>
+
+                    <option disabled v-for="unit in product.units" v-bind:value="[unit.unit_id, unit.rate]">
+                      {{ unit.name }}
+                    </option>
+
+
+                  </select>
+
+
+                  <select v-on:change="calculate_total(index)" v-else style="background-color: beige;"
+                    :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control" required>
+
+                    <option v-for="unit in product.units" v-bind:value="[unit.unit_id, unit.rate]">
+                      {{ unit.name }}
+                    </option>
+
+
+                  </select>
 
 
 
-                </table>
-              </div>
-            </div>
-      
+
+
+                </div>
+              </td>
+              <td>
+
+
+                {{ unit_price[index] }}
+              </td>
+
+              <!-- <td>
+
+
+      <input v-if="check_state[index] == true" v-model="unit_price[index]"
+        class="form-control input_cantidad" onkeypress="return " readonly />
+
+
+      <input v-else v-model="unit_price[index]" v-on:input="calculate_total(index)"
+        class="form-control input_cantidad" onkeypress="return " />
+    </td> -->
+              <td>
+
+
+
+                <input v-if="check_state[index] == true" style="background-color: beige;" type="number"
+                  v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeypress="return "
+                  readonly />
+
+                <input v-else style="background-color: beige;" type="number" @input="calculate_total(index)"
+                  v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeypress="return " />
+              </td>
+              <td>
+                <input v-if="check_state[index] == true" type="number" v-model="tax[index]" id="qty"
+                  class="form-control input_cantidad" onkeypress="return " readonly />
+
+                <input v-else type="number" v-model="tax[index]" id="qty" class="form-control input_cantidad"
+                  onkeypress="return " @input="calculate_total(index)" />
+              </td>
+
+              <td>
+
+                <input v-if="check_state[index] == true" type="number" v-model="total[index]"
+                  :id="'total_row' + index" class="form-control" readonly />
+
+                <input v-else @input="calculate_total(index)" type="number" v-model="total[index]"
+                  :id="'total_row' + index" class="form-control" />
+              </td>
+
+              <td>
+
+                <span style="color: red;" :id="'message_validation' + index"></span>
+
+              </td>
+              <td>
+                <input :id="'check_state' + index" v-model="check_state[index]" @change="calculate()"
+                  type="checkbox" class="btn btn-info waves-effect">
+              </td>
+
+            </tr>
+
+
+
+          </tbody>
+          <tbody v-else>
+            <tr>
+              <td align="center" colspan="10">
+                <h3> لايوجد بيانات </h3>
+              </td>
+            </tr>
+          </tbody>
+
+
+
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="card text-right">
+
+  <div class="card-body">
+
+
+
+    <div class="row">
+
+      <div class="col-md-8">
+        <div class="row">
+
+
+
+          <div class="col-md-12" v-show="show">
+            <label for="pagoPrevio">المدفوع</label>
+            <input @input="calculate()" type="text" class="form-control" v-model="paid" style="color: red" />
+
+          </div>
+          <div class="col-md-12" v-show="show">
+            <label for="pagoPrevio">المتبقي</label>
+            <input @input="calculate()" type="text" id="remaining" class="form-control" v-model="remaining" />
 
           </div>
 
-        </div>
+          <div class="col-md-3">
+        <label for="pagoPrevio">الخصم (%)</label>
+        <input type="number" @input="take_discount" v-model="discount" :min="0" :max="99" :step="1"
+          oninput="validity.valid||(value='');" class="form-control input_cantidad" onkeypress="return " />
+
+      </div>
+  
+
+
+      <div class="col-md-4">
+        <label for="pagoPrevio">تاريخ الاستحقاق</label>
+        <input type="date" id="remaining" class="form-control" />
 
       </div>
 
-      <div class="row">
-
-        <div class="card text-right">
-      
-          <div class="card-body">
-    
-
-
-            <div class="row">
-
-              <div class="col-md-8">
-                <div class="row">
 
 
 
-                  <div class="col-md-12" v-show="show">
-                    <label for="pagoPrevio">المدفوع</label>
-                    <input @input="calculate()" type="text" class="form-control" v-model="paid" style="color: red" />
+          <div class="col-md-12">
+            <label for="total" class="text-left">المبلغ المستحق</label>
+            <input @input="calculate()" type="text" class="form-control" v-model="To_pay" />
 
-                  </div>
-                  <div class="col-md-12" v-show="show">
-                    <label for="pagoPrevio">المتبقي</label>
-                    <input @input="calculate()" type="text" id="remaining" class="form-control" v-model="remaining" />
+            <!-- <div class="col-md-12 letra_calculator_total text-center" id="div_total">
+    {{ To_pay }}
+  </div> -->
+            <!-- <input type="hidden" name="total" id="total" v-model="To_pay" /> -->
+          </div>
 
-                  </div>
+        </div>
+      </div>
+      <div class="col-md-4">
 
-                  <div class="col-md-3">
-                <label for="pagoPrevio">الخصم (%)</label>
-                <input type="number" @input="take_discount" v-model="discount" :min="0" :max="99" :step="1"
-                  oninput="validity.valid||(value='');" class="form-control input_cantidad" onkeypress="return " />
+        <div class="row">
 
-              </div>
-          
+          <div class="col-md-12">
+            <label for="pagoPrevio">اجمالي الكميه</label>
+            <input @input="calculate()" type="text" id="cantidad_total" class="form-control"
+              v-model="total_quantity" />
+          </div>
 
+          <div class="col-md-12">
 
-              <div class="col-md-4">
-                <label for="pagoPrevio">تاريخ الاستحقاق</label>
-                <input type="date" id="remaining" class="form-control" />
+            <label for="impuestosTotales">اجمالي الضريبه</label>
+            <input @input="calculate()" type="text" id="impuestos_totales" class="form-control"
+              v-model="total_tax" />
 
-              </div>
-
-
-
-
-                  <div class="col-md-12">
-                    <label for="total" class="text-left">المبلغ المستحق</label>
-                    <input @input="calculate()" type="text" class="form-control" v-model="To_pay" />
-
-                    <!-- <div class="col-md-12 letra_calculator_total text-center" id="div_total">
-            {{ To_pay }}
-          </div> -->
-                    <!-- <input type="hidden" name="total" id="total" v-model="To_pay" /> -->
-                  </div>
-
-                </div>
-              </div>
-              <div class="col-md-4">
-
-                <div class="row">
-
-                  <div class="col-md-12">
-                    <label for="pagoPrevio">اجمالي الكميه</label>
-                    <input @input="calculate()" type="text" id="cantidad_total" class="form-control"
-                      v-model="total_quantity" />
-                  </div>
-
-                  <div class="col-md-12">
-
-                    <label for="impuestosTotales">اجمالي الضريبه</label>
-                    <input @input="calculate()" type="text" id="impuestos_totales" class="form-control"
-                      v-model="total_tax" />
-
-                  </div>
+          </div>
 
 
-                  <div class="col-md-12">
-                    <label for="subTotal">الاجمالي (مع الضريبه) <small></small></label>
+          <div class="col-md-12">
+            <label for="subTotal">الاجمالي (مع الضريبه) <small></small></label>
 
-                    <input @input="calculate()" type="text" id="subtotal_general" name="subtotal_general"
-                      class="form-control" v-model="grand_total" />
-                    <input type="hidden" id="subtotal_general_sf" name="subtotal_general_sf" class="form-control"
-                      value="0.00" />
-                  </div>
+            <input @input="calculate()" type="text" id="subtotal_general" name="subtotal_general"
+              class="form-control" v-model="grand_total" />
+            <input type="hidden" id="subtotal_general_sf" name="subtotal_general_sf" class="form-control"
+              value="0.00" />
+          </div>
 
 
-                  <div class="col-md-12">
+          <div class="col-md-12">
 
-                    <label for="subTotal">الاجمالي (بدون ضريبه) <small></small></label>
-                    <input @input="calculate()" type="text" id="subtotal_general_si" name="subtotal_general_si"
-                      class="form-control" value="0.00" v-model="sub_total" />
+            <label for="subTotal">الاجمالي (بدون ضريبه) <small></small></label>
+            <input @input="calculate()" type="text" id="subtotal_general_si" name="subtotal_general_si"
+              class="form-control" value="0.00" v-model="sub_total" />
 
-                  </div>
+          </div>
 
-                  <div class="col-md-12">
-                    <div class="text-center">
-                      <a style="
+          <div class="col-md-12">
+            <div class="text-center">
+              <a style="
 width: 100%;
 padding-top: 0.5em;
 padding-bottom: 0.5em;
 font-size: 18pt;
 " href="javascript:void" @click="payment()" class="btn btn-info waves-effect waves-light" id="pagar">
-                        <i class="fa fa-credit-card"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+                <i class="fa fa-credit-card"></i></a>
             </div>
-
           </div>
-
         </div>
-
       </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+        </div>
+      </div>
+
 
 
 

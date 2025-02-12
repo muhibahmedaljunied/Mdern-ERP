@@ -246,6 +246,7 @@ export default {
     },
 
     list(page = 1) {
+
       this.axios
         .post(`/allowance_type?page=${page}`)
         .then(({ data }) => {

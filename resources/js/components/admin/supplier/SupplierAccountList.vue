@@ -1,10 +1,9 @@
 <template>
     <div class="container-fluid">
 
-        <div class="row row-sm">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-header">
+        <div class="card">
+
+            <div class="card-header">
                         <!-- <span class="h2"> المخزون</span> -->
 
                         <div class="pull-right">
@@ -13,6 +12,13 @@
 
 
                     </div>
+
+
+                    <div class="card-body">
+                        <div class="row row-sm">
+            <div class="col-xl-12">
+                <div class="card">
+              
                     <div class="card-body">
 
                         <div class="row">
@@ -195,6 +201,9 @@
             </div>
             <!--/div-->
         </div>
+                    </div>
+        </div>
+ 
 
     </div>
 </template>

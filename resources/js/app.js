@@ -9,6 +9,7 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 window.axios.defaults.baseURL = "http://localhost/ERP";
 
+
 // ---------------------------- sweetalert ---------------------------------------------------------
 import swal from "sweetalert2";
 
@@ -18,7 +19,7 @@ const toast = swal.mixin({
     toast: true,
     position: "top-center",
     showConfirmButton: false,
-    timer: 3000,
+    timer: 4000,
 });
 window.toast = toast;
 // -----------------------------------This for alert messages ----------------------------------------------

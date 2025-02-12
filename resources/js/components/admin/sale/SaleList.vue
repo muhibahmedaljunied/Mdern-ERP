@@ -1,15 +1,24 @@
 <template>
-  <div>
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-          <div class="card-header pb-0">
+  <div class="container-fluid">
+
+    <div class="card">
+
+
+      <div class="card-body">
+
+        <div class="card-header pb-0">
             <div class="d-flex justify-content-between">
               <span class="h2"> المبيعات</span>
             </div>
             <!-- <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
               aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" /> -->
           </div>
+
+
+          <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+       
           <div class="card-body">
             <div class="table-responsive">
               <table class="table text-md-nowrap" id="example1">
@@ -128,7 +137,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <span class="h2"> تفاصيل البيع</span>
+            <span class="h2"> التفاصيل</span>
 
 
           </div>
@@ -230,6 +239,11 @@ temx.name }}</span>
         </div>
       </div>
     </div>
+
+
+      </div>
+    </div>
+
 
   </div>
 </template>

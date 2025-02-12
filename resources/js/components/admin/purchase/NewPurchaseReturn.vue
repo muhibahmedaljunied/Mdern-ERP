@@ -2,12 +2,18 @@
   <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
+
+        <div class="card">
+
+          <div class="card-header">
                 <span class="h3"> فاتوره مردود مشتريات</span>
               </div>
+
+              <div class="card-body">
+                <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+         
               <div class="text-center">
 
               </div>
@@ -594,6 +600,9 @@ temx.name }}</span>
             </div>
           </div>
         </div>
+              </div>
+        </div>
+   
       </div>
     </section>
   </div>

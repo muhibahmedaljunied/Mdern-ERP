@@ -1,9 +1,11 @@
 <template>
   <!-- row opened -->
-  <div class="row row-sm">
-    <div class="col-xl-12">
-      <div class="card">
-        <div class="card-header">
+
+  <div class="container-fluid">
+
+
+    <div class="card">
+      <div class="card-header">
           <span class="h2"> العملاء</span>
 
           <div style="display: flex;float: left; margin: 5px">
@@ -15,6 +17,11 @@
               @input="get_search()" />
           </div>
         </div>
+      <div class="card-body">
+        <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+  
         <div class="card-body">
           <form method="post" enctype="multipart/form-data">
 
@@ -175,6 +182,10 @@
     </div>
     <!--/div-->
   </div>
+      </div>
+    </div>
+  </div>
+
   <!-- /row -->
 </template>
 <script>

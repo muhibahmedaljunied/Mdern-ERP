@@ -1,13 +1,10 @@
 <template>
   <!-- row opened -->
 
-  <div>
+  <div class="container-fluid">
 
-
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-          <div class="card-header">
+    <div class="card">
+      <div class="card-header">
             <span class="h3">التحويلات المخزنيه</span>
 
 
@@ -24,6 +21,14 @@
 
             </div>
           </div>
+
+          <div class="card-body">
+
+            
+    <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+    
           <div class="card-body" id="printme">
             <div class="row row-sm">
               <div class="table-responsive">
@@ -80,12 +85,8 @@
       <div class="col-xl-12">
         <div class="card">
           <!-- <form method="post" @submit.prevent="submitForm"> -->
-          <form method="post">
-            <div class="card-header pb-0">
-              <div class="d-flex justify-content-between">
-                <span class="h2"> تفاصيل التحويل المخزني </span>
-              </div>
-            </div>
+
+         
             <div class="card-body" id="printme">
               <div class="row">
                 <div class="col-sm-12">
@@ -178,12 +179,15 @@ temx.name }}</span>
                 </table>
               </div>
             </div>
-          </form>
+
           <!-- </form> -->
         </div>
       </div>
       <!--/div-->
     </div>
+          </div>
+    </div>
+
   </div>
 
   <!-- /row -->

@@ -1,16 +1,23 @@
 <template>
   <div class="container-fluid">
 
-    <div class="row row-sm">
+    <div class="card">
+
+      <div class="card-header">
+
+<div class="pull-right">
+  <h3>كشف حساب عميل <span id="codigo"></span></h3>
+</div>
+
+</div>
+
+
+<div class="card-body">
+
+  <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
-          <div class="card-header">
-
-            <div class="pull-right">
-              <h3>كشف حساب عميل <span id="codigo"></span></h3>
-            </div>
-
-          </div>
+     
           <div class="card-body">
 
 
@@ -184,6 +191,9 @@
       </div>
       <!--/div-->
     </div>
+</div>
+    </div>
+  
 
   </div>
 </template>

@@ -1,125 +1,130 @@
 <template>
   <div class="container-fluid">
 
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-          <div class="card-header">
-            <span class="h2"> الوحدات</span>
+    <div class="card">
+      <div class="card-header">
+        <span class="h2"> الوحدات</span>
 
-            <div style="display: flex;float: left; margin: 5px">
+        <div style="display: flex;float: left; margin: 5px">
 
 
 
-              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-                aria-haspopup="true" aria-expanded="true" placeholder=" بحث  " v-model="word_search"
-                @input="get_search()" />
-            </div>
-          </div>
-          <div class="card-body">
-            <form method="post" enctype="multipart/form-data">
+          <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button" aria-haspopup="true"
+            aria-expanded="true" placeholder=" بحث  " v-model="word_search" @input="get_search()" />
+        </div>
+      </div>
 
-              <div class="table-responsive">
-                <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-large">
-                  <thead>
-                    <tr>
+      <div class="card-body">
+        <div class="row row-sm">
+          <div class="col-xl-12">
+            <div class="card">
 
-                      <th> الوحده</th>
+              <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
 
+                  <div class="table-responsive">
+                    <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-large">
+                      <thead>
+                        <tr>
 
-
-
-
-
-
-                      <th>اضافه</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="index in count" :key="index">
-                      <td>
-                        <input v-model="unit[index]" type="text" class="form-control" name="name" id="name" required />
-
-                      </td>
+                          <th> الوحده</th>
 
 
 
 
 
-                      <td v-if="index == 1">
-                        <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
-                          <i class="fa fa-plus-circle"></i></a>
-
-                        <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
-                          <i class="fa fa-minus-circle"></i></a>
-                      </td>
 
 
+                          <th>اضافه</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="index in count" :key="index">
+                          <td>
+                            <input v-model="unit[index]" type="text" class="form-control" name="name" id="name"
+                              required />
 
-                    </tr>
+                          </td>
 
-                    <tr>
-                      <td></td>
-                      <td>
-                        <button type="button" class="btn btn-primary" @click="addunit()">حفظ </button>
 
-                      </td>
-                    </tr>
 
-                  </tbody>
-                </table>
+
+
+                          <td v-if="index == 1">
+                            <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
+                              <i class="fa fa-plus-circle"></i></a>
+
+                            <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
+                              <i class="fa fa-minus-circle"></i></a>
+                          </td>
+
+
+
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>
+                            <button type="button" class="btn btn-primary" @click="addunit()">حفظ </button>
+
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </form>
+
               </div>
-            </form>
-
-          </div>
-        </div>
-      </div>
-      <!--/div-->
-    </div>
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table text-md-nowrap" id="example1">
-                <thead>
-                  <tr>
-                    <th class="wd-15p border-bottom-0">#</th>
-                    <th class="wd-15p border-bottom-0">الوحده</th>
-
-                    <th class="wd-15p border-bottom-0">العمليات</th>
-                  </tr>
-                </thead>
-                <tbody v-if="units && units.length > 0">
-                  <tr v-for="(unit, index) in units" :key="index">
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ unit.name }}</td>
-
-
-
-                    <td>
-                      <button type="button" @click="delete_unit(unit.id)" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                      <router-link :to="{ name: 'edit_unit', params: { id: unit.id } }" class="btn btn-success"><i
-                          class="fa fa-edit"></i></router-link>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="3">لايوجد بياتات.</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
-            <pagination align="center" :data="units" @pagination-change-page="list"></pagination>
           </div>
+          <div class="col-xl-12">
+            <div class="card">
+
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table text-md-nowrap" id="example1">
+                    <thead>
+                      <tr>
+                        <th class="wd-15p border-bottom-0">#</th>
+                        <th class="wd-15p border-bottom-0">الوحده</th>
+
+                        <th class="wd-15p border-bottom-0">العمليات</th>
+                      </tr>
+                    </thead>
+                    <tbody v-if="units && units.length > 0">
+                      <tr v-for="(unit, index) in units" :key="index">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ unit.name }}</td>
+
+
+
+                        <td>
+                          <button type="button" @click="delete_unit(unit.id)" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                          <router-link :to="{ name: 'edit_unit', params: { id: unit.id } }" class="btn btn-success"><i
+                              class="fa fa-edit"></i></router-link>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-else>
+                      <tr>
+                        <td align="center" colspan="3">لايوجد بياتات.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <pagination align="center" :data="units" @pagination-change-page="list"></pagination>
+              </div>
+            </div>
+          </div>
+          <!--/div-->
         </div>
       </div>
-      <!--/div-->
     </div>
+
+
   </div>
 </template>
 <script>
