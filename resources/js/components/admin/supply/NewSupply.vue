@@ -15,7 +15,197 @@
 
             <div class="card text-right">
 
+<<<<<<< HEAD
               <div class="card-body">
+=======
+      </div>
+
+      <div class="row">
+
+        <div class="card text-right">
+     
+          <div class="card-body">
+
+
+            <div class="row">
+              <div class="table-responsive">
+                <table class="table table-bordered text-right" style="width: 100%; font-size: x-large">
+                  <thead>
+                    <tr>
+                      <th>الرقم التسلسلي</th>
+                      <th>المنتج</th>
+                      <th>المخزن</th>
+
+                      <th>الحاله</th>
+                      <th>الموصفات والطراز</th>
+                      <th>الوحده</th>
+                      <th>التكلفه</th>
+
+                      <!-- <th>السعر</th> -->
+                      <th>الكميه</th>
+                      <!-- <th>الضريبه</th> -->
+                      <th>الاجمالي</th>
+                      <th>تاريخ الانتهاء</th>
+
+
+                      <th>اضافه</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="index in count" :key="index">
+                      <td>{{ index }}</td>
+                      <td>
+                        <div class="custom-search">
+
+                          <input style="background-color: beige;font-size: 15px;" :id="'Supply_productm_tree' + index"
+                            type="text" readonly class="custom-search-input">
+                          <input :id="'Supply_productm_tree_id' + index" type="hidden" readonly
+                            class="custom-search-input">
+
+                          <button class="custom-search-botton" type="button" data-toggle="modal"
+                            data-target="#exampleModalProductm" @click="detect_index(index)">
+                            <i class="fa fa-plus-circle"></i></button>
+                        </div>
+
+
+
+                      </td>
+                      <td>
+                        <div class="custom-search">
+
+                          <input style="background-color: beige;font-size: 15px;" :id="'Supply_storem_tree' + index"
+                            type="text" readonly class="custom-search-input">
+                          <input :id="'Supply_storem_tree_id' + index" type="hidden" readonly
+                            class="custom-search-input">
+
+
+                          <button class="custom-search-botton" type="button" data-toggle="modal"
+                            data-target="#exampleModalStorem" @click="detect_index(index)">
+                            <i class="fa fa-plus-circle"></i>
+                          </button>
+                        </div>
+
+
+
+                      </td>
+
+                      <td>
+                        <div id="factura_producto">
+                          <select v-model="status[index]" name="type" id="type" class="form-control" required>
+
+
+
+                            <!-- <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  >
+
+                            <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  > -->
+
+                         
+
+                            <option selected v-for="status in statuses" v-bind:value="status.id"   >
+
+                              {{ status.name }}
+                            </option>
+
+                          
+                          </select>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div id="factura_producto">
+                          <input type="text" v-model="desc[index]" id="desc" class="form-control" />
+                        </div>
+                      </td>
+
+
+
+                      <td>
+                        <div id="factura_producto">
+
+                          <select v-on:change="calculate()" style="background-color: beige;" v-model="unit[index]"
+                            name="type" :id="'select_unit' + index" class="form-control" required>
+
+                          </select>
+                        </div>
+                      </td>
+
+
+
+                      <td>
+                        <input v-on:input="calculate()" style="background-color: beige;" type="number"
+                          v-model="unit_price[index]" class="form-control" />
+                      </td>
+
+
+
+                      <td>
+                        <input style="background-color: beige;" @input="calculate()" type="number" v-model="qty[index]"
+                          id="qty" class="form-control" />
+                      </td>
+
+
+                      <td>
+                        <input type="number" v-model="total[index]" :id="'total_row' + index" class="form-control"
+                          readonly />
+
+
+                      </td>
+
+                      <td>
+                        <input name="expiry_date" type="date" v-model="expiry_date" class="form-control" />
+
+                      </td>
+
+
+
+
+                      <td v-if="index == 1">
+
+                        <button class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
+                          <i class="fa fa-plus-circle"></i></button>
+
+                        <button class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
+                          <i class="fa fa-minus-circle"></i></button>
+
+
+
+                      </td>
+                    </tr>
+
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="card text-right">
+   
+          <div class="card-body">
+
+
+
+
+            <div class="row">
+              <div class="col-md-8">
+
+
+
+
+>>>>>>> 8399fda0c3981485d6e9bdf56b0fc92b5185a0dd
 
 
 
