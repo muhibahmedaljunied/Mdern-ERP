@@ -6,7 +6,7 @@ export default {
                 this.productselectedname = data.node.text;
             }
             if (this.type == "OpeningInventory") {
-                this.product[this.indexselected] = data.node.id;
+                // this.product[this.indexselected] = data.node.id;
                 this.product_tree(data, count); //this for get units of product
             }
 

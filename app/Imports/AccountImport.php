@@ -24,7 +24,7 @@ class AccountImport implements ToModel,WithHeadingRow
             'rank'    => $row['rank'],
             'account_type'    => $row['account_type'],
             'currency'    => $row['currency'],
-            'type_branch'    => $row['type_branch'],
+            // 'type_branch'    => $row['type_branch'],
             'status_account'    => $row['status_account'],
             'created_at'    => $row['created_at'],
             'updated_at'    => $row['updated_at'],

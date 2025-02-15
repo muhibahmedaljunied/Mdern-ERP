@@ -384,6 +384,8 @@ export default {
           // console.log(1);
         })
         .catch(error => {
+          toastMessage("تم اتمام عمليه التصدير");
+          this.$router.go(0);
 
         });
     },
@@ -392,6 +394,8 @@ export default {
       axios
         .post(`import_account`)
         .then(function (response) {
+          toastMessage("تم اتمام عمليه الاستيراد");
+          this.$router.go(0);
 
           // console.log(1);
         })

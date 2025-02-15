@@ -23,25 +23,6 @@
 
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="pagoPrevio">المخزن</label>
-                                            <div class="custom-search">
-
-                                                <input style="background-color: beige;font-size: 15px;"
-                                                    :id="'OpeningInventory_store_tree'" type="text" readonly
-                                                    class="custom-search-input">
-                                                <input :id="'OpeningInventory_store_tree_id'" type="hidden" readonly
-                                                    class="custom-search-input">
-                                                <input :id="'select_account_Purchase'" type="hidden" readonly
-                                                    class="custom-search-input">
-
-
-                                                <button class="custom-search-botton" type="button" data-toggle="modal"
-                                                    @click="detect_index(null)" data-target="#exampleModalStore">
-                                                    <i class="fa fa-plus-circle"></i></button>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-4">
                                             <label for="pagoPrevio">المنتج</label>
                                             <div class="custom-search">
 
@@ -60,6 +41,26 @@
                                             </div>
 
                                         </div>
+                                        <div class="col-md-4">
+                                            <label for="pagoPrevio">المخزن</label>
+                                            <div class="custom-search">
+
+                                                <input style="background-color: beige;font-size: 15px;"
+                                                    :id="'OpeningInventory_store_tree'" type="text" readonly
+                                                    class="custom-search-input">
+                                                <input :id="'OpeningInventory_store_tree_id'" type="hidden" readonly
+                                                    class="custom-search-input">
+                                                <input :id="'select_account_Purchase'" type="hidden" readonly
+                                                    class="custom-search-input">
+
+
+                                                <button class="custom-search-botton" type="button" data-toggle="modal"
+                                                    @click="detect_index(null)" data-target="#exampleModalStore">
+                                                    <i class="fa fa-plus-circle"></i></button>
+                                            </div>
+
+                                        </div>
+                                   
 
                                         <div class="col-md-4">
                                             <label> الحساب</label>
@@ -182,13 +183,13 @@
 
                                                         <div class="custom-search">
 
-                                                            <input :id="'OpeningInventory_product_tree' + index"
+                                                            <input :id="'OpeningInventory_productm_tree' + index"
                                                                 type="text" readonly class="custom-search-input">
-                                                            <input :id="'OpeningInventory_product_tree_id' + index"
+                                                            <input :id="'OpeningInventory_productm_tree_id' + index"
                                                                 type="hidden" readonly class="custom-search-input">
 
                                                             <button class="custom-search-botton" type="button"
-                                                                data-toggle="modal" data-target="#exampleModalProduct"
+                                                                data-toggle="modal" data-target="#exampleModalProductm"
                                                                 @click="detect_index(index)"> <i
                                                                     class="fa fa-plus-circle"></i></button>
                                                         </div>
@@ -229,13 +230,13 @@
 
                                                         <div class="custom-search">
 
-                                                            <input :id="'OpeningInventory_store_tree' + index"
+                                                            <input :id="'OpeningInventory_storem_tree' + index"
                                                                 type="text" readonly class="custom-search-input">
-                                                            <input :id="'OpeningInventory_store_tree_id' + index"
+                                                            <input :id="'OpeningInventory_storem_tree_id' + index"
                                                                 type="hidden" readonly class="custom-search-input">
 
                                                             <button class="custom-search-botton" type="button"
-                                                                data-toggle="modal" data-target="#exampleModalStore"
+                                                                data-toggle="modal" data-target="#exampleModalStorem"
                                                                 @click="detect_index(index)">
                                                                 <i class="fa fa-plus-circle"></i></button>
                                                         </div>
@@ -446,6 +447,85 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="exampleModalStorem" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="well" id="treeview_json_storem"></div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="exampleModalProduct" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="well" id="treeview_json_product"></div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="exampleModalProductm" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="well" id="treeview_json_productm"></div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="exampleModalAccount" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="well" id="treeview_json_account"></div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
 
             </div>
         </section>
@@ -453,7 +533,8 @@
 </template>
 <script>
 import pagination from "laravel-vue-pagination";
-import operation from '../../../operation1.js';
+// import operation from '../../../operation1.js';
+import operation from '../../../operation.js';
 import tree from '../../../../js/tree/tree.js';
 export default {
 
@@ -500,10 +581,24 @@ export default {
         this.list();
         this.counts[0] = 1;
         this.type = 'OpeningInventory';
+
+        this.type_refresh = 'increment';
         this.type_of_tree = 1;
         this.showtree('store', 'tree_store');
         this.showtree('product', 'tree_product');
-        this.type_refresh = 'increment';
+        this.showtree('storem', 'tree_store');
+        this.showtree('productm', 'tree_product');
+        this.showtree('account', 'tree_account');
+
+
+
+
+
+
+
+
+      
+
 
 
     },
