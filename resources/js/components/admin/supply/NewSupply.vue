@@ -16,12 +16,7 @@
             <div class="card text-right">
 
               <div class="card-body">
-
-
-
                 <div class="row">
-
-
                   <div class="col-md-4">
                     <label for="pagoPrevio">المخزن</label>
                     <div class="custom-search">
@@ -37,7 +32,6 @@
                     </div>
 
                   </div>
-
                   <div class="col-md-4">
                     <label for="pagoPrevio">المنتج</label>
                     <div class="custom-search">
@@ -54,14 +48,6 @@
                     </div>
 
                   </div>
-
-
-
-
-
-
-
-
                 </div>
 
                 <br />
@@ -197,6 +183,8 @@
                                 :id="'Supply_productm_tree' + index" type="text" readonly class="custom-search-input">
                               <input :id="'Supply_productm_tree_id' + index" type="hidden" readonly
                                 class="custom-search-input">
+
+                                
 
                               <button class="custom-search-botton" type="button" data-toggle="modal"
                                 data-target="#exampleModalProductm" @click="detect_index(index)">

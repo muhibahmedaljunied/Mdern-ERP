@@ -163,7 +163,7 @@ export default {
                                 gf.check_account(data);
                             }
                             if (table == "product") {
-                                console.log("no _productm", data.node.id);
+                                console.log("no _productm", data.node.id,gf.counts);
                                 gf.check_prouct(table, data, gf.counts);
                             }
 
@@ -185,7 +185,9 @@ export default {
 
                                 if (
                                     gf.type == "Purchase" ||
-                                    gf.type == "Supply"
+                                    gf.type == "Supply" 
+                                    ||
+                                      gf.type == "OpeningInventory"
                                 ) {
                                     gf.get_account_for_store(gf.counts);
                                 }
@@ -229,6 +231,7 @@ export default {
                             }
 
                             if (table == "storem") {
+                                console.log("yes _storem", data.node.id);
                                 gf.check_storem(data);
                             }
 

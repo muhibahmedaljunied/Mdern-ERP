@@ -8,6 +8,8 @@ export default {
                 this.type == "Purchase" ||
                 this.type == "Supply" ||
                 this.type == "SaleReturn"
+                // ||
+                // this.type == "OpeningInventory"
             ) {
                 this.get_account_for_storem(data.node.id);
             }
@@ -34,8 +36,6 @@ export default {
                 // console.log('almuheeb',3);
                 this.group_accounts_details(data.node.id);
             }
-
-      
         },
         get_account_for_store(length) {
             //this called when selected store in top
@@ -59,10 +59,12 @@ export default {
                     if (length.hasOwnProperty.call(length, key)) {
                         let element = 0;
                         console.log(key, this.type);
-                        if (this.type == "Purchase") {
-                            element = length[key];
-                        }
-                        if (this.type == "Supply") {
+
+                        if (
+                            this.type == "Purchase" ||
+                            this.type == "Supply"
+                            || this.type == "OpeningInventory"
+                        ) {
                             element = length[key];
                         }
 
@@ -89,16 +91,19 @@ export default {
         get_storem_by_store(index, response_id) {
             //this called for return stores in bottom when selected store in top
 
-            $(`#${this.type}_storem_tree${index}`).val(response_id[0].text+'   '+response_id[0].id);
+            $(`#${this.type}_storem_tree${index}`).val(
+                response_id[0].text + "   " + response_id[0].id
+            );
 
             this.storem[index] = this.store;
-  
         },
 
         get_account_for_storem_by_store(index, response_id) {
             //this called for return accounts of stores in bottom when selected store in top
 
-            $(`#${this.type}_storem_tree${index}`).val(response_id[0].text+'   '+response_id[0].id);
+            $(`#${this.type}_storem_tree${index}`).val(
+                response_id[0].text + "   " + response_id[0].id
+            );
 
             this.storem[index] = this.store;
             this.storem_account[index] = response_id[0].id;
@@ -116,7 +121,6 @@ export default {
                     if (arrayLength == 0) {
                         return;
                     }
-
 
                     this.storem_account[this.indexselected] =
                         response.data.accounts[0].id;

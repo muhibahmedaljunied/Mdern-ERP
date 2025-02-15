@@ -43,7 +43,7 @@ class AccountExport implements FromCollection,WithMapping, WithHeadings
 
             $registration->currency,
 
-            $registration->type_branch,
+            // $registration->type_branch,
 
             $registration->status_account,
 
@@ -82,7 +82,7 @@ class AccountExport implements FromCollection,WithMapping, WithHeadings
 
            'currency',
 
-           'type_branch',
+        //    'type_branch',
 
            'status_account',
 
