@@ -24,7 +24,6 @@ trait PurchaseDetailsTrait
         $Details->store_product_id = $this->core->id_store_product;
         $Details->unit_id = $this->core->unit_array[0];
         $Details->qty = $this->core->micro_unit_qty;
-        // $Details->qty = $this->core->data['qty'][$this->core->value];
 
         $Details->save();
         // dd($Details->id);

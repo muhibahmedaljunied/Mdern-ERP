@@ -271,20 +271,19 @@
 
 
                                                     <td>
-                                                        <input type="number" v-model="price[index]"
+                                                        <input type="number" v-model="unit_price[index]"
                                                             class="form-control" />
                                                     </td>
 
                                                     <td>
-                                                        <input @input="calculate()"
-                                                            type="number" v-model="qty[index]" id="qty"
-                                                            class="form-control" />
+                                                        <input @input="calculate()" type="number" v-model="qty[index]"
+                                                            id="qty" class="form-control" />
                                                     </td>
 
 
                                                     <td>
-                                                        <input @input="calculate()"  type="number" v-model="total[index]" id="tax"
-                                                            class="form-control" readonly />
+                                                        <input type="number" @input="calculate()" v-model="total[index]"
+                                                            :id="'total_row' + index" class="form-control" />
 
 
                                                     </td>
@@ -312,10 +311,22 @@
 
                                                     </td>
                                                 </tr>
+
                                                 <tr>
 
-                                                    <td colspan="9"></td>
+                                                    <td colspan="6" style="color: red;">الاجمالي</td>
                                                     <td>
+                                                        <input @input="calculate()" type="text" id="cantidad_total"
+                                                            v-model="total_quantity" class="form-control" />
+                                                    </td>
+                                                    <td>
+                                                        <input @input="calculate()" type="text" id="subtotal_general"
+                                                            name="subtotal_general" v-model="grand_total"
+                                                            class="form-control" />
+                                                        <input type="hidden" id="subtotal_general_sf"
+                                                            name="subtotal_general_sf" value="0.00" />
+                                                    </td>
+                                                    <td colspan="2">
                                                         <a href="javascript:void" @click="add_opening()"
                                                             class="btn btn-primary"><span>تاكيد
                                                                 العمليه</span></a>
@@ -561,6 +572,7 @@ export default {
 
         return {
 
+            description: '',
             all_products: '',
             jsonTreeData: '',
             type_of_tree: 1,
@@ -597,6 +609,7 @@ export default {
 
         this.type_refresh = 'increment';
         this.type_of_tree = 1;
+        this.first_row = 1;
         this.showtree('store', 'tree_store');
         this.showtree('product', 'tree_product');
         this.showtree('storem', 'tree_store');
@@ -617,20 +630,7 @@ export default {
     },
 
     methods: {
-        calculate_price(price, qty, index) {
-            var unit = JSON.parse($(`#select_unit${index}`).val());
-            if (unit[2] == 0) {
 
-                this.total[index] = price * qty;
-            }
-
-            if (unit[2] == 1) {
-
-                this.total[index] = price * unit[1] * qty;
-
-            }
-
-        },
 
 
         get_search() {
@@ -640,24 +640,67 @@ export default {
                     this.products = data.products;
                 });
         },
+
         add_opening() {
 
             this.axios
                 .post("/payOpening", {
                     count: this.counts,
                     date: this.date,
-                    product_id: this.product,
-                    store_id: this.store,
+                    product: this.productm,
+                    store: this.storem,
                     type: this.type,
                     type_refresh: this.type_refresh,
                     desc: this.desc,
                     qty: this.qty,
-                    unit_id: this.unit,
-                    status_id: this.status,
-                    price: this.price,
+                    unit: this.unit,
+                    units: this.units,
+                    status: this.status,
+                    price: this.unit_price,
                     expiry_date: this.expiry_date,
                     total: this.total,
                     // old: this.detail,
+
+
+                    store: this.storem,
+                    description: this.description,
+                    type_refresh: this.type_refresh,
+                    // -------------this for dailies----------------------------------------------
+                    debit: {
+                        account_id: this.storem_account,
+                        value: this.total,
+                        account_details: this.storem,
+
+                    },
+                    credit: {
+
+                        account_id: $(`#OpeningInventory_account_tree_id`).val(),
+                        value: this.sub_total,
+                        account_details: $(`#select_account_${this.type}_group`).val(),
+
+                    },
+
+                    type_daily: 'OpeningInventory',
+                    payment_type: this.Way_to_pay_selected,
+                    daily_index: 1,
+                    // supplier_id: this.supplier[0],
+                    // supplier_name: this.supplier[1],
+                    date: this.date,
+                    // treasury: this.treasury[0],
+                    // ------------------------------------------------------------------------------
+                    grand_total: this.grand_total,
+                    sub_total: this.sub_total,
+                    // discount: this.discounts,
+                    // total_tax: this.total_tax,
+                    // type_payment: this.type_payment,
+                    // remaining: this.remaining,
+                    paid: this.paid,
+                    // ------------------------------------------------------------------------------
+
+                    total_quantity: this.total_quantity,
+
+
+
 
 
                 })
@@ -692,6 +735,10 @@ export default {
                     console.error(response);
                 });
         },
+        check_data(i = 0) {
+
+            return 1;
+        }
 
 
 

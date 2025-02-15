@@ -22,7 +22,7 @@ use App\Models\Stock;
             return 0;
         }
 
-        // dd($this->core->data['unit']);
+ 
         $stocks = new Stock();
         $stocks->store_product_id = $this->core->id_store_product;
         // $stocks->unit_id = $this->core->unit_value;

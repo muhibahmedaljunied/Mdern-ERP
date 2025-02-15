@@ -9,6 +9,8 @@ export default {
                 this.total_quantity =
                     parseInt(0) + parseInt(this.total_quantity);
             }
+
+            console.log("muhibllllllllll");
         },
 
         calculate_remaining() {
@@ -24,7 +26,11 @@ export default {
 
             for (let index = this.first_row; index <= count; index++) {
                 this.row_counter = index;
-                if (this.type == "Purchase" || this.type == "Supply") {
+                if (
+                    this.type == "Purchase" ||
+                    this.type == "Supply" ||
+                    this.type == "OpeningInventory"
+                ) {
                     this.check_state[this.row_counter] = true;
                 }
 
@@ -56,21 +62,29 @@ export default {
         },
 
         calculate_total_with_check() {
-            console.log(this.total, this.row_counter);
+            console.log(
+                "yeeeeeeeeeeeeeeeeeez",
 
+                this.check_state[this.row_counter],
+                this.unit,
+                this.unit[this.row_counter],
+                this.qty[this.row_counter],
+                this.unit_price[this.row_counter],
+                this.row_counter
+            );
             if (
                 this.unit[this.row_counter] &&
                 this.qty[this.row_counter] &&
                 this.unit_price[this.row_counter]
             ) {
-                this.check_data();
+                this.check_check_data();
             } else {
                 this.total[this.row_counter] = 0;
                 this.operation_status = 0;
             }
         },
 
-        check_data() {
+        check_check_data() {
             var unit = 0;
 
             if (this.check_data(this.row_counter) != 0) {
@@ -92,15 +106,12 @@ export default {
                         unit[1];
                 }
 
-                console.log(this.total);
                 return 1;
             }
 
             return 0;
         },
         calculate_grand_total() {
-            console.log("muhibllllllllll", this.total);
-
             if (this.total[this.row_counter]) {
                 this.grand_total =
                     parseInt(this.total[this.row_counter]) +

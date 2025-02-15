@@ -13,7 +13,7 @@ class CreateOpeningInventoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('opening_inventories', function (Blueprint $table) {
+        Schema::create('opening_inventuries', function (Blueprint $table) {
             $table->Increments('id');
       
             $table->unsignedInteger('store_product_id');

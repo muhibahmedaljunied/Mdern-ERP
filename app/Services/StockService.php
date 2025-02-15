@@ -74,7 +74,6 @@ class  StockService
 
         $this->detail->details();
     
-
         $this->stock->stock();
 
     }

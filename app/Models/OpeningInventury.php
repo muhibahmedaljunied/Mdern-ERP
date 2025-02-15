@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class OpeningInventury extends Model
 {
 
-    protected $fillable = [];
 
 
+    protected $fillable = [
+        'store_product_id','unit_id','cost','qty','total','date','status_id'
+    ];
 
     public function stock()
     {

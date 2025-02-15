@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Repository\Stock\CashDetailRepository;
 use App\Repository\Stock\CashReturnDetailRepository;
 use App\Repository\Stock\CashReturnRefreshDetailRepository;
+use App\Repository\Stock\OpeninngInventoryDetailRepository;
 use App\Repository\Stock\PurchaseDetailRepository;
 use App\Repository\Stock\PurchaseRefreshDitailRepository;
 use App\Repository\Stock\PurchaseReturnDetailRepository;
@@ -89,6 +90,11 @@ class DetailServiceProvider extends ServiceProvider
                 return new CashReturnDetailRepository();
 
             } 
+
+            if ($request->type == 'OpeningInventory') {
+             
+                return new OpeninngInventoryDetailRepository();
+            }
 
       
 

@@ -112,7 +112,11 @@ export default {
             this.paid = 0;
             this.To_pay = 0;
 
-            if (this.type == "Purchase" || this.type == "Supply") {
+            if (
+                this.type == "Purchase" ||
+                this.type == "Supply" ||
+                this.type == "OpeningInventory"
+            ) {
                 var count = this.count;
             } else {
                 var count = this.detail.length;
@@ -150,7 +154,11 @@ export default {
         },
 
         handle_top() {
-            if (this.type != "Purchase" && this.type != "Supply") {
+            if (
+                this.type != "Purchase" &&
+                this.type != "Supply" &&
+                this.type != "OpeningInventory"
+            ) {
                 this.set_values();
                 this.set_price();
             }

@@ -15,7 +15,8 @@ class UnitDecodeRepository  implements UnitRepositoryInterface
         $this->core = app(CoreService::class);
     }
 
-    public function handle_unit(){
+    public function handle_unit()
+    {
 
         $this->decode_unit();
         $this->convert_unit();
@@ -26,9 +27,10 @@ class UnitDecodeRepository  implements UnitRepositoryInterface
 
 
 
+
         $this->core->unit_array = json_decode($this->core->data['unit'][$this->core->value]);
 
-
+        // dd($this->core->unit_array);
         return $this;
     }
 
@@ -36,6 +38,7 @@ class UnitDecodeRepository  implements UnitRepositoryInterface
     {
 
 
+        // dd($this->core->data['units']);
 
         foreach ($this->core->data['units'] as  $value) {
 

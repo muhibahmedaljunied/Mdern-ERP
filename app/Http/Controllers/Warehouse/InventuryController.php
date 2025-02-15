@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Warehouse;
 
-
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
 use App\Traits\Invoice\InvoiceTrait;
@@ -35,23 +34,21 @@ class InventuryController extends Controller
     }
 
 
-    public function store(Request $request, OpeningService $stock)
-    {
+    public function store(
+        OpeningService $stock
+    ) {
 
 
 
-        dd($request->all());
+        // dd($request->all());
         // -------------------------------------------------------------------------------------
 
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
-            foreach ($stock->core->data['count'] as $value) {
 
-                $stock->core->setValue($value);
+            $stock->handle();
 
-                $stock->handle_core();
-            }
 
 
 
