@@ -276,14 +276,14 @@
                                                     </td>
 
                                                     <td>
-                                                        <input @input="calculate_price(price[index], qty[index], index)"
+                                                        <input @input="calculate()"
                                                             type="number" v-model="qty[index]" id="qty"
                                                             class="form-control" />
                                                     </td>
 
 
                                                     <td>
-                                                        <input type="number" v-model="total[index]" id="tax"
+                                                        <input @input="calculate()"  type="number" v-model="total[index]" id="tax"
                                                             class="form-control" readonly />
 
 

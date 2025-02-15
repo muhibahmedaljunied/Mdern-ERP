@@ -1,4 +1,3 @@
-import { forEach, forIn } from "lodash";
 export default {
     methods: {
         calculate_qty() {
@@ -47,32 +46,31 @@ export default {
             console.log("dddddd2", i);
 
             if (this.check_state[i] != true) {
-
                 if (this.check_data(i) != 0) {
                     if (this.unit_price[i]) {
                         this.total[i] =
                             this.unit_price[i] * this.unit[i][1] * this.qty[i];
                     }
-
-            
                 }
             }
         },
 
         calculate_total_with_check() {
+            console.log(this.total, this.row_counter);
+
             if (
                 this.unit[this.row_counter] &&
                 this.qty[this.row_counter] &&
                 this.unit_price[this.row_counter]
             ) {
-                this.check_check_data();
+                this.check_data();
             } else {
                 this.total[this.row_counter] = 0;
                 this.operation_status = 0;
             }
         },
 
-        check_check_data() {
+        check_data() {
             var unit = 0;
 
             if (this.check_data(this.row_counter) != 0) {
@@ -94,12 +92,15 @@ export default {
                         unit[1];
                 }
 
+                console.log(this.total);
                 return 1;
             }
 
             return 0;
         },
         calculate_grand_total() {
+            console.log("muhibllllllllll", this.total);
+
             if (this.total[this.row_counter]) {
                 this.grand_total =
                     parseInt(this.total[this.row_counter]) +

@@ -13,7 +13,7 @@ export default {
             bank: [],
             product: [],
             typeselected: [],
-            currency:[],
+            currency: [],
             qty: [],
             debit: [],
             credit: [],
@@ -85,9 +85,7 @@ export default {
             console.log("alkhm", newVal, oldVal);
         },
         count(newVal, oldVal) {
-
-             this.day_value
-
+            this.day_value;
         },
     },
 
@@ -130,7 +128,7 @@ export default {
             }
         },
 
-        credit() {
+        credit_func() {
             if (this.paid == "") {
                 this.paid = 0;
             }
@@ -166,12 +164,13 @@ export default {
             this.calculate_qty();
             this.calculate_tax();
             this.calculate_grand_total();
-            this.credit();
+            this.credit_func();
             this.calculate_remaining();
         },
 
         set_price() {
             console.log(this.unit_price[this.row_counter]);
+
             if (!this.unit_price[this.row_counter]) {
                 if (this.detail[this.row_counter].price) {
                     this.unit_price[this.row_counter] =
