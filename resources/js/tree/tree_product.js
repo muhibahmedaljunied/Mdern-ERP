@@ -1,6 +1,7 @@
 export default {
     methods: {
         check_prouct(table, data, count = null) {
+            console.log('check_prouctcheck_prouctcheck_prouct',table, data, count);
             if (this.type == "Stock" || this.type == "Movement") {
                 this.productselected = data.node.id;
                 this.productselectedname = data.node.text;
@@ -42,7 +43,6 @@ export default {
                 this.units = response.data.units;
 
                 // this.units = response.data.units;
-
                 console.log("almuhib", this.units);
                 var arrayLength = response.data.units.length;
                 var html = "";
@@ -64,6 +64,8 @@ export default {
             axios.post(`/get_unit/${data.node.id}`).then((response) => {
                 var ds = 0;
                 for (const key in count) {
+                    console.log('almuhib',count,count[key]);
+
                     ds = count[key];
 
                     this.units = response.data.units;
@@ -79,7 +81,6 @@ export default {
                         // html = html + `<option data-rate-${ds} = ${this.units[i].rate} data-${ds} = ${this.units[i].unit_type}  value=[${this.units[i].unit_id},${this.units[i].rate},${this.units[i].unit_type}]>${this.units[i].name}</option>`;
                     }
                     $(`#select_unit${ds}`).html(html);
-                    // console.log('almuhib',response.data.units);
                     $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
                     this.productm[ds] = data.node.id;
                 }

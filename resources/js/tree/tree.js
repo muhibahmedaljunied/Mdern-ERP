@@ -163,7 +163,7 @@ export default {
                                 gf.check_account(data);
                             }
                             if (table == "product") {
-                                console.log("no _productm", data.node.id,gf.counts);
+                                console.log("no _productm",gf.counts);
                                 gf.check_prouct(table, data, gf.counts);
                             }
 

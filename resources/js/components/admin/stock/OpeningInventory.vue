@@ -60,7 +60,7 @@
                                             </div>
 
                                         </div>
-                                   
+
 
                                         <div class="col-md-4">
                                             <label> الحساب</label>
@@ -246,14 +246,27 @@
 
 
                                                     <td>
-                                                        <div id="factura_producto">
+                                                        <!-- <div id="factura_producto">
 
                                                             <select v-model="unit[index]" name="type"
                                                                 :id="'select_unit' + index" class="form-control"
                                                                 required>
 
                                                             </select>
+                                                        </div> -->
+
+                                                        <div id="factura_producto">
+
+                                                            <select v-on:change="calculate()"
+                                                                style="background-color: beige;" v-model="unit[index]"
+                                                                name="type" :id="'select_unit' + index"
+                                                                class="form-control" required>
+
+                                                            </select>
                                                         </div>
+
+
+
                                                     </td>
 
 
@@ -288,11 +301,11 @@
                                                     <td v-if="index == 1">
 
                                                         <button class="tn btn-info btn-sm waves-effect btn-agregar"
-                                                            v-on:click="addComponent">
+                                                            v-on:click="addComponent(count)">
                                                             <i class="fa fa-plus-circle"></i></button>
 
                                                         <button class="tn btn-info btn-sm waves-effect btn-agregar"
-                                                            v-on:click="disComponent">
+                                                            v-on:click="addComponent(count)">
                                                             <i class="fa fa-minus-circle"></i></button>
 
 
@@ -448,84 +461,84 @@
                     </div>
                 </div>
                 <div class="modal fade" id="exampleModalStorem" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
 
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
 
-                  <div class="well" id="treeview_json_storem"></div>
+                                <div class="well" id="treeview_json_storem"></div>
 
-                </div>
+                            </div>
 
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="exampleModalProduct" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-
-                  <div class="well" id="treeview_json_product"></div>
-
+                        </div>
+                    </div>
                 </div>
 
-              </div>
-            </div>
-          </div>
+                <div class="modal fade" id="exampleModalProduct" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
 
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
 
-          <div class="modal fade" id="exampleModalProductm" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
+                                <div class="well" id="treeview_json_product"></div>
 
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
+                            </div>
 
-                  <div class="well" id="treeview_json_productm"></div>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="modal fade" id="exampleModalAccount" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-
-                  <div class="well" id="treeview_json_account"></div>
-
+                        </div>
+                    </div>
                 </div>
 
-              </div>
-            </div>
-          </div>
+
+                <div class="modal fade" id="exampleModalProductm" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="well" id="treeview_json_productm"></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModalAccount" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="well" id="treeview_json_account"></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </section>
@@ -597,7 +610,7 @@ export default {
 
 
 
-      
+
 
 
 
