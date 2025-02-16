@@ -353,11 +353,11 @@
                                     <div style="display: flex;float: left; margin: 5px">
 
 
-                                        <button @click="Export()">
+                                        <button @click="exports_excel()">
                                             <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
                                         </button>
 
-                                        <button @click="Import()">
+                                        <button @click="imports_excel()">
                                             <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
                                         </button>
 
@@ -806,7 +806,7 @@ export default {
                 })
                 .catch(error => {
                     toastMessage("تم اتمام عمليه التصدير");
-                    this.$router.go(0);
+                    // this.$router.go(0);
 
                 });
         },

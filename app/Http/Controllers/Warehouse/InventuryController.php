@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Warehouse;
 
+use App\Exports\OpeningInventuryExport;
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
+use App\Imports\OpeningInventuryImport;
 use App\Traits\Invoice\InvoiceTrait;
 use App\Traits\Details\DetailsTrait;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use App\Models\Temporale;
 use App\Models\Status;
@@ -33,7 +34,7 @@ class InventuryController extends Controller
     {
 
 
- 
+
         $statuses = Status::all();
         $this->details();
 
@@ -56,7 +57,7 @@ class InventuryController extends Controller
     public function import()
     {
 
-        Excel::import(new ProductImport, storage_path('opening_inventury.xlsx'));
+        Excel::import(new OpeningInventuryImport, storage_path('opening_inventury.xlsx'));
 
         return response()->json([
             'status' =>
@@ -68,8 +69,8 @@ class InventuryController extends Controller
     public function export()
     {
 
-        Excel::download(new ProductExport, 'opening_inventury.xlsx');
-    
+        Excel::download(new OpeningInventuryExport, 'opening_inventury.xlsx');
+
 
 
         return response()->json([
@@ -118,41 +119,6 @@ class InventuryController extends Controller
 
 
 
-
-    // public function show()
-    // {
-    //     $sales = DB::table('opening_inventuries')
-
-    //         ->select(
-    //             'opening_inventuries.*',
-    //             'opening_inventuries.id as opening_inventury_id',
-    //         )
-    //         ->paginate(10);
-
-    //     return response()->json(['opening_inventuries' => $sales]);
-    // }
-
-    // public function pricing()
-    // {
-
-    //     $products = StoreProduct::where('store_products.quantity', '!=', '0')
-    //         ->joinall()
-    //         ->select(
-    //             'products.*',
-    //             'products.text as product',
-    //             'stores.text as store',
-    //             'statuses.name as status',
-    //             'store_products.quantity as availabe_qty',
-    //             'store_products.*'
-    //         )
-    //         ->paginate(100);
-    //     $units = $this->units($products);
-
-    //     return response()->json([
-    //         // 'temporales' => $temporale, 
-    //         'products' => $products
-    //     ]);
-    // }
     public function destroy(Request $request)
     {
         if ($request->id) {

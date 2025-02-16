@@ -17,6 +17,12 @@ class StoreProduct extends Model
         return $this->hasMany(Stock::class);
     }
 
+    public function opening()
+    {
+        return $this->hasMany(OpeningInventury::class);
+    }
+
+
     public function scopeJoinall($query)
 
     {
