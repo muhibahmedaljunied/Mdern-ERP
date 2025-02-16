@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Warehouse\ProductController;
 use App\Http\Controllers\Warehouse\StoreController;
+use App\Http\Controllers\Warehouse\InventuryController;
 use Illuminate\Support\Facades\Route;
 
 //-------------------------------product--------------------------------------------------------------------------------------
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('import_product', [ProductController::class, 'import']);
 Route::post('export_product', [ProductController::class, 'export']);
+Route::post('import_opening_inventuries', [InventuryController::class, 'import']);
+Route::post('export_opening_inventuries', [InventuryController::class, 'export']);
 Route::post('product', 'Warehouse\ProductController@index');
 Route::post('/create_product', 'Warehouse\ProductController@create');
 Route::post('/store_product', 'Warehouse\ProductController@store');
@@ -105,6 +108,7 @@ Route::post('/stock_repo', 'Warehouse\StockController@stock_repo');
 // -------------------------------------OpeningInventury----------------------------------------------------------
 Route::post('/payOpening', 'Warehouse\InventuryController@store');
 Route::post('/opening/newopening', 'Warehouse\InventuryController@index');
+Route::post('/opening_details', 'Warehouse\InventuryController@details');
 // ---------------------------------------------------------------------------------------------------------------
 Route::post('/Warehouse/pricing', 'Warehouse\InventuryController@pricing');
 Route::post('/movement_repo','Warehouse\StockController@movement_repo');

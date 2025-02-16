@@ -4,182 +4,286 @@
       <div class="col-xl-12">
 
         <div class="card">
-          <!-- <form method="post" @submit.prevent="submitForm"> -->
 
           <div class="card-header pb-0">
             <div class="d-flex justify-content-between">
               <span class="h2">الارصده الافتتاحيه</span>
             </div>
           </div>
+
           <div class="card-body">
+
             <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
+
+              <div class="card">
+                <!-- <form method="post" @submit.prevent="submitForm"> -->
+
+
+                <div class="card-body">
                   <div class="row">
-                    <div class="col-md-2">
-                      <label for="desde">تاريخ القيد </label>
-                      <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
-                        name="modal_reporte_venta_inicio" v-model="daily_date" onkeypress="return controltag(event)"
-                        style="background-color: white" />
-                    </div>
-                    <div class="col-md-2">
-                      <label for="desde"> اجمالي المدين </label>
-                      <input v-model="total_debit" type="text" class="form-control hasDatepicker"
-                        onkeypress="return controltag(event)" readonly />
-                    </div>
-                    <div class="col-md-2">
-                      <label for="desde"> اجمالي الدائن </label>
-                      <input v-model="total_credit" type="text" class="form-control hasDatepicker"
-                        onkeypress="return controltag(event)" readonly />
-                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="desde">تاريخ القيد </label>
+                            <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
+                              name="modal_reporte_venta_inicio" v-model="daily_date"
+                              onkeypress="return controltag(event)" style="background-color: white" />
+                          </div>
+                          <div class="col-md-2">
+                            <label for="desde"> اجمالي المدين </label>
+                            <input v-model="total_debit" type="text" class="form-control hasDatepicker"
+                              onkeypress="return controltag(event)" readonly />
+                          </div>
+                          <div class="col-md-2">
+                            <label for="desde"> اجمالي الدائن </label>
+                            <input v-model="total_credit" type="text" class="form-control hasDatepicker"
+                              onkeypress="return controltag(event)" readonly />
+                          </div>
 
 
+                        </div>
+                      </div>
+                    </div>
                   </div>
+
+
+
                 </div>
               </div>
-            </div>
+
+              <!-- ------------------------------------------------------------------------------------------ -->
+              <div class="card">
+                <!-- <form method="post" @submit.prevent="submitForm"> -->
 
 
+                <div class="card-body">
 
-          </div>
-        </div>
+                  <div class="row">
+                    <div class="table-responsive">
+                      <table class="table table-bordered text-center">
+                        <thead>
+                          <tr>
+                            <th class="wd-15p border-bottom-0">رقم الحساب</th>
+                            <th class="wd-15p border-bottom-0">اسم الحساب</th>
+                            <th class="wd-15p border-bottom-0"> الحساب التفصيلي</th>
+                            <th class="wd-15p border-bottom-0"> العمله</th>
+                            <th class="wd-15p border-bottom-0">البيان</th>
+                            <th class="wd-15p border-bottom-0">مدين</th>
 
-        <!-- ------------------------------------------------------------------------------------------ -->
-        <div class="card">
-          <!-- <form method="post" @submit.prevent="submitForm"> -->
+                            <th class="wd-15p border-bottom-0">داين</th>
+                            <th>+</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="index in count" :key="index">
 
-
-          <div class="card-body">
-
-            <div class="row">
-              <div class="table-responsive">
-                <table class="table table-bordered text-center">
-                  <thead>
-                    <tr>
-                      <th class="wd-15p border-bottom-0">رقم الحساب</th>
-                      <th class="wd-15p border-bottom-0">اسم الحساب</th>
-                      <th class="wd-15p border-bottom-0"> الحساب التفصيلي</th>
-                      <th class="wd-15p border-bottom-0"> العمله</th>
-                      <th class="wd-15p border-bottom-0">البيان</th>
-                      <th class="wd-15p border-bottom-0">مدين</th>
-
-                      <th class="wd-15p border-bottom-0">داين</th>
-                      <th>+</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="index in count" :key="index">
-
-                      <td>
-                        <input required type="number" :id="'OpenningBalance_accounts_tree_id' + index" name="account_id"
-                          class="form-control input_cantidad" readonly />
-                      </td>
-                      <td>
+                            <td>
+                              <input required type="number" :id="'OpenningBalance_accounts_tree_id' + index"
+                                name="account_id" class="form-control input_cantidad" readonly />
+                            </td>
+                            <td>
 
 
 
 
-                        <div class="custom-search">
+                              <div class="custom-search">
 
-                          <input :id="'OpenningBalance_accounts_tree' + index" type="text" readonly
-                            class="custom-search-input">
+                                <input :id="'OpenningBalance_accounts_tree' + index" type="text" readonly
+                                  class="custom-search-input">
 
-                          <button class="custom-search-botton" type="button" data-toggle="modal"
-                            data-target="#exampleModal" @click="detect_index(index)"> <i
-                              class="fa fa-plus-circle"></i></button>
-                        </div>
-
-
-
-                      </td>
-
-                      <td>
+                                <button class="custom-search-botton" type="button" data-toggle="modal"
+                                  data-target="#exampleModal" @click="detect_index(index)"> <i
+                                    class="fa fa-plus-circle"></i></button>
+                              </div>
 
 
 
+                            </td>
 
-                        <select class="form-control" style="background-color: beige;" name="forma_pago"
-                          :id="'select_account_OpenningBalance_group_' + index">
+                            <td>
 
-                        </select>
+
+
+
+                              <select class="form-control" style="background-color: beige;" name="forma_pago"
+                                :id="'select_account_OpenningBalance_group_' + index">
+
+                              </select>
 
 
 
 
 
 
-                      </td>
+                            </td>
 
-                      <td>
-
-
-
-                        <input style="text-align: center;color:red" v-model="currency" name="date" type="number"
-                          class="form-control" />
+                            <td>
 
 
 
-                      </td>
+                              <input style="text-align: center;color:red" v-model="currency" name="date" type="number"
+                                class="form-control" />
+
+
+
+                            </td>
 
 
 
 
 
-                      <td>
-                        <input v-model='description[index]' required type="text" style="width: 500px"
-                          class="form-control input_cantidad" />
-                      </td>
-                      <td>
-                        <input @input="calculate_total('debit')" v-model='debit[index]' type="number"
-                          style="width: 150px" class="form-control input_cantidad" />
-                      </td>
-                      <td>
-                        <input @input="calculate_total('credit')" v-model='cred[index]' type="number"
-                          style="width: 150px" class="form-control input_cantidad" />
-                      </td>
+                            <td>
+                              <input v-model='description[index]' required type="text" style="width: 500px"
+                                class="form-control input_cantidad" />
+                            </td>
+                            <td>
+                              <input @input="calculate_total('debit')" v-model='debit[index]' type="number"
+                                style="width: 150px" class="form-control input_cantidad" />
+                            </td>
+                            <td>
+                              <input @input="calculate_total('credit')" v-model='cred[index]' type="number"
+                                style="width: 150px" class="form-control input_cantidad" />
+                            </td>
 
 
-                      <td v-if="index == 1">
+                            <td v-if="index == 1">
 
-                        <button class="tn btn-info btn-sm waves-effect btn-agregar" @click="addComponent(index)">
-                          <i class="fa fa-plus-circle"></i></button>
+                              <button class="tn btn-info btn-sm waves-effect btn-agregar" @click="addComponent(index)">
+                                <i class="fa fa-plus-circle"></i></button>
 
-                        <button class="tn btn-info btn-sm waves-effect btn-agregar" @click="disComponent(index)">
-                          <i class="fa fa-minus-circle"></i></button>
-
-
-
-                      </td>
-                    </tr>
-                    <tr>
-
-                      <td colspan="5" style="text-align:center;color:red;font-size:large">الاجمالي</td>
-                      <td style="text-align:center;color:red;font-size:large">
-
-                        <input type="hidden" style="width: 250px" class="form-control input_cantidad" />
-
-                      </td>
-                      <td style="text-align:center;color:red;font-size:large">
-
-                        <input type="hidden" style="width: 250px" class="form-control input_cantidad" />
-
-                      </td>
+                              <button class="tn btn-info btn-sm waves-effect btn-agregar" @click="disComponent(index)">
+                                <i class="fa fa-minus-circle"></i></button>
 
 
-                      <td> <a href="javascript:void" @click='addDaily()' class="btn btn-primary"><span>تاكيد
-                            العمليه</span></a></td>
-                    </tr>
-                  </tbody>
-                </table>
+
+                            </td>
+                          </tr>
+                          <tr>
+
+                            <td colspan="5" style="text-align:center;color:red;font-size:large">الاجمالي</td>
+                            <td style="text-align:center;color:red;font-size:large">
+
+                              <input type="hidden" style="width: 250px" class="form-control input_cantidad" />
+
+                            </td>
+                            <td style="text-align:center;color:red;font-size:large">
+
+                              <input type="hidden" style="width: 250px" class="form-control input_cantidad" />
+
+                            </td>
+
+
+                            <td> <a href="javascript:void" @click='addDaily()' class="btn btn-primary"><span>تاكيد
+                                  العمليه</span></a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="card">
+
+
+                <div class="card-header">
+                  <span class="h2"> التفاصيل</span>
+
+                  <div style="display: flex;float: left; margin: 5px">
+
+
+                    <button @click="Export()">
+                      <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+                    </button>
+
+                    <button @click="Import()">
+                      <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+                    </button>
+
+                    <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                      aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                      @input="get_search()" />
+                  </div>
+                </div>
+                <div class="card-body" id="printme">
+
+                  <div class="row">
+
+                    <div class="table-responsive">
+                      <table class="table table-bordered text-center">
+                        <thead>
+                          <tr>
+                            <th class="wd-15p border-bottom-0">رقم الحساب</th>
+                            <th class="wd-15p border-bottom-0">اسم الحساب</th>
+                            <th class="wd-15p border-bottom-0">البيان</th>
+                            <th class="wd-15p border-bottom-0">مدين</th>
+                            <th class="wd-15p border-bottom-0">داين</th>
+
+                          </tr>
+                        </thead>
+                        <tbody v-if="value_list && value_list.data.length > 0">
+                          <tr v-for="(daily, index) in value_list.data" :key="index">
+                            <!-- <tr > -->
+                            <td>
+                              {{ daily.id }}
+                            </td>
+                            <td>
+
+                              {{ daily.text }}
+
+                            </td>
+                            <td>
+
+                              {{ daily.description }}
+                            </td>
+                            <td>
+                              {{ daily.debit }}
+                            </td>
+                            <td>
+                              {{ daily.credit }}
+                            </td>
+
+
+
+                          </tr>
+                          <tr>
+                            <td colspan="3">الاجمالي</td>
+                            <td> <span style="color:green">{{ sum_debit }}</span></td>
+                            <td> <span style="color:green">{{ sum_credit }}</span></td>
+                            <!-- <td></td> -->
+
+
+                          </tr>
+
+                        </tbody>
+                        <tbody v-else>
+                          <tr>
+                            <td align="center" colspan="5">
+                              <h3> لايوجد بيانات </h3>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+
+
+                </div>
               </div>
 
+
             </div>
-
-
           </div>
         </div>
 
+
+
       </div>
+
 
 
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -206,84 +310,6 @@
       <!-- </form> -->
     </div>
 
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-
-
-
-          <div class="card-body" id="printme">
-
-            <div class="row">
-
-              <div class="table-responsive">
-                <table class="table table-bordered text-center">
-                  <thead>
-                    <tr>
-                      <th class="wd-15p border-bottom-0">رقم الحساب</th>
-                      <th class="wd-15p border-bottom-0">اسم الحساب</th>
-                      <th class="wd-15p border-bottom-0">البيان</th>
-                      <th class="wd-15p border-bottom-0">مدين</th>
-                      <th class="wd-15p border-bottom-0">داين</th>
-
-                    </tr>
-                  </thead>
-                  <tbody v-if="value_list && value_list.data.length > 0">
-                    <tr v-for="(daily, index) in value_list.data" :key="index">
-                      <!-- <tr > -->
-                      <td>
-                        {{ daily.id }}
-                      </td>
-                      <td>
-
-                        {{ daily.text }}
-
-                      </td>
-                      <td>
-
-                        {{ daily.description }}
-                      </td>
-                      <td>
-                        {{ daily.debit }}
-                      </td>
-                      <td>
-                        {{ daily.credit }}
-                      </td>
-
-
-
-                    </tr>
-                    <tr>
-                      <td colspan="3">الاجمالي</td>
-                      <td> <span style="color:green">{{ sum_debit }}</span></td>
-                      <td> <span style="color:green">{{ sum_credit }}</span></td>
-                      <!-- <td></td> -->
-
-
-                    </tr>
-
-                  </tbody>
-                  <tbody v-else>
-                    <tr>
-                      <td align="center" colspan="5">
-                        <h3> لايوجد بيانات </h3>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-
-
-          </div>
-        </div>
-      </div>
-
-
-
-
-    </div>
   </div>
 </div></template>
 <script>

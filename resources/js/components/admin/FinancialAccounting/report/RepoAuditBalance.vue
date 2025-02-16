@@ -1,156 +1,161 @@
 <template>
   <!-- row opened -->
-  <div class="row row-sm">
-    <div class="col-xl-12">
-      <div class="card">
-        <form method="post" @submit.prevent="submitForm">
+  <div class="container-fluid">
+    <div class="row row-sm">
+      <div class="col-xl-12">
+
+        <div class="card">
           <div class="card-header pb-0">
-            <div class="d-flex justify-content-between">
-              <span class="h2">ميزان المراجعه</span>
+              <div class="d-flex justify-content-between">
+                <span class="h2">ميزان المراجعه</span>
+              </div>
             </div>
-          </div>
-          <div class="card-body" id="printme">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <div class="row">
+          <div class="card-body">
+            <div class="card">
+          <form method="post" @submit.prevent="submitForm">
+     
+            <div class="card-body" id="printme">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="row">
 
-                    <div class="col-xl-3">
-                      <label for="">الحساب </label>
+                      <div class="col-xl-3">
+                        <label for="">الحساب </label>
 
-                      <div class="custom-search">
+                        <div class="custom-search">
 
-                        <input id="AccountReport_account_tree" type="text" class="custom-search-input">
+                          <input id="AccountReport_account_tree" type="text" class="custom-search-input">
 
-                        <button class="custom-search-botton" type="button" data-toggle="modal"
-                          data-target="#exampleModalAccountReport"> <i class="fa fa-plus-circle"></i></button>
+                          <button class="custom-search-botton" type="button" data-toggle="modal"
+                            data-target="#exampleModalAccountReport"> <i class="fa fa-plus-circle"></i></button>
 
+
+
+                        </div>
+
+                        <input type="hidden" name="status" id="AccountReport_account_tree_id" class="form-control" />
 
 
                       </div>
 
-                      <input type="hidden" name="status" id="AccountReport_account_tree_id" class="form-control" />
 
+                      <div class="col-md-3">
+                        <label for="desde">من تاريخ </label>
+                        <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
+                          name="modal_reporte_venta_inicio" v-model="from_date" onkeypress="return controltag(event)"
+                          style="background-color: white" />
+                      </div>
+
+                      <div class="col-md-3">
+                        <label for="desde">الي تاريخ </label>
+                        <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
+                          name="modal_reporte_venta_inicio" v-model="into_date" onkeypress="return controltag(event)"
+                          style="background-color: white" />
+                      </div>
+                      <div class="col-sm-2 col-md-3" style="margin-top: auto;">
+                        <a @click="onwaychange()" href="#"><img src="/assets/img/search.png" alt="" style="width: 10%;">
+                        </a>
+                      </div>
 
                     </div>
+                  </div>
+                </div>
+              </div>
 
 
-                    <div class="col-md-3">
-                      <label for="desde">من تاريخ </label>
-                      <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
-                        name="modal_reporte_venta_inicio" v-model="from_date" onkeypress="return controltag(event)"
-                        style="background-color: white" />
+
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
-
-                    <div class="col-md-3">
-                      <label for="desde">الي تاريخ </label>
-                      <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
-                        name="modal_reporte_venta_inicio" v-model="into_date" onkeypress="return controltag(event)"
-                        style="background-color: white" />
-                    </div>
-                    <div class="col-sm-2 col-md-3" style="margin-top: auto;">
-                      <a @click="onwaychange()" href="#"><img src="/assets/img/search.png" alt="" style="width: 10%;">
-                      </a>
-                    </div>
-
                   </div>
                 </div>
               </div>
             </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <form method="post" @submit.prevent="submitForm">
+
+            <div class="card-body" id="printme">
 
 
-
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div class="card">
-        <form method="post" @submit.prevent="submitForm">
-
-          <div class="card-body" id="printme">
+              <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                  <thead>
+                    <tr>
+                      <th class="wd-15p border-bottom-0" rowspan="2">
+                        رقم الحساب
+                      </th>
+                      <th class="wd-15p border-bottom-0" rowspan="2">
+                        اسم الحساب
+                      </th>
+                      <th class="wd-15p border-bottom-0" rowspan="2">
+                        الحساب الختامي
 
 
-            <div class="table-responsive">
-              <table class="table table-bordered text-center">
-                <thead>
-                  <tr>
-                    <th class="wd-15p border-bottom-0" rowspan="2">
-                      رقم الحساب
-                    </th>
-                    <th class="wd-15p border-bottom-0" rowspan="2">
-                      اسم الحساب
-                    </th>
-                    <th class="wd-15p border-bottom-0" rowspan="2">
-                      الحساب الختامي
+                      </th>
+                      <th class="wd-15p border-bottom-0" colspan="2" style="color: brown;">
+                        بالمجاميع
+                      </th>
+
+                      <th class="wd-15p border-bottom-0" colspan="2" style="color: brown;">
+                        بالارصده
+                      </th>
+                      <!-- <th class="wd-15p border-bottom-0" colspan="2">بالارصده</th> -->
+                    </tr>
+                    <tr>
+                      <th class="wd-15p border-bottom-0">مدين</th>
+
+                      <th class="wd-15p border-bottom-0">داين</th>
+
+                      <th class="wd-15p border-bottom-0">مدين</th>
+
+                      <th class="wd-15p border-bottom-0">داين</th>
+                      <!-- <th class="wd-15p border-bottom-0">الرصيد</th> -->
 
 
-                    </th>
-                    <th class="wd-15p border-bottom-0" colspan="2" style="color: brown;">
-                      بالمجاميع
-                    </th>
-
-                    <th class="wd-15p border-bottom-0" colspan="2" style="color: brown;">
-                      بالارصده
-                    </th>
-                    <!-- <th class="wd-15p border-bottom-0" colspan="2">بالارصده</th> -->
-                  </tr>
-                  <tr>
-                    <th class="wd-15p border-bottom-0">مدين</th>
-
-                    <th class="wd-15p border-bottom-0">داين</th>
-
-                    <th class="wd-15p border-bottom-0">مدين</th>
-
-                    <th class="wd-15p border-bottom-0">داين</th>
-                    <!-- <th class="wd-15p border-bottom-0">الرصيد</th> -->
-
-
-                    <!-- <th class="wd-15p border-bottom-0">مدين</th>
+                      <!-- <th class="wd-15p border-bottom-0">مدين</th>
 
                     <th class="wd-15p border-bottom-0">داين</th> -->
-                  </tr>
+                    </tr>
 
 
-                </thead>
-                <tbody v-if="auditBalances && auditBalances.length > 0">
-                  <tr v-for="(auditBalance, index) in auditBalances" :key="index">
+                  </thead>
+                  <tbody v-if="auditBalances && auditBalances.length > 0">
+                    <tr v-for="(auditBalance, index) in auditBalances" :key="index">
 
-                    <template v-if="auditBalance.balance != null">
-                      <td>{{ auditBalance.id }}</td>
+                      <template v-if="auditBalance.balance != null">
+                        <td>{{ auditBalance.id }}</td>
 
-                      <td>{{ auditBalance.text }}</td>
-                      <td>
+                        <td>{{ auditBalance.text }}</td>
+                        <td>
 
-                        <template v-if="auditBalance.final_account == 1">
-                          الميزانيه
+                          <template v-if="auditBalance.final_account == 1">
+                            الميزانيه
 
-                        </template>
-                        <template v-if="auditBalance.final_account == 2">
+                          </template>
+                          <template v-if="auditBalance.final_account == 2">
 
-                          الارباح والخسائر
-                        </template>
+                            الارباح والخسائر
+                          </template>
 
 
-                      </td>
-                      <td>{{ auditBalance.debit }}</td>
-                      <td>{{ auditBalance.credit }}</td>
+                        </td>
+                        <td>{{ auditBalance.debit }}</td>
+                        <td>{{ auditBalance.credit }}</td>
 
-                      <td>{{ auditBalance.debit }}</td>
-                      <td>{{ auditBalance.credit }}</td>
-<!-- 
+                        <td>{{ auditBalance.debit }}</td>
+                        <td>{{ auditBalance.credit }}</td>
+                        <!-- 
                       <td v-if="auditBalance.balance < 0">
 
                         <span style="color:red">
@@ -166,48 +171,54 @@
 
                       </td> -->
 
-                    </template>
+                      </template>
 
-                  </tr>
+                    </tr>
 
-                  <tr>
-                    <td colspan="3" style="color: blue;">الاجمالي</td>
-                    <td> <span style="color:green">{{ sum_debit }}</span></td>
-                    <td> <span style="color:green">{{ sum_credit }}</span></td>
-                    <td> <span style="color:green">{{ sum_debit }}</span></td>
-                    <td> <span style="color:green">{{ sum_credit }}</span></td>
-                    <!-- <td></td> -->
+                    <tr>
+                      <td colspan="3" style="color: blue;">الاجمالي</td>
+                      <td> <span style="color:green">{{ sum_debit }}</span></td>
+                      <td> <span style="color:green">{{ sum_credit }}</span></td>
+                      <td> <span style="color:green">{{ sum_debit }}</span></td>
+                      <td> <span style="color:green">{{ sum_credit }}</span></td>
+                      <!-- <td></td> -->
 
 
-                  </tr>
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="5">لايوجد بياتات.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                    </tr>
+                  </tbody>
+                  <tbody v-else>
+                    <tr>
+                      <td align="center" colspan="5">لايوجد بياتات.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </form>
+        </div>
           </div>
-        </form>
+        </div>
+  
       </div>
+      <!--/div-->
     </div>
-    <!--/div-->
+
   </div>
+
   <!-- /row -->
 </template>
 
@@ -230,7 +241,7 @@ export default {
         credit: "",
         balance: "",
         daily_date: "",
-        
+
       },
 
       from_date: new Date().toISOString().substr(0, 10),

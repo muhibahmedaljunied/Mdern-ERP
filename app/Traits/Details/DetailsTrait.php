@@ -19,15 +19,27 @@ trait DetailsTrait
 
         $this->qty->output = explode('_', $this->qty->table);
 
-        if (str_contains($this->qty->table, '_return_')) {
+
+        if ($this->qty->table == 'opening_inventuries') {
 
 
             $this->qty->column = $this->qty->output[0] . '_' . $this->qty->output[1];
             $this->qty->DB = DB::raw($this->qty->table . '.qty');
-            
+
         } else {
-            $this->qty->column = $this->qty->output[0];
-            $this->qty->DB = DB::raw($this->qty->table . '.qty-' . $this->qty->table . '.qty_return AS qty_remain');
+
+            if (str_contains($this->qty->table, '_return_')) {
+
+
+                $this->qty->column = $this->qty->output[0] . '_' . $this->qty->output[1];
+                $this->qty->DB = DB::raw($this->qty->table . '.qty');
+            } else {
+                dd($this->qty->output);
+                $this->qty->column = $this->qty->output[0];
+                $this->qty->DB = DB::raw($this->qty->table . '.qty-' . $this->qty->table . '.qty_return AS qty_remain');
+            }
+
+            dd($this->qty->DB);
         }
     }
 
@@ -39,9 +51,16 @@ trait DetailsTrait
 
 
 
-        $this->qty->details =   DB::table($this->qty->table)
-            ->where($this->qty->table . '.' . $this->qty->column . '_id', $this->qty->request->id)
-            ->join('store_products', 'store_products.id', '=', $this->qty->table . '.store_product_id')
+
+        $this->qty->details =   DB::table($this->qty->table);
+
+        if ($this->qty->request->id) {
+
+            $this->qty->details = $this->qty->details->where($this->qty->table . '.' . $this->qty->column . '_id', $this->qty->request->id);
+        }
+
+
+        $this->qty->details = $this->qty->details->join('store_products', 'store_products.id', '=', $this->qty->table . '.store_product_id')
             ->join('products', 'store_products.product_id', '=', 'products.id')
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('stores', 'store_products.store_id', '=', 'stores.id')
@@ -61,7 +80,7 @@ trait DetailsTrait
             )
             ->get();
 
-            // dd($this->qty->details);
+        // dd($this->qty->details);
 
         foreach ($this->qty->details as $value) {
 

@@ -1,174 +1,180 @@
 <template>
   <div class="row row-sm">
     <div class="col-xl-12">
+
       <div class="card">
         <div class="card-header pb-0">
-          <div class="d-flex justify-content-between">
-            <span class="h2"> كشف حساب</span>
-          </div>
-          <p class="tx-12 tx-gray-500 mb-2">
+              <div class="d-flex justify-content-between">
+                <span class="h2"> كشف حساب</span>
+              </div>
+              <p class="tx-12 tx-gray-500 mb-2">
 
-          </p>
-          <!-- <div class="d-flex justify-content-between">
+              </p>
+              <!-- <div class="d-flex justify-content-between">
 
             <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" />
           </div> -->
-        </div>
+            </div>
         <div class="card-body">
 
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <div class="row">
+          <div class="card">
+         
+            <div class="card-body">
 
-                  <div class="col-xl-3">
-                    <label for="">الحساب </label>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="row">
 
-                    <div class="custom-search">
+                      <div class="col-xl-3">
+                        <label for="">الحساب </label>
 
-                      <input id="AccountReport_account_tree" type="text" class="custom-search-input">
+                        <div class="custom-search">
 
-                      <button class="custom-search-botton" type="button" data-toggle="modal"
-                        data-target="#exampleModalAccountReport"> <i class="fa fa-plus-circle"></i></button>
+                          <input id="AccountReport_account_tree" type="text" class="custom-search-input">
+
+                          <button class="custom-search-botton" type="button" data-toggle="modal"
+                            data-target="#exampleModalAccountReport"> <i class="fa fa-plus-circle"></i></button>
+
+
+
+                        </div>
+
+                        <input type="hidden" name="status" id="AccountReport_account_tree_id" class="form-control" />
+
+
+                      </div>
+
+                      <div class="col-md-3">
+                        <label for="cliente"> نوع كشف الحساب</label>
+
+                        <select class="form-control" style="background-color: beige;" name="forma_pago">
+
+
+                          <option v-bind:value="1">اجمالي</option>
+                          <option v-bind:value="2">تحليلي</option>
+
+                        </select>
+
+                      </div>
+
 
 
 
                     </div>
 
-                    <input type="hidden" name="status" id="AccountReport_account_tree_id" class="form-control" />
+                    <div class="row">
+
+                      <div class="col-md-3">
+                        <label for="cliente"> الحساب التفصيلي</label>
+
+                        <select class="form-control" style="background-color: beige;" name="forma_pago"
+                          id="select_account_AccountReport_group">
+
+                        </select>
+
+                      </div>
 
 
-                  </div>
+                      <div class="col-md-3">
+                        <label for="desde">من تاريخ </label>
+                        <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
+                          name="modal_reporte_venta_inicio" v-model="from_date" onkeypress="return controltag(event)"
+                          style="background-color: white" />
+                      </div>
 
-                  <div class="col-md-3">
-                    <label for="cliente">  نوع كشف الحساب</label>
-
-                    <select class="form-control" style="background-color: beige;" name="forma_pago"
-                    >
-
-                      
-                    <option v-bind:value="1">اجمالي</option>
-                    <option v-bind:value="2">تحليلي</option>
-
-                    </select>
-
-                  </div>
-
-
-           
-
-                </div>
-
-                <div class="row">
-
-                  <div class="col-md-3">
-                    <label for="cliente"> الحساب التفصيلي</label>
-
-                    <select class="form-control" style="background-color: beige;" name="forma_pago"
-                      id="select_account_AccountReport_group">
-
-                    </select>
-
-                  </div>
-                  
-
-                  <div class="col-md-3">
-                    <label for="desde">من تاريخ </label>
-                    <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
-                      name="modal_reporte_venta_inicio" v-model="from_date" onkeypress="return controltag(event)"
-                      style="background-color: white" />
-                  </div>
-
-                  <div class="col-md-3">
-                    <label for="desde">الي تاريخ </label>
-                    <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
-                      name="modal_reporte_venta_inicio" v-model="into_date" onkeypress="return controltag(event)"
-                      style="background-color: white" />
-                  </div>
-                  <div class="col-sm-3 col-md-3" style="margin-top: auto;">
-                    <a @click="onwaychange()" href="#"><img src="/assets/img/search.png" alt="" style="width: 10%;">
-                    </a>
+                      <div class="col-md-3">
+                        <label for="desde">الي تاريخ </label>
+                        <input type="date" class="form-control hasDatepicker" id="modal_reporte_venta_inicio"
+                          name="modal_reporte_venta_inicio" v-model="into_date" onkeypress="return controltag(event)"
+                          style="background-color: white" />
+                      </div>
+                      <div class="col-sm-3 col-md-3" style="margin-top: auto;">
+                        <a @click="onwaychange()" href="#"><img src="/assets/img/search.png" alt="" style="width: 10%;">
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+
+
+
+
+
+              <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
             </div>
           </div>
+          <div class="card">
+
+            <div class="card-body">
 
 
+              <div class="row">
+
+                <div class="col-sm-12">
+                  <div class="table-responsive">
+                    <table class="table text-md-nowrap" id="example1">
+                      <thead>
+                        <tr>
+                          <th class="wd-15p border-bottom-0">#</th>
+                          <th class="wd-15p border-bottom-0">رقم الحساب</th>
+                          <th class="wd-15p border-bottom-0"> الحساب</th>
+                          <th class="wd-15p border-bottom-0"> الحساب التحليلي</th>
+                          <!-- <th class="wd-15p border-bottom-0"> نوع الحركه</th> -->
+                          <th class="wd-15p border-bottom-0">التاريخ</th>
+
+                          <th> مدين</th>
+                          <th class="wd-15p border-bottom-0"> داين</th>
 
 
+                          <!-- <th class="wd-15p border-bottom-0">العمليات</th> -->
+                        </tr>
+                      </thead>
+                      <tbody v-if="value_list && value_list.data.length > 0">
+                        <tr v-for="(daily, index) in value_list.data" :key="index">
 
-          <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
-        </div>
-      </div>
-      <div class="card">
+                          <td>{{ index + 1 }}</td>
+                          <td>{{ daily.account_id }}</td>
+                          <td>{{ daily.text }}</td>
+                          <td>{{ daily.text }}</td>
+                          <td>{{ daily.created_at }}</td>
 
-        <div class="card-body">
+                          <td>{{ daily.debit }}</td>
+                          <td>{{ daily.credit }}</td>
 
+                        </tr>
+                        <tr>
+                          <td colspan="5">الاجمالي</td>
+                          <td>
+                            <span style="color:green">{{ sum_debit }}</span>
 
-          <div class="row">
+                          </td>
 
-            <div class="col-sm-12">
-              <div class="table-responsive">
-                <table class="table text-md-nowrap" id="example1">
-                  <thead>
-                    <tr>
-                      <th class="wd-15p border-bottom-0">#</th>
-                      <th class="wd-15p border-bottom-0">رقم الحساب</th>
-                      <th class="wd-15p border-bottom-0">  الحساب</th>
-                      <th class="wd-15p border-bottom-0">  الحساب التحليلي</th>
-                      <!-- <th class="wd-15p border-bottom-0"> نوع الحركه</th> -->
-                      <th class="wd-15p border-bottom-0">التاريخ</th>
+                          <td>
 
-                      <th> مدين</th>
-                      <th class="wd-15p border-bottom-0"> داين</th>
+                            <span style="color:green">{{ sum_credit }}</span>
+                          </td>
 
-
-                      <!-- <th class="wd-15p border-bottom-0">العمليات</th> -->
-                    </tr>
-                  </thead>
-                  <tbody v-if="value_list && value_list.data.length > 0">
-                    <tr v-for="(daily, index) in value_list.data" :key="index">
-
-                      <td>{{ index + 1 }}</td>
-                      <td>{{ daily.account_id }}</td>
-                      <td>{{ daily.text }}</td>
-                      <td>{{ daily.text }}</td>
-                      <td>{{ daily.created_at }}</td>
-
-                      <td>{{ daily.debit }}</td>
-                      <td>{{ daily.credit }}</td>
-
-                    </tr>
-                    <tr>
-                      <td colspan="5">الاجمالي</td>
-                      <td>
-                        <span style="color:green">{{ sum_debit }}</span>
-
-                      </td>
-
-                      <td>
-
-                        <span style="color:green">{{ sum_credit }}</span>
-                      </td>
-
-                    </tr>
-                  </tbody>
-                  <tbody v-else>
-                    <tr>
-                      <td align="center" colspan="7">
-                        <h3> لايوجد بيانات </h3>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                        </tr>
+                      </tbody>
+                      <tbody v-else>
+                        <tr>
+                          <td align="center" colspan="7">
+                            <h3> لايوجد بيانات </h3>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
+
+
+              <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
             </div>
           </div>
-
-
-          <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
         </div>
       </div>
     </div>
@@ -223,7 +229,7 @@ export default {
       from_date: new Date().toISOString().substr(0, 10),
       into_date: new Date().toISOString().substr(0, 10),
 
-      Way_to_note_selected:'',
+      Way_to_note_selected: '',
 
     }
   },

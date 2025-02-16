@@ -383,38 +383,88 @@
                                                     <th style="width: 60px">العمليات</th>
                                                 </tr>
                                             </thead>
-                                            <tbody v-if="opening && opening.data.length > 0">
-                                                <tr v-for="(openings, index) in opening.data" :key="index">
-                                                    <td style="width: 40px">{{ index + 1 }}</td>
-                                                    <td style="width: 40px">{{ openings.product }}</td>
+                                            <tbody v-if="opening_inventuries && opening_inventuries.length > 0">
+                                                <tr v-for="(opening_inventury, index) in opening_inventuries"
+                                                    :key="index">
+                                                    <td>{{ index + 1 }}</td>
 
-                                                    <td style="width: 40px">
-                                                        {{ openings.store }}
+                                                    <td>{{ opening_inventury.product }}</td>
+                                                    <td>{{ opening_inventury.store }}</td>
+                                                    <td>{{ opening_inventury.status }}</td>
+                                                    <td>{{ opening_inventury.desc }}</td>
+                                                    <td>
+
+
+                                                        <div v-for="temx in opening_inventury.qty_after_convert['qty']">
+
+
+
+                                                            <span v-for="temx2 in temx">
+
+
+                                                                <span style="float: right;">
+                                                                    {{ temx2[0] }}
+                                                                    <span style="color: red;">
+                                                                        {{ temx2[1] }}
+                                                                    </span>
+
+                                                                </span>
+
+
+
+                                                            </span>
+
+                                                            <!-- <span v-if="temx.unit_type == 0">
+
+
+<span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
+temx.name }}</span>
+
+
+
+</span> -->
+
+                                                        </div>
+
+
                                                     </td>
 
-                                                    <td style="width: 40px">{{ openings.status }}</td>
-                                                    <td style="width: 40px">{{ openings.desc }}</td>
+                                                    <!-- <td>{{ purchase_details.qty }} {{ purchase_details.unit }}</td> -->
 
-                                                    <td>{{ openings.tem_qty }} {{ openings.unit }}</td>
-                                                    <td>{{ openings.price }}</td>
-                                                    <td>{{ openings.total }}</td>
+
+                                                    <!-- <td>{{ purchase_details.unit }}</td> -->
+                                                    <td>{{ opening_inventury.cost }}</td>
+                                                    <td>{{ opening_inventury.total }}</td>
+                                                    <!-- <td>{{ purchase_details.qty_return }}</td> -->
                                                     <td>
-                                                        <button data-toggle="modal" data-target="#modal_vaciar1"
-                                                            @click="show_modal(openings.product_id)"
-                                                            class="tn btn-danger btn-sm waves-effect btn-agregar">
-                                                            <i class="fa fa-trash"></i></button>
+                                                        <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="tn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
+                                                        <button type="button"
+                                                            class="btn btn-sm waves-effect btn-danger">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
 
-                                                        <router-link to="/opening_supply"
-                                                            class="btn btn-info btn-sm waves-effect btn-agregar"
-                                                            data-toggle="tooltip" title="تعديل">
+                                                        <router-link :to="{
+                                                            name: 'edit_allowance_types',
+                                                            params: { id: opening_inventury.id },
+                                                        }" class="edit btn btn-sm waves-effect btn-success">
                                                             <i class="fa fa-edit"></i></router-link>
                                                     </td>
+
+
                                                 </tr>
+                                                <!-- <tr>
+
+                    <td colspan="7" style="text-align:center;color:red;font-size:large">الاجمالي</td>
+                    <td>{{ total }}</td>
+                  </tr> -->
+
                                             </tbody>
                                             <tbody v-else>
                                                 <tr>
-                                                    <td align="center" colspan="7">
-                                                        <h3> لايوجد بيانات </h3>
+                                                    <td align="center" colspan="8">
+                                                        <h3>
+                                                            لايوجد اي بيانات
+                                                        </h3>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -572,6 +622,10 @@ export default {
 
         return {
 
+            opening_inventuries: {
+                type: Object,
+                default: null,
+            },
             description: '',
             all_products: '',
             jsonTreeData: '',
@@ -633,13 +687,13 @@ export default {
 
 
 
-        get_search() {
-            this.axios
-                .post(`/purchase/newpurchasesearch`, { word_search: this.word_search })
-                .then(({ data }) => {
-                    this.products = data.products;
-                });
-        },
+        // get_search() {
+        //     this.axios
+        //         .post(`/purchase/newpurchasesearch`, { word_search: this.word_search })
+        //         .then(({ data }) => {
+        //             this.products = data.products;
+        //         });
+        // },
 
         add_opening() {
 
@@ -723,12 +777,15 @@ export default {
         },
         list(page = 1) {
             this.axios
-                .post(`/opening/newopening?page=${page}`)
+                .post(`/opening/newopening?page=${page}`, {
+                    table: 'opening_inventuries'
+                })
                 .then(({ data }) => {
                     console.log('data.statuses');
 
                     // this.opening = data.temporales;
                     this.statuses = data.statuses;
+                    this.opening_inventuries = data.details;
 
                 })
                 .catch(({ response }) => {
@@ -738,7 +795,35 @@ export default {
         check_data(i = 0) {
 
             return 1;
-        }
+        },
+        exports_excel() {
+
+            axios
+                .post(`/export_opening_inventuries`)
+                .then(function (response) {
+
+                    // console.log(1);
+                })
+                .catch(error => {
+                    toastMessage("تم اتمام عمليه التصدير");
+                    this.$router.go(0);
+
+                });
+        },
+        imports_excel() {
+
+            axios
+                .post(`/import_opening_inventuries`)
+                .then(function (response) {
+                    toastMessage("تم اتمام عمليه الاستيراد");
+                    this.$router.go(0);
+
+                    // console.log(1);
+                })
+                .catch(error => {
+
+                });
+        },
 
 
 

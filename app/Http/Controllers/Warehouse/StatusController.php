@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Status;
-// use App\Exports\StatusExport;
-// use App\Imports\StatusImport;
-use Maatwebsite\Excel\Facades\Excel;
-use Storage;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class StatusController extends Controller
 {
