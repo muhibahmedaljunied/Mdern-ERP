@@ -9,7 +9,18 @@ class StoreProduct extends Model
     protected $fillable = [
         'product_id',
         'store_id',
+        "status_id",
+        "desc",
+        "cost",
+        "qr_code",
+        "quantity",
+        "total"
     ];
+
+
+
+ 
+
 
 
     public function stock()

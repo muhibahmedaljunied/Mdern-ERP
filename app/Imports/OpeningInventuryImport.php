@@ -11,15 +11,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 class OpeningInventuryImport implements ToModel, WithHeadingRow
 {
 
-    protected $store_product;
-    protected $stock;
 
-    public function __construct()
-    {
-
-        $this->store_product = StoreProduct::select()->get();
-        $this->stock = Stock::select()->get();
-    }
 
 
     /**
@@ -30,80 +22,43 @@ class OpeningInventuryImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
+        // foreach ($row as $rows) {
 
-        // $store_product = $this->store_product->where('id', $row['store_product_id'])->first();
-        // $stock = $this->stock->where(
+        $store_product = StoreProduct::create([
 
-        //     [
-        //         'stockable_type' => 'App\Models\OpeningInventury',
-        //         'stockable_id' => $row['id']
-        //     ]
-
-        // )->first();
-
-
-        // --------------------------------------------------------------------
-        foreach ($row as $rows) {
-            $memberId = StoreProduct::create([
-                'full_name'     => $rows['full_name'],
-                'father_name'   => $rows['father_name'],
-                'mother_name'   => $rows['mother_name'],
-                'cell_number'   => $rows['cell_number'],
-            ]);
-            $applicationId  = OpeningInventury::create([
-                'member_id'             => $memberId->member_id,
-                'licence_category_name' => $rows['licence_category_name'],
-            ]);
-            Stock::create([
-                'member_id'         => $memberId->member_id,
-                'application_id'    => $applicationId->application_id,
-                'application_type'  => $rows['application_type'],
-            ]);
-
-            
-        }
-        // -----------------------------------store_product-----------------------
-        $opening_inventury =  new StoreProduct([
-
-
-            "store_product_id" => $row['store_product_id'],
-            "unit_id" => $row['unit_id'],
+            "product_id" => $row['product_id'],
+            "store_id" => $row['store_id'],
+            "status_id" => $row['status_id'],
             "desc" => $row['desc'],
-            "qty" => $row['qty'],
+            "cost" => $row['cost'],
+            "qr_code" => $row['qr_code'],
+            "quantity" => $row['quantity'],
             "cost" => $row['cost'],
             "total" => $row['total'],
-            "expiry_date" => $row['expiry_date'],
-            "date" => $row['date'],
-
-
 
         ]);
+        $opening_inventury  = OpeningInventury::create([
 
-        // --------------------------------opening_inventury--------------------------
-
-        $opening_inventury->opening()->create([
-
-            "store_product_id" => $store_product->store_product_id ?? NULL,
+            "store_product_id" => $store_product->id ?? NULL,
             "unit_id" => $row['unit_id'],
-            "qty" => $row['qty'],
-            "total" => $row['total'],
-            "expiry_date" => $row['expiry_date'],
+            "qty" => $row['quantity'],
+            "total" => 0,
             "date" => $row['date'],
 
-        ]);
-        // --------------------------------------stock--------------------
-        $opening_inventury->stock()->create([
 
-            "id" => $row['id'],
-            "store_product_id" => $store_product->store_product_id ?? NULL,
+        ]);
+        Stock::create([
+
+            "store_product_id" => $store_product->id ?? NULL,
             "unit_id" => $row['unit_id'],
-            "qty" => $row['qty'],
-            "cost" => $row['cost'],
-            "total" => $row['total'],
-            "expiry_date" => $row['expiry_date'],
+            "stockable_type" => 'App\Models\OpeningInventury',
+            "stockable_id" => $opening_inventury->id,
+            "quantity" => $row['quantity'],
             "date" => $row['date'],
-        ]);
 
+
+        ]);
+        // }
 
 
 

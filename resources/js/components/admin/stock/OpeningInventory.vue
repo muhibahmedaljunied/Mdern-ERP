@@ -352,13 +352,16 @@
 
                                     <div style="display: flex;float: left; margin: 5px">
 
-
                                         <button @click="exports_excel()">
-                                            <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+
+                                            <i class="fa-solid fa-file-export "
+                                                style="font-size: 24px; color: #63E6BE;"></i>
                                         </button>
 
                                         <button @click="imports_excel()">
-                                            <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+
+                                            <i class="fa-solid fa-file-import "
+                                                style="font-size: 24px; color: #B197FC;"></i>
                                         </button>
 
                                         <input type="search" autocomplete="on" name="search" data-toggle="dropdown"
@@ -802,11 +805,11 @@ export default {
                 .post(`/export_opening_inventuries`)
                 .then(function (response) {
 
-                    // console.log(1);
+                    toastMessage("تم اتمام عمليه التصدير");
+                    this.$router.go(0);
                 })
                 .catch(error => {
-                    toastMessage("تم اتمام عمليه التصدير");
-                    // this.$router.go(0);
+
 
                 });
         },
@@ -818,7 +821,7 @@ export default {
                     toastMessage("تم اتمام عمليه الاستيراد");
                     this.$router.go(0);
 
-                    // console.log(1);
+
                 })
                 .catch(error => {
 

@@ -62,7 +62,10 @@ mix.js(
         [
             // -----------------------------------------------------------------------------------------------------------------------------
             "assets/css/custom-search.css",
-            "assets/css/font-awesome.min.css",
+            // "assets/font-awesome/css/fontawesome.css",
+            // "assets/font-awesome/css/fontawesome.min.css",
+            // "assets/font-awesome/css/solid.css",
+            // "assets/font-awesome/css/solid.min.css",
             "assets/css/jstree.css",
             "assets/css/jquery-ui.min.css",
             // 'public/assets/img/brand/favicon.png',

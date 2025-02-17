@@ -5,9 +5,10 @@
 
 
 <link href="{{URL::asset('css/app.css')}}" rel="stylesheet">  
-<!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> -->
-<link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
-
+<link href="{{URL::asset('assets/font-awesome/css/fontawesome.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/font-awesome/css/fontawesome.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/font-awesome/css/solid.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/font-awesome/css/light.css')}}" rel="stylesheet">
 
 
 

@@ -2,232 +2,242 @@
   <!-- row opened -->
 
   <div class="container-fluid">
-  <div class="card">
-    <div class="card-header pb-0">
-      <div class="d-flex justify-content-between">
-        <span class="h2">المنتجات</span>
+    <div class="card">
+      <div class="card-header pb-0">
+        <div class="d-flex justify-content-between">
+          <span class="h2">المنتجات</span>
+        </div>
       </div>
-    </div>
 
-    <div class="card-body">
-      <div class="row row-sm">
+      <div class="card-body">
+        <div class="row row-sm">
 
-        <div class="col-xl-6">
-          <div class="card">
-            <div class="card-header pb-0">
+          <div class="col-xl-6">
+            <div class="card">
+              <div class="card-header pb-0">
 
 
-              <span style="font-size: x-large"> شجره المنتجات</span>
+                <span style="font-size: x-large"> شجره المنتجات</span>
 
-            </div>
-            <div class="card-body">
-              <div class="container">
-                <div class="row justify-content-left">
-                  <div class="col-md-12">
-                    <div class="card">
-
+              </div>
+              <div class="card-body">
+                <div class="container">
+                  <div class="row justify-content-left">
+                    <div class="col-md-12">
+                      <div class="card">
 
 
 
-                      <div class="card-body">
+
+                        <div class="card-body">
 
 
-                        <div class="container">
-                          <div class="row">
-                            <div class="col-md-8">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-md-8">
 
-                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti"
-                                placeholder="بحث" aria-describedby="search-addon">
+                                <input style="background-color:azure;" class="form-control" type="text"
+                                  id="ricerca-enti" placeholder="بحث" aria-describedby="search-addon">
+
+
+
+                              </div>
+
+
+                              <div class="col-md-4">
+
+                                <button @click="exports_excel()">
+
+                                  <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+                                </button>
+
+                                <button @click="imports_excel()">
+
+                                  <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+                                </button>
+
+
+
+
+                                <!-- <button @click="exports_excel()">
+                                  <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+                                </button>
+
+                                <button @click="imports_excel()">
+                                  <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+                                </button> -->
+
+                              </div>
+
 
 
 
                             </div>
+                            <div class="row">
+                              <div class="col-xs-12" id="treeview_json_product">
 
+                                <div id="test">
 
-                            <div class="col-md-4">
-
-
-
-
-
-                              <button @click="exports_excel()">
-                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
-                              </button>
-
-                              <button @click="imports_excel()">
-                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
-                              </button>
-
-                            </div>
-
-
-
-
-                          </div>
-                          <div class="row">
-                            <div class="col-xs-12" id="treeview_json_product">
-
-                              <div id="test">
-
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
 
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
-        </div>
 
 
 
 
-        <div class="col-xl-6">
-          <div class="card">
+          <div class="col-xl-6">
+            <div class="card">
 
-            <div class="card-header">
-              <span style="font-size: x-large"> اضافه المنتجات</span>
-            </div>
-            <!-- <form method="post"> -->
-
-            <div class="card-body">
-              <div class="row">
-
-                <div class="col-md-4">
-                  <label for="Product">رقم المنتج</label>
-                  <input style="background-color: beige;" id='product_number' type="text" class="form-control" required
-                    readonly />
-
-                </div>
-                <div class="col-md-4">
-                  <label for="Product">اسم المنتج</label>
-                  <input style="background-color: beige;" v-model="text" type="text" name="Product" id="product"
-                    class="form-control" required /><span style="color:red">{{ error_text[0] }}</span>
-
-                </div>
-
-                <div class="col-md-4">
-                  <label for="radio-example-one">متفرع </label>
-
-                  <input type="checkbox" name='fieldset2' v-model="status" id="status">
-                  <input id='parent' type="hidden" />
-
-                  <input id='rank' type="hidden" />
-
-                </div>
+              <div class="card-header">
+                <span style="font-size: x-large"> اضافه المنتجات</span>
               </div>
+              <!-- <form method="post"> -->
 
-              <br>
-              <div class="row">
+              <div class="card-body">
+                <div class="row">
 
-                <div class="col-md-12" v-if="!status">
-                  <div class="row">
+                  <div class="col-md-4">
+                    <label for="Product">رقم المنتج</label>
+                    <input style="background-color: beige;" id='product_number' type="text" class="form-control"
+                      required readonly />
+
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Product">اسم المنتج</label>
+                    <input style="background-color: beige;" v-model="text" type="text" name="Product" id="product"
+                      class="form-control" required /><span style="color:red">{{ error_text[0] }}</span>
+
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="radio-example-one">متفرع </label>
+
+                    <input type="checkbox" name='fieldset2' v-model="status" id="status">
+                    <input id='parent' type="hidden" />
+
+                    <input id='rank' type="hidden" />
+
+                  </div>
+                </div>
+
+                <br>
+                <div class="row">
+
+                  <div class="col-md-12" v-if="!status">
+                    <div class="row">
 
 
-                    <div class='col-md-4'>
-                      <label for="Product"></label>
+                      <div class='col-md-4'>
+                        <label for="Product"></label>
 
-                      <label for="Product">الوحده الرئيسيه<span style="color: red;">(اصغر وحده)</span></label>
+                        <label for="Product">الوحده الرئيسيه<span style="color: red;">(اصغر وحده)</span></label>
 
-                      <select v-model="unit" id="supplier" class="form-control">
-                        <option v-for="unit in units" v-bind:value="unit.id">
-                          {{ unit.name }}
-                        </option>
-                      </select>
+                        <select v-model="unit" id="supplier" class="form-control">
+                          <option v-for="unit in units" v-bind:value="unit.id">
+                            {{ unit.name }}
+                          </option>
+                        </select>
 
-                    </div>
-                    <div class='col-md-4'>
-                      <label for="purchase_price"> سعر الشراء</label>
-                      <input v-model="purchase_price" type="text" name="purchase_price" class="form-control" /><span
-                        style="color:red">{{ error_purchase_price[0] }}</span>
+                      </div>
+                      <div class='col-md-4'>
+                        <label for="purchase_price"> سعر الشراء</label>
+                        <input v-model="purchase_price" type="text" name="purchase_price" class="form-control" /><span
+                          style="color:red">{{ error_purchase_price[0] }}</span>
 
-                      <!-- <input v-model="rate[0]" type="text" 
+                        <!-- <input v-model="rate[0]" type="text" 
                           class="form-control" /> -->
+                      </div>
+
+
+
+                      <div class='col-md-4'>
+                        <label for="radio-example-one">اضافه وحدات تجزئه </label><br>
+
+
+                        <!-- <input type="checkbox" name='fieldset2' id="status" v-model="check_state"> -->
+
+
+                        <button type="button" class="btn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal"
+                          data-target="#exampleModalUnit">
+                          <i class="fa fa-eye"></i></button>
+
+
+
+
+
+
+                      </div>
                     </div>
 
+                    <br>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label for="Product Minimum"> الحد الادني للمنتج</label>
+                        <input v-model="product_minimum" type="number" name="Minimum" id="Minimum"
+                          class="form-control" />
+                        <span style="color:red">{{ error_hash_rate[0] }}</span>
+                      </div>
 
+                      <div class="col-md-4">
+                        <label for="Product Minimum">مده الارجاع</label>
+                        <input v-model="period" type="number" name="Minimum" id="Minimum" class="form-control" />
 
-                    <div class='col-md-4'>
-                      <label for="radio-example-one">اضافه وحدات تجزئه </label><br>
+                      </div>
 
-
-                      <!-- <input type="checkbox" name='fieldset2' id="status" v-model="check_state"> -->
-
-
-                      <button type="button" class="btn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal"
-                        data-target="#exampleModalUnit">
-                        <i class="fa fa-eye"></i></button>
-
-
-
+                      <div class="col-md-4">
+                        <label for="filePhoto">الصوره</label>
+                        <input v-on:change="onFileChange" type="file" name="image" class="form-control-file"
+                          id="filePhoto" />
+                        <img src="" id="previewHolder" width="150px" />
+                      </div>
 
 
 
                     </div>
+
                   </div>
 
-                  <br>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label for="Product Minimum"> الحد الادني للمنتج</label>
-                      <input v-model="product_minimum" type="number" name="Minimum" id="Minimum" class="form-control" />
-                      <span style="color:red">{{ error_hash_rate[0] }}</span>
-                    </div>
-
-                    <div class="col-md-4">
-                      <label for="Product Minimum">مده الارجاع</label>
-                      <input v-model="period" type="number" name="Minimum" id="Minimum" class="form-control" />
-
-                    </div>
-
-                    <div class="col-md-4">
-                      <label for="filePhoto">الصوره</label>
-                      <input v-on:change="onFileChange" type="file" name="image" class="form-control-file"
-                        id="filePhoto" />
-                      <img src="" id="previewHolder" width="150px" />
-                    </div>
 
 
 
-                  </div>
 
                 </div>
 
 
+                <br>
 
+                <div class="row">
 
+                  <div class="col-md-12">
+                    <button type="button" class="btn btn-primary btn-lg btn-inline" @click="add()"> حفظ </button>
 
-              </div>
-
-
-              <br>
-
-              <div class="row">
-
-                <div class="col-md-12">
-                  <button type="button" class="btn btn-primary btn-lg btn-inline" @click="add()"> حفظ </button>
-
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- <div class="card-footer">
+              <!-- <div class="card-footer">
               <button type="button" class="btn btn-primary" @click="addnode()"> حفظ </button>
             </div> -->
-            <!-- </form> -->
+              <!-- </form> -->
+            </div>
           </div>
+
+
+
+
+          <!--/div-->
         </div>
-
-
-
-
-        <!--/div-->
-      </div>
-      <!-- <div class="row">
+        <!-- <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
@@ -313,113 +323,113 @@
       </div> -->
 
 
-    </div>
+      </div>
 
-    <div class="modal fade" id="exampleModalUnit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <!-- <div class="modal-header">
+      <div class="modal fade" id="exampleModalUnit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <!-- <div class="modal-header">
 
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">وحدات التجزئه</span>
             </button>
           </div> -->
-          <div class="modal-body">
+            <div class="modal-body">
 
 
 
-            <div class="row">
-              <div class="table-responsive">
-                <table class="table table-bordered text-right" style="width: auto; font-size: x-large">
-                  <thead>
-                    <tr>
-                      <!-- <th>Code</th> -->
-                      <th>وحده التجزئه</th>
-                      <th>سعر الشراء</th>
-                      <th>عدد وحدات التجزئه بالوحده الاساسيه</th>
+              <div class="row">
+                <div class="table-responsive">
+                  <table class="table table-bordered text-right" style="width: auto; font-size: x-large">
+                    <thead>
+                      <tr>
+                        <!-- <th>Code</th> -->
+                        <th>وحده التجزئه</th>
+                        <th>سعر الشراء</th>
+                        <th>عدد وحدات التجزئه بالوحده الاساسيه</th>
 
-                      <th>اضافه</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="index in count" :key="index">
-                      <td>
+                        <th>اضافه</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="index in count" :key="index">
+                        <td>
 
-                        <!-- retail_unit -->
-                        <select v-model="retail_unit[index]" class="form-control">
-                          <option v-for="unit in units" v-bind:value="unit.id">
-                            {{ unit.name }}
-                          </option>
-                        </select>
-
-
-
-
-
-                      </td>
-                      <td>
-
-
-                        <input v-model="purchase_price_for_retail_unit[index]" type="text" name="purchase_price"
-                          class="form-control" />
+                          <!-- retail_unit -->
+                          <select v-model="retail_unit[index]" class="form-control">
+                            <option v-for="unit in units" v-bind:value="unit.id">
+                              {{ unit.name }}
+                            </option>
+                          </select>
 
 
 
 
-                      </td>
 
-                      <td>
-
-
-                        <input v-model="hash_rate[index]" type="text" name="purchase_price" class="form-control" />
-
-                      </td>
+                        </td>
+                        <td>
 
 
-                      <td v-if="index == 1">
-
-                        <button class="btn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
-                          <i class="fa fa-plus-circle"></i></button>
-
-                        <button class="btn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
-                          <i class="fa fa-minus-circle"></i></button>
+                          <input v-model="purchase_price_for_retail_unit[index]" type="text" name="purchase_price"
+                            class="form-control" />
 
 
 
-                      </td>
-                    </tr>
+
+                        </td>
+
+                        <td>
 
 
-                  </tbody>
-                </table>
+                          <input v-model="hash_rate[index]" type="text" name="purchase_price" class="form-control" />
+
+                        </td>
+
+
+                        <td v-if="index == 1">
+
+                          <button class="btn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
+                            <i class="fa fa-plus-circle"></i></button>
+
+                          <button class="btn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
+                            <i class="fa fa-minus-circle"></i></button>
+
+
+
+                        </td>
+                      </tr>
+
+
+                    </tbody>
+                  </table>
+                </div>
               </div>
+
+
             </div>
 
-
-          </div>
-
-          <!-- <div class="modal-footer">
+            <!-- <div class="modal-footer">
 
         
             <button class="tn btn-info btn-lg waves-effect btn-agregar" @click="addunit()"> حفظ </button>
 
           </div>  -->
+          </div>
         </div>
       </div>
-    </div>
 
 
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          حذف
+      <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            حذف
+          </div>
         </div>
       </div>
-    </div>
 
-  </div>
+    </div>
   </div>
 </template>
 
@@ -468,7 +478,7 @@ export default {
   mounted() {
     // this.list();
 
-    console.log('ffhghghhghhghghhg',window.axios.defaults.baseURL);
+    console.log('ffhghghhghhghghhg', window.axios.defaults.baseURL);
     this.counts[0] = 1;
     this.type_of_tree = 0;
     this.axios.post("/unit").then((response) => {

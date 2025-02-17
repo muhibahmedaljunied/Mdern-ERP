@@ -32,16 +32,16 @@ class CreateOpeningInventoriesTable extends Migration
             // $table->unsignedInteger('status_id')->unsigned()->nullable();
             // $table->foreign('status_id')->references('id')->on('statuses');
 
-            $table->string('desc')->nullable();
+            // $table->string('desc')->nullable();
             // $table->string('product_name')->nullable();
 
             $table->integer('qty')->default(0);
 
-            $table->integer('cost')->default(0);
+            // $table->integer('cost')->default(0);
 
             $table->integer('total')->default(0);
 
-            $table->date('expiry_date')->nullable();
+            // $table->date('expiry_date')->nullable();
 
             $table->date('date')->nullable();
 

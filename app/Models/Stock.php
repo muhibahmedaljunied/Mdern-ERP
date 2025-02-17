@@ -8,11 +8,12 @@ class Stock extends Model
 {
     protected $fillable = [
 
-        'product_id',
+        'store_product_id',
         'quantity',
         'unit_id',
-        'store_id',
-        'price'
+        'date',
+        'stockable_type',
+        'stockable_id'
     ];
 
 
