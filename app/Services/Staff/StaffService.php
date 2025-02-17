@@ -150,7 +150,7 @@ class StaffService
 
         $payroll = new Payroll();
         $payroll->staff_id = $this->staff_id;
-        $payroll->net_salary = (float)$this->core->data['salary'];
+        $payroll->net_salary = $this->core->data['salary'];
         $payroll->save();
     }
 }

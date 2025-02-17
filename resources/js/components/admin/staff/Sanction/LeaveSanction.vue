@@ -1,7 +1,7 @@
 <template>
- <div class="container-fluid">
+  <div class="container-fluid">
 
-  <div class="row row-sm">
+    <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
           <div class="card-header">
@@ -27,7 +27,7 @@
           <div class="col-xl-12">
             <!-- <form method="post"> -->
             <div class="card">
-             
+
               <div class="card-body">
                 <form method="post">
 
@@ -64,7 +64,8 @@
                                   </select>
                                 </td> -->
                           <td>
-                            <select v-model="leaveoutselected[index]" name="type" id="type" class="form-control " required>
+                            <select v-model="leaveoutselected[index]" name="type" id="type" class="form-control "
+                              required>
                               <option v-for="leaveout in leaveout_types" v-bind:value="leaveout.id">
                                 {{ leaveout.name }}
                               </option>
@@ -156,10 +157,10 @@
                       </tbody>
                     </table>
                   </div>
-               
+
                 </form>
               </div>
-           
+
             </div>
 
 
@@ -171,95 +172,98 @@
 
     </div>
     <div class="row row-sm">
-    <div class="col-xl-12">
-      <div class="card">
-        <div class="card-header">
-          <!-- <span class="h2"> الموردين</span> -->
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <!-- <span class="h2"> الموردين</span> -->
 
-          <div style="display: flex;float: left; margin: 5px">
+            <div style="display: flex;float: left; margin: 5px">
 
 
-            <button @click="Export()">
-              <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
-            </button>
+              <button @click="exports_excel()">
 
-            <button @click="Import()">
-              <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
-            </button>
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
 
-            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
-              @input="get_search()" />
+              <button @click="imports_excel()">
+
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                @input="get_search()" />
+            </div>
+          </div>
+          <div class="card-body" id="printme">
+            <div class="table-responsive">
+              <table class="table table-bordered text-center">
+                <thead>
+                  <tr>
+                    <th class="wd-15p border-bottom-0">#</th>
+                    <!-- <th class="wd-15p border-bottom-0">اسم الموظف</th> -->
+                    <th class="wd-15p border-bottom-0">نوع الانصراف</th>
+
+                    <th class="wd-15p border-bottom-0">وقت الانصراف</th>
+                    <th class="wd-15p border-bottom-0">عدد مرات التكرار</th>
+                    <th class="wd-15p border-bottom-0"> طريقه الخصم</th>
+                    <th class="wd-15p border-bottom-0"> طريقه الاحتساب</th>
+                    <th class="wd-15p border-bottom-0"> الجزاء</th>
+
+                    <!-- <th class="wd-15p border-bottom-0"> الحاله</th> -->
+
+                    <th class="wd-15p border-bottom-0">العمليات</th>
+                  </tr>
+                </thead>
+                <tbody v-if="value_list.data && value_list.data.length > 0">
+                  <tr v-for="(leaveout_sanction, index) in value_list.data" :key="index">
+                    <td>{{ index + 1 }}</td>
+                    <!-- <td>{{ leaveout_sanction.staff_name }}</td> -->
+                    <td>{{ leaveout_sanction.leaveout }}</td>
+                    <td>{{ leaveout_sanction.duration }}</td>
+
+                    <td v-if="leaveout_sanction.iteration == 1"> مره واحده</td>
+                    <td v-if="leaveout_sanction.iteration == 2"> مرتين</td>
+                    <td v-if="leaveout_sanction.iteration == 3">ثلاث مرات</td>
+                    <td v-if="leaveout_sanction.iteration == 4">اربع مرات</td>
+                    <td v-if="leaveout_sanction.iteration == 5"> خمس مرات او اكثر</td>
+                    <td v-if="leaveout_sanction.iteration == 6"> اي مره</td>
+
+                    <td>{{ leaveout_sanction.discount_name }}</td>
+                    <td v-if="leaveout_sanction.discount == 1">قيمه</td>
+                    <td v-if="leaveout_sanction.discount == 2">نسبه</td>
+                    <td>{{ leaveout_sanction.sanction }}</td>
+
+
+                    <td>
+                      <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="btn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
+                      <button type="button" @click="delete_item(leaveout_sanction.id)"
+                        class="btn btn-danger btn-sm waves-effect">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                      <a class="btn btn-info btn-sm waves-effect btn-agregar" data-target="#updateSLA"
+                        data-toggle="modal" id="agregar_productos">
+                        <i class="fa fa-edit"></i></a>
+
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody v-else>
+                  <tr>
+                    <td align="center" colspan="6">لايوجد بياتات.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
           </div>
         </div>
-        <div class="card-body" id="printme">
-      <div class="table-responsive">
-        <table class="table table-bordered text-center">
-          <thead>
-            <tr>
-              <th class="wd-15p border-bottom-0">#</th>
-              <!-- <th class="wd-15p border-bottom-0">اسم الموظف</th> -->
-              <th class="wd-15p border-bottom-0">نوع الانصراف</th>
-
-              <th class="wd-15p border-bottom-0">وقت الانصراف</th>
-              <th class="wd-15p border-bottom-0">عدد مرات التكرار</th>
-              <th class="wd-15p border-bottom-0"> طريقه الخصم</th>
-              <th class="wd-15p border-bottom-0"> طريقه الاحتساب</th>
-              <th class="wd-15p border-bottom-0"> الجزاء</th>
-
-              <!-- <th class="wd-15p border-bottom-0"> الحاله</th> -->
-
-              <th class="wd-15p border-bottom-0">العمليات</th>
-            </tr>
-          </thead>
-          <tbody v-if="value_list.data && value_list.data.length > 0">
-            <tr v-for="(leaveout_sanction, index) in value_list.data" :key="index">
-              <td>{{ index + 1 }}</td>
-              <!-- <td>{{ leaveout_sanction.staff_name }}</td> -->
-              <td>{{ leaveout_sanction.leaveout }}</td>
-              <td>{{ leaveout_sanction.duration }}</td>
-             
-              <td v-if="leaveout_sanction.iteration == 1"> مره واحده</td>
-              <td v-if="leaveout_sanction.iteration == 2">  مرتين</td>
-              <td v-if="leaveout_sanction.iteration == 3">ثلاث مرات</td>
-              <td v-if="leaveout_sanction.iteration == 4">اربع مرات</td>
-              <td v-if="leaveout_sanction.iteration == 5"> خمس مرات او اكثر</td>
-              <td v-if="leaveout_sanction.iteration == 6"> اي مره</td>
-
-              <td>{{ leaveout_sanction.discount_name }}</td>
-              <td v-if="leaveout_sanction.discount == 1">قيمه</td>
-              <td v-if="leaveout_sanction.discount == 2">نسبه</td>
-              <td>{{ leaveout_sanction.sanction }}</td>
-       
-
-              <td>
-                <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="btn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
-                <button type="button" @click="delete_item(leaveout_sanction.id)" class="btn btn-danger btn-sm waves-effect">
-                  <i class="fa fa-trash"></i>
-                </button>
-                <a class="btn btn-info btn-sm waves-effect btn-agregar" data-target="#updateSLA" data-toggle="modal"
-                  id="agregar_productos">
-                  <i class="fa fa-edit"></i></a>
-
-              </td>
-            </tr>
-          </tbody>
-          <tbody v-else>
-            <tr>
-              <td align="center" colspan="6">لايوجد بياتات.</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-      <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
-    </div>
-      </div>
-    </div>
-    
 
-  
+
+
+    </div>
   </div>
- </div>
 
 </template>
 
@@ -277,12 +281,12 @@ export default {
 
 
 
-      leaveout_types:'',
-      leaveout_parts:'',
-      discount_types:'',
+      leaveout_types: '',
+      leaveout_parts: '',
+      discount_types: '',
       discountselected: [],
       leaveoutselected: [],
-      leaveoutpartselected:[],
+      leaveoutpartselected: [],
       iterationselected: [],
       discounttypeselected: [],
       sanctionselected: [],
@@ -291,9 +295,10 @@ export default {
     };
   },
   mounted() {
-    this.list();
     this.counts[0] = 1;
     this.type = 'leaveout_sanction';
+    this.list();
+
   },
   methods: {
 
@@ -307,12 +312,12 @@ export default {
           discount: this.discountselected,
 
           leaveout: this.leaveoutselected,
-          leaveout_part:this.leaveoutpartselected,
+          leaveout_part: this.leaveoutpartselected,
           iteration: this.iterationselected,
           discount_type: this.discounttypeselected,
           sanction: this.sanctionselected,
         });
-
+      this.list();
 
     },
 
@@ -332,9 +337,35 @@ export default {
         });
     },
 
+    exports_excel() {
+
+      axios
+        .post(`/export_leave_sanction`)
+        .then(function (response) {
+
+          toastMessage("تم التصدير   ");
+          this.list();
+        })
+        .catch(error => {
+
+        });
+    },
+    imports_excel() {
+
+      axios
+        .post(`/import_leave_sanction`)
+        .then(function (response) {
+
+          toastMessage("تم الاستيراد   ");
+          this.list();
+
+        })
+        .catch(error => {
+
+        });
+    },
 
 
   },
 };
 </script>
-

@@ -46,8 +46,7 @@ Route::post('/get_treasury_accounts', 'Account\AccountController@get_treasury_ac
 Route::post('/get_bank_accounts', 'Account\AccountController@get_bank_accounts');
 Route::post('/groups', 'GroupController@get_groups');
 Route::post('/group_marks', 'GroupController@get_group_mark');
-Route::post('/group_mark_treasury', 'GroupController@get_group_mark_treasury');
-Route::post('/group_mark_bank', 'GroupController@get_group_mark_bank');
+
 Route::post('/get_group/{id}', 'GroupController@get_group');
 Route::post('/store_group', 'GroupController@store_group');
 Route::post('/store_group_type', 'GroupController@store_group_type');
@@ -97,8 +96,8 @@ Route::post('/store_account_period', 'Account\PeriodController@store_account_per
 Route::post('/account_year', 'Account\PeriodController@index');
 
 Route::post('/get_account_account_setting', 'Account\AccountController@get_account_account_setting');
-// Route::post('/store_account_account_setting', 'Account\AccountController@store_account_account_setting');
-Route::post('/store_account_setting', 'GroupController@store_account_setting');
+Route::post('/store_account_setting', 'Account\AccountController@store_account_setting');
+
 
 
 

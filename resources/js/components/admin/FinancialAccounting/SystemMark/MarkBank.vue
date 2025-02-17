@@ -57,7 +57,7 @@
                                                                                 ">
                                                                             <!-- <option v-bind:value="1">الكل</option> -->
                                                                             <option v-for="gg in groups"
-                                                                                v-bind:value="gg.group_type_id
+                                                                                v-bind:value="gg.group_id
                                                                                     ">
                                                                                 {{
                                                                                     gg.group_name
@@ -140,7 +140,7 @@
                                                                     <td>
                                                                         <button type="button" class="btn btn-primary"
                                                                             @click="
-                                                                                add_new_account()
+                                                                                add_new()
                                                                                 ">
                                                                             حفظ
                                                                         </button>
@@ -201,14 +201,15 @@
                                         </thead>
                                         <tbody v-if="
                                             list_data &&
-                                            list_data.length > 0
+                                            list_data.data.length > 0
                                         ">
                                             <tr v-for="(
-                                                    daily, index
-                                                ) in list_data" :key="index">
+                                                    banks, index
+                                                ) in list_data.data" :key="index">
                                                 <td>{{ index + 1 }}</td>
-                                                <td>{{ daily.type_name }}</td>
-                                                <td>{{ daily.name }}</td>
+                                                <td>{{ banks.name }}</td>
+                                                <td>{{ banks.bank_name }}</td>
+                         
                                                 <!-- <td>{{ daily.account_id }}</td> -->
 
 
@@ -267,16 +268,17 @@ export default {
     },
 
     methods: {
-        add_new_account() {
+        add_new() {
             this.axios
-                .post("/store_account_setting", {
+                .post("/store_account_setting/bank", {
                     count: this.counts,
-                    account: this.account,
+                    bank: this.bank,
                     group: this.group,
                 })
                 .then(function (response) {
                     // e.preventDefault();
                     toastMessage("تم الاضافه بنجاح");
+                    this.list();
                 })
                 .catch(function (error) {
                     currentObj.output = error;
@@ -304,7 +306,7 @@ export default {
         },
 
         list() {
-            this.axios.post(`/group_mark_bank`).then(({ data }) => {
+            this.axios.post(`/mark_bank`).then(({ data }) => {
                 // console.log('muhibxcd', data.count_account);
                 this.groups = data.groups;
                 this.banks = data.banks;

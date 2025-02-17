@@ -183,14 +183,15 @@
             <div style="display: flex;float: left; margin: 5px">
 
 
-              <button @click="Export()">
-                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+              <button @click="exports_excel()">
+
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
               </button>
 
-              <button @click="Import()">
-                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
-              </button>
+              <button @click="imports_excel()">
 
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
               <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
                 aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
                 @input="get_search()" />
@@ -295,9 +296,10 @@ export default {
     };
   },
   mounted() {
-    this.list();
     this.counts[0] = 1;
     this.type = 'delay_sanction';
+    this.list();
+
   },
   methods: {
 
@@ -315,7 +317,7 @@ export default {
           discount_type: this.discounttypeselected,
           sanction: this.sanctionselected,
         });
-
+        this.list();
 
     },
 
@@ -335,6 +337,34 @@ export default {
           console.error(response);
         });
     },
+
+    exports_excel() {
+
+axios
+  .post(`export_delay_sanction`)
+  .then(function (response) {
+
+    toastMessage("تم التصدير   ");
+    this.list();
+  })
+  .catch(error => {
+
+  });
+},
+imports_excel() {
+
+axios
+  .post(`import_delay_sanction`)
+  .then(function (response) {
+
+    toastMessage("تم الاستيراد   ");
+    this.list();
+
+  })
+  .catch(error => {
+
+  });
+},
 
 
 

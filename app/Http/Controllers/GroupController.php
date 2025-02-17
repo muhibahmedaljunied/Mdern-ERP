@@ -38,42 +38,6 @@ class GroupController extends Controller
 
         $this->type = $type;
     }
-    public function store_account_setting(Request $request)
-    {
-
-
-
-  
-
-        foreach ($request['count'] as $value) {
-
-
-            $groups = new GroupAccount();
-            $groups->account_id = $request->account[$value];
-            $groups->group_id = $request->group[$value];
-            $groups->save();
-
-
-
-            // dd($request['group'][$value]);
-            // Group::where([
-
-            //     'id' => $request['group'][$value],
-            //     'group_type_id' => $request['type_group'][$value]
-
-            // ])->update();
-
-
-            // $group_accounts = Group::where(
-            //     [
-            //         'id' => $request['group'][$value],
-            //         'group_type_id' => $request['type_group'][$value]
-            //     ]
-            // );
-            // $group_accounts->update(['account_id' => $request['account'][$value]]);
-        }
-        return response()->json(['message' => 'sucess']);
-    }
 
 
     public function get_groups()

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Absence;
+
+use App\Exports\AbsenceSanctionExport;
 use App\Repository\StaffSaction\StaffAbsenceSanctionRepository;
 use App\Repository\HR\AbsenceSanctionRepository;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -8,13 +10,14 @@ use App\Services\PayrollService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
+use App\Imports\AbsenceSanctionImport;
 use App\Models\AbsenceSanction;
 use App\Services\CoreStaffService;
 use App\Models\SanctionDiscount;
 use Illuminate\Http\Request;
 use App\Models\AbsenceType;
 use App\Models\StaffSanction;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class AbsenceSanctionController extends Controller
 {
@@ -102,7 +105,29 @@ class AbsenceSanctionController extends Controller
         //     ->get();
 
     }
+    public function import(Request $request)
+    {
 
+        Excel::import(new AbsenceSanctionImport, storage_path('absence_sanction.xlsx'));
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv imported'
+        ]);
+    }
+
+
+    public function export()
+    {
+
+        Excel::download(new AbsenceSanctionExport, 'absence_sanction.xlsx');
+
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv exporteded'
+        ]);
+    }
     public function apply_absence_sanction_attendance(Request $request)
     {
 
@@ -255,9 +280,6 @@ class AbsenceSanctionController extends Controller
                     }
                 }
             }
-
-
-         
         }
 
         // dd($this->core->attendances);
@@ -279,18 +301,18 @@ class AbsenceSanctionController extends Controller
             ->paginate(10);
 
         // ----------------------------------------------------------------------------------------
-        $absence_sanctions = Cache::rememberForever('absence_sanctions_index', function () {
+        // $absence_sanctions = Cache::rememberForever('absence_sanctions_index', function () {
 
-            return DB::table('absence_sanctions')
-                ->join('absence_types', 'absence_types.id', '=', 'absence_sanctions.absence_type_id')
-                ->join('sanction_discounts', 'sanction_discounts.id', '=', 'absence_sanctions.sanction_discount_id')
-                ->select(
-                    'absence_sanctions.*',
-                    'absence_types.name as absence',
-                    'sanction_discounts.name as discount_name'
-                )
-                ->paginate(10);
-        });
+        $absence_sanctions =  DB::table('absence_sanctions')
+            ->join('absence_types', 'absence_types.id', '=', 'absence_sanctions.absence_type_id')
+            ->join('sanction_discounts', 'sanction_discounts.id', '=', 'absence_sanctions.sanction_discount_id')
+            ->select(
+                'absence_sanctions.*',
+                'absence_types.name as absence',
+                'sanction_discounts.name as discount_name'
+            )
+            ->paginate(10);
+        // });
 
         return $absence_sanctions;
     }

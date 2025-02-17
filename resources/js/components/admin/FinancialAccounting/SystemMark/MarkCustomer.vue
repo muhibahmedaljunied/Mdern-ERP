@@ -36,9 +36,7 @@
                                                                     <th>
                                                                         من
                                                                     </th>
-                                                                    <th>
-                                                                        الي
-                                                                    </th>
+                                                              
                                                        
 
                                                                
@@ -92,7 +90,7 @@
                                                                             name="forma_pago"
                                                                             class="form-control"
                                                                             v-model="
-                                                                                customer_from[
+                                                                                customer[
                                                                                     index
                                                                                 ]
                                                                             "
@@ -116,37 +114,7 @@
                                                                         </select>
                                                                     </td>
                                                                
-                                                                    <td>
-                                                                        <select
-                                                                            style="
-                                                                                background-color: beige;
-                                                                            "
-                                                                            name="forma_pago"
-                                                                            class="form-control"
-                                                                            v-model="
-                                                                                customer_to[
-                                                                                    index
-                                                                                ]
-                                                                            "
-                                                                            v-on:change="
-                                                                                onchange(
-                                                                                    index
-                                                                                )
-                                                                            "
-                                                                        >
-                                                                            <!-- <option v-bind:value="1">الكل</option> -->
-                                                                            <option
-                                                                                v-for="cc in customers"
-                                                                                v-bind:value="
-                                                                                    cc.id
-                                                                                "
-                                                                            >
-                                                                                {{
-                                                                                    cc.name
-                                                                                }}
-                                                                            </option>
-                                                                        </select>
-                                                                    </td>
+                                                                   
                                                             
 
                                                                     <td
@@ -226,14 +194,14 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td
-                                                                        colspan="3"
+                                                                        colspan="2"
                                                                     ></td>
                                                                     <td>
                                                                         <button
                                                                             type="button"
                                                                             class="btn btn-primary"
                                                                             @click="
-                                                                                add_new_account()
+                                                                                add_new()
                                                                             "
                                                                         >
                                                                             حفظ
@@ -305,21 +273,21 @@
                                         <tbody
                                             v-if="
                                                 list_data &&
-                                                list_data.length > 0
+                                                list_data.data.length > 0
                                             "
                                         >
                                             <tr
                                                 v-for="(
-                                                    daily, index
-                                                ) in list_data"
+                                                    customers, index
+                                                ) in list_data.data"
                                                 :key="index"
                                             >
                                                 <td>{{ index + 1 }}</td>
-                                        
-                                                <td>{{ daily.text }}</td>
+                                                <td>{{ customers.name }}</td>
+                                                <td>{{ customers.customer_name }}</td>
                                                 <!-- <td>{{ daily.account_id }}</td> -->
 
-                                                <td>{{ daily.text }}</td>
+                           
                                             </tr>
                                      
                                         </tbody>
@@ -363,8 +331,8 @@ export default {
             type_group: [],
             type_groups: "",
             group: [],
-            customer_from:[],
-            customer_to:[],
+      
+            customer:[],
             groups: "",
             group_lists:'',
             customers:'',
@@ -382,19 +350,21 @@ export default {
     },
 
     methods: {
-        add_new_account() {
+        add_new() {
             this.axios
-                .post("/store_account_setting", {
+                .post("/store_account_setting/customer", {
                     count: this.counts,
-                    account: this.account,
+  
+                    customer: this.customer,
                     group: this.group,
                 })
                 .then(function (response) {
                     // e.preventDefault();
                     toastMessage("تم الاضافه بنجاح");
+                    this.list();
                 })
                 .catch(function (error) {
-                    currentObj.output = error;
+                    // currentObj.output = error;
                 });
 
             // this.$router.go(0);
@@ -420,7 +390,7 @@ export default {
 
         list() {
        
-            this.axios.post(`/group_mark_customer`).then(({ data }) => {
+            this.axios.post(`/mark_customer`).then(({ data }) => {
                 // console.log('muhibxcd', data.count_account);
                 this.groups = data.groups;
                 this.customers = data.customers;

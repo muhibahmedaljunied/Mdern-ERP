@@ -15,6 +15,7 @@ export default {
       periods: '',
       period_times:'',
       breaks: '',
+      word_search:'',
   
     }
   },

@@ -1,24 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Staff;
-
-use App\Exports\HrSettingExport;
-use App\RepositoryInterface\HRRepositoryInterface;
+use App\Exports\StaffExport;
 use App\Services\CoreStaffService;
 use App\Services\Staff\StaffService;
 use Illuminate\Support\Facades\Cache;
 use App\Models\AdministrativeStructure;
 use App\Http\Controllers\Controller;
-use App\Imports\HrSettingImport;
-use App\Models\Account;
+use App\Imports\StaffImport;
 use App\Models\Group;
 use App\Models\PeriodTime;
 use App\Models\WorkSystem;
 use App\Models\Qualification;
 use App\Models\Branch;
-use App\Models\GroupAccount;
 use App\Models\GroupType;
-use App\Models\HrAccount;
 use App\Models\Staff;
 use App\Models\Nationality;
 use App\Models\StaffType;
@@ -39,9 +34,9 @@ class StaffController extends Controller
     {
 
 
-        $staff_list = Cache::rememberForever('staff_eager_load_e', function () {
+        // $staff_list = Cache::rememberForever('staff_eager_load_e', function () {
 
-            return Staff::with([
+            $staff_list = Staff::with([
 
                 'department' => function ($query) {
                     $query->select('*');
@@ -69,8 +64,8 @@ class StaffController extends Controller
                 }
 
             ])
-                ->paginate(10);
-        });
+                ->paginate();
+        // });
 
         // dd($staff_list);
 
@@ -98,14 +93,14 @@ class StaffController extends Controller
         ]);
     }
 
-    public function import(Request $request)
+    public function import()
     {
 
-        Excel::import(new HrSettingImport, storage_path('hr_setting.xlsx'));
+        Excel::import(new StaffImport, storage_path('staff_import.xlsx'));
 
         return response()->json([
             'status' =>
-            'The file has been excel/csv imported to database in laravel 9'
+            'The file has been excel/csv imported to database in laravel '
         ]);
     }
 
@@ -113,8 +108,15 @@ class StaffController extends Controller
     public function export()
     {
 
-        return Excel::download(new HrSettingExport, 'hr_setting.xlsx');
+        return Excel::download(new StaffExport, 'staff_export.xlsx');
+        
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv exported to database in laravel '
+        ]);
     }
+
+ 
 
 
     public function get_job(Request $request)
@@ -154,7 +156,10 @@ class StaffController extends Controller
     public function store(Request $request, StaffService $staff_service)
     {
 
+        // مهيب احمد عبدالحليل
         // return response()->json($request->all());
+
+        // dd($request->all());
         $this->core->setData($request->all());
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction

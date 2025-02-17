@@ -40,7 +40,7 @@ class SupplierController extends Controller
             )
             ->paginate(10);
 
-            
+
 
 
 
@@ -58,7 +58,17 @@ class SupplierController extends Controller
     }
 
 
+    public function store_account_setting(Request $request)
+    {
 
+        foreach ($request['count'] as $value) {
+
+
+            $group_accounts = Supplier::find($request->supplier[$value]);
+            $group_accounts->update(['group_id' => $request->group[$value]]);
+        }
+        return response()->json(['message' => 'sucess']);
+    }
     public function get_supplier_account_setting()
     {
 

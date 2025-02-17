@@ -316,6 +316,8 @@ export default {
                 .then((response) => {
                     console.log(response);
                     toastMessage("تم الاضافه بنجاح");
+
+                    this.list();
                     // this.$router.go(0);
                 });
 

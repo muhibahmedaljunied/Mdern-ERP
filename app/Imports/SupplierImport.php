@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Supplier;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class SupplierImport implements ToModel
+class SupplierImport implements ToModel,WithHeadingRow
 {
     /**
     * @param array $row
@@ -16,15 +17,14 @@ class SupplierImport implements ToModel
     {
         return new Supplier([
             
-            'id'     => $row[0],
-            'name'    => $row[1],
-            'code'     => $row[2],
-            'company'    => $row[3],
-            'email'    => $row[4],
-            'phone'    => $row[5],
-            'address'    => $row[6],
-            'status' => $row[7],
-            'group_id' => $row[8],
+            'name'    => $row['name'],
+            'code'     => $row['code'],
+            'company'    => $row['company'],
+            'email'    => $row['email'],
+            'phone'    => $row['phone'],
+            'address'    => $row['address'],
+            'status' => $row['status'],
+            'group_id' => $row['group_id'],
      
 
 

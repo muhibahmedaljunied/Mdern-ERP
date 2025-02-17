@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Staff;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class StaffImport implements ToModel
+class StaffImport implements ToModel,WithHeadingRow
 {
     /**
     * @param array $row
@@ -16,23 +17,23 @@ class StaffImport implements ToModel
     {
         return new Staff([
             
-            'id'     => $row[0],
-            'name'    => $row[1],
-            'phone' => $row[2],
-            'email'     => $row[3],
-            'salary'    => $row[4],
-            'personal_card'    => $row[5],
-            'date'    => $row[6],
-            'staff_status'    => $row[7],
-            'social_status' => $row[8],
-            'barth_date' => $row[9],
-            'qualification__id' => $row[10],
-            'branch_id' => $row[11],
-            'department_id' => $row[12],
-            'job_id' => $row[13],
-            'staff_type_id' => $row[14],
-            'religion_id' => $row[15],
-            'nationality_id' => $row[16],
+  
+            'name'    => $row['name'],
+            'phone' => $row['phone'],
+            'email'     => $row['email'],
+            'salary'    => $row['salary'],
+            'personal_card'    => $row['personal_card'],
+            'date'    => $row['date'],
+            'staff_status'    => $row['staff_status'],
+            'social_status' => $row['social_status'],
+            'barth_date' => $row['barth_date'],
+            'qualification__id' => $row['qualification__id'],
+            'branch_id' => $row['branch_id'],
+            'department_id' => $row['department_id'],
+            'job_id' => $row['job_id'],
+            'staff_type_id' => $row['staff_type_id'],
+            'religion_id' => $row['religion_id'],
+            'nationality_id' => $row['nationality_id'],
 
 
 

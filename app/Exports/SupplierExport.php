@@ -4,9 +4,8 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use App\models\Store;
 use App\Models\Supplier;
-use Carbon\Carbon;
+
 
 
 
@@ -24,11 +23,7 @@ class SupplierExport implements FromCollection,WithMapping, WithHeadings
 
         return [
 
-        
-
-
-            $row->id,
-
+    
             $row->name,
 
             $row->code,
@@ -47,9 +42,9 @@ class SupplierExport implements FromCollection,WithMapping, WithHeadings
 
 
 
-            Carbon::parse($row->created_at)->toFormattedDateString(),
+            // Carbon::parse($row->created_at)->toFormattedDateString(),
 
-            Carbon::parse($row->updated_at)->toFormattedDateString()
+            // Carbon::parse($row->updated_at)->toFormattedDateString()
 
         ] ;
  
@@ -62,7 +57,7 @@ class SupplierExport implements FromCollection,WithMapping, WithHeadings
 
 
         return [
-            'id' ,
+
             'name',
             'code',
             'company',

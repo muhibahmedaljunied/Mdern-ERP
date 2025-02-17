@@ -24,3 +24,6 @@ Route::post('/store_supplier_group', 'Purchase\SupplierGroupController@store');
 Route::post('/get_supplier_account_setting', 'Purchase\SupplierController@get_supplier_account_setting');
 Route::post('/store_supplier_account_setting', 'GroupController@store_account_setting');
 Route::post('/get_supplier_account/{id}', 'Purchase\SupplierController@get_supplier_account');
+
+Route::post('/mark_supplier', 'Purchase\SupplierGroupController@get_mark_supplier');
+Route::post('/store_account_setting/supplier', 'Purchase\SupplierController@store_account_setting');

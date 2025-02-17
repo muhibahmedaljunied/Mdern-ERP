@@ -27,7 +27,7 @@ class CustomerExport implements FromCollection,WithMapping, WithHeadings
         
 
 
-            $row->id,
+            // $row->id,
 
             $row->name,
 
@@ -58,7 +58,7 @@ class CustomerExport implements FromCollection,WithMapping, WithHeadings
 
 
         return [
-            'id' ,
+            // 'id' ,
             'name',
             'email',
             'phone',

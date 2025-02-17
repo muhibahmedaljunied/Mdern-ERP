@@ -13,20 +13,12 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <form
-                                                    method="post"
-                                                    enctype="multipart/form-data"
-                                                >
-                                                    <div
-                                                        class="table-responsive"
-                                                    >
-                                                        <table
-                                                            class="table table-bordered text-right m-t-30"
-                                                            style="
+                                                <form method="post" enctype="multipart/form-data">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered text-right m-t-30" style="
                                                                 width: 100%;
                                                                 font-size: x-small;
-                                                            "
-                                                        >
+                                                            ">
                                                             <thead>
                                                                 <tr>
                                                                     <!-- <th>
@@ -37,12 +29,10 @@
                                                                         التصنيف
                                                                     </th>
                                                                     <th>
-                                                                         من 
+                                                                        من
                                                                     </th>
 
-                                                                    <th>
-                                                                         الي 
-                                                                    </th>
+
 
                                                                     <!-- <th> الرمز </th> -->
 
@@ -54,10 +44,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr
-                                                                    v-for="index in count"
-                                                                    :key="index"
-                                                                >
+                                                                <tr v-for="index in count" :key="index">
                                                                     <!-- <td>
                                                                         <select
                                                                             style="
@@ -90,30 +77,21 @@
                                                                         </select>
                                                                     </td> -->
                                                                     <td>
-                                                                        <select
-                                                                            style="
+                                                                        <select style="
                                                                                 background-color: beige;
-                                                                            "
-                                                                            name="forma_pago"
-                                                                            class="form-control"
-                                                                            v-model="
-                                                                                group[
-                                                                                    index
+                                                                            " name="forma_pago" class="form-control"
+                                                                            v-model="group[
+                                                                                index
                                                                                 ]
-                                                                            "
-                                                                            v-on:change="
+                                                                                " v-on:change="
                                                                                 onchange(
                                                                                     index
                                                                                 )
-                                                                            "
-                                                                        >
-                                                                         
-                                                                            <option
-                                                                                v-for="types in groups"
-                                                                                v-bind:value="
-                                                                                    types.group_type_id
-                                                                                "
-                                                                            >
+                                                                                ">
+
+                                                                            <option v-for="types in groups"
+                                                                                v-bind:value="types.group_id
+                                                                                    ">
                                                                                 {{
                                                                                     types.group_name
                                                                                 }}
@@ -121,67 +99,28 @@
                                                                         </select>
                                                                     </td>
                                                                     <td>
-                                                                        <select
-                                                                            style="
+                                                                        <select style="
                                                                                 background-color: beige;
-                                                                            "
-                                                                            name="forma_pago"
-                                                                            class="form-control"
-                                                                            v-model="
-                                                                                supplier_from[
-                                                                                    index
+                                                                            " name="forma_pago" class="form-control"
+                                                                            v-model="supplier[
+                                                                                index
                                                                                 ]
-                                                                            "
-                                                                            v-on:change="
+                                                                                " v-on:change="
                                                                                 onchange(
                                                                                     index
                                                                                 )
-                                                                            "
-                                                                        >
-                                                                         
-                                                                            <option
-                                                                                v-for="ss in suppliers"
-                                                                                v-bind:value="
-                                                                                    ss.id
-                                                                                "
-                                                                            >
+                                                                                ">
+
+                                                                            <option v-for="ss in suppliers"
+                                                                                v-bind:value="ss.id
+                                                                                    ">
                                                                                 {{
                                                                                     ss.name
                                                                                 }}
                                                                             </option>
                                                                         </select>
                                                                     </td>
-                                                                    <td>
-                                                                        <select
-                                                                            style="
-                                                                                background-color: beige;
-                                                                            "
-                                                                            name="forma_pago"
-                                                                            class="form-control"
-                                                                            v-model="
-                                                                                supplier_to[
-                                                                                    index
-                                                                                ]
-                                                                            "
-                                                                            v-on:change="
-                                                                                onchange(
-                                                                                    index
-                                                                                )
-                                                                            "
-                                                                        >
-                                                                         
-                                                                            <option
-                                                                                v-for="ss in suppliers"
-                                                                                v-bind:value="
-                                                                                    ss.id
-                                                                                "
-                                                                            >
-                                                                                {{
-                                                                                    ss.name
-                                                                                }}
-                                                                            </option>
-                                                                        </select>
-                                                                    </td>
+
 
                                                                     <!-- <td>
 
@@ -192,93 +131,57 @@
 
                                                                     </td> -->
 
-                                                                    <td
-                                                                        v-if="
-                                                                            index ==
-                                                                            1
-                                                                        "
-                                                                    >
-                                                                        <a
-                                                                            class="tn btn-info btn-sm waves-effect btn-agregar"
+                                                                    <td v-if="
+                                                                        index ==
+                                                                        1
+                                                                    ">
+                                                                        <a class="tn btn-info btn-sm waves-effect btn-agregar"
                                                                             v-on:click="
                                                                                 addComponent(
                                                                                     count
                                                                                 )
-                                                                            "
-                                                                        >
-                                                                            <i
-                                                                                class="fa fa-plus-circle"
-                                                                            ></i
-                                                                        ></a>
+                                                                                ">
+                                                                            <i class="fa fa-plus-circle"></i></a>
 
-                                                                        <a
-                                                                            class="tn btn-info btn-sm waves-effect btn-agregar"
+                                                                        <a class="tn btn-info btn-sm waves-effect btn-agregar"
                                                                             v-on:click="
                                                                                 disComponent(
                                                                                     count
                                                                                 )
-                                                                            "
-                                                                        >
-                                                                            <i
-                                                                                class="fa fa-minus-circle"
-                                                                            ></i
-                                                                        ></a>
+                                                                                ">
+                                                                            <i class="fa fa-minus-circle"></i></a>
                                                                     </td>
 
-                                                                    <div
-                                                                        class="modal fade"
-                                                                        :id="'exampleModalMark'"
-                                                                        tabindex="-1"
-                                                                        role="dialog"
+                                                                    <div class="modal fade" :id="'exampleModalMark'"
+                                                                        tabindex="-1" role="dialog"
                                                                         aria-labelledby="exampleModalLabel"
-                                                                        aria-hidden="true"
-                                                                    >
-                                                                        <div
-                                                                            class="modal-dialog"
-                                                                            role="document"
-                                                                        >
-                                                                            <div
-                                                                                class="modal-content"
-                                                                            >
-                                                                                <div
-                                                                                    class="modal-header"
-                                                                                >
-                                                                                    <button
-                                                                                        type="button"
-                                                                                        class="close"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <button type="button" class="close"
                                                                                         data-dismiss="modal"
-                                                                                        aria-label="Close"
-                                                                                    >
+                                                                                        aria-label="Close">
                                                                                         <span
-                                                                                            aria-hidden="true"
-                                                                                            >&times;</span
-                                                                                        >
+                                                                                            aria-hidden="true">&times;</span>
                                                                                     </button>
                                                                                 </div>
-                                                                                <div
-                                                                                    class="modal-body"
-                                                                                >
-                                                                                    <div
-                                                                                        class="well"
-                                                                                        :id="'treeview_json_mark'"
-                                                                                    ></div>
+                                                                                <div class="modal-body">
+                                                                                    <div class="well"
+                                                                                        :id="'treeview_json_mark'">
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td
-                                                                        colspan="3"
-                                                                    ></td>
+                                                                    <td colspan="2"></td>
                                                                     <td>
-                                                                        <button
-                                                                            type="button"
-                                                                            class="btn btn-primary"
+                                                                        <button type="button" class="btn btn-primary"
                                                                             @click="
-                                                                                add_new_account()
-                                                                            "
-                                                                        >
+                                                                                add_new()
+                                                                                ">
                                                                             حفظ
                                                                         </button>
                                                                     </td>
@@ -297,37 +200,32 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-            <!-- <span class="h2"> الموردين</span> -->
+                        <!-- <span class="h2"> الموردين</span> -->
 
-            <div style="display: flex;float: left; margin: 5px">
+                        <div style="display: flex;float: left; margin: 5px">
 
 
-              <button @click="Export()">
-                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
-              </button>
+                            <button @click="Export()">
+                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+                            </button>
 
-              <button @click="Import()">
-                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
-              </button>
+                            <button @click="Import()">
+                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+                            </button>
 
-              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
-                @input="get_search()" />
-            </div>
-          </div>
+                            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                                @input="get_search()" />
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="table-responsive">
-                                    <table
-                                        class="table text-md-nowrap"
-                                        id="example1"
-                                    >
+                                    <table class="table text-md-nowrap" id="example1">
                                         <thead>
                                             <tr>
-                                                <th
-                                                    class="wd-15p border-bottom-0"
-                                                >
+                                                <th class="wd-15p border-bottom-0">
                                                     #
                                                 </th>
                                                 <!-- <th
@@ -335,40 +233,32 @@
                                                 >
                                                     نوع التصنيف
                                                 </th> -->
-                                                <th
-                                                    class="wd-15p border-bottom-0"
-                                                >
+                                                <th class="wd-15p border-bottom-0">
                                                     التصنيف
                                                 </th>
-                                                <th
-                                                    class="wd-15p border-bottom-0"
-                                                >
+                                                <th class="wd-15p border-bottom-0">
                                                     المورد
                                                 </th>
                                                 <!-- <th class="wd-15p border-bottom-0"> رقم الحساب</th> -->
                                                 <!-- <th class="wd-15p border-bottom-0">العمليات</th> -->
                                             </tr>
                                         </thead>
-                                        <tbody
-                                            v-if="
-                                                list_data &&
-                                                list_data.length > 0
-                                            "
-                                        >
-                                            <tr
-                                                v-for="(
-                                                    daily, index
-                                                ) in list_data"
-                                                :key="index"
-                                            >
+                                        <tbody v-if="
+                                            list_data &&
+                                            list_data.data.length > 0
+                                        ">
+                                            <tr v-for="(
+                                                    suppliers, index
+                                                ) in list_data.data" :key="index">
                                                 <td>{{ index + 1 }}</td>
                                                 <!-- <td>{{ daily.type_name }}</td> -->
-                                                <td>{{ daily.name }}</td>
+                                                <td>{{ suppliers.name }}</td>
+                                                <td>{{ suppliers.supplier_name }}</td>
                                                 <!-- <td>{{ daily.account_id }}</td> -->
 
-                                                <td>{{ daily.text }}</td>
+
                                             </tr>
-                                         
+
                                         </tbody>
                                         <tbody v-else>
                                             <tr>
@@ -382,11 +272,7 @@
                             </div>
                         </div>
 
-                        <pagination
-                            align="center"
-                            :data="list_data"
-                            @pagination-change-page="list"
-                        ></pagination>
+                        <pagination align="center" :data="list_data" @pagination-change-page="list"></pagination>
                     </div>
                 </div>
             </div>
@@ -401,20 +287,19 @@ import operation from "../../../../operation1.js";
 import tree from "../../../../../js/tree/tree.js";
 export default {
     mixins: [operation, tree],
-    components:[pagination],
+    components: [pagination],
     data() {
         return {
-     
+
             account: [],
             code: [],
             type_group: [],
-            group_lists:'',
+            group_lists: '',
             type_groups: "",
             group: [],
-            supplier_from:[],
-            supplier_to:[],
+            supplier: [],
             groups: "",
-            suppliers:'',
+            suppliers: '',
 
             count_accounts: "",
         };
@@ -428,19 +313,24 @@ export default {
     },
 
     methods: {
-        add_new_account() {
+        add_new() {
             this.axios
-                .post("/store_account_setting", {
+                .post("/store_account_setting/supplier", {
                     count: this.counts,
-                    account: this.account,
+                    supplier: this.supplier,
                     group: this.group,
+
+
+
+
                 })
                 .then(function (response) {
                     // e.preventDefault();
                     toastMessage("تم الاضافه بنجاح");
+                    this.list();
                 })
                 .catch(function (error) {
-                    currentObj.output = error;
+                    // currentObj.output = error;
                 });
 
             // this.$router.go(0);
@@ -465,8 +355,7 @@ export default {
         },
 
         list() {
-            this.axios.post(`/group_mark_supplier`).then(({ data }) => {
-                // console.log('muhibxcd', data.count_account);
+            this.axios.post(`/mark_supplier`).then(({ data }) => {
                 this.groups = data.groups;
                 this.suppliers = data.suppliers;
                 this.list_data = data.group_lists;

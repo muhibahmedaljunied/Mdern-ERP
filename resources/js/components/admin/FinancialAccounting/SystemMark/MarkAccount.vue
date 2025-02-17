@@ -405,9 +405,10 @@ export default {
                 .then(function (response) {
                     // e.preventDefault();
                     toastMessage("تم الاضافه بنجاح");
+                    this.list();
                 })
                 .catch(function (error) {
-                    currentObj.output = error;
+                    // currentObj.output = error;
                 });
 
             // this.$router.go(0);

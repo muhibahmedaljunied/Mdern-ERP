@@ -142,13 +142,16 @@ class CustomerController extends Controller
         return response()->json(['groups' => $groups, 'group_accounts' => $group_accounts]);
     }
 
-    public function store_customer_account_setting(Request $request)
+    public function store_account_setting(Request $request)
     {
 
 
-        $group_accounts = Group::find($request['group_id']);
-        $group_accounts->update(['account_id' => $request['account_id']]);
+        foreach ($request['count'] as $value) {
 
+         
+            $group_accounts = Customer::find($request->customer[$value]);
+            $group_accounts->update(['group_id' => $request->group[$value]]);
+        }
         return response()->json(['message' => 'sucess']);
     }
 
@@ -258,7 +261,7 @@ class CustomerController extends Controller
             // -------------------------------------------------------------------------
 
             foreach ($request->post('count') as $value) {
-                
+
                 $customer = new Customer();
                 $customer->name = $request->post('name')[$value];
                 $customer->phone = $request->post('phone')[$value];

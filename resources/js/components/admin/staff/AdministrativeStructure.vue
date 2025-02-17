@@ -32,24 +32,21 @@
                                                 <div class="card-header">
 
 
+
                                                     <button @click="exports_excel()">
-                                                        <i class="fas fa-file-export"
-                                                            style="font-size: 24px; color: #ee335e"></i>
+
+                                                        <i class="fa-solid fa-file-export "
+                                                            style="font-size: 24px; color: #63E6BE;"></i>
                                                     </button>
 
                                                     <button @click="imports_excel()">
-                                                        <i class="fas fa-file-import"
-                                                            style="font-size: 24px; color: #22c03c"></i>
+
+                                                        <i class="fa-solid fa-file-import "
+                                                            style="font-size: 24px; color: #B197FC;"></i>
                                                     </button>
 
 
-                                                    <!-- <a @click="exports_excel()">
-                                                        <img src="/assets/img/export.png" alt=""
-                                                            style="width: 5%;"></a>
 
-                                                    <a @click="imports_excel()">
-                                                        <img src="/assets/img/import.png" alt=""
-                                                            style="width: 5%;"></a> -->
                                                 </div>
 
 
@@ -230,10 +227,7 @@ export default {
 
         };
     },
-    // mounted() {
-    //     this.type_of_tree = 0;
-
-    // },
+ 
     created() {
         this.type_of_tree = 0;
         localStorage.setItem('id', 0);
@@ -256,8 +250,9 @@ export default {
             axios
                 .post(`export_structure`)
                 .then(function (response) {
+                    toastMessage("تم التصدير   ");
 
-                    // console.log(1);
+
                 })
                 .catch(error => {
 
@@ -269,7 +264,8 @@ export default {
                 .post(`import_structure`)
                 .then(function (response) {
 
-                    // console.log(1);
+                    toastMessage("تم الاستيراد   ");
+
                 })
                 .catch(error => {
 

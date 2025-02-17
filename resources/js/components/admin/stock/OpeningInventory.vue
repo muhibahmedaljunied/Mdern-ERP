@@ -821,6 +821,10 @@ export default {
                     toastMessage("تم اتمام عمليه الاستيراد");
                     this.$router.go(0);
 
+                    // this.list();
+
+
+
 
                 })
                 .catch(error => {

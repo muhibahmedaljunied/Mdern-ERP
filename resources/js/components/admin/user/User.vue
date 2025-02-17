@@ -15,50 +15,8 @@
           <div class="card-body">
             <div class="form">
               
-              <!-- <form method="post">
-                <div class="form-group">
-                  <label for="name">الاسم</label>
-                  <input v-model="name" type="text" name="name" id="name" class="form-control" required /><span
-                    style="color:red">{{ error_name[0] }}</span>
-                </div>
-                <div class="form-group">
-                  <label for="phone">الهاتف</label>
-                  <input v-model="phone" type="text" name="phone" id="phone" class="form-control" />
-                </div>
-                <div class="form-group">
-                  <label for="name">البريد الالكتروني</label>
-                  <input v-model="email" type="text" name="email" id="email" class="form-control" /><span
-                    style="color:red">{{ error_email[0] }}</span>
-                </div>
-                <div class="form-group">
-                  <label for="password">كلمه السر</label>
-                  <input v-model="password" type="text" name="password" id="password" class="form-control" required />
-                  <span style="color:red">{{ error_password[0] }}</span>
-                </div>
-                <div class="form-group">
-                  <label for="address">العنوان</label>
-                  <input v-model="address" type="text" name="address" id="address" class="form-control" />
-                </div>
-                <div class="form-group">
-                  <label for="role">الصلاحيه</label>
-                  <select v-model="roleselected" name="role" id="role" class="form-control" required>
-                    <option value="">select</option>
-                    <option v-for="roles in role" v-bind:value="roles.id">
-                      {{ roles.name }}
-                    </option>
-                  </select>
-                </div>
+            
 
-                <div class="form-group">
-                  <label for="status">الحاله</label>
-                  <input v-model="status" type="text" name="status" id="status" class="form-control" />
-                </div>
-                <button type="button" @click="adduser()" class="btn btn-primary btn-lg btn-block">
-                  اضافه
-                </button>
-              </form> -->
-
-              <!-- ---------------------------------------------------------------------------------------- -->
               <form method="post" enctype="multipart/form-data">
 
                 <div class="table-responsive">
@@ -324,6 +282,8 @@ export default {
         .then(function (response) {
         
           toastMessage("تم الاضافه بنجاح");
+
+          this.list();
 
         })
         .catch(error => {

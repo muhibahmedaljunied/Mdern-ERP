@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Account;
 
 
 use App\Models\Currency;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -54,7 +54,7 @@ class CurrencyController extends Controller
     public function show()
     {
          $currencies = DB::table('currencies')
-        ->select('currencies.*')
+        ->select()
         ->paginate(10);
 
         return response()->json(['currencies' => $currencies]);

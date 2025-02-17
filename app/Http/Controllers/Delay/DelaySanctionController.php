@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Delay;
 
+use App\Exports\DelaySanctionExport;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Models\SanctionDiscount;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\DelaySanctionImport;
 use App\Models\DelaySanction;
 use Illuminate\Support\Facades\Cache;
 use App\Services\CoreStaffService;
@@ -16,6 +18,7 @@ use App\Models\StaffSanction;
 use App\Repository\StaffSaction\StaffDelaySanctionRepository;
 use App\Services\PayrollService;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DelaySanctionController extends Controller
 {
@@ -278,20 +281,20 @@ class DelaySanctionController extends Controller
             ->paginate(10);
 
         // ----------------------------------------------------------------------------------------
-        $delay_sanctions = Cache::rememberForever('delay_sanctions_index', function () {
+        // $delay_sanctions = Cache::rememberForever('delay_sanctions_index', function () {
 
-            return DB::table('delay_sanctions')
-                ->join('delay_types', 'delay_types.id', '=', 'delay_sanctions.delay_type_id')
-                ->join('parts', 'parts.id', '=', 'delay_sanctions.part_id')
-                ->join('sanction_discounts', 'sanction_discounts.id', '=', 'delay_sanctions.sanction_discount_id')
-                ->select(
-                    'delay_sanctions.*',
-                    'delay_types.name as delay',
-                    'parts.name as duration',
-                    'sanction_discounts.name as discount_name'
-                )
-                ->paginate(10);
-        });
+        $delay_sanctions = DB::table('delay_sanctions')
+            ->join('delay_types', 'delay_types.id', '=', 'delay_sanctions.delay_type_id')
+            ->join('parts', 'parts.id', '=', 'delay_sanctions.part_id')
+            ->join('sanction_discounts', 'sanction_discounts.id', '=', 'delay_sanctions.sanction_discount_id')
+            ->select(
+                'delay_sanctions.*',
+                'delay_types.name as delay',
+                'parts.name as duration',
+                'sanction_discounts.name as discount_name'
+            )
+            ->paginate(10);
+        // });
 
         return $delay_sanctions;
     }
@@ -332,11 +335,35 @@ class DelaySanctionController extends Controller
         return response()->json(['list' => $staff]);
     }
 
+    public function import(Request $request)
+    {
 
+        Excel::import(new DelaySanctionImport, storage_path('delay_sanction.xlsx'));
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv imported'
+        ]);
+    }
+
+
+    public function export()
+    {
+
+        Excel::download(new DelaySanctionExport, 'delay_sanction.xlsx');
+
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv exporteded'
+        ]);
+    }
     public function store(Request $request)
     {
-        $this->core->data = $request->all();
 
+
+        // dd($request->all());
+        $this->core->data = $request->all();
         foreach ($request->post('count') as $value) {
 
             $this->core->value = $value;

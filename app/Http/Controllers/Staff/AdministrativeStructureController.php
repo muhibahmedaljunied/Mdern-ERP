@@ -33,26 +33,23 @@ class AdministrativeStructureController extends Controller
 
     public function tree_structure()
     {
-         // ------------------------------------------------------------------------------------------------
-         $stores = Cache::rememberForever('AdministrativeStructure', function () {
-            return AdministrativeStructure::where('parent_id', null)->with('children')->get();
-        });
+        // ------------------------------------------------------------------------------------------------
+        //  $stores = Cache::rememberForever('AdministrativeStructure', function () {
+        $stores = AdministrativeStructure::where('parent_id', null)->with('children')->get();
+        // });
 
-          $last_nodes = Cache::rememberForever('last_nodes', function () {
-            return AdministrativeStructure::where('parent_id', null)->select('administrative_structures.*')->max('id');
-        });
+        //   $last_nodes = Cache::rememberForever('last_nodes', function () {
+        $last_nodes = AdministrativeStructure::where('parent_id', null)->select('administrative_structures.*')->max('id');
+
+        // });
         // --------------------------------------------------------------------------------------------------
-        return response()->json(['trees' => $stores, 'last_nodes' => $last_nodes]);
-
-
-        
-
-
-            
-
+        return response()->json([
+            'trees' => $stores,
+            'last_nodes' => $last_nodes
+        ]);
     }
 
-    public function import(Request $request)
+    public function import()
     {
 
         Excel::import(new AdministrativeStructureImport, storage_path('structure.xlsx'));
@@ -69,7 +66,7 @@ class AdministrativeStructureController extends Controller
 
         return Excel::download(new AdministrativeStructureExport, 'structure.xlsx');
     }
-    
+
 
     public function structure_details_node($id)
     {
@@ -87,18 +84,18 @@ class AdministrativeStructureController extends Controller
         return response()->json(['childs' => $childs, 'details' => $details]);
     }
 
-  
+
     public function store(Request $request)
     {
 
 
         // return response()->json($request->all());
 
-    
+
         $Store = new AdministrativeStructure();
         $Store->text = $request->post('text');
-        if($request->post('parent') != 0){
-            $Store->parent_id= $request->post('parent');
+        if ($request->post('parent') != 0) {
+            $Store->parent_id = $request->post('parent');
         }
         $Store->id = $request->post('structure_id');
         $Store->rank = $request->post('rank');
@@ -125,8 +122,8 @@ class AdministrativeStructureController extends Controller
 
         return response()->json(['childs' => $childs, 'details' => $details]);
     }
- 
-   
+
+
     public function update(Request $request)
     {
         $store = AdministrativeStructure::find($request->id);

@@ -18,3 +18,5 @@ Route::post('/store_customer_group', 'Sale\CustomerGroupController@store');
 
 Route::post('/group_mark_customer', 'GroupController@get_group_mark_customer');
 
+Route::post('/mark_customer', 'Sale\CustomerGroupController@get_mark_customer');
+Route::post('/store_account_setting/customer', 'Sale\CustomerController@store_account_setting');

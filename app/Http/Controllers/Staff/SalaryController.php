@@ -1,25 +1,22 @@
 <?php
 
 namespace App\Http\Controllers\Staff;
-
+use App\Services\Daily\DailySalaryService;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\GroupAccountDetail;
+use App\Services\CoreStaffService;
+use App\Services\DailyStockService;
 use App\Http\Controllers\Controller;
+use App\Services\PayrollService;
+use App\Services\SalaryService;
 use App\Models\Branch;
 use App\Models\StaffType;
 use App\Models\Allowance;
 use App\Models\AllowanceType;
-use App\Models\Group;
-use App\Models\GroupAccountDetail;
-use App\Models\HrAccount;
 use App\Models\Staff;
-use App\Services\CoreStaffService;
-use App\Services\Daily\DailySalaryService;
-use App\Services\DailyService;
-use App\Services\DailyStockService;
-use App\Services\PayrollService;
-use App\Services\SalaryService;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class SalaryController extends Controller
 {
@@ -125,7 +122,7 @@ class SalaryController extends Controller
     public function prove_salary(Request $request)
     {
 
-        dd($request->all());
+    
 
         $this->core->setData($request->all());
         try {

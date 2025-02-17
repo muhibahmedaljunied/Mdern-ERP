@@ -3,52 +3,55 @@
 namespace App\Http\Controllers\Sale;
 
 use App\Models\Customer;
-use App\Models\Sale;
-use App\Models\Account;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
-use Illuminate\Http\Request;
-
+USE App\Services\GroupService;
 class CustomerGroupController extends Controller
 {
+    public $groups;
+    public $type;
+    use GroupService;
 
+    public function init($type)
+    {
+
+
+        $this->type = $type;
+    }
     public function index()
     {
 
         $groups =  DB::table('groups')
-        ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
-        ->where('group_types.code','customer')
-        ->select(
-            'groups.*',
-            'group_types.name as type_name'
-        )
-        ->get();
+            ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
+            ->where('group_types.code', 'customer')
+            ->select(
+                'groups.*',
+                'group_types.name as type_name'
+            )
+            ->get();
 
-    return response()->json(['groups' => $groups]);
-
-
-
+        return response()->json(['groups' => $groups]);
     }
 
-    public function store()
+    public function get_mark_customer()
     {
 
-        $Details = new CashDetail();
-        $Details->cash_id = $this->core->cash_id;
-        $Details->price = $this->core->data['old'][$this->core->value]['price'];
-        $Details->total = $this->core->data['total'][$this->core->value];
-        $Details->store_product_id = $this->core->id_store_product;
-        $Details->unit_id = $this->core->unit_value;
-        $Details->qty = $this->core->micro_unit_qty;
-        $Details->save();
 
-    return response()->json(['groups' => $groups]);
-
-
-
+   
+        $this->init('customer');
+        $this->groups();
+        $groups =  DB::table('customers')
+            ->join('groups', 'groups.id', '=', 'customers.group_id')
+            ->select(
+                'customers.id as customer_id',
+                'customers.name as customer_name',
+                'groups.*'
+            )
+            ->paginate();
+        return response()->json([
+            'group_lists' => $groups,
+            'groups' => $this->groups,
+            'customers' => Customer::all(),
+        ]);
     }
-
-
-  
 }

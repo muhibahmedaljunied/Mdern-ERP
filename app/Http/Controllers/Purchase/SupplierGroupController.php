@@ -1,16 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Purchase;
-
-use Illuminate\Http\Request;
-use App\Services\SupplierService;
 use App\Models\Supplier;
-use App\Models\Purchase;
-use App\Models\Account;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use App\Services\GroupService;
 use Storage;
 
 class SupplierGroupController extends Controller
@@ -20,6 +15,18 @@ class SupplierGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public $groups;
+     public $type;
+     use GroupService;
+
+     public function init($type)
+     {
+ 
+ 
+         $this->type = $type;
+     }
+     
     public function index()
     {
 
@@ -34,5 +41,28 @@ class SupplierGroupController extends Controller
             ->get();
 
         return response()->json(['groups' => $groups]);
+    }
+
+
+    public function get_mark_supplier()
+    {
+
+
+        $this->init('supplier');
+        $this->groups();
+
+        $groups =  DB::table('suppliers')
+            ->join('groups', 'groups.id', '=', 'suppliers.group_id')
+            ->select(
+                'suppliers.id as supplier_id',
+                'suppliers.name as supplier_name',
+                'groups.*'
+            )
+            ->paginate();
+        return response()->json([
+            'group_lists' => $groups,
+            'groups' => $this->groups,
+            'suppliers' => Supplier::all(),
+        ]);
     }
 }

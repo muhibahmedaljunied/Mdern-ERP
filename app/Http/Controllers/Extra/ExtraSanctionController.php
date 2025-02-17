@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Extra;
 
+use App\Exports\ExtraSanctionExport;
 use App\Repository\StaffSaction\StaffExtraSanctionRepository;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Repository\HR\ExtraSanctionRepository;
@@ -10,6 +11,7 @@ use App\Models\ExtraType;
 use App\Models\Part;
 use App\Models\SanctionDiscount;
 use App\Http\Controllers\Controller;
+use App\Imports\ExtraSanctionImport;
 use App\Models\ExtraSanction;
 use App\Models\Staff;
 use App\Models\StaffSanction;
@@ -20,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Query\Builder;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExtraSanctionController extends Controller
 {
@@ -481,9 +484,6 @@ class ExtraSanctionController extends Controller
     {
 
         $this->core->data = $request->all();
-
-        // dd($this->core->data);
-
         try {
 
             DB::beginTransaction();
@@ -512,7 +512,28 @@ class ExtraSanctionController extends Controller
         Cache::forget('staff');
         return response()->json(['message' => $request->all()]);
     }
+    public function import()
+    {
 
+        Excel::import(new ExtraSanctionImport, storage_path('extra_sanction.xlsx'));
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv imported'
+        ]);
+    }
+
+
+    public function export()
+    {
+
+        Excel::download(new ExtraSanctionExport, 'extra_sanction.xlsx');
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv exporteded'
+        ]);
+    }
     public function change_status(
         Request $request,
         StaffExtraSanctionRepository $staff_sanction,

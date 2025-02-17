@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $fillable = [
-        'id','account_id','name','email','phone','address','status'
+        'id','group_id','name','email','phone','address','status'
     ];
 
     public function daily()

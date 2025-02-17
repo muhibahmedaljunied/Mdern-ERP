@@ -304,7 +304,8 @@ export default {
         .then((response) => {
           console.log(response);
           toastMessage("تم الاضافه بنجاح");
-          // this.$router.go(0);
+          this.list();
+ 
         });
 
 
@@ -334,4 +335,4 @@ export default {
 
   },
 };
-</script>./GroupBankTreasury.vue/index.js
+</script>

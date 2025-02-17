@@ -31,7 +31,7 @@ class CreatePayrollsTable extends Migration
             $table->float('total_absence_sanction')->default(0);
             $table->float('total_extra_sanction')->default(0);
 
-            $table->string('status');
+            $table->string('status')->nullable();
              $table->string('note')->nullable();
             $table->timestamps();
         });

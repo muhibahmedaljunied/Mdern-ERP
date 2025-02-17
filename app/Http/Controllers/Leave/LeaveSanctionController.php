@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Leave;
 
+use App\Exports\LeaveSanctionExport;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Http\Controllers\Controller;
+use App\Imports\LeaveSanctionImport;
 use App\Models\StaffSanction;
 use App\Models\LeaveSanction;
 use Illuminate\Support\Facades\Cache;
@@ -16,6 +18,7 @@ use App\Repository\StaffSaction\StaffLeaveSanctionRepository;
 use App\Services\PayrollService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LeaveSanctionController extends Controller
 {
@@ -113,8 +116,6 @@ class LeaveSanctionController extends Controller
                 $this->core->array_filter[$i] =  $year . '-' . $month . '-' . $i;
             }
         }
-
-
     }
 
     public function staff_attendance($request)
@@ -153,16 +154,13 @@ class LeaveSanctionController extends Controller
         }
         $this->core->attendances = $this->core->attendances->orderBy('revenue')
             ->paginate();
-
-
-
     }
 
 
     public function final_sanction($request)
     {
 
-     
+
 
         foreach ($this->core->attendances as $value) {
 
@@ -208,21 +206,14 @@ class LeaveSanctionController extends Controller
                     }
                 }
             }
-
-
-
         }
-
-
-
-
     }
 
 
 
 
 
-  
+
 
     public function apply_leave_sanction_attendance(Request $request)
     {
@@ -315,7 +306,29 @@ class LeaveSanctionController extends Controller
     }
 
 
+    public function import()
+    {
 
+        Excel::import(new LeaveSanctionImport, storage_path('leave_sanction.xlsx'));
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv imported'
+        ]);
+    }
+
+
+    public function export()
+    {
+
+        Excel::download(new LeaveSanctionExport, 'leave_sanction.xlsx');
+
+
+        return response()->json([
+            'status' =>
+            'The file has been excel/csv exporteded'
+        ]);
+    }
 
 
     public function store(Request $request)

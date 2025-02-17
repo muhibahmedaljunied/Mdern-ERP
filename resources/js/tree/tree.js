@@ -5,14 +5,13 @@ export default {
     mixins: [tree_account, tree_product],
     methods: {
         showtree(table, uri, value = null) {
-
             let gf = this;
             var id = `treeview_json_${table}`;
 
             if (gf.type == "Salary" || gf.type == "Advance") {
                 var id = `treeview_json_${table}_${gf.type}`;
             }
-            console.log("ididididid", id);
+            // console.log("ididididid", gf.type);
 
             this.axios
                 .post(`/${uri}`, {
@@ -22,15 +21,14 @@ export default {
                 .then((response) => {
                     this.jsonTreeData = response.data.trees;
 
-                    // console.log("almuhib", this.jsonTreeData);
                     if (this.type_of_tree == 0) {
                         // this if tree is in the orignal screen (account,product,store,structure)
 
                         this.last_nodes = response.data.last_nodes;
                         $(`#${table}_number`).val(response.data.last_nodes + 1);
                     }
-
-                    console.log(`muhiiiiiiiiiiiiii${id}`, id);
+    
+                    // console.log(`muhiiiiiiiiiiiiii${id}`, id);
 
                     $(`#${id}`)
                         .jstree({
@@ -38,7 +36,6 @@ export default {
                                 themes: {
                                     responsive: true,
                                 },
-                                // so that create works
                                 check_callback: true,
                                 data: this.jsonTreeData,
                             },
@@ -80,6 +77,8 @@ export default {
                         })
                         .on("rename_node.jstree", function (e, data) {})
                         .on("changed.jstree", function (e, data) {
+
+             
                             if (
                                 gf.type == "Sale" ||
                                 gf.type == "Cash" ||
@@ -96,14 +95,15 @@ export default {
                                 gf.To_pay = 0;
                             }
 
-                            console.log("rrrrrrr", table);
-                            console.log(
-                                "rrrrrrrrr1",
-                                gf.type,
-                                gf.indexselected
-                            );
+                            // console.log("rrrrrrr", table);
+                            // console.log(
+                            //     "rrrrrrrrr1",
+                            //     gf.type,
+                            //     gf.indexselected
+                            // );
                             // indexselected == 0 when operation is sale or what is same when start index from 0
                             if (gf.indexselected || gf.indexselected == 0) {
+                                console.log("nowwwwwwwwwwwwww_first", gf.type);
                                 $(
                                     `#${gf.type}_${table}_tree${gf.indexselected}`
                                 ).val(data.node.text + "   " + data.node.id);
@@ -128,13 +128,19 @@ export default {
                                     }
                                 }
                             } else {
+                                console.log(
+                                    "nowwwwwwwwwwwwww_second",
+                                    gf.type,
+                                    gf.indexselected
+                                );
+
                                 $(`#${gf.type}_${table}_tree`).val(
                                     data.node.text + "  " + data.node.id
                                 );
-                                console.log(
-                                    "nowwwwwwwwwwwwww",
-                                    `#${gf.type}_${table}_tree_id`
-                                );
+                                // console.log(
+                                //     "nowwwwwwwwwwwwww",
+                                //     `#${gf.type}_${table}_tree_id`
+                                // );
                                 $(`#${gf.type}_${table}_tree_id`).val(
                                     data.node.id
                                 );
@@ -163,7 +169,7 @@ export default {
                                 gf.check_account(data);
                             }
                             if (table == "product") {
-                                console.log("no _productm",gf.counts);
+                                console.log("no _productm", gf.counts);
                                 gf.check_prouct(table, data, gf.counts);
                             }
 
@@ -185,9 +191,8 @@ export default {
 
                                 if (
                                     gf.type == "Purchase" ||
-                                    gf.type == "Supply" 
-                                    ||
-                                      gf.type == "OpeningInventory"
+                                    gf.type == "Supply" ||
+                                    gf.type == "OpeningInventory"
                                 ) {
                                     gf.get_account_for_store(gf.counts);
                                 }
@@ -343,7 +348,6 @@ export default {
                     // console.log("dfdf", response);
                     // currentObj.success = response.data.success;
                     // currentObj.filename = "";
-
                     // toastMessage("تم الاضافه بنجاح");
                 })
                 .catch((error) => {

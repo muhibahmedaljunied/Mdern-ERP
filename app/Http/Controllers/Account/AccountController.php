@@ -15,6 +15,7 @@ use App\Imports\AccountImport;
 use App\Models\Allowance;
 use App\Models\Bank;
 use App\Models\Customer;
+use App\Models\GroupAccount;
 use App\Models\Store;
 use App\Models\Supplier;
 use App\Models\Treasury;
@@ -32,6 +33,27 @@ class AccountController extends Controller
             ->get();
         return response()->json(['accounts' => $accounts]);
     }
+
+
+    public function store_account_setting(Request $request)
+    {
+
+
+
+        // dd($request->all());
+
+        foreach ($request['count'] as $value) {
+
+
+            $groups = new GroupAccount();
+            $groups->account_id = $request->account[$value];
+            $groups->group_id = $request->group[$value];
+            $groups->save();
+
+        }
+        return response()->json(['message' => 'sucess']);
+    }
+
 
     public function get_group_accounts_details_details(Request $request)
     {

@@ -25,7 +25,7 @@ class CreateSuppliersTable extends Migration
             $table->string('email',50)->unique()->nullable();
             $table->string('phone',20)->unique()->nullable();
             $table->longtext('address')->nullable();
-            $table->char('status', 1)->default('1')->nullable();    
+            $table->integer('status', 1)->default('1');    
             $table->timestamps();
         });
     }

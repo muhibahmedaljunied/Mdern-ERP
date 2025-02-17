@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-       
+
         DB::table('roles')->insert([
             'id'       => 1,
             'name'   => "Admin",
@@ -106,6 +107,42 @@ class DatabaseSeeder extends Seeder
             'name'    => 'عطلان',
 
         ]);
+        // --------------------------------------------------group_types--------------------------------------------------------
+        // DB::table('group_types')->insert([
+        //     'id'        => 1,
+        //     'name'    => 'الموردين',
+        //     'code'    => 'supplier',
+        //     // 'status'    => '',
+
+
+
+        // ]);
+
+
+        // DB::table('group_types')->insert([
+        //     'id'        => 2,
+        //     'name'    => 'العملاء',
+        //     'code'    => 'customer',
+        //     // 'status'    => 'تالف',
+
+        // ]);
+
+        // DB::table('group_types')->insert([
+        //     'id'        => 3,
+        //     'name'    => 'الصناديق',
+        //     'code'    => 'treasuries',
+        //     // 'status'    => 'تالف',
+
+        // ]);
+
+        // DB::table('group_types')->insert([
+        //     'id'        => 4,
+        //     'name'    => 'البنوك',
+        //     'code'    => 'banks',
+        //     // 'status'    => 'تالف',
+
+        // ]);
+
 
         // -------------------------------------Staff---------------------------------------------------------
 
@@ -129,7 +166,7 @@ class DatabaseSeeder extends Seeder
             'name'    => 'عدن',
 
         ]);
-        
+
         //   -----------------------stafftype----------------------------------
 
         DB::table('staff_types')->insert([
@@ -205,13 +242,13 @@ class DatabaseSeeder extends Seeder
         DB::table('delay_types')->insert([
             'id'        => 1,
             'name'    => 'يوم السبت',
-            'code'=>'sat',
+            'code' => 'sat',
 
         ]);
         DB::table('delay_types')->insert([
             'id'        => 2,
             'name'    => 'يوم الخميس',
-            'code'=>'tue',
+            'code' => 'tue',
 
 
         ]);
@@ -227,7 +264,7 @@ class DatabaseSeeder extends Seeder
         DB::table('parts')->insert([
             'id'        => 2,
             'name'    => 'نص ساعه',
-            'duration'=>30
+            'duration' => 30
 
         ]);
         //   -----------------------extra_types----------------------------------
@@ -256,7 +293,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-      
+
         //   -----------------------leave_types----------------------------------
 
         DB::table('leave_types')->insert([
@@ -355,7 +392,7 @@ class DatabaseSeeder extends Seeder
             'duration' => 5,
 
         ]);
-        
+
         // ---------------------------------------
         //   -----------------------personality----------------------------------
 
@@ -436,12 +473,12 @@ class DatabaseSeeder extends Seeder
 
         // ]);
 
-      
+
         // --------------------------------periods-------------------------------------------
         //   DB::table('periods')->insert([
         //     'id'        => 1,
         //     'name'    => 'فتره صباحيه',
-        
+
 
 
 
@@ -450,7 +487,7 @@ class DatabaseSeeder extends Seeder
         // DB::table('periods')->insert([
         //     'id'        => 2,
         //     'name'    => 'فتره مسائيه',
-           
+
 
 
         // ]);
@@ -459,11 +496,11 @@ class DatabaseSeeder extends Seeder
         // DB::table('periods')->insert([
         //     'id'        => 3,
         //     'name'    => 'فتره ليليه',
-           
+
 
 
         // ]);
 
-        
+
     }
 }
