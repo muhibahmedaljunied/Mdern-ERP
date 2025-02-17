@@ -16,15 +16,14 @@ class SupplierImport implements ToModel
     {
         return new Supplier([
             
-            'id'     => $row[0],
-            'name'    => $row[1],
-            'code'     => $row[2],
-            'company'    => $row[3],
-            'email'    => $row[4],
-            'phone'    => $row[5],
-            'address'    => $row[6],
-            'status' => $row[7],
-            'group_id' => $row[8],
+            'name'    => $row[0],
+            'code'     => $row[1],
+            'company'    => $row[2],
+            'email'    => $row[3],
+            'phone'    => $row[4],
+            'address'    => $row[5],
+            'status' => $row[6],
+            'group_id' => $row[7],
      
 
 

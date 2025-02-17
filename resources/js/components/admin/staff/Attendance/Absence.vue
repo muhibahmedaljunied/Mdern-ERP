@@ -24,327 +24,352 @@
 
             </div>
           </div>
-
           <div class="card-body">
-            <div class="row row-sm">
-              <div class="col-xl-12">
-                <!-- <form method="post"> -->
-                <div class="card">
-        
-
-                  <div class="card-body">
-                    <form method="post" @submit.prevent="submitForm" >
-
-                      <div class="table-responsive">
-                        <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
-                          <thead>
-                            <tr>
-
-                              <th>اسم المؤظف</th>
+            <div class="card">
 
 
-                              <th> نوع الغياب</th>
+              <div class="card-body">
+                <div class="row row-sm">
+                  <div class="col-xl-12">
+                    <!-- <form method="post"> -->
+                    <div class="card">
 
 
-                              <th>التاريخ </th>
+                      <div class="card-body">
+                        <form method="post" @submit.prevent="submitForm">
+
+                          <div class="table-responsive">
+                            <table class="table table-bordered text-right m-t-30"
+                              style="width: 100%; font-size: x-small">
+                              <thead>
+                                <tr>
+
+                                  <th>اسم المؤظف</th>
 
 
+                                  <th> نوع الغياب</th>
 
-                              <th>اضافه</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr v-for="index in count" :key="index">
-                              <td>
-                                <select style="background-color: beige;" v-model="staffselected[index]" name="type"
-                                  id="type" class="form-control " required>
-                                  <option  v-bind:value="0">
-                                    الكل
-                                  </option>
-                                  <option style="background-color: beige;" v-for="staff in staffs"
-                                    v-bind:value="staff.id">
-                                    {{ staff.name }}
-                                  </option>
-                                </select>
-                              </td>
-                              <td>
-                                <select style="background-color: beige;" v-model="typeselected[index]" name="type"
-                                  id="type" class="form-control" required>
-                                  <option  v-bind:value="0">
-                                    الافتراضي
-                                  </option>
-                                  <option v-for="absence_type in absence_types" v-bind:value="absence_type.id">
-                                    {{ absence_type.name }}
-                                  </option>
-                             
-                                </select>
-                              </td>
+
+                                  <th>التاريخ </th>
 
 
 
+                                  <th>اضافه</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr v-for="index in count" :key="index">
+                                  <td>
+                                    <select style="background-color: beige;" v-model="staffselected[index]" name="type"
+                                      id="type" class="form-control " required>
+                                      <option v-bind:value="0">
+                                        الكل
+                                      </option>
+                                      <option style="background-color: beige;" v-for="staff in staffs"
+                                        v-bind:value="staff.id">
+                                        {{ staff.name }}
+                                      </option>
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <select style="background-color: beige;" v-model="typeselected[index]" name="type"
+                                      id="type" class="form-control" required>
+                                      <option v-bind:value="0">
+                                        الافتراضي
+                                      </option>
+                                      <option v-for="absence_type in absence_types" v-bind:value="absence_type.id">
+                                        {{ absence_type.name }}
+                                      </option>
+
+                                    </select>
+                                  </td>
 
 
-                              <td>
-                                <input style="background-color: beige;" v-model="date[index]" type="date"
-                                  class="form-control" name="name" id="name" required />
-                              </td>
-
-                              <td v-if="index == 1">
-                                <a class="btn btn-info btn-sm waves-effect btn-agregar"
-                                  v-on:click="addComponent(count)">
-                                  <i class="fa fa-plus-circle"></i></a>
-
-                                <a class="btn btn-info btn-sm waves-effect btn-agregar"
-                                  v-on:click="disComponent(count)">
-                                  <i class="fa fa-minus-circle"></i></a>
-                              </td>
 
 
 
-                            </tr>
+                                  <td>
+                                    <input style="background-color: beige;" v-model="date[index]" type="date"
+                                      class="form-control" name="name" id="name" required />
+                                  </td>
 
-                            <tr>
-                              <td colspan="3"></td>
-                              <td>
-                                <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
+                                  <td v-if="index == 1">
+                                    <a class="btn btn-info btn-sm waves-effect btn-agregar"
+                                      v-on:click="addComponent(count)">
+                                      <i class="fa fa-plus-circle"></i></a>
 
-                              </td>
-                            </tr>
+                                    <a class="btn btn-info btn-sm waves-effect btn-agregar"
+                                      v-on:click="disComponent(count)">
+                                      <i class="fa fa-minus-circle"></i></a>
+                                  </td>
 
 
-                          </tbody>
-                        </table>
+
+                                </tr>
+
+                                <tr>
+                                  <td colspan="3"></td>
+                                  <td>
+                                    <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
+
+                                  </td>
+                                </tr>
+
+
+                              </tbody>
+                            </table>
+                          </div>
+
+                        </form>
+
+
                       </div>
 
-                    </form>
+
+                    </div>
 
 
+                    <!-- </form> -->
                   </div>
-
-
                 </div>
-
-
-                <!-- </form> -->
               </div>
+
+
+
+
+
             </div>
-          </div>
+            <div class="card">
+              <div class="card-header">
+
+
+                <div style="display: flex;float: left; margin: 5px">
+
+                  <button @click="exports_excel()">
+
+                    <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+                  </button>
+
+                  <button @click="imports_excel()">
+
+                    <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+                  </button>
+
+                  <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                    aria-haspopup="true" aria-expanded="true" placeholder="بحث " v-model="word_search"
+                    @input="get_search()" />
+                </div>
+              </div>
+              <div class="card-body" id="printme">
+                <div class="table-responsive">
+                  <table class="table table-bordered text-center">
+                    <thead>
+                      <tr>
+
+                        <th class="wd-15p border-bottom-0">اسم المؤظف</th>
+                        <th class="wd-15p border-bottom-0"> نوع الغياب</th>
+                        <th class="wd-15p border-bottom-0">التاريخ </th>
+
+
+                        <th class="wd-15p border-bottom-0">العمليات</th>
+                      </tr>
+                    </thead>
+                    <tbody v-if="value_list && value_list.data.length > 0">
+                      <tr v-for="(absence, index) in value_list.data" :key="index">
+
+                        <td>{{ absence.staff_name }}</td>
+
+                        <td>
+
+                          {{ absence.absence_type_name }}
+
+                        </td>
+
+
+
+
+                        <td>
+
+                          {{ absence.date }}
+
+                        </td>
 
 
 
 
 
-        </div>
-      </div>
-      <!--/div-->
-    </div>
-
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-     
-          <div class="card-body" id="printme">
-            <div class="table-responsive">
-              <table class="table table-bordered text-center">
-                <thead>
-                  <tr>
-
-                    <th class="wd-15p border-bottom-0">اسم المؤظف</th>
-                    <th class="wd-15p border-bottom-0"> نوع الغياب</th>
-                    <th class="wd-15p border-bottom-0">التاريخ </th>
-
-
-                    <th class="wd-15p border-bottom-0">العمليات</th>
-                  </tr>
-                </thead>
-                <tbody v-if="value_list && value_list.data.length > 0">
-                  <tr v-for="(absence, index) in value_list.data" :key="index">
-
-                    <td>{{ absence.staff_name }}</td>
-
-                    <td>
-
-                      {{ absence.absence_type_name }}
-
-                    </td>
 
 
 
-
-                    <td>
-
-                      {{ absence.date }}
-
-                    </td>
-
+                        <td>
+                          <button type="button" @click="delete_item(absence.id)"
+                            class="btn btn-danger btn-sm waves-effect">
+                            <i class="fa fa-trash"></i>
+                          </button>
 
 
+                          <a class="btn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal"
+                            id="agregar_productos" data-target="#updateExtra">
+                            <i class="fa fa-edit"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-else>
+                      <tr>
+                        <td align="center" colspan="3">لايوجد بياتات.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
+              </div>
 
 
-
-
-
-                    <td>
-                      <button type="button" @click="delete_item(absence.id)" class="btn btn-danger btn-sm waves-effect">
-                        <i class="fa fa-trash"></i>
-                      </button>
-
-
-                      <a class="btn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal" id="agregar_productos"
-                        data-target="#updateExtra">
-                        <i class="fa fa-edit"></i></a>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="3">لايوجد بياتات.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
-          </div>
-
- 
-          <div class="modal fade" id="updateExtra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form method="post">
-              <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-
-
-                  <div class="modal-body">
-                    <div class="row row-sm">
-                      <div class="col-xl-12">
-                        <!-- <form method="post"> -->
-                        <div class="card">
-                          <div class="card-header pb-0">
-                            <div class="d-flex justify-content-between">
-                              <h4 class="modal-title" id="myLargeModalLabel">الاضافي</h4>
-                              <i class="mdi mdi-dots-horizontal text-gray"></i>
-                            </div>
-                          </div>
-
-                          <div class="card-body">
-                            <form method="post" @submit.prevent="submitForm" enctype="multipart/form-data">
-
-                              <div class="card-body" id="printme">
-                                <div class="table-responsive">
-                                  <table class="table table-bordered text-center">
-                                    <thead>
-                                      <tr>
-
-                                        <th class="wd-15p border-bottom-0">اسم المؤظف</th>
-                                        <th class="wd-15p border-bottom-0"> نوع الاضافي</th>
-                                        <th class="wd-15p border-bottom-0">التاريخ </th>
-
-                                        <th class="wd-15p border-bottom-0">وقت البدء</th>
-                                        <th class="wd-15p border-bottom-0">وقت الانتعاء</th>
-                                        <th class="wd-15p border-bottom-0"> المده</th>
-                                        <th class="wd-15p border-bottom-0"> اضافه</th>
-                                        <th class="wd-15p border-bottom-0">العمليات</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody v-if="value_list && value_list.data.length > 0">
-                                      <tr v-for="(absence, index) in value_list.data" :key="index">
-
-
-                                        <template v-if="absence.id == 3">
-
-
-                                          <td>{{ absence.name }}</td>
-                                          <td>
-
-                                            <div v-for="(absence_names, index) in absence.absence" :key="index">
-                                              {{ absence_names.absence_type.name }}
-                                              <hr>
-                                            </div>
-                                          </td>
-                                          <td>
-
-                                            <div v-for="(absence_end_date, index) in absence.absence" :key="index">
-                                              {{ absence_end_date.date }}
-                                              <hr>
-
-                                            </div>
-                                          </td>
-                                          <td>
-
-                                            <div v-for="(absence_start_time, index) in absence.absence" :key="index">
-                                              {{ absence_start_time.start_time }}
-                                              <hr>
-                                            </div>
-                                          </td>
-                                          <td>
-
-                                            <div v-for="(absence_end_time, index) in absence.absence" :key="index">
-                                              {{ absence_end_time.end_time }}
-                                              <hr>
-                                            </div>
-                                          </td>
-                                          <td>
-
-                                            <div v-for="(absence_end_time, index) in absence.absence" :key="index">
-                                              {{ absence_end_time.number_hours }}
-                                              <hr>
-                                            </div>
-                                          </td>
-                                          <!-- <td>{{ absence.note }}</td> -->
-                                          <td>
-                                            <input type="checkbox" class="btn btn-info waves-effect">
-                                          </td>
-                                          <td>
-                                            <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="btn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
-                                            <button type="button" @click="delete_item(absence.id)"
-                                              class="btn btn-danger btn-sm waves-effect">
-                                              <i class="fa fa-trash"></i>
-                                            </button>
-
-
-                                            <a class="btn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal"
-                                              id="agregar_productos" data-target="#updateExtra">
-                                              <i class="fa fa-edit"></i></a>
-                                          </td>
-
-                                        </template>
-                                      </tr>
-                                    </tbody>
-                                    <tbody v-else>
-                                      <tr>
-                                        <td align="center" colspan="3">لايوجد بياتات.</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-                                <pagination align="center" :data="value_list" @pagination-change-page="list">
-                                </pagination>
-                              </div>
-                            </form>
-
-                          </div>
-
-
-                        </div>
-
-
-                        <!-- </form> -->
+              <div class="modal fade" id="updateExtra" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <form method="post">
+                  <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
+
+
+                      <div class="modal-body">
+                        <div class="row row-sm">
+                          <div class="col-xl-12">
+                            <!-- <form method="post"> -->
+                            <div class="card">
+                              <div class="card-header pb-0">
+                                <div class="d-flex justify-content-between">
+                                  <h4 class="modal-title" id="myLargeModalLabel">الاضافي</h4>
+                                  <i class="mdi mdi-dots-horizontal text-gray"></i>
+                                </div>
+                              </div>
+
+                              <div class="card-body">
+                                <form method="post" @submit.prevent="submitForm" enctype="multipart/form-data">
+
+                                  <div class="card-body" id="printme">
+                                    <div class="table-responsive">
+                                      <table class="table table-bordered text-center">
+                                        <thead>
+                                          <tr>
+
+                                            <th class="wd-15p border-bottom-0">اسم المؤظف</th>
+                                            <th class="wd-15p border-bottom-0"> نوع الاضافي</th>
+                                            <th class="wd-15p border-bottom-0">التاريخ </th>
+
+                                            <th class="wd-15p border-bottom-0">وقت البدء</th>
+                                            <th class="wd-15p border-bottom-0">وقت الانتعاء</th>
+                                            <th class="wd-15p border-bottom-0"> المده</th>
+                                            <th class="wd-15p border-bottom-0"> اضافه</th>
+                                            <th class="wd-15p border-bottom-0">العمليات</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody v-if="value_list && value_list.data.length > 0">
+                                          <tr v-for="(absence, index) in value_list.data" :key="index">
+
+
+                                            <template v-if="absence.id == 3">
+
+
+                                              <td>{{ absence.name }}</td>
+                                              <td>
+
+                                                <div v-for="(absence_names, index) in absence.absence" :key="index">
+                                                  {{ absence_names.absence_type.name }}
+                                                  <hr>
+                                                </div>
+                                              </td>
+                                              <td>
+
+                                                <div v-for="(absence_end_date, index) in absence.absence" :key="index">
+                                                  {{ absence_end_date.date }}
+                                                  <hr>
+
+                                                </div>
+                                              </td>
+                                              <td>
+
+                                                <div v-for="(absence_start_time, index) in absence.absence"
+                                                  :key="index">
+                                                  {{ absence_start_time.start_time }}
+                                                  <hr>
+                                                </div>
+                                              </td>
+                                              <td>
+
+                                                <div v-for="(absence_end_time, index) in absence.absence" :key="index">
+                                                  {{ absence_end_time.end_time }}
+                                                  <hr>
+                                                </div>
+                                              </td>
+                                              <td>
+
+                                                <div v-for="(absence_end_time, index) in absence.absence" :key="index">
+                                                  {{ absence_end_time.number_hours }}
+                                                  <hr>
+                                                </div>
+                                              </td>
+                                              <!-- <td>{{ absence.note }}</td> -->
+                                              <td>
+                                                <input type="checkbox" class="btn btn-info waves-effect">
+                                              </td>
+                                              <td>
+                                                <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="btn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
+                                                <button type="button" @click="delete_item(absence.id)"
+                                                  class="btn btn-danger btn-sm waves-effect">
+                                                  <i class="fa fa-trash"></i>
+                                                </button>
+
+
+                                                <a class="btn btn-info btn-sm waves-effect btn-agregar"
+                                                  data-toggle="modal" id="agregar_productos" data-target="#updateExtra">
+                                                  <i class="fa fa-edit"></i></a>
+                                              </td>
+
+                                            </template>
+                                          </tr>
+                                        </tbody>
+                                        <tbody v-else>
+                                          <tr>
+                                            <td align="center" colspan="3">لايوجد بياتات.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    <pagination align="center" :data="value_list" @pagination-change-page="list">
+                                    </pagination>
+                                  </div>
+                                </form>
+
+                              </div>
+
+
+                            </div>
+
+
+                            <!-- </form> -->
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
-          
-                </div>
+                </form>
               </div>
-            </form>
+
+
+            </div>
           </div>
-
-
         </div>
+
       </div>
       <!--/div-->
     </div>
+
+
   </div>
 
 
@@ -363,7 +388,7 @@ export default {
     return {
 
 
-   
+
 
       typeselected: [],
       date: [],

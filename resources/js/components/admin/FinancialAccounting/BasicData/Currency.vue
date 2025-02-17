@@ -196,7 +196,7 @@
               </table>
             </div>
           </div>
-          <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+          <!-- <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
             aria-hidden="true" style="display: none" id="currency">
             <div class="modal-dialog modal-lg" style="width: 100%">
               <div class="modal-content">
@@ -293,20 +293,20 @@
 
                       </div>
                     </div>
-                    <!--/div-->
+          
                   </div>
                 </div>
 
 
               </div>
-              <!-- /.modal-content -->
+     
             </div>
 
-            <!-- /.modal-dialog -->
-          </div>
+
+          </div> -->
         </div>
       </div>
-      <!--/div-->
+
     </div>
   </div>
 
@@ -366,6 +366,7 @@ export default {
         .then((response) => {
           console.log(response);
           toastMessage("تم الاضافه بنجاح");
+          this.list();
           // this.$router.go(0);
         });
 

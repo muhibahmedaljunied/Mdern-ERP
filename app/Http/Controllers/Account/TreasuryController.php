@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Treasury;
-use App\Models\Account;
 use Illuminate\Support\Facades\DB;
 
 class TreasuryController extends Controller
@@ -57,7 +56,7 @@ class TreasuryController extends Controller
 
             $treasury = new Treasury();
             // $treasury->account_id =  $id;
-            $treasury->group_id =  $request['group'][$value];
+            // $treasury->group_id =  $request['group'][$value];
             $treasury->name =  $request['name'][$value];
             $treasury->save();
         }
@@ -74,24 +73,31 @@ class TreasuryController extends Controller
         //     ->paginate(10);
 
 
+        // $treasuries =  DB::table('treasuries')
+        // ->join('groups', 'groups.id', '=', 'treasuries.group_id')
+        // ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
+        // ->where('group_types.code', 'treasury')
+        // ->select(
+        //     'treasuries.*',
+        //     'groups.name as group_name'
+        // )
+        // ->paginate(10);
+
+        // $groups =  DB::table('groups')
+        //     ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
+        //     ->where('group_types.code', 'treasury')
+        //     ->select(
+        //         'groups.*'
+        //     )
+        //     ->get();
+
         $treasuries =  DB::table('treasuries')
-        ->join('groups', 'groups.id', '=', 'treasuries.group_id')
-        ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
-        ->where('group_types.code', 'treasury')
-        ->select(
-            'treasuries.*',
-            'groups.name as group_name'
-        )
-        ->paginate(10);
+            ->select()
+            ->paginate();
 
-        $groups =  DB::table('groups')
-            ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
-            ->where('group_types.code', 'treasury')
-            ->select(
-                'groups.*'
-            )
-            ->get();
-
-        return response()->json(['treasuries' => $treasuries, 'groups' => $groups]);
+        return response()->json([
+            'treasuries' => $treasuries,
+            // 'groups' => $groups
+        ]);
     }
 }

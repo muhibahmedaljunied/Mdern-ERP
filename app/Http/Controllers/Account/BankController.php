@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Models\Bank;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Validator;
-use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -69,7 +67,7 @@ class BankController extends Controller
             $bank = new Bank();
             // $bank->account_id =  $id;
             $bank->name =  $request['name'][$value];
-            $bank->group_id =  $request['group'][$value];
+            // $bank->group_id =  $request['group'][$value];
 
             $bank->save();
         }
@@ -85,27 +83,33 @@ class BankController extends Controller
         //     ->select('banks.*', 'accounts.text', 'accounts.id as account_id')
         //     ->paginate(10);
 
+        // $banks =  DB::table('banks')
+        //     ->join('groups', 'groups.id', '=', 'banks.group_id')
+        //     ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
+        //     ->where('group_types.code', 'bank')
+        //     ->select(
+        //         'banks.*',
+        //         'groups.name as group_name'
+        //     )
+        //     ->paginate(10);
+
+        // $groups =  DB::table('groups')
+        //     ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
+        //     ->where('group_types.code', 'bank')
+        //     ->select(
+        //         'groups.*'
+        //     )
+        //     ->get();
+
         $banks =  DB::table('banks')
-            ->join('groups', 'groups.id', '=', 'banks.group_id')
-            ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
-            ->where('group_types.code', 'bank')
-            ->select(
-                'banks.*',
-                'groups.name as group_name'
-            )
-            ->paginate(10);
-
-        $groups =  DB::table('groups')
-            ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
-            ->where('group_types.code', 'bank')
-            ->select(
-                'groups.*'
-            )
-            ->get();
+            ->select()
+            ->paginate();
 
 
-
-            // dd($groups);
-        return response()->json(['banks' => $banks, 'groups' => $groups]);
+        // dd($groups);
+        return response()->json([
+            'banks' => $banks,
+            // 'groups' => $groups
+        ]);
     }
 }

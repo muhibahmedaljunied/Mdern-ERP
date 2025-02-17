@@ -161,7 +161,7 @@
       </div>
     </div>
     <div class="row row-sm">
-      
+
       <div class="card">
         <div class="card-header">
           <!-- <span class="h2"> الموردين</span> -->
@@ -169,17 +169,18 @@
           <div style="display: flex;float: left; margin: 5px">
 
 
-            <button @click="Export()">
-              <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+
+            <button @click="exports_excel()">
+
+              <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
             </button>
 
-            <button @click="Import()">
-              <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
-            </button>
+            <button @click="imports_excel()">
 
+              <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+            </button>
             <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
-              @input="get_search()" />
+              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" />
           </div>
         </div>
         <div class="card-body" id="printme">

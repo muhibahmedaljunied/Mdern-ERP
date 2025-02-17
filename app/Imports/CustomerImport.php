@@ -16,13 +16,12 @@ class CustomerImport implements ToModel
     {
         return new Customer([
             
-            'id'     => $row[0],
-            'name'    => $row[1],
-            'email'    => $row[2],
-            'phone'    => $row[3],
-            'address'    => $row[4],
-            'status' => $row[5],
-            'group_id' => $row[6],
+            'name'    => $row[0],
+            'email'    => $row[1],
+            'phone'    => $row[2],
+            'address'    => $row[3],
+            'status' => $row[4],
+            'group_id' => $row[5],
      
 
 

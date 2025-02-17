@@ -209,6 +209,7 @@ export default {
         .then(function (response) {
 
           toastMessage("تم الاضافه بنجاح");
+          this.list();
 
         })
         .catch(function (error) {
