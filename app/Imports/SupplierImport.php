@@ -17,6 +17,7 @@ class SupplierImport implements ToModel,WithHeadingRow
     {
         return new Supplier([
             
+<<<<<<< HEAD
             'name'    => $row['name'],
             'code'     => $row['code'],
             'company'    => $row['company'],
@@ -25,6 +26,16 @@ class SupplierImport implements ToModel,WithHeadingRow
             'address'    => $row['address'],
             'status' => $row['status'],
             'group_id' => $row['group_id'],
+=======
+            'name'    => $row[0],
+            'code'     => $row[1],
+            'company'    => $row[2],
+            'email'    => $row[3],
+            'phone'    => $row[4],
+            'address'    => $row[5],
+            'status' => $row[6],
+            'group_id' => $row[7],
+>>>>>>> e6f25e3908fccf613f415c22430d25ca28bcaa25
      
 
 

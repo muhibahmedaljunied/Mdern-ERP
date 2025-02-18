@@ -49,6 +49,10 @@ class BankController extends Controller
 
             $bank = new Bank();
             $bank->name =  $request['name'][$value];
+<<<<<<< HEAD
+=======
+            // $bank->group_id =  $request['group'][$value];
+>>>>>>> e6f25e3908fccf613f415c22430d25ca28bcaa25
 
             $bank->save();
         }
@@ -103,6 +107,7 @@ class BankController extends Controller
             'banks' => $banks,
             // 'groups' => $groups
         ]);
+<<<<<<< HEAD
     }
 
 
@@ -124,6 +129,8 @@ class BankController extends Controller
             'groups' => $this->groups,
             'banks' => Bank::all(),
         ]);
+=======
+>>>>>>> e6f25e3908fccf613f415c22430d25ca28bcaa25
     }
 
 }

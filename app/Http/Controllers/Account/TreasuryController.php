@@ -50,6 +50,11 @@ class TreasuryController extends Controller
 
 
             $treasury = new Treasury();
+<<<<<<< HEAD
+=======
+            // $treasury->account_id =  $id;
+            // $treasury->group_id =  $request['group'][$value];
+>>>>>>> e6f25e3908fccf613f415c22430d25ca28bcaa25
             $treasury->name =  $request['name'][$value];
             $treasury->save();
         }
@@ -75,6 +80,7 @@ class TreasuryController extends Controller
         //     'groups.name as group_name'
         // )
         // ->paginate(10);
+<<<<<<< HEAD
 
         // $groups =  DB::table('groups')
         //     ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
@@ -88,10 +94,26 @@ class TreasuryController extends Controller
             ->select()
             ->paginate();
 
+=======
+
+        // $groups =  DB::table('groups')
+        //     ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
+        //     ->where('group_types.code', 'treasury')
+        //     ->select(
+        //         'groups.*'
+        //     )
+        //     ->get();
+
+        $treasuries =  DB::table('treasuries')
+            ->select()
+            ->paginate();
+
+>>>>>>> e6f25e3908fccf613f415c22430d25ca28bcaa25
         return response()->json([
             'treasuries' => $treasuries,
             // 'groups' => $groups
         ]);
+<<<<<<< HEAD
     }
 
 
@@ -113,5 +135,7 @@ class TreasuryController extends Controller
             'groups' => $this->groups,
             'treasuries' => Treasury::all(),
         ]);
+=======
+>>>>>>> e6f25e3908fccf613f415c22430d25ca28bcaa25
     }
 }
