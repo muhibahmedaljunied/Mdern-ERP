@@ -89,13 +89,13 @@
 
               <button @click="exports_excel()">
 
-<i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
-</button>
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
 
-<button @click="imports_excel()">
+              <button @click="imports_excel()">
 
-<i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
-</button>
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
 
               <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
                 aria-haspopup="true" aria-expanded="true" placeholder="بحث " v-model="word_search"
@@ -224,30 +224,30 @@ export default {
 
     exports_excel() {
 
-axios
-  .post(`export_store`)
-  .then(function (response) {
+      axios
+        .post(`export_store`)
+        .then(function (response) {
 
-    toastMessage("تم تصدير   ");
-    console.log(1);
-  })
-  .catch(error => {
+          toastMessage("تم تصدير   ");
+          console.log(1);
+        })
+        .catch(error => {
 
-  });
-},
-imports_excel() {
+        });
+    },
+    imports_excel() {
 
-axios
-  .post(`import_store`)
-  .then(function (response) {
+      axios
+        .post(`import_store`)
+        .then(function (response) {
 
-    toastMessage("تم استيراد   ");
+          toastMessage("تم استيراد   ");
 
-  })
-  .catch(error => {
+        })
+        .catch(error => {
 
-  });
-},
+        });
+    },
   },
 };
 </script>
