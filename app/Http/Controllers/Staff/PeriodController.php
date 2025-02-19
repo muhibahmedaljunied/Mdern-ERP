@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PeriodTime;
 use App\Models\Absence;
 use App\Models\Period;
+use App\Models\WorkSystemType;
 use Illuminate\Http\Request;
 
 class PeriodController extends Controller
@@ -33,23 +34,56 @@ class PeriodController extends Controller
         // $periods = Period::all();
 
 
-        return response()->json(['periods' => period::all()]);
-    }
+        return response()->json([
+            'periods' => period::all(),
 
+        ]);
+    }
+    public function get_period(Request $request)
+    {
+
+
+        // dd($request->id);
+
+
+        $periods = PeriodTime::join('work_system_types', 'work_system_types.id', '=', 'period_times.work_system_type_id')
+            ->select(
+
+                'period_times.*',
+                'work_system_types.name as work_system_type_name',
+                'work_system_types.id as work_system_type_id'
+
+
+            )
+            ->where('period_times.work_system_type_id',$request->id)
+            ->get();
+
+        return response()->json(
+            [
+                'periods' => $periods,
+
+            ]
+        );
+    }
     public function get_period_time(Request $request)
     {
 
-        $period_times = PeriodTime::select(
+        $period_times = PeriodTime::join('work_system_types', 'work_system_types.id', '=', 'period_times.work_system_type_id')
+            ->select(
 
-            'period_times.*',
+                'period_times.*',
+                'work_system_types.name as work_system_type_name',
+                'work_system_types.id as work_system_type_id'
 
-        )
+
+            )
             ->get();
 
         return response()->json(
             [
                 'period_times' => $period_times,
-           
+                'work_system_types' => WorkSystemType::all(),
+
             ]
         );
     }
@@ -97,7 +131,9 @@ class PeriodController extends Controller
 
             $absence = new PeriodTime();
 
-            $absence->period_id = $request->post('type')[$value];
+            // $absence->period_id = $request->post('type')[$value];
+            $absence->work_system_type_id = $request->post('type')[$value];
+
             $absence->from_time = $request->post('from_period')[$value];
             $absence->into_time = $request->post('into_period')[$value];
             $absence->duration = $request->post('duration_period')[$value];

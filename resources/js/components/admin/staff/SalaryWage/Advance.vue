@@ -74,16 +74,16 @@
 
 
 
-     
-                          <label for="cliente"> الحساب التفصيلي</label>
+
+                        <label for="cliente"> الحساب التفصيلي</label>
 
 
-                          <select class="form-control" style="background-color: beige;" name="forma_pago"
-                            id="select_account_Advance_group">
+                        <select class="form-control" style="background-color: beige;" name="forma_pago"
+                          id="select_account_Advance_group">
 
-                          </select>
+                        </select>
 
-           
+
 
 
 
@@ -253,7 +253,28 @@
     <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
+          <div class="card-header">
 
+
+            <div style="display: flex;float: left; margin: 5px">
+
+
+
+
+              <button @click="exports_excel()">
+
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
+
+              <button @click="imports_excel()">
+
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث عن موظف" v-model="word_search" />
+            </div>
+          </div>
           <div class="card-body" id="printme">
             <div class="table-responsive">
               <table class="table table-bordered text-center">
@@ -515,7 +536,33 @@ export default {
         });
     },
 
+    exports_excel() {
 
+axios
+  .post(`/export_staff`)
+  .then(function (response) {
+
+    toastMessage("تم التصدير");
+    this.list();
+  })
+  .catch(error => {
+
+  });
+},
+imports_excel() {
+
+axios
+  .post(`/import_staff`)
+  .then(function (response) {
+
+    toastMessage("تم الاستيراد");
+    this.list();
+
+  })
+  .catch(error => {
+
+  });
+},
 
 
 

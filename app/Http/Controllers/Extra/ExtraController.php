@@ -105,6 +105,7 @@ class ExtraController extends Controller
 
 
    
+        // dd($request->all());
         $this->core->data = $request->all();
 
         try {
@@ -119,7 +120,7 @@ class ExtraController extends Controller
             
                 $this->hr->store();
 
-                $this->extra_sanction->create();
+                // $this->extra_sanction->create();
             }
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
             return response([

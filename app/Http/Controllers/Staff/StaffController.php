@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Staff;
+
+use App\Exports\AbsenceSanctionExport;
 use App\Exports\StaffExport;
 use App\Services\CoreStaffService;
 use App\Services\Staff\StaffService;
@@ -105,18 +107,22 @@ class StaffController extends Controller
     }
 
 
+ 
+ 
     public function export()
     {
 
-        return Excel::download(new StaffExport, 'staff_export.xlsx');
         
+         Excel::download(new StaffExport,'staff_export.xlsx');
+
+
         return response()->json([
             'status' =>
-            'The file has been excel/csv exported to database in laravel '
+            'The file has been excel/csv exporteded'
         ]);
     }
 
- 
+
 
 
     public function get_job(Request $request)

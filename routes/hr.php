@@ -1,14 +1,13 @@
 <?php
 
 use App\Http\Controllers\Staff\AdministrativeStructureController;
-use App\Http\Controllers\Staff\StaffController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/store_staff_account_setting', 'Staff\staffController@store_staff_account_setting');
 Route::post('/get_staff_account_setting', 'Staff\staffController@get_staff_account_setting');
 
-Route::post('/import_staff', [StaffController::class, 'import']);
-Route::post('/export_staff', [StaffController::class, 'export']);
+Route::post('/import_staff','Staff\staffController@import');
+Route::post('/export_staff','Staff\staffController@export');
 // ----------------------------------------------------------------------
 Route::post('/import_absence_sanction', 'Absence\AbsenceSanctionController@import');
 Route::post('/import_delay_sanction', 'Delay\DelaySanctionController@import');
@@ -72,6 +71,7 @@ Route::post('/attendance', 'Attendance\AttendanceController@index');
 Route::post('/attendance_report', 'Attendance\AttendanceController@report');
 Route::post('/attendance_report/search', 'Attendance\AttendanceController@search');
 Route::post('/attendance/get_period/{id}', 'Attendance\AttendanceController@get_period');
+Route::post('/staff/get_period/{id}', 'Staff\PeriodController@get_period');
 Route::post('/attendance/get_staff/{id}', 'Attendance\AttendanceController@get_staff');
 Route::post('/attendance/select_staff', 'Attendance\AttendanceController@select_staff');
 Route::post('/attendance/get_time', 'Attendance\AttendanceController@get_time');
@@ -168,6 +168,7 @@ Route::post('/absence_typesearch', 'Absence\AbsenceController@search');
 /* --------------------------------------------------------------------------------*/
 /*  ---------------------------------------allowance_type-----------------------------*/
 Route::post('/allowance', 'Staff\AllowanceController@index');
+Route::post('/get_allowance', 'Staff\AllowanceController@get_allowance');
 Route::post('/allowance_type', 'Staff\AllowanceTypeController@index');
 Route::post('/create_allowance_type', 'Staff\AllowanceController@create');
 Route::post('/store_allowance_type', 'Staff\AllowanceTypeController@store');

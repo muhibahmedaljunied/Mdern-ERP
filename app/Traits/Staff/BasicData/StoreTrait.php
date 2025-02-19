@@ -17,8 +17,7 @@ use App\Models\DelayType;
 use App\Models\StaffType;
 use App\Models\ExtraType;
 use App\Models\ExtraPart;
-
-
+use App\Models\WorkSystemType;
 use DB;
 
 trait StoreTrait
@@ -49,7 +48,7 @@ trait StoreTrait
 
             if ($request->post('type') == 'work_type') {
 
-                $temporale = new WorkType();
+                $temporale = new WorkSystemType();
                 $temporale->name = $request['name'][$value];
                 $temporale->save();
             }

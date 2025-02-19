@@ -5,8 +5,6 @@ use App\Models\PeriodTime;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Carbon\Carbon;
-
 class PeriodTimeExport implements FromCollection,WithMapping, WithHeadings
 {
     /**
@@ -24,10 +22,9 @@ class PeriodTimeExport implements FromCollection,WithMapping, WithHeadings
 
         return [
 
-            
-            $registration->id,
+        
 
-            $registration->period->id,
+            $registration->work_system_type_id,
 
             $registration->from_time,
 
@@ -35,9 +32,7 @@ class PeriodTimeExport implements FromCollection,WithMapping, WithHeadings
 
             $registration->duration,
 
-            Carbon::parse($registration->created_at)->toFormattedDateString(),
 
-            Carbon::parse($registration->updated_at)->toFormattedDateString()
 
         ] ;
  
@@ -51,9 +46,9 @@ class PeriodTimeExport implements FromCollection,WithMapping, WithHeadings
 
         return [
 
-            'id',
+
  
-            'period_time',
+            'work_system_type_id',
  
             'from_time',
  
@@ -61,10 +56,8 @@ class PeriodTimeExport implements FromCollection,WithMapping, WithHeadings
  
             'duration',
  
-            'created_at',
- 
-            'updated_at'
- 
+  
+
  
          ] ;
 

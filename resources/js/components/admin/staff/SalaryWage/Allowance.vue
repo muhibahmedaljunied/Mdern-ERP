@@ -67,7 +67,8 @@
                                     </td>
 
 
-                                    <td> <select v-model="allowance_status[index]" id="inputState" class="form-control">
+                                    <td> <select @change="set_allowance(allowance_status[index], index)"
+                                        v-model="allowance_status[index]" id="inputState" class="form-control">
                                         <option v-bind:value="1">
                                           بدلات شهريه
                                         </option>
@@ -76,11 +77,15 @@
                                         </option>
                                       </select></td>
 
-                                    <td> <select v-model="allowance_type[index]" id="inputState" class="form-control" @change="set_account(index)">
-                                        <option  v-for="allowance_type in allowance_types"
-                                          v-bind:value="[allowance_type.id,allowance_type.account_id,allowance_type.account_second_id]">
-                                          {{ allowance_type.name }}
-                                        </option>
+                                    <!-- <td> <select v-model="allowance_type[index]" id="inputState" class="form-control" 
+                                      @change="set_account(index)
+                                      "> -->
+                                    <td> <select v-model="allowance_type[index]" :id="'select_allowance' + index"
+                                        class="form-control">
+                                        <!-- <option v-for="allowance_type in allowance_types"
+                                        v-bind:value="[allowance_type.id, allowance_type.account_id, allowance_type.account_second_id]">
+                                        {{ allowance_type.name }}
+                                        </option> -->
                                       </select>
 
                                     </td>
@@ -189,7 +194,28 @@
     <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
+          <div class="card-header">
 
+
+            <div style="display: flex;float: left; margin: 5px">
+
+
+
+
+              <button @click="exports_excel()">
+
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
+
+              <button @click="imports_excel()">
+
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث عن موظف" v-model="word_search" />
+            </div>
+          </div>
           <div class="card-body">
 
             <div class="table-responsive">
@@ -317,7 +343,7 @@ export default {
   mixins: [operation],
   data() {
     return {
- 
+
       allowance_types: "",
       allowance_type: [],
       allowance_status: [],
@@ -361,16 +387,43 @@ export default {
     set_account(index) {
 
 
-      console.log('rrrrrrrqqqqqqqqrrrrrrrrrr',this.allowance_type,index);
-          this.account.account_id[index] = this.allowance_type[index][1];
-          this.account.account_second_id[index] = this.allowance_type[index][2];
+      console.log('rrrrrrrqqqqqqqqrrrrrrrrrr', this.allowance_type, index);
+      this.account.account_id[index] = this.allowance_type[index][1];
+      this.account.account_second_id[index] = this.allowance_type[index][2];
 
 
 
     },
+
+    set_allowance(status, index) {
+
+      axios.post(`/get_allowance`, {
+
+        status: status
+      }).then((response) => {
+
+        var arrayLength = response.data.allowances.length
+        var html = '<option></option>';
+        console.log('ddddddddd', response.data.allowances);
+        for (var i = 0; i < arrayLength; i++) {
+
+          html = html + `<option data-period-${status}= ${response.data.allowances[i].allowance_type_id}   value= ${response.data.allowances[i].allowance_type_id} >    ${response.data.allowances[i].allowance_type_name}   </option>`
+
+
+
+        }
+
+        $(`#select_allowance${index}`).html(html);
+
+
+
+
+      });
+
+    },
     Add_new() {
 
-   
+
 
       this.Add(
         {
@@ -406,7 +459,7 @@ export default {
             account_id: this.account.account_second_id,
             value: this.quantity,
           },
-          daily_index:1,
+          daily_index: 1,
           grand_total: this.grand_total,
           type_daily: 'hr_allowance',
 
@@ -445,7 +498,33 @@ export default {
         });
     },
 
+    exports_excel() {
 
+      axios
+        .post(`/export_staff`)
+        .then(function (response) {
+
+          toastMessage("تم التصدير");
+          this.list();
+        })
+        .catch(error => {
+
+        });
+    },
+    imports_excel() {
+
+      axios
+        .post(`/import_staff`)
+        .then(function (response) {
+
+          toastMessage("تم الاستيراد");
+          this.list();
+
+        })
+        .catch(error => {
+
+        });
+    },
 
   },
 };

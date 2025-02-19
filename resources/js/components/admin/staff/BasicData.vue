@@ -85,7 +85,7 @@
                           <a href="#tab17" class="nav-link" data-toggle="tab"> نظام الدوام </a>
                         </li> -->
                         <li class="nav-item">
-                          <a href="#tab21" class="nav-link" data-toggle="tab"> اوقات فترات الدوام  </a>
+                          <a href="#tab21" class="nav-link" data-toggle="tab">  فترات الدوام  </a>
                         </li>
 
                         <li class="nav-item">

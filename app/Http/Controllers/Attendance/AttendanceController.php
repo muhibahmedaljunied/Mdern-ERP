@@ -42,7 +42,7 @@ class AttendanceController extends Controller
                 'staff.name as staff_name',
                 'work_systems.*',
                 'work_system_types.*',
-                'period_times.name as period_name',
+                // 'period_times.name as period_name',
                 'period_times.from_time',
                 'period_times.into_time',
 
@@ -72,9 +72,9 @@ class AttendanceController extends Controller
         // });
 
         $minutes = 60;
-        $staffs = Cache::remember('staff', $minutes, function () {
-            return DB::table('staff')->get();
-        });
+        // $staffs = Cache::remember('staff', $minutes, function () {
+        $staffs = DB::table('staff')->get();
+        // });
 
         $work_system_types = DB::table('work_system_types')
             ->select('work_system_types.name', 'work_system_types.id')
@@ -231,7 +231,7 @@ class AttendanceController extends Controller
 
         // dd($request->all());
         // DB::enableQueryLog();
-        
+
 
         $staff =  DB::table('staff')
             ->join('work_systems', 'work_systems.staff_id', '=', 'staff.id')
@@ -247,7 +247,7 @@ class AttendanceController extends Controller
             'staff.name as staff_name',
             'work_systems.*',
             'work_system_types.*',
-            'period_times.name as period_name',
+            // 'period_times.name as period_name',
             'period_times.from_time',
             'period_times.into_time',
 
@@ -264,17 +264,18 @@ class AttendanceController extends Controller
 
                 $ss =   $ss->where('attendances.attendance_date', '=', $request->date);
             }
-            $value->period =   $ss->where('attendances.staff_id', '=', $value->staff_id)
+            $value->period =   collect($ss->where('attendances.staff_id', '=', $value->staff_id)
                 ->where(
                     function ($query) use ($value) {
                         return $query
                             ->where('attendances.attendance_status', '=', 0)
                             ->orWhere('attendance_details.period_id', '=', $value->period_time_id);
                     }
-                )->get();
+                )->get())->toArray();
         }
 
 
+        // dd($staff);
         // dd(DB::getQueryLog());
 
         return response()->json(['periods' => $staff]);
@@ -297,7 +298,6 @@ class AttendanceController extends Controller
             ->select('attendance_details.*')
             ->paginate(10);
 
-
         return response()->json([
             'staff_attendance' => $staff_attendance,
             'staffs' => $staffs,
@@ -311,6 +311,8 @@ class AttendanceController extends Controller
         $staff_attendance = AttendanceDetail::with('attendance', 'attendance.staff', 'period')
             ->select('attendance_details.*')
             ->paginate(10);
+
+
 
         return response()->json([
             'staff_attendance' => $staff_attendance,

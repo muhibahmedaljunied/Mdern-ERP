@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Traits\Staff\BasicData\StoreTrait;
 use App\Models\Unit;
 use App\Models\WorkSystemType;
-use App\Models\WorkType;
-use DB;
 use Illuminate\Http\Request;
 
 class WorkTypeController extends Controller

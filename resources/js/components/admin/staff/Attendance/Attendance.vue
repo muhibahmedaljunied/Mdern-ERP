@@ -72,9 +72,14 @@
                                     <div class="col-sm-6 col-md-2" style="margin-top: auto;">
 
 
-                                        <a @click="get_time_for_all_staff()" id="agregar_productos"
-                                            data-target=".bs-example-modal-sm">
-                                            <img src="/assets/img/search.png" alt="" style="width: 15%;"></a>
+                                        <a @click="get_time_for_all_staff()" href="#">
+
+                                            <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #74C0FC;"></i>
+
+
+                                        </a>
+
+
                                     </div>
 
 
@@ -121,7 +126,7 @@
                                                     <th class="wd-10p border-bottom-0">اسم المؤظف</th>
 
                                                     <th class="wd-10p border-bottom-0">نظام العمل</th>
-                                                    <th class="wd-10p border-bottom-0">الفتره</th>
+                                                    <!-- <th class="wd-10p border-bottom-0">الفتره</th> -->
 
 
                                                     <th class="wd-5p border-bottom-0">التأريخ</th>
@@ -157,12 +162,12 @@
 
                                                     <td>{{ staff.name }}</td>
 
-                                                    <td>
+                                                    <!-- <td>
 
 
                                                         {{ staff.period_name }}
 
-                                                    </td>
+                                                    </td> -->
 
 
 
@@ -178,11 +183,11 @@
 
                                                     <td>
 
-                                                        <span v-if="staff.period.length == 0" style="color:blue;">
+                                                        <span v-if="!staff.period.length" style="color:blue;">
 
                                                             لم يحضر
                                                         </span>
-                                                        <template v-if="staff.period">
+                                                        <template v-if="staff.period.length">
 
                                                             <template v-for="attendance in staff.period"
                                                                 v-if="attendance.attendance_status == 0">

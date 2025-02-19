@@ -376,13 +376,13 @@
 <script>
 import pagination from "laravel-vue-pagination";
 import tree from '../../../../../js/tree/tree.js';
-// import operation from '../../../../operation.js';
+import operation from '../../../../operation.js';
 export default {
   components: {
     pagination,
   },
   mixins: [tree,
-    // operation
+    operation
   ],
   data() {
     return {
@@ -561,9 +561,11 @@ export default {
           currentObj.success = response.data.success;
           currentObj.filename = "";
           toastMessage("تم الاضافه بنجاح");
+
+          this.list();
         })
         .catch(function (error) {
-          currentObj.output = error;
+          // currentObj.output = error;
         });
 
       // this.$router.go(0);

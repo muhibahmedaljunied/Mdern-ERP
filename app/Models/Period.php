@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Period extends Model
 {
-    protected $fillable = ['id','name','from_time','into_time'];
+    protected $fillable = ['id','work_system_type_id','from_time','into_time'];
 
     public function period_time()
     {

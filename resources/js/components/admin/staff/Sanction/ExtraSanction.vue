@@ -170,22 +170,10 @@
             <div style="display: flex;float: left; margin: 5px">
 
 
-<<<<<<< HEAD
               <button @click="exports_excel()">
 
                 <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
               </button>
-=======
-            <button @click="exports_excel()">
-
-<i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
-</button>
-
-<button @click="imports_excel()">
-
-<i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
-</button>
->>>>>>> e6f25e3908fccf613f415c22430d25ca28bcaa25
 
               <button @click="imports_excel()">
 

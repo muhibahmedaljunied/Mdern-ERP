@@ -4,8 +4,12 @@ namespace App\Exports;
 
 use App\Models\Staff;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class StaffExport implements FromCollection
+
+
+class StaffExport implements FromCollection, WithMapping, WithHeadings
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -18,18 +22,21 @@ class StaffExport implements FromCollection
     public function map($registration): array
     {
 
+
         return [
 
             $registration->name,
             $registration->phone,
             $registration->email,
             $registration->salary,
+            $registration->register,
             $registration->personal_card,
             $registration->date,
             $registration->staff_status,
             $registration->social_status,
             $registration->barth_date,
             $registration->qualification_id,
+            $registration->gender,
             $registration->branch_id,
             $registration->department_id,
             $registration->job_id,
@@ -48,6 +55,9 @@ class StaffExport implements FromCollection
     {
 
 
+
+
+
         return [
 
             'name',
@@ -57,6 +67,8 @@ class StaffExport implements FromCollection
             'email',
 
             'salary',
+
+            'register',
 
             'personal_card',
 
@@ -69,6 +81,8 @@ class StaffExport implements FromCollection
             'barth_date',
 
             'qualification_id',
+
+            'gender',
 
             'branch_id',
 

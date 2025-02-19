@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class WorkSystem extends Model
 {
-    protected $fillable = ['id','period_time_id','work_system_type_id','days'];
+    protected $fillable = ['id','staff_id','period_time_id','work_system_type_id','days'];
 
 
     protected $casts = [

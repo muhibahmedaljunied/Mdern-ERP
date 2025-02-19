@@ -8,7 +8,7 @@
           <div class="card-header">
 
             <span class="h2"> الدوام</span>
-            
+
           </div>
           <div class="card-body">
 
@@ -43,8 +43,8 @@
                       </td>
                       <td>
 
-                        <select style="background-color:beige" v-model="work_system_type[index]" class="form-control "
-                          required>
+                        <select @change="get_period_time(work_system_type[index], index)" style="background-color:beige"
+                          v-model="work_system_type[index]" class="form-control " required>
                           <option v-for="work_system_type in work_system_types" v-bind:value="work_system_type.id">
                             {{ work_system_type.name }}
                           </option>
@@ -53,10 +53,11 @@
                       </td>
 
                       <td>
-                        <select v-model="period_selected[index]" class="form-control " required>
-                          <option v-for="period in period_times" v-bind:value="period.id">
+                        <select :id="'select_period' + index" v-model="period_selected[index]" class="form-control "
+                          required>
+                          <!-- <option v-for="period in period_times" v-bind:value="period.id">
                             من {{ period.from_time }}الي{{ period.into_time }}
-                          </option>
+                          </option> -->
 
                         </select>
 
@@ -140,6 +141,28 @@
       <div class="col-xl-12">
         <div class="card">
 
+          <div class="card-header">
+
+
+            <div style="display: flex;float: left; margin: 5px">
+
+
+
+
+              <button @click="exports_excel()">
+
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
+
+              <button @click="imports_excel()">
+
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث عن موظف" v-model="word_search" />
+            </div>
+          </div>
 
           <div class="card-body" id="printme">
             <div class="table-responsive">
@@ -306,7 +329,6 @@ export default {
 
     this.counts[0] = 1;
     this.type = 'work_system';
-    // this.day_value = new Array(this.count); // create an empty array of length n
     for (var i = 1; i <= this.count; i++) {
       this.day_value[this.count] = new Array(7); // make each element an array
       this.day[this.count] = new Array(7);
@@ -330,12 +352,8 @@ export default {
         .post(`/store_work_system`, {
           count: this.counts,
           staff: this.staff,
-
           work_system_type: this.work_system_type,
-          // period_type: this.period_type_selected,
           period: this.period_selected,
-          // sort_period: this.sort_period,
-
           day: this.day_value,
 
         }
@@ -348,7 +366,33 @@ export default {
 
 
     },
+    exports_excel() {
 
+      axios
+        .post(`/export_staff`)
+        .then(function (response) {
+
+          toastMessage("تم التصدير");
+          this.list();
+        })
+        .catch(error => {
+
+        });
+    },
+    imports_excel() {
+
+      axios
+        .post(`/import_staff`)
+        .then(function (response) {
+
+          toastMessage("تم الاستيراد");
+          this.list();
+
+        })
+        .catch(error => {
+
+        });
+    },
     list() {
       this.axios
         .post(`/work_system`)
@@ -366,6 +410,31 @@ export default {
         });
     },
 
+    get_period_time(id, index) {
+
+
+
+      axios.post(`/staff/get_period/${id}`).then((response) => {
+
+        var arrayLength = response.data.periods.length
+        var html = '<option></option>';
+        console.log('ddddddddd', response.data.periods);
+        for (var i = 0; i < arrayLength; i++) {
+
+          html = html + `<option data-period-${id}= ${response.data.periods[i].id}   value= ${response.data.periods[i].id} > من   ${response.data.periods[i].from_time}  الي ${response.data.periods[i].into_time}</option>`
+
+
+
+        }
+
+        $(`#select_period${index}`).html(html);
+
+
+
+
+      });
+
+    },
 
 
   },
