@@ -119,7 +119,7 @@ class AbsenceController extends Controller
     {
 
 
-        // dd($request->all());
+        dd($request->all());
         $this->core->data = $request->all();
 
         try {
@@ -130,9 +130,6 @@ class AbsenceController extends Controller
                 $this->core->setValue($value);
 
                 // $this->hr->store();  //this with sanction 
-
-
-
                 if (
                     $this->core->data['staff'][$this->core->value] == 0
                     // || $this->core->data['absence_type'][$this->core->value] != 0
@@ -182,6 +179,18 @@ class AbsenceController extends Controller
 
                 ]
             );
+
+            Absence::updateOrCreate(
+                [
+                    'staff_id' => $value->id,
+                    'absence_type_id' => $this->core->data['absence_type'][$this->core->value],
+                    'date' => $this->core->data['date'][$this->core->value],
+                    'note' => ''
+    
+                ]
+            );
+
+
         }
     }
 
@@ -200,5 +209,16 @@ class AbsenceController extends Controller
 
             ]
         );
+
+        Absence::updateOrCreate(
+            [
+                'staff_id' => $this->core->data['staff'][$this->core->value],
+                'absence_type_id' => $this->core->data['absence_type'][$this->core->value],
+                'date' => $this->core->data['date'][$this->core->value],
+                'note' => ''
+
+            ]
+        );
+
     }
 }

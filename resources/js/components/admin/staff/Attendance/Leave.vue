@@ -9,7 +9,7 @@
           <div class="col-xl-12">
             <form method="post" @submit.prevent="submitForm">
               <div class="card">
-             
+
 
                 <div class="card-header">
 
@@ -35,112 +35,111 @@
 
                 <div class="card-body">
 
-               
-
-                    <div class="table-responsive">
-                      <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
-                        <thead>
-                          <tr>
-
-                            <th>اسم المؤظف</th>
 
 
-                            <th>نوع الاجازه</th>
-                            <th> تاريخ بدء الاجازه </th>
+                  <div class="table-responsive">
+                    <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
+                      <thead>
+                        <tr>
 
-                            <th> تاريخ اتتها الاجازه </th>
-
-                            <th> عدد الايام </th>
-                            <th> رصيد الاجازات</th>
-                            <th>اضافه</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="index in count" :key="index">
-                            <td>
-                              <select v-model="staffselected[index]" id="inputState" class="form-control">
-                                <option v-for="staff in staffs" v-bind:value="staff.id">
-                                  {{ staff.name }}
-                                </option>
-                              </select>
-                            </td>
-                            <td>
-
-                              <select v-model="vaction_typeselected[index]" id="inputState" class="form-control">
-                                <option v-for="vacation_type in vacation_types" v-bind:value="vacation_type.id">
-                                  {{ vacation_type.name }}
-                                </option>
-                              </select>
-
-                            </td>
-                            <td>
+                          <th>اسم المؤظف</th>
 
 
+                          <th>نوع الاجازه</th>
+                          <th> تاريخ بدء الاجازه </th>
 
+                          <th> تاريخ اتتها الاجازه </th>
 
-                              <input @change="calc_time(index)" v-model="start_date[index]" type="date" class="form-control"
-                                name="exampleRadios" />
+                          <th> عدد الايام </th>
+                          <th> رصيد الاجازات</th>
+                          <th>اضافه</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="index in count" :key="index">
+                          <td>
+                            <select v-model="staffselected[index]" id="inputState" class="form-control">
+                              <option v-for="staff in staffs" v-bind:value="staff.id">
+                                {{ staff.name }}
+                              </option>
+                            </select>
+                          </td>
+                          <td>
+
+                            <select v-model="vaction_typeselected[index]" id="inputState" class="form-control">
+                              <option v-for="vacation_type in vacation_types" v-bind:value="vacation_type.id">
+                                {{ vacation_type.name }}
+                              </option>
+                            </select>
+
+                          </td>
+                          <td>
 
 
 
-                            </td>
-                            <td>
 
-
-                              <input @change="calc_time(index)" v-model="end_date[index]" type="date" name="exampleRadios" class="form-control" />
-
-                            </td>
-                            <td>
+                            <input @change="calc_time(index)" v-model="start_date[index]" type="date"
+                              class="form-control" name="exampleRadios" />
 
 
 
-                              <!-- <input @keypress="calc_time(index)" v-model="days[index]" type="number" id="num_days"
+                          </td>
+                          <td>
+
+
+                            <input @change="calc_time(index)" v-model="end_date[index]" type="date" name="exampleRadios"
+                              class="form-control" />
+
+                          </td>
+                          <td>
+
+
+
+                            <!-- <input @keypress="calc_time(index)" v-model="days[index]" type="number" id="num_days"
                                 name="exampleRadios" class="form-control" /> -->
 
-                                <input v-model="days[index]" type="number" id="num_days"
-                                name="exampleRadios" class="form-control" />
+                            <input v-model="days[index]" type="number" id="num_days" name="exampleRadios"
+                              class="form-control" />
 
-                            </td>
-                            <td>
-
-
-                              <input type="number" id="numddd_days" name="exampleRadios" class="form-control" />
-
-                            </td>
-                            <td>
-
-                              <div v-if="index == 1">
-                                <a class="btn btn-info btn-sm waves-effect btn-agregar"
-                                  v-on:click="addComponent(count)">
-                                  <i class="fa fa-plus-circle"></i></a>
-
-                                <a class="btn btn-info btn-sm waves-effect btn-agregar"
-                                  v-on:click="disComponent(count)">
-                                  <i class="fa fa-minus-circle"></i></a>
+                          </td>
+                          <td>
 
 
-                              </div>
-                            </td>
+                            <input type="number" id="numddd_days" name="exampleRadios" class="form-control" />
+
+                          </td>
+                          <td>
+
+                            <div v-if="index == 1">
+                              <a class="btn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
+                                <i class="fa fa-plus-circle"></i></a>
+
+                              <a class="btn btn-info btn-sm waves-effect btn-agregar" v-on:click="disComponent(count)">
+                                <i class="fa fa-minus-circle"></i></a>
+
+
+                            </div>
+                          </td>
 
 
 
 
-                          </tr>
-                          <tr>
-                              <td colspan="6"></td>
-                              <td>
-                                <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
+                        </tr>
+                        <tr>
+                          <td colspan="6"></td>
+                          <td>
+                            <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
 
-                              </td>
-                            </tr>
+                          </td>
+                        </tr>
 
 
-                        </tbody>
-                      </table>
-                    </div>
-         
+                      </tbody>
+                    </table>
+                  </div>
 
-              
+
+
 
 
 
@@ -160,7 +159,26 @@
     <div class="row row-sm">
       <div class="col-xl-12">
         <div class="card">
+          <div class="card-header">
 
+
+            <div style="display: flex;float: left; margin: 5px">
+
+              <button @click="exports_excel()">
+
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
+
+              <button @click="imports_excel()">
+
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث " v-model="word_search"
+                @input="get_search()" />
+            </div>
+          </div>
           <div class="card-body" id="printme">
             <div class="table-responsive">
               <table class="table table-bordered text-center">
@@ -265,7 +283,7 @@ export default {
   data() {
     return {
 
-    
+
 
       vaction_typeselected: [],
       vactionselected: [],
@@ -312,7 +330,7 @@ export default {
     },
 
 
-    
+
     calc_time(index) {
 
 
@@ -356,6 +374,34 @@ export default {
         })
         .catch(({ response }) => {
           console.error(response);
+        });
+    },
+
+    exports_excel() {
+
+      axios
+        .post(`/export_staff`)
+        .then(function (response) {
+
+          toastMessage("تم التصدير");
+          this.list();
+        })
+        .catch(error => {
+
+        });
+    },
+    imports_excel() {
+
+      axios
+        .post(`/import_staff`)
+        .then(function (response) {
+
+          toastMessage("تم الاستيراد");
+          this.list();
+
+        })
+        .catch(error => {
+
         });
     },
 

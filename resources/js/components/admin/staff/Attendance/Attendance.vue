@@ -553,31 +553,31 @@ export default {
 
         exports_excel() {
 
-axios
-  .post(`/export_staff`)
-  .then(function (response) {
+            axios
+                .post(`/export_staff`)
+                .then(function (response) {
 
-    toastMessage("تم التصدير");
-    this.list();
-  })
-  .catch(error => {
+                    toastMessage("تم التصدير");
+                    this.list();
+                })
+                .catch(error => {
 
-  });
-},
-imports_excel() {
+                });
+        },
+        imports_excel() {
 
-axios
-  .post(`/import_staff`)
-  .then(function (response) {
+            axios
+                .post(`/import_staff`)
+                .then(function (response) {
 
-    toastMessage("تم الاستيراد");
-    this.list();
+                    toastMessage("تم الاستيراد");
+                    this.list();
 
-  })
-  .catch(error => {
+                })
+                .catch(error => {
 
-  });
-},
+                });
+        },
 
 
 

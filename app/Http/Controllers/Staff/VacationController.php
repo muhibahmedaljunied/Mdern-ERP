@@ -75,6 +75,7 @@ class VacationController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->all());
 
         $this->core->data = $request->all();
 

@@ -8,7 +8,7 @@ class Vacation extends Model
 {
 
 
-    protected $fillable = ['staff_id','vacation_type_id', 'start_date', 'end_date','days'];
+    protected $fillable = ['staff_id','vacation_type_id', 'start_date', 'end_date','total_days','status'];
     public function scopeWhereLeave($query, $data,$value)
 
     {
