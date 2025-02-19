@@ -119,7 +119,7 @@ class AbsenceController extends Controller
     {
 
 
-        dd($request->all());
+  
         $this->core->data = $request->all();
 
         try {

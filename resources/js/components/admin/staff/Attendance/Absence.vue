@@ -416,6 +416,9 @@ export default {
         });
 
 
+        this.list();
+
+
     },
 
     get_search(word_search) {
