@@ -319,7 +319,7 @@ export default {
     exports_excel() {
 
       axios
-        .post(`export_absence_sanction`)
+        .post(`/export_absence_sanction`)
         .then(function (response) {
 
           toastMessage("تم التصدير   ");
@@ -332,7 +332,7 @@ export default {
     imports_excel() {
 
       axios
-        .post(`import_absence_sanction`)
+        .post(`/import_absence_sanction`)
         .then(function (response) {
 
           toastMessage("تم الاستيراد   ");

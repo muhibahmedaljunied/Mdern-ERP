@@ -60,7 +60,6 @@ class AllowanceTypeController extends Controller
     {
 
         $this->core->setData($request->all());
-        // dd($request->all());
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
@@ -72,9 +71,9 @@ class AllowanceTypeController extends Controller
                 // $staff_service->add_account();
 
                 $staff = new AllowanceType();
-                $staff->name = $request['name'][$value];
-                $staff->status = $request['status'][$value];
-                $staff->group_id = $request['group'][$value];
+                $staff->name = $request['allowance'][$value];
+                $staff->status = $request['allowance_type'][$value];
+                // $staff->group_id = $request['group'][$value];
                 $staff->save();
             }
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB

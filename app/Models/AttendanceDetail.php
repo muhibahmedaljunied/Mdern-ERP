@@ -20,7 +20,7 @@ class AttendanceDetail extends Model
 
     public function period()
     {
-        return $this->belongsTo(Period::class);
+        return $this->belongsTo(PeriodTime::class);
     }
 
 

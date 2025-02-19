@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Staff;
 
 use App\Services\DailyService;
 use App\Http\Controllers\Controller;
+use App\Models\Allowance;
+use App\Models\AllowanceType;
 use App\Services\CoreStaffService;
 use App\Repository\HR\AllowanceRepository;
 use Illuminate\Support\Facades\Cache;
@@ -46,6 +48,28 @@ class AllowanceController extends Controller
         ]);
     }
 
+
+    public function get_allowance(Request $request)
+    {
+
+        $allowances = DB::table('allowance_types')
+            ->select(
+                'name as allowance_type_name',
+                'id as allowance_type_id'
+
+
+            )
+            ->where('status', $request->status)
+            ->get();
+
+
+        return response()->json(
+            [
+                'allowances' => $allowances,
+
+            ]
+        );
+    }
 
     public function get_staff()
     {
@@ -99,7 +123,7 @@ class AllowanceController extends Controller
                 Cache::forget('staff_allowances');
             }
 
-            $this->daily->daily()->exicute('debit')->exicute('credit');
+            // $this->daily->daily()->exicute('debit')->exicute('credit');
 
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
             Cache::forget('staff_allowance');

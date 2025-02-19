@@ -6,7 +6,7 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-header">
-            <span class="h4">  التصنيفات</span>
+            <span class="h4"> التصنيفات</span>
 
 
           </div>
@@ -69,8 +69,8 @@
                       <tbody>
                         <tr v-for="index in count" :key="index">
                           <td>
-                            <input style="background-color:beige" v-model="group[index]" type="text" class="form-control" name="name" id="name"
-                              required />
+                            <input style="background-color:beige" v-model="group[index]" type="text"
+                              class="form-control" name="name" id="name" required />
                           </td>
 
 
@@ -79,7 +79,7 @@
                           <td>
                             <select style="background-color:beige" v-model="group_type_selected[index]"
                               class="form-control " required>
-                              <option v-for=" group_type in group_types" v-bind:value="group_type.group_type_id">
+                              <option v-for="group_type in group_types" v-bind:value="group_type.group_type_id">
                                 {{ group_type.type_name }}
                               </option>
 
@@ -88,8 +88,8 @@
                           </td>
 
                           <td>
-                            <input style="background-color:beige" v-model="code[index]" type="text" class="form-control" name="name" id="name"
-                              required />
+                            <input style="background-color:beige" v-model="code[index]" type="text" class="form-control"
+                              name="name" id="name" required />
                           </td>
 
 
@@ -159,24 +159,26 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-header">
-                        <!-- <span class="h2"> الموردين</span> -->
+            <!-- <span class="h2"> الموردين</span> -->
 
-                        <div style="display: flex;float: left; margin: 5px">
+            <div style="display: flex;float: left; margin: 5px">
 
 
-                            <button @click="Export()">
-                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
-                            </button>
+              <button @click="exports_excel()">
 
-                            <button @click="Import()">
-                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
-                            </button>
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
 
-                            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-                                aria-haspopup="true" aria-expanded="true" placeholder="بحث"
-                                v-model="word_search" @input="get_search()" />
-                        </div>
-                    </div>
+              <button @click="imports_excel()">
+
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                @input="get_search()" />
+            </div>
+          </div>
           <div class="card-body" id="printme">
             <div class="table-responsive">
               <table class="table table-bordered text-center">
@@ -231,7 +233,7 @@
     </div>
 
 
-   
+
 
   </div>
 </template>
@@ -257,7 +259,7 @@ export default {
       //   default: null,
       // },
       group: [],
-      code:[],
+      code: [],
       group_type_selected: [],
       groups: '',
       group_types: '',
@@ -305,7 +307,7 @@ export default {
           console.log(response);
           toastMessage("تم الاضافه بنجاح");
           this.list();
- 
+
         });
 
 
@@ -331,6 +333,34 @@ export default {
           console.error(response);
         });
     },
+
+    exports_excel() {
+
+axios
+  .post(`/export_staff`)
+  .then(function (response) {
+
+    toastMessage("تم التصدير");
+    this.list();
+  })
+  .catch(error => {
+
+  });
+},
+imports_excel() {
+
+axios
+  .post(`/import_staff`)
+  .then(function (response) {
+
+    toastMessage("تم الاستيراد");
+    this.list();
+
+  })
+  .catch(error => {
+
+  });
+},
 
 
   },

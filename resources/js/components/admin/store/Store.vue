@@ -57,11 +57,13 @@
 
 
                               <button @click="exports_excel()">
-                                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+
+                                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
                               </button>
 
                               <button @click="imports_excel()">
-                                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+
+                                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
                               </button>
 
 

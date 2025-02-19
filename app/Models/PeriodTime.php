@@ -10,13 +10,10 @@ class PeriodTime extends Model
 
 
 
-
-    public function period()
+    public function attendance_detail()
     {
-        return $this->belongsTo(Period::class);
+        return $this->hasMany(AttendanceDetail::class);
     }
-
-
     public function work_system_type()
     {
         return $this->belongsToMany(WorkSystemType::class,'work_systems');

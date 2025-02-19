@@ -8,9 +8,38 @@ class Staff extends Model
 {
 
     protected $fillable = [
-        'name', 'personal_card', 'job_id', 'branch_id', 'department_id', 'phone',
-        'salary_id', 'register_id', 'date', 'staff_status', 'qualification_id',
-        'nationality_id', 'gender', 'staff_type_id', 'barth_date', 'religion_id', 'social_status', 'email'
+
+        'name',
+
+        'phone',
+
+        'email',
+
+        'salary',
+        'register',
+        'personal_card',
+
+        'date',
+
+        'staff_status',
+
+        'social_status',
+
+        'barth_date',
+
+        'qualification_id',
+        'gender',
+        'branch_id',
+
+        'department_id',
+
+        'job_id',
+
+        'staff_type_id',
+
+        'religion_id',
+
+        'nationality_id',
     ];
 
 
@@ -22,16 +51,16 @@ class Staff extends Model
 
     public function period_time()
     {
-        return $this->belongsToMany(PeriodTime::class,'work_systems');
+        return $this->belongsToMany(PeriodTime::class, 'work_systems');
     }
 
-    
+
 
 
 
     public function absence()
     {
-        
+
         return $this->hasMany(Absence::class);
     }
 
@@ -146,9 +175,4 @@ class Staff extends Model
     {
         return $this->hasMany(StaffSanction::class);
     }
-
-
-
-
-
 }

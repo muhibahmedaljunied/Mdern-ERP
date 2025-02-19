@@ -18,7 +18,7 @@
 
 
                   <div class="card-body">
-                    <form method="post"  enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data">
 
                       <div class="table-responsive">
                         <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
@@ -65,17 +65,16 @@
                                   class="form-control" name="name" id="name" required />
                               </td>
                               <td>
-                                <input style="background-color: beige;" v-model="start_time[index]" type="time"
-                                  class="form-control" name="name" id="name" />
+                                <input @input="calc_duration(index)" style="background-color: beige;"
+                                  v-model="start_time[index]" type="time" class="form-control" name="name" id="name" />
                               </td>
                               <td>
-                                <input style="background-color: beige;" v-model="end_time[index]" type="time"
-                                  class="form-control" name="name" id="name" />
+                                <input @input="calc_duration(index)" style="background-color: beige;"
+                                  v-model="end_time[index]" type="time" class="form-control" name="name" id="name" />
                               </td>
 
                               <td>
-                                <input readonly @keypress="calc_duration(index)" type="text" class="form-control"
-                                  name="name" :id="'duration'+index" />
+                                <input readonly type="text" class="form-control" name="name" :id="'duration' + index" />
                                 <input v-model="duration[index]" type="hidden" class="form-control" name="name">
                               </td>
 
@@ -94,7 +93,7 @@
                             </tr>
                             <tr>
                               <td colspan="6"></td>
-                              <td >
+                              <td>
 
                                 <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
 
@@ -131,6 +130,28 @@
       <div class="col-xl-12">
         <div class="card">
 
+          <div class="card-header">
+
+
+            <div style="display: flex;float: left; margin: 5px">
+
+
+
+
+              <button @click="exports_excel()">
+
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
+
+              <button @click="imports_excel()">
+
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
+
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث عن موظف" v-model="word_search" />
+            </div>
+          </div>
           <div class="card-body" id="printme">
             <div class="table-responsive">
               <table class="table table-bordered text-center">
@@ -356,7 +377,7 @@
                       </div>
                     </div>
                   </div>
-         
+
                 </div>
               </div>
             </form>
@@ -423,7 +444,33 @@ export default {
 
 
     },
+    exports_excel() {
 
+      axios
+        .post(`/export_staff`)
+        .then(function (response) {
+
+          toastMessage("تم التصدير");
+          this.list();
+        })
+        .catch(error => {
+
+        });
+    },
+    imports_excel() {
+
+      axios
+        .post(`/import_staff`)
+        .then(function (response) {
+
+          toastMessage("تم الاستيراد");
+          this.list();
+
+        })
+        .catch(error => {
+
+        });
+    },
     get_search(word_search) {
       this.axios.post(`/extrasearch`, { word_search: this.word_search }).then(({ data }) => {
 
@@ -462,7 +509,7 @@ export default {
 
       var minutes = (hh * 60) + mm;
       this.duration[index] = minutes;
-      $(`#duration`+index).val(`${hh}ساعه,${mm}دقيقه`);
+      $(`#duration` + index).val(`${hh}ساعه,${mm}دقيقه`);
 
     },
     list(page = 1) {

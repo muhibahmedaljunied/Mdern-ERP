@@ -20,14 +20,13 @@
             <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
               <thead>
                 <tr>
-                  <th> الفتره </th>
-                  <th> من</th>
+                  <th> نوع الدوام </th>
 
+                  <th> من</th>
 
                   <th> الي </th>
 
                   <th> عدد الساعات </th>
-
 
                   <th>اضافه</th>
                 </tr>
@@ -36,35 +35,41 @@
                 <tr v-for="index in count" :key="index">
                   <td>
                     <div class="col-md-12">
-                      <!-- <select style="background-color:beige" v-model="period_selected[index]"
-                                        class="form-control " required>
-                                        <option v-for="period in periods" v-bind:value="period.id">
-                                          {{ period.name }}
-                                        </option>
 
-                                      </select> -->
+                      <select style="background-color:beige" v-model="work_system_type[index]" class="form-control "
+                        required>
+                        <option v-for="work_system_type in work_system_types" v-bind:value="work_system_type.id">
+                          {{ work_system_type.name }}
+                        </option>
 
-                      <input v-model="name[index]" type="text" class="form-control" required />
+                      </select>
+
+
+                      <!-- <input v-model="work_type[index]" type="text" class="form-control" required /> -->
 
                     </div>
 
                   </td>
                   <td>
-                    <input type="time" v-model="from_period[index]" class="form-control" name="name" required />
-
-                  </td>
-
-                  <td>
-                    <input type="time" v-model="into_period[index]" class="form-control" name="name" required />
-
-                  </td>
-                  <td>
-                    <input type="text" @keypress="calc_duration(index)" class="form-control" id="duration_period"
+                    <input @input="calc_duration(index)" type="time" v-model="from_period[index]" class="form-control"
                       name="name" required />
 
-                    <input type="hidden" v-model="duration_period[index]">
+                  </td>
+
+                  <td>
+                    <input @input="calc_duration(index)" type="time" v-model="into_period[index]" class="form-control"
+                      name="name" required />
 
                   </td>
+
+                  <td>
+                    <input type="text" class="form-control" :id="'duration_period' + index" name="name" required />
+
+                    <input type="hidden" v-model="duration_period[index]">
+                  </td>
+
+
+
 
 
                   <td v-if="index == 1">
@@ -109,12 +114,14 @@
             <div style="display: flex;float: left; margin: 5px">
 
 
-              <button @click="Export()">
-                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+              <button @click="exports_excel()">
+
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
               </button>
 
-              <button @click="Import()">
-                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+              <button @click="imports_excel()">
+
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
               </button>
 
               <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
@@ -129,7 +136,7 @@
                 <thead>
                   <tr>
                     <th class="wd-15p border-bottom-0">#</th>
-                    <th class="wd-15p border-bottom-0">الفتره</th>
+                    <th class="wd-15p border-bottom-0">نوع الدوام</th>
                     <th class="wd-15p border-bottom-0">من</th>
                     <th class="wd-15p border-bottom-0">الي</th>
                     <th class="wd-15p border-bottom-0"> عدد الساعات </th>
@@ -142,7 +149,7 @@
                   <tr v-for="(period, index) in period_times" :key="index">
 
                     <td>{{ index + 1 }}</td>
-                    <td>{{ period.name }}</td>
+                    <td>{{ period.work_system_type_name }}</td>
                     <td>{{ period.from_time }}</td>
                     <td>{{ period.into_time }}</td>
                     <td>{{ period.duration }}</td>
@@ -204,7 +211,7 @@ export default {
       duration_period: [],
       period_selected: [],
       periods: '',
-
+      work_system_type: [],
     };
   },
   mounted() {
@@ -220,8 +227,8 @@ export default {
       this.axios
         .post(`/store_period_time`, {
           count: this.counts,
-          type: this.period_selected,
-          // period_name: this.period_name,
+          // type: this.period_selected,
+          type: this.work_system_type,
           from_period: this.from_period,
           into_period: this.into_period,
           duration_period: this.duration_period,
@@ -272,7 +279,7 @@ export default {
 
 
       this.duration_period[index] = hh;
-      $(`#duration_period`).val(`${hh}ساعه,${mm}دقيقه`);
+      $(`#duration_period${index}`).val(`${hh}ساعه,${mm}دقيقه`);
 
     },
     list(page = 1) {
@@ -280,13 +287,42 @@ export default {
         .post(`/period_time?page=${page}`)
         .then(({ data }) => {
 
-          console.log(data.periods);
+
+          this.work_system_types = data.work_system_types;
 
           this.period_times = data.period_times;
           // this.periods = data.periods;
         })
         .catch(({ response }) => {
           console.error(response)
+        });
+    },
+
+    exports_excel() {
+
+      axios
+        .post(`/export_period_time`)
+        .then(function (response) {
+
+          toastMessage("تم التصدير");
+          this.list();
+        })
+        .catch(error => {
+
+        });
+    },
+    imports_excel() {
+
+      axios
+        .post(`/import_period_time`)
+        .then(function (response) {
+
+          toastMessage("تم الاستيراد");
+          this.list();
+
+        })
+        .catch(error => {
+
         });
     },
 

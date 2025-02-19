@@ -22,7 +22,7 @@ class CreateAttendanceDetailsTable extends Migration
             $table->unsignedInteger('period_id');
             $table->foreign('period_id')->references('id')->on('period_times');
 
-            $table->string('attendance_status');
+            $table->string('attendance_status')->nullable();
 
             $table->time('check_in')->nullable()->default(0);
 

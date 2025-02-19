@@ -71,10 +71,6 @@ class WorkSystemController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        //
-    }
 
 
     public function store(Request $request)
@@ -88,10 +84,6 @@ class WorkSystemController extends Controller
 
 
             foreach ($request->post('count') as $value) {
-
-
-
-
 
 
                 $enum = [];
@@ -115,6 +107,7 @@ class WorkSystemController extends Controller
 
                 WorkSystem::updateOrCreate(
                     [
+                        'staff_id' => $request['staff'][$value],
                         'work_system_type_id' => $request['work_system_type'][$value],
                         'period_time_id' => $request['period'][$value],
                         'days' => json_encode($enum),
