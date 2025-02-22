@@ -15,6 +15,7 @@ use App\Models\PeriodTime;
 use App\Models\WorkSystem;
 use App\Models\Qualification;
 use App\Models\Branch;
+use App\Models\GroupAccountDetail;
 use App\Models\GroupType;
 use App\Models\Staff;
 use App\Models\Nationality;
@@ -317,7 +318,7 @@ class StaffController extends Controller
             ->select('groups.code as code', 'group_types.code as type')
             ->get();
 
-        // dd($array_data);
+ 
 
 
         try {
@@ -327,11 +328,12 @@ class StaffController extends Controller
             foreach ($array_data as $value) {
 
 
-                $this->Account_right($value);
+                $this->account_right($value);
 
-                // $this->Account_left($value);
-
+                // $this->account_left($value);
             }
+
+            // dd(GroupAccountDetail::all());
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
 
             return response(
@@ -350,13 +352,9 @@ class StaffController extends Controller
         }
     }
 
-    public function Account_right($value)
+
+    public function account_right($value)
     {
-
-
-        // $re = $this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id'];
-        // $xe =  $this->core->data['staff_' . $value->code . '_account_id'];
-        // if ($this->core->data['staff_' . $value->code . '_account_hraccount_id'] == null) {
 
 
         if ($this->core->data['staff_' . $value->code . '_account_id'] != 'undefined') {
@@ -367,65 +365,96 @@ class StaffController extends Controller
             //     intval($this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id'])
             // );
 
+            
             if ($value->type != 'advance') {
 
-                DB::table('group_accounts')
-                    ->where(['id' => intval($this->core->data['staff_' . $value->code . '_account_hraccount_id'])])
-                    ->update(
-                        [
-                            'account_id' => intval($this->core->data['staff_' . $value->code . '_account_id']),
-                            'account_second_id' => intval($this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id'])
-                        ]
-                    );
+                $staff_allowance = new GroupAccountDetail();
+                $staff_allowance->group_account_id = intval($this->core->data['staff_' . $value->code . '_account_hraccount_id']);
+                $staff_allowance->account_id = intval($this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id']);
+                $staff_allowance->save();
+
+        
+          
             }
+
+         
         }
-        // }
-        //  else {
 
-
-        //     DB::table('hr_accounts')
-        //         ->where(['id' => $this->core->data['staff_' . $value->code . '_account_hraccount_id']])
-        //         ->update([
-        //             'account_id' => intval($xe),
-        //             'account_second_id' => $re
-        //         ]);
-        // }
+      
+    
+    
     }
 
-    // public function Account_left($value){
+    // public function account_left($value)
+    // {
 
 
-    //     if ($this->core->data['staff_' . $value->code+$value->type . '_account_hraccount_id'] == null) {
+    //     if ($this->core->data['staff_' . $value->code + $value->type . '_account_hraccount_id'] == null) {
 
 
-    //         if ($this->core->data['staff_' . $value->code+$value->type . '_account_id']) {
+    //         if ($this->core->data['staff_' . $value->code + $value->type . '_account_id']) {
 
-    //             // $student = HrAccount::find($this->core->data['staff_' . $value->code+$value->type . '_account_id']);
-    //             // $student->name = $this->core->data['staff_' . $value->code+$value->type . '_account_name'];
-    //             // $student->code = $value->code;
-    //             // $student->account_id = $this->core->data['staff_' . $value->code+$value->type . '_account_id'];
-    //             $student->account_second_id = $this->core->data['staff_' . $value->code+$value->type . 'second_account_id'];
+        
+    //             $student->account_second_id = $this->core->data['staff_' . $value->code + $value->type . 'second_account_id'];
     //             // $student->update();
     //         }
     //     } else {
 
     //         $trimmed = str_replace(
-    //             $this->core->data['staff_' . $value->code+$value->type . '_account_id'],
+    //             $this->core->data['staff_' . $value->code + $value->type . '_account_id'],
     //             '',
-    //             $this->core->data['staff_' . $value->code+$value->type . '_account_name']
+    //             $this->core->data['staff_' . $value->code + $value->type . '_account_name']
     //         );
 
-    //         // dd($request->post('staff_' . $value->code . '_account_name'));
-    //         // $student = HrAccount::find($this->core->data['staff_' . $value->code+$value->type . '_account_hraccount_id']);
-    //         // $student->name = $trimmed;
-    //         // $student->code = $value->code;
-    //         // $student->account_id = $this->core->data['staff_' . $value->code+$value->type . '_account_id'];
-    //         $student->account_second_id = $this->core->data['staff_' . $value->code+$value->type . 'second_account_id'];
+    //         $student->account_second_id = $this->core->data['staff_' . $value->code + $value->type . 'second_account_id'];
     //         // $student->update();
 
     //     }
-
     // }
+
+    // public function account_right($value)
+    // {
+
+
+    //     // $re = $this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id'];
+    //     // $xe =  $this->core->data['staff_' . $value->code . '_account_id'];
+    //     // if ($this->core->data['staff_' . $value->code . '_account_hraccount_id'] == null) {
+
+
+    //     if ($this->core->data['staff_' . $value->code . '_account_id'] != 'undefined') {
+
+    //         // dd(
+    //         //     intval($this->core->data['staff_' . $value->code . '_account_id']),
+    //         //     intval($this->core->data['staff_' . $value->code . '_account_hraccount_id']),
+    //         //     intval($this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id'])
+    //         // );
+
+    //         if ($value->type != 'advance') {
+
+    //             DB::table('group_accounts')
+    //                 ->where(['id' => intval($this->core->data['staff_' . $value->code . '_account_hraccount_id'])])
+    //                 ->update(
+    //                     [
+    //                         'account_id' => intval($this->core->data['staff_' . $value->code . '_account_id']),
+    //                         'account_second_id' => intval($this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id'])
+    //                     ]
+    //                 );
+    //         }
+    //     }
+    //     // }
+    //     //  else {
+
+
+    //     //     DB::table('hr_accounts')
+    //     //         ->where(['id' => $this->core->data['staff_' . $value->code . '_account_hraccount_id']])
+    //     //         ->update([
+    //     //             'account_id' => intval($xe),
+    //     //             'account_second_id' => $re
+    //     //         ]);
+    //     // }
+    // }
+
+ 
     public function get_staff_account_setting()
     {
 

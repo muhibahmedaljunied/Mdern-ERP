@@ -67,10 +67,15 @@
                         </div>
                       </div>
 
+                 
+                    </div>
+
+                    <br>
+                    <br>
+                    <div class="row">
+
                       <div class="col-md-3">
-                        <!-- <label for="date">الحساب التفصيلي</label><br />
-                        <input  v-model="quantity[index]" type="number"
-                        class="form-control" required /> -->
+        
 
 
 

@@ -380,23 +380,23 @@ export default {
     methods: {
 
 
-        add_new_account() {
+        // add_new_account() {
 
-            this.axios
-                .post(`/store_account_setting`, {
-                    count: this.counts,
-                    type: this.type,
-                    name: this.account,
-                    code: this.code,
-                    type_account: this.type_account,
+        //     this.axios
+        //         .post(`/store_account_setting`, {
+        //             count: this.counts,
+        //             type: this.type,
+        //             name: this.account,
+        //             code: this.code,
+        //             type_account: this.type_account,
 
-                })
-                .then((response) => {
-                    console.log(response);
-                    toastMessage("تم الاضافه بنجاح");
-                    // this.$router.go(0);
-                });
-        },
+        //         })
+        //         .then((response) => {
+        //             console.log(response);
+        //             toastMessage("تم الاضافه بنجاح");
+        //             // this.$router.go(0);
+        //         });
+        // },
         submitForm() {
 
             let currentObj = this;

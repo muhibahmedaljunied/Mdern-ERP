@@ -130,8 +130,8 @@ class SalaryController extends Controller
             // dd($this->core->data);
             DB::beginTransaction();
 
-            $this->daily->daily()->debit()->credit();
-            // $this->daily->daily()->exicute('debit')->exicute('credit');
+            // $this->daily->daily()->debit()->credit();
+            $this->daily->daily()->exicute('debit')->exicute('credit');
 
             $this->payroll->refresh_payroll_status($this->core->data['staff'], 'prove');
 
