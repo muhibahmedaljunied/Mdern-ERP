@@ -8,19 +8,6 @@
 
             <span class="h2"> السلف</span>
 
-
-            <div style="display: flex;float: left; margin: 5px">
-
-
-
-
-              <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-                placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-                @input="get_search()">
-
-
-              <div></div>
-            </div>
           </div>
           <div class="card-body">
 
@@ -67,7 +54,7 @@
                         </div>
                       </div>
 
-                 
+
                     </div>
 
                     <br>
@@ -75,7 +62,7 @@
                     <div class="row">
 
                       <div class="col-md-3">
-        
+
 
 
 
@@ -246,6 +233,112 @@
                 </div>
               </div>
             </div>
+            <div class="row row-sm">
+              <div class="col-xl-12">
+                <div class="card">
+                  <div class="card-header">
+
+
+                    <div style="display: flex;float: left; margin: 5px">
+
+
+
+
+                      <button @click="exports_excel()">
+
+                        <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+                      </button>
+
+                      <button @click="imports_excel()">
+
+                        <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+                      </button>
+
+                      <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" />
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered text-center">
+                        <thead>
+                          <tr>
+
+                            <th class="wd-15p border-bottom-0">اسم المؤظف</th>
+                            <th class="wd-15p border-bottom-0">المبلغ</th>
+
+
+                            <th class="wd-15p border-bottom-0">التاريخ</th>
+
+
+                            <th class="wd-15p border-bottom-0"> ملاجظه</th>
+
+
+                            <th class="wd-15p border-bottom-0">العمليات</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(advance, index) in value_list.data" :key="index">
+                            <td>{{ advance.name }}</td>
+
+                            <td>
+
+                              <div v-for="(adv, index) in advance.advance" :key="index">
+                                {{ adv.quantity }}
+                                <hr>
+                              </div>
+                            </td>
+
+
+                            <td>
+
+                              <div v-for="(adv, index) in advance.advance" :key="index">
+                                {{ adv.date }}
+                                <hr>
+                              </div>
+                            </td>
+
+                            <td>
+
+                              <div v-for="(adv, index) in advance.advance" :key="index">
+                                {{ adv.note }}
+                                <hr>
+                              </div>
+                            </td>
+
+
+
+
+
+                            <!-- <td>
+                      <button type="button" class="btn btn-danger btn-sm waves-effect">
+                        <i class="fa fa-trash"></i>
+                      </button>
+
+                      <a class="btn btn-info btn-sm waves-effect btn-agregar" data-target="#updateAd"
+                        data-toggle="modal" id="agregar_accountos">
+                        <i class="fa fa-edit"></i></a>
+
+                    </td> -->
+                          </tr>
+                        </tbody>
+                        <!-- <tbody v-else>
+                          <tr>
+                            <td align="center" colspan="3">لايوجد بياتات.</td>
+                          </tr>
+                        </tbody> -->
+                      </table>
+                    </div>
+                    <pagination align="center" :data="value_list" @pagination-change-page="list"></pagination>
+                  </div>
+
+
+
+
+                </div>
+              </div>
+
+            </div>
           </div>
 
 
@@ -255,131 +348,27 @@
 
     </div>
 
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-          <div class="card-header">
-
-
-            <div style="display: flex;float: left; margin: 5px">
 
 
 
+    <div class="modal fade" id="exampleModalAccountAdvance" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
 
-              <button @click="exports_excel()">
-
-                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
-              </button>
-
-              <button @click="imports_excel()">
-
-                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
-              </button>
-
-              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-                aria-haspopup="true" aria-expanded="true" placeholder="بحث عن موظف" v-model="word_search" />
-            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <div class="card-body" id="printme">
-            <div class="table-responsive">
-              <table class="table table-bordered text-center">
-                <thead>
-                  <tr>
-                    <!-- <th class="wd-15p border-bottom-0">الرقم الوظيفي</th> -->
-                    <th class="wd-15p border-bottom-0">اسم المؤظف</th>
-                    <th class="wd-15p border-bottom-0">المبلغ</th>
-                    <!-- <th class="wd-15p border-bottom-0">طريقه الخصم</th> -->
+          <div class="modal-body">
 
-                    <th class="wd-15p border-bottom-0">التاريخ</th>
-                    <!-- <th class="wd-15p border-bottom-0">الحاله</th> -->
+            <div class="well" id="treeview_json_account_Advance"></div>
 
-                    <th class="wd-15p border-bottom-0"> ملاجظه</th>
-
-
-                    <th class="wd-15p border-bottom-0">العمليات</th>
-                  </tr>
-                </thead>
-                <tbody v-if="value_list && value_list.data.length > 0">
-                  <tr v-for="(advance, index) in value_list.data" :key="index">
-                    <td>{{ advance.name }}</td>
-
-                    <td>
-
-                      <div v-for="(adv, index) in advance.advance" :key="index">
-                        {{ adv.quantity }}
-                        <hr>
-                      </div>
-                    </td>
-
-                    <!-- <td></td> -->
-                    <td>
-
-                      <div v-for="(adv, index) in advance.advance" :key="index">
-                        {{ adv.date }}
-                        <hr>
-                      </div>
-                    </td>
-
-                    <td>
-
-                      <div v-for="(adv, index) in advance.advance" :key="index">
-                        {{ adv.note }}
-                        <hr>
-                      </div>
-                    </td>
-
-
-                    <!-- <td></td> -->
-
-
-                    <td>
-                      <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="btn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
-                      <button type="button" @click="delete_advance(advance.id)"
-                        class="btn btn-danger btn-sm waves-effect">
-                        <i class="fa fa-trash"></i>
-                      </button>
-
-                      <a class="btn btn-info btn-sm waves-effect btn-agregar" data-target="#updateAd"
-                        data-toggle="modal" id="agregar_accountos">
-                        <i class="fa fa-edit"></i></a>
-
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="3">لايوجد بياتات.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- <pagination align="center" :data="advances" @pagination-change-page="list"></pagination> -->
-          </div>
-
-
-          <div class="modal fade" id="exampleModalAccountAdvance" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-
-                  <div class="well" id="treeview_json_account_Advance"></div>
-
-                </div>
-
-              </div>
-            </div>
           </div>
 
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -396,7 +385,7 @@ export default {
     pagination,
   },
   mixins: [
-    operation, 
+    operation,
     // operation2, 
     tree],
   data() {
@@ -415,14 +404,15 @@ export default {
     };
   },
   mounted() {
-    this.list();
+    this.counts[0] = 1;
     this.type_of_tree = 1;
     this.type = 'Advance';
+    this.list();
     this.showtree('account', 'tree_account');
-    this.counts[0] = 1;
+
 
   },
-  
+
   methods: {
 
 
@@ -476,7 +466,7 @@ export default {
           staff: this.staffselected,
           qty: this.quantity,
           date: this.date,
-  
+
 
           debit: {
 

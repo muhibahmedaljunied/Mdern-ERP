@@ -9,24 +9,13 @@
             <span class="h2"> الخصميات</span>
 
 
-            <div style="display: flex;float: left; margin: 5px">
-
-
-              <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-                placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-                @input="get_search()">
-
-
-
-
-              <div></div>
-            </div>
+           
           </div>
           <div class="card-body">
 
             <div class="row row-sm">
               <div class="col-xl-12">
-                <!-- <form method="post"> -->
+          
                 <div class="card">
 
 

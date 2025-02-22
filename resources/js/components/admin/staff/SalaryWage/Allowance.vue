@@ -6,14 +6,7 @@
         <div class="card">
           <div class="card-header">
             <span class="h2"> البدلات</span>
-            <div style="display: flex;float: left; margin: 5px">
-
-
-              <input autocomplete="on" v-model="word_search" type="text" class="form-control input-text"
-                placeholder="بحث ...." aria-label="Recipient's username" aria-describedby="basic-addon2"
-                @input="get_search()">
-
-            </div>
+         
 
           </div>
           <div class="card-body">
