@@ -206,7 +206,7 @@
               </button>
 
               <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-                aria-haspopup="true" aria-expanded="true" placeholder="بحث عن موظف" v-model="word_search" />
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" />
             </div>
           </div>
           <div class="card-body">
