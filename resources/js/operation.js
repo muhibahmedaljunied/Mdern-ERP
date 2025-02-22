@@ -3,6 +3,11 @@ export default {
     mixins: [calculate],
     data() {
         return {
+
+            value_list: {
+                type: Object,
+                default: null,
+            },
             date: new Date().toISOString().substr(0, 10),
             dateselected: new Date().toISOString().substr(0, 10),
             expiry_date: new Date().toISOString().substr(0, 10),

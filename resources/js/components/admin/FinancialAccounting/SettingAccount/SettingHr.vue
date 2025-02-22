@@ -11,11 +11,29 @@
 
 
 
+
+
                     <div class="card-header">
+                        <span class="h2"> الموارد البشريه</span>
+                        <div style="display: flex;float: left; margin: 5px">
 
-                        <h2> الموارد البشريه </h2>
 
+                            <button @click="exports_excel()">
+
+                                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+                            </button>
+
+                            <button @click="imports_excel()">
+
+                                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+                            </button>
+
+                            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                                @input="get_search()" />
+                        </div>
                     </div>
+
 
                     <div class="card-body">
 
@@ -24,6 +42,7 @@
 
 
 
+                        <!-- 
 
                         <a @click="exports_excel()">
 
@@ -36,7 +55,7 @@
                             <img src="/assets/img/import.png" alt="" style="width: 2%;"></a>
 
 
-
+ -->
 
 
 
@@ -45,17 +64,14 @@
 
                             <div v-for="(group_types, index) in list_data">
 
-
-
-                                <fieldset class="border rounded-3 p-3">
-
-                                    <legend class="float-none w-auto px-3"> {{ group_types.name }}</legend>
+                                <div v-for="(accounts, index) in group_types.group" :key="index"
+                                    v-if="accounts.status == 1" class="row">
 
 
 
-                                    <div v-for="(accounts, index) in group_types.group" :key="index" class="row">
 
-
+                                    <fieldset class="border rounded-3 p-3">
+                                        <legend class="float-none w-auto px-3"> {{ group_types.name }}</legend>
 
 
 
@@ -297,17 +313,17 @@
 
                                         </div>
 
+                                    </fieldset>
+
+
+
+                                </div>
 
 
 
 
-                                    </div>
 
 
-
-
-
-                                </fieldset>
 
 
 

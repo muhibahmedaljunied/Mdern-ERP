@@ -186,6 +186,13 @@ class GroupController extends Controller
 
 
 
+        if ($code == 'advance') {
+
+
+            return $this->get_advance();
+        }
+
+
 
         if ($code == 'allowance') {
 
@@ -242,6 +249,7 @@ class GroupController extends Controller
             $groups = new Group();
             $groups->name = $request->name[$value];
             $groups->code = $request->code[$value];
+            $groups->status = $request->status[$value];
             $groups->group_type_id = $request->type[$value];
             $groups->save();
         }

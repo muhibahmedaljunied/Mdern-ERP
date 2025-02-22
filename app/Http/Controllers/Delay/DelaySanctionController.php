@@ -86,15 +86,27 @@ class DelaySanctionController extends Controller
     public function filter_date($request)
     {
 
+
+
         $request->staff_id = collect($request->staff_id)->toArray();
-
-
         $this->core->array_filter = [];
-        $year = intval(date("2024"));
-        $month = intval(date("11"));
+
+        if (!$request->date) {
+
+            $year = intval(date("Y"));
+            $month = intval(date('m'));
+        } else {
+
+            $all_date = explode('-', $request->date);
+            $year = $all_date[0];
+            $month = $all_date[1];
+            // echo "Day: $day, Month: $month, Year: $year";
+
+        }
+
+
+
         $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-
-
         for ($i = 1; $i < $days; $i++) {
 
             if ($this->get_day_name("$year-$month-$i") == $request->delay_type_code) {

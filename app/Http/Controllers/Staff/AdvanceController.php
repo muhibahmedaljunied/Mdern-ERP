@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Staff;
 use App\Models\Staff;
 use App\Repository\HR\AdvanceRepository;
 use App\Services\CoreStaffService;
-use App\Services\DailyService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\GroupAccount;
-use App\Models\HrAccount;
 use App\Services\DailyStockService;
 use App\Services\PayrollService;
 use Illuminate\Support\Facades\DB;
@@ -24,10 +22,11 @@ class AdvanceController extends Controller
     ) {}
     public function index()
     {
-
+    
 
         $advances = Staff::with(['advance'])->paginate(10);
 
+ 
         $this->hr->Sum($advances, 'advance');
         // ------------------------------------------------------------------------------------------------
         $staffs =  DB::table('staff')
@@ -38,6 +37,7 @@ class AdvanceController extends Controller
             ->get();
 
 
+            // dd($advances);
         // -------------------------------------------------------------------------------------------------
 
         return response()->json([
@@ -52,6 +52,8 @@ class AdvanceController extends Controller
 
 
         ]);
+
+      
     }
 
 

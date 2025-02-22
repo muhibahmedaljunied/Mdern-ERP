@@ -5,7 +5,7 @@ export default {
                 type: Object,
                 default: null,
             },
-
+            dateselected:'',
             check_state: [],
             apply_date: "",
             discounttypeselected: [],

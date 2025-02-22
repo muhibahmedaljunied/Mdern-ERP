@@ -86,7 +86,7 @@ class DailyStockService
             $this->set_account_details();
         }
 
-        dd(122);
+        // dd(122);
     }
     public function multble_daily()
     {
@@ -165,7 +165,7 @@ class DailyStockService
 
         $daily = new GroupAccountDailyDetail();
         $daily->dailyable()->associate($this->core->account_details);
-        $daily->daily_details_id = $this->core->dailyDetailId;
+        $daily->daily_detail_id = $this->core->dailyDetailId;
         $daily->save();
 
 
@@ -280,7 +280,7 @@ class DailyStockService
         // this check if account content account_details
         $this->daily_payment->check_payment_type(); //this check type of debit or credit daily as details
         $this->store_group_account(); //insert data into  group_daily_details 
-        dd(132);
+        // dd(132);
     }
 
     public function get_daily_detail_id()

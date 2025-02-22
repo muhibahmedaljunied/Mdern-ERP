@@ -61,16 +61,18 @@
 
                             <div class="col-md-2">
                                 <label for="status"> التأريخ</label>
-                                <input class="form-control" type="date" name="" id="" v-model="attendance_date">
+                                <input class="form-control" type="date" name="" id="" v-model="dateselected">
                             </div>
 
                             <div class="col-sm-6 col-md-2" style="margin-top: auto;">
                                 <!-- <a href="#" onclick="get_time_for_all_staff(period_selected)"><img src="/assets/img/search.png"
                                     alt="" style="width: 15%;"> </a> -->
-
+<!-- 
                                 <a @click="get_staff_attendance(period_selected)" id="agregar_productos"
                                     data-target=".bs-example-modal-sm">
-                                    <img src="/assets/img/search.png" alt="" style="width: 15%;"></a>
+                                    <img src="/assets/img/search.png" alt="" style="width: 15%;"></a> -->
+
+                                    <a href="#" @click="search()"> <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #74C0FC;"></i></a>
                             </div>
 
 

@@ -196,23 +196,27 @@ class DatabaseSeeder extends Seeder
         DB::table('absence_types')->insert([
             'id'        => 1,
             'name'    => 'يوم السبت',
+            'code' => 'Sat'
 
         ]);
         DB::table('absence_types')->insert([
             'id'        => 2,
             'name'    => 'يوم الخميس',
+            'code' => 'Thu'
 
         ]);
 
         DB::table('absence_types')->insert([
             'id'        => 3,
             'name'    => 'بعد عطله اسبوعيه',
+            'code' => 'After_holiday'
 
         ]);
 
         DB::table('absence_types')->insert([
             'id'        => 4,
             'name'    => 'بعد اجازه رسميه',
+            'code' => 'After_vacation'
 
         ]);
 

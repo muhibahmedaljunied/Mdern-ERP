@@ -38,35 +38,35 @@ class StaffController extends Controller
 
         // $staff_list = Cache::rememberForever('staff_eager_load_e', function () {
 
-            $staff_list = Staff::with([
+        $staff_list = Staff::with([
 
-                'department' => function ($query) {
-                    $query->select('*');
-                },
-                'job' => function ($query) {
-                    $query->select('*');
-                },
-                'qualification' => function ($query) {
-                    $query->select('*');
-                },
-                'branch' => function ($query) {
-                    $query->select('*');
-                },
-                'staff_type' => function ($query) {
-                    $query->select('*');
-                },
-                // 'work_type' => function ($query) {
-                //     $query->select('*');
-                // },
-                'staff_religion' => function ($query) {
-                    $query->select('*');
-                },
-                'nationality' => function ($query) {
-                    $query->select('*');
-                }
+            'department' => function ($query) {
+                $query->select('*');
+            },
+            'job' => function ($query) {
+                $query->select('*');
+            },
+            'qualification' => function ($query) {
+                $query->select('*');
+            },
+            'branch' => function ($query) {
+                $query->select('*');
+            },
+            'staff_type' => function ($query) {
+                $query->select('*');
+            },
+            // 'work_type' => function ($query) {
+            //     $query->select('*');
+            // },
+            'staff_religion' => function ($query) {
+                $query->select('*');
+            },
+            'nationality' => function ($query) {
+                $query->select('*');
+            }
 
-            ])
-                ->paginate();
+        ])
+            ->paginate();
         // });
 
         // dd($staff_list);
@@ -107,13 +107,13 @@ class StaffController extends Controller
     }
 
 
- 
- 
+
+
     public function export()
     {
 
-        
-         Excel::download(new StaffExport,'staff_export.xlsx');
+
+        Excel::download(new StaffExport, 'staff_export.xlsx');
 
 
         return response()->json([
@@ -446,34 +446,16 @@ class StaffController extends Controller
                     $query->select('*', 'text');
                 }
             ]
-        )->select('*','code as type')
+
+
+        )
+            ->select('*', 'code as type')
 
             ->get();
 
 
-        // $accounts = GroupAccount::with(
-        //     [
-        //         'account' => function ($query) {
-        //             $query->select('*', 'text');
-        //         },
-        //         // 'account_second' => function ($query) {
-        //         //     $query->select('*', 'text as second_name');
-        //         // },
-        //         'group' => function ($query) {
-        //             $query->select('*');
-        //         },
-        //         'group.group_type' => function ($query) {
-        //             $query->select('*', 'code as type');
-        //         }
-        //     ]
-        // )->select('group_accounts.*')
-
-        //     ->get();
-
 
         $count_account = Group::all()->count();
-        // $group_type = GroupType::all();
-
         return response()->json([
             'accounts' => $accounts,
             'count_account' => $count_account,

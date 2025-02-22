@@ -12,11 +12,9 @@ use App\Models\DailyDetail;
 use Illuminate\Http\Request;
 use App\Exports\AccountExport;
 use App\Imports\AccountImport;
-use App\Models\Allowance;
 use App\Models\Bank;
 use App\Models\Customer;
 use App\Models\GroupAccount;
-use App\Models\Store;
 use App\Models\Supplier;
 use App\Models\Treasury;
 

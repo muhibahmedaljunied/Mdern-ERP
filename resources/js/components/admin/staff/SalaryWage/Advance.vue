@@ -382,26 +382,28 @@
 <script>
 
 import pagination from "laravel-vue-pagination";
-import operation from '../../../../../js/staff/operation/operation.js';
-// import operation2 from '../../../../../js/operation.js';
-import operation2 from '../../../../operation.js';
+// import operation from '../../../../../js/staff/operation/operation.js';
+import operation from '../../../../operation.js';
 import tree from '../../../../../js/tree/tree.js';
 
 export default {
   components: {
     pagination,
   },
-  mixins: [operation,operation2, tree],
+  mixins: [
+    operation, 
+    // operation2, 
+    tree],
   data() {
     return {
 
-    
 
+      staffselected: [],
       debit: '',
       grand_total: '',
       quantity: [],
       account: [],
-    
+
       word_search: "",
       Way_to_pay_selected: '',
 
@@ -415,6 +417,7 @@ export default {
     this.counts[0] = 1;
 
   },
+  
   methods: {
 
 
@@ -468,18 +471,7 @@ export default {
           staff: this.staffselected,
           qty: this.quantity,
           date: this.date,
-          // credit: {
-          //   credit_account_id: this.account,
-          //   paid: this.quantity,
-
-          // },
-          // debit: {
-
-          //   debit_account_id: this.debit,
-          //   staff: this.staffselected,
-          //   paid: this.quantity,
-
-          // },
+  
 
           debit: {
 
@@ -538,31 +530,31 @@ export default {
 
     exports_excel() {
 
-axios
-  .post(`/export_staff`)
-  .then(function (response) {
+      axios
+        .post(`/export_staff`)
+        .then(function (response) {
 
-    toastMessage("تم التصدير");
-    this.list();
-  })
-  .catch(error => {
+          toastMessage("تم التصدير");
+          this.list();
+        })
+        .catch(error => {
 
-  });
-},
-imports_excel() {
+        });
+    },
+    imports_excel() {
 
-axios
-  .post(`/import_staff`)
-  .then(function (response) {
+      axios
+        .post(`/import_staff`)
+        .then(function (response) {
 
-    toastMessage("تم الاستيراد");
-    this.list();
+          toastMessage("تم الاستيراد");
+          this.list();
 
-  })
-  .catch(error => {
+        })
+        .catch(error => {
 
-  });
-},
+        });
+    },
 
 
 

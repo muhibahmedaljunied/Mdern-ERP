@@ -274,23 +274,23 @@ export default {
     },
 
     methods: {
-        // add_new_account() {
-        //     this.axios
-        //         .post("/store_account_setting", {
-        //             count: this.counts,
-        //             account: this.account,
-        //             group: this.group,
-        //         })
-        //         .then(function (response) {
-        //             // e.preventDefault();
-        //             toastMessage("تم الاضافه بنجاح");
-        //         })
-        //         .catch(function (error) {
-        //             currentObj.output = error;
-        //         });
+        add_new_account() {
+            this.axios
+                .post("/store_account_setting", {
+                    count: this.counts,
+                    account: this.account,
+                    group: this.group,
+                })
+                .then(function (response) {
+                    // e.preventDefault();
+                    toastMessage("تم الاضافه بنجاح");
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                });
 
-        //     // this.$router.go(0);
-        // },
+            // this.$router.go(0);
+        },
 
         onchange(index) {
             this.axios

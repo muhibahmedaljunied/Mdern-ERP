@@ -138,6 +138,38 @@ class ExtraSanctionController extends Controller
 
 
 
+
+
+
+        $this->core_extra($request->date);
+        $this->before_work($request->date);
+        $this->after_work($request->date);
+
+
+
+
+        $this->core->attendances = $this->core->attendances->where('revenue', $request->extra_part_duration)
+            // ->whereIn('attendance_date', $this->core->array_filter)
+            ->join('staff', 'staff.id', '=', 'attendances.staff_id');
+
+        // if (count($request->staff_id) > 0) {
+        if ($request->staff_id) {
+
+            $this->core->attendances = $this->core->attendances->where('staff.id', $request->staff_id);
+        }
+
+
+
+
+        $this->core->attendances = $this->core->attendances->orderBy('revenue')
+            ->paginate();
+    }
+
+
+    public function core_extra($date)
+    {
+
+
         $this->core->attendances = DB::table('attendances')
             ->select(
                 'staff.name',
@@ -151,18 +183,16 @@ class ExtraSanctionController extends Controller
                 'revenue',
             );
 
-        if ($request->extra_type_code == 'before_work') {
 
-            $this->core->attendances = $this->core->attendances->Join(
-                DB::raw('(SELECT attendance_id,SUM(extra) AS revenue FROM attendance_details 
-                    GROUP BY attendance_id) AS n'),
-                'n.attendance_id',
-                '=',
-                'attendances.id'
-            );
+        if ($date) {
+
+            $this->core->attendances = $this->core->attendances->where('attendances.attendance_date', $date);
         }
+    }
+    public function after_work()
+    {
 
-        if ($request->extra_type_code == 'after_work') {
+        if ($request->extra_type_code == 'After_work') {
 
             $this->core->attendances = $this->core->attendances->Join(
                 DB::raw('(SELECT attendance_id,SUM(extra_after) AS revenue FROM attendance_details 
@@ -172,28 +202,21 @@ class ExtraSanctionController extends Controller
                 'attendances.id'
             );
         }
-
-
-
-        $this->core->attendances = $this->core->attendances->where('revenue', $request->extra_part_duration)
-            // ->whereIn('attendance_date', $this->core->array_filter)
-            ->join('staff', 'staff.id', '=', 'attendances.staff_id');
-
-        if (count($request->staff_id) > 0) {
-
-            $this->core->attendances = $this->core->attendances->where('staff.id', $request->staff_id[0]);
-        }
-        $this->core->attendances = $this->core->attendances->orderBy('revenue')
-            ->paginate();
-
-
-
-        // dd($this->core->attendances);
     }
+    public function before_work()
+    {
+     
+        if ($request->extra_type_code == 'Before_work') {
 
-
-
-
+            $this->core->attendances = $this->core->attendances->Join(
+                DB::raw('(SELECT attendance_id,SUM(extra) AS revenue FROM attendance_details 
+                    GROUP BY attendance_id) AS n'),
+                'n.attendance_id',
+                '=',
+                'attendances.id'
+            );
+        }
+    }
     public function final_sanction($request)
     {
 
@@ -221,7 +244,7 @@ class ExtraSanctionController extends Controller
 
             if (count($extra) > 0) {
 
-              
+
                 foreach ($extra as $key => $value2) {
 
                     $staff_sanction =  collect(StaffSanction::where('sanctionable_type', 'App\Models\ExtraSanction')

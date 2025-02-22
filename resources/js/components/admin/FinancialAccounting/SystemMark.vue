@@ -22,10 +22,10 @@
                                                     <a href="#tab1" class="nav-link" data-toggle="tab">ترميز
                                                         الحسابات</a>
                                                 </li> -->
-                                                <li class="nav-item">
+                                                <!-- <li class="nav-item">
                                                     <a href="#tab2" class="nav-link" data-toggle="tab">ترميز الموارد
                                                         البشريه</a>
-                                                </li>
+                                                </li> -->
                                                 <!-- <li class="nav-item">
                                                     <a href="#tab3" class="nav-link" data-toggle="tab"> ترميز
                                                         المخازن</a>
@@ -67,9 +67,9 @@
                                             <!-- <div class="tab-pane active" id="tab1">
                                                 <mark-account></mark-account>
                                             </div> -->
-                                            <div class="tab-pane active" id="tab2">
+                                            <!-- <div class="tab-pane active" id="tab2">
                                                 <mark-hr></mark-hr>
-                                            </div>
+                                            </div> -->
                                             <!-- <div class="tab-pane" id="tab3">
                                                 <mark-store></mark-store>
                                             </div> -->
@@ -101,7 +101,7 @@
 </template>
 <script>
 import MarkAccount from "./SystemMark/MarkAccount";
-import MarkHr from "./SystemMark/MarkHr";
+// import MarkHr from "./SystemMark/MarkHr";
 // import MarkStore from "./SystemMark/MarkStore";
 import MarkCustomer from "./SystemMark/MarkCustomer";
 import MarkSupplier from "./SystemMark/MarkSupplier";
@@ -110,7 +110,7 @@ import MarkBank from "./SystemMark/MarkBank";
 export default {
     components: {
         MarkAccount,
-        MarkHr,
+        // MarkHr,
         // MarkStore,
         MarkCustomer,
         MarkSupplier,

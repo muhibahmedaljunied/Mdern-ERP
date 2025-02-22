@@ -59,7 +59,7 @@
                           <th>النوع </th>
                           <th>الرمز </th>
 
-                          <!-- <th>رقم الحساب </th> -->
+                          <th> مرتبط بحساب مقابل </th>
 
 
 
@@ -93,6 +93,19 @@
                           </td>
 
 
+                          <td>
+                            <select style="background-color:beige" v-model="status_selected[index]"
+                              class="form-control " required>
+                              <option  v-bind:value="1">
+                              مرتبط بحساب مقابل
+                              </option>
+                              <option  v-bind:value="0">
+                              غير مرتبط بحساب مقابل
+                              </option>
+
+                            </select>
+                          </td>
+
                           <td v-if="index == 1">
                             <a class="tn btn-info btn-sm waves-effect btn-agregar" v-on:click="addComponent(count)">
                               <i class="fa fa-plus-circle"></i></a>
@@ -106,7 +119,7 @@
                         </tr>
 
                         <tr>
-                          <td colspan="3"></td>
+                          <td colspan="4"></td>
                           <td>
 
                             <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
@@ -186,8 +199,11 @@
                   <tr>
                     <!-- <th class="wd-15p border-bottom-0">الرقم الوظيفي</th> -->
                     <th class="wd-15p border-bottom-0">رقم التصنيف</th>
-                    <th class="wd-15p border-bottom-0">اسم التصنيف</th>
+                    <th class="wd-15p border-bottom-0"> التصنيف</th>
                     <th class="wd-15p border-bottom-0"> النوع</th>
+                    <th class="wd-15p border-bottom-0"> الرمز</th>
+                    <th class="wd-15p border-bottom-0"> الحاله</th>
+           
 
                     <th class="wd-15p border-bottom-0">العمليات</th>
                   </tr>
@@ -203,6 +219,14 @@
                     <td>
                       {{ group.type_name }}
                     </td>
+                    <td>
+                      {{ group.code }}
+                    </td>
+
+                    <td v-if="group.status == 0">
+                      غير مرتبط بحساب
+                    </td>
+                    <td v-else>مرتبط بحساب </td>
                     <td>
                       <button data-toggle="modal" class="tn btn-danger btn-sm waves-effect btn-agregar">
                         <i class="fa fa-trash"></i></button>
@@ -263,7 +287,7 @@ export default {
       group_type_selected: [],
       groups: '',
       group_types: '',
-
+      status_selected:[],
       // account: [],
       // indexselectedgroup: 0,
       type: '',
@@ -295,10 +319,11 @@ export default {
         .post(`/store_group`, {
           count: this.counts,
           type: this.group_type_selected,
+          status:this.status_selected,
           name: this.group,
           code: this.code,
 
-          // account: this.account,
+
 
 
         }

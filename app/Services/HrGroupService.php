@@ -7,6 +7,19 @@ use Illuminate\Support\Facades\DB;
 trait HrGroupService
 {
 
+
+    // public function get_advance()
+    // {
+
+
+
+    //     $this->result =  DB::table('allowance_types')
+    //         ->select(
+    //             'allowance_types.*',
+    //         )
+    //         ->get();
+    // }
+
     public function get_allowance()
     {
 

@@ -248,7 +248,7 @@ trait AttendanceTrait
         $Details = new AttendanceDetail();
         $Details->attendance_id = $id;
         $Details->period_id = $data['period'][$value];
-        $Details->attendance_status = 1;
+        // $Details->attendance_status = 1;
 
 
         // if ($data['attendance_in_out'] == 1) {

@@ -41,7 +41,7 @@
 
                             <div class="col-md-2">
                                 <label for="status"> التأريخ</label>
-                                <input class="form-control" type="date" name="" id="" v-model="apply_date">
+                                <input class="form-control" type="date" name="" id="" v-model="dateselected">
 
 
                             </div>
@@ -85,10 +85,15 @@
                             </div> -->
 
                             <div class="col-sm-6 col-md-2" style="margin-top: auto;">
+                                <!-- <input type="search" autocomplete="on" name="search" data-toggle="dropdown"
+                                        role="button" aria-haspopup="true" aria-expanded="true" placeholder="بحث "
+                                        v-model="word_search"   />
+ -->
 
+                                        <a href="#" @click="search()"> <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #74C0FC;"></i></a>
 
-                                <a @click="search()" id="agregar_productos" data-target=".bs-example-modal-sm">
-                                    <img src="/assets/img/search.png" alt="" style="width: 15%;"></a>
+                                <!-- <a @click="search()" id="agregar_productos" data-target=".bs-example-modal-sm">
+                                    <img src="/assets/img/search.png" alt="" style="width: 15%;"></a> -->
                             </div>
 
 
@@ -401,6 +406,7 @@ export default {
         return {
             absence_types: '',
             absenceselected: [],
+           
 
         };
     },
@@ -448,6 +454,7 @@ export default {
             axios.post(`/absence_sanction_attendance`, {
                 absence_type_code: this.absenceselected[1],
                 absence_type_id: this.absenceselected[0],
+                date: this.dateselected,
                 staff_id: this.staffselected,
 
 
