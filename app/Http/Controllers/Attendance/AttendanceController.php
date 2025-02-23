@@ -33,44 +33,50 @@ class AttendanceController extends Controller
 
 
         $staff_list =  DB::table('staff')
-            ->join('work_systems', 'work_systems.staff_id', '=', 'staff.id')
-            ->join('work_system_types', 'work_systems.work_system_type_id', '=', 'work_system_types.id')
-            ->join('period_times', 'work_systems.period_time_id', '=', 'period_times.id')
+            // ->join('work_systems', 'work_systems.staff_id', '=', 'staff.id')
+            // ->join('work_system_types', 'work_systems.work_system_type_id', '=', 'work_system_types.id')
+            // ->join('period_times', 'work_systems.period_time_id', '=', 'period_times.id')
             ->select(
 
                 'staff.*',
                 'staff.name as staff_name',
-                'work_systems.*',
-                'work_system_types.*',
-                // 'period_times.name as period_name',
-                'period_times.from_time',
-                'period_times.into_time',
+                // 'work_systems.*',
+                // 'work_system_types.*',
+                // 'period_times.from_time',
+                // 'period_times.into_time',
 
-            )->orderBy('staff.name')
+            )
+            ->orderBy('staff.name')
             ->paginate();
-
+        // dd($staff_list);
         foreach ($staff_list as $key => $value) {
 
             $ss = DB::table('attendances');
 
-            $ss =   $ss->leftJoin('attendance_details', 'attendance_details.attendance_id', '=', 'attendances.id');
+            // $ss =   $ss->leftJoin('attendance_details', 'attendance_details.attendance_id', '=', 'attendances.id');
 
+            $value->period =   collect($ss->where('attendances.staff_id', '=', $value->id)
+                // ->where('attendances.attendance_date', '=',NOW())
+                // ->where('attendances.attendance_date', '=','2025-02-19')
 
-            $value->period =   $ss->where('attendances.staff_id', '=', $value->staff_id)
-                ->where('attendances.attendance_date', '=', NOW())
-                ->where(
-                    function ($query) use ($value) {
-                        return $query
-                            ->where('attendances.attendance_status', '=', 0)
-                            ->orWhere('attendance_details.period_id', '=', $value->period_time_id);
-                    }
-                )
-                ->get();
+                // ->where(
+                //     function ($query) use ($value) {
+                //         return $query
+                //             ->where('attendances.attendance_status', '=', 0)
+                //             ->orWhere('attendances.attendance_status', '=', 1);
+       
+                //             // ->orWhere('attendance_details.period_id', '=', $value->period_time_id);
+                //     }
+                // )
+                ->select('attendances.*')
+                ->get())
+                ->toArray();
         }
 
 
         // });
 
+        // dd($staff_list);
         $minutes = 60;
         // $staffs = Cache::remember('staff', $minutes, function () {
         $staffs = DB::table('staff')->get();

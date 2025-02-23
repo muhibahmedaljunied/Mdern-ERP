@@ -110,28 +110,28 @@
           <div class="card-header">
 
 
-<div style="display: flex;float: left; margin: 5px">
+            <div style="display: flex;float: left; margin: 5px">
 
 
 
 
-  <button @click="exports_excel()">
+              <button @click="exports_excel()">
 
-    <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
-  </button>
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
 
-  <button @click="imports_excel()">
+              <button @click="imports_excel()">
 
-    <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
-  </button>
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
 
-  <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-    aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" />
-</div>
-</div>
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" />
+            </div>
+          </div>
 
 
-          <div class="card-body" >
+          <div class="card-body">
 
 
             <div class="table-responsive">
@@ -442,11 +442,11 @@ export default {
           type: this.type,
           date: this.date,
           credit: {
-            account_id:this.prove_account[0]['account_second_id'],
-            value:'',
+            account_id: this.prove_account[0]['account_second_id'],
+            value: '',
             account_details: '',
           },
-          debit: {  
+          debit: {
             account_id: this.prove_account[0]['account_id'],
             value: this.basic_salary,
             account_details: '',
