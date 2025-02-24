@@ -98,7 +98,7 @@
                              <personal-information></personal-information>
                       </div>
                         <div class="tab-pane" id="tab3">
-                             <holiday></holiday>
+                             <leave></leave>
              
                       </div>
 
@@ -162,10 +162,10 @@
 </template>
 <script>
 import Advance from "./StaffData/Advance";
-
-import Holiday from "./StaffData/Holiday";
-
 import PersonalInformation from "./StaffData/PersonalInformation";
+import leave from "./StaffData/leave";
+
+
 
 import SalaryDetails from "./StaffData/SalaryDetails";
 import Attendance from "./StaffData/Attendance";
@@ -186,7 +186,7 @@ import StaffAllowance from "./StaffData/StaffAllowance";
 export default {
   components: {
     Advance,
-    Holiday,
+    leave,
     PersonalInformation,
     SalaryDetails,
     Attendance,

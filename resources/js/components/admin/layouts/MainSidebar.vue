@@ -407,11 +407,11 @@
 
 
 
-          <ul class="slide-menu">
+          <!-- <ul class="slide-menu">
             <li>
               <router-link class="slide-item" to="/staff/report">التقارير</router-link>
             </li>
-          </ul>
+          </ul> -->
         </li>
 
 

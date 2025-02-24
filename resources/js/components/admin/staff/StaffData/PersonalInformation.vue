@@ -12,16 +12,8 @@
           </div>
           <div class="card-body" id="printme">
             <div class="row">
-              <div class="col-md-4">
-                <label for="status">اسم الموظف</label>
-                <select @change="select_staff" v-model="staff_selected" name="type" id="type" class="form-control "
-                  required>
-                  <option v-for="staff in staffs" v-bind:value="staff.id">
-                    {{ staff.name }}
-                  </option>
-                </select>
-              </div>
 
+              
               <div class="col-md-3">
                   <h5 class="card-title"> الهيكل الاداري</h5>
                   <div class="custom-search">
@@ -37,6 +29,16 @@
                       <i class="fa fa-plus-circle"></i></button>
                   </div>
                 </div>
+              <div class="col-md-4">
+                <label for="status">اسم الموظف</label>
+                <select @change="select_staff" v-model="staff_selected" name="type" id="type" class="form-control "
+                  required>
+                  <option v-for="staff in staffs" v-bind:value="staff.id">
+                    {{ staff.name }}
+                  </option>
+                </select>
+              </div>
+
               <!-- <div class="col-md-2">
                 <label for="status"> من تأريخ</label>
                 <input v-model="from_date" type="date" name="" id="" class="form-control">

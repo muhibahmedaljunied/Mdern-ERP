@@ -31,18 +31,7 @@
                   </option>
                 </select>
               </div>
-              <!-- <div class="col-md-2">
-              <label for="status"> من تأريخ</label>
-              <input v-model="from_date" type="date" name="" id="" class="form-control">
-            </div>
-
-            <div class="col-md-2">
-              <label for="status">الي تأريخ</label>
-              <input v-model="from_date" type="date" name="" id="" class="form-control">
-            </div> -->
-              <!-- <div class="col-sm-6 col-md-3" style="margin-top: auto;">
-                <a href="#" @click="report()"><img src="/assets/img/search.png" alt="" style="width: 10%;"> </a>
-              </div> -->
+          
               <div class="col-sm-6 col-md-2" style="margin-top: auto;">
 
 
