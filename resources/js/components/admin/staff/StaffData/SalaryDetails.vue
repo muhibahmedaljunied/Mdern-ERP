@@ -14,7 +14,7 @@
 
 
 
-          <div class="card-body" >
+          <div class="card-body">
             <div class="row">
               <div class="col-md-4">
                 <label for="status">اسم الموظف</label>
@@ -25,24 +25,39 @@
                   </option>
                 </select>
               </div>
-              
+
               <div class="col-md-3">
-                  <h5 class="card-title"> الهيكل الاداري</h5>
-                  <div class="custom-search">
+                <h5 class="card-title"> الهيكل الاداري</h5>
+                <div class="custom-search">
 
 
-                    <input :id="'Expence_account_tree_id'" type="hidden" readonly class="custom-search-input">
+                  <input :id="'Expence_account_tree_id'" type="hidden" readonly class="custom-search-input">
 
-                    <input style="background-color: beige;" :id="'Expence_account_tree'" type="text" readonly
-                      class="custom-search-input">
+                  <input style="background-color: beige;" :id="'Expence_account_tree'" type="text" readonly
+                    class="custom-search-input">
 
-                    <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
-                      data-target="#exampleModalAccount">
-                      <i class="fa fa-plus-circle"></i></button>
-                  </div>
+                  <button @click="detect_index(null)" class="custom-search-botton" type="button" data-toggle="modal"
+                    data-target="#exampleModalAccount">
+                    <i class="fa fa-plus-circle"></i></button>
                 </div>
-              <div class="col-sm-6 col-md-3" style="margin-top: auto;">
+              </div>
+              <!-- <div class="col-sm-6 col-md-3" style="margin-top: auto;">
                 <a href="#"><img src="/assets/img/search.png" alt="" style="width: 10%;"> </a>
+              </div> -->
+
+
+              <div class="col-sm-6 col-md-2" style="margin-top: auto;">
+
+
+                <a @click="report()" href="#">
+
+
+                  <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
+
+
+                </a>
+
+
               </div>
             </div>
 
@@ -61,7 +76,7 @@
 
 
           <div class="card-body" id="printme">
-         
+
 
             <div class="row">
 
@@ -232,7 +247,19 @@ export default {
         });
 
     },
+    report() {
+      this.axios
+        .post(`/allowance_report`, {
+          type: this.type,
+          staff: this.staff_selected,
+          from_date: this.from_date,
+          into_date: this.into_date,
+        })
+        .then(({ data }) => {
+          this.list_data = data.list;
 
+        });
+    },
 
   },
 };

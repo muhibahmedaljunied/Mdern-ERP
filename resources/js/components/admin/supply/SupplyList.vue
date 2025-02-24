@@ -5,64 +5,55 @@
 
       <div class="card-header pb-0">
 
-<span class="h3"> اوامرالتوريد</span>
-<div style="display: flex;float: left; margin: 5px">
-
-  <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-    aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
-    @input="get_search()" />
+        <span class="h3"> اوامرالتوريد</span>
 
 
-  <!-- 774899393 -->
+      </div>
 
-</div>
-
-</div>
-
-<div class="card-body">
-  <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-      
+      <div class="card-body">
+        <div class="row row-sm">
+          <div class="col-xl-12">
+            <div class="card">
 
 
 
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table text-md-nowrap" id="example1">
-                <thead>
-                  <tr>
-                    <th class="wd-15p border-bottom-0">رقم السند</th>
-                    <!-- <th class="wd-15p border-bottom-0">المورد</th> -->
-                    <th class="wd-15p border-bottom-0">جهه التوريد </th>
-                    <!--<th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
-                    <th class="wd-15p border-bottom-0">تاريخ الشراء</th>
 
-                    <!-- <th class="wd-15p border-bottom-0"> المدفوع</th> -->
-                    <!-- <th class="wd-15p border-bottom-0">المتبقي</th> -->
-                    <!-- <th class="wd-15p border-bottom-0">اجمالي الفاتوره</th> -->
-                    <!-- <th class="wd-15p border-bottom-0">حاله الفاتوره</th> -->
-                    <th class="wd-15p border-bottom-0">العمليات</th>
-                  </tr>
-                </thead>
-                <tbody v-if="supplies && supplies.data.length > 0">
-                  <tr v-for="(supply, index) in supplies.data" :key="index">
-                    <td>{{ supply.paymentable.supply_id }}</td>
-                    <td v-if="supply.payment_info == '1' ||
-                      supply.payment_info == '2'"> {{
-                      supply.paymentable.supplier_name }}</td>
-                    <td v-else>{{ supply.paymentable.text }} {{ supply.paymentable.account_id }}</td>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table text-md-nowrap" id="example1">
+                    <thead>
+                      <tr>
+                        <th class="wd-15p border-bottom-0">رقم السند</th>
+                        <!-- <th class="wd-15p border-bottom-0">المورد</th> -->
+                        <th class="wd-15p border-bottom-0">جهه التوريد </th>
+                        <!--<th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
+                        <th class="wd-15p border-bottom-0">تاريخ الشراء</th>
 
-                    <!-- <td>{{ supply.paymentable.supplier_name }}</td> -->
-                    <!-- <td>{{ supply.paymentable.text }}</td> -->
+                        <!-- <th class="wd-15p border-bottom-0"> المدفوع</th> -->
+                        <!-- <th class="wd-15p border-bottom-0">المتبقي</th> -->
+                        <!-- <th class="wd-15p border-bottom-0">اجمالي الفاتوره</th> -->
+                        <!-- <th class="wd-15p border-bottom-0">حاله الفاتوره</th> -->
+                        <th class="wd-15p border-bottom-0">العمليات</th>
+                      </tr>
+                    </thead>
+                    <tbody v-if="supplies && supplies.data.length > 0">
+                      <tr v-for="(supply, index) in supplies.data" :key="index">
+                        <td>{{ supply.paymentable.supply_id }}</td>
+                        <td v-if="supply.payment_info == '1' ||
+                          supply.payment_info == '2'"> {{
+                        supply.paymentable.supplier_name }}</td>
+                        <td v-else>{{ supply.paymentable.text }} {{ supply.paymentable.account_id }}</td>
 
-                    <!-- <td>{{ supply.quantity }}</td>
+                        <!-- <td>{{ supply.paymentable.supplier_name }}</td> -->
+                        <!-- <td>{{ supply.paymentable.text }}</td> -->
+
+                        <!-- <td>{{ supply.quantity }}</td>
                   <td>{{ supply.qty_return }}</td> -->
-                    <td>{{ supply.paymentable.date }}</td>
-                    <!-- <td>{{ supply.paid }}</td> -->
-                    <!-- <td>{{ supply.remaining }}</td> -->
-                    <!-- <td>{{ supply.paymentable.grand_total }}</td> -->
-                    <!-- <td>
+                        <td>{{ supply.paymentable.date }}</td>
+                        <!-- <td>{{ supply.paid }}</td> -->
+                        <!-- <td>{{ supply.remaining }}</td> -->
+                        <!-- <td>{{ supply.paymentable.grand_total }}</td> -->
+                        <!-- <td>
 
                       <span class="badge bg-warning" v-if="supply.payment_status == 'pendding'">غير مدفوعه</span>
                       <span class="badge bg-success" v-if="supply.payment_status == 'paiding'">مدفوعه</span>
@@ -70,140 +61,140 @@
 
                     </td> -->
 
-                    <td>
-                      <div class="optionbox">
-                        <select @change="changeRoute(index)" v-model="operationselected[index]" name="العمليات"
-                          class="form-control">
-                          <option :selected="true" class="btn btn-success" v-bind:value="[
-                            '/supply_details/',
-                            supply.paymentable.supply_id,
-                            0
-                          ]">
-                            تفاصيل
-                          </option>
+                        <td>
+                          <div class="optionbox">
+                            <select @change="changeRoute(index)" v-model="operationselected[index]" name="العمليات"
+                              class="form-control">
+                              <option :selected="true" class="btn btn-success" v-bind:value="[
+                                '/supply_details/',
+                                supply.paymentable.supply_id,
+                                0
+                              ]">
+                                تفاصيل
+                              </option>
 
-                          <option class="btn btn-success" v-bind:value="[
-                            'return_supply',
-                            supply.paymentable,
-                            1
-                          ]">
-                            ارجاع
-                          </option>
-                          <option class="btn btn-success" v-bind:value="[
-                            'returnsupplylist',
-                            supply.paymentable.supply_id,
-                            2
-                          ]">
-                            مرتجعات
-                          </option>
+                              <option class="btn btn-success" v-bind:value="[
+                                'return_supply',
+                                supply.paymentable,
+                                1
+                              ]">
+                                ارجاع
+                              </option>
+                              <option class="btn btn-success" v-bind:value="[
+                                'returnsupplylist',
+                                supply.paymentable.supply_id,
+                                2
+                              ]">
+                                مرتجعات
+                              </option>
 
-                          <option class="btn btn-success" v-bind:value="[
-                            'supply_invoice',
-                            supply.paymentable.supply_id,
-                            3
-                          ]">
-                            عرض السند
-                          </option>
-                          <!-- <option v-if="supply.payment_status != 'paiding'" class="btn btn-success"
+                              <option class="btn btn-success" v-bind:value="[
+                                'supply_invoice',
+                                supply.paymentable.supply_id,
+                                3
+                              ]">
+                                عرض السند
+                              </option>
+                              <!-- <option v-if="supply.payment_status != 'paiding'" class="btn btn-success"
                             v-bind:value="['/PaymentBond/', supply.paymentable.supply_id, 4]">
                             دفع
                           </option> -->
-                          <option v-if="supply.payment_status != 'paiding'" class="btn btn-success"
-                            v-bind:value="['PaymentBond', supply.paymentable.supply_id, 4]">
-                            صرف
-                          </option>
-                          <option class="btn btn-success"
-                            v-bind:value="['/supply_invoice_update/', supply.paymentable.supply_id, 5]">
-                            تعديل السند
-                          </option>
+                              <option v-if="supply.payment_status != 'paiding'" class="btn btn-success"
+                                v-bind:value="['PaymentBond', supply.paymentable.supply_id, 4]">
+                                صرف
+                              </option>
+                              <option class="btn btn-success"
+                                v-bind:value="['/supply_invoice_update/', supply.paymentable.supply_id, 5]">
+                                تعديل السند
+                              </option>
 
 
-                          <option class="btn btn-success"
-                            v-bind:value="['supply_daily', supply.paymentable.supply_id, 6]">
-                            عرض القيد المحاسبي
-                          </option>
-                        </select>
-                      </div>
+                              <option class="btn btn-success"
+                                v-bind:value="['supply_daily', supply.paymentable.supply_id, 6]">
+                                عرض القيد المحاسبي
+                              </option>
+                            </select>
+                          </div>
 
 
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="8">
-                      <h3>
-                        لايوجد اي واردات
-                      </h3>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-else>
+                      <tr>
+                        <td align="center" colspan="8">
+                          <h3>
+                            لايوجد اي واردات
+                          </h3>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <pagination align="center" :data="supplies" @pagination-change-page="list"></pagination>
+              </div>
             </div>
-            <pagination align="center" :data="supplies" @pagination-change-page="list"></pagination>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <span class="h2">التفاصيل</span>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <span class="h2">التفاصيل</span>
 
 
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <!-- <th>  رقم الفاتوره </th> -->
-                    <th>اسم المنتج</th>
-                    <th> المواصفات والطراز</th>
-                    <th>الحاله</th>
-                    <th>المخزن</th>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <!-- <th>  رقم الفاتوره </th> -->
+                        <th>اسم المنتج</th>
+                        <th> المواصفات والطراز</th>
+                        <th>الحاله</th>
+                        <th>المخزن</th>
 
-                    <th class="wd-15p border-bottom-0"> الكميه </th>
-                    <!-- <th>الوحده</th> -->
-                    <!-- <th class="wd-15p border-bottom-0"> السعر </th> -->
-                    <!-- <th class="wd-15p border-bottom-0"> الاجمالي </th> -->
+                        <th class="wd-15p border-bottom-0"> الكميه </th>
+                        <!-- <th>الوحده</th> -->
+                        <!-- <th class="wd-15p border-bottom-0"> السعر </th> -->
+                        <!-- <th class="wd-15p border-bottom-0"> الاجمالي </th> -->
 
-                    <!-- <th class="wd-15p border-bottom-0">  الكميه المرتحعه</th> -->
+                        <!-- <th class="wd-15p border-bottom-0">  الكميه المرتحعه</th> -->
 
 
-                  </tr>
-                </thead>
-                <tbody v-if="supply_detail && supply_detail.length > 0">
-                  <tr v-for="(supply_details, index) in supply_detail">
-                    <!-- <td>{{ supply_details.id }}</td> -->
-                    <td>{{ supply_details.product }}</td>
-                    <td>{{ supply_details.desc }}</td>
-                    <td>{{ supply_details.status }}</td>
-                    <td>{{ supply_details.store }}</td>
-                    <!-- <td>{{ supply_details.qty }} {{ supply_details.unit }}</td> -->
-                    <td>
+                      </tr>
+                    </thead>
+                    <tbody v-if="supply_detail && supply_detail.length > 0">
+                      <tr v-for="(supply_details, index) in supply_detail">
+                        <!-- <td>{{ supply_details.id }}</td> -->
+                        <td>{{ supply_details.product }}</td>
+                        <td>{{ supply_details.desc }}</td>
+                        <td>{{ supply_details.status }}</td>
+                        <td>{{ supply_details.store }}</td>
+                        <!-- <td>{{ supply_details.qty }} {{ supply_details.unit }}</td> -->
+                        <td>
 
-                      <div v-for="temx in supply_details.qty_after_convert['qty']">
+                          <div v-for="temx in supply_details.qty_after_convert['qty']">
 
 
 
-                        <span v-for="temx2 in temx">
+                            <span v-for="temx2 in temx">
 
 
-                          <span style="float: right;">
-                            {{ temx2[0] }}
-                            <span style="color: red;">
-                              {{ temx2[1] }}
+                              <span style="float: right;">
+                                {{ temx2[0] }}
+                                <span style="color: red;">
+                                  {{ temx2[1] }}
+                                </span>
+
+                              </span>
+
+
+
                             </span>
 
-                          </span>
-
-
-
-                        </span>
-
-                        <!-- <span v-if="temx.unit_type == 0">
+                            <!-- <span v-if="temx.unit_type == 0">
 
 
   <span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
@@ -213,43 +204,43 @@ temx.name }}</span>
 
 </span> -->
 
-                      </div>
+                          </div>
 
 
-                    </td>
+                        </td>
 
-                    <!-- <td>{{ supply_details.unit }}</td> -->
-                    <!-- <td>{{ supply_details.price }}</td> -->
-                    <!-- <td>{{ supply_details.total }}</td> -->
-                    <!-- <td>{{ supply_details.qty_return }}</td> -->
+                        <!-- <td>{{ supply_details.unit }}</td> -->
+                        <!-- <td>{{ supply_details.price }}</td> -->
+                        <!-- <td>{{ supply_details.total }}</td> -->
+                        <!-- <td>{{ supply_details.qty_return }}</td> -->
 
 
 
-                  </tr>
-                  <!-- <tr>
+                      </tr>
+                      <!-- <tr>
 
                     <td colspan="7" style="text-align:center;color:red;font-size:large">الاجمالي</td>
                     <td>{{ total }}</td>
                   </tr> -->
 
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="8">
-                      <h3>
-                        لايوجد اي واردات
-                      </h3>
-                    </td>
-                  </tr>
-                </tbody>
+                    </tbody>
+                    <tbody v-else>
+                      <tr>
+                        <td align="center" colspan="8">
+                          <h3>
+                            لايوجد اي واردات
+                          </h3>
+                        </td>
+                      </tr>
+                    </tbody>
 
-              </table>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-</div>
     </div>
 
   </div>

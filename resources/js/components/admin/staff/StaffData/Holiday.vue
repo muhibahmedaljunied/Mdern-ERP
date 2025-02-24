@@ -30,9 +30,22 @@
                 <label for="status">الي تأريخ</label>
                 <input v-model="from_date" type="date" name="" id="" class="form-control">
               </div>
-              <div class="col-sm-6 col-md-3" style="margin-top: auto;">
+              <!-- <div class="col-sm-6 col-md-3" style="margin-top: auto;">
                 <a href="#" @click="report()"><img src="/assets/img/search.png" alt="" style="width: 10%;"> </a>
+              </div> -->
+              <div class="col-sm-6 col-md-2" style="margin-top: auto;">
+
+
+                <a @click="report()" href="#">
+
+                  <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
+
+
+                </a>
+
+
               </div>
+
             </div>
 
           </div>

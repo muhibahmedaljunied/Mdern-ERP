@@ -6,11 +6,7 @@
                 <span class="h2"> المخزون</span>
 
 
-                <div style="display: flex; float: left; margin: 5px">
-                    <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-                        aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
-                        @input="get_search()" />
-                </div>
+          
             </div>
 
             <div class="card-body">

@@ -81,7 +81,7 @@
 
                                 <a @click="search()" href="#">
 
-                                    <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #74C0FC;"></i>
+                                    <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
 
 
                                 </a>

@@ -19,7 +19,7 @@
                   <table class="table table-bordered text-center">
                     <thead>
                       <tr>
-                        <th class="wd-15p border-bottom-0">اسم الفتره</th>
+                        <th class="wd-15p border-bottom-0">الفتره</th>
                         <th class="wd-15p border-bottom-0"> تأريخ البدء</th>
                         <th class="wd-15p border-bottom-0">تأريخ الانتهاء</th>
 
@@ -172,7 +172,7 @@
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
-                    <th class="wd-15p border-bottom-0">اسم الفتره</th>
+                    <th class="wd-15p border-bottom-0">الفتره</th>
                     <th class="wd-15p border-bottom-0"> تأريخ البدء</th>
                     <th class="wd-15p border-bottom-0">تأريخ الانتهاء</th>
 

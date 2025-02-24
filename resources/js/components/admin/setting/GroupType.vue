@@ -204,8 +204,13 @@
                     <td>
                       {{ group.code }}
                     </td>
-                    <td>
-                      {{ group.status }}
+                    <td v-if="group.status == 0">
+                     
+                      غير مفعل
+                    </td>
+
+                    <td v-else>
+                      مفعل
                     </td>
                     <td>
                       <button data-toggle="modal" class="tn btn-danger btn-sm waves-effect btn-agregar">

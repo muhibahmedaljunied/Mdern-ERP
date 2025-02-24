@@ -70,16 +70,26 @@
 
                             </div>
 
-                            <div class="col-sm-6 col-md-2" style="margin-top: auto;">
-                                <!-- <a href="#" onclick="get_time_for_all_staff(period_selected)"><img src="/assets/img/search.png"
-                                    alt="" style="width: 15%;"> </a> -->
+                            <!-- <div class="col-sm-6 col-md-2" style="margin-top: auto;">
+                              
 
                                 <a @click="get_staff_attendance(period_selected)" id="agregar_productos"
                                     data-target=".bs-example-modal-sm">
                                     <img src="/assets/img/search.png" alt="" style="width: 15%;"></a>
+                            </div> -->
+
+                            <div class="col-sm-6 col-md-2" style="margin-top: auto;">
+
+
+                                <a @click="get_time_for_all_staff()" href="#">
+
+                                    <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
+
+
+                                </a>
+
+
                             </div>
-
-
 
                         </div>
 

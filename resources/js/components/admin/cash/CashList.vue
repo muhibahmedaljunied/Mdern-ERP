@@ -7,18 +7,7 @@
         <span class="h3">اوامر الصرف</span>
 
 
-        <div style="display: flex;float: left; margin: 5px">
-          <!-- <router-link to="NewCash" id="agregar_productos"
-              class="tn btn-info btn-sm waves-effect btn-agregar"><i class="fa fa-plus-circle"></i></router-link> -->
 
-
-          <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button" aria-haspopup="true"
-            aria-expanded="true" v-model="word_search" @input="get_search()" />
-
-
-          <!-- 774899393 -->
-
-        </div>
       </div>
       <div class="card-body">
         <div class="row row-sm">
