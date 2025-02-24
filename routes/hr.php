@@ -153,19 +153,18 @@ Route::post('/update_religion/{id}', 'Staff\StaffReligionController@update');
 Route::post('/religion/{id}', 'Staff\StaffReligionController@edit');
 Route::post('/delete_religion/{id}', 'Staff\StaffReligionController@destroy');
 Route::post('/religionsearch', 'Staff\StaffReligionController@search');
-/*  ---------------------------------------absence_type-----------------------------*/
-Route::post('/absence_type', 'Absence\AbsenceController@absence_type');
-Route::post('/leaveout_type', 'Leave\LeaveController@leaveout_type');
+// --------------------------------leave_type------------------------------------------
+Route::post('/leaveout_type', 'Leave\LeaveTypeController@leaveout_type');
+Route::post('/store_leaveout_type', 'Leave\LeaveTypeController@store');
 
+/*  ---------------------------------------absence_type-----------------------------*/
+Route::post('/absence_type', 'Absence\AbsenceTypeController@absence_type');
 Route::post('/create_absence_type', 'Absence\AbsenceController@create');
-Route::post('/storeabsence_type', 'Absence\AbsenceController@store');
+Route::post('/store_absence_type', 'Absence\AbsenceTypeController@store');
 Route::post('/update_absence_type/{id}', 'Absence\AbsenceController@update');
 Route::post('/absence_type/{id}', 'Absence\AbsenceController@edit');
 Route::post('/delete_absence_type/{id}', 'Absence\AbsenceController@destroy');
 Route::post('/absence_typesearch', 'Absence\AbsenceController@search');
-
-
-/* --------------------------------------------------------------------------------*/
 /*  ---------------------------------------allowance_type-----------------------------*/
 Route::post('/allowance', 'Staff\AllowanceController@index');
 Route::post('/get_allowance', 'Staff\AllowanceController@get_allowance');
@@ -186,19 +185,20 @@ Route::post('/official_holiday/{id}', 'Staff\OfficialHolidayController@edit');
 Route::post('/delete_official_holiday/{id}', 'Staff\OfficialHolidayController@destroy');
 Route::post('/official_holidaysearch', 'Staff\OfficialHolidayController@search');
 /*  ---------------------------------------allowance_type-----------------------------*/
-Route::post('/extra_type', 'Extra\ExtraController@extra_type');
+Route::post('/extra_type', 'Extra\ExtraTypeController@extra_type');
 Route::post('/extra_part', 'Extra\ExtraPartController@index');
 Route::post('/create_extra_type', 'Extra\ExtraController@create');
-Route::post('/storeextra_type', 'Extra\ExtraController@store');
+Route::post('/store_extra_type', 'Extra\ExtraTypeController@store');
 Route::post('/update_extra_type/{id}', 'Extra\ExtraController@update');
 Route::post('/extra_type/{id}', 'Extra\ExtraController@edit');
 Route::post('/delete_extra_type/{id}', 'Extra\ExtraController@destroy');
 Route::post('/extra_typesearch', 'Extra\ExtraController@search');
+Route::post('/store_extra_type', 'Extra\ExtraTypeController@store');
 
 /*  ---------------------------------------delay_type-----------------------------*/
-Route::post('/delay_type', 'Delay\DelayController@delay_type');
+Route::post('/delay_type', 'Delay\DelayTypeController@delay_type');
 Route::post('/create_delay_type', 'Delay\DelayController@create');
-Route::post('/storedelay_type', 'Delay\DelayController@store');
+Route::post('/store_delay_type', 'Delay\DelayTypeController@store');
 Route::post('/update_delay_type/{id}', 'Delay\DelayController@update');
 Route::post('/delay_type/{id}', 'Delay\DelayController@edit');
 Route::post('/delete_delay_type/{id}', 'Delay\DelayController@destroy');
@@ -246,6 +246,9 @@ Route::post('/discount/select_staff', 'Staff\DiscountController@select_staff');
 
 Route::post('/vacation_type', 'Staff\VacationTypeController@index');
 Route::post('/store_vacation_type', 'Staff\VacationTypeController@store');
+/* --------------------------------------------------------VacationType---------------------------------------------------------------------*/
+Route::post('/store_vaction_type', 'Staff\VacationTypeController@vaction_type');
+Route::post('/store_vaction_type', 'Staff\VacationTypeController@store');
 /* --------------------------------------------------------Vacation---------------------------------------------------------------------*/
 Route::post('/staff_vacation', 'Staff\VacationController@index');
 Route::post('/vacation_report', 'Staff\VacationController@report');

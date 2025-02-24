@@ -210,63 +210,12 @@ export default {
   mounted() {
     this.list();
     this.counts[0] = 1;
-
     this.type = 'official_holiday';
   },
   methods: {
 
 
-    // calc_time(index, from, into) {
-
-
-    //   var time, mm, hh;
-    //   var time_result = 0, mm_result = 0, hh_result = 0;
-
-
-    //   var split_in;
-    //   var split_out;
-    //   var date1
-    //   var date2
-    //   var date;
-
-
-    //   this.check_in[index] = $(`#in${index}`).val();
-    //   this.check_out[index] = $(`#out${index}`).val();
-    //   split_in = this.check_in[index].split(":");
-    //   split_out = this.check_out[index].split(":");
-
-    //   date = this.attendance_date.split("-");
-    //   date1 = new Date(date[0], date[1], date[2], split_in[0], split_in[1]); // 9:00 AM
-    //   date2 = new Date(date[0], date[1], date[2], split_out[0], split_out[1]); // 5:00 PM
-
-
-    //   if (date2 < date1) {
-
-    //     date2.setDate(date2.getDate() + 1);
-    //   }
-
-    //   [time, mm, hh] = this.get_diff(date1, date2);
-    //   time_result += time, mm_result += mm, hh_result += hh;
-
-
-
-    //   this.duration[index] = time_result;
-
-    //   this.translate_time(index, time_result, hh_result, mm_result, 'duration');
-
-    //   this.calc_delay(index, from, into);
-    //   this.calc_leave(index, from, into);
-    //   this.calc_extra_before(index, from, into);
-    //   this.calc_extra_after(index, from, into);
-
-    //   // console.log('----------', split_in, split_out);
-
-
-
-
-
-
-    // },
+   
     list(page = 1) {
       this.axios
         .post(`/official_holiday?page=${page}`)
@@ -286,14 +235,8 @@ export default {
 
       var date1 = new Date(`${start_date[0]}/${start_date[1]}/${start_date[2]}`);
       var date2 = new Date(`${end_date[0]}/${end_date[1]}/${end_date[2]}`);
-
-      // To calculate the time difference of two dates
       var Difference_In_Time = date2.getTime() - date1.getTime();
-
-      // To calculate the no. of days between two dates
       var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-
-      //To display the final no. of days (result)
       console.log("Total number of days between dates <br>"
         + date1 + "<br> and <br>"
         + date2 + " is: <br> "
@@ -321,7 +264,6 @@ export default {
           console.log(response);
           toastMessage("تم الاضافه بنجاح");
           this.list();
-          // this.$router.go(0);
         });
 
 

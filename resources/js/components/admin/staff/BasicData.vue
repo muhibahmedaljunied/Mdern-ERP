@@ -65,9 +65,9 @@
                         <li class="nav-item">
                           <a href="#tab10" class="nav-link" data-toggle="tab">انواع الاضافي</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                           <a href="#tab19" class="nav-link" data-toggle="tab"> اجزاء الوقت</a>
-                        </li>
+                        </li> -->
 
                         <!-- <li class="nav-item">
                           <a href="#tab15" class="nav-link" data-toggle="tab"> جزاءات الاضافي</a>
@@ -158,10 +158,10 @@
                       <div class="tab-pane" id="tab18">
                         <official-holiday></official-holiday> 
                       </div>
-
+<!-- 
                       <div class="tab-pane" id="tab19">
                         <extra-part></extra-part> 
-                      </div>
+                      </div> -->
 
                       <div class="tab-pane" id="tab21">
                         <period-time></period-time> 
@@ -207,7 +207,7 @@ import Religion from "./BasicData/Religion";
 import Allowance from "./BasicData/Allowance";
 import Nationality from "./BasicData/Nationality";
 import OfficialHoliday from "./BasicData/OfficialHoliday";
-import ExtraPart from "./BasicData/ExtraPart";
+// import ExtraPart from "./BasicData/ExtraPart";
 // import WorkSystem from "./BasicData/WorkSystem";
 import WorkType from "./BasicData/WorkType";
 // import Period from "./BasicData/Period";
@@ -230,7 +230,7 @@ export default {
     ExtraType,
     Nationality,
     OfficialHoliday,
-    ExtraPart,
+    // ExtraPart,
     // WorkSystem,
     WorkType,
     // Period,

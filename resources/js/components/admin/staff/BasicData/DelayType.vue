@@ -21,7 +21,7 @@
 
                     <th> النوع</th>
 
-
+                    <th> الكود</th>
 
                     <!-- <th >التصنيف</th> -->
 
@@ -34,19 +34,17 @@
                 <tbody>
                   <tr v-for="index in count" :key="index">
                     <td>
-                      <input v-model="name[index]" type="text" class="form-control" name="name" id="name" required />
+                      <input v-model="name[index]" type="text" class="form-control"  />
+
+                    </td>
+
+                    <td>
+                      <input v-model="code[index]" type="text" class="form-control"  />
 
                     </td>
 
 
-                    <!-- <td>
-                        <select v-model="group[index]" id="inputState" class="form-control">
-                          <option v-for="group in groups" v-bind:value="group.id">
-                            {{ group.name }}
-                          </option>
-
-                        </select>
-                      </td> -->
+               
 
 
                     <td v-if="index == 1">
@@ -62,7 +60,7 @@
                   </tr>
 
                   <tr>
-                    <td></td>
+                    <td colspan="2"></td>
                     <td>
                       <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
                     </td>
@@ -106,6 +104,7 @@
                   <tr>
                     <th class="wd-15p border-bottom-0">#</th>
                     <th class="wd-15p border-bottom-0">النوع</th>
+                    <th class="wd-15p border-bottom-0">الكود</th>
 
                     <!-- <th class="wd-15p border-bottom-0">التصنيف</th> -->
 
@@ -116,7 +115,7 @@
                   <tr v-for="(delay_type, index) in delay_types" :key="index">
                     <td>{{ index + 1 }}</td>
                     <td>{{ delay_type.name }}</td>
-
+                    <td>{{ delay_type.code }}</td>
                     <!-- <td>{{ delay_type.name }}</td> -->
                     <td>
                       <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="tn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
@@ -182,8 +181,8 @@ export default {
       this.axios
         .post(`/store_delay_type`, {
           count: this.counts,
-          type: this.type,
           name: this.name,
+          code: this.code,
           // group:this.group,
 
         }
@@ -191,6 +190,7 @@ export default {
         .then((response) => {
           console.log(response);
           toastMessage("تم الاضافه بنجاح");
+          this.list();
           // this.$router.go(0);
         });
 

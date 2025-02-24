@@ -25,7 +25,7 @@
                     <th> النوع</th>
 
 
-                    <!-- <th> التصنيف</th> -->
+                    <th> الكود</th>
 
 
 
@@ -38,20 +38,17 @@
                 <tbody>
                   <tr v-for="index in count" :key="index">
                     <td>
-                      <input v-model="name[index]" type="text" class="form-control" name="name" id="name" required />
+                      <input v-model="name[index]" type="text" class="form-control" required />
+
+                    </td>
+
+                    <td>
+                      <input v-model="code[index]" type="text" class="form-control"  required />
 
                     </td>
 
 
 
-                    <!-- <td>
-                        <select v-model="group[index]" id="inputState" class="form-control">
-                          <option v-for="group in groups" v-bind:value="group.id">
-                            {{ group.name }}
-                          </option>
-
-                        </select>
-                      </td> -->
 
 
                     <td v-if="index == 1">
@@ -67,8 +64,8 @@
                   </tr>
                   <tr>
 
-                    <td></td>
-                    <td>
+                    <td colspan="2"></td>
+                    <td >
                       <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
 
                     </td>
@@ -112,7 +109,7 @@
                 <tr>
                   <th class="wd-15p border-bottom-0">#</th>
                   <th class="wd-15p border-bottom-0">النوع</th>
-
+                  <th class="wd-15p border-bottom-0">الكود</th>
                   <!-- <th class="wd-15p border-bottom-0"> التصنيف</th> -->
                   <th class="wd-15p border-bottom-0">العمليات</th>
                 </tr>
@@ -121,7 +118,7 @@
                 <tr v-for="(absence_type, index) in absence_types" :key="index">
                   <td>{{ index + 1 }}</td>
                   <td>{{ absence_type.name }}</td>
-                  <!-- <td>{{ absence_type.name }}</td> -->
+                  <td>{{ absence_type.code }}</td>
                   <!-- <td>{{ absence_type.name }}</td> -->
 
                   <td>
@@ -176,12 +173,14 @@ export default {
   data() {
     return {
       absence_types: '',
+   
 
 
     };
   },
   mounted() {
     this.list();
+    this.counts[0] = 1;
     this.type = 'absence_type';
   },
   methods: {
@@ -191,14 +190,15 @@ export default {
       this.axios
         .post(`/store_absence_type`, {
           count: this.counts,
-          type: this.type,
           name: this.name,
+          code: this.code,
 
         }
         )
         .then((response) => {
           console.log(response);
           toastMessage("تم الاضافه بنجاح");
+          this.list();
           // this.$router.go(0);
         });
 

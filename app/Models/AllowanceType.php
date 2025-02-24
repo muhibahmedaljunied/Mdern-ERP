@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AllowanceType extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name','code'];
 
     public function allowance()
     {

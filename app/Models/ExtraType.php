@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExtraType extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name','code'];
 
     public function extra()
     {

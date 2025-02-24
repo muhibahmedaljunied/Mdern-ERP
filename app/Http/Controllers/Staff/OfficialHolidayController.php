@@ -8,6 +8,7 @@ use App\Models\VacationType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Services\CoreStaffService;
+
 class OfficialHolidayController extends Controller
 {
 
@@ -22,11 +23,13 @@ class OfficialHolidayController extends Controller
         $official_holidays = DB::table('official_holidays')
             ->select('official_holidays.*')
             ->paginate(10);
-        return response()->json(['official_holidays' => $official_holidays]);
+        return response()->json([
+            'official_holidays' => $official_holidays
+        ]);
     }
 
 
-  
+
 
 
     public function store(Request $request)
@@ -60,28 +63,5 @@ class OfficialHolidayController extends Controller
                 'status' => 'failed'
             ], 400);
         }
-    }
-
-
-    public function show(VacationType $vacationType)
-    {
-        //
-    }
-
-    public function edit(VacationType $vacationType)
-    {
-        //
-    }
-
-
-    public function update(Request $request, VacationType $vacationType)
-    {
-        //
-    }
-
-
-    public function destroy(VacationType $vacationType)
-    {
-        //
     }
 }

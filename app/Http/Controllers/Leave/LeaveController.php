@@ -25,17 +25,16 @@ class LeaveController extends Controller
 
 
 
-    ) {
-    }
+    ) {}
 
 
     public function index()
     {
 
         $minutes = 60;
-        $staffs = Cache::remember('staff', $minutes, function () {
-            return DB::table('staff')->get();
-        });
+        // $staffs = Cache::remember('staff', $minutes, function () {
+        $staffs = DB::table('staff')->get();
+        // });
         // --------------------------------------------------------------------------------------------------
 
         return response()->json([
@@ -45,32 +44,10 @@ class LeaveController extends Controller
     }
 
 
-    public function absence_type()
-    {
 
 
-        return response()->json([
-            'leave_types' => LeaveType::all(),
-            // 'groups' => $this->groups()
-        ]);
-    }
 
-    // public function groups()
-    // {
-
-
-    //     return DB::table('groups')
-    //         ->join('group_types', 'group_types.id', '=', 'groups.group_type_id')
-    //         ->where('group_types.code', 'leave')
-    //         ->select(
-    //             'groups.*',
-    //             'group_types.name as type_name'
-    //         )
-    //         ->get();
-    // }
-
-
-    public function get_staff_leave()
+    public function get_staff_leaveout()
     {
 
         //  $minutes = 60;
@@ -115,9 +92,9 @@ class LeaveController extends Controller
 
                 $this->core->setValue($value);
                 $this->init_data_store();
-       
+
                 $this->hr->store();
-        
+
                 $this->leave_sanction->create();
             }
 

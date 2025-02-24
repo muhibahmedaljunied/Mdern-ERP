@@ -27,7 +27,7 @@
 
                       <th> النوع</th>
 
-
+                      <th> الكود</th>
 
                       <!-- <th >التصنيف</th> -->
 
@@ -40,10 +40,13 @@
                   <tbody>
                     <tr v-for="index in count" :key="index">
                       <td>
-                        <input v-model="name[index]" type="text" class="form-control" name="name" id="name" required />
+                        <input v-model="name[index]" type="text" class="form-control"  />
 
                       </td>
+                      <td>
+                        <input v-model="code[index]" type="text" class="form-control"  />
 
+                      </td>
 
                       <!-- <td>
                         <select v-model="group[index]" id="inputState" class="form-control">
@@ -68,7 +71,7 @@
                     </tr>
 
                     <tr>
-                      <td></td>
+                      <td colspan="2"></td>
                       <td>
                         <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
                       </td>
@@ -114,6 +117,7 @@
                   <tr>
                     <th class="wd-15p border-bottom-0">#</th>
                     <th class="wd-15p border-bottom-0">النوع</th>
+                    <th class="wd-15p border-bottom-0">الكود</th>
 
                     <!-- <th class="wd-15p border-bottom-0">التصنيف</th> -->
 
@@ -124,7 +128,7 @@
                   <tr v-for="(leave_type, index) in leave_types" :key="index">
                     <td>{{ index + 1 }}</td>
                     <td>{{ leave_type.name }}</td>
-
+                    <td>{{ leave_type.code }}</td>
                     <!-- <td>{{ leave_type.name }}</td> -->
                     <td>
                       <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="tn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
@@ -188,10 +192,10 @@ export default {
     Add_new() {
 
       this.axios
-        .post(`/store_leave_type`, {
+        .post(`/store_leaveout_type`, {
           count: this.counts,
-          type: this.type,
           name: this.name,
+          code: this.code,
           // group:this.group,
 
         }
@@ -199,6 +203,7 @@ export default {
         .then((response) => {
           console.log(response);
           toastMessage("تم الاضافه بنجاح");
+          this.list();
           // this.$router.go(0);
         });
 
@@ -210,7 +215,7 @@ export default {
     },
     list(page = 1) {
       this.axios
-        .post(`/leave_type?page=${page}`)
+        .post(`/leaveout_type?page=${page}`)
         .then(({ data }) => {
           this.leave_types = data.leave_types;
           this.groups = data.groups;

@@ -531,11 +531,12 @@ export default {
         list(page = 1) {
 
             this.get_staff_attendance();
+            this.get_time_for_all_staff();
             this.axios
                 .post(`/attendance?page=${page}`, { type: 'attendance' })
                 .then(({ data }) => {
 
-                    this.value_list = data.list;
+                    // this.value_list = data.list;
                     this.staffs = data.staffs;
                     this.work_system_types = data.work_system_types;
                     this.init_attendance(data.list);

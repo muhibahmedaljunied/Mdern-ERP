@@ -6,8 +6,12 @@ export default {
       count: 1,
       counts: {},
       name:[],
+      code:[],
       group:[],
       groups:'',
+      // date: new Date().toISOString().substr(0, 10),
+      // start_date: new Date().toISOString().substr(0, 10),
+      // end_date: new Date().toISOString().substr(0, 10),
       // ----------------------------
       type:'',
       work_types: '',

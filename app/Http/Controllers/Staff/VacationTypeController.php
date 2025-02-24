@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Traits\Staff\BasicData\StoreTrait;
 use App\Models\VacationType;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class VacationTypeController extends Controller
@@ -21,37 +21,31 @@ class VacationTypeController extends Controller
     }
 
 
-    public function create()
+    public function vacation_type()
     {
-        //
+
+        return response()->json([
+            'vacation_types' => VacationType::all(),
+        ]);
     }
 
 
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-
-    public function show(VacationType $vacationType)
+    public function store(Request $request)
     {
-        //
+
+
+        foreach ($request->post('count') as $value) {
+
+            $work_systm = new VacationType();
+            $work_systm->name = $request->post('name')[$value];
+            $work_systm->duration = $request->post('duration')[$value];
+            $work_systm->save();
+        }
+        response()->json();
     }
 
-    public function edit(VacationType $vacationType)
-    {
-        //
-    }
+   
 
   
-    public function update(Request $request, VacationType $vacationType)
-    {
-        //
-    }
 
- 
-    public function destroy(VacationType $vacationType)
-    {
-        //
-    }
 }

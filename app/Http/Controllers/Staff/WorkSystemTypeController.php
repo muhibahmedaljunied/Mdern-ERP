@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Staff;
+
 use App\Traits\Staff\BasicData\StoreTrait;
 use App\Http\Controllers\Controller;
 use App\Models\WorkSystemDetail;
@@ -26,19 +27,17 @@ class WorkSystemTypeController extends Controller
             // 'work_system_types.work_type_id',
             // 'work_types.*'
         )
-        ->paginate(10);
+            ->paginate(10);
 
-   
+
 
         return response()->json([
             'work_types' => WorkType::all(),
             'work_system_types' => $work_system_types
         ]);
-        
-        
     }
 
-  
+
     public function store(Request $request)
     {
 
@@ -46,23 +45,23 @@ class WorkSystemTypeController extends Controller
 
 
         // dd($request->all());
-    foreach ($request->post('count') as $value) {
+        foreach ($request->post('count') as $value) {
 
-        $work_systm = new WorkSystemType();
-        $work_systm->name = $request->post('name')[$value];
-        $work_systm->work_type_id = $request->post('work_type')[$value];
-        $work_systm->save();
-    }
+            $work_systm = new WorkSystemType();
+            $work_systm->name = $request->post('name')[$value];
+            $work_systm->work_type_id = $request->post('work_type')[$value];
+            $work_systm->save();
+        }
         response()->json();
     }
-   
+
     public function create()
     {
         //
     }
 
 
- 
+
 
 
     public function show(Absence $absence)
