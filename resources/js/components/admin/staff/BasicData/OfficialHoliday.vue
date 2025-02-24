@@ -43,7 +43,8 @@
                   <tbody>
                     <tr v-for="index in count" :key="index">
                       <td>
-                        <input v-model="name[index]" type="text" class="form-control" name="name" id="name" required />
+                        <input v-model="holiday[index]" type="text" class="form-control" name="name" id="name"
+                          required />
 
                       </td>
                       <td>
@@ -68,8 +69,8 @@
                         <!-- <input @keypress="calc_time(index)" v-model="days[index]" type="number" id="num_days"
                           name="exampleRadios" class="form-control" /> -->
 
-                          <input v-model="days[index]" type="number" id="num_days"
-                          name="exampleRadios" class="form-control" />
+                        <input v-model="days[index]" type="number" id="num_days" name="exampleRadios"
+                          class="form-control" />
 
                       </td>
 
@@ -108,23 +109,24 @@
         <div class="card">
 
           <div class="card-header">
-          <!-- <span class="h2"> الموردين</span> -->
+            <!-- <span class="h2"> الموردين</span> -->
 
-          <div style="display: flex;float: left; margin: 5px">
+            <div style="display: flex;float: left; margin: 5px">
 
 
-            <button @click="Export()">
-              <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
-            </button>
+              <button @click="Export()">
+                <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
+              </button>
 
-            <button @click="Import()">
-              <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
-            </button>
+              <button @click="Import()">
+                <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
+              </button>
 
-            <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" />
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search"
+                @input="get_search()" />
+            </div>
           </div>
-        </div>
           <div class="card-body" id="printme">
             <div class="table-responsive">
               <table class="table table-bordered text-center">
@@ -198,6 +200,7 @@ export default {
         default: null,
       },
 
+      holiday: [],
       start_date: [],
       end_date: [],
       days: [],
@@ -208,7 +211,7 @@ export default {
     this.list();
     this.counts[0] = 1;
 
-    this.type = '';
+    this.type = 'official_holiday';
   },
   methods: {
 
@@ -302,6 +305,30 @@ export default {
 
 
     },
+    Add_new() {
+
+      this.axios
+        .post(`/store_official_holiday`, {
+          count: this.counts,
+          holiday: this.holiday,
+          start_date: this.start_date,
+          end_date: this.end_date,
+          days: this.days,
+
+        }
+        )
+        .then((response) => {
+          console.log(response);
+          toastMessage("تم الاضافه بنجاح");
+          this.list();
+          // this.$router.go(0);
+        });
+
+
+
+
+    },
+
 
 
   },

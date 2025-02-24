@@ -177,17 +177,61 @@
 
 
                                                         </div>
-                                                        <div v-for="attends_fri in full_day_name">
-                               
-                                                            <a v-if="attends_fri == atten" class="btn btn-danger"
+
+
+
+
+
+
+
+
+                                                    </template>
+
+
+                                                    <template>
+
+                                                        <div v-for="(attends_fri, num) in full_day_name" :key="num">
+
+                                                            <a v-if="full_day_name[num] == atten" class="btn btn-danger"
                                                                 href="javascript:void(0);" data-toggle="modal"
-                                                                data-target="#attendance_info">عطله نهايه الاسبوع
+                                                                data-target="#attendance_info">عطله
                                                             </a>
                                                         </div>
 
                                                         <div v-for="holiday in official_holidays">
 
+
                                                             <div v-if="holiday.code == 1">
+                                                                <a v-if="holiday.from_date == atten"
+                                                                    class="btn btn-link" href="javascript:void(0);"
+                                                                    data-toggle="modal"
+                                                                    data-target="#attendance_info">عيد 26 سبتمبر
+                                                                </a>
+                                                            </div>
+                                                            <div v-if="holiday.code == 2">
+                                                                <a v-if="holiday.from_date == atten"
+                                                                    class="btn btn-primary" href="javascript:void(0);"
+                                                                    data-toggle="modal"
+                                                                    data-target="#attendance_info">عيد 14 اكتوبر
+                                                                </a>
+                                                            </div>
+
+                                                            <div v-if="holiday.code == 3">
+                                                                <a v-if="holiday.from_date == atten"
+                                                                    class="btn btn-light" href="javascript:void(0);"
+                                                                    data-toggle="modal"
+                                                                    data-target="#attendance_info">عيد 30 نوفمبر
+                                                                </a>
+                                                            </div>
+                                                            <div v-if="holiday.code == 4">
+                                                                <a v-if="holiday.from_date == atten"
+                                                                    class="btn btn-success" href="javascript:void(0);"
+                                                                    data-toggle="modal"
+                                                                    data-target="#attendance_info">عيد 22 مايو
+                                                                </a>
+                                                            </div>
+
+                                                            <div v-if="holiday.code == 5">
                                                                 <a v-if="holiday.from_date == atten"
                                                                     class="btn btn-secondary" href="javascript:void(0);"
                                                                     data-toggle="modal"
@@ -198,7 +242,7 @@
                                                             </div>
 
 
-                                                            <div v-if="holiday.code == 2">
+                                                            <div v-if="holiday.code == 6">
                                                                 <a v-if="holiday.from_date == atten"
                                                                     class="btn btn-warning" href="javascript:void(0);"
                                                                     data-toggle="modal"
@@ -206,51 +250,92 @@
                                                                 </a>
                                                             </div>
 
-                                                            <div v-if="holiday.code == 3">
-                                                                <a v-if="holiday.from_date == atten"
-                                                                    class="btn btn-success" href="javascript:void(0);"
-                                                                    data-toggle="modal"
-                                                                    data-target="#attendance_info">عيد 22 مايو
-                                                                </a>
-                                                            </div>
 
 
-                                                            <div v-if="holiday.code == 4">
-                                                                <a v-if="holiday.from_date == atten"
-                                                                    class="btn btn-primary" href="javascript:void(0);"
-                                                                    data-toggle="modal"
-                                                                    data-target="#attendance_info">عيد 14 اكتوبر
-                                                                </a>
-                                                            </div>
 
-                                                            <div v-if="holiday.code == 5">
-                                                                <a v-if="holiday.from_date == atten"
-                                                                    class="btn btn-light" href="javascript:void(0);"
-                                                                    data-toggle="modal"
-                                                                    data-target="#attendance_info">عيد 30 نوفمبر
-                                                                </a>
-                                                            </div>
-
-                                                            <div v-if="holiday.code == 6">
-                                                                <a v-if="holiday.from_date == atten"
-                                                                    class="btn btn-link" href="javascript:void(0);"
-                                                                    data-toggle="modal"
-                                                                    data-target="#attendance_info">عيد 26 سبتمبر
-                                                                </a>
-                                                            </div>
 
 
 
                                                         </div>
 
 
+                                                        <div v-for="vaction in vacations"
+                                                            v-if="attendance.id == vaction.staff_id">
+
+
+                                                            <!-- <div v-if="vaction.code == 1"> -->
+                                                            <div>
+
+
+
+
+                                                                <a v-if="vaction.start_date == atten"
+                                                                    class="btn btn-warning" href="javascript:void(0);"
+                                                                    data-toggle="modal"
+                                                                    data-target="#attendance_info">{{ vaction.name }}
+                                                                </a>
+
+
+
+                                                                <a v-if="atten > vaction.start_date && atten < vaction.end_date"
+                                                                    class="btn btn-warning" href="javascript:void(0);"
+                                                                    data-toggle="modal"
+                                                                    data-target="#attendance_info">{{ vaction.name }}
+                                                                </a>
+
+                                                                <a v-if="vaction.end_date == atten"
+                                                                    class="btn btn-warning" href="javascript:void(0);"
+                                                                    data-toggle="modal"
+                                                                    data-target="#attendance_info">{{ vaction.name }}
+                                                                </a>
+
+
+                                                            </div>
+                                                            <!-- <div v-if="holiday.code == 2">
+    <a v-if="holiday.from_date == atten" class="btn btn-primary"
+        href="javascript:void(0);" data-toggle="modal"
+        data-target="#attendance_info">عيد 14 اكتوبر
+    </a>
+</div>
+
+<div v-if="holiday.code == 3">
+    <a v-if="holiday.from_date == atten" class="btn btn-light"
+        href="javascript:void(0);" data-toggle="modal"
+        data-target="#attendance_info">عيد 30 نوفمبر
+    </a>
+</div>
+<div v-if="holiday.code == 4">
+    <a v-if="holiday.from_date == atten" class="btn btn-success"
+        href="javascript:void(0);" data-toggle="modal"
+        data-target="#attendance_info">عيد 22 مايو
+    </a>
+</div>
+
+<div v-if="holiday.code == 5">
+    <a v-if="holiday.from_date == atten"
+        class="btn btn-secondary" href="javascript:void(0);"
+        data-toggle="modal" data-target="#attendance_info">عيد
+        الفطر
+    </a>
+
+</div>
+
+
+<div v-if="holiday.code == 6">
+    <a v-if="holiday.from_date == atten" class="btn btn-warning"
+        href="javascript:void(0);" data-toggle="modal"
+        data-target="#attendance_info">عيد الاضحي
+    </a>
+</div> -->
 
 
 
 
 
+
+
+                                                        </div>
                                                     </template>
-
 
 
 
@@ -326,7 +411,7 @@ export default {
             staffselected: 1,
 
             staff_on_change: "",
-            vactions: "",
+            vacations: "",
             jobs: "",
             branches: "",
             staff_types: "",
@@ -432,6 +517,8 @@ export default {
 
                     this.list_data = data.list;
                     this.official_holidays = data.official_holidays;
+                    this.vacations = data.vacations;
+
                     this.staffs = data.staffs;
 
                 })

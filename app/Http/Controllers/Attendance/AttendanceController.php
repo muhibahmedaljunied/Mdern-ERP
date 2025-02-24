@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\AttendanceDetail;
+use App\Models\OfficialHoliday;
 use App\Services\AttendanceService;
 use App\Models\Staff;
 use App\Models\WorkSystem;
@@ -64,7 +65,7 @@ class AttendanceController extends Controller
                 //         return $query
                 //             ->where('attendances.attendance_status', '=', 0)
                 //             ->orWhere('attendances.attendance_status', '=', 1);
-       
+
                 //             // ->orWhere('attendance_details.period_id', '=', $value->period_time_id);
                 //     }
                 // )
@@ -93,6 +94,11 @@ class AttendanceController extends Controller
             'list' => $staff_list,
             'staffs' => $staffs,
             'work_system_types' => $work_system_types,
+            'official_holidays' => OfficialHoliday::all(),
+            'vacations' => DB::table('vacations')
+                ->join('vacation_types', 'vacation_types.id', '=', 'vacations.vacation_type_id')
+                ->select('vacations.*','vacation_types.name')
+                ->get(),
 
         ]);
     }

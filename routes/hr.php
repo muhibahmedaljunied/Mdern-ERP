@@ -180,7 +180,7 @@ Route::post('/store_allowance', 'Staff\AllowanceController@store');
 /* --------------------------------------------------------------------official_holiday--------------------*/
 Route::post('/official_holiday', 'Staff\OfficialHolidayController@index');
 Route::post('/create_official_holiday', 'Staff\OfficialHolidayController@create');
-
+Route::post('/store_official_holiday', 'Staff\OfficialHolidayController@store');
 Route::post('/update_official_holiday/{id}', 'Staff\OfficialHolidayController@update');
 Route::post('/official_holiday/{id}', 'Staff\OfficialHolidayController@edit');
 Route::post('/delete_official_holiday/{id}', 'Staff\OfficialHolidayController@destroy');

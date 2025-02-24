@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 
 use App\Traits\Staff\BasicData\StoreTrait;
-
 use App\Models\AllowanceType;
 use App\Services\CoreStaffService;
 use App\Services\Staff\StaffService;
