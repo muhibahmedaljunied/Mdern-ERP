@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Models\Sale;
-use App\Models\Account;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\Group;
-use App\Models\GroupAccount;
-use App\Models\GroupDailyDetail;
 use App\Services\GroupService;
 use App\Services\HrGroupService;
 use App\Models\GroupType;
@@ -50,19 +46,21 @@ class GroupController extends Controller
                 'groups.*',
                 'group_types.name as type_name',
             )
-
             ->get();
         $group_types =  DB::table('group_types')->select(
             'group_types.name as type_name',
             'group_types.id as group_type_id'
         )
             ->get();
-        return response()->json(['groups' => $groups, 'group_types' => $group_types]);
+        return response()->json([
+            'groups' => $groups,
+            'group_types' => $group_types
+        ]);
     }
 
     public function get_group(Request $request)
     {
-        
+
         $this->init($request->code);
         $this->groups();
         return response()->json(['groups' => $this->groups]);

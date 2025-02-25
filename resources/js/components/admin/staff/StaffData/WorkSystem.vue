@@ -24,39 +24,15 @@
               </div>
               <div class="col-md-2">
                 <label for="status"> نوع الدوام</label>
-                <select @change="select_staff" v-model="staff_selected" name="type" id="type" class="form-control "
-                  required>
-                  <option v-for="staff in staffs" v-bind:value="staff.id">
-                    {{ staff.name }}
+                <select style="background-color:beige" v-model="work_system_type[index]" class="form-control " required>
+                  <option v-for="work_system_type in work_system_types" v-bind:value="work_system_type.id">
+                    {{ work_system_type.name }}
                   </option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label for="status">نظام الدوام</label>
-                <select @change="select_staff" v-model="staff_selected" name="type" id="type" class="form-control "
-                  required>
-                  <option v-for="staff in staffs" v-bind:value="staff.id">
-                    {{ staff.name }}
-                  </option>
-                </select>
-              </div>
-              <!-- <div class="col-md-2">
-              <label for="status">الفتره</label>
-              <select @change="select_staff" v-model="staff_selected" name="type" id="type" class="form-control " required>
-                <option v-for="staff in staffs" v-bind:value="staff.id">
-                  {{ staff.name }}
-                </option>
-              </select>
-            </div> -->
-              <!-- <div class="col-md-2">
-              <label for="status"> من تأريخ</label>
-             <input v-model="from_date" type="date" name="" id="" class="form-control">
-            </div>
 
-            <div class="col-md-2">
-              <label for="status">الي تأريخ</label>
-              <input v-model="from_date" type="date" name="" id="" class="form-control">
-            </div> -->
+                </select>
+              </div>
+            
+           
 
 
 
@@ -64,7 +40,7 @@
               <div class="col-sm-6 col-md-2" style="margin-top: auto;">
 
 
-                  <a @click="report()" href="#">
+                <a @click="report()" href="#">
 
 
                   <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
@@ -96,45 +72,83 @@
                   <table class="table table-bordered text-center">
                     <thead>
                       <tr>
+                  <th class="wd-15p border-bottom-0">#</th>
+                  <th class="wd-15p border-bottom-0">الموظف</th>
+                  <th class="wd-15p border-bottom-0"> نوع الدوام</th>
+                  <th class="wd-15p border-bottom-0"> من</th>
+                  <th class="wd-15p border-bottom-0"> الي</th>
 
-                        <th class="wd-15p border-bottom-0">اسم المؤظف</th>
-                        <th class="wd-15p border-bottom-0">التاريخ</th>
-
-                        <th class="wd-15p border-bottom-0"> نوع الخصم</th>
-                        <th class="wd-15p border-bottom-0">قيمه الخصم</th>
-
-                        <th class="wd-15p border-bottom-0" style="color:red"> الاجمالي</th>
+                  <th class="wd-15p border-bottom-0">ايام العمل</th>
 
 
-                      </tr>
+                  <th class="wd-15p border-bottom-0">العمليات</th>
+                </tr>
                     </thead>
-                    <tbody v-if="list_data && list_data.data.length > 0">
-                      <tr v-for="(discount, index) in list_data.data" :key="index">
-                        <td>{{ discount.name }}</td>
-                        <td>{{ discount.date }}</td>
+                    <tbody v-if="value_list && value_list.data.length > 0">
+                <tr v-for="(work_system, index) in value_list.data" :key="index">
+                  <td>{{ index + 1 }}</td>
 
-                        <td>
+                  <td>
 
-                          <div v-for="(discount_names, index) in discount.discount" :key="index">
-                            {{ discount_names.discount_type.name }}
-                          </div>
-                        </td>
+                    {{ work_system.name }}
+                  </td>
+                  <td>
 
-                        <td>
+                    {{ work_system.work_system_type_name }}
+                  </td>
 
-                          <div v-for="(discount_qty, index) in discount.discount" :key="index">
-                            {{ discount_qty.quantity }}
-                          </div>
-                        </td>
 
-                        <td style="color:red">{{ discount.sum_discount }}</td>
 
-                      </tr>
-                      <tr>
-                        <td colspan="4" style="color:red;font-size: x-large;">الاجمالي</td>
 
-                      </tr>
-                    </tbody>
+                  <td>
+
+                    {{ work_system.from_time }}
+                  </td>
+
+                  <td>
+
+                    {{ work_system.into_time }}
+                  </td>
+
+
+
+                  <td>
+                    <span v-for="days in JSON.parse(work_system.days)">
+
+
+                      <span style="color: red;font-size: larger;" v-if="days == 'Friday'"> جمعه</span>
+                      <span v-if="days == 'Satarday'"> سبت</span>
+                      <span v-if="days == 'Sunday'"> احد</span>
+                      <span v-if="days == 'Monday'"> اثنين</span>
+                      <span v-if="days == 'Tusday'"> ثلاثاء</span>
+                      <span v-if="days == 'Wedencday'"> اربعاء</span>
+                      <span v-if="days == 'Thresay'"> خميس</span>
+
+
+
+
+
+
+
+                    </span>
+
+                  </td>
+
+
+                  <td>
+                    <button type="button" @click="delete_work_system(work_system.id)"
+                      class="btn btn-sm waves-effect btn-danger">
+                      <i class="fa fa-trash"></i>
+                    </button>
+
+                    <router-link :to="{
+                      name: 'edit_branch',
+                      params: { id: work_system.id },
+                    }" class="edit btn btn-sm waves-effect btn-success">
+                      <i class="fa fa-edit"></i></router-link>
+                  </td>
+                </tr>
+              </tbody>
                     <tbody v-else>
                       <tr>
                         <td align="center" colspan="3">لايوجد بياتات.</td>
@@ -157,8 +171,8 @@
       </div>
     </div>
 
-    </div>
-    <!-- /row -->
+  </div>
+  <!-- /row -->
 </template>
 
 <script>
@@ -172,23 +186,28 @@ export default {
   mixins: [operation],
   data() {
     return {
-      discount_types: "",
-      staffs: '',
-      staffselected: '',
-      typeselected: '',
-      date: '',
-      quantity: '',
-      staff_selected: 1,
-      note: '',
-      name: '',
-      table: 'discount',
-      list_data: {
+      values: [
+
+      ],
+
+      value_list: {
         type: Object,
         default: null,
       },
-      from_date: new Date().toISOString().substr(0, 10),
-      into_date: new Date().toISOString().substr(0, 10),
-      word_search: "",
+      staffs: '',
+      day_value: [],
+
+      day: [],
+
+      staff: [],
+      work_system_type: [],
+
+      period_selected: [],
+
+      days: '',
+      period_type_selected: '',
+      sort_period: '',
+
     };
   },
   mounted() {
@@ -216,13 +235,17 @@ export default {
         });
     },
 
-    list(page = 1) {
+    list() {
       this.axios
-        .post(`/discount?page=${page}`)
-        .then(({ data }) => {
-          this.list_data = data.list;
-          this.discount_types = data.discount_types;
-          this.staffs = data.staffs;
+        .post(`/work_system`)
+        .then((responce) => {
+
+          console.log('eeeewwwww', responce);
+          this.value_list = responce.data.work_systems;
+          this.work_system_types = responce.data.work_system_types;
+          this.staffs = responce.data.staffs;
+          this.period_times = responce.data.period_times;
+          this.days = responce.data.days;
         })
         .catch(({ response }) => {
           console.error(response);

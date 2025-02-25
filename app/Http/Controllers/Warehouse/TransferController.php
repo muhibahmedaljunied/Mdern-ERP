@@ -193,6 +193,8 @@ class TransferController extends Controller
 
         try {
 
+            // dd($this->core->data);
+
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
             $warehouse->add(); // this handle data in transfer table

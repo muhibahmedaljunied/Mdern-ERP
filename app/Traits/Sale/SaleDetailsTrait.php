@@ -23,10 +23,11 @@ trait SaleDetailsTrait
         $Details->save();
     }
 
-    function refresh_qty_return_sale_details()
+    function refresh_qty_sale_details()
     {
 
  
+      
       
         DB::table('sale_details')
             ->where(['store_product_id' => $this->core->data['old'][$this->core->value]['store_product_id']])
@@ -35,7 +36,7 @@ trait SaleDetailsTrait
             ->increment('qty_return', $this->core->micro_unit_qty);
 
       
-
+        
 
     }
 }

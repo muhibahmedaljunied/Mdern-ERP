@@ -318,7 +318,7 @@ class StaffController extends Controller
             ->select('groups.code as code', 'group_types.code as type')
             ->get();
 
- 
+
 
 
         try {
@@ -365,24 +365,15 @@ class StaffController extends Controller
             //     intval($this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id'])
             // );
 
-            
+
             if ($value->type != 'advance') {
 
                 $staff_allowance = new GroupAccountDetail();
                 $staff_allowance->group_account_id = intval($this->core->data['staff_' . $value->code . '_account_hraccount_id']);
                 $staff_allowance->account_id = intval($this->core->data['staff_' . $value->code . '' . $value->type . '_second_account_id']);
                 $staff_allowance->save();
-
-        
-          
             }
-
-         
         }
-
-      
-    
-    
     }
 
     // public function account_left($value)
@@ -394,7 +385,7 @@ class StaffController extends Controller
 
     //         if ($this->core->data['staff_' . $value->code + $value->type . '_account_id']) {
 
-        
+
     //             $student->account_second_id = $this->core->data['staff_' . $value->code + $value->type . 'second_account_id'];
     //             // $student->update();
     //         }
@@ -454,7 +445,7 @@ class StaffController extends Controller
     //     // }
     // }
 
- 
+
     public function get_staff_account_setting()
     {
 
@@ -481,6 +472,7 @@ class StaffController extends Controller
             ->select('*', 'code as type')
 
             ->get();
+
 
 
 

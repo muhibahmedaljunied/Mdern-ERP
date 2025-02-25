@@ -267,9 +267,9 @@
                 ربط الجسابات </router-link>
             </li>
 
-            <li>
+            <!-- <li>
               <router-link class="slide-item" to="/company">بيانات الشركه</router-link>
-            </li>
+            </li> -->
           </ul>
 
         </li>

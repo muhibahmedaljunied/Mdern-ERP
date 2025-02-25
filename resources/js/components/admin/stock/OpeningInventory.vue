@@ -154,22 +154,22 @@
                                             <thead>
                                                 <tr>
                                                     <!-- <th>Code</th> -->
-                                                    <th>المنتج</th>
+                                                    <th class="wd-15p border-bottom-0">المنتج</th>
                                                     <!-- <th>المجموعه</th> -->
 
-                                                    <th>الحاله</th>
-                                                    <th>الموصفات والطراز</th>
-                                                    <th>المخزن</th>
-                                                    <th>الوحده</th>
-                                                    <th>التكلفه</th>
+                                                    <th class="wd-15p border-bottom-0">الحاله</th>
+                                                    <th class="wd-15p border-bottom-0">الموصفات والطراز</th>
+                                                    <th class="wd-15p border-bottom-0">المخزن</th>
+                                                    <th class="wd-15p border-bottom-0">الوحده</th>
+                                                    <th class="wd-15p border-bottom-0">التكلفه</th>
 
-                                                    <th>الكميه</th>
+                                                    <th class="wd-15p border-bottom-0">الكميه</th>
 
-                                                    <th>الاجمالي</th>
-                                                    <th>تاريخ الانتهاء</th>
+                                                    <th class="wd-15p border-bottom-0">الاجمالي</th>
+                                                    <th class="wd-15p border-bottom-0">تاريخ الانتهاء</th>
 
 
-                                                    <th>اضافه</th>
+                                                    <th class="wd-15p border-bottom-0">اضافه</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -371,19 +371,18 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered text-right m-t-30"
-                                            style="width: 100%; font-size: x-small">
+                                        <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 60px">#</th>
-                                                    <th style="width: 60px">المنتج</th>
-                                                    <th style="width: 60px">المخزن</th>
-                                                    <th style="width: 60px">الحاله</th>
-                                                    <th style="width: 60px">المواصفات والطراز</th>
-                                                    <th style="width: 60px">الكميه </th>
-                                                    <th style="width: 60px">التكلفه</th>
-                                                    <th style="width: 60px">الاجمالي</th>
-                                                    <th style="width: 60px">العمليات</th>
+                                                    <th class="wd-15p border-bottom-0">#</th>
+                                                    <th class="wd-15p border-bottom-0">المنتج</th>
+                                                    <th class="wd-15p border-bottom-0">المخزن</th>
+                                                    <th class="wd-15p border-bottom-0">الحاله</th>
+                                                    <th class="wd-15p border-bottom-0">المواصفات والطراز</th>
+                                                    <th class="wd-15p border-bottom-0">الكميه </th>
+                                                    <th class="wd-15p border-bottom-0">التكلفه</th>
+                                                    <th class="wd-15p border-bottom-0">الاجمالي</th>
+                                                    <th class="wd-15p border-bottom-0">العمليات</th>
                                                 </tr>
                                             </thead>
                                             <tbody v-if="opening_inventuries && opening_inventuries.length > 0">

@@ -84,13 +84,18 @@ Phpinfo()
  about to be   على وشك أن يكون
  So whereas  في حين أن
 
-7ec3b14833f97ee0ca4cd25085fd5fa750e39892d4053c290c3a4dd89b42f1d0
-
  git reset -–hard <ORIGINAL_COMMIT 4>    Undo the last merge
 
  git reset -–hard <ORIGINAL_COMMIT 9>   undo the rebasing
 
  git branch -D paul_branch  delete branch 
+
+
+ --------------------
+
+ عند الضغط علي المخزن في الاعلي لا يسجل الحساب المقابل له في مرتجع المبيعات(مشكله يجب حلها)
+
+ في حاله المبيعات والمشتريات والمردودات هل يمكن ربط كل من هولاء العمليات بصندوق او ينك ومخزن محدد او حتي كاافتراضي في حاله المستخدم لم يدخل بيانات (ميزه يمكن ويفضل اضافتها)
 
 
 

@@ -226,7 +226,7 @@
                               <tr>
                                 <!-- <th>الرقم</th> -->
                                 <th>اسم المنتج</th>
-                                <th> الباركود </th>
+                                <!-- <th> الباركود </th> -->
                                 <th> المواصفات والطراز</th>
                                 <th>الحاله</th>
                                 <th>المخزن</th>
@@ -261,12 +261,12 @@
                                     {{ sale_details.product }}
                                   </div>
                                 </td>
-
+<!-- 
                                 <td>
                                   <div class="form-group">
                                     <vue-barcode :value="sale_details.product_code" tag="svg"></vue-barcode>
                                   </div>
-                                </td>
+                                </td> -->
 
                                 <td>{{ sale_details.desc }}</td>
                                 <td>{{ sale_details.status }}</td>
@@ -766,13 +766,13 @@ export default {
 
       console.log(this.qty[i], this.unit[i][1], this.detail[i].avilable_qty, this.detail[i].qty);
 
-      if ((this.qty[i] * this.unit[i][1]) > this.detail[i].avilable_qty) {
+      // if ((this.qty[i] * this.unit[i][1]) > this.detail[i].avilable_qty) {
 
 
-        $(`#message_validation${i}`).html("كميه المرتجع اكبر من كمبه البيع");
+      //   $(`#message_validation${i}`).html("كميه المرتجع اكبر من كمبه البيع");
 
-        return 0;
-      }
+      //   return 0;
+      // }
 
       if ((this.qty[i] * this.unit[i][1]) > this.detail[i].qty) {
 
@@ -876,7 +876,7 @@ export default {
           unit: this.unit,
           qty: this.qty,
           total: this.total,
-
+          total_quantity:this.total_quantity,
           debit: {
             account_id: this.storem_account,
             value: this.total,
@@ -890,7 +890,7 @@ export default {
 
           },
           type_daily: 'salereturn',
-          type_payment: this.Way_to_pay_selected,
+          payment_type: this.Way_to_pay_selected,
           daily_index: 0,
           description: this.description,
           type_refresh: this.type_refresh,

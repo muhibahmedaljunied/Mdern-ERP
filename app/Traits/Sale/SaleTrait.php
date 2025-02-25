@@ -28,6 +28,7 @@ trait SaleTrait
         );
         // $this->core->sale =  $table_one;
         $this->core->sale_id =  $table_one->id;
+
         $this->core->stockable = $table_one;
         $this->core->paymentable = $table_one;
     }
@@ -35,7 +36,7 @@ trait SaleTrait
     public function refresh_sale_table()
     {
 
-  
+
         DB::table('sales')
             ->where(['id' => $this->core->sale_id])
             ->update(['daily_id' => $this->core->daily_id]);

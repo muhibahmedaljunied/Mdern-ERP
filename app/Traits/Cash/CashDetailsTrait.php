@@ -24,7 +24,7 @@ trait CashDetailsTrait
 
 
     }
-    function refresh_qty_return_cash_details()
+    function refresh_qty_cash_details()
     {
 
  

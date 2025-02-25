@@ -50,11 +50,8 @@
                                                                             v-model="group[
                                                                                 index
                                                                                 ]
-                                                                                " v-on:change="
-                                                                                onchange(
-                                                                                    index
-                                                                                )
-                                                                                ">
+                                                                                " 
+                                                                                >
                                                                             <!-- <option v-bind:value="1">الكل</option> -->
                                                                             <option v-for="gg in groups"
                                                                                 v-bind:value="gg.group_id
@@ -72,11 +69,8 @@
                                                                             v-model="bank[
                                                                                 index
                                                                                 ]
-                                                                                " v-on:change="
-                                                                                onchange(
-                                                                                    index
-                                                                                )
-                                                                                ">
+                                                                                " 
+                                                                                >
                                                                             <!-- <option v-bind:value="1">الكل</option> -->
                                                                             <option v-for="bank in banks"
                                                                                 v-bind:value="bank.id
@@ -287,23 +281,23 @@ export default {
             // this.$router.go(0);
         },
 
-        onchange(index) {
-            this.axios
-                .post(`/get_bank_group/${this.type_group[index]}`)
-                .then(({ data }) => {
-                    var arrayLength = data.groups.length;
-                    console.log(arrayLength);
-                    var html = "<option></option>";
+        // onchange(index) {
+        //     this.axios
+        //         .post(`/get_bank_group/${this.type_group[index]}`)
+        //         .then(({ data }) => {
+        //             var arrayLength = data.groups.length;
+        //             console.log(arrayLength);
+        //             var html = "<option></option>";
 
-                    for (var i = 0; i < arrayLength; i++) {
-                        html =
-                            html +
-                            `<option  value= ${data.groups[i].id} >${data.groups[i].name}  </option>`;
-                    }
+        //             for (var i = 0; i < arrayLength; i++) {
+        //                 html =
+        //                     html +
+        //                     `<option  value= ${data.groups[i].id} >${data.groups[i].name}  </option>`;
+        //             }
 
-                    $(`#group${index}`).html(html);
-                });
-        },
+        //             $(`#group${index}`).html(html);
+        //         });
+        // },
 
         list() {
             this.axios.post(`/mark_bank`).then(({ data }) => {

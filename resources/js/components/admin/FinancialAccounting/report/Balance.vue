@@ -188,7 +188,7 @@
                     <tr>
 
                       <td style="text-align: right;font-weight: 400">ايراد غياب</td>
-                      <td style="text-align: right;color: blue;"> 20000000</td>
+                      <td style="text-align: right;color: blue;"> </td>
 
 
 

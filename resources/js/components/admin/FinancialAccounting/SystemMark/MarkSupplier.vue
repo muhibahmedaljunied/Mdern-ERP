@@ -57,11 +57,7 @@
                                                                                     index
                                                                                 ]
                                                                             "
-                                                                            v-on:change="
-                                                                                onchange(
-                                                                                    index
-                                                                                )
-                                                                            "
+                                                                           
                                                                         >
                                                                          
                                                                             <option
@@ -83,11 +79,8 @@
                                                                             v-model="group[
                                                                                 index
                                                                                 ]
-                                                                                " v-on:change="
-                                                                                onchange(
-                                                                                    index
-                                                                                )
-                                                                                ">
+                                                                                " 
+                                                                                >
 
                                                                             <option v-for="types in groups"
                                                                                 v-bind:value="types.group_id
@@ -105,11 +98,7 @@
                                                                             v-model="supplier[
                                                                                 index
                                                                                 ]
-                                                                                " v-on:change="
-                                                                                onchange(
-                                                                                    index
-                                                                                )
-                                                                                ">
+                                                                                " >
 
                                                                             <option v-for="ss in suppliers"
                                                                                 v-bind:value="ss.id
@@ -336,23 +325,23 @@ export default {
             // this.$router.go(0);
         },
 
-        onchange(index) {
-            this.axios
-                .post(`/get_supplier_group/${this.type_group[index]}`)
-                .then(({ data }) => {
-                    var arrayLength = data.groups.length;
-                    console.log(arrayLength);
-                    var html = "<option></option>";
+        // onchange(index) {
+        //     this.axios
+        //         .post(`/get_supplier_group/${this.type_group[index]}`)
+        //         .then(({ data }) => {
+        //             var arrayLength = data.groups.length;
+        //             console.log(arrayLength);
+        //             var html = "<option></option>";
 
-                    for (var i = 0; i < arrayLength; i++) {
-                        html =
-                            html +
-                            `<option  value= ${data.groups[i].id} >${data.groups[i].name}  </option>`;
-                    }
+        //             for (var i = 0; i < arrayLength; i++) {
+        //                 html =
+        //                     html +
+        //                     `<option  value= ${data.groups[i].id} >${data.groups[i].name}  </option>`;
+        //             }
 
-                    $(`#group${index}`).html(html);
-                });
-        },
+        //             $(`#group${index}`).html(html);
+        //         });
+        // },
 
         list() {
             this.axios.post(`/mark_supplier`).then(({ data }) => {

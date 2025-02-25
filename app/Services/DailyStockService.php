@@ -40,11 +40,14 @@ class DailyStockService
     public function detect_number_daily()
     {
         // dd(gettype($this->core->value));
+
+
         if (gettype($this->core->value) == 'string' || gettype($this->core->value) == 'integer') {
 
 
             $this->one_daily();
         }
+
 
         if (gettype($this->core->value) == 'array') {
 
@@ -53,6 +56,8 @@ class DailyStockService
     }
     public function daily()
     {
+
+
 
         $daily = new Daily();
         $daily->daily_date = $this->core->data['date'];
@@ -102,13 +107,17 @@ class DailyStockService
                 if ($value == $i) {
 
                     $this->core->set_row_daily_details($i); //this set number of row
-
+          
                     $this->set_daily_value(); //this set data of daily 
+             
 
                     $this->detect_number_daily_detail(); //this check for make refreshing in DailyDetail Table
 
                 }
+    
             }
+
+
         }
     }
 
@@ -122,8 +131,10 @@ class DailyStockService
 
 
 
+
         $this->init_items($type);
         $this->detect_number_daily();
+
 
 
 
@@ -141,6 +152,7 @@ class DailyStockService
 
         $this->core->dailyDetailId_item[$this->core->daily_type] = (gettype($this->core->data[$this->core->daily_type]['value']) == 'array') ?
             $this->core->data[$this->core->daily_type]['value'][$this->core->row_daily_details] : $this->core->data[$this->core->daily_type]['value'];
+
     }
 
 
@@ -162,7 +174,7 @@ class DailyStockService
     {
 
 
-
+        
         $daily = new GroupAccountDailyDetail();
         $daily->dailyable()->associate($this->core->account_details);
         $daily->daily_detail_id = $this->core->dailyDetailId;
@@ -185,16 +197,18 @@ class DailyStockService
 
 
 
-
+  
 
         if (array_key_exists('account_details', $this->core->data[$this->core->daily_type])) {
 
-
+          
             $this->with_daily_detail();
         } else {
 
+  
             $this->without_daily_detail();
         }
+        
     }
 
     public function without_daily_detail()
@@ -215,7 +229,7 @@ class DailyStockService
     public function with_daily_detail()
     {
 
-
+ 
         if (
             gettype($this->core->data[$this->core->daily_type]['account_details']) == 'string' ||
             gettype($this->core->data[$this->core->daily_type]['account_details']) == 'integer' ||
@@ -228,7 +242,7 @@ class DailyStockService
             $this->one_daily_detail();
         }
 
-
+   
         if (
             gettype($this->core->data[$this->core->daily_type]['account_details']) == 'array'
 
@@ -265,6 +279,7 @@ class DailyStockService
 
 
         $this->data_daily_detail();
+
         $this->set_account_details();
     }
 
@@ -279,7 +294,10 @@ class DailyStockService
 
         // this check if account content account_details
         $this->daily_payment->check_payment_type(); //this check type of debit or credit daily as details
+
         $this->store_group_account(); //insert data into  group_daily_details 
+
+
         // dd(132);
     }
 

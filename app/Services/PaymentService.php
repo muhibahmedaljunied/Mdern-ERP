@@ -24,11 +24,11 @@ class PaymentService
 
 
         $payment_status = 'paiding';
-        if ($this->core->data['type_payment'] == 1) {
+        if ($this->core->data['payment_type'] == 1) {
 
             $payment_status = 'paiding';
         }
-        if ($this->core->data['type_payment'] == 2) {
+        if ($this->core->data['payment_type'] == 2) {
 
             if ($this->core->data['paid'] == 0) {
 
@@ -43,7 +43,7 @@ class PaymentService
 
         $payment = new Payment();
         $payment->paymentable()->associate($this->core->paymentable);
-        $payment->payment_info = $this->core->data['type_payment'];
+        $payment->payment_info = $this->core->data['payment_type'];
         $payment->payment_status = $payment_status;
         $payment->paid = $this->core->data['paid'];
         $payment->remaining = $this->core->data['remaining'];
