@@ -84,8 +84,16 @@
                           </td>
 
                           <td>
-                            <input style="background-color:beige" v-model="status[index]" type="number"
-                              class="form-control" required />
+                            <select style="background-color:beige" v-model="status[index]"
+                              class="form-control " required>
+                              <option  v-bind:value="1">
+                                مفعل
+                              </option>
+                              <option  v-bind:value="0">
+                                غير مفعل
+                              </option>
+
+                            </select>
 
                           </td>
 

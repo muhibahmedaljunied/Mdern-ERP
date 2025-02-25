@@ -1,15 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Customer;
-use App\Models\Sale;
-use App\Models\Account;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\Group;
-use App\Models\GroupAccount;
-use App\Models\GroupDailyDetail;
 use App\Services\GroupService;
 use App\Services\HrGroupService;
 use App\Models\GroupType;

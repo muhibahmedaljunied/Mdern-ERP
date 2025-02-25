@@ -143,14 +143,14 @@
                   <tr>
                     <!-- <th>  رقم الفاتوره </th> -->
                     <th>اسم المنتج</th>
-                    <th> الباركود</th>
+                    <!-- <th> الباركود</th> -->
                     <th> المواصفات والطراز</th>
                     <th>الحاله</th>
                     <th>المخزن</th>
 
                     <th class="wd-15p border-bottom-0"> كميه الشراء</th>
                     <!-- <th>الوحده</th> -->
-                    <th class="wd-15p border-bottom-0"> السعر </th>
+                    <th class="wd-15p border-bottom-0"> سعر الوحده </th>
                     <!-- <th class="wd-15p border-bottom-0"> الاجمالي </th> -->
 
                     <!-- <th class="wd-15p border-bottom-0">  الكميه المرتحعه</th> -->
@@ -163,7 +163,7 @@
                     <!-- <td>{{ purchase_details.id }}</td> -->
 
                     <td>{{ purchase_details.product }}</td>
-                    <td>{{ purchase_details.product_code }}</td>
+                    <!-- <td>{{ purchase_details.product_code }}</td> -->
                     <td>{{ purchase_details.desc }}</td>
                     <td>{{ purchase_details.status }}</td>
                     <td>{{ purchase_details.store }}</td>

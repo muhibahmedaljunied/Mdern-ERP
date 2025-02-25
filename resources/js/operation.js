@@ -8,6 +8,7 @@ export default {
                 type: Object,
                 default: null,
             },
+            show:'',
             date: new Date().toISOString().substr(0, 10),
             dateselected: new Date().toISOString().substr(0, 10),
             expiry_date: new Date().toISOString().substr(0, 10),

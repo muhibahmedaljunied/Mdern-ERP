@@ -148,7 +148,7 @@
                   <tr>
                     <!-- <th>الرقم</th> -->
                     <th>اسم المنتج</th>
-                                 <th>الباركود</th>
+                                 <!-- <th>الباركود</th> -->
                     <th> المواصفات والطراز</th>
                     <th>الحاله</th>
                     <th>المخزن</th>
@@ -164,9 +164,9 @@
                     <!-- <td>{{ sale_details.id }}</td> -->
                     <td>{{ sale_details.product }}</td>
 
-                    <td>
+                    <!-- <td>
                       <vue-barcode  :value="sale_details.product_code" tag="svg"></vue-barcode>
-                    </td>
+                    </td> -->
                     <td>{{ sale_details.desc }}</td>
                     <td>{{ sale_details.status }}</td>
                     <td>{{ sale_details.store }}</td>
@@ -294,6 +294,8 @@ export default {
             this.sale_detail.forEach((item) => {
               this.total = parseInt(item.total) + parseInt(this.total);
             });
+
+          
 
           })
           .catch(({ response }) => {

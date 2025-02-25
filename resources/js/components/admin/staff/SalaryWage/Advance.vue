@@ -307,7 +307,17 @@
                             </td>
 
 
+                            <td>
+                      <button type="button" class="btn btn-danger btn-sm waves-effect">
+                        <i class="fa fa-trash"></i>
+                      </button>
 
+
+                      <a class="btn btn-info btn-sm waves-effect btn-agregar" data-target="#updateAd"
+                        data-toggle="modal" id="agregar_productos">
+                        <i class="fa fa-edit"></i></a>
+
+                    </td>
 
 
                             <!-- <td>

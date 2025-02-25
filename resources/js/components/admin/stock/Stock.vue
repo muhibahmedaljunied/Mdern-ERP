@@ -54,7 +54,7 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table text-md-nowrap" id="example1">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th class="wd-15p border-bottom-0">
@@ -63,9 +63,9 @@
                                                 <th class="wd-15p border-bottom-0">
                                                     المنتج
                                                 </th>
-                                                <th class="wd-15p border-bottom-0">
+                                                <!-- <th class="wd-15p border-bottom-0">
                                                     الباركود
-                                                </th>
+                                                </th> -->
                                                 <th class="wd-15p border-bottom-0">
                                                     الحاله
                                                 </th>
@@ -83,7 +83,7 @@
                                             <tr v-for="(stock, index) in stocks.data" :key="index">
                                                 <td>{{ index + 1 }}</td>
                                                 <td>{{ stock.product }}</td>
-                                                <td>
+                                                <!-- <td>
 
 
 
@@ -94,7 +94,7 @@
 
 
 
-                                                </td>
+                                                </td> -->
                                                 <td>{{ stock.status }}</td>
                                                 <td>{{ stock.desc }}</td>
 

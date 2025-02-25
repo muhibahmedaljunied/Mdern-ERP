@@ -24,6 +24,19 @@ trait PurchaseReturnTrait
 
     }
 
+     public function refresh_qty_return_purchase_details()
+    {
+
+
+        DB::table('purchase_details')
+            ->where(['store_product_id' => $this->core->data['old'][$this->core->value]['store_product_id']])
+            ->where(['purchase_id' =>   $this->core->data['purchase_id']])
+            ->increment('qty_return', $this->core->micro_unit_qty);
+        // ->increment('qty_return', $this->core->data['qty'][$this->core->value]);
+
+
+
+    }
     public function refresh_purchase_return_table()
     {
 

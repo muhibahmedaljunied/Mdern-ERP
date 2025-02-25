@@ -49,7 +49,7 @@
                             >الحضور والغياب</a
                           >
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                         <a href="#tab11" class="nav-link" data-toggle="tab"
                             >الحضور والغياب اليومي</a
                           >
@@ -58,7 +58,7 @@
                         <a href="#tab12" class="nav-link" data-toggle="tab"
                             >الحضور والغياب الشهري</a
                           >
-                        </li>
+                        </li> -->
 
                         <li class="nav-item">
                           <a href="#tab6" class="nav-link" data-toggle="tab"> الاضافي</a>
@@ -112,14 +112,14 @@
              
                       </div>
 
-                      <div class="tab-pane" id="tab11">
+                      <!-- <div class="tab-pane" id="tab11">
                              <attendance-list></attendance-list>
              
                       </div>
                       <div class="tab-pane" id="tab12">
                              <attendance-monthly></attendance-monthly>
              
-                      </div>
+                      </div> -->
 
                       <div class="tab-pane" id="tab6">
                         <extra></extra>
@@ -169,8 +169,8 @@ import leave from "./StaffData/leave";
 
 import SalaryDetails from "./StaffData/SalaryDetails";
 import Attendance from "./StaffData/Attendance";
-import AttendanceList from "./StaffData/AttendanceList";
-import AttendanceMonthly from "./StaffData/AttendanceMonthly";
+// import AttendanceList from "./StaffData/AttendanceList";
+// import AttendanceMonthly from "./StaffData/AttendanceMonthly";
 
 import Extra from "./StaffData/Extra";
 
@@ -190,8 +190,8 @@ export default {
     PersonalInformation,
     SalaryDetails,
     Attendance,
-    AttendanceList,
-    AttendanceMonthly,
+    // AttendanceList,
+    // AttendanceMonthly,
     Extra,
     Discount,
     StaffSanction,

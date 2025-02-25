@@ -790,7 +790,7 @@ export default {
     check_data(i) {
 
 
-      console.log('dddddd', i, this.unit[1]);
+      console.log('dddddd', this.qty[i] * this.unit[i][1],this.detail[i].availabe_qty);
       if ((this.qty[i] * this.unit[i][1]) > this.detail[i].availabe_qty) {
 
 

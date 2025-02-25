@@ -24,14 +24,14 @@
               </div>
               <div class="col-md-2">
                 <label for="status"> نوع الاضافي</label>
-                <select @change="select_staff" v-model="staff_selected" name="type" id="type" class="form-control "
-                  required>
-                  <option v-for="staff in staffs" v-bind:value="staff.id">
-                    {{ staff.name }}
+                <select style="background-color: beige;" v-model="typeselected[index]" name="type" id="type"
+                  class="form-control" required>
+                  <option v-for="extra_type in extra_types" v-bind:value="extra_type.id">
+                    {{ extra_type.name }}
                   </option>
                 </select>
               </div>
-          
+
               <div class="col-sm-6 col-md-2" style="margin-top: auto;">
 
 

@@ -9,8 +9,6 @@ use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\SaleReturn;
-use App\Models\StoreProduct;
-use App\Repository\CheckData\CheckSaleReturnRepository;
 use App\Repository\Qty\QtyStockRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +40,7 @@ class SaleReturnController extends Controller
         ]);
         $this->init();
         $this->get_details();
+ 
         $this->qty->handle_qty();
         return response()->json([
             'details' => $this->qty->details,

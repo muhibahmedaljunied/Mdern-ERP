@@ -23,9 +23,9 @@ class StockController extends Controller
 
 
         $qty->set_compare_array(['quantity']);
-        $qty->details = Cache::rememberForever('stock', function () {
+        // $qty->details = Cache::rememberForever('stock', function () {
 
-            return StoreProduct::where('store_products.quantity', '!=', 0)
+            $qty->details = StoreProduct::where('store_products.quantity', '!=', 0)
                 ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
                 ->join('stores', 'store_products.store_id', '=', 'stores.id')
                 ->join('products', 'store_products.product_id', '=', 'products.id')
@@ -39,7 +39,7 @@ class StockController extends Controller
 
                 )
                 ->paginate(100);
-        });
+        // });
 
 
         $qty->handle_qty();

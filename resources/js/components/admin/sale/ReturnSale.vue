@@ -217,7 +217,7 @@
                           <tr>
                             <!-- <th>الرقم</th> -->
                             <th>اسم المنتج</th>
-                            <th> الباركود </th>
+                            <!-- <th> الباركود </th> -->
                             <th> المواصفات والطراز</th>
                             <th>الحاله</th>
                             <th>المخزن</th>
@@ -255,12 +255,12 @@
                               </div>
                             </td>
 
-                            <td>
+                            <!-- <td>
                               <div class="form-group">
                                 <vue-barcode :value="sale_details.product_code" tag="svg" width='2'
                                   height='70'></vue-barcode>
                               </div>
-                            </td>
+                            </td> -->
 
                             <td>{{ sale_details.desc }}</td>
                             <td>{{ sale_details.status }}</td>
@@ -818,15 +818,15 @@ export default {
     check_data(i) {
 
 
-      // console.log(this.qty[i], this.unit[i][1], this.detail[i].avilable_qty, this.detail[i].qty);
+      console.log('2222222',this.qty[i], this.unit[i][1], this.detail[i].avilable_qty, this.detail[i].qty);
 
-      if ((this.qty[i] * this.unit[i][1]) > this.detail[i].avilable_qty) {
+      // if ((this.qty[i] * this.unit[i][1]) > this.detail[i].avilable_qty) {
 
 
-        $(`#message_validation${i}`).html("كميه المرتجع اكبر من كمبه البيع");
+      //   $(`#message_validation${i}`).html("كميه المرتجع اكبر من كمبه البيع");
 
-        return 0;
-      }
+      //   return 0;
+      // }
 
       if ((this.qty[i] * this.unit[i][1]) > this.detail[i].qty) {
 
@@ -931,6 +931,7 @@ export default {
           qty: this.qty,
           store: this.storem, //this store that we was returned into it      
           total: this.total,
+          total_quantity:this.total_quantity,
           debit: {
             account_id: this.storem_account,
             value: this.total,
@@ -944,7 +945,7 @@ export default {
 
           },
           type_daily: 'salereturn',
-          type_payment: this.Way_to_pay_selected,
+          payment_type: this.Way_to_pay_selected,
           daily_index: 0,
           description: this.description,
           type_refresh: this.type_refresh,

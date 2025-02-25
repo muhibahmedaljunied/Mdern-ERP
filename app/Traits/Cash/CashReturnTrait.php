@@ -45,5 +45,19 @@ trait CashReturnTrait
         $Details->save();
     }
 
+    function refresh_qty_return_cash_details()
+    {
+
+ 
+        DB::table('cash_details')
+            ->where(['store_product_id' => $this->core->data['old'][$this->core->value]['store_product_id']])
+            ->where(['cash_id' => $this->core->data['cash_id']])
+            // ->increment('qty_return', $this->core->data['qty'][$this->core->value]);
+            ->increment('qty_return', $this->core->micro_unit_qty);
+
+
+
+    }
+
 }
 

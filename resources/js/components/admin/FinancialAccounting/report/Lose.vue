@@ -33,7 +33,7 @@
                     <tr>
 
                       <td style="text-align: right;font-weight: 400">ايراد غياب</td>
-                      <td style="text-align: right;"> 20000000</td>
+                      <td style="text-align: right;"> </td>
 
 
 
@@ -63,7 +63,7 @@
                     <tr>
 
                       <td style="text-align: right;font-weight: 400">ايراد غياب</td>
-                      <td style="text-align: center;"> 20000000</td>
+                      <td style="text-align: center;"> </td>
 
 
 

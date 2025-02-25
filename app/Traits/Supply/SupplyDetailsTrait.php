@@ -29,7 +29,7 @@ trait SupplyDetailsTrait
         $Details->save();
     }
 
-    public function refresh_qty_return_supply_details()
+    public function refresh_qty_supply_details()
     {
 
         DB::table('supply_details')

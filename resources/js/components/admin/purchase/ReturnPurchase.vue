@@ -177,7 +177,7 @@
                           <tr>
                             <!-- <th>الرقم</th> -->
                             <th>اسم المنتج</th>
-                            <th> الباركود</th>
+                            <!-- <th> الباركود</th> -->
                             <th>كميه الشراء</th>
                             <th>الكميه المتوفره</th>
                             <th>الحاله</th>
@@ -205,12 +205,12 @@
                               {{ purchase_details.product }}
                             </td>
 
-                            <td>
+                            <!-- <td>
                               <div class="form-group">
                               <ejs-barcodegenerator ref="barcodeControl" width="180px" height="80px" type="Codabar"
                                 :value="purchase_details.product_code" mode="SVG"></ejs-barcodegenerator>
                               </div>
-                            </td>
+                            </td> -->
 
 
                             <td>
@@ -913,7 +913,7 @@ export default {
           },
           // -----------------------------------------------------------
           type_daily: 'purchasereturn',
-          type_payment: this.Way_to_pay_selected,
+          payment_type: this.Way_to_pay_selected,
           daily_index: 0,
           description: this.description,
           type_refresh: this.type_refresh,

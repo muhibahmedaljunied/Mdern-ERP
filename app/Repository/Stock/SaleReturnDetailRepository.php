@@ -6,7 +6,6 @@ use App\Traits\Sale\SaleDetailsTrait;
 use App\Traits\Sale\SaleReturnTrait;
 use App\Traits\Sale\SaleTrait;
 use App\Services\CoreService;
-use DB;
 class SaleReturnDetailRepository implements DetailRepositoryInterface
 {
 

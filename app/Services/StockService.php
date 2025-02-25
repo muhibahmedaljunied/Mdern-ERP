@@ -44,38 +44,36 @@ class  StockService
     {
 
 
+        // dd($this->core->data);
         // $this->check_return_qty();
-
         $this->warehouse->add();
         foreach ($this->core->data['count'] as $value) {
 
             $this->core->setValue($value);
             $this->handle_core();
         }
-      
+
+
         $this->payment->pay();
-   
-
-        // $this->daily->daily()->exicute('debit')->exicute('credit');
-    
-        // $this->warehouse->refresh(); //this update purchase_return table by daily_id
 
 
-        // dd(GroupAccountDailyDetail::all());
+        $this->daily->daily()->exicute('debit')->exicute('credit');
 
+        $this->warehouse->refresh(); //this update purchase_return table by daily_id
+
+  
     }
 
     public function handle_core()
     {
-      
+
         $this->unit->handle_unit();
 
         $this->store->store();
 
         $this->detail->details();
-    
-        $this->stock->stock();
 
+        $this->stock->stock();
     }
 
     public function check_return_qty()

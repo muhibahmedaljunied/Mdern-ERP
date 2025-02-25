@@ -26,12 +26,12 @@
               </div>
               <div class="col-md-2">
                 <label for="status"> نوع الخصم</label>
-                <select @change="select_staff" v-model="staff_selected" name="type" id="type" class="form-control "
-                  required>
-                  <option v-for="staff in staffs" v-bind:value="staff.id">
-                    {{ staff.name }}
-                  </option>
-                </select>
+                <select v-model="discounttypeselected[index]" name="type" id="type"
+                                      class="form-control" required>
+                                      <option v-for="discount_type in discount_types" v-bind:value="discount_type.id">
+                                        {{ discount_type.name }}
+                                      </option>
+                                    </select>
               </div>
               <!-- <div class="col-md-2">
                 <label for="status"> من تأريخ</label>
@@ -156,6 +156,7 @@ export default {
   mixins: [operation],
   data() {
     return {
+      discounttypeselected: [],
       discount_types: "",
       staffs: '',
       staffselected: '',

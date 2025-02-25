@@ -6,7 +6,6 @@ use App\Models\Advance;
 use App\Models\Allowance;
 use App\Models\Bank;
 use App\Models\Customer;
-use App\Models\Extra;
 use App\Models\Payroll;
 use App\Models\Store;
 use App\Models\Supplier;
@@ -18,7 +17,9 @@ class DailyPaymentStockService
 
     public function __construct()
     {
-        $this->core = app(CoreStaffService::class);
+        // $this->core = app(CoreStaffService::class);
+        $this->core = app(CoreService::class);
+
     }
 
 
@@ -81,13 +82,23 @@ class DailyPaymentStockService
     public function get_treasury()
     {
 
+
+
         if (gettype($this->core->data[$this->core->daily_type]['account_details']) == 'array') {
 
+
+
             $this->core->account_details = Treasury::find($this->core->data[$this->core->daily_type]['account_details'][$this->core->row_daily_details]);
+
+            // dd($this->core->data[$this->core->daily_type]['account_details'][$this->core->row_daily_details]);
         } else {
 
             $this->core->account_details = Treasury::find($this->core->data[$this->core->daily_type]['account_details']);
+ 
+
         }
+
+       
     }
 
 
@@ -150,6 +161,7 @@ class DailyPaymentStockService
     {
 
 
+     
 
 
         if ($this->core->daily_type == 'debit') {
@@ -202,6 +214,7 @@ class DailyPaymentStockService
 
         if (
             $this->core->data['type_daily'] == 'purchase' ||
+            $this->core->data['type_daily'] == 'salereturn' ||
             $this->core->data['type_daily'] == 'supply'
 
         ) {
@@ -209,9 +222,10 @@ class DailyPaymentStockService
             $this->get_store();
         }
         // -----------------------------------------------------------------------------------------------------------
-
+        
         if (
             $this->core->data['type_daily'] == 'sale' ||
+            $this->core->data['type_daily'] == 'purchasereturn' ||
             $this->core->data['type_daily'] == 'cash' ||
             $this->core->data['type_daily'] == 'income_expence' ||
             $this->core->data['type_daily'] == 'ReceivableBond'
@@ -248,7 +262,7 @@ class DailyPaymentStockService
 
             $this->get_payroll();
 
-            dd($this->core->account_details);
+            // dd($this->core->account_details);
         }
 
 
@@ -257,6 +271,7 @@ class DailyPaymentStockService
         if (
             $this->core->data['type_daily'] == 'purchase' ||
             $this->core->data['type_daily'] == 'supply' ||
+            $this->core->data['type_daily'] == 'salereturn' ||
             $this->core->data['type_daily'] == 'PaymentBond' ||
             $this->core->data['type_daily'] == 'hr_advance'
 
@@ -281,6 +296,9 @@ class DailyPaymentStockService
     public function choice_account_with_payment()
     {
 
+
+
+    
 
         if ($this->core->data['payment_type'] == 1) {
 
