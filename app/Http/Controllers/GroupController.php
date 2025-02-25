@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
