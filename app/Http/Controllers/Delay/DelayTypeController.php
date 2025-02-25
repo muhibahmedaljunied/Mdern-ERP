@@ -18,7 +18,6 @@ class DelayTypeController extends Controller
 
      
         protected CoreStaffService $core,
-        protected DelayService $Delay_sanction,
         protected DelayRepository $hr,
 
 

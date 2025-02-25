@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\core;
+namespace App\Services\Core;
 
 use App\Services\CoreService;
 use App\Traits\Staff\Sanction\SanctionTrait;
-use App\Traits\staff\AttendanceTrait;
+use App\Traits\Staff\AttendanceTrait;
 
 class CoreStaffAttendanceService extends CoreService
 {

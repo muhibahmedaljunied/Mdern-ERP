@@ -7,7 +7,7 @@ use App\Repository\Sanction\LeaveRepository;
 use App\Repository\Sanction\AbsenceRepository;
 use App\Repository\Sanction\ExtraRepository;
 use App\Repository\Sanction\SanctionRepository;
-use App\Services\core\CoreStaffAttendanceService;
+use App\Services\Core\CoreStaffAttendanceService;
 use App\Services\CoreDailyService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
@@ -31,13 +31,14 @@ class AppServiceProvider extends ServiceProvider
 
 
 
+       
    
         $this->app->singleton(CoreStaffAttendanceService::class);
 
         $this->app->singleton('delay_sanction', function () {
 
             return new DelayRepository(
-                app(\App\Services\core\CoreStaffAttendanceService::class),
+                app(\App\Services\Core\CoreStaffAttendanceService::class),
                 app(\App\Repository\HR\DelayRepository::class),
 
             );
@@ -47,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('absence_sanction', function () {
 
             return new AbsenceRepository(
-                app(\App\Services\core\CoreStaffAttendanceService::class),
+                app(\App\Services\Core\CoreStaffAttendanceService::class),
                 // app(\App\Repository\HR\AbsenceRepository::class),
 
             );
@@ -56,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('leave_sanction', function () {
 
             return new LeaveRepository(
-                app(\App\Services\core\CoreStaffAttendanceService::class),
+                app(\App\Services\Core\CoreStaffAttendanceService::class),
                 app(\App\Repository\HR\LeaveRepository::class),
 
             );
@@ -66,7 +67,7 @@ class AppServiceProvider extends ServiceProvider
 
 
             return new ExtraRepository(
-                app(\App\Services\core\CoreStaffAttendanceService::class),
+                app(\App\Services\Core\CoreStaffAttendanceService::class),
                 app(\App\Repository\HR\ExtraRepository::class),
 
             );

@@ -53,12 +53,11 @@ Route::get('/change_database', function () {
 
 // --------------------------------------
 
-Route::get('/images/{image}', 'AbsenceController@test');
+// Route::get('/images/{image}', 'AbsenceController@test');
 
-Route::get('/test-event', 'AbsenceSanctionController@index');
+// Route::get('/test-event', 'AbsenceSanctionController@index');
 
 //-----------------------customer------------------------------
-// Route::post('/dailys', 'DailyController@index');
 Route::post('/store_daily', 'DailyController@store');
 
 
@@ -77,12 +76,11 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/', function () {
         // dd(12);
-  
+
         return view('admin/layouts/master');
     });
     Route::post('/dashboard', 'HomeController@show');
-
-
+    
     require __DIR__ . '\user.php';
     require __DIR__ . '\account.php';
     require __DIR__ . '\bank.php';

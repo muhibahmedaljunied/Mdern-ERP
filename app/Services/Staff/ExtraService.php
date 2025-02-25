@@ -2,7 +2,7 @@
 
 namespace App\Services\Staff;
 use App\Repository\StaffSaction\StaffExtraSanctionRepository;
-use App\Traits\staff\Sanction\ExtraSanctionTrait;
+use App\Traits\Staff\Sanction\ExtraSanctionTrait;
 use App\Services\CoreStaffService;
 use App\Services\Core\SanctionService;
 use Illuminate\Support\Facades\DB;

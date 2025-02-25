@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Leave;
-
-use App\Services\Staff\LeaveService;
 use App\Http\Controllers\Controller;
 use App\Models\LeaveType;
 use Illuminate\Support\Facades\Cache;
@@ -18,7 +16,6 @@ class LeaveTypeController extends Controller
     public function __construct(
 
         protected CoreStaffService $core,
-        protected LeaveService $leave_sanction,
         protected LeaveRepository $hr,
 
 

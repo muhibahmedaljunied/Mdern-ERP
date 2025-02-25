@@ -8,7 +8,7 @@ use App\Models\Staff;
 use Illuminate\Support\Facades\Cache;
 use App\Services\CoreStaffService;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\Cast\Double;
+
 
 class StaffService
 {
@@ -38,7 +38,6 @@ class StaffService
         $staff->branch_id = $this->core->data['branch'];
         $staff->department_id = $this->core->data['department'];
         $staff->phone = $this->core->data['phone'];
-        // $staff->work_type_id = $this->core->data['work');
         $staff->date = $this->core->data['date'];
         $staff->staff_status = $this->core->data['staff_status'];
         $staff->qualification_id = $this->core->data['qualification'];

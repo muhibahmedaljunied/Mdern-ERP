@@ -8,7 +8,7 @@ use App\Repository\HR\AbsenceRepository;
 use App\Services\CoreStaffService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Services\Staff\AbsenceService;
+// use App\Services\Staff\AbsenceService;
 use App\Models\AbsenceType;
 use App\Http\Controllers\Controller;
 use App\Models\Absence;
@@ -28,7 +28,7 @@ class AbsenceController extends Controller
     public function __construct(
 
         protected CoreStaffService $core,
-        protected AbsenceService $absence_sanction,
+        // protected AbsenceService $absence_sanction,
         protected AbsenceRepository $hr,
 
 

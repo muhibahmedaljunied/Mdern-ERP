@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Extra;
 use App\Http\Controllers\Controller;
-use App\Services\Staff\ExtraService;
 use Illuminate\Support\Facades\Cache;
 use App\Repository\HR\ExtraRepository;
 use App\Services\CoreStaffService;
@@ -18,7 +17,6 @@ class ExtraTypeController extends Controller
 
      
         protected CoreStaffService $core,
-        protected ExtraService $extra_sanction,
         protected ExtraRepository $hr,
 
 

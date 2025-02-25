@@ -18,7 +18,6 @@ class AbsenceTypeController extends Controller
 
      
         protected CoreStaffService $core,
-        protected AbsenceService $Absence_sanction,
         protected AbsenceRepository $hr,
 
 

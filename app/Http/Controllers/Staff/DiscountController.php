@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Services\CoreStaffService;
 use App\Models\Staff;
 use App\Models\DiscountType;
-use App\Models\Group;
-use App\Models\HrAccount;
 use App\Services\PayrollService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -22,7 +20,10 @@ class DiscountController extends Controller
     public function __construct(
         protected DiscountRepository $hr,
         protected CoreStaffService $core,
-    ) {}
+    ) {
+        $this->hr = $hr;
+        $this->core = $core;
+    }
 
 
     public function index()

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits\staff;
+namespace App\Traits\Staff;
 
 use App\Models\Attendance;
 use App\Models\AttendanceDetail;

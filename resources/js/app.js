@@ -9,7 +9,6 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 window.axios.defaults.baseURL = "http://localhost/ERP";
 
-
 // ---------------------------- sweetalert ---------------------------------------------------------
 import swal from "sweetalert2";
 

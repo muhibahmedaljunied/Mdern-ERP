@@ -46,8 +46,8 @@
                                                                             " name="forma_pago" class="form-control"
                                                                             v-model="group[
                                                                                 index
-                                                                                ]
-                                                                                " >
+                                                                            ]
+                                                                                ">
                                                                             <!-- <option v-bind:value="1">الكل</option> -->
                                                                             <option v-for="gg in groups" v-bind:value="gg.group_type_id
                                                                                 ">
@@ -63,8 +63,8 @@
                                                                             " name="forma_pago" class="form-control"
                                                                             v-model="customer[
                                                                                 index
-                                                                                ]
-                                                                                " >
+                                                                            ]
+                                                                                ">
                                                                             <!-- <option v-bind:value="1">الكل</option> -->
                                                                             <option v-for="cc in customers"
                                                                                 v-bind:value="cc.id

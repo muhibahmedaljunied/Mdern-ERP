@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Staff;
 
 use App\Services\DailyService;
 use App\Http\Controllers\Controller;
-use App\Models\Allowance;
-use App\Models\AllowanceType;
 use App\Services\CoreStaffService;
 use App\Repository\HR\AllowanceRepository;
 use Illuminate\Support\Facades\Cache;
