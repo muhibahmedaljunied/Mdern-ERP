@@ -2,98 +2,100 @@
   <div class="container-fluid">
 
     <div class="card">
-
+      <div class="card-header pb-0">
+          <div class="d-flex justify-content-between">
+            <span class="h2"> المبيعات</span>
+          </div>
+          <!-- <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" /> -->
+        </div>
 
       <div class="card-body">
 
-        <div class="card-header pb-0">
-            <div class="d-flex justify-content-between">
-              <span class="h2"> المبيعات</span>
-            </div>
-            <!-- <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" /> -->
-          </div>
+   
 
 
-          <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-       
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table text-md-nowrap" id="example1">
-                <thead>
-                  <tr>
-                    <th class="wd-15p border-bottom-0">رقم الفاتوره</th>
-                    <th class="wd-15p border-bottom-0">العميل</th>
-                    <!-- <th class="wd-15p border-bottom-0">الكميه </th> -->
-                    <!-- <th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
-                    <th class="wd-15p border-bottom-0">تاريخ  البيع   </th>
-                    <th class="wd-15p border-bottom-0"> المدفوع</th>
-                    <th class="wd-15p border-bottom-0">المتبقي</th>
-                    <th class="wd-15p border-bottom-0">اجمالي الفاتوره</th>
-                    <th class="wd-15p border-bottom-0">حاله الفاتوره</th>
+        <div class="row row-sm">
+          <div class="col-xl-12">
+            <div class="card">
 
-                    <th class="wd-15p border-bottom-0">العمليات</th>
-                  </tr>
-                </thead>
-                <tbody v-if="sales && sales.data.length > 0">
-                  <tr v-for="(sale, index) in sales.data" :key="index">
-                    <td>{{ sale.paymentable.sale_id }}</td>
-                    <td>{{ sale.paymentable.customer_name }}</td>
-                    <!-- <td>{{ sale.quantity }}</td>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table text-md-nowrap" id="example1">
+                    <thead>
+                      <tr>
+                        <th class="wd-15p border-bottom-0">رقم الفاتوره</th>
+                        <th class="wd-15p border-bottom-0">العميل</th>
+                        <!-- <th class="wd-15p border-bottom-0">الكميه </th> -->
+                        <!-- <th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
+                        <th class="wd-15p border-bottom-0">تاريخ البيع </th>
+                        <th class="wd-15p border-bottom-0"> المدفوع</th>
+                        <th class="wd-15p border-bottom-0">المتبقي</th>
+                        <th class="wd-15p border-bottom-0">اجمالي الفاتوره</th>
+                        <th class="wd-15p border-bottom-0">حاله الفاتوره</th>
+
+                        <th class="wd-15p border-bottom-0">العمليات</th>
+                      </tr>
+                    </thead>
+                    <tbody v-if="sales && sales.data.length > 0">
+                      <tr v-for="(sale, index) in sales.data" :key="index">
+                        <td>{{ sale.paymentable.sale_id }}</td>
+                        <td>{{ sale.paymentable.customer_name }}</td>
+                        <!-- <td>{{ sale.quantity }}</td>
                   <td>{{ sale.qty_return }}</td> -->
-                    <td>{{ sale.paymentable.date }}</td>
-                    <td>{{ sale.paid }}</td>
-                    <td>{{ sale.remaining }}</td>
-                    <td>{{ sale.paymentable.grand_total }}</td>
-                    <!-- <td>{{ sale.sale_status }}</td> -->
-                    <td>
+                        <td>{{ sale.paymentable.date }}</td>
+                        <td>{{ sale.paid }}</td>
+                        <td>{{ sale.remaining }}</td>
+                        <td>{{ sale.paymentable.grand_total }}</td>
+                        <!-- <td>{{ sale.sale_status }}</td> -->
+                        <td>
 
-                      <span class="badge bg-warning" v-if="sale.payment_status == 'pendding'">غير مدفوعه</span>
-                      <span class="badge bg-success" v-if="sale.payment_status == 'paiding'">مدفوعه</span>
-                      <span class="badge bg-info" v-if="sale.payment_status == 'partialy'">مدفوعه جزئيا</span>
+                          <span class="badge bg-warning" v-if="sale.payment_status == 'pendding'">غير مدفوعه</span>
+                          <span class="badge bg-success" v-if="sale.payment_status == 'paiding'">مدفوعه</span>
+                          <span class="badge bg-info" v-if="sale.payment_status == 'partialy'">مدفوعه جزئيا</span>
 
-                    </td>
+                        </td>
 
-                    <td>
+                        <td>
 
-                      <div class="optionbox">
-                        <select @change="changeRoute(index)" v-model="operationselected[index]" name="العمليات"
-                          class="form-control">
-                          <option :selected="true" class="btn btn-success"
-                            v-bind:value="['/sale_details/', sale.paymentable.sale_id, 0]">
-                            تفاصيل
-                          </option>
-                          <option class="btn btn-success" v-bind:value="['return_sale', sale.paymentable, 1]">
-                            ارجاع
-                          </option>
-                          <option class="btn btn-success"
-                            v-bind:value="['returnsalelist', sale.paymentable.sale_id, 2]">
-                            مرتجعات
-                          </option>
+                          <div class="optionbox">
+                            <select @change="changeRoute(index)" v-model="operationselected[index]" name="العمليات"
+                              class="form-control">
+                              <option :selected="true" class="btn btn-success"
+                                v-bind:value="['/sale_details/', sale.paymentable.sale_id, 0]">
+                                تفاصيل
+                              </option>
+                              <option class="btn btn-success" v-bind:value="['return_sale', sale.paymentable, 1]">
+                                ارجاع
+                              </option>
+                              <option class="btn btn-success"
+                                v-bind:value="['returnsalelist', sale.paymentable.sale_id, 2]">
+                                مرتجعات
+                              </option>
 
-                          <option class="btn btn-success" v-bind:value="['sale_invoice', sale.paymentable.sale_id, 3]">
-                            عرض الفاتوره
-                          </option>
-                          <option v-if="sale.payment_status != 'paiding'" class="btn btn-success"
-                            v-bind:value="['ReceivableBond', sale.paymentable.sale_id, 4]">
-                            قبض
-                          </option>
-                          <option class="btn btn-success"
-                            v-bind:value="['/sale_invoice_update/', sale.paymentable.sale_id, 5]">
-                            تعديل الفاتوره
-                          </option>
+                              <option class="btn btn-success"
+                                v-bind:value="['sale_invoice', sale.paymentable.sale_id, 3]">
+                                عرض الفاتوره
+                              </option>
+                              <option v-if="sale.payment_status != 'paiding'" class="btn btn-success"
+                                v-bind:value="['ReceivableBond', sale.paymentable.sale_id, 4]">
+                                قبض
+                              </option>
+                              <option class="btn btn-success"
+                                v-bind:value="['/sale_invoice_update/', sale.paymentable.sale_id, 5]">
+                                تعديل الفاتوره
+                              </option>
 
-                          <option class="btn btn-success" v-bind:value="['sale_daily', sale.paymentable.sale_id, 6]">
-                            عرض القيد المحاسبي
-                          </option>
+                              <option class="btn btn-success"
+                                v-bind:value="['sale_daily', sale.paymentable.sale_id, 6]">
+                                عرض القيد المحاسبي
+                              </option>
 
-                        </select>
-                      </div>
+                            </select>
+                          </div>
 
 
-                      <!-- <router-link
+                          <!-- <router-link
                       :to="`/sale_details/${sale.paymentable.sale_id}`"
                       class="btn btn-success"
                     >
@@ -114,87 +116,87 @@
                     </router-link> -->
 
 
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="8">
-                      <h3>
-                        لايوجد اي مبيعات
-                      </h3>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-else>
+                      <tr>
+                        <td align="center" colspan="8">
+                          <h3>
+                            لايوجد اي مبيعات
+                          </h3>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <pagination align="center" :data="sales" @pagination-change-page="list"></pagination>
+              </div>
             </div>
-            <pagination align="center" :data="sales" @pagination-change-page="list"></pagination>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row row-sm">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <span class="h2"> التفاصيل</span>
+        <div class="row row-sm">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <span class="h2"> التفاصيل</span>
 
 
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <!-- <th>الرقم</th> -->
-                    <th>اسم المنتج</th>
-                                 <!-- <th>الباركود</th> -->
-                    <th> المواصفات والطراز</th>
-                    <th>الحاله</th>
-                    <th>المخزن</th>
-                    <th class="wd-15p border-bottom-0"> الكميه المباعه</th>
-                    <th class="wd-15p border-bottom-0"> السعر </th>
-                    <!-- <th class="wd-15p border-bottom-0"> الاجمالي </th> -->
-                    <!-- <th class="wd-15p border-bottom-0">  الكميه المرتحعه</th> -->
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <!-- <th>الرقم</th> -->
+                        <th>اسم المنتج</th>
+                        <!-- <th>الباركود</th> -->
+                        <th> المواصفات والطراز</th>
+                        <th>الحاله</th>
+                        <th>المخزن</th>
+                        <th class="wd-15p border-bottom-0"> الكميه المباعه</th>
+                        <th class="wd-15p border-bottom-0"> السعر </th>
+                        <!-- <th class="wd-15p border-bottom-0"> الاجمالي </th> -->
+                        <!-- <th class="wd-15p border-bottom-0">  الكميه المرتحعه</th> -->
 
-                  </tr>
-                </thead>
-                <tbody v-if="sale_detail && sale_detail.length > 0">
-                  <tr v-for="sale_details in sale_detail">
-                    <!-- <td>{{ sale_details.id }}</td> -->
-                    <td>{{ sale_details.product }}</td>
+                      </tr>
+                    </thead>
+                    <tbody v-if="sale_detail && sale_detail.length > 0">
+                      <tr v-for="sale_details in sale_detail">
+                        <!-- <td>{{ sale_details.id }}</td> -->
+                        <td>{{ sale_details.product }}</td>
 
-                    <!-- <td>
+                        <!-- <td>
                       <vue-barcode  :value="sale_details.product_code" tag="svg"></vue-barcode>
                     </td> -->
-                    <td>{{ sale_details.desc }}</td>
-                    <td>{{ sale_details.status }}</td>
-                    <td>{{ sale_details.store }}</td>
+                        <td>{{ sale_details.desc }}</td>
+                        <td>{{ sale_details.status }}</td>
+                        <td>{{ sale_details.store }}</td>
 
-                    <!-- <td>{{ sale_details.qty }}</td>  -->
-                    <td>
-
-
-                      <div v-for="temx in sale_details.qty_after_convert['qty']">
+                        <!-- <td>{{ sale_details.qty }}</td>  -->
+                        <td>
 
 
+                          <div v-for="temx in sale_details.qty_after_convert['qty']">
 
-                        <span v-for="temx2 in temx">
 
 
-                          <span style="float: right;">
-                            {{ temx2[0] }}
-                            <span style="color: red;">
-                              {{ temx2[1] }}
+                            <span v-for="temx2 in temx">
+
+
+                              <span style="float: right;">
+                                {{ temx2[0] }}
+                                <span style="color: red;">
+                                  {{ temx2[1] }}
+                                </span>
+
+                              </span>
+
+
+
                             </span>
 
-                          </span>
-
-
-
-                        </span>
-
-                        <!-- <span v-if="temx.unit_type == 0">
+                            <!-- <span v-if="temx.unit_type == 0">
 
 
   <span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
@@ -204,41 +206,41 @@ temx.name }}</span>
 
 </span> -->
 
-                      </div>
+                          </div>
 
-                      <!-- {{ sale_details.qty }} {{ sale_details.unit }} -->
-                    </td>
-                    <td>{{ sale_details.price }}</td>
-                    <!-- <td>{{ sale_details.total }}</td> -->
-                    <!-- <td>{{ sale_details.qty_return }}</td> -->
+                          <!-- {{ sale_details.qty }} {{ sale_details.unit }} -->
+                        </td>
+                        <td>{{ sale_details.price }}</td>
+                        <!-- <td>{{ sale_details.total }}</td> -->
+                        <!-- <td>{{ sale_details.qty_return }}</td> -->
 
-                  </tr>
+                      </tr>
 
-                  <!-- <tr>
+                      <!-- <tr>
                     <td colspan="7" style="text-align:center;color:red;font-size:large">الاجمالي</td>
                     <td>{{ total }}</td>
                   </tr> -->
-                  <!-- <a 
+                      <!-- <a 
                       @click="$router.go(-1)"
                       class="btn btn-success"
                       ><span> تراجع</span></a
                     > -->
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="8">
-                      <h3>
-                        لايوجد اي مبيعات
-                      </h3>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </tbody>
+                    <tbody v-else>
+                      <tr>
+                        <td align="center" colspan="8">
+                          <h3>
+                            لايوجد اي مبيعات
+                          </h3>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
 
       </div>
@@ -295,7 +297,7 @@ export default {
               this.total = parseInt(item.total) + parseInt(this.total);
             });
 
-          
+
 
           })
           .catch(({ response }) => {

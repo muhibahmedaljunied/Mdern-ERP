@@ -11,8 +11,7 @@
         <div class="dropdown user-pro-body">
           <div class="">
             <!-- <img alt="user-img" class="avatar avatar-xl brround" src="/assets/img/logo_muhib.jpg" /> -->
-            <span
-              class="avatar-status profile-status bg-green"></span>
+            <span class="avatar-status profile-status bg-green"></span>
           </div>
           <div class="user-info">
             <h4 class="font-weight-semibold mt-3 mb-0">{{ username }}</h4>
@@ -292,7 +291,7 @@
               <router-link class="slide-item" to="/accounts_basic_data">البيانات الاساسيه </router-link>
             </li>
 
-            
+
 
             <li class="slide">
               <router-link class="slide-item" to="/accounts_guide">الدليل المجاسبي</router-link>
@@ -302,20 +301,20 @@
                 قيود اليوميه</router-link>
             </li>
 
-          
+
 
             <li class="slide">
               <router-link class="slide-item" to="/expence">المصروفات والايرادات</router-link>
             </li>
             <li class="slide">
               <router-link class="slide-item" to="/account_list">
-                  كشف حساب</router-link>
+                كشف حساب</router-link>
             </li>
             <li class="slide">
               <router-link class="slide-item" to="/opening_balances"> الارصده الافتتاحيه
-                 </router-link>
+              </router-link>
             </li>
-          
+
             <li class="slide">
               <router-link class="slide-item" to="auditBalance">
                 ميزان المراجعه</router-link>
@@ -326,7 +325,7 @@
             </li>
             <li class="slide">
               <router-link class="slide-item" to="balance">
-                 الميزانيه العموميه</router-link>
+                الميزانيه العموميه</router-link>
             </li>
             <li class="slide">
               <router-link class="slide-item" to="/closing_year"> الاقفالات السنويه </router-link>
@@ -427,6 +426,17 @@
             </svg><span class="side-menu__label">اداره المخازن</span><i class="angle fe fe-chevron-down"></i></a>
 
           <ul class="slide-menu">
+
+            <li>
+              <router-link class="slide-item" to="/attribute"><span class="side-menu__label">خصائص المنتج</span><i
+                  class="angle fe fe-chevron-down"></i></router-link>
+            </li>
+
+            <li>
+              <router-link class="slide-item" to="/attribute_family"><span class="side-menu__label">مجموعه
+                  الخصائص</span><i class="angle fe fe-chevron-down"></i></router-link>
+            </li>
+
             <li>
               <router-link class="slide-item" to="/product"> المنتجات</router-link>
             </li>

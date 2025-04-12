@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
+
 use App\Services\Product\ProductService;
+use App\Services\ProductService as ProService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
@@ -10,6 +12,7 @@ use App\Exports\ProductExport;
 use App\Exports\ProductUnitExport;
 use App\Imports\ProductUnitImport;
 use App\Models\Product;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,13 +22,21 @@ class ProductController extends Controller
 
 
 
-
-    public function __construct(protected ProductService $product)
+    public $request;
+    public function __construct(Request $request)
     {
-        // $this->middleware('Admin');
 
-
+        $this->request = $request;
     }
+
+    public function init_data($product_service)
+    {
+
+        $product_service->request = $this->request->all();
+        $product_service->count = json_decode($this->request['count']);
+        $product_service->data = json_decode($this->request['product_attr']);
+    }
+
     public function index(Request $request) {}
 
     protected function random($length = 14)
@@ -101,7 +112,77 @@ class ProductController extends Controller
 
 
 
-    public function store(Request $request)
+    public function store2(ProService $product_service)
+    {
+
+
+
+
+        // dd($request->all());
+        // $validator = Validator::make($request->all(), [
+        //     'text' => 'required',
+        //     'hash_rate' => 'required',
+        //     'purchase_price' => 'required',
+        // ]);
+
+        // if ($validator->fails()) {
+
+
+        //     return response([
+        //         'message' => $validator->errors(),
+        //         'status' => 'failed'
+        //     ], 401);
+        // }
+
+
+
+
+        $this->init_data($product_service);
+        try {
+            DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
+
+            // --------------------------------------------------------------------------------------
+            $product_service->save_product();
+            // --------------------------------------------------------------------------------------
+            $product_service->get_attribute_option();
+
+
+            foreach ($product_service->count as $value) {
+
+                // --------------------------------this save variant details of every product---------------
+                $product_service->save_product_family_attribute($this->request->file('image'), $value);
+
+                // -----------------------------------this save attributes of every product------------------
+                $product_service->save_family_attribute_option($value);
+            }
+
+
+
+            // dd(Product::all());
+            // ------------------------------------------------------------------------------------------------------
+            DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
+
+
+            return response([
+                'message' => "product created successfully",
+                'status' => "success"
+            ], 200);
+        } catch (\Exception $exp) {
+
+            DB::rollBack(); // Tell Laravel, "It's not you, it's me. Please don't persist to DB"
+
+
+            return response([
+                'message' => $exp->getMessage(),
+                'status' => 'failed'
+            ], 400);
+        }
+
+
+        // return response()->json($request->file('image'));
+    }
+
+    public function store(ProductService $product)
     {
 
 
@@ -131,7 +212,7 @@ class ProductController extends Controller
 
 
 
-            $this->product
+            $product
                 ->check()
                 ->product()
                 ->unit();
@@ -251,7 +332,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        
+
         // $rr = Product::first()->getTable();
         // $rr = app(Product::class)->getTable();
         // Is there a way to list all relationships of a model?
