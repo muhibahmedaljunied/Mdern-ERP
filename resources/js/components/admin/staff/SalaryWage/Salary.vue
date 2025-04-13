@@ -18,7 +18,15 @@
 
           <div class="card-body" id="printme">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-4">
+                <label for="inputAddress">الفرع</label>
+                <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                  <option v-for="branch in branches" v-bind:value="branch.id">
+                    {{ branch.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
 
                 <label for="status"> الهيكل الاداري</label>
 
@@ -38,7 +46,7 @@
 
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-4">
 
                 <label for="status"> الحساب</label>
 
@@ -141,6 +149,7 @@
                   <tr>
                     <th class="wd-15p border-bottom-0">الرقم الوظيفي</th>
                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
+                    <th class="wd-15p border-bottom-0"> الفرع</th>
                     <th class="wd-15p border-bottom-0">الراتب الاساسي</th>
                     <!-- <th class="wd-15p border-bottom-0">بدلات </th> -->
                     <!-- <th class="wd-15p border-bottom-0"> اضافي</th> -->
@@ -160,6 +169,7 @@
 
                     <td>{{ salary.id }}</td>
                     <td> <a @click="salary_details(salary.id)">{{ salary.name }} </a></td>
+                    <td> <a >{{ salary.name }} </a></td>
 
                     <td>{{ salary.salary }}</td>
 

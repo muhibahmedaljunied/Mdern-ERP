@@ -3,17 +3,56 @@
 
     <div class="card">
       <div class="card-header pb-0">
-          <div class="d-flex justify-content-between">
-            <span class="h2"> المبيعات</span>
-          </div>
-          <!-- <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" /> -->
+        <div class="d-flex justify-content-between">
+          <span class="h2"> المبيعات</span>
         </div>
+        <!-- <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+              aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" @input="get_search()" /> -->
+      </div>
 
       <div class="card-body">
 
-   
+        <div class="row">
 
+          <div class="card">
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="inputAddress">الفرع</label>
+                  <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                    <option v-for="branch in branches" v-bind:value="branch.id">
+                      {{ branch.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputAddress">العميل</label>
+                  <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                    <option v-for="branch in branches" v-bind:value="branch.id">
+                      {{ branch.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-md-3" >
+
+                  <label for="inputAddress">بحث</label>
+                  <br>
+                  <a  href="#">
+
+                    <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
+
+
+                  </a>
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
 
         <div class="row row-sm">
           <div class="col-xl-12">

@@ -20,46 +20,52 @@
                 <span style="font-size: x-large"> شجره المنتجات</span>
 
               </div> -->
+              <span>              *كيف يتم التعامل مع تعدد الوحدات في حاله المنتجات المتباينه وضبط سعر الشراء وسعر البيع وكذلك ضبط الاجزاء للوحدات مقارنه مع الانظمه الاخري مثل mazerp
+              </span>
+
+              <span>              *هل يمكن تفعيل المخازن من الاعدادات في نظام mazerp تأكد لانه في الفيديو هذا موجود
+              </span>
+
               <div class="card-body">
 
-                  <div class="row justify-content-left">
-                    <div class="col-md-12">
-                      <div class="card">
+                <div class="row justify-content-left">
+                  <div class="col-md-12">
+                    <div class="card">
 
 
 
 
-                        <div class="card-body">
+                      <div class="card-body">
 
 
-                          <div class="container-fluid">
-                            <div class="row">
-                              <div class="col-md-8">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-8">
 
-                                <input style="background-color:azure;" class="form-control" type="text"
-                                  id="ricerca-enti" placeholder="بحث" aria-describedby="search-addon">
-
-
-
-                              </div>
-
-
-                              <div class="col-md-4">
-
-                                <button @click="exports_excel()">
-
-                                  <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
-                                </button>
-
-                                <button @click="imports_excel()">
-
-                                  <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
-                                </button>
+                              <input style="background-color:azure;" class="form-control" type="text" id="ricerca-enti"
+                                placeholder="بحث" aria-describedby="search-addon">
 
 
 
+                            </div>
 
-                                <!-- <button @click="exports_excel()">
+
+                            <div class="col-md-4">
+
+                              <button @click="exports_excel()">
+
+                                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+                              </button>
+
+                              <button @click="imports_excel()">
+
+                                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+                              </button>
+
+
+
+
+                              <!-- <button @click="exports_excel()">
                                   <i class="fas fa-file-export" style="font-size: 24px; color: #ee335e"></i>
                                 </button>
 
@@ -67,27 +73,27 @@
                                   <i class="fas fa-file-import" style="font-size: 24px; color: #22c03c"></i>
                                 </button> -->
 
-                              </div>
-
-
-
-
                             </div>
-                            <div class="row">
-                              <div class="col-xs-12" id="treeview_json_product">
 
-                                <div id="test">
 
-                                </div>
+
+
+                          </div>
+                          <div class="row">
+                            <div class="col-xs-12" id="treeview_json_product">
+
+                              <div id="test">
+
                               </div>
                             </div>
                           </div>
-
                         </div>
+
                       </div>
                     </div>
                   </div>
-              
+                </div>
+
 
               </div>
             </div>
@@ -246,7 +252,7 @@
 
                       </div>
 
-                      <div class="col-md-4">
+                      <div class="col-md-4" v-if="product_type == 1">
                         <label for="filePhoto">الصوره</label>
                         <input v-on:change="onFileChange" type="file" name="image" class="form-control-file"
                           id="filePhoto" />
@@ -285,7 +291,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="index in count" :key="index">
+                          <tr v-for="index in count_unit" :key="index">
                             <td>
 
                               <!-- retail_unit -->
@@ -323,11 +329,11 @@
                             <td v-if="index == 1">
 
                               <button class="btn btn-info btn-sm waves-effect btn-agregar"
-                                v-on:click="addComponent(count)">
+                                v-on:click="addComponentUnit(count_unit)">
                                 <i class="fa fa-plus-circle"></i></button>
 
                               <button class="btn btn-info btn-sm waves-effect btn-agregar"
-                                v-on:click="disComponent(count)">
+                                v-on:click="disComponentUnit(count_unit)">
                                 <i class="fa fa-minus-circle"></i></button>
 
 
@@ -603,7 +609,7 @@ export default {
   data() {
     return {
 
-      multi_unit:false,
+      multi_unit: false,
       counts: [],
       count: 1,
       qty: [],
@@ -692,7 +698,18 @@ export default {
 
   methods: {
 
-
+    addComponentUnit(index) {
+      // alert(index);
+      this.count_unit += 1;
+      this.counts_unit[index] = this.count_unit;
+    },
+    disComponentUnit(index) {
+      if (index != 1) {
+        this.count_unit -= 1;
+        this.$delete(this.counts_unit, index - 1);
+        console.log("yuuyyusd", index, this.count_unit);
+      }
+    },
     onFileChange(e) {
       this.file = e.target.files[0];
     },

@@ -18,6 +18,7 @@
                 <tr>
                   <th style="color: blue; font-size: medium;" class="wd-15p border-bottom-0" rowspan="2">الرقم الوظيفي</th>
                   <th style="color: blue;font-size: medium;" class="wd-15p border-bottom-0" rowspan="2">اسم المؤظف</th>
+                  <th style="color: blue;font-size: medium;" class="wd-15p border-bottom-0" rowspan="2"> الفرع</th>
                   <th style="color: blue;font-size: medium;" class="wd-15p border-bottom-0" rowspan="2">الراتب الاساسي</th>
                   <th style="color: blue;font-size: medium;" class="wd-15p border-bottom-0" colspan="3"> الاضافي</th>
                   <th style="color: blue;font-size: medium;" class="wd-15p border-bottom-0" colspan="6"> المستقطع</th>
@@ -46,6 +47,7 @@
 
 
                   <td>{{ salary.id }}</td>
+                  <td>{{ salary.name }}</td>
                   <td>{{ salary.name }}</td>
                   <td>{{ salary.salary }}</td>
                   <td>{{ salary.total_allowance }}</td>

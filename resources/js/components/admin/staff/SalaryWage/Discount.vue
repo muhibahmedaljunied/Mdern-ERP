@@ -9,13 +9,13 @@
             <span class="h2"> الخصميات</span>
 
 
-           
+
           </div>
           <div class="card-body">
 
             <div class="row row-sm">
               <div class="col-xl-12">
-          
+
                 <div class="card">
 
 
@@ -70,7 +70,7 @@
                               <thead>
                                 <tr>
 
-
+                                  <th> الفرع</th>
                                   <th>اسم المؤظف</th>
 
                                   <!-- <th>الحساب</th> -->
@@ -93,7 +93,16 @@
                                 <tr v-for="index in count" :key="index">
 
 
+                                  <td>
 
+                                    <select v-model="staffselected[index]" name="type" id="type" class="form-control"
+                                      required>
+                                      <option v-for="staff in staffs" v-bind:value="staff.id">
+                                        {{ staff.name }}
+                                      </option>
+                                    </select>
+
+                                  </td>
                                   <td>
 
                                     <select v-model="staffselected[index]" name="type" id="type" class="form-control"
@@ -166,7 +175,7 @@
 
                                 <tr>
 
-                                  <td colspan="5"></td>
+                                  <td colspan="6"></td>
                                   <td>
                                     <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
                                   </td>
@@ -209,33 +218,36 @@
           <div class="card-header">
 
 
-<div style="display: flex;float: left; margin: 5px">
+            <div style="display: flex;float: left; margin: 5px">
 
 
 
 
-  <button @click="exports_excel()">
+              <button @click="exports_excel()">
 
-    <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
-  </button>
+                <i class="fa-solid fa-file-export " style="font-size: 24px; color: #63E6BE;"></i>
+              </button>
 
-  <button @click="imports_excel()">
+              <button @click="imports_excel()">
 
-    <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
-  </button>
+                <i class="fa-solid fa-file-import " style="font-size: 24px; color: #B197FC;"></i>
+              </button>
 
-  <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
-    aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" />
-</div>
-</div>
-          <div class="card-body" >
+              <input type="search" autocomplete="on" name="search" data-toggle="dropdown" role="button"
+                aria-haspopup="true" aria-expanded="true" placeholder="بحث" v-model="word_search" />
+            </div>
+          </div>
+          <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
 
                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
+                    <th class="wd-15p border-bottom-0">الفرع</th>
+
                     <th class="wd-15p border-bottom-0"> نوع الخصم</th>
+                    
                     <th class="wd-15p border-bottom-0">قيمه الخصم</th>
                     <th class="wd-15p border-bottom-0">طريقه الخصم</th>
 
@@ -251,7 +263,7 @@
                   <tr v-for="(discount, index) in value_list.data" :key="index">
 
                     <td>{{ discount.name }}</td>
-
+                    <td>{{ discount.name }}</td>
                     <td>
 
                       <div v-for="(discount_names, index) in discount.discount" :key="index">
@@ -377,7 +389,7 @@ export default {
           discount_type: this.discounttypeselected,
           qty: this.quantity,
           date: this.date,
-      
+
 
 
           // debit: {

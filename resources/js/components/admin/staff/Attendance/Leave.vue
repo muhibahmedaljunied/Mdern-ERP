@@ -41,7 +41,7 @@
                     <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
                       <thead>
                         <tr>
-
+                          <th> الفرع</th>
                           <th>اسم المؤظف</th>
 
 
@@ -57,6 +57,13 @@
                       </thead>
                       <tbody>
                         <tr v-for="index in count" :key="index">
+                          <td>
+                            <select v-model="staffselected[index]" id="inputState" class="form-control">
+                              <option v-for="staff in staffs" v-bind:value="staff.id">
+                                {{ staff.name }}
+                              </option>
+                            </select>
+                          </td>
                           <td>
                             <select v-model="staffselected[index]" id="inputState" class="form-control">
                               <option v-for="staff in staffs" v-bind:value="staff.id">
@@ -126,7 +133,7 @@
 
                         </tr>
                         <tr>
-                          <td colspan="6"></td>
+                          <td colspan="7"></td>
                           <td>
                             <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
 

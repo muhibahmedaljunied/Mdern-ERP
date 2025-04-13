@@ -18,6 +18,7 @@
                 <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
                   <thead>
                     <tr>
+                      <th> الفرع</th>
                       <th> الموظف</th>
 
                       <th>نوع الدوام</th>
@@ -32,6 +33,16 @@
                   <tbody>
                     <tr v-for="index in count" :key="index">
 
+
+                      <td>
+
+                        <select style="background-color:beige" v-model="staff[index]" class="form-control " required>
+                          <option v-for="staff in staffs" v-bind:value="staff.id">
+                            {{ staff.name }}
+                          </option>
+
+                        </select>
+                      </td>
                       <td>
 
                         <select style="background-color:beige" v-model="staff[index]" class="form-control " required>
@@ -109,7 +120,7 @@
 
                     <tr>
 
-                      <td colspan="4"></td>
+                      <td colspan="5"></td>
                       <td>
 
                         <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
@@ -172,6 +183,7 @@
                     <th class="wd-15p border-bottom-0">#</th>
                     <th class="wd-15p border-bottom-0">الموظف</th>
                     <th class="wd-15p border-bottom-0"> نوع الدوام</th>
+                    <th class="wd-15p border-bottom-0">الفرع</th>
                     <th class="wd-15p border-bottom-0"> من</th>
                     <th class="wd-15p border-bottom-0"> الي</th>
 
@@ -194,7 +206,10 @@
                       {{ work_system.work_system_type_name }}
                     </td>
 
+                    <td>
 
+                      {{ work_system.work_system_type_name }}
+                    </td>
 
 
                     <td>
@@ -248,7 +263,7 @@
                 </tbody>
                 <tbody v-else>
                   <tr>
-                    <td align="center" colspan="3">لايوجد بياتات.</td>
+                    <td align="center" colspan="7">لايوجد بياتات.</td>
                   </tr>
                 </tbody>
               </table>

@@ -25,6 +25,7 @@
                           <thead>
                             <tr>
 
+                              <th> الفرع</th>
                               <th>اسم المؤظف</th>
 
 
@@ -42,6 +43,15 @@
                           </thead>
                           <tbody>
                             <tr v-for="index in count" :key="index">
+                              <td>
+                                <select style="background-color: beige;" v-model="staffselected[index]" name="type"
+                                  id="type" class="form-control " required>
+                                  <option style="background-color: beige;" v-for="staff in staffs"
+                                    v-bind:value="staff.id">
+                                    {{ staff.name }}
+                                  </option>
+                                </select>
+                              </td>
                               <td>
                                 <select style="background-color: beige;" v-model="staffselected[index]" name="type"
                                   id="type" class="form-control " required>
@@ -92,7 +102,7 @@
 
                             </tr>
                             <tr>
-                              <td colspan="6"></td>
+                              <td colspan="7"></td>
                               <td>
 
                                 <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
@@ -160,6 +170,7 @@
 
                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                     <th class="wd-15p border-bottom-0"> نوع الاضافي</th>
+                    <th class="wd-15p border-bottom-0"> الفرع</th>
                     <th class="wd-15p border-bottom-0">التاريخ </th>
 
                     <th class="wd-15p border-bottom-0">وقت البدء</th>
@@ -176,6 +187,8 @@
                 <tbody v-if="value_list && value_list.data.length > 0">
                   <tr v-for="(extra, index) in value_list.data" :key="index">
 
+
+
                     <td>{{ extra.name }}</td>
 
                     <td>
@@ -186,7 +199,13 @@
                       </div>
                     </td>
 
+                    <td>
 
+                      <div v-for="(extra_names, index) in extra.extra" :key="index">
+                        {{ extra_names.extra_type.name }}
+                        <hr>
+                      </div>
+                    </td>
 
 
                     <td>
@@ -241,7 +260,7 @@
                 </tbody>
                 <tbody v-else>
                   <tr>
-                    <td align="center" colspan="3">لايوجد بياتات.</td>
+                    <td align="center" colspan="4">لايوجد بياتات.</td>
                   </tr>
                 </tbody>
               </table>
@@ -282,6 +301,7 @@
 
                                         <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                                         <th class="wd-15p border-bottom-0"> نوع الاضافي</th>
+                                        <th class="wd-15p border-bottom-0"> الفرع</th>
                                         <th class="wd-15p border-bottom-0">التاريخ </th>
 
                                         <th class="wd-15p border-bottom-0">وقت البدء</th>
@@ -299,6 +319,13 @@
 
 
                                           <td>{{ extra.name }}</td>
+                                          <td>
+
+                                            <div v-for="(extra_names, index) in extra.extra" :key="index">
+                                              {{ extra_names.extra_type.name }}
+                                              <hr>
+                                            </div>
+                                          </td>
                                           <td>
 
                                             <div v-for="(extra_names, index) in extra.extra" :key="index">

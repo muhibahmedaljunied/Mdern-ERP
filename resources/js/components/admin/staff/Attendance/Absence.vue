@@ -44,6 +44,7 @@
                               <thead>
                                 <tr>
 
+                                  <th> الفرع</th>
                                   <th>اسم المؤظف</th>
 
 
@@ -59,6 +60,18 @@
                               </thead>
                               <tbody>
                                 <tr v-for="index in count" :key="index">
+                                  <td>
+                                    <select style="background-color: beige;" v-model="staffselected[index]" name="type"
+                                      id="type" class="form-control " required>
+                                      <option v-bind:value="0">
+                                        الكل
+                                      </option>
+                                      <option style="background-color: beige;" v-for="staff in staffs"
+                                        v-bind:value="staff.id">
+                                        {{ staff.name }}
+                                      </option>
+                                    </select>
+                                  </td>
                                   <td>
                                     <select style="background-color: beige;" v-model="staffselected[index]" name="type"
                                       id="type" class="form-control " required>
@@ -108,7 +121,7 @@
                                 </tr>
 
                                 <tr>
-                                  <td colspan="3"></td>
+                                  <td colspan="4"></td>
                                   <td>
                                     <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
 

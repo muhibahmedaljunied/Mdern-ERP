@@ -21,7 +21,18 @@
 
                 <div class="row">
 
+           
 
+                    <div class="col-md-2">
+                      <label for="inputAddress">الفرع</label>
+                      <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                        <option v-for="branch in branches" v-bind:value="branch.id">
+                          {{ branch.name }}
+                        </option>
+                      </select>
+                    </div>
+            
+           
 
                   <div class="col-md-4">
                     <label for="pagoPrevio">المخزن</label>
@@ -435,8 +446,8 @@ class="btn btn-info waves-effect">
 
                       <div class="col-md-12" v-show="show">
                         <label for="pagoPrevio">المدفوع</label>
-                        <input @input="calculate()" class="form-control" type="text" id="paid" v-on:input="credit_func()"
-                          v-model="paid" style="color: red" />
+                        <input @input="calculate()" class="form-control" type="text" id="paid"
+                          v-on:input="credit_func()" v-model="paid" style="color: red" />
                       </div>
 
                       <div class="col-md-12" v-show="show">

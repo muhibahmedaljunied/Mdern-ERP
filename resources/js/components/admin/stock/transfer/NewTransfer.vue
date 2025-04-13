@@ -21,7 +21,14 @@
               <div class="col-sm-12">
                 <div class="form-group">
                   <div class="row">
-
+                    <div class="col-md-2">
+                      <label for="inputAddress">الفرع</label>
+                      <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                        <option v-for="branch in branches" v-bind:value="branch.id">
+                          {{ branch.name }}
+                        </option>
+                      </select>
+                    </div>
 
                     <div class="col-md-3">
                       <label for="desde"> المخزن</label>

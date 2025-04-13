@@ -25,6 +25,14 @@
                     <div class="row">
 
                       <div class="col-md-2">
+                      <label for="inputAddress">الفرع</label>
+                      <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                        <option v-for="branch in branches" v-bind:value="branch.id">
+                          {{ branch.name }}
+                        </option>
+                      </select>
+                    </div>
+                      <div class="col-md-2">
                         <label for="FormaPago">طريقه الدفع</label>
                         <select style="background-color: beige;" name="forma_pago" class="form-control" id="forma_pago"
                           v-model="Way_to_pay_selected" v-on:change="onwaychange">
@@ -38,6 +46,15 @@
 
 
 
+
+
+                    </div>
+
+                    <br>
+                    <br>
+                    <div class="row">
+
+                      
                       <div class="col-md-2">
                         <label for="date">الحساب</label><br />
                         <div class="custom-search">
@@ -53,14 +70,6 @@
                             <i class="fa fa-plus-circle"></i></button>
                         </div>
                       </div>
-
-
-                    </div>
-
-                    <br>
-                    <br>
-                    <div class="row">
-
                       <div class="col-md-3">
 
 
