@@ -104,6 +104,7 @@
                   <table class="table table-bordered text-right" style="width: 100%;font-size:x-large">
                     <thead style="background:red">
                       <tr>
+                        <th >الرقم التسلسلي</th>
                         <th>اسم المنتج</th>
 
                         <th> المواصفات والطراز</th>
@@ -118,7 +119,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="sale_details in sale_detail">
+                      <tr v-for="(sale_details,index) in sale_detail" :key="index">
+                        <td>
+                          {{ index+1 }}
+                        </td>
                         <td>{{ sale_details.product }}</td>
                         <td>{{ sale_details.desc }}</td>
                         <td>{{ sale_details.status }}</td>

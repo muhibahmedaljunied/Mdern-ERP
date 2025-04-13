@@ -18,6 +18,7 @@
                 <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
                   <thead>
                     <tr>
+                      <th >الرقم التسلسلي</th>
                       <th> الفرع</th>
                       <th> الموظف</th>
 
@@ -34,6 +35,9 @@
                     <tr v-for="index in count" :key="index">
 
 
+                      <td>
+                        {{ index+1 }}
+                      </td>
                       <td>
 
                         <select style="background-color:beige" v-model="staff[index]" class="form-control " required>

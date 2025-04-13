@@ -26,6 +26,7 @@
                   <thead>
                     <tr>
 
+                      <th >الرقم التسلسلي</th>
                       <th> الاسم</th>
 
                       <th> من</th>
@@ -42,6 +43,9 @@
                   </thead>
                   <tbody>
                     <tr v-for="index in count" :key="index">
+                      <td>
+                        {{ index+1 }}
+                      </td>
                       <td>
                         <input v-model="holiday[index]" type="text" class="form-control" name="name" id="name"
                           required />
@@ -132,7 +136,7 @@
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
-                    <th class="wd-15p border-bottom-0">#</th>
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <th class="wd-15p border-bottom-0">الاسم</th>
                     <th class="wd-15p border-bottom-0">تاريخ البدء</th>
                     <th class="wd-15p border-bottom-0">تاريخ الانتهاء</th>

@@ -147,6 +147,7 @@
                 <thead>
 
                   <tr>
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <th class="wd-15p border-bottom-0">الرقم الوظيفي</th>
                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                     <th class="wd-15p border-bottom-0"> الفرع</th>
@@ -167,6 +168,9 @@
                   <tr v-for="(salary, index) in list_data.data" :key="index">
 
 
+                    <td>
+                      {{ index+1 }}
+                    </td>
                     <td>{{ salary.id }}</td>
                     <td> <a @click="salary_details(salary.id)">{{ salary.name }} </a></td>
                     <td> <a >{{ salary.name }} </a></td>

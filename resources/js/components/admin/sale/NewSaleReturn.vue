@@ -12,82 +12,94 @@
           <div class="card-body">
             <div class="row">
 
-      
-                <div class="card">
+
+              <div class="card">
 
 
 
-                  <div class="card-body">
+                <div class="card-body">
 
 
-                    <div class="row">
+                  <div class="row">
 
-                      <div class="col-md-2">
-                        <label for="pagoPrevio">رقم الفاتوره</label>
-
-
-                        <input class="form-control" style="background-color: beige;" type="text" v-model="sale_id"
-                          @input="get_sale">
+                    <div class="col-md-2">
+                      <label for="pagoPrevio">رقم الفاتوره</label>
 
 
-                      </div>
-                      <div class="col-md-2">
+                      <input class="form-control" style="background-color: beige;" type="text" v-model="sale_id"
+                        @input="get_sale">
 
 
-                        <label for="cliente"> العميل</label>
-
-                        <input v-if='sale' class="form-control" type="text" v-model="sale[0].name" @input="get_sale">
-
+                    </div>
+                    <div class="col-md-2">
 
 
-                      </div>
-                      <div class="col-md-4">
-                        <label for="pagoPrevio">اجمالي الفاتوره</label>
+                      <label for="cliente"> العميل</label>
 
+                      <input v-if='sale' class="form-control" type="text" v-model="sale[0].name" @input="get_sale">
 
-                        <input v-if='sale' class="form-control" type="number" v-model="sale[0].grand_total"
-                          @input="get_sale">
-
-                      </div>
 
 
                     </div>
 
-                    <hr>
-                    <br>
-                    <div class="row">
+                    <div class="col-md-2">
+
+
+                      <label for="cliente"> الفرع</label>
+
+                      <input v-if='sale' class="form-control" type="text" v-model="sale[0].name" @input="get_sale">
 
 
 
-                      <div class="col-md-2">
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="pagoPrevio">اجمالي الفاتوره</label>
 
 
-                        <label for="date">التاريخ</label><br />
+                      <input v-if='sale' class="form-control" type="number" v-model="sale[0].grand_total"
+                        @input="get_sale">
 
-                        <input style="background-color: beige;" name="date" type="date" v-model="dateselected"
-                          class="form-control" />
-
-
-
-                      </div>
-                      <!-- <div class="col-md-2" v-if="data.payment_status == 'pendding'"> -->
-                      <div class="col-md-2">
+                    </div>
 
 
-                        <label for="date">طريقه الدفع</label><br />
-                        <select style="background-color: beige;" name="forma_pago" class="form-control" id="forma_pago"
-                          v-model="Way_to_pay_selected" v-on:change="onwaychange">
-                          text
+                  </div>
 
-                          <option v-bind:value="1">نقد</option>
-                          <option v-bind:value="2">أجل</option>
-                          <option v-bind:value="3">بنك</option>
-                        </select>
-
-                      </div>
+                  <hr>
+                  <br>
+                  <div class="row">
 
 
-                      <!-- 
+
+                    <div class="col-md-2">
+
+
+                      <label for="date">التاريخ</label><br />
+
+                      <input style="background-color: beige;" name="date" type="date" v-model="dateselected"
+                        class="form-control" />
+
+
+
+                    </div>
+                    <!-- <div class="col-md-2" v-if="data.payment_status == 'pendding'"> -->
+                    <div class="col-md-2">
+
+
+                      <label for="date">طريقه الدفع</label><br />
+                      <select style="background-color: beige;" name="forma_pago" class="form-control" id="forma_pago"
+                        v-model="Way_to_pay_selected" v-on:change="onwaychange">
+                        text
+
+                        <option v-bind:value="1">نقد</option>
+                        <option v-bind:value="2">أجل</option>
+                        <option v-bind:value="3">بنك</option>
+                      </select>
+
+                    </div>
+
+
+                    <!-- 
         <div class="col-md-2" v-else>
 
           <label for="date">طريقه الدفع</label><br />
@@ -106,62 +118,62 @@
 
         </div> -->
 
-                      <div class="col-md-4">
-                        <h5 class="card-title"> الحساب</h5>
-                        <div class="custom-search">
+                    <div class="col-md-4">
+                      <h5 class="card-title"> الحساب</h5>
+                      <div class="custom-search">
 
-                          <input :id="'SaleReturn_account_tree'" type="text" class="custom-search-input">
-                          <input :id="'SaleReturn_account_tree_id'" type="hidden" class="custom-search-input">
-                          <!-- <input :id="'SaleReturn_store_tree_id'" type="hidden"  class="custom-search-input"> -->
+                        <input :id="'SaleReturn_account_tree'" type="text" class="custom-search-input">
+                        <input :id="'SaleReturn_account_tree_id'" type="hidden" class="custom-search-input">
+                        <!-- <input :id="'SaleReturn_store_tree_id'" type="hidden"  class="custom-search-input"> -->
 
 
-                          <button class="custom-search-botton" type="button" data-toggle="modal"
-                            data-target="#exampleModalAcoount">
-                            <i class="fa fa-plus-circle"></i></button>
-                        </div>
+                        <button class="custom-search-botton" type="button" data-toggle="modal"
+                          data-target="#exampleModalAcoount">
+                          <i class="fa fa-plus-circle"></i></button>
                       </div>
-                      <div class="col-md-2">
-                        <label for="cliente"> الحساب التفصيلي</label>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="cliente"> الحساب التفصيلي</label>
 
 
-                        <select class="form-control" style="background-color: beige;" name="forma_pago"
-                          id="select_account_SaleReturn_group">
+                      <select class="form-control" style="background-color: beige;" name="forma_pago"
+                        id="select_account_SaleReturn_group">
 
-                        </select>
-
-                      </div>
-
-
-
-
-
-
+                      </select>
 
                     </div>
-                    <hr>
-                    <br>
-
-                    <div class="row">
 
 
 
-                      <div class="col-md-4">
-                        <label for="cliente">المخزن المرتجع البه</label>
 
-                        <div class="custom-search">
 
-                          <input style="background-color: beige;" :id="'SaleReturn_store_tree'" type="text"
-                            class="custom-search-input">
-                          <input :id="'SaleReturn_store_tree_id'" type="hidden">
-                          <input :id="'select_account_SaleReturn'" type="hidden" class="custom-search-input">
-                          <button class="custom-search-botton" type="button" data-toggle="modal"
-                            data-target="#exampleModalStore">
-                            <i class="fa fa-plus-circle"></i></button>
-                        </div>
 
+
+                  </div>
+                  <hr>
+                  <br>
+
+                  <div class="row">
+
+
+
+                    <div class="col-md-4">
+                      <label for="cliente">المخزن المرتجع البه</label>
+
+                      <div class="custom-search">
+
+                        <input style="background-color: beige;" :id="'SaleReturn_store_tree'" type="text"
+                          class="custom-search-input">
+                        <input :id="'SaleReturn_store_tree_id'" type="hidden">
+                        <input :id="'select_account_SaleReturn'" type="hidden" class="custom-search-input">
+                        <button class="custom-search-botton" type="button" data-toggle="modal"
+                          data-target="#exampleModalStore">
+                          <i class="fa fa-plus-circle"></i></button>
                       </div>
 
-                      <!-- <div class="col-md-2" v-if="show_treasury == true">
+                    </div>
+
+                    <!-- <div class="col-md-2" v-if="show_treasury == true">
 
           <label for="pagoPrevio">الصندوق</label>
           <select style="background-color: beige;" v-model="treasury" id="supplier" class="form-control">
@@ -184,129 +196,133 @@
 
         </div> -->
 
-                      <div class="col-md-4">
-                        <label for="pagoPrevio">البيان</label>
+                    <div class="col-md-4">
+                      <label for="pagoPrevio">البيان</label>
 
 
-                        <input class="form-control" style="background-color: beige;" type="text" v-model="description">
+                      <input class="form-control" style="background-color: beige;" type="text" v-model="description">
 
-
-                      </div>
-
-                      <div class="col-md-4">
-                        <label for="pagoPrevio">اختيار الكل</label> <br>
-
-                        <input v-model="check_state_all" @change="check_all_return()" type="checkbox"
-                          class="btn btn-info waves-effect">
-                      </div>
 
                     </div>
 
+                    <div class="col-md-4">
+                      <label for="pagoPrevio">اختيار الكل</label> <br>
+
+                      <input v-model="check_state_all" @change="check_all_return()" type="checkbox"
+                        class="btn btn-info waves-effect">
+                    </div>
+
                   </div>
+
                 </div>
-      
+              </div>
+
             </div>
 
             <div class="row">
 
-      
-                <div class="card">
+
+              <div class="card">
 
 
 
-                  <div class="card-body">
+                <div class="card-body">
 
 
 
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="table-responsive">
-                          <table class="table table-bordered">
-                            <thead>
-                              <tr>
-                                <!-- <th>الرقم</th> -->
-                                <th>اسم المنتج</th>
-                                <!-- <th> الباركود </th> -->
-                                <th> المواصفات والطراز</th>
-                                <th>الحاله</th>
-                                <th>المخزن</th>
-                                <th>المخزن المرتجع البه</th>
-                                <!-- <th>الكميه المتوفره</th> -->
-                                <th>الكميه المباعه</th>
-                                <!-- <th> السعر </th> -->
-                                <th>الكميه المسموح ارجاعها</th>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <!-- <th>الرقم</th> -->
+                              <th>الرقم التسلسلي</th>
+                              <th>اسم المنتج</th>
+                              <!-- <th> الباركود </th> -->
+                              <th> المواصفات والطراز</th>
+                              <th>الحاله</th>
+                              <th>المخزن</th>
+                              <th>المخزن المرتجع البه</th>
+                              <!-- <th>الكميه المتوفره</th> -->
+                              <th>الكميه المباعه</th>
+                              <!-- <th> السعر </th> -->
+                              <th>الكميه المسموح ارجاعها</th>
 
-                                <th> الوحده </th>
+                              <th> الوحده </th>
 
-                                <th> التكلفه </th>
-                                <!-- <th> سعر البيع </th> -->
+                              <th> التكلفه </th>
+                              <!-- <th> سعر البيع </th> -->
 
 
-                                <th>الكميه المرتجعه الفعليه </th>
-                                <th>قيمه المرتجع</th>
+                              <th>الكميه المرتجعه الفعليه </th>
+                              <th>قيمه المرتجع</th>
 
-                                <th>ملاحظه</th>
-                                <th>اضافه</th>
-                              </tr>
-                            </thead>
-                            <tbody v-if="detail && detail.length > 0">
-                              <tr v-for="(sale_details, index) in detail" :key="index">
-                                <input v-model="id = sale_details.sale_id" type="hidden" name="name" id="name"
-                                  class="form-control" />
+                              <th>ملاحظه</th>
+                              <th>اضافه</th>
+                            </tr>
+                          </thead>
+                          <tbody v-if="detail && detail.length > 0">
+                            <tr v-for="(sale_details, index) in detail" :key="index">
+                              <input v-model="id = sale_details.sale_id" type="hidden" name="name" id="name"
+                                class="form-control" />
 
-                                <td>
-                                  <div class="form-group">
-                                    <!-- <input v-model="sale_details.product"  type="text" name="name" id="name"
+                              <td>
+                                {{ index + 1 }}
+                              </td>
+                              <td>
+                                <div class="form-group">
+                                  <!-- <input v-model="sale_details.product"  type="text" name="name" id="name"
               class="form-control" /> -->
-                                    {{ sale_details.product }}
-                                  </div>
-                                </td>
-<!-- 
+                                  {{ sale_details.product }}
+                                </div>
+                              </td>
+                              <!-- 
                                 <td>
                                   <div class="form-group">
                                     <vue-barcode :value="sale_details.product_code" tag="svg"></vue-barcode>
                                   </div>
                                 </td> -->
 
-                                <td>{{ sale_details.desc }}</td>
-                                <td>{{ sale_details.status }}</td>
-                                <td>{{ sale_details.store }}
-                                  <input :id="'select_account_SaleReturn' + index" type="hidden">
-                                </td>
+                              <td>{{ sale_details.desc }}</td>
+                              <td>{{ sale_details.status }}</td>
+                              <td>{{ sale_details.store }}
+                                <input :id="'select_account_SaleReturn' + index" type="hidden">
+                              </td>
 
-                                <td>
-                                  <div class="custom-search">
+                              <td>
+                                <div class="custom-search">
 
-                                    <input style="background-color: beige;" :id="'SaleReturn_storem_tree' + index"
-                                      type="text" class="custom-search-input">
-                                    <input :id="'SaleReturn_storem_tree_id' + index" type="hidden">
+                                  <input style="background-color: beige;" :id="'SaleReturn_storem_tree' + index"
+                                    type="text" class="custom-search-input">
+                                  <input :id="'SaleReturn_storem_tree_id' + index" type="hidden">
 
-                                    <button class="custom-search-botton" type="button" data-toggle="modal"
-                                      @click="detect_index(index)" data-target="#exampleModalStorem">
-                                      <i class="fa fa-plus-circle"></i></button>
-                                  </div>
-                                </td>
+                                  <button class="custom-search-botton" type="button" data-toggle="modal"
+                                    @click="detect_index(index)" data-target="#exampleModalStorem">
+                                    <i class="fa fa-plus-circle"></i></button>
+                                </div>
+                              </td>
 
-                                <td>
-                                  <div v-for="temx in sale_details.qty_after_convert['qty']">
-
-
-
-                                    <span v-for="temx2 in temx">
+                              <td>
+                                <div v-for="temx in sale_details.qty_after_convert['qty']">
 
 
 
+                                  <span v-for="temx2 in temx">
 
-                                      <span>
-                                        {{ temx2[0] }}
-                                      </span>
-                                      <span style="color: red;">
-                                        {{ temx2[1] }}
-                                      </span>
 
+
+
+                                    <span>
+                                      {{ temx2[0] }}
+                                    </span>
+                                    <span style="color: red;">
+                                      {{ temx2[1] }}
                                     </span>
 
-                                    <!-- <span v-if="temx.unit_type == 0">
+                                  </span>
+
+                                  <!-- <span v-if="temx.unit_type == 0">
 
 
 <span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
@@ -316,31 +332,31 @@ temx.name }}</span>
 
 </span> -->
 
-                                  </div>
+                                </div>
 
-                                </td>
+                              </td>
 
-                                <td>
+                              <td>
 
-                                  <div v-for="temx in sale_details.qty_after_convert['qty_remain']">
-
-
-
-                                    <span v-for="temx2 in temx">
+                                <div v-for="temx in sale_details.qty_after_convert['qty_remain']">
 
 
 
+                                  <span v-for="temx2 in temx">
 
-                                      <span>
-                                        {{ temx2[0] }}
-                                      </span>
-                                      <span style="color: red;">
-                                        {{ temx2[1] }}
-                                      </span>
 
+
+
+                                    <span>
+                                      {{ temx2[0] }}
+                                    </span>
+                                    <span style="color: red;">
+                                      {{ temx2[1] }}
                                     </span>
 
-                                    <!-- <span v-if="temx.unit_type == 0">
+                                  </span>
+
+                                  <!-- <span v-if="temx.unit_type == 0">
 
 
 <span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
@@ -350,83 +366,83 @@ temx.name }}</span>
 
 </span> -->
 
-                                  </div>
-                                </td>
-                                <td>
+                                </div>
+                              </td>
+                              <td>
 
-                                  <select v-if="check_state[index] == true" :id="'select_unit' + index"
-                                    v-model="unit[index]" name="type" class="form-control" required>
+                                <select v-if="check_state[index] == true" :id="'select_unit' + index"
+                                  v-model="unit[index]" name="type" class="form-control" required>
 
-                                    <option disabled v-for="unit in sale_details.units"
-                                      v-bind:value="[unit.unit_id, unit.rate]">
-                                      {{ unit.name }}
-                                    </option>
-
-
-                                  </select>
-
-                                  <select v-else v-on:change="calculate_total(index)" style="background-color: beige;"
-                                    :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control"
-                                    required>
-
-                                    <option v-for="unit in sale_details.units" v-bind:value="[unit.unit_id, unit.rate]">
-                                      {{ unit.name }}
-                                    </option>
+                                  <option disabled v-for="unit in sale_details.units"
+                                    v-bind:value="[unit.unit_id, unit.rate]">
+                                    {{ unit.name }}
+                                  </option>
 
 
-                                  </select>
-                                </td>
-                                <td> {{ unit_price[index] }}
-                                </td>
+                                </select>
+
+                                <select v-else v-on:change="calculate_total(index)" style="background-color: beige;"
+                                  :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control"
+                                  required>
+
+                                  <option v-for="unit in sale_details.units" v-bind:value="[unit.unit_id, unit.rate]">
+                                    {{ unit.name }}
+                                  </option>
 
 
+                                </select>
+                              </td>
+                              <td> {{ unit_price[index] }}
+                              </td>
 
 
 
-                                <td>
-                                  <div class="form-group">
-                                    <input v-if="check_state[index] == true" v-model="qty[index]" type="number"
-                                      class="form-control" readonly />
-
-                                    <input v-else @input="calculate_total(index)" style="background-color: beige;"
-                                      v-model="qty[index]" type="number" min="1" step="1" class="form-control" />
-
-                                  </div>
-                                </td>
-                                <td>
-
-                                  <input v-if="check_state[index] == true" readonly v-model="total[index]" name="number"
-                                    type="number" class="form-control" />
 
 
-                                  <input v-else @input="calculate_total(index)" v-model="total[index]" name="number"
-                                    type="number" class="form-control" />
+                              <td>
+                                <div class="form-group">
+                                  <input v-if="check_state[index] == true" v-model="qty[index]" type="number"
+                                    class="form-control" readonly />
 
-                                </td>
-                                <td>
+                                  <input v-else @input="calculate_total(index)" style="background-color: beige;"
+                                    v-model="qty[index]" type="number" min="1" step="1" class="form-control" />
 
-                                  <span style="color: red;" :id="'message_validation' + index"></span>
+                                </div>
+                              </td>
+                              <td>
 
-                                </td>
-                                <td v-if="sale_details.qty_remain != 0">
-
-                                  <input v-model="check_state[index]" @change="calculate()" type="checkbox"
-                                    class="btn btn-info waves-effect">
-
-                                </td>
+                                <input v-if="check_state[index] == true" readonly v-model="total[index]" name="number"
+                                  type="number" class="form-control" />
 
 
-                                <td v-else>
+                                <input v-else @input="calculate_total(index)" v-model="total[index]" name="number"
+                                  type="number" class="form-control" />
 
-                                  <input v-model="check_state[index]" @change="
-                                    calculate()
-                                    " type="checkbox" disabled class="btn btn-info waves-effect">
+                              </td>
+                              <td>
 
-                                </td>
+                                <span style="color: red;" :id="'message_validation' + index"></span>
 
-                              </tr>
+                              </td>
+                              <td v-if="sale_details.qty_remain != 0">
 
-                              <!-- <tr>
+                                <input v-model="check_state[index]" @change="calculate()" type="checkbox"
+                                  class="btn btn-info waves-effect">
+
+                              </td>
+
+
+                              <td v-else>
+
+                                <input v-model="check_state[index]" @change="
+                                  calculate()
+                                  " type="checkbox" disabled class="btn btn-info waves-effect">
+
+                              </td>
+
+                            </tr>
+
+                            <!-- <tr>
         <td colspan="10">
           <div class="col-md-12">
             <label for="date">الاجمالي</label><br />
@@ -454,154 +470,154 @@ temx.name }}</span>
 
 
 
-                            </tbody>
-                            <tbody v-else>
-                              <tr>
-                                <td align="center" colspan="10">
-                                  <h3>
-                                    لايوجد بيانات
-                                  </h3>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
+                          </tbody>
+                          <tbody v-else>
+                            <tr>
+                              <td align="center" colspan="10">
+                                <h3>
+                                  لايوجد بيانات
+                                </h3>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
-
-
                   </div>
+
+
                 </div>
-    
+              </div>
+
             </div>
 
 
             <div class="row">
 
-         
-                <div class="card">
+
+              <div class="card">
 
 
 
-                  <div class="card-body">
+                <div class="card-body">
 
 
-                    <div class="row">
-                      <div class="col-md-8">
-
-
-
+                  <div class="row">
+                    <div class="col-md-8">
 
 
 
 
-                        <div class="row">
 
-                          <div class="col-md-12"> <label for="pagoPrevio">نوع العمله</label>
-                            <select class="form-control" name="forma_pago" id="forma_pago">
-                              <option v-bind:value="2">ريال يمني </option>
-                              <option v-bind:value="1">دولار امريكي</option>
-                              <option v-bind:value="2">ريال سعودي </option>
-                            </select>
-                          </div>
-                          <div class="col-md-12">
-                            <label for="pagoPrevio">الخصم (%)</label>
-                            <input type="number" @input="take_discount" v-model="discount" :min="0" :max="99" :step="1"
-                              oninput="validity.valid||(value='');" class="form-control input_cantidad"
-                              onkeypress="return valida(event)" />
 
-                          </div>
-                          <div class="col-md-12">
-                            <label for="pagoPrevio">مصروفات مباشره</label>
-                            <input type="number" :min="0" :max="99" :step="1" oninput="validity.valid||(value='');"
-                              class="form-control input_cantidad" onkeypress="return valida(event)" />
 
-                          </div>
+                      <div class="row">
 
-                          <div class="col-md-12">
-                            <label for="pagoPrevio">تاريخ الاستحقاق</label>
-                            <input type="date" class="form-control" />
+                        <div class="col-md-12"> <label for="pagoPrevio">نوع العمله</label>
+                          <select class="form-control" name="forma_pago" id="forma_pago">
+                            <option v-bind:value="2">ريال يمني </option>
+                            <option v-bind:value="1">دولار امريكي</option>
+                            <option v-bind:value="2">ريال سعودي </option>
+                          </select>
+                        </div>
+                        <div class="col-md-12">
+                          <label for="pagoPrevio">الخصم (%)</label>
+                          <input type="number" @input="take_discount" v-model="discount" :min="0" :max="99" :step="1"
+                            oninput="validity.valid||(value='');" class="form-control input_cantidad"
+                            onkeypress="return valida(event)" />
 
-                          </div>
-                          <div class="col-md-3">&nbsp;</div>
-                          <div class="col-md-12">
-                            <label for="total" class="text-left">المبلغ المستحق</label>
-                            <input @input="calculate()" type="text" id="remaining" class="form-control"
-                              v-model="To_pay" />
-
-                          </div>
-
+                        </div>
+                        <div class="col-md-12">
+                          <label for="pagoPrevio">مصروفات مباشره</label>
+                          <input type="number" :min="0" :max="99" :step="1" oninput="validity.valid||(value='');"
+                            class="form-control input_cantidad" onkeypress="return valida(event)" />
 
                         </div>
 
+                        <div class="col-md-12">
+                          <label for="pagoPrevio">تاريخ الاستحقاق</label>
+                          <input type="date" class="form-control" />
+
+                        </div>
+                        <div class="col-md-3">&nbsp;</div>
+                        <div class="col-md-12">
+                          <label for="total" class="text-left">المبلغ المستحق</label>
+                          <input @input="calculate()" type="text" id="remaining" class="form-control"
+                            v-model="To_pay" />
+
+                        </div>
+
+
                       </div>
-                      <div class="col-md-4">
 
-                        <div class="row">
+                    </div>
+                    <div class="col-md-4">
 
-                          <div class="col-md-12">
-                            <label for="pagoPrevio">اجمالي الكميه</label>
+                      <div class="row">
 
-                            <input @input="calculate()" type="text" id="cantidad_total" v-model="total_quantity"
-                              class="form-control" />
+                        <div class="col-md-12">
+                          <label for="pagoPrevio">اجمالي الكميه</label>
 
-                          </div>
+                          <input @input="calculate()" type="text" id="cantidad_total" v-model="total_quantity"
+                            class="form-control" />
+
+                        </div>
 
 
-                          <div class="col-md-12">
-                            <label for="subTotal">الاجمالي (بدون ضريبه) <small></small></label>
-                            <input @input="calculate()" type="text" id="subtotal_general_si" name="subtotal_general_si"
-                              value="0.00" v-model="sub_total" class="form-control" />
-                          </div>
+                        <div class="col-md-12">
+                          <label for="subTotal">الاجمالي (بدون ضريبه) <small></small></label>
+                          <input @input="calculate()" type="text" id="subtotal_general_si" name="subtotal_general_si"
+                            value="0.00" v-model="sub_total" class="form-control" />
+                        </div>
 
-                          <div class="col-md-12">
-                            <label for="impuestosTotales">مجموع الضريبه</label>
-                            <input @input="calculate()" type="text" id="impuestos_totales" v-model="total_tax"
-                              class="form-control" />
-                          </div>
+                        <div class="col-md-12">
+                          <label for="impuestosTotales">مجموع الضريبه</label>
+                          <input @input="calculate()" type="text" id="impuestos_totales" v-model="total_tax"
+                            class="form-control" />
+                        </div>
 
-                          <div class="col-md-12">
-                            <label for="subTotal">الاجمالي (مع الضريبه) <small></small></label>
+                        <div class="col-md-12">
+                          <label for="subTotal">الاجمالي (مع الضريبه) <small></small></label>
 
-                            <input @input="calculate()" type="text" id="subtotal_general" name="subtotal_general"
-                              v-model="grand_total" class="form-control" />
-                            <input type="hidden" id="subtotal_general_sf" name="subtotal_general_sf" value="0.00" />
-                          </div>
+                          <input @input="calculate()" type="text" id="subtotal_general" name="subtotal_general"
+                            v-model="grand_total" class="form-control" />
+                          <input type="hidden" id="subtotal_general_sf" name="subtotal_general_sf" value="0.00" />
+                        </div>
 
-                          <div class="col-md-12" v-show="show">
-                            <label for="pagoPrevio">المدفوع</label>
-                            <input @input="calculate()" class="form-control" type="text" id="paid" v-on:input="credit"
-                              v-model="paid" style="color: red" />
+                        <div class="col-md-12" v-show="show">
+                          <label for="pagoPrevio">المدفوع</label>
+                          <input @input="calculate()" class="form-control" type="text" id="paid" v-on:input="credit"
+                            v-model="paid" style="color: red" />
 
-                          </div>
+                        </div>
 
-                          <div class="col-md-12" v-show="show">
-                            <label for="pagoPrevio">المتبقي</label>
-                            <input @input="calculate()" type="text" id="remaining" class="form-control"
-                              v-model="remaining" />
+                        <div class="col-md-12" v-show="show">
+                          <label for="pagoPrevio">المتبقي</label>
+                          <input @input="calculate()" type="text" id="remaining" class="form-control"
+                            v-model="remaining" />
 
-                          </div>
-                          <div class="col-md-12">
-                            <div class="text-center">
-                              <a style="
+                        </div>
+                        <div class="col-md-12">
+                          <div class="text-center">
+                            <a style="
             width: 100%;
             padding-top: 0.5em;
             padding-bottom: 0.5em;
             font-size: 18pt;" href="javascript:void" @click="Add_return()"
-                                class="btn btn-info waves-effect waves-light" id="pagar">
-                                <i class="fa fa-credit-card"></i></a>
-                            </div>
+                              class="btn btn-info waves-effect waves-light" id="pagar">
+                              <i class="fa fa-credit-card"></i></a>
                           </div>
                         </div>
-
-
-
-
                       </div>
+
+
+
+
                     </div>
                   </div>
                 </div>
-       
+              </div>
+
             </div>
           </div>
         </div>
@@ -876,7 +892,7 @@ export default {
           unit: this.unit,
           qty: this.qty,
           total: this.total,
-          total_quantity:this.total_quantity,
+          total_quantity: this.total_quantity,
           debit: {
             account_id: this.storem_account,
             value: this.total,

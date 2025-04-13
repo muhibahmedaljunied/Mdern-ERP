@@ -123,7 +123,7 @@
                                 <table class="table table-bordered text-center">
                                     <thead>
                                         <tr>
-
+                                            <th class="wd-10p border-bottom-0">الرقم التسلسلي</th>
                                             <th class="wd-10p border-bottom-0">اسم المؤظف</th>
                                             <th class="wd-10p border-bottom-0">نوع الغياب</th>
                                             <th class="wd-10p border-bottom-0">عدد المرات</th>
@@ -140,7 +140,9 @@
                                         <tr v-for="(staff, indexs) in value_list.data" :key="indexs"
                                             v-if="staff.attendance > 0">
 
-
+<td>
+    {{ indexs+1 }}
+</td>
 
                                             <td>{{ staff.name }}</td>
 
@@ -232,6 +234,7 @@
                                                                                                 style="width: 100%; font-size: x-large">
                                                                                                 <thead>
                                                                                                     <tr>
+                                                                                                        <th >الرقم التسلسلي</th>
 
                                                                                                         <th> نوع
                                                                                                             الغياب
@@ -261,6 +264,9 @@
                                                                                                     <tr v-for="(absence, index_absence) in staff.absence"
                                                                                                         :key="index_absence">
 
+                                                                                                        <td>
+                                                                                                            {{ index_absence+1 }}
+                                                                                                        </td>
                                                                                                         <td>
 
                                                                                                             {{

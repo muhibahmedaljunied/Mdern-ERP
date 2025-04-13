@@ -26,7 +26,7 @@
             <table class="table table-bordered text-center">
               <thead>
                 <tr>
-                  <th class="wd-15p border-bottom-0">#</th>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th class="wd-15p border-bottom-0">من</th>
                   <th class="wd-15p border-bottom-0">الي</th>
                   <th class="wd-15p border-bottom-0">المده</th>

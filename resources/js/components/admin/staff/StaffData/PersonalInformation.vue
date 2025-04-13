@@ -85,6 +85,7 @@
             <table class="table table-bordered text-center">
               <thead>
                 <tr>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th class="wd-15p border-bottom-0">الرقم الوظيفي</th>
                   <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                   <th class="wd-15p border-bottom-0">الهويه</th>
@@ -110,6 +111,9 @@
               </thead>
               <tbody v-if="list_data && list_data.data.length > 0">
                 <tr v-for="(staff, index) in list_data.data" :key="index">
+                  <td>
+                    {{ index+1 }}
+                  </td>
                   <td>{{ staff.id }}</td>
 
                   <td>{{ staff.name }}</td>

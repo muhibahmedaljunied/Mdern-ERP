@@ -37,6 +37,7 @@
                         <tr>
 
                           <!-- <th>اسم الموظف</th> -->
+                          <th >الرقم التسلسلي</th>
                           <th>نوع الانصراف</th>
                           <th>وقت الانصراف</th>
                           <th>عدد مرات التكرار</th>
@@ -63,6 +64,9 @@
                                     </option>
                                   </select>
                                 </td> -->
+                                <td>
+                                  {{ index+1 }}
+                                </td>
                           <td>
                             <select v-model="leaveoutselected[index]" name="type" id="type" class="form-control "
                               required>

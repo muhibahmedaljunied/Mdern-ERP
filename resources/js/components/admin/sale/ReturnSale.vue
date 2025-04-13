@@ -37,6 +37,19 @@
                     <div>{{ data.customer_name }}</div>
 
                   </div>
+
+          
+
+                  <div class="col-md-2">
+
+
+                    <label > الفرع</label>
+
+
+
+                    <div>{{ data.customer_name }}</div>
+
+                  </div>
                   <div class="col-md-4">
                     <label for="pagoPrevio">اجمالي الفاتوره</label>
 
@@ -191,7 +204,7 @@
                   </div>
 
                 </div>
-       
+
               </div>
             </div>
           </div>
@@ -201,13 +214,13 @@
 
           <div class="col-md-12">
             <div class="card">
-            
+
 
 
               <div class="card-body">
 
 
-     
+
 
                 <div class="row">
                   <div class="col-md-12">
@@ -216,6 +229,7 @@
                         <thead>
                           <tr>
                             <!-- <th>الرقم</th> -->
+                            <th>الرقم التسلسلي</th>
                             <th>اسم المنتج</th>
                             <!-- <th> الباركود </th> -->
                             <th> المواصفات والطراز</th>
@@ -247,6 +261,9 @@
                             <input v-model="id = sale_details.sale_id" type="hidden" name="name" id="name"
                               class="form-control" />
 
+                            <td>
+                              {{ index + 1 }}
+                            </td>
                             <td>
                               <div class="form-group">
                                 <!-- <input v-model="sale_details.product"  type="text" name="name" id="name"
@@ -515,7 +532,7 @@ temx.name }}</span>
 
           <div class="col-md-12">
             <div class="card">
-            
+
 
 
               <div class="card-body">
@@ -818,7 +835,7 @@ export default {
     check_data(i) {
 
 
-      console.log('2222222',this.qty[i], this.unit[i][1], this.detail[i].avilable_qty, this.detail[i].qty);
+      console.log('2222222', this.qty[i], this.unit[i][1], this.detail[i].avilable_qty, this.detail[i].qty);
 
       // if ((this.qty[i] * this.unit[i][1]) > this.detail[i].avilable_qty) {
 
@@ -931,7 +948,7 @@ export default {
           qty: this.qty,
           store: this.storem, //this store that we was returned into it      
           total: this.total,
-          total_quantity:this.total_quantity,
+          total_quantity: this.total_quantity,
           debit: {
             account_id: this.storem_account,
             value: this.total,

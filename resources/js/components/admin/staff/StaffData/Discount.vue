@@ -81,6 +81,7 @@
                     <thead>
                       <tr>
 
+                        <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                         <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                         <th class="wd-15p border-bottom-0">التاريخ</th>
 
@@ -94,6 +95,9 @@
                     </thead>
                     <tbody v-if="list_data && list_data.data.length > 0">
                       <tr v-for="(discount, index) in list_data.data" :key="index">
+                        <td>
+                          {{ index+1 }}
+                        </td>
                         <td>{{ discount.name }}</td>
                         <td>{{ discount.date }}</td>
 

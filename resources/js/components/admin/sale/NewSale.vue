@@ -175,6 +175,7 @@
                       <thead>
                         <tr>
                           <!-- <th>Code</th> -->
+                          <th >الرقم التسلسلي</th>
                           <th>المنتج</th>
                           <th>الباركود</th>
                           <th>المخزن</th>
@@ -197,6 +198,9 @@
                       <tbody v-if="detail && detail.length > 0">
                         <!-- <tr v-for="(products, index) in product"> -->
                         <tr v-for="(product, index) in detail" :key="index">
+                          <td>
+                            {{ index+1 }}
+                          </td>
                           <!-- <td><input type="text" value="123" id="codigo0" class="form-control input_codigo" =""></td> -->
                           <td>
                             <div id="factura_producto" class="input_nombre">

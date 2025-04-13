@@ -16,6 +16,8 @@ class CreateLeavesTable extends Migration
         Schema::create('leaves', function (Blueprint $table) {
             $table->Increments('id');
             // --------------------------------------------------------------
+            // $table->unsignedInteger('branch_id');
+            // $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
 
             $table->unsignedInteger('staff_id');
             $table->foreign('staff_id')->references('id')->on('staff');

@@ -463,6 +463,12 @@ const routes = [
         component: ReturnSaleList,
     },
     {
+        path: "/listreturn_sale",
+        name: "returnsalelist",
+        props: false,
+        component: ReturnSaleList,
+    },
+    {
         path: "/return_sale_invoice/:id",
         name: "return_sale_invoice",
         props: true,
@@ -605,6 +611,12 @@ const routes = [
         path: "/returnpurchaselist/:id",
         name: "returnpurchaselist",
         props: true,
+        component: ReturnPurchaseList,
+    },
+    {
+        path: "/returnpurchaselist",
+        name: "returnpurchaselist",
+        props: false,
         component: ReturnPurchaseList,
     },
     {

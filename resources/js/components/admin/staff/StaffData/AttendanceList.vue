@@ -116,6 +116,7 @@
                                     <thead>
                                         <tr>
                                             <!-- <th class="wd-15p border-bottom-0">الرقم الوظيفي</th> -->
+                                            <th class="wd-10p border-bottom-0">الرقم التسلسلي</th>
                                             <th class="wd-10p border-bottom-0">اسم المؤظف</th>
                                             <!-- <th class="wd-10p border-bottom-0">الوظيفه</th> -->
                                             <th class="wd-10p border-bottom-0">التاريخ</th>
@@ -147,6 +148,9 @@
                                             class="form-control" /> -->
 
 
+                                            <td>
+                                                {{ indexs+1 }}
+                                            </td>
                                             <td>{{ staff.attendance.staff.name }}</td>
                                             <td>{{ staff.attendance.attendance_date }}</td>
 

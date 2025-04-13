@@ -60,9 +60,19 @@
                       </div>
 
 
+                      <div class="col-md-2">
+                          <label for="inputAddress">الفرع</label>
+                          <select v-model="branchselected" class="form-control" required>
+                            <option v-for="branch in branches" v-bind:value="branch.id">
+                              {{ branch.name }}
+                            </option>
+                          </select>
+                        </div>
 
 
                     </div>
+
+                    <br>
 
                     <div class="row">
 
@@ -118,7 +128,7 @@
                     <table class="table text-md-nowrap" id="example1">
                       <thead>
                         <tr>
-                          <th class="wd-15p border-bottom-0">#</th>
+                          <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                           <th class="wd-15p border-bottom-0">رقم الحساب</th>
                           <th class="wd-15p border-bottom-0"> الحساب</th>
                           <th class="wd-15p border-bottom-0"> الحساب التحليلي</th>

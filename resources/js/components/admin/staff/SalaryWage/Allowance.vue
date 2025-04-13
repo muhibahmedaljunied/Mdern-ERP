@@ -34,6 +34,7 @@
                               <table class="table table-bordered text-right">
                                 <thead>
                                   <tr>
+                                    <th >الرقم التسلسلي</th>
                                     <th> الفرع</th>
                                     <th>اسم المؤظف</th>
                                     <th>نوع البدل</th>
@@ -51,6 +52,9 @@
 
                                   <tr v-for="index in count" :key="index">
 
+                                    <td>
+                                      {{ index+1 }}
+                                    </td>
                                     <td>
                                       <select v-model="staffselected[index]" id="inputState" class="form-control">
                                         <option v-for="staff in staffs" v-bind:value="staff.id">
@@ -223,6 +227,7 @@
                 <thead>
                   <tr>
                     <!-- <th class="wd-15p border-bottom-0">الرقم الوظيفي</th> -->
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                      <th class="wd-15p border-bottom-0">الفرع</th>
                   <!--<th class="wd-15p border-bottom-0">القسم</th> -->
@@ -238,6 +243,9 @@
                   <tr v-for="(staff_allowance, index) in value_list.data" :key="index">
 
 
+                    <td>
+                      {{ index+1 }}
+                    </td>
                     <td>{{ staff_allowance.name }}</td>
                     <td>{{ staff_allowance.name }}</td>
                     <!-- <td>{{ staff_allowance.personal_card }}</td>
@@ -323,11 +331,6 @@
 
 
       </div>
-
-      <!-- ================================== -->
-
-
-      <!-- ================================== -->
 
     </div>
   </div>

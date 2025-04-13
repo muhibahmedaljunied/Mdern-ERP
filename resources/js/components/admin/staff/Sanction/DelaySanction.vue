@@ -36,6 +36,7 @@
                       <thead>
                         <tr>
                           <!-- <th>اسم الموظف</th> -->
+                          <th >الرقم التسلسلي</th>
                           <th>التاخير</th>
                           <th>المده</th>
                           <th>عدد مرات التكرار</th>
@@ -63,6 +64,9 @@
                                     </option>
                                   </select>
                                 </td> -->
+                                <td>
+                                  {{ index+1 }}
+                                </td>
                           <td>
                             <select v-model="delayselected[index]" name="type" id="type" class="form-control " required>
                               <option v-for="delay in delay_types" v-bind:value="delay.id">
@@ -202,7 +206,7 @@
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
-                    <th class="wd-15p border-bottom-0">#</th>
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <!-- <th class="wd-15p border-bottom-0">اسم الموظف</th> -->
                     <th class="wd-15p border-bottom-0">التاخير</th>
                     <th class="wd-15p border-bottom-0">المده</th>

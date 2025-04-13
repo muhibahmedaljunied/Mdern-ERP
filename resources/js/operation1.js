@@ -6,7 +6,7 @@ export default {
                 type: Object,
                 default: null,
             },
-
+            error_text:'',
             // count_row : '',
             first_row: "",
             purchase_id: [],

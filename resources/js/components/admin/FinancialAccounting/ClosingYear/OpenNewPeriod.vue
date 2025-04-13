@@ -19,6 +19,7 @@
                   <table class="table table-bordered text-center">
                     <thead>
                       <tr>
+                        <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                         <th class="wd-15p border-bottom-0">الفتره</th>
                         <th class="wd-15p border-bottom-0"> تأريخ البدء</th>
                         <th class="wd-15p border-bottom-0">تأريخ الانتهاء</th>
@@ -30,6 +31,9 @@
 
                       <tr v-for="index in count" :key="index">
 
+                        <td>
+                          {{ index+1 }}
+                        </td>
                         <td>
                           <input v-model="year" type="number" min="1900" max="2099" step="1" />
                         </td>
@@ -172,6 +176,7 @@
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <th class="wd-15p border-bottom-0">الفتره</th>
                     <th class="wd-15p border-bottom-0"> تأريخ البدء</th>
                     <th class="wd-15p border-bottom-0">تأريخ الانتهاء</th>
@@ -182,6 +187,9 @@
                 <tbody v-if="value_list && value_list.length > 0">
                   <tr v-for="(period, index) in value_list" :key="index">
 
+                    <td>
+                      {{ index+1 }}
+                    </td>
                     <td>{{ period.name }}</td>
                     <td>{{ period.start_date }}</td>
                     <td>{{ period.end_date }}</td>

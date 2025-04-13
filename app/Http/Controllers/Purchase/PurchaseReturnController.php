@@ -165,6 +165,15 @@ class PurchaseReturnController extends Controller
     }
 
 
+    public function return_purchase_list()
+    {
+
+        $returns = PurchaseReturn::with(['payments'])->paginate(15);
+
+        return response()->json(['returns' => $returns]);
+    }
+
+
 
     public function create(
         StockService $stock,

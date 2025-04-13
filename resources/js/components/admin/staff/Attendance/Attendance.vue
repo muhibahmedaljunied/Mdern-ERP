@@ -139,6 +139,7 @@
                                         <table class="table table-bordered text-center" style="font-size: larger;">
                                             <thead>
                                                 <tr>
+                                                    <th class="wd-10p border-bottom-0">الرقم التسلسلي</th>
                                                     <th class="wd-10p border-bottom-0">اسم المؤظف</th>
 
                                                     <th class="wd-10p border-bottom-0">نظام العمل</th>
@@ -170,7 +171,9 @@
 
 
 
-
+<td>
+    {{ index+1 }}
+</td>
 
                                                     <td>{{ staff.staff_name }}</td>
 

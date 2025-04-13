@@ -32,6 +32,7 @@
             <table class="table table-bordered text-center">
               <thead>
                 <tr>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th class="wd-15p border-bottom-0">رقم الحساب</th>
                   <th class="wd-15p border-bottom-0">اسم الحساب</th>
                   <th class="wd-15p border-bottom-0">البيان</th>
@@ -44,6 +45,10 @@
               <tbody>
                 <tr v-for="index in count" :key="index">
                   <!-- <tr > -->
+
+                    <td>
+                      {{ index+1 }}
+                    </td>
                   <td>
                     <input required type="number" :id="'Daily_account_tree_id' + index" name="account_id"
                       class="form-control input_cantidad" readonly />

@@ -9,7 +9,7 @@ export default {
             showdesc: false,
             showdate: false,
             showoperation: false,
-
+            branchselected:'',
             type_report: 0,
             from_date: "2021-11-24",
             to_date: new Date().toISOString().substr(0, 10),
@@ -206,13 +206,10 @@ export default {
                                     > <br />
                                       <h4>الجمهوريه اليمنيه</h4>
                                    
-                                      <h4>وزاره الدفاع</h4>
+                                      <h4>وزاره الشباب والرياضه</h4>
                                   
-                                    <h4>رئاسه هيئه الاركات</h4>
                            
-                              <h4>قياده القوات الجويه والدفاع</h4>
                                     
-                                      <h4>الدراسات والابحاث</h4>
                                   
                                       <h4>المخازن</h4>
                                  

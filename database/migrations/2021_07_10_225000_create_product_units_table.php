@@ -15,13 +15,10 @@ class CreateProductUnitsTable extends Migration
     {
         Schema::create('product_units', function (Blueprint $table) {
             $table->Increments('id');
-
-
             // ---------------------------------------------------------------------------
             $table->unsignedInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products');
-           
-        
+            // ---------------------------------------------------------------------------
             $table->unsignedInteger('unit_id')->nullable();
             $table->foreign('unit_id')->references('id')->on('units');
             // ------------------------------------------------------------------------------
@@ -29,7 +26,7 @@ class CreateProductUnitsTable extends Migration
             $table->integer('rate')->nullable();
             // $table->float('cost')->nullable();
             // $table->integer('unit_type')->default(0)->nullable();
-    
+
 
 
             $table->timestamps();

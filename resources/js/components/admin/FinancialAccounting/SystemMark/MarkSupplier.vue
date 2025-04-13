@@ -25,6 +25,7 @@
                                                                         نوع
                                                                         التصنيف
                                                                     </th> -->
+                                                                    <th >الرقم التسلسلي</th>
                                                                     <th>
                                                                         التصنيف
                                                                     </th>
@@ -72,6 +73,9 @@
                                                                             </option>
                                                                         </select>
                                                                     </td> -->
+                                                                    <td>
+                                                                        {{ index+1 }}
+                                                                    </td>
                                                                     <td>
                                                                         <select style="
                                                                                 background-color: beige;
@@ -214,9 +218,7 @@
                                     <table class="table text-md-nowrap" id="example1">
                                         <thead>
                                             <tr>
-                                                <th class="wd-15p border-bottom-0">
-                                                    #
-                                                </th>
+                                                <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                                                 <!-- <th
                                                     class="wd-15p border-bottom-0"
                                                 >

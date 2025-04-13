@@ -24,7 +24,16 @@
                 <div class="row">
 
 
-                  <div class="col-md-4">
+                  <div class="col-md-2">
+                    <label for="cliente"> الفرع</label>
+
+                    <select v-model="customer" id="supplier" class="form-control">
+                      <option v-for="sup in customers" v-bind:value="[sup.id, sup.name]">
+                        {{ sup.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
                     <label for="cliente"> العميل</label>
 
                     <select v-model="customer" id="supplier" class="form-control">
@@ -46,7 +55,7 @@
                   </div>
                
 
-                  <div class="col-sm-6 col-md-3" style="margin-top: auto;">
+                  <div class="col-sm-4 col-md-3" style="margin-top: auto;">
 
 
                     <a @click="onwaychange()" href="#">
@@ -91,7 +100,7 @@
                         <thead>
                           <tr>
 
-
+                            <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                             <th>التاريخ</th>
                             <th>البيات</th>
                             <th>داين</th>
@@ -106,13 +115,15 @@
                         </thead>
                         <tbody v-if="sales">
 
-                          <tr v-for="temporales in sales.sales">
+                          <tr v-for="(temporales,index) in sales.sales" :key="index">
 
 
 
                             <template v-if="temporales.id">
 
-
+<td>
+  {{ index+1 }}
+</td>
                               <td>{{ temporales.created_at }}</td>
                               <td> <span style="color:red">فاتوره بيع رقم </span> {{
                                 temporales.id }}

@@ -18,6 +18,11 @@ class CreateDailiesTable extends Migration
 
             // $table->integer('daily_id');
 
+            
+            // $table->unsignedInteger('branch_id');
+            // $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+
+            
             $table->integer('total');
 
             $table->date('daily_date')->nullable();

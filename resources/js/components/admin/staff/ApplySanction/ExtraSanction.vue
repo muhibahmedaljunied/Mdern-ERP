@@ -109,7 +109,7 @@
                                 <table class="table table-bordered text-center">
                                     <thead>
                                         <tr>
-
+                                            <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                                             <th class="wd-10p border-bottom-0">اسم المؤظف</th>
                                             <th class="wd-10p border-bottom-0">نوع الاضافي</th>
                                             <th class="wd-10p border-bottom-0">المده</th>
@@ -129,7 +129,9 @@
                                             v-if="staff.attendance > 0">
 
 
-
+<td>
+    {{ indexs }}
+</td>
                                             <td>{{ staff.name }}</td>
 
                                             <td v-for="extra in extra_types" v-if="extra.code == extraselected[1]">
@@ -233,6 +235,7 @@ id="buscar_producto" v-model="word_search"
                                                                                                 <thead>
                                                                                                     <tr>
 
+                                                                                                        <th >الرقم التسلسلي</th>
                                                                                                         <th> نوع
                                                                                                             التأخير
                                                                                                         </th>
@@ -261,6 +264,9 @@ id="buscar_producto" v-model="word_search"
                                                                                                     <tr v-for="(extra, index_extra) in staff.extra"
                                                                                                         :key="index_extra">
 
+                                                                                                        <td>
+                                                                                                            {{ index_extra }}
+                                                                                                        </td>
                                                                                                         <td>
 
                                                                                                             {{

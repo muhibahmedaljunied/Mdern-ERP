@@ -27,6 +27,17 @@
 
                           </div>
 
+                          <!-- <div class="col-md-4">
+                            <label for="pagoPrevio">الفرع</label>
+                            <select class="form-control" style="background-color: beige;" v-model="customer_id"
+                              id="supplier">
+                              <option v-for="cus in customers" v-bind:value="cus.id">
+                                {{ cus.name }}
+                              </option>
+                            </select>
+
+
+                          </div> -->
                           <div class="col-md-4">
                             <label for="pagoPrevio">العميل</label>
                             <select class="form-control" style="background-color: beige;" v-model="customer_id"

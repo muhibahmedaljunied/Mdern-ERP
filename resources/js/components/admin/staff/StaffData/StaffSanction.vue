@@ -103,6 +103,7 @@
                             <thead>
                                 <tr>
                                     <!-- <th class="wd-15p border-bottom-0">الرقم الوظيفي</th> -->
+                                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                                     <th class="wd-15p border-bottom-0">نوع الجراء</th>
 
@@ -125,6 +126,9 @@
                                     <template
                                         v-if="advance.LeaveSanction || advance.DelaySanction || advance.ExtraSanction || advance.ExtraDetails">
 
+                                        <td>
+                                            {{ index+1 }}
+                                        </td>
                                         <td>{{ advance.name }}</td>
                                         <td>
 

@@ -28,9 +28,10 @@
                         <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
                           <thead>
                             <tr>
-
+                              <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                               <th>الاسم </th>
 
+                              <th>الفرع</th>
                               <th>رمز العمله </th>
 
 
@@ -42,8 +43,19 @@
                           <tbody>
                             <tr v-for="index in count" :key="index">
                               <td>
+                                {{ index+1 }}
+                              </td>
+                              <td>
                                 <input v-model="currency[index]" type="text" class="form-control" name="name" id="name"
                                   required />
+                              </td>
+
+                              <td>
+                                <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                        <option v-for="branch in branches" v-bind:value="branch.id">
+                          {{ branch.name }}
+                        </option>
+                      </select>
                               </td>
                               <td>
 
@@ -75,7 +87,7 @@
 
                             </tr>
                             <tr>
-                              <td colspan="3"></td>
+                              <td colspan="5"></td>
                               <td>
 
                                 <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
@@ -140,6 +152,7 @@
                 <thead>
                   <tr>
                     <!-- <th class="wd-15p border-bottom-0">الرقم الوظيفي</th> -->
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <th class="wd-15p border-bottom-0">اسم العمله</th>
                     <th class="wd-15p border-bottom-0">رمز العمله</th>
                     <th class="wd-15p border-bottom-0">معدل التحويل</th>
@@ -152,6 +165,9 @@
                 </thead>
                 <tbody v-if="currencies && currencies.data.length > 0">
                   <tr v-for="(currency, index) in currencies.data" :key="index">
+                    <td>
+                      {{ index+1 }}
+                    </td>
                     <td>
                       {{ currency.name }}
                     </td>
@@ -178,6 +194,11 @@
                       <button data-toggle="modal" data-target="#modal_vaciar1"
                         class="tn btn-danger btn-sm waves-effect btn-agregar">
                         <i class="fa fa-trash"></i></button>
+
+                        
+                        <button class="btn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal"
+                             data-target="#updatCurrency">
+                            <i class="fa fa-edit"></i></button>
                       <!-- 
                     <router-link to="/temporale_supply" class="tn btn-info btn-sm waves-effect btn-agregar"
                       data-toggle="tooltip" title="تعديل">

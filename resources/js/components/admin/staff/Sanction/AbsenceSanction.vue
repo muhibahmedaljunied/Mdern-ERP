@@ -37,7 +37,7 @@
                       <thead>
                         <tr>
 
-
+                          <th>الرقم التسلسلي</th>
                           <!-- <th>اسم الموظف</th> -->
                           <th>الغياب</th>
                           <th>عدد مرات التكرار</th>
@@ -58,6 +58,9 @@
                                     </option>
                                   </select>
                                 </td> -->
+                                <td>
+                                  {{ index+1 }}
+                                </td>
                           <td>
                             <select v-model="absenceselected[index]" name="type" id="type" class="form-control "
                               required>
@@ -188,7 +191,7 @@
             <table class="table table-bordered text-center">
               <thead>
                 <tr>
-                  <th class="wd-15p border-bottom-0">#</th>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <!-- <th class="wd-15p border-bottom-0">اسم الموظف</th> -->
                   <th class="wd-15p border-bottom-0">الغياب</th>
                   <th class="wd-15p border-bottom-0">عدد مرات التكرار</th>

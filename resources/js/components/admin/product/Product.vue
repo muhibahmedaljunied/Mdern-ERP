@@ -20,10 +20,15 @@
                 <span style="font-size: x-large"> شجره المنتجات</span>
 
               </div> -->
-              <span>              *كيف يتم التعامل مع تعدد الوحدات في حاله المنتجات المتباينه وضبط سعر الشراء وسعر البيع وكذلك ضبط الاجزاء للوحدات مقارنه مع الانظمه الاخري مثل mazerp
+              <span> *كيف يتم التعامل مع تعدد الوحدات في حاله المنتجات المتباينه وضبط سعر الشراء وسعر البيع وكذلك ضبط
+                الاجزاء للوحدات مقارنه مع الانظمه الاخري مثل mazerp
               </span>
 
-              <span>              *هل يمكن تفعيل المخازن من الاعدادات في نظام mazerp تأكد لانه في الفيديو هذا موجود
+              <span> *هل يمكن تفعيل المخازن من الاعدادات في نظام mazerp تأكد لانه في الفيديو هذا موجود
+              </span>
+              <span>
+                *كيف يتم التعامل مع الفروع هل تحدد لاول مره فقط ثم تعين اعتمادا علي ذلك في الواجهات والعمليات وكيف يتم
+                ربط الفروع بباقي جداول النظام تتبع smacc @ MazErp 
               </span>
 
               <div class="card-body">
@@ -113,20 +118,20 @@
               <div class="card-body">
                 <div class="row">
 
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <label for="Product">رقم المنتج</label>
                     <input style="background-color: beige;" id='product_number' type="text" class="form-control"
                       required readonly />
 
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <label for="Product">اسم المنتج</label>
                     <input style="background-color: beige;" v-model="text" type="text" name="Product" id="product"
                       class="form-control" required /><span style="color:red">{{ error_text[0] }}</span>
 
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <label for="radio-example-one">متفرع </label><br>
 
                     <input type="checkbox" name='fieldset2' v-model="status" id="status">
@@ -144,12 +149,24 @@
                     <div class="row">
 
 
-                      <div class='col-md-4'>
+                      <div class='col-md-2'>
                         <label for="Product"></label>
 
                         <label for="Product">الوحده الرئيسيه<span style="color: red;">(اصغر وحده)</span></label>
 
                         <select style="background-color: beige;" v-model="unit" class="form-control">
+                          <option v-for="unit in units" v-bind:value="unit.id">
+                            {{ unit.name }}
+                          </option>
+                        </select>
+
+                      </div>
+                      <div class='col-md-2'>
+                        <label for="Product"></label>
+
+                        <label> الفرع</label>
+
+                        <select style="background-color: beige;"  class="form-control">
                           <option v-for="unit in units" v-bind:value="unit.id">
                             {{ unit.name }}
                           </option>
@@ -164,10 +181,6 @@
                         <!-- <input v-model="rate[0]" type="text" 
                           class="form-control" /> -->
                       </div>
-
-
-
-
                       <div class="col-md-2">
                         <label for="radio-example-one">تعدد وحدات التجزئه </label><br>
 
@@ -199,7 +212,6 @@
 
 
 
-
                     </div>
 
                     <br>
@@ -222,7 +234,9 @@
                         </select>
 
                       </div>
-                      <div class="col-md-4" v-if="product_type == 2">
+                 
+
+                      <div class="col-md-2" v-if="product_type == 2">
                         <label for="pagoPrevio">مجموعه الخصائص</label>
 
                         <select style="background-color: beige;" @change="get_attribute()" v-model="family_attribute"
@@ -237,31 +251,28 @@
 
                       </div>
 
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-2">
                         <label for="Product Minimum"> الحد الادني للمنتج</label>
                         <input v-model="product_minimum" type="number" name="Minimum" class="form-control" />
                         <span style="color:red">{{ error_hash_rate[0] }}</span>
                       </div>
 
-                      <div class="col-md-4">
+                      <div class="col-md-2">
                         <label for="Product Minimum">مده الارجاع</label>
                         <input v-model="period" type="number" name="Minimum" class="form-control" />
 
                       </div>
 
-                      <div class="col-md-4" v-if="product_type == 1">
+                      <div class="col-md-2" v-if="product_type == 1">
                         <label for="filePhoto">الصوره</label>
                         <input v-on:change="onFileChange" type="file" name="image" class="form-control-file"
                           id="filePhoto" />
                         <img src="" id="previewHolder" width="150px" />
                       </div>
 
-
-
                     </div>
+              
+                
 
                   </div>
 
@@ -283,6 +294,7 @@
                         <thead>
                           <tr>
                             <!-- <th>Code</th> -->
+                             <th>الرقم التسلسلي</th>
                             <th>وحده التجزئه</th>
                             <th>سعر الشراء</th>
                             <th>عدد وحدات التجزئه بالوحده الاساسيه</th>
@@ -292,6 +304,9 @@
                         </thead>
                         <tbody>
                           <tr v-for="index in count_unit" :key="index">
+                            <td>
+                              {{ index }}
+                            </td>
                             <td>
 
                               <!-- retail_unit -->
@@ -369,7 +384,8 @@
                         <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
                           <thead>
                             <tr>
-                              <th>السعر</th>
+                              <th>الرقم التسلسلي</th>
+                              <!-- <th>السعر</th> -->
 
 
                               <th>الخصائص</th>
@@ -383,9 +399,12 @@
 
 
                               <td>
+                                {{ index }}
+                              </td>
+                              <!-- <td>
                                 <input v-model="price[index - 1]" type="text" class="form-control" name="name" id="name"
                                   required />
-                              </td>
+                              </td> -->
 
 
                               <td>
@@ -623,7 +642,7 @@ export default {
 
       product_type: 1,
       check_state: '',
-      error_text: '',
+
       error_hash_rate: '',
       error_purchase_price: '',
       units: '',

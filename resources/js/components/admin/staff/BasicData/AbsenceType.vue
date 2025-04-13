@@ -22,6 +22,7 @@
                 <thead>
                   <tr>
 
+                    <th >الرقم التسلسلي</th>
                     <th> النوع</th>
 
 
@@ -37,6 +38,9 @@
                 </thead>
                 <tbody>
                   <tr v-for="index in count" :key="index">
+                    <td>
+                      {{ index+1 }}
+                    </td>
                     <td>
                       <input v-model="name[index]" type="text" class="form-control" required />
 
@@ -107,7 +111,7 @@
             <table class="table table-bordered text-center">
               <thead>
                 <tr>
-                  <th class="wd-15p border-bottom-0">#</th>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th class="wd-15p border-bottom-0">النوع</th>
                   <th class="wd-15p border-bottom-0">الكود</th>
                   <!-- <th class="wd-15p border-bottom-0"> التصنيف</th> -->

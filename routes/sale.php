@@ -23,6 +23,7 @@ Route::post('/return_sale_invoice/{id}', 'Sale\SaleReturnController@return_invoi
 Route::post('/sale_details_in_return/{id}', 'Sale\SaleReturnController@details');
 Route::post('/salereturn', 'Sale\SaleReturnController@create');
 Route::post('/listreturn_sale/{id}', 'Sale\SaleReturnController@show');
+Route::post('/listreturn_sale', 'Sale\SaleReturnController@return_sale_list');
 
 Route::post('/returnsale_details/{id}', 'Sale\SaleReturnController@return_detail');
 

@@ -113,7 +113,7 @@
                                 <table class="table table-bordered text-center">
                                     <thead>
                                         <tr>
-
+                                            <th class="wd-10p border-bottom-0">الرقم التسلسلي</th>
                                             <th class="wd-10p border-bottom-0">اسم المؤظف</th>
                                             <th class="wd-10p border-bottom-0">نوع التأخير</th>
                                             <th class="wd-10p border-bottom-0">المده</th>
@@ -131,7 +131,9 @@
                                         <tr v-for="(staff, indexs) in value_list.data" :key="indexs"
                                             v-if="staff.attendance > 0">
 
-
+<td>
+    {{ indexs+1 }}
+</td>
 
                                             <td>{{ staff.name }}</td>
 
@@ -369,7 +371,7 @@
                                                                                                 style="width: 100%; font-size: x-large">
                                                                                                 <thead>
                                                                                                     <tr>
-
+                                                                                                        <th >الرقم التسلسلي</th>
                                                                                                         <th> نوع
                                                                                                             التأخير
                                                                                                         </th>
@@ -398,6 +400,9 @@
                                                                                                     <tr v-for="(delay, index_delay) in staff.delay"
                                                                                                         :key="index_delay">
 
+                                                                                                        <td>
+                                                                                                            {{ index_delay }}
+                                                                                                        </td>
                                                                                                         <td>
 
                                                                                                             {{

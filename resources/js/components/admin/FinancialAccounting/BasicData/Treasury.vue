@@ -34,6 +34,10 @@
 
                           <th>الصندوق </th>
 
+                          <th>
+                          الفرع
+                          </th>
+
                           <!-- <th> التصنيف </th> -->
 
 
@@ -51,6 +55,14 @@
                           <td>
                             <input v-model="treasury[index]" type="text" class="form-control" name="name" id="name"
                               required />
+                          </td>
+
+                          <td>
+                            <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                        <option v-for="branch in branches" v-bind:value="branch.id">
+                          {{ branch.name }}
+                        </option>
+                      </select>
                           </td>
 
 
@@ -89,7 +101,7 @@
                         </tr>
 
                         <tr>
-                          <td colspan="2"></td>
+                          <td colspan="3"></td>
                           <td>
 
                             <button type="button" class="btn btn-primary" @click="Add_new()">حفظ </button>
@@ -175,6 +187,10 @@
                     <td>
                       <button data-toggle="modal" class="tn btn-danger btn-sm waves-effect btn-agregar">
                         <i class="fa fa-trash"></i></button>
+                        
+                        <button class="btn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal"
+                             data-target="#updateTreasury">
+                            <i class="fa fa-edit"></i></button>
 
                     </td>
 

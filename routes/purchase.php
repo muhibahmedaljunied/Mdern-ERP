@@ -21,6 +21,7 @@ Route::post('/purchase_details_in_return/{id}', 'Purchase\PurchaseReturnControll
 Route::post('/purchase_return_details/{id}', 'Purchase\PurchaseReturnController@index');
 Route::post('/purchasereturn', 'Purchase\PurchaseReturnController@create');
 Route::post('/listreturn_purchase/{id}', 'Purchase\PurchaseReturnController@show');
+Route::post('/listreturn_purchase', 'Purchase\PurchaseReturnController@return_purchase_list');
 Route::post('/listreturn_purchasesearch', 'Purchase\PurchaseReturnController@search');
 Route::post('/returnpurchase_details/{id}', 'Purchase\PurchaseReturnController@return_detail');
 Route::post('/invoice_purchase/{id}', 'Purchase\PurchaseController@invoice_purchase');

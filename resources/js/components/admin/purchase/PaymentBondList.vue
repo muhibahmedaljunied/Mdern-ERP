@@ -28,6 +28,20 @@
 
 
                           </div>
+<!-- 
+                          <div class="col-md-4">
+                            <label for="pagoPrevio">الفرع</label>
+
+
+                            <select class="form-control" style="background-color: beige;" v-model="supplier_id"
+                              id="supplier">
+                              <option v-for="sup in suppliers" v-bind:value="sup.id">
+                                {{ sup.name }}
+                              </option>
+                            </select>
+
+
+                          </div> -->
 
                           <div class="col-md-4">
                             <label for="pagoPrevio">المورد</label>

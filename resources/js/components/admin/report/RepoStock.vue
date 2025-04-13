@@ -118,6 +118,16 @@
 
                 <fieldset class="border rounded-3 p-3">
                   <div class="row">
+
+                    <div class="col-md-4">
+                      <label for="inputAddress">الفرع</label>
+                      <select v-model="branchselected" class="form-control" required>
+                        <option v-for="branch in branches" v-bind:value="branch.id">
+                          {{ branch.name }}
+                        </option>
+                      </select>
+                    </div>
+
                     <div class="col-md-3" v-show="showproduct">
                       <label for="status">المنتج</label>
 
@@ -327,9 +337,15 @@
                             </span>
                           </div>
                           <div class="col-sm-2">
+
+                            <span class="h5">
+                              <label style="color: gray;font-size: large;"> الفرع</label> : {{ productselectedname }}
+                            </span>
+                          </div>
+                          <div class="col-sm-2">
                             <span v-if="storeselected != 0" class="h5"><label style="color: gray;font-size: large;">
                                 المخزن</label> : {{ storeselectedname
-                              }}</span>
+                                }}</span>
                           </div>
                           <div class="col-sm-2">
                             <span v-if="statusselected != 0" class="h5">
@@ -365,6 +381,7 @@
                               <!-- <td v-if="moveselected == 1">نوع العمليه</td> -->
                               <td v-if="storeselected == 0">المخزن</td>
                               <td v-if="statusselected == 0">الحاله</td>
+                              <td>الفرع</td>
                               <!-- <td v-if="descselected == 0">الطراز والمواصفات</td> -->
                               <td>الطراز والمواصفات</td>
                               <td>الكميه</td>
@@ -376,7 +393,7 @@
 
                             <tr class="item" v-for="(datas, index) in report.data" :key="index">
 
-                              <td>{{ index+1 }}</td>
+                              <td>{{ index + 1 }}</td>
                               <!-- <td v-if="productselected == 0"> -->
                               <td>
                                 {{ datas.product }}
@@ -386,6 +403,7 @@
                               <td v-if="statusselected == 0">
                                 {{ datas.status }}
                               </td>
+                              <td></td>
                               <!-- <td v-if="descselected == 0"> -->
                               <td>
                                 {{ datas.desc }}

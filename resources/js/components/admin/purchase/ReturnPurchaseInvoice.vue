@@ -74,6 +74,7 @@
                 <table class="table table-bordered text-right" style="width: 100%">
                   <thead style="background:red">
                     <tr>
+                      <th >الرقم التسلسلي</th>
                       <th>اسم المنتج</th>
                       <th>الحاله</th>
                       <!-- <th class="wd-15p border-bottom-0">الكميه </th> -->
@@ -83,7 +84,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="return_details in purchase_detail">
+                    <tr v-for="(return_details,index) in purchase_detail" :key="index">
+                      <td>{{ index+1 }}</td>
                       <td>{{ return_details.product }}</td>
                       <td>{{ return_details.status }}</td>
                       <!-- <td>{{ return_details.qty }}</td> -->

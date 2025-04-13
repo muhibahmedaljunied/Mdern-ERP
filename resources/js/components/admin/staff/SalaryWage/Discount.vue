@@ -70,6 +70,7 @@
                               <thead>
                                 <tr>
 
+                                  <th >الرقم التسلسلي</th>
                                   <th> الفرع</th>
                                   <th>اسم المؤظف</th>
 
@@ -93,6 +94,9 @@
                                 <tr v-for="index in count" :key="index">
 
 
+                                  <td>
+                                    {{ index+1 }}
+                                  </td>
                                   <td>
 
                                     <select v-model="staffselected[index]" name="type" id="type" class="form-control"
@@ -242,7 +246,7 @@
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
-
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                     <th class="wd-15p border-bottom-0">الفرع</th>
 
@@ -262,6 +266,10 @@
                 <tbody v-if="value_list && value_list.data.length > 0">
                   <tr v-for="(discount, index) in value_list.data" :key="index">
 
+                    <td>
+
+                      {{ index+1 }}
+                    </td>
                     <td>{{ discount.name }}</td>
                     <td>{{ discount.name }}</td>
                     <td>

@@ -543,6 +543,9 @@
               <router-link class="slide-item" to="/listpurchase">المشتريات</router-link>
             </li>
             <li>
+              <router-link class="slide-item" to="/returnpurchaselist">مردودات المشتريات</router-link>
+            </li>
+            <li>
               <router-link class="slide-item" to="/supplier_account_list">حساب الموردين</router-link>
             </li>
 
@@ -595,6 +598,10 @@
             </li>
             <li>
               <router-link class="slide-item" to="/listsale"> المبيعات</router-link>
+            </li>
+
+            <li>
+              <router-link class="slide-item" to="/listreturn_sale"> مردودات المبيعات</router-link>
             </li>
 
             <li>
@@ -698,7 +705,7 @@
             </li>
             <!-- <li>
               <router-link class="slide-item" to="reportsupplyreturn"
-                >مرتجع الوارد</router-link
+                >مردود الوارد</router-link
               >
             </li> -->
 

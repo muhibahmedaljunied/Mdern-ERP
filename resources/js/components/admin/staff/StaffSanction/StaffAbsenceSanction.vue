@@ -15,6 +15,7 @@
                             <thead>
                                 <tr>
                                     <!-- <th class="wd-15p border-bottom-0">الرقم الوظيفي</th> -->
+                                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                                     <th class="wd-15p border-bottom-0">نوع الغياب</th>
 
@@ -34,6 +35,9 @@
                             <tbody v-if="value_list && value_list.data.length > 0">
                                 <tr v-for="(absence, index) in value_list.data" :key="index">
 
+                                    <td>
+                                        {{ index+1 }}
+                                    </td>
 
                                     <td>{{ absence.name }}</td>
 

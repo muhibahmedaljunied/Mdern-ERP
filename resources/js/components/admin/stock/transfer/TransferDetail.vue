@@ -23,7 +23,7 @@
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <th class="wd-15p border-bottom-0" rowspan="1">
                       اسم المنتج
                     </th>

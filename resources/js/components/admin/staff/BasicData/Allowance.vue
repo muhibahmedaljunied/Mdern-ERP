@@ -34,6 +34,7 @@
                     <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
                       <thead>
                         <tr>
+                          <th >الرقم التسلسلي</th>
                           <th> البدل</th>
                           <th> نوع البدل</th>
                           <!-- <th> التصنيف</th> -->
@@ -44,6 +45,9 @@
                       </thead>
                       <tbody>
                         <tr v-for="index in count" :key="index">
+                          <td>
+                            {{ index+1 }}
+                          </td>
                           <td>
                             <input v-model="allowance[index]" type="text" class="form-control" name="name" id="name"
                               required />

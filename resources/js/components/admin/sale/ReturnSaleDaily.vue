@@ -19,6 +19,7 @@
             <table class="table table-bordered text-center">
               <thead>
                 <tr>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th class="wd-15p border-bottom-0">رقم الحساب</th>
                   <th class="wd-15p border-bottom-0">اسم الحساب</th>
                   <th class="wd-15p border-bottom-0">البيان</th>
@@ -30,6 +31,9 @@
               <tbody>
                 <tr v-for="(daily, index) in value_list" :key="index">
                   <!-- <tr > -->
+                    <td>
+                      {{ index+1 }}
+                    </td>
                   <td>
                   {{ daily.account_id }}
                   </td>

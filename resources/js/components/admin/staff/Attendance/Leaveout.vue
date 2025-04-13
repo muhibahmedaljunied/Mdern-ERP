@@ -41,7 +41,7 @@
                         <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-small">
                           <thead>
                             <tr>
-
+                              <th >الرقم التسلسلي</th>
                               <th>اسم المؤظف</th>
 
 
@@ -59,6 +59,9 @@
                           </thead>
                           <tbody>
                             <tr v-for="index in count" :key="index">
+                              <td>
+                                {{ index+1 }}
+                              </td>
                               <td>
                                 <select style="background-color: beige;" v-model="staffselected[index]" name="type"
                                   id="type" class="form-control " required>
@@ -153,7 +156,7 @@
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
-
+                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                     <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                     <th class="wd-15p border-bottom-0"> نوع الانصراف</th>
                     <th class="wd-15p border-bottom-0"> المده</th>
@@ -165,6 +168,9 @@
                 <tbody v-if="value_list && value_list.data.length > 0">
                   <tr v-for="(leave, index) in value_list.data" :key="index">
 
+                    <td>
+                      {{ index+1 }}
+                    </td>
                     <td>{{ leave.staff_name }}</td>
 
                     <td>

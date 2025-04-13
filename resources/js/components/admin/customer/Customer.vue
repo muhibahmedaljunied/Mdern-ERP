@@ -22,7 +22,7 @@
               <table class="table table-bordered text-right m-t-30" style="width: 100%; font-size: x-large">
                 <thead>
                   <tr>
-
+                    <th >الرقم التسلسلي</th>
                     <th> العميل</th>
                     <th> الهاتف</th>
                     <th> البريد الالكتروني</th>
@@ -33,6 +33,9 @@
                 </thead>
                 <tbody>
                   <tr v-for="index in count" :key="index">
+                    <td>
+                      {{ index+1 }}
+                    </td>
                     <td>
                       <input style="background-color: beige;" v-model="name[index]" type="text" name="name" id="name"
                         class="form-control" required />
@@ -118,7 +121,7 @@
             <table class="table text-md-nowrap" id="example1">
               <thead>
                 <tr>
-                  <th class="wd-15p border-bottom-0">#</th>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th class="wd-15p border-bottom-0">العميل</th>
                   <th class="wd-15p border-bottom-0">الهاتف</th>
                   <th class="wd-15p border-bottom-0">البريد الالكتروني</th>

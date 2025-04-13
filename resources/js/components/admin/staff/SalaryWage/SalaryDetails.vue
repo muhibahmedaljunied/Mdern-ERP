@@ -16,6 +16,7 @@
             <table class="table table-bordered text-center">
               <thead>
                 <tr>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th style="color: blue; font-size: medium;" class="wd-15p border-bottom-0" rowspan="2">الرقم الوظيفي</th>
                   <th style="color: blue;font-size: medium;" class="wd-15p border-bottom-0" rowspan="2">اسم المؤظف</th>
                   <th style="color: blue;font-size: medium;" class="wd-15p border-bottom-0" rowspan="2"> الفرع</th>
@@ -45,6 +46,9 @@
               <tbody v-if="list_data && list_data.data.length > 0">
                 <tr v-for="(salary, index) in list_data.data" :key="index">
 
+                  <td>
+                    {{ index+1 }}
+                  </td>
 
                   <td>{{ salary.id }}</td>
                   <td>{{ salary.name }}</td>

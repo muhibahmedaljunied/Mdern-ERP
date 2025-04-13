@@ -27,6 +27,7 @@
               <thead>
                 <tr>
                   <!-- <th class="wd-15p border-bottom-0">الرقم الوظيفي</th> -->
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                   <th class="wd-15p border-bottom-0">التاريخ</th>
                   <th class="wd-15p border-bottom-0">المبلغ</th>
@@ -39,6 +40,9 @@
               </thead>
               <tbody v-if="loans && loans.data.length > 0">
                 <tr v-for="(loan, index) in loans.data" :key="index">
+                  <td>
+                    {{ index+1 }}
+                  </td>
                   <td>{{ loan.staff }}</td>
                   <td>{{ loan.date }}</td>
                   <td>{{ loan.quantity }}</td>
@@ -110,7 +114,7 @@
                               style="width: 100%; font-size: x-small">
                               <thead>
                                 <tr>
-
+                                  <th >الرقم التسلسلي</th>
                                   <th>اسم المؤظف</th>
 
 
@@ -125,6 +129,9 @@
                               </thead>
                               <tbody>
                                 <tr v-for="index in count" :key="index">
+                                  <td>
+                                    {{ index+1 }}
+                                  </td>
                                   <td>
                                     <select v-model="staffselected[index]" name="type" id="type" class="form-control" required>
                                       <option v-for="staff in staffs" v-bind:value="staff.id">

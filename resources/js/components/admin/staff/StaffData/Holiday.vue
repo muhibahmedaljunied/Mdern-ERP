@@ -65,6 +65,7 @@
                 <table class="table table-bordered text-center">
                   <thead>
                     <tr>
+                      <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                       <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                       <th class="wd-15p border-bottom-0">تاريخ بدء الاجازه</th>
                       <th class="wd-15p border-bottom-0">تاريخ انتهاء الاجازه</th>
@@ -80,6 +81,9 @@
                   </thead>
                   <tbody v-if="list_data && list_data.data.length > 0">
                     <tr v-for="(vacation, index) in list_data.data" :key="index">
+                      <td>
+                        {{ index+1 }}
+                      </td>
                       <td>{{ vacation.name }}</td>
 
                       <td>

@@ -80,6 +80,7 @@
                 >
                   <thead style="background: red">
                     <tr>
+                      <th >الرقم التسلسلي</th>
                       <th>اسم المنتج</th>
                              <th> المواصفات والطراز</th>
                       <th>الحاله</th>
@@ -90,7 +91,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="supply_details in supply_detail">
+                    <tr v-for="(supply_details,index) in supply_detail" :key="index">
+                      <td>
+                        {{ index+1 }}
+                      </td>
                       <td>{{ supply_details.product_name }}</td>
                            <td>{{ purchase_details.desc }}</td>
                       <td>{{ supply_details.status }}</td>

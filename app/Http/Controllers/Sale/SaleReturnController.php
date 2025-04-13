@@ -40,7 +40,7 @@ class SaleReturnController extends Controller
         ]);
         $this->init();
         $this->get_details();
- 
+
         $this->qty->handle_qty();
         return response()->json([
             'details' => $this->qty->details,
@@ -156,6 +156,18 @@ class SaleReturnController extends Controller
 
         return response()->json(['returns' => $returns]);
     }
+
+    public function return_sale_list()
+    {
+
+
+
+        $returns = SaleReturn::with(['payments'])->paginate(5);
+
+
+        return response()->json(['returns' => $returns]);
+    }
+
 
 
 

@@ -154,6 +154,7 @@
                                             <thead>
                                                 <tr>
                                                     <!-- <th>Code</th> -->
+                                                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                                                     <th class="wd-15p border-bottom-0">المنتج</th>
                                                     <!-- <th>المجموعه</th> -->
 
@@ -175,6 +176,9 @@
                                             <tbody>
                                                 <tr v-for="index in count" :key="index">
 
+                                                    <td>
+                                                        {{ index + 1 }}
+                                                    </td>
                                                     <td>
 
 
@@ -374,7 +378,7 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th class="wd-15p border-bottom-0">#</th>
+                                                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                                                     <th class="wd-15p border-bottom-0">المنتج</th>
                                                     <th class="wd-15p border-bottom-0">المخزن</th>
                                                     <th class="wd-15p border-bottom-0">الحاله</th>

@@ -34,11 +34,11 @@
                     </option>
                   </select>
                 </div>
-                <div class="col-sm-6 col-md-3" >
+                <div class="col-sm-6 col-md-3">
 
                   <label for="inputAddress">بحث</label>
                   <br>
-                  <a  href="#">
+                  <a href="#">
 
                     <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
 
@@ -63,10 +63,13 @@
                   <table class="table text-md-nowrap" id="example1">
                     <thead>
                       <tr>
+                        <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                         <th class="wd-15p border-bottom-0">رقم الفاتوره</th>
                         <th class="wd-15p border-bottom-0">العميل</th>
                         <!-- <th class="wd-15p border-bottom-0">الكميه </th> -->
                         <!-- <th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
+                        <th class="wd-15p border-bottom-0">الفرع </th>
+
                         <th class="wd-15p border-bottom-0">تاريخ البيع </th>
                         <th class="wd-15p border-bottom-0"> المدفوع</th>
                         <th class="wd-15p border-bottom-0">المتبقي</th>
@@ -78,7 +81,11 @@
                     </thead>
                     <tbody v-if="sales && sales.data.length > 0">
                       <tr v-for="(sale, index) in sales.data" :key="index">
+                        <td>
+                          {{ index + 1 }}
+                        </td>
                         <td>{{ sale.paymentable.sale_id }}</td>
+                        <td>{{ sale.paymentable.customer_name }}</td>
                         <td>{{ sale.paymentable.customer_name }}</td>
                         <!-- <td>{{ sale.quantity }}</td>
                   <td>{{ sale.qty_return }}</td> -->
@@ -188,6 +195,7 @@
                     <thead>
                       <tr>
                         <!-- <th>الرقم</th> -->
+                        <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                         <th>اسم المنتج</th>
                         <!-- <th>الباركود</th> -->
                         <th> المواصفات والطراز</th>
@@ -201,8 +209,11 @@
                       </tr>
                     </thead>
                     <tbody v-if="sale_detail && sale_detail.length > 0">
-                      <tr v-for="sale_details in sale_detail">
+                      <tr v-for="(sale_details, index) in sale_detail" :key="index">
                         <!-- <td>{{ sale_details.id }}</td> -->
+                        <td>
+                          {{ index + 1 }}
+                        </td>
                         <td>{{ sale_details.product }}</td>
 
                         <!-- <td>

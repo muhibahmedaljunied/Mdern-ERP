@@ -13,6 +13,7 @@
                                 <table class="table table-bordered text-center" style="font-size: larger;">
                                     <thead>
                                         <tr>
+                                            <th class="wd-10p border-bottom-0">الرقم التسلسلي</th>
                                             <th class="wd-10p border-bottom-0">اسم المؤظف</th>
 
                                             <th class="wd-10p border-bottom-0">نظام العمل</th>
@@ -44,7 +45,9 @@
                                             <template
                                                 v-if="staff.attendance">
 
-
+<td>
+    {{ index+1 }}
+</td>
                                                 <td>{{ staff.attendance.staff.name }}</td>
 
                                                 <td>{{ staff.attendance.attendance_date }}</td>

@@ -64,7 +64,7 @@
                 <table class="table table-bordered text-center">
                   <thead>
                     <tr>
-
+                      <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                       <th class="wd-15p border-bottom-0">اسم المؤظف</th>
                       <th class="wd-15p border-bottom-0">التأريخ </th>
                       <th class="wd-15p border-bottom-0">وقت البدء</th>
@@ -82,6 +82,9 @@
                   </thead>
                   <tbody v-if="list_data && list_data.data.length > 0">
                     <tr v-for="(extra, index) in list_data.data" :key="index">
+                      <td>
+                        {{ index+1 }}
+                      </td>
                       <td>{{ extra.name }}</td>
                       <td>
 

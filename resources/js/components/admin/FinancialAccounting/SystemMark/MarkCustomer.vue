@@ -21,6 +21,7 @@
                                                             ">
                                                             <thead>
                                                                 <tr>
+                                                                    <th >الرقم التسلسلي</th>
                                                                     <th>
 
                                                                         التصنيف
@@ -40,6 +41,9 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr v-for="index in count" :key="index">
+                                                                    <td>
+                                                                        {{ index+1 }}
+                                                                    </td>
                                                                     <td>
                                                                         <select style="
                                                                                 background-color: beige;
@@ -173,9 +177,7 @@
                                     <table class="table text-md-nowrap" id="example1">
                                         <thead>
                                             <tr>
-                                                <th class="wd-15p border-bottom-0">
-                                                    #
-                                                </th>
+                                                <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                                                 <th class="wd-15p border-bottom-0">
                                                     التصنيف
                                                 </th>

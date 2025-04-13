@@ -30,6 +30,16 @@
                               name="modal_reporte_venta_inicio" v-model="daily_date"
                               onkeypress="return controltag(event)" style="background-color: white" />
                           </div>
+
+                          <div class="col-md-2">
+                          <label for="inputAddress">الفرع</label>
+                          <select v-model="branchselected" class="form-control" required>
+                            <option v-for="branch in branches" v-bind:value="branch.id">
+                              {{ branch.name }}
+                            </option>
+                          </select>
+                        </div>
+                        
                           <div class="col-md-2">
                             <label for="desde"> اجمالي المدين </label>
                             <input v-model="total_debit" type="text" class="form-control hasDatepicker"
@@ -64,6 +74,7 @@
                       <table class="table table-bordered text-center">
                         <thead>
                           <tr>
+                            <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                             <th class="wd-15p border-bottom-0">رقم الحساب</th>
                             <th class="wd-15p border-bottom-0">اسم الحساب</th>
                             <th class="wd-15p border-bottom-0"> الحساب التفصيلي</th>
@@ -78,6 +89,9 @@
                         <tbody>
                           <tr v-for="index in count" :key="index">
 
+                            <td>
+                              {{ index+1 }}
+                            </td>
                             <td>
                               <input required type="number" :id="'OpenningBalance_accounts_tree_id' + index"
                                 name="account_id" class="form-control input_cantidad" readonly />

@@ -18,37 +18,37 @@
 
               <div class="row">
                 <div class="col-md-2">
-                <label for="inputAddress">الفرع</label>
-                <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
-                  <option v-for="branch in branches" v-bind:value="branch.id">
-                    {{ branch.name }}
-                  </option>
-                </select>
+                  <label for="inputAddress">الفرع</label>
+                  <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                    <option v-for="branch in branches" v-bind:value="branch.id">
+                      {{ branch.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputAddress">المورد</label>
+                  <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
+                    <option v-for="branch in branches" v-bind:value="branch.id">
+                      {{ branch.name }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+
+                  <label for="inputAddress">بحث</label>
+                  <br>
+                  <a href="#">
+
+                    <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
+
+
+                  </a>
+
+
+                </div>
               </div>
-              <div class="col-md-2">
-                <label for="inputAddress">المورد</label>
-                <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
-                  <option v-for="branch in branches" v-bind:value="branch.id">
-                    {{ branch.name }}
-                  </option>
-                </select>
-              </div>
 
-              <div class="col-sm-6 col-md-3" >
-
-<label for="inputAddress">بحث</label>
-<br>
-<a  href="#">
-
-  <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #74C0FC;"></i>
-
-
-</a>
-
-
-</div>
-              </div>
-    
             </div>
           </div>
 
@@ -63,12 +63,13 @@
                   <table class="table text-md-nowrap" id="example1">
                     <thead>
                       <tr>
+                        <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                         <th class="wd-15p border-bottom-0">رقم الفاتوره</th>
                         <th class="wd-15p border-bottom-0">المورد</th>
                         <!-- <th class="wd-15p border-bottom-0">الكميه </th>
                   <th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
                         <th class="wd-15p border-bottom-0">تاريخ الشراء</th>
-
+                        <th class="wd-15p border-bottom-0"> الفرع</th>
                         <th class="wd-15p border-bottom-0"> المدفوع</th>
                         <th class="wd-15p border-bottom-0">المتبقي</th>
                         <th class="wd-15p border-bottom-0">اجمالي الفاتوره</th>
@@ -78,10 +79,12 @@
                     </thead>
                     <tbody v-if="purchases && purchases.data.length > 0">
                       <tr v-for="(purchase, index) in purchases.data" :key="index">
+                        <td>{{ index+1 }}</td>
                         <td>{{ purchase.paymentable.purchase_id }}</td>
                         <td>{{ purchase.paymentable.supplier_name }}</td>
                         <!-- <td>{{ purchase.quantity }}</td>
                   <td>{{ purchase.qty_return }}</td> -->
+                        <td>{{ purchase.paymentable.date }}</td>
                         <td>{{ purchase.paymentable.date }}</td>
                         <td>{{ purchase.paid }}</td>
                         <td>{{ purchase.remaining }}</td>
@@ -182,6 +185,7 @@
                   <table class="table table-bordered">
                     <thead>
                       <tr>
+                        <th >الرقم التسلسلي</th>
                         <!-- <th>  رقم الفاتوره </th> -->
                         <th>اسم المنتج</th>
                         <!-- <th> الباركود</th> -->
@@ -200,8 +204,8 @@
                       </tr>
                     </thead>
                     <tbody v-if="purchase_detail && purchase_detail.length > 0">
-                      <tr v-for="purchase_details in purchase_detail">
-                        <!-- <td>{{ purchase_details.id }}</td> -->
+                      <tr v-for="(purchase_details,index) in purchase_detail" :key="index">
+                        <td>{{ index+1 }}</td>
 
                         <td>{{ purchase_details.product }}</td>
                         <!-- <td>{{ purchase_details.product_code }}</td> -->

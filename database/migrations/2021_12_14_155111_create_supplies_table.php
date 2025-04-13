@@ -16,6 +16,9 @@ class CreateSuppliesTable extends Migration
         Schema::create('Supplies', function (Blueprint $table) {
             $table->Increments('id');
 
+            // $table->unsignedInteger('branch_id');
+            // $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+
             $table->unsignedInteger('supplier_id');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
 

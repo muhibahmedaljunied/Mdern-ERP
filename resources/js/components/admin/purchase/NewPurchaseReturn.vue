@@ -38,6 +38,13 @@
 
 
                   </div>
+                  <div class="col-md-2">
+                    <label for="pagoPrevio">الفرع</label>
+
+                    <input v-if='purchase' name="date" type="text" v-model="purchase[0].name" class="form-control" />
+
+
+                  </div>
                   <div class="col-md-4">
                     <label for="pagoPrevio">اجمالي الفاتوره</label>
 
@@ -187,6 +194,7 @@
                       <table class="table">
                         <thead>
                           <tr>
+                            <th >الرقم التسلسلي</th>
                             <th>اسم المنتج</th>
                             <!-- <th> الباركود</th> -->
                             <th>كميه الشراء</th>
@@ -209,6 +217,9 @@
                             <input v-model="id = purchase_details.purchase_id" type="hidden" name="name" id="name"
                               class="form-control" />
 
+                              <td>
+                                {{ index+1 }}
+                              </td>
                             <td>
                               {{ purchase_details.product }}
                             </td>

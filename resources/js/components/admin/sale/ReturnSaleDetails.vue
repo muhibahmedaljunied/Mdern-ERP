@@ -11,7 +11,10 @@
             <table class="table text-md-nowrap" id="example1">
               <thead>
                 <tr>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <!-- <th class="wd-15p border-bottom-0">رقم المرتجع</th> -->
+                   
+
                   <th class="wd-15p border-bottom-0">المنتج</th>
 
                   <th> المواصفات والطراز</th>
@@ -27,8 +30,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="sales in sale">
+                <tr v-for="(sales,index) in sale" :key="index">
                   <!-- <td>{{ sales.sale_return_id }}</td> -->
+                   <td>
+                    {{ index+1 }}
+                   </td>
                   <td>{{ sales.product_name }}</td>
                   <td>{{ sales.desc }}</td>
                   <td>{{ sales.status }}</td>

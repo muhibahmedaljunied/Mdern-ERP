@@ -32,6 +32,13 @@
 
 
                   </div>
+                  <div class="col-md-2">
+                    <label for="pagoPrevio">الفرع</label>
+
+                    <div>{{ data.supplier_name }}</div>
+
+
+                  </div>
                   <div class="col-md-4">
                     <label for="pagoPrevio">اجمالي الفاتوره</label>
 
@@ -152,7 +159,7 @@
 
                 </div>
 
-         
+
               </div>
             </div>
           </div>
@@ -163,11 +170,11 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-      
-           
+
+
 
               <div class="card-body">
-             
+
 
                 <div class="row">
                   <div class="col-m-12">
@@ -175,7 +182,7 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <!-- <th>الرقم</th> -->
+                            <th>الرقم التسلسلي</th>
                             <th>اسم المنتج</th>
                             <!-- <th> الباركود</th> -->
                             <th>كميه الشراء</th>
@@ -199,6 +206,9 @@
                             <input v-model="id = purchase_details.purchase_id" type="hidden" name="name" id="name"
                               class="form-control" />
 
+                            <td>
+                              {{ index + 1 }}
+                            </td>
                             <td>
 
 
@@ -462,8 +472,8 @@ temx.name }}</span>
 
                             <td>
 
-                              <span style="color: red;" :id="'message_validation'+index"></span>
-                           
+                              <span style="color: red;" :id="'message_validation' + index"></span>
+
                             </td>
 
                             <td v-if="purchase_details.qty_remain != 0">
@@ -506,18 +516,18 @@ temx.name }}</span>
             </div>
           </div>
 
-       
+
         </div>
 
 
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-           
-       
+
+
 
               <div class="card-body">
-          
+
 
                 <div class="row">
                   <div class="col-md-6">
@@ -665,7 +675,7 @@ import tree from '../../../../js/tree/tree.js';
 import { BarcodeGeneratorComponent as EjsBarcodegenerator } from '@syncfusion/ej2-vue-barcode-generator';
 export default {
   mixins: [operation, tree],
-  components:{
+  components: {
     EjsBarcodegenerator
   },
   data() {
@@ -837,7 +847,7 @@ export default {
       if ((this.qty[i] * this.unit[i][1]) > this.detail[i].qty_remain) {
 
         $(`#message_validation${i}`).html("كميه المرتجع اكبر من المسموح");
-       
+
         return 0;
       }
       $(`#message_validation${i}`).html("");

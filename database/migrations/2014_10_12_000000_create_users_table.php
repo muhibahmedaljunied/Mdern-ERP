@@ -16,6 +16,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
 
+            // $table->unsignedInteger('branch_id');
+            // $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+
+
             $table->unsignedInteger('role_id')->default('3');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
 
@@ -32,11 +36,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
 
             $table->string('status')->default('1')->nullable();
-            
+
             $table->rememberToken();
             $table->timestamps();
         });
-       
     }
 
     /**

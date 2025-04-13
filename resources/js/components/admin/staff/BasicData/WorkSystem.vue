@@ -25,7 +25,7 @@
             <table class="table table-bordered text-center">
               <thead>
                 <tr>
-                  <th class="wd-15p border-bottom-0">#</th>
+                  <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                   <th class="wd-15p border-bottom-0">الموظف</th>
                   <th class="wd-15p border-bottom-0"> نوع الدوام</th>
                   <th class="wd-15p border-bottom-0"> من</th>
@@ -190,6 +190,7 @@
                                 style="width: 100%; font-size: x-small">
                                 <thead>
                                   <tr>
+                                    <th >الرقم التسلسلي</th>
                                     <th> الموظف</th>
 
                                     <th>نوع الدوام</th>
@@ -204,6 +205,9 @@
                                 <tbody>
                                   <tr v-for="index in count" :key="index">
 
+                                    <td>
+                                      {{ index+1 }}
+                                    </td>
                                     <td>
 
                                       <select style="background-color:beige" v-model="staff[index]"

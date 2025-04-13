@@ -100,6 +100,7 @@
                 <table class="table table-bordered text-right" style="width: 100%">
                   <thead style="background:red">
                     <tr>
+                      <th >الرقم التسلسلي</th>
                       <th>اسم المنتج</th>
                       <!-- <th class="wd-15p border-bottom-0">كميه </th> -->
                       <th class="wd-15p border-bottom-0">الكميه المرتحعه</th>
@@ -108,7 +109,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="sale_details in sale_detail">
+                    <tr v-for="(sale_details,index) in sale_detail" :key="index">
+                      <td>
+                        {{ index+1 }}
+                      </td>
                       <td>{{ sale_details.product_name }}</td>
 
 

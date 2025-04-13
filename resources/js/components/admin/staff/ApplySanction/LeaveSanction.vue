@@ -108,7 +108,7 @@
                                 <table class="table table-bordered text-center">
                                     <thead>
                                         <tr>
-
+                                            <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
                                             <th class="wd-10p border-bottom-0">اسم المؤظف</th>
                                             <th class="wd-10p border-bottom-0">نوع الانصراف</th>
                                             <th class="wd-10p border-bottom-0">المده</th>
@@ -125,7 +125,9 @@
                                         <tr v-for="(staff, indexs) in value_list.data" :key="indexs"
                                             v-if="staff.attendance > 0">
 
-
+<td>
+    {{ indexs }}
+</td>
 
                                             <td>{{ staff.name }}</td>
 
@@ -220,7 +222,7 @@
                                                                                                 style="width: 100%; font-size: x-large">
                                                                                                 <thead>
                                                                                                     <tr>
-
+                                                                                                        <th>الرقم التسلسلي</th>
                                                                                                         <th> نوع
                                                                                                             الانصراف
                                                                                                         </th>
@@ -248,7 +250,9 @@
                                                                                                     v-if="staff.Leaveout">
                                                                                                     <tr v-for="(leaveout, index_leaveout) in staff.Leaveout"
                                                                                                         :key="index_leaveout">
-
+<td>
+    {{ index_leaveout }}
+</td>
                                                                                                         <td>
 
                                                                                                             {{
