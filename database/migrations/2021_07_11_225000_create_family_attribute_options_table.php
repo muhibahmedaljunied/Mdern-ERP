@@ -25,8 +25,11 @@ class CreateFamilyAttributeOptionsTable extends Migration
             $table->foreign('attribute_family_mapping_id')->references('id')->on('attribute_family_mappings')->onDelete('cascade');
 
 
-            $table->unsignedInteger('product_family_attribute_id');
-            $table->foreign('product_family_attribute_id')->references('id')->on('product_family_attributes')->onDelete('cascade');
+            // $table->unsignedInteger('product_family_attribute_id');
+            // $table->foreign('product_family_attribute_id')->references('id')->on('product_family_attributes')->onDelete('cascade');
+
+            $table->unsignedInteger('store_product_id');
+            $table->foreign('store_product_id')->references('id')->on('store_products')->onDelete('cascade');
 
             // -------------------------------------------------------------------------------------------
             $table->unsignedInteger('attribute_option_id');

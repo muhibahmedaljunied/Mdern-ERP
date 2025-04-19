@@ -2,12 +2,12 @@
   <div class="wrapper">
     <div class="container-fluid">
 
-      <div class="card">
+      <div class="card text-right">
 
         <div class="card-header">
 
 
-          <h3>فاتوره مشتريات <span id="codigo"></span></h3>
+          <h1 class="card-title"> فاتوره مشتريات</h1>
         </div>
 
 
@@ -21,18 +21,10 @@
 
                 <div class="row">
 
-           
 
-                    <div class="col-md-2">
-                      <label for="inputAddress">الفرع</label>
-                      <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
-                        <option v-for="branch in branches" v-bind:value="branch.id">
-                          {{ branch.name }}
-                        </option>
-                      </select>
-                    </div>
-            
-           
+
+
+
 
                   <div class="col-md-4">
                     <label for="pagoPrevio">المخزن</label>
@@ -192,37 +184,60 @@
 
                 <div class="row">
                   <div class="table-responsive">
-                    <table class="table table-bordered text-right" style="width: 100%; font-size: x-large">
+                    <table class="table table-bordered text-right" style="width: 100%; font-size: large;">
                       <thead>
                         <tr>
                           <th>الرقم التسلسلي</th>
-                          <th>المنتج</th>
-                          <th>المخزن</th>
+                          <th class="wd-10p border-bottom-0">المنتج</th>
+                          <th class="wd-10p border-bottom-0">المخزن</th>
 
-                          <th>الحاله</th>
-                          <th>الموصفات والطراز</th>
+                          <th class="wd-5p border-bottom-0">الحاله</th>
+                          <th class="wd-5p border-bottom-0">الموصفات والطراز</th>
                           <!-- <th>المخزن</th> -->
-                          <th>الوحده</th>
+                          <th class="wd-10p border-bottom-0">الوحده</th>
                           <!--<th>التكلفه</th> -->
 
-                          <th>السعر</th>
-                          <th>الكميه</th>
-                          <th>الضريبه</th>
-                          <th>الخصم</th>
+                          <th class="wd-10p border-bottom-0">السعر</th>
+                          <th class="wd-10p border-bottom-0">الكميه</th>
+                          <th class="wd-15p border-bottom-0">الضريبه</th>
+                          <th class="wd-15p border-bottom-0">الخصم</th>
 
-                          <th>الاجمالي</th>
-                          <th>تاريخ الانتهاء</th>
+                          <th class="wd-15p border-bottom-0">الاجمالي</th>
+                          <th class="wd-15p border-bottom-0">تاريخ الانتهاء</th>
 
                           <!-- <th>اضافه</th> -->
 
-                          <th>اضافه</th>
+                          <!-- <th>اضافه</th> -->
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr v-for="index in count" :key="index">
-                          <td>{{ index }}</td>
+                      <tbody id="show_pro">
+                        <tr v-for="(sto_pro, index) in store_products" :key="index">
+                          <td>{{ index + 1 }}
+
+
+
+                          </td>
                           <td>
-                            <div class="custom-search">
+
+
+                            <div>
+                              <input type="hidden" v-model="sto_pro.text" id="desc" class="form-control" />
+
+                              <span>{{ sto_pro.text }}</span>
+                              <span style="color: blue;" v-if="sto_pro.kk" v-for="ss in sto_pro.kk">
+
+
+                                -{{ ss.value }}
+
+
+
+
+
+                              </span>
+                            </div>
+
+
+                            <!-- <div class="custom-search">
 
                               <input style="background-color: beige;font-size: 15px;"
                                 :id="'Purchase_productm_tree' + index" type="text" readonly class="custom-search-input">
@@ -232,12 +247,19 @@
                               <button class="custom-search-botton" type="button" data-toggle="modal"
                                 data-target="#exampleModalProductm" @click="detect_index(index)">
                                 <i class="fa fa-plus-circle"></i></button>
-                            </div>
+                            </div> -->
 
 
 
                           </td>
                           <td>
+
+
+                            <!-- <div>
+                                <input type="text" v-model="sto_pro.text" id="desc" class="form-control" />
+                              </div> -->
+
+
                             <div class="custom-search">
 
                               <input style="background-color: beige;font-size: 15px;"
@@ -255,33 +277,45 @@
 
 
                           </td>
-
                           <td>
-                            <div id="factura_producto">
-                              <select v-model="status[index]" name="type" id="type" class="form-control" required>
 
-                                <option v-for="status in statuses" v-bind:value="status.id">
-                                  {{ status.name }}
-                                </option>
-                              </select>
-                            </div>
+                            {{ sto_pro.name }}
+
+
                           </td>
 
                           <td>
-                            <div id="factura_producto">
-                              <input type="text" v-model="desc[index]" id="desc" class="form-control" />
-                            </div>
+
+                            {{ sto_pro.desc }}
+
+
                           </td>
 
 
 
                           <td>
-                            <div id="factura_producto">
+                            <div>
 
-                              <select v-on:change="calculate()" style="background-color: beige;" v-model="unit[index]"
+                              <!-- <select v-on:change="calculate()" style="background-color: beige;" v-model="unit[index]"
                                 name="type" :id="'select_unit' + index" class="form-control" required>
 
+                              </select> -->
+
+
+                              <select v-on:change="set_unit_price(index), calculate()" style="background-color: beige;"
+                                v-model="unit[index]" name="type" :id="'select_unit' + index" class="form-control"
+                                required>
+
+                                <option v-for="ssu in sto_pro.unit" v-bind:value="[ssu.id, ssu.rate, ssu.cost]">
+                                  {{ ssu.name }}
+                                </option>
+
                               </select>
+
+
+
+
+
                             </div>
                           </td>
 
@@ -316,12 +350,9 @@
                           </td>
 
 
-                          <!-- <td>
-<input v-model="check_state[index]" @change="add_one_sale(product, index)" type="checkbox"
-class="btn btn-info waves-effect">
-</td> -->
+                   
 
-                          <td v-if="index == 1" rowspan="3">
+                          <!-- <td v-if="index == 1" rowspan="3">
 
                             <button class="btn btn-info btn-sm waves-effect btn-agregar"
                               v-on:click="addComponent(count)">
@@ -333,7 +364,7 @@ class="btn btn-info waves-effect">
 
 
 
-                          </td>
+                          </td> -->
                         </tr>
 
 
@@ -598,6 +629,7 @@ class="btn btn-info waves-effect">
 import pagination from "laravel-vue-pagination";
 import operation from '../../../operation.js';
 import tree from '../../../../js/tree/tree.js';
+
 export default {
 
   components: {
@@ -633,12 +665,12 @@ export default {
     this.type = 'Purchase';
     this.type_refresh = 'increment';
     this.type_of_tree = 1;
-    this.first_row = 1;
+    this.first_row = 0;
 
     this.showtree('store', 'tree_store');
     this.showtree('storem', 'tree_store');
     this.showtree('product', 'tree_product');
-    this.showtree('productm', 'tree_product');
+    // this.showtree('productm', 'tree_product');
     this.showtree('account', 'tree_account');
 
 
@@ -655,7 +687,14 @@ export default {
 
 
 
+   
 
+    set_unit_price(index) {
+
+
+      this.unit_price[index] = this.unit[index][2];
+
+    },
 
     get_search() {
       this.axios
@@ -679,10 +718,9 @@ export default {
       this.axios.post(`/purchase/newpurchase?page=${page}`).then(({ data }) => {
         console.log(data.suppliers);
         this.temporale = data.temporales;
-
-
-
         this.products = data.products;
+        this.store_products = data.store_products;
+
         this.suppliers = data.suppliers;
 
         this.stores = data.stores;

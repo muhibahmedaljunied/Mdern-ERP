@@ -1,3 +1,5 @@
+import { forIn } from "lodash";
+
 export default {
     methods: {
         check_storem(data) {
@@ -40,6 +42,7 @@ export default {
         get_account_for_store(length) {
             //this called when selected store in top
 
+            console.log("whyyyyyyyyyyy", length);
             axios.post(`/get_account_store/${this.store}`).then((response) => {
                 var arrayLength = response.data.accounts.length;
 
@@ -54,34 +57,44 @@ export default {
                     response.data.accounts[0].id
                 );
 
-                // -----------------------------------------------------------------------------------
-                for (const key in length) {
-                    if (length.hasOwnProperty.call(length, key)) {
-                        let element = 0;
-                        console.log(key, this.type);
-
-                        if (
-                            this.type == "Purchase" ||
-                            this.type == "Supply"
-                            || this.type == "OpeningInventory"
-                        ) {
-                            element = length[key];
-                        }
-
-                        if (this.type == "SaleReturn") {
-                            element = key;
-                        }
-
+                if (
+                    this.type == "Purchase" ||
+                    this.type == "Supply" ||
+                    this.type == "OpeningInventory"
+                ) {
+                    for (let index = 0; index < length; index++) {
                         if (!response.data.accounts.account_id) {
                             this.get_storem_by_store(
-                                element,
+                                index,
                                 response.data.accounts
                             );
                         } else {
                             this.get_account_for_storem_by_store(
-                                element,
+                                index,
                                 response.data.accounts
                             );
+                        }
+                    }
+                }
+
+                // -----------------------------------------------------------------------------------
+                if (this.type == "SaleReturn") {
+                    for (const key in length) {
+                        if (length.hasOwnProperty.call(length, key)) {
+                            let element = 0;
+
+                            element = key;
+                            if (!response.data.accounts.account_id) {
+                                this.get_storem_by_store(
+                                    element,
+                                    response.data.accounts
+                                );
+                            } else {
+                                this.get_account_for_storem_by_store(
+                                    element,
+                                    response.data.accounts
+                                );
+                            }
                         }
                     }
                 }

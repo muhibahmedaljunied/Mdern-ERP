@@ -59,7 +59,6 @@ trait DetailsTrait
             $this->qty->details = $this->qty->details->where($this->qty->table . '.' . $this->qty->column . '_id', $this->qty->request->id);
         }
 
-
         $this->qty->details = $this->qty->details->join('store_products', 'store_products.id', '=', $this->qty->table . '.store_product_id')
             ->join('products', 'store_products.product_id', '=', 'products.id')
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')

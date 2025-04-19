@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Warehouse;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Status;
+use Illuminate\Support\Facades\DB;
 
 class UnitController extends Controller
 {
@@ -18,10 +20,11 @@ class UnitController extends Controller
     {
 
 
-    
+        return response()->json([
+            'units' => Unit::all(),
+            'status' => Status::all(),
 
-        $units = Unit::all();
-        return response()->json(['units' => $units]);
+        ]);
     }
 
     /**
@@ -42,15 +45,14 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-    //    dd($request['count']);
+        //    dd($request['count']);
         foreach ($request['count'] as $value) {
 
             $unit = new Unit();
             $unit->name = $request['name'][$value];
             $unit->save();
-
         }
-   
+
         return response()->json();
     }
 
@@ -62,16 +64,57 @@ class UnitController extends Controller
      */
     public function show(Request $request)
     {
-        $units = Unit::where('product_units.product_id', $request->id)
-            ->join('product_units', 'units.id', '=', 'product_units.unit_id')
-            ->join('products', 'product_units.product_id', '=', 'products.id')
-            // ->select('units.*','product_units.unit_type','products.rate')
-            ->select('units.*', 'product_units.*')
+        // $units = Unit::where('product_units.product_id', $request->id)
+        //     ->join('product_units', 'units.id', '=', 'product_units.unit_id')
+        //     ->join('products', 'product_units.product_id', '=', 'products.id')
+        //     ->select('units.*', 'product_units.*')
 
+        //     ->get();
+
+
+
+        $products = DB::table('products')
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->select(
+                'products.*',
+                'store_products.id as store_product_id',
+                'store_products.desc',
+                'statuses.name'
+            )
             ->get();
 
+        foreach ($products as $value) {
 
-        return response()->json(['units' => $units]);
+            $value->kk = collect(DB::table('family_attribute_options')
+                ->where('family_attribute_options.store_product_id', $value->store_product_id)
+                ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
+                ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
+                ->get())->toArray();
+        }
+
+        foreach ($products as $value) {
+
+
+            $value->unit = Unit::where('product_units.product_id', $value->id)
+                ->join('product_units', 'units.id', '=', 'product_units.unit_id')
+                // ->join('products', 'product_units.product_id', '=', 'products.id')
+                ->join('product_prices', 'product_prices.product_unit_id', '=', 'product_units.id')
+                ->select(
+                    'units.*',
+                    'product_units.*',
+                    'product_prices.*'
+                )
+
+                ->get();
+        }
+
+
+        return response()->json([
+            // 'units' => $units,
+
+            'products' => $products
+        ]);
     }
 
     /**

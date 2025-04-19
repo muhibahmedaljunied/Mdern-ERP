@@ -27,7 +27,7 @@ export default {
                         this.last_nodes = response.data.last_nodes;
                         $(`#${table}_number`).val(response.data.last_nodes + 1);
                     }
-    
+
                     // console.log(`muhiiiiiiiiiiiiii${id}`, id);
 
                     $(`#${id}`)
@@ -77,8 +77,6 @@ export default {
                         })
                         .on("rename_node.jstree", function (e, data) {})
                         .on("changed.jstree", function (e, data) {
-
-             
                             if (
                                 gf.type == "Sale" ||
                                 gf.type == "Cash" ||
@@ -128,19 +126,19 @@ export default {
                                     }
                                 }
                             } else {
-                                console.log(
-                                    "nowwwwwwwwwwwwww_second",
-                                    gf.type,
-                                    gf.indexselected
-                                );
+                                // console.log(
+                                //     "nowwwwwwwwwwwwww_second",
+                                //     gf.type,
+                                //     gf.indexselected
+                                // );
 
                                 $(`#${gf.type}_${table}_tree`).val(
                                     data.node.text + "  " + data.node.id
                                 );
-                                // console.log(
-                                //     "nowwwwwwwwwwwwww",
-                                //     `#${gf.type}_${table}_tree_id`
-                                // );
+                                console.log(
+                                    "nowwwwwwwwwwwwww",
+                                    `#${gf.type}_${table}_tree_id`
+                                );
                                 $(`#${gf.type}_${table}_tree_id`).val(
                                     data.node.id
                                 );
@@ -169,7 +167,7 @@ export default {
                                 gf.check_account(data);
                             }
                             if (table == "product") {
-                                console.log("no _productm", gf.counts);
+                                // console.log("no _productm", gf.counts);
                                 gf.check_prouct(table, data, gf.counts);
                             }
 
@@ -186,6 +184,7 @@ export default {
                                         data.node.id,
                                         table
                                     );
+
                                     gf.get_account_for_store();
                                 }
 
@@ -194,8 +193,11 @@ export default {
                                     gf.type == "Supply" ||
                                     gf.type == "OpeningInventory"
                                 ) {
-                                    gf.get_account_for_store(gf.counts);
+                                    gf.get_account_for_store(
+                                        gf.store_products.length
+                                    );
                                 }
+
                                 if (
                                     gf.type == "SaleReturn" ||
                                     gf.type == "CashReturn"
@@ -279,7 +281,7 @@ export default {
             };
             // form data
 
-            console.log("counts", this.counts);
+            // console.log("counts", this.counts);
             let formData = new FormData();
             formData.append(
                 `${localStorage.getItem("table")}_id`,
@@ -288,14 +290,24 @@ export default {
             formData.append("text", this.text);
             // formData.append(`${localStorage.getItem('table')}_name_en`, this.store_name_en);
             formData.append("parent", $("#parent").val());
+
+            // -------------------I add it muhib---------------
+            formData.append("attribute", this.attr_array);
+            formData.append("family_id", this.family_attribute);
+            formData.append("product_attr", JSON.stringify(this.att_family));
+            formData.append("product_type", this.product_type);
+            // ------------------------------------------
             // formData.append("account", this.account);
             formData.append("rank", $("#rank").val());
             formData.append("unit", this.unit);
-            formData.append("purchase_price", this.purchase_price);
+            // formData.append("purchase_price", this.purchase_price);
             formData.append("status", this.status);
+            formData.append("status_product", this.status_product_selected);
+            formData.append("desc", this.desc);
+
             // formData.append("status", this.status);
 
-            console.log("eeeeeeeeeeeeeee", this.status);
+            // console.log("eeeeeeeeeeeeeee", this.status);
 
             if (localStorage.getItem("table") == "product") {
                 // formData.append("count", this.counts);
@@ -307,17 +319,17 @@ export default {
                         formData.append("count[]", this.counts[i]);
                     }
 
-                    if (this.purchase_price_for_retail_unit[i] === undefined) {
-                        formData.append(
-                            "purchase_price_for_retail_unit[]",
-                            null
-                        );
-                    } else {
-                        formData.append(
-                            "purchase_price_for_retail_unit[]",
-                            this.purchase_price_for_retail_unit[i]
-                        );
-                    }
+                    // if (this.purchase_price_for_retail_unit[i] === undefined) {
+                    //     formData.append(
+                    //         "purchase_price_for_retail_unit[]",
+                    //         null
+                    //     );
+                    // } else {
+                    //     formData.append(
+                    //         "purchase_price_for_retail_unit[]",
+                    //         this.purchase_price_for_retail_unit[i]
+                    //     );
+                    // }
                     if (this.hash_rate[i] === undefined) {
                         formData.append("hash_rate[]", null);
                     } else {
@@ -334,6 +346,19 @@ export default {
                     // formData.append('hash_rate[]', this.hash_rate[i]);
                     // formData.append('retail_unit[]', this.retail_unit[i]);
                 }
+
+                for (let i = 0; i < this.file.length; i++) {
+                    // payload.append('image[]', this.image[i])
+                    formData.append("image[]", this.file[i]);
+                }
+
+                // -------------------------I add it muhib----------------------------------
+                for (var i = 0; i <= this.counts_unit.length; i++) {
+                    if (i != this.counts_unit.length) {
+                        formData.append("count_unit[]", this.counts_unit[i]);
+                    }
+                }
+                // -----------------------------------------------------------------------
 
                 formData.append("product_minimum", this.product_minimum);
             }

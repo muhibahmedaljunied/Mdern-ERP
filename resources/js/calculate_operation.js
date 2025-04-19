@@ -23,6 +23,7 @@ export default {
 
         calculate() {
             var count = this.init();
+            console.log('purchase_after_update',count,this.first_row);
 
             for (let index = this.first_row; index <= count; index++) {
                 this.row_counter = index;
@@ -31,7 +32,9 @@ export default {
                     this.type == "Supply" ||
                     this.type == "OpeningInventory"
                 ) {
+
                     this.check_state[this.row_counter] = true;
+        
                 }
 
                 if (this.check_state[this.row_counter] == true) {
@@ -65,11 +68,17 @@ export default {
             console.log(
                 "yeeeeeeeeeeeeeeeeeez",
 
+                this.row_counter,
                 this.check_state[this.row_counter],
                 this.unit,
                 this.unit[this.row_counter],
                 this.qty[this.row_counter],
                 this.unit_price[this.row_counter],
+
+                // this.unit[0][0],
+                // this.qty[0],
+                // this.unit_price[0],
+
                 this.row_counter
             );
             if (
@@ -102,8 +111,7 @@ export default {
                     this.operation_status = 1;
                     this.total[this.row_counter] =
                         this.unit_price[this.row_counter] *
-                        this.qty[this.row_counter] *
-                        unit[1];
+                        this.qty[this.row_counter] ;
                 }
 
                 return 1;

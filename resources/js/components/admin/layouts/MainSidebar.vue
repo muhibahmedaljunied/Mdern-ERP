@@ -427,7 +427,7 @@
 
           <ul class="slide-menu">
 
-            <li>
+            <!-- <li>
               <router-link class="slide-item" to="/attribute"><span class="side-menu__label">خصائص المنتج</span><i
                   class="angle fe fe-chevron-down"></i></router-link>
             </li>
@@ -435,18 +435,18 @@
             <li>
               <router-link class="slide-item" to="/attribute_family"><span class="side-menu__label">مجموعه
                   الخصائص</span><i class="angle fe fe-chevron-down"></i></router-link>
-            </li>
+            </li> -->
 
             <li>
               <router-link class="slide-item" to="/product"> المنتجات</router-link>
             </li>
           </ul>
 
-          <ul class="slide-menu">
+          <!-- <ul class="slide-menu">
             <li>
               <router-link class="slide-item" to="/unit">الوحدات</router-link>
             </li>
-          </ul>
+          </ul> -->
 
           <ul class="slide-menu">
             <li>

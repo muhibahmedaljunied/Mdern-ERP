@@ -15,6 +15,7 @@ Route::post('export_opening_inventuries', [InventuryController::class, 'export']
 Route::post('product', 'Warehouse\ProductController@index');
 Route::post('/create_product', 'Warehouse\ProductController@create');
 Route::post('/store_product', 'Warehouse\ProductController@store');
+Route::post('/store_price', 'Warehouse\ProductController@store_price');
 Route::post('/update_product/{id}', 'Warehouse\ProductController@update');
 Route::get('/product/{id}', 'Warehouse\ProductController@edit');
 Route::post('/delete_product/{id}', 'Warehouse\ProductController@destroy');
@@ -31,6 +32,7 @@ Route::post('/productsearch', 'Warehouse\ProductController@search');
 //-------------------------------------Unit------------------------------------------------------------------------------
 
 Route::post('/get_unit/{id}', 'Warehouse\UnitController@show');
+Route::post('/get_product_price/{id}', 'Warehouse\ProductController@pricing');
 Route::post('/unit', 'Warehouse\UnitController@index');
 Route::post('/create_unit', 'Warehouse\UnitController@create');
 Route::post('/store_unit', 'Warehouse\UnitController@store');

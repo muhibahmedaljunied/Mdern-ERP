@@ -666,7 +666,6 @@ export default {
         this.list();
         this.counts[0] = 1;
         this.type = 'OpeningInventory';
-
         this.type_refresh = 'increment';
         this.type_of_tree = 1;
         this.first_row = 1;
@@ -675,17 +674,6 @@ export default {
         this.showtree('storem', 'tree_store');
         this.showtree('productm', 'tree_product');
         this.showtree('account', 'tree_account');
-
-
-
-
-
-
-
-
-
-
-
 
     },
 

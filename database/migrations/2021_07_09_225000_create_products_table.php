@@ -21,11 +21,15 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('products');
             // ------------------------------------------------------------------------------
+            // $table->string('product_type');
+            // ---------------------------------------------------------------------------------
 
             $table->string('text');
             $table->integer('rank')->nullable();
             $table->string('status')->default('true');
 
+            $table->string('desc')->default('default');
+            
             $table->integer('product_minimum')->nullable()->default(1);
             $table->string('image')->nullable();
 

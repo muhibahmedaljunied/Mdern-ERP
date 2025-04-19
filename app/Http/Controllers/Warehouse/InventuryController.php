@@ -48,11 +48,12 @@ class InventuryController extends Controller
 
     public function details()
     {
+
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
         $this->qty->handle_qty();
-        // return response()->json(['details' => $this->qty->details]);
+   
     }
     public function import()
     {

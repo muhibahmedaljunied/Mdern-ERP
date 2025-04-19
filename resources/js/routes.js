@@ -147,6 +147,7 @@ import RepoCashingReturn from "./components/admin/report/RepoCashingReturn";
 import RepoStock from "./components/admin/report/RepoStock";
 import RepoSupply from "./components/admin/report/RepoSupply";
 import RepoSupplyReturn from "./components/admin/report/RepoSupplyReturn";
+import ProductDetails from "./components/admin/product/ProductDetails.vue";
 // import Balance from './components/admin/FinancialAccounting/report/Balance.vue'
 // -------------------------------------------------------------------------------------------------------------------------------------------
 const routes = [
@@ -383,7 +384,7 @@ const routes = [
         // path: '/ERP/product',
         path: "/product",
         name: "product",
-        component: Product,
+        component: ProductDetails,
     },
 
     // ----------------------------------Category---------------------------------------------------------------------------------------------------

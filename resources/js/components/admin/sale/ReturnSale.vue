@@ -40,16 +40,6 @@
 
           
 
-                  <div class="col-md-2">
-
-
-                    <label > الفرع</label>
-
-
-
-                    <div>{{ data.customer_name }}</div>
-
-                  </div>
                   <div class="col-md-4">
                     <label for="pagoPrevio">اجمالي الفاتوره</label>
 

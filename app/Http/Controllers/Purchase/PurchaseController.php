@@ -17,19 +17,22 @@ use Illuminate\Http\Request;
 use App\Models\status;
 use App\Models\Temporale;
 use App\Models\Purchase;
+use App\Models\Unit;
 use App\Repository\Qty\QtyStockRepository;
+
 class PurchaseController extends Controller
 {
     use InvoiceTrait,
         GeneralTrait;
 
     public $qty;
-    public function __construct(Request $request,QtyStockRepository $qty)
+    public $products;
+    public $store_products;
+    public function __construct(Request $request, QtyStockRepository $qty)
     {
 
         $this->qty = $qty;
         $this->qty->request = $request;
-     
     }
     public function details()
     {
@@ -45,19 +48,94 @@ class PurchaseController extends Controller
     {
 
 
-        $products = DB::table('products')
-            ->select('products.*',)
-            ->get();
+     
+
+        $this->product();
+        $this->product_detail();
+        $this->variant();
+        $this->unit();
+
+
+
+
+
+        // dd($store_products);
 
 
         return response()->json([
-            'products' => $products,
+            'products' => $this->products,
+            'store_products' => $this->store_products,
             'suppliers' => $this->suppliers(),
             'statuses' => Status::all(),
             'stores' => $this->get_store()
 
         ]);
     }
+
+    public function product()
+    {
+
+
+        $this->products = DB::table('products')
+            ->select('products.*',)
+            ->get();
+
+
+      
+    }
+    public function product_detail()
+    {
+
+
+     
+
+        $this->store_products = DB::table('products')
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->select(
+                'products.*',
+                'store_products.id as store_product_id',
+                'store_products.desc',
+                'statuses.name'
+            )
+            ->get();
+    }
+
+    public function variant()
+    {
+
+
+        foreach ($this->store_products as $value) {
+
+            $value->kk = collect(DB::table('family_attribute_options')
+                ->where('family_attribute_options.store_product_id', $value->store_product_id)
+                ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
+                ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
+                ->get())->toArray();
+        }
+    }
+
+    public function unit()
+    {
+
+
+        foreach ($this->store_products as $value) {
+
+
+            $value->unit = Unit::where('product_units.product_id', $value->id)
+                ->join('product_units', 'units.id', '=', 'product_units.unit_id')
+                ->join('products', 'product_units.product_id', '=', 'products.id')
+                ->join('product_prices', 'product_prices.product_unit_id', '=', 'product_units.id')
+                ->select(
+                    'units.*',
+                    'product_units.*',
+                    'product_prices.*'
+                )
+
+                ->get();
+        }
+    }
+
 
 
     public function get_store()
@@ -93,7 +171,7 @@ class PurchaseController extends Controller
             ->select(
                 'treasuries.id',
                 'treasuries.name',
-               
+
 
             )
             ->get();
@@ -108,7 +186,7 @@ class PurchaseController extends Controller
 
 
 
-        // dd($stock->core->data);
+        dd($stock->core->data);
         // $result  = $this->daily->check_account();
 
         // if ($result == 0) {
@@ -126,9 +204,7 @@ class PurchaseController extends Controller
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
             $stock->handle();
-            
 
-            // dd(2);
             Cache::forget('stock');
 
             // ------------------------------------------------------------------------------------------------------
@@ -187,7 +263,7 @@ class PurchaseController extends Controller
             $morphTo->constrain([
                 Purchase::class => function ($query) {
                     $query->join('suppliers', 'suppliers.id', '=', 'purchases.supplier_id');
-                    $query->select('purchases.*', 'purchases.id as purchase_id','suppliers.name as supplier_name');
+                    $query->select('purchases.*', 'purchases.id as purchase_id', 'suppliers.name as supplier_name');
                 },
             ]);
         }])

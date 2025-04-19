@@ -53,6 +53,7 @@ export default {
             treasuries: "",
             banks: "",
             products: "",
+            store_products:'',
             stores: "",
             statuses: "",
             stores: "",
@@ -168,6 +169,7 @@ export default {
                 this.set_values();
                 this.set_price();
             }
+
 
             if (this.calculate_total_with_check() == 0) {
                 return 0;

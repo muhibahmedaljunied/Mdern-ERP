@@ -42,16 +42,7 @@
 
                     </div>
 
-                    <div class="col-md-2">
-
-
-                      <label for="cliente"> الفرع</label>
-
-                      <input v-if='sale' class="form-control" type="text" v-model="sale[0].name" @input="get_sale">
-
-
-
-                    </div>
+      
 
                     <div class="col-md-4">
                       <label for="pagoPrevio">اجمالي الفاتوره</label>

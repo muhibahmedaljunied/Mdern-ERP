@@ -9,7 +9,7 @@
 
 				<div class="card-header">
 					<div class="d-flex justify-content-between">
-						<span class="h2">خصائص المنتج</span>
+						<span class="h2">تباينات المنتج</span>
 					</div>
 				</div>
 				<div class="card-body">

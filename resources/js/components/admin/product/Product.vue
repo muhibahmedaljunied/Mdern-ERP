@@ -20,7 +20,7 @@
                 <span style="font-size: x-large"> شجره المنتجات</span>
 
               </div> -->
-              <span> *كيف يتم التعامل مع تعدد الوحدات في حاله المنتجات المتباينه وضبط سعر الشراء وسعر البيع وكذلك ضبط
+              <!-- <span> *كيف يتم التعامل مع تعدد الوحدات في حاله المنتجات المتباينه وضبط سعر الشراء وسعر البيع وكذلك ضبط
                 الاجزاء للوحدات مقارنه مع الانظمه الاخري مثل mazerp
               </span>
 
@@ -29,7 +29,7 @@
               <span>
                 *كيف يتم التعامل مع الفروع هل تحدد لاول مره فقط ثم تعين اعتمادا علي ذلك في الواجهات والعمليات وكيف يتم
                 ربط الفروع بباقي جداول النظام تتبع smacc @ MazErp 
-              </span>
+              </span> -->
 
               <div class="card-body">
 
@@ -120,7 +120,7 @@
 
                   <div class="col-md-2">
                     <label for="Product">رقم المنتج</label>
-                    <input style="background-color: beige;" id='product_number' type="text" class="form-control"
+                    <input style="background-color: beige;" type="text" id='product_number' class="form-control"
                       required readonly />
 
                   </div>
@@ -152,7 +152,7 @@
                       <div class='col-md-2'>
                         <label for="Product"></label>
 
-                        <label for="Product">الوحده الرئيسيه<span style="color: red;">(اصغر وحده)</span></label>
+                        <label for="Product">الوحده الاساسيه<span style="color: red;">(اصغر وحده)</span></label>
 
                         <select style="background-color: beige;" v-model="unit" class="form-control">
                           <option v-for="unit in units" v-bind:value="unit.id">
@@ -161,7 +161,7 @@
                         </select>
 
                       </div>
-                      <div class='col-md-2'>
+                      <!-- <div class='col-md-2'>
                         <label for="Product"></label>
 
                         <label> الفرع</label>
@@ -172,15 +172,13 @@
                           </option>
                         </select>
 
-                      </div>
-                      <div class='col-md-2'>
+                      </div> -->
+                      <!-- <div class='col-md-2'>
                         <label for="purchase_price"> سعر الشراء</label>
-                        <input v-model="purchase_price" type="text" name="purchase_price" class="form-control" /><span
-                          style="color:red">{{ error_purchase_price[0] }}</span>
+                        <input v-model="purchase_price" type="text" class="form-control" /><span style="color:red">{{
+                          error_purchase_price[0] }}</span>
 
-                        <!-- <input v-model="rate[0]" type="text" 
-                          class="form-control" /> -->
-                      </div>
+                      </div> -->
                       <div class="col-md-2">
                         <label for="radio-example-one">تعدد وحدات التجزئه </label><br>
 
@@ -188,6 +186,30 @@
                         <input id='parent' type="hidden" />
 
                         <input id='rank' type="hidden" />
+
+                      </div>
+
+                      <div class='col-md-2'>
+                        <label for="purchase_price"> الطراز </label>
+                        <input v-model="desc" type="text" class="form-control" /><span style="color:red">{{
+                          error_purchase_price[0] }}</span>
+
+                        <!-- <input v-model="rate[0]" type="text" 
+                          class="form-control" /> -->
+                      </div>
+
+
+                      <div class='col-md-2'>
+                        <label for="Product"></label>
+
+                        <label for="Product">الحاله</label>
+
+                        <select v-model="status_product_selected" name="type" id="type" class="form-control" required>
+
+                          <option v-for="status in status_product" v-bind:value="status.id">
+                            {{ status.name }}
+                          </option>
+                        </select>
 
                       </div>
 
@@ -234,13 +256,13 @@
                         </select>
 
                       </div>
-                 
+
 
                       <div class="col-md-2" v-if="product_type == 2">
                         <label for="pagoPrevio">مجموعه الخصائص</label>
 
                         <select style="background-color: beige;" @change="get_attribute()" v-model="family_attribute"
-                          name="Category" id="Category" class="form-control">
+                          id="Category" class="form-control">
                           <option v-for="families in attribute_families" v-bind:value="families.id">
                             {{ families.name }}
                           </option>
@@ -253,26 +275,25 @@
 
                       <div class="col-md-2">
                         <label for="Product Minimum"> الحد الادني للمنتج</label>
-                        <input v-model="product_minimum" type="number" name="Minimum" class="form-control" />
+                        <input v-model="product_minimum" type="number" class="form-control" />
                         <span style="color:red">{{ error_hash_rate[0] }}</span>
                       </div>
 
                       <div class="col-md-2">
                         <label for="Product Minimum">مده الارجاع</label>
-                        <input v-model="period" type="number" name="Minimum" class="form-control" />
+                        <input v-model="period" type="number" class="form-control" />
 
                       </div>
 
                       <div class="col-md-2" v-if="product_type == 1">
                         <label for="filePhoto">الصوره</label>
-                        <input v-on:change="onFileChange" type="file" name="image" class="form-control-file"
-                          id="filePhoto" />
+                        <input v-on:change="onFileChange" type="file" class="form-control-file" />
                         <img src="" id="previewHolder" width="150px" />
                       </div>
 
                     </div>
-              
-                
+
+
 
                   </div>
 
@@ -294,9 +315,9 @@
                         <thead>
                           <tr>
                             <!-- <th>Code</th> -->
-                             <th>الرقم التسلسلي</th>
+                            <th>الرقم التسلسلي</th>
                             <th>وحده التجزئه</th>
-                            <th>سعر الشراء</th>
+                            <!-- <th>سعر الشراء</th> -->
                             <th>عدد وحدات التجزئه بالوحده الاساسيه</th>
 
                             <th>اضافه</th>
@@ -321,22 +342,21 @@
 
 
                             </td>
-                            <td>
+                            <!-- <td>
 
 
-                              <input v-model="purchase_price_for_retail_unit[index]" type="text" name="purchase_price"
+                              <input v-model="purchase_price_for_retail_unit[index]" type="text" 
                                 class="form-control" />
 
 
 
 
-                            </td>
+                            </td> -->
 
                             <td>
 
 
-                              <input v-model="hash_rate[index]" type="text" name="purchase_price"
-                                class="form-control" />
+                              <input v-model="hash_rate[index]" type="text" class="form-control" />
 
                             </td>
 
@@ -444,8 +464,8 @@
 
 
                                 <!-- <input v-on:change="onFileChange(index)"
-            type="file" name="image"
-            class="form-control-file" id="filePhoto">
+            type="file" 
+            class="form-control-file" >
         <img src="" id="previewHolder" width="150px"> -->
                               </td>
 
@@ -621,10 +641,8 @@ import operation from '../../../operation1.js';
 import tree from '../../../../js/tree/tree.js';
 
 export default {
-  // mixins: [jtree],
   mixins: [tree, operation],
 
-  // mixins: [tree],
   data() {
     return {
 
@@ -633,13 +651,14 @@ export default {
       count: 1,
       qty: [],
       price: [],
+      desc:'',
       description: [],
+      attr_array: [],
       discount: [],
       attributes: '',
-      count_attributes: '',
       attribute_families: '',
       family_attribute: '',
-
+      count_attributes: 1,
       product_type: 1,
       check_state: '',
 
@@ -653,11 +672,14 @@ export default {
       purchase_price_for_retail_unit: [],
       product_minimum: '',
       period: '',
-      file: '',
+      // file: '',
+      file: [],
       text: '',
       product: '',
       image: '',
       status: false,
+      status_product:'',
+      status_product_selected:'',
       id: '',
       trees: "",
       errors: "",
@@ -687,9 +709,16 @@ export default {
 
     this.axios.post("/unit").then((response) => {
       this.units = response.data.units;
+      this.status_product = response.data.status;
 
     });
     this.type = 'Stock';
+
+
+
+    this.att_family = Array.from(Array(this.count), () => new Array(this.count_attributes))
+    console.log('kkkkkkkk', this.att_family);
+
 
 
 
@@ -729,8 +758,40 @@ export default {
         console.log("yuuyyusd", index, this.count_unit);
       }
     },
+
+    addComponent(index) {
+      // alert(index);
+      this.count += 1;
+      this.counts[index] = this.count;
+
+      this.att_family = Array.from(Array(this.count), () => new Array(2))
+      console.log('kkkkkkkk_addComponentUnit', this.att_family);
+    },
+    disComponent(index) {
+      if (index != 1) {
+        this.count -= 1;
+        this.$delete(this.counts, index - 1);
+        console.log("yuuyyusd", index, this.count);
+      }
+    },
+
+    addFind(index, index2, event, att) {
+
+
+      index = index - 1;
+      console.log(index, index2);
+      this.att_family[index][index2] = [att, event.target.value];
+
+    },
+
     onFileChange(e) {
       this.file = e.target.files[0];
+    },
+    onFileChange(e, index) {
+
+
+      this.file[index] = e.target.files[0];
+      console.log(this.file);
     },
 
     get_attribute() {
@@ -787,7 +848,7 @@ export default {
       var result = this.addnode();
       toastMessage("تم الاضافه بنجاح");
 
-      this.$router.go(0);
+      // this.$router.go(0);
     }
 
 
