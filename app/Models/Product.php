@@ -19,6 +19,10 @@ class Product extends Model
 
 
     }
+    public function store_product()
+    {
+        return $this->hasMany(StoreProduct::class);
+    }
 
     // public function product()
     // {

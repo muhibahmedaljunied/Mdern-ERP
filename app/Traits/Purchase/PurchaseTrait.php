@@ -11,6 +11,7 @@ trait PurchaseTrait
     public function add_into_purchase_table()
     {
 
+       
 
         $table_one = Purchase::create(
             [
@@ -24,7 +25,7 @@ trait PurchaseTrait
 
             ]
         );
-
+  
         $this->core->purchase_id = $table_one->id;
         // $this->core->purchase = $table_one;
         $this->core->stockable = $table_one;

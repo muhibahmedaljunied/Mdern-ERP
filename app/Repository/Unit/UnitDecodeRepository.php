@@ -27,8 +27,10 @@ class UnitDecodeRepository  implements UnitRepositoryInterface
 
 
 
+        // $this->core->unit_array = json_decode($this->core->data['unit'][$this->core->value]);
+        $this->core->unit_array = $this->core->data['unit'][$this->core->value];
 
-        $this->core->unit_array = json_decode($this->core->data['unit'][$this->core->value]);
+
 
         // dd($this->core->unit_array);
         return $this;
@@ -38,17 +40,20 @@ class UnitDecodeRepository  implements UnitRepositoryInterface
     {
 
 
-        // dd($this->core->data['units']);
+        // dd($this->core->unit_array[1], $this->core->data['qty'][$this->core->value]);
 
-        foreach ($this->core->data['units'] as  $value) {
+        $this->core->micro_unit_qty = $this->core->unit_array[1] * $this->core->data['qty'][$this->core->value];
 
 
-            if ($value['unit_id'] == $this->core->unit_array[0]) {  //this means unit_type
+        // foreach ($this->core->data['units'] as  $value) {
 
-                $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value] * $value['rate']);
-                // $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value]);
-            }
-        }
+
+        //     if ($value['unit_id'] == $this->core->unit_array[0]) {  //this means unit_type
+
+        //         $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value] * $value['rate']);
+        //         // $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value]);
+        //     }
+        // }
 
         return $this;
     }

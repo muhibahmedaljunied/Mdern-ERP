@@ -17,14 +17,7 @@
 
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-2">
-                      <label for="inputAddress">الفرع</label>
-                      <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
-                        <option v-for="branch in branches" v-bind:value="branch.id">
-                          {{ branch.name }}
-                        </option>
-                      </select>
-                    </div>
+
                   <div class="col-md-4">
                     <label for="pagoPrevio">المخزن</label>
                     <div class="custom-search">
@@ -181,7 +174,7 @@
                           <th>اضافه</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <!-- <tbody>
                         <tr v-for="index in count" :key="index">
                           <td>{{ index }}</td>
                           <td>
@@ -224,12 +217,6 @@
                           <td>
                             <div id="factura_producto">
                               <select v-model="status[index]" name="type" id="type" class="form-control" required>
-
-
-
-                                <!-- <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  >
-
-                    <option  v-for="(status,index) in statuses"  :key="index" v-bind:value="status.id"  > -->
 
 
 
@@ -304,6 +291,165 @@
 
 
                           </td>
+                        </tr>
+
+
+                      </tbody> -->
+                      <tbody id="show_pro">
+                        <tr v-for="(sto_pro, index) in store_products" :key="index">
+                          <td>{{ index + 1 }}
+
+
+
+                          </td>
+                          <td>
+
+
+                            <div>
+                              <input type="hidden" v-model="sto_pro.text" id="desc" class="form-control" />
+
+                              <span>{{ sto_pro.text }}</span>
+                              <span style="color: blue;" v-if="sto_pro.kk" v-for="ss in sto_pro.kk">
+
+
+                                -{{ ss.value }}
+
+
+
+
+
+                              </span>
+                            </div>
+
+
+                            <!-- <div class="custom-search">
+
+                              <input style="background-color: beige;font-size: 15px;"
+                                :id="'Purchase_productm_tree' + index" type="text" readonly class="custom-search-input">
+                              <input :id="'Purchase_productm_tree_id' + index" type="hidden" readonly
+                                class="custom-search-input">
+
+                              <button class="custom-search-botton" type="button" data-toggle="modal"
+                                data-target="#exampleModalProductm" @click="detect_index(index)">
+                                <i class="fa fa-plus-circle"></i></button>
+                            </div> -->
+
+
+
+                          </td>
+                          <td>
+
+
+                            <!-- <div>
+                                <input type="text" v-model="sto_pro.text" id="desc" class="form-control" />
+                              </div> -->
+
+
+                            <div class="custom-search">
+
+                              <input style="background-color: beige;font-size: 15px;"
+                                :id="'Supply_storem_tree' + index" type="text" readonly class="custom-search-input">
+                              <input :id="'Supply_storem_tree_id' + index" type="hidden" readonly
+                                class="custom-search-input">
+
+
+                              <button class="custom-search-botton" type="button" data-toggle="modal"
+                                data-target="#exampleModalStorem" @click="detect_index(index)">
+                                <i class="fa fa-plus-circle"></i>
+                              </button>
+                            </div>
+
+
+
+                          </td>
+                          <td>
+
+                            {{ sto_pro.name }}
+
+
+                          </td>
+
+                          <td>
+
+                            {{ sto_pro.desc }}
+
+
+                          </td>
+
+
+
+                          <td>
+                            <div>
+
+                              <!-- <select v-on:change="calculate()" style="background-color: beige;" v-model="unit[index]"
+                                name="type" :id="'select_unit' + index" class="form-control" required>
+
+                              </select> -->
+
+
+                              <select v-on:change="set_unit_price(index), calculate()" style="background-color: beige;"
+                                v-model="unit[index]" name="type" :id="'select_unit' + index" class="form-control"
+                                required>
+
+                                <option v-for="ssu in sto_pro.unit" v-bind:value="[ssu.id, ssu.rate, ssu.cost]">
+                                  {{ ssu.name }}
+                                </option>
+
+                              </select>
+
+
+
+
+
+                            </div>
+                          </td>
+
+
+                          <td>
+                            <input v-on:input="calculate()" style="background-color: beige;" type="number"
+                              v-model="unit_price[index]" id="qty" class="form-control" />
+                          </td>
+                          <td>
+                            <input style="background-color: beige;" @input="calculate()" type="number"
+                              v-model="qty[index]" id="qty" class="form-control" />
+                          </td>
+                          <td>
+                            <input type="number" v-model="tax[index]" @input="calculate()" id="tax"
+                              class="form-control" />
+                          </td>
+                          <td>
+                            <input type="number" v-model="discount[index]" @input="calculate()" id="tax"
+                              class="form-control" />
+                          </td>
+
+                          <td>
+                            <input type="number" @input="calculate()" v-model="total[index]" :id="'total_row' + index"
+                              class="form-control" />
+
+
+                          </td>
+
+                          <td>
+                            <input name="expiry_date" type="date" v-model="expiry_date" class="form-control" />
+
+                          </td>
+
+
+
+
+                          <!-- <td v-if="index == 1" rowspan="3">
+
+                            <button class="btn btn-info btn-sm waves-effect btn-agregar"
+                              v-on:click="addComponent(count)">
+                              <i class="fa fa-plus-circle"></i></button>
+
+                            <button class="btn btn-info btn-sm waves-effect btn-agregar"
+                              v-on:click="disComponent(count)">
+                              <i class="fa fa-minus-circle"></i></button>
+
+
+
+                          </td> -->
                         </tr>
 
 
@@ -590,10 +736,11 @@ export default {
     this.type = 'Supply';
     this.type_refresh = 'increment';
     this.type_of_tree = 1;
+    this.first_row = 0;
     this.showtree('store', 'tree_store');
     this.showtree('storem', 'tree_store');
     this.showtree('product', 'tree_product');
-    this.showtree('productm', 'tree_product');
+    // this.showtree('productm', 'tree_product');
     this.showtree('account', 'tree_account');
 
 
@@ -608,6 +755,7 @@ export default {
   },
 
   methods: {
+
 
 
     get_search() {
@@ -637,6 +785,7 @@ export default {
 
 
         this.products = data.products;
+        this.store_products = data.store_products;
         this.suppliers = data.suppliers;
 
         this.stores = data.stores;

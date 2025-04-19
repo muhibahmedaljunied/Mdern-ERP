@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Temporale;
 use App\Models\Status;
+use App\Models\Unit;
 use App\Repository\Qty\QtyStockRepository;
 use App\Services\OpeningService;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,8 @@ class InventuryController extends Controller
 
 
     public $qty;
+    public $products;
+    public $store_products;
     public function __construct(Request $request, QtyStockRepository $qty)
     {
 
@@ -30,29 +33,122 @@ class InventuryController extends Controller
         $this->qty->request = $request;
     }
 
+    // public function index()
+    // {
+
+
+
+    //     $statuses = Status::all();
+    //     $this->details();
+
+    //     return response()->json([
+
+    //         'statuses' => $statuses,
+    //         'details' => $this->qty->details
+    //     ]);
+    // }
+
+    
     public function index()
     {
 
 
+     
 
-        $statuses = Status::all();
-        $this->details();
+        $this->product();
+        $this->product_detail();
+        $this->variant();
+        $this->unit();
+
+
+
+
+
+        // dd($store_products);
+
 
         return response()->json([
+            'products' => $this->products,
+            'store_products' => $this->store_products,
+            'statuses' => Status::all(),
+            // 'stores' => $this->get_store()
 
-            'statuses' => $statuses,
-            'details' => $this->qty->details
         ]);
+    }
+
+    public function product()
+    {
+
+
+        $this->products = DB::table('products')
+            ->select('products.*',)
+            ->get();
+
+
+      
+    }
+    public function product_detail()
+    {
+
+
+     
+
+        $this->store_products = DB::table('products')
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->select(
+                'products.*',
+                'store_products.id as store_product_id',
+                'store_products.desc',
+                'statuses.name'
+            )
+            ->get();
+    }
+
+    public function variant()
+    {
+
+
+        foreach ($this->store_products as $value) {
+
+            $value->kk = collect(DB::table('family_attribute_options')
+                ->where('family_attribute_options.store_product_id', $value->store_product_id)
+                ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
+                ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
+                ->get())->toArray();
+        }
+    }
+
+    public function unit()
+    {
+
+
+        foreach ($this->store_products as $value) {
+
+
+            $value->unit = Unit::where('product_units.product_id', $value->id)
+                ->join('product_units', 'units.id', '=', 'product_units.unit_id')
+                ->join('products', 'product_units.product_id', '=', 'products.id')
+                ->join('product_prices', 'product_prices.product_unit_id', '=', 'product_units.id')
+                ->select(
+                    'units.*',
+                    'product_units.*',
+                    'product_prices.*'
+                )
+
+                ->get();
+        }
     }
 
 
     public function details()
     {
+
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
         $this->qty->handle_qty();
-        // return response()->json(['details' => $this->qty->details]);
+   
     }
     public function import()
     {

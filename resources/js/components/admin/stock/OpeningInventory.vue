@@ -31,7 +31,7 @@
                                                     class="custom-search-input">
                                                 <input :id="'OpeningInventory_product_tree_id'" type="hidden" readonly
                                                     class="custom-search-input">
-                                                <input :id="'select_account_Purchase'" type="hidden" readonly
+                                                <input :id="'select_account_OpeningInventory'" type="hidden" readonly
                                                     class="custom-search-input">
 
 
@@ -50,7 +50,7 @@
                                                     class="custom-search-input">
                                                 <input :id="'OpeningInventory_store_tree_id'" type="hidden" readonly
                                                     class="custom-search-input">
-                                                <input :id="'select_account_Purchase'" type="hidden" readonly
+                                                <input :id="'select_account_OpeningInventory'" type="hidden" readonly
                                                     class="custom-search-input">
 
 
@@ -109,7 +109,7 @@
                                             <label for="cliente"> الحساب التفصيلي</label>
 
                                             <select class="form-control" style="background-color: beige;"
-                                                name="forma_pago" id="select_account_Purchase_group">
+                                                name="forma_pago" id="select_account_OpeningInventory_group">
 
                                             </select>
 
@@ -154,134 +154,150 @@
                                             <thead>
                                                 <tr>
                                                     <!-- <th>Code</th> -->
-                                                    <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
+                                                    <th class="wd-5p border-bottom-0">الرقم التسلسلي</th>
                                                     <th class="wd-15p border-bottom-0">المنتج</th>
                                                     <!-- <th>المجموعه</th> -->
+                                                    <th class="wd-5p border-bottom-0">المخزن</th>
+                               
+                                                    <th class="wd-5p border-bottom-0">الموصفات والطراز</th>
+                                                    <th class="wd-10p border-bottom-0">الحاله</th>
+                                                    <th class="wd-10p border-bottom-0">الوحده</th>
+                                                    <th class="wd-10p border-bottom-0">التكلفه</th>
 
-                                                    <th class="wd-15p border-bottom-0">الحاله</th>
-                                                    <th class="wd-15p border-bottom-0">الموصفات والطراز</th>
-                                                    <th class="wd-15p border-bottom-0">المخزن</th>
-                                                    <th class="wd-15p border-bottom-0">الوحده</th>
-                                                    <th class="wd-15p border-bottom-0">التكلفه</th>
-
-                                                    <th class="wd-15p border-bottom-0">الكميه</th>
+                                                    <th class="wd-10p border-bottom-0">الكميه</th>
 
                                                     <th class="wd-15p border-bottom-0">الاجمالي</th>
                                                     <th class="wd-15p border-bottom-0">تاريخ الانتهاء</th>
 
 
-                                                    <th class="wd-15p border-bottom-0">اضافه</th>
+
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr v-for="index in count" :key="index">
+                                            <tbody id="show_pro">
+                                                <tr v-for="(sto_pro, index) in store_products" :key="index">
+                                                    <td>{{ index + 1 }}
 
-                                                    <td>
-                                                        {{ index + 1 }}
+
+
                                                     </td>
                                                     <td>
 
 
-
-
-
-                                                        <div class="custom-search">
-
-                                                            <input :id="'OpeningInventory_productm_tree' + index"
-                                                                type="text" readonly class="custom-search-input">
-                                                            <input :id="'OpeningInventory_productm_tree_id' + index"
-                                                                type="hidden" readonly class="custom-search-input">
-
-                                                            <button class="custom-search-botton" type="button"
-                                                                data-toggle="modal" data-target="#exampleModalProductm"
-                                                                @click="detect_index(index)"> <i
-                                                                    class="fa fa-plus-circle"></i></button>
-                                                        </div>
-
-
-                                                    </td>
-
-                                                    <td>
-                                                        <div id="factura_producto">
-                                                            <select v-model="status[index]" name="type" id="type"
-                                                                class="form-control" required>
-
-                                                                <option v-for="status in statuses"
-                                                                    v-bind:value="status.id">
-                                                                    {{ status.name }}
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id="factura_producto">
-                                                            <input type="text" v-model="desc[index]" id="desc"
+                                                        <div>
+                                                            <input type="hidden" v-model="sto_pro.text" id="desc"
                                                                 class="form-control" />
-                                                        </div>
-                                                    </td>
 
+                                                            <span>{{ sto_pro.text }}</span>
+                                                            <span style="color: blue;" v-if="sto_pro.kk"
+                                                                v-for="ss in sto_pro.kk">
+
+
+                                                                -{{ ss.value }}
+
+
+
+
+
+                                                            </span>
+                                                        </div>
+
+
+                                                        <!-- <div class="custom-search">
+
+                              <input style="background-color: beige;font-size: 15px;"
+                                :id="'Purchase_productm_tree' + index" type="text" readonly class="custom-search-input">
+                              <input :id="'Purchase_productm_tree_id' + index" type="hidden" readonly
+                                class="custom-search-input">
+
+                              <button class="custom-search-botton" type="button" data-toggle="modal"
+                                data-target="#exampleModalProductm" @click="detect_index(index)">
+                                <i class="fa fa-plus-circle"></i></button>
+                            </div> -->
+
+
+
+                                                    </td>
                                                     <td>
-                                                        <!-- <div id="factura_producto" class="input_nombre">
-                             <select v-model="store[index]" name="type" id="type" class="form-control"
-                                 required>
-                                 <option v-for="store in stores" v-bind:value="store.id">
-                                     {{ store.text }}
-                                 </option>
-                             </select>
-                         </div> -->
+
+
+                                                        <!-- <div>
+                                <input type="text" v-model="sto_pro.text" id="desc" class="form-control" />
+                              </div> -->
 
 
                                                         <div class="custom-search">
 
-                                                            <input :id="'OpeningInventory_storem_tree' + index"
-                                                                type="text" readonly class="custom-search-input">
-                                                            <input :id="'OpeningInventory_storem_tree_id' + index"
-                                                                type="hidden" readonly class="custom-search-input">
+                                                            <input style="background-color: beige;font-size: 15px;"
+                                                                :id="'OpeningInventory_storem_tree' + index" type="text"
+                                                                readonly class="custom-search-input">
+                                                            <input :id="'OpeningInventory_storem_tree_id' + index" type="hidden"
+                                                                readonly class="custom-search-input">
+
 
                                                             <button class="custom-search-botton" type="button"
                                                                 data-toggle="modal" data-target="#exampleModalStorem"
                                                                 @click="detect_index(index)">
-                                                                <i class="fa fa-plus-circle"></i></button>
+                                                                <i class="fa fa-plus-circle"></i>
+                                                            </button>
                                                         </div>
+
+
+
+                                                    </td>
+                                                    <td>
+
+                                                        {{ sto_pro.name }}
+
+
+                                                    </td>
+
+                                                    <td>
+
+                                                        {{ sto_pro.desc }}
+
+
                                                     </td>
 
 
 
-
                                                     <td>
-                                                        <!-- <div id="factura_producto">
+                                                        <div>
 
-                                                            <select v-model="unit[index]" name="type"
-                                                                :id="'select_unit' + index" class="form-control"
-                                                                required>
+                                                            <!-- <select v-on:change="calculate()" style="background-color: beige;" v-model="unit[index]"
+                                name="type" :id="'select_unit' + index" class="form-control" required>
 
-                                                            </select>
-                                                        </div> -->
+                              </select> -->
 
-                                                        <div id="factura_producto">
 
-                                                            <select v-on:change="calculate()"
+                                                            <select v-on:change="set_unit_price(index), calculate()"
                                                                 style="background-color: beige;" v-model="unit[index]"
                                                                 name="type" :id="'select_unit' + index"
                                                                 class="form-control" required>
 
+                                                                <option v-for="ssu in sto_pro.unit"
+                                                                    v-bind:value="[ssu.id, ssu.rate, ssu.cost]">
+                                                                    {{ ssu.name }}
+                                                                </option>
+
                                                             </select>
+
+
+
+
+
                                                         </div>
-
-
-
                                                     </td>
 
 
                                                     <td>
-                                                        <input type="number" v-model="unit_price[index]"
+                                                        <input v-on:input="calculate()" style="background-color: beige;"
+                                                            type="number" v-model="unit_price[index]" id="qty"
                                                             class="form-control" />
                                                     </td>
-
                                                     <td>
-                                                        <input @input="calculate()" type="number" v-model="qty[index]"
-                                                            id="qty" class="form-control" />
+                                                        <input style="background-color: beige;" @input="calculate()"
+                                                            type="number" v-model="qty[index]" id="qty"
+                                                            class="form-control" />
                                                     </td>
 
 
@@ -301,40 +317,19 @@
 
 
 
-                                                    <td v-if="index == 1">
+                                                    <!-- <td v-if="index == 1" rowspan="3">
 
-                                                        <button class="tn btn-info btn-sm waves-effect btn-agregar"
-                                                            v-on:click="addComponent(count)">
-                                                            <i class="fa fa-plus-circle"></i></button>
+                            <button class="btn btn-info btn-sm waves-effect btn-agregar"
+                              v-on:click="addComponent(count)">
+                              <i class="fa fa-plus-circle"></i></button>
 
-                                                        <button class="tn btn-info btn-sm waves-effect btn-agregar"
-                                                            v-on:click="addComponent(count)">
-                                                            <i class="fa fa-minus-circle"></i></button>
+                            <button class="btn btn-info btn-sm waves-effect btn-agregar"
+                              v-on:click="disComponent(count)">
+                              <i class="fa fa-minus-circle"></i></button>
 
 
 
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-
-                                                    <td colspan="6" style="color: red;">الاجمالي</td>
-                                                    <td>
-                                                        <input @input="calculate()" type="text" id="cantidad_total"
-                                                            v-model="total_quantity" class="form-control" />
-                                                    </td>
-                                                    <td>
-                                                        <input @input="calculate()" type="text" id="subtotal_general"
-                                                            name="subtotal_general" v-model="grand_total"
-                                                            class="form-control" />
-                                                        <input type="hidden" id="subtotal_general_sf"
-                                                            name="subtotal_general_sf" value="0.00" />
-                                                    </td>
-                                                    <td colspan="2">
-                                                        <a href="javascript:void" @click="add_opening()"
-                                                            class="btn btn-primary"><span>تاكيد
-                                                                العمليه</span></a>
-                                                    </td>
+                          </td> -->
                                                 </tr>
 
 
@@ -420,30 +415,18 @@
 
                                                             </span>
 
-                                                            <!-- <span v-if="temx.unit_type == 0">
 
-
-<span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
-temx.name }}</span>
-
-
-
-</span> -->
 
                                                         </div>
 
 
                                                     </td>
 
-                                                    <!-- <td>{{ purchase_details.qty }} {{ purchase_details.unit }}</td> -->
-
-
-                                                    <!-- <td>{{ purchase_details.unit }}</td> -->
                                                     <td>{{ opening_inventury.cost }}</td>
                                                     <td>{{ opening_inventury.total }}</td>
-                                                    <!-- <td>{{ purchase_details.qty_return }}</td> -->
+
                                                     <td>
-                                                        <!-- <a data-toggle="modal" data-target="#modal_vaciar" class="tn btn-danger btn-lg waves-effect btn-agregar"><i class="fa fa-trash"></i></a> -->
+
                                                         <button type="button"
                                                             class="btn btn-sm waves-effect btn-danger">
                                                             <i class="fa fa-trash"></i>
@@ -458,11 +441,7 @@ temx.name }}</span>
 
 
                                                 </tr>
-                                                <!-- <tr>
 
-                    <td colspan="7" style="text-align:center;color:red;font-size:large">الاجمالي</td>
-                    <td>{{ total }}</td>
-                  </tr> -->
 
                                             </tbody>
                                             <tbody v-else>
@@ -666,26 +645,14 @@ export default {
         this.list();
         this.counts[0] = 1;
         this.type = 'OpeningInventory';
-
         this.type_refresh = 'increment';
         this.type_of_tree = 1;
-        this.first_row = 1;
+        this.first_row = 0;
         this.showtree('store', 'tree_store');
         this.showtree('product', 'tree_product');
         this.showtree('storem', 'tree_store');
-        this.showtree('productm', 'tree_product');
+        // this.showtree('productm', 'tree_product');
         this.showtree('account', 'tree_account');
-
-
-
-
-
-
-
-
-
-
-
 
     },
 
@@ -791,7 +758,8 @@ export default {
 
                     // this.opening = data.temporales;
                     this.statuses = data.statuses;
-                    this.opening_inventuries = data.details;
+                    this.store_products = data.store_products;
+                    // this.opening_inventuries = data.details;
 
                 })
                 .catch(({ response }) => {

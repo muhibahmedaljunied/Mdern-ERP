@@ -20,10 +20,8 @@ class CreateSaleDetailsTable extends Migration
             $table->unsignedInteger('sale_id');
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
 
-          
             $table->unsignedInteger('store_product_id');
             $table->foreign('store_product_id')->references('id')->on('store_products');
-
 
             $table->unsignedInteger('unit_id')->unsigned()->nullable();
             $table->foreign('unit_id')->references('id')->on('units');

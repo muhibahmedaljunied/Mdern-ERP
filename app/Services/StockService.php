@@ -49,17 +49,26 @@ class  StockService
         $this->warehouse->add();
         foreach ($this->core->data['count'] as $value) {
 
+
+         
+
             $this->core->setValue($value);
             $this->handle_core();
+
+ 
+  
         }
 
+
+    
 
         $this->payment->pay();
 
 
-        $this->daily->daily()->exicute('debit')->exicute('credit');
+    
+        // $this->daily->daily()->exicute('debit')->exicute('credit');
 
-        $this->warehouse->refresh(); //this update purchase_return table by daily_id
+        // $this->warehouse->refresh(); //this update purchase_return table by daily_id
 
   
     }

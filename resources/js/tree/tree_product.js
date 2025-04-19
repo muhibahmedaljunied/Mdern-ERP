@@ -1,18 +1,26 @@
 export default {
     methods: {
         check_prouct(table, data, count = null) {
-            console.log('check_prouctcheck_prouctcheck_prouct',table, data, count);
+            console.log(
+                "check_prouctcheck_prouctcheck_prouct",
+                table,
+                data,
+                count
+            );
             if (this.type == "Stock" || this.type == "Movement") {
                 this.productselected = data.node.id;
                 this.productselectedname = data.node.text;
             }
             if (this.type == "OpeningInventory") {
                 // this.product[this.indexselected] = data.node.id;
-                this.product_tree(data, count); //this for get units of product
+                this.product_tree_for_opening_inventury(data, count); //this for get units of product
             }
 
             if (this.type == "Purchase" || this.type == "Supply") {
                 this.product_tree(data, count); //this for get units of product
+            }
+            if (this.type == "Price") {
+                this.product_tree_for_price(data, count); //this for get units of product
             }
 
             if (this.type == "Cash") {
@@ -62,27 +70,37 @@ export default {
         product_tree(data, count = null) {
             this.product = data.node.id;
             axios.post(`/get_unit/${data.node.id}`).then((response) => {
-                var ds = 0;
+                this.store_products = response.data.products;
+                console.log("almuhibesssssssssssss", response.data.products);
                 for (const key in count) {
-                    console.log('almuhib',count,count[key]);
-
-                    ds = count[key];
-
-                    this.units = response.data.units;
-                    var arrayLength = response.data.units.length;
-                    var html = "";
-
-                    for (var i = 0; i < arrayLength; i++) {
-                        console.log("muhib", this.units[i].name);
-
-                        html =
-                            html +
-                            `<option data-rate-${ds} = ${this.units[i].rate} value=[${this.units[i].unit_id},${this.units[i].rate}]>${this.units[i].name}</option>`;
-                        // html = html + `<option data-rate-${ds} = ${this.units[i].rate} data-${ds} = ${this.units[i].unit_type}  value=[${this.units[i].unit_id},${this.units[i].rate},${this.units[i].unit_type}]>${this.units[i].name}</option>`;
-                    }
-                    $(`#select_unit${ds}`).html(html);
-                    $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
-                    this.productm[ds] = data.node.id;
+                   
+                    // $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
+                    this.productm[key] = data.node.id;
+                    console.log("almuhib", this.productm,count[key],count);
+                }
+            });
+        },
+        product_tree_for_opening_inventury(data, count = null) {
+            this.product = data.node.id;
+            axios.post(`/get_unit/${data.node.id}`).then((response) => {
+                this.store_products = response.data.products;
+                console.log("almuhibesssssssssssss", response.data.products);
+                for (const key in count) {
+                    console.log("almuhib", count, count[key]);
+                    // $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
+                    this.productm[count[key]] = data.node.id;
+                }
+            });
+        },
+        product_tree_for_price(data, count = null) {
+            this.product = data.node.id;
+            axios.post(`/get_product_price/${data.node.id}`).then((response) => {
+                this.store_products = response.data.products;
+                console.log("almuhibesssssssssssss", response.data.products);
+                for (const key in count) {
+                    console.log("almuhib", count, count[key]);
+                    // $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
+                    this.productm[count[key]] = data.node.id;
                 }
             });
         },

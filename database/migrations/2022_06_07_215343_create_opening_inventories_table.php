@@ -16,8 +16,8 @@ class CreateOpeningInventoriesTable extends Migration
         Schema::create('opening_inventuries', function (Blueprint $table) {
             $table->Increments('id');
 
-            // $table->unsignedInteger('branch_id');
-            // $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->unsignedInteger('branch_id');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
 
             $table->unsignedInteger('store_product_id');
             $table->foreign('store_product_id')->references('id')->on('store_products');

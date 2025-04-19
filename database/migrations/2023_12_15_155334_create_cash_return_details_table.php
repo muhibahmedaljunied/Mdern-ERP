@@ -21,7 +21,7 @@ class CreateCashReturnDetailsTable extends Migration
 
         $table->unsignedInteger('store_product_id');
         $table->foreign('store_product_id')->references('id')->on('store_products');
-        
+
         $table->unsignedInteger('unit_id')->unsigned();
         $table->foreign('unit_id')->references('id')->on('units');
         

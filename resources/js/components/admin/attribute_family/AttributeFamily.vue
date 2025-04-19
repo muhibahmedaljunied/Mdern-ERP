@@ -11,7 +11,7 @@
 			<div class="card-header">
 
 				<div class="d-flex justify-content-between">
-					<span class="h2">مجموعه الخصائص</span>
+					<span class="h2">مجموعه التباينات</span>
 				</div>
 
 			</div>

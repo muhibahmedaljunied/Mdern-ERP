@@ -32,13 +32,7 @@
 
 
                   </div>
-                  <div class="col-md-2">
-                    <label for="pagoPrevio">الفرع</label>
-
-                    <div>{{ data.supplier_name }}</div>
-
-
-                  </div>
+             
                   <div class="col-md-4">
                     <label for="pagoPrevio">اجمالي الفاتوره</label>
 

@@ -17,6 +17,7 @@ class UnitEncodeRepository  implements UnitRepositoryInterface
 
        
 
+
         $this->encode_unit();
         $this->convert_unit();
     }
@@ -38,20 +39,20 @@ class UnitEncodeRepository  implements UnitRepositoryInterface
     {
 
 
-        // dd($this->core->data['old']);
+        $this->core->micro_unit_qty = $this->core->unit_array[1] * $this->core->data['qty'][$this->core->value];
       
-        foreach ($this->core->data['old'][$this->core->value]['units'] as  $value) {
+        // foreach ($this->core->data['old'][$this->core->value]['units'] as  $value) {
 
 
-            if ($value['unit_id'] == $this->core->unit_array[0]) {  //this means unit_type
+        //     if ($value['unit_id'] == $this->core->unit_array[0]) {  //this means unit_type
 
-                $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value] * $value['rate']);
-                // $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value]);
+        //         $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value] * $value['rate']);
+        //         // $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value]);
 
 
-            }
+        //     }
     
-        }
+        // }
 
         return $this;
     }

@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Services\Product;
- use App\Services\ProductService as ProService;
+
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductUnit;
 use App\Models\Unit;
 
-class ProductService extends ProService
+class ProductService
 {
 
     public $file_name = '';
@@ -55,6 +55,9 @@ class ProductService extends ProService
         $product->id = $this->request->post('product_id');
         $product->rank = $this->request->post('rank');
         $product->product_minimum = $this->request->post('product_minimum');
+        // $product->status = $this->request->post('status');
+        // $product->rate = $this->request->post('hash_rate');
+        // $product->product_code = $request['product_code'];
         $product->image = $this->file_name;
         $product->save();
         // dd(1);

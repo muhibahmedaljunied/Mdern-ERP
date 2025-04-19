@@ -16,18 +16,10 @@
               <div class="card-body">
                 <div class="row">
 
-      
 
-                    <div class="col-md-2">
-                      <label for="inputAddress">الفرع</label>
-                      <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
-                        <option v-for="branch in branches" v-bind:value="branch.id">
-                          {{ branch.name }}
-                        </option>
-                      </select>
-                    </div>
-          
-   
+
+
+
 
                   <div class="col-md-4">
                     <h5 class="card-title"> المنتج</h5>
@@ -175,7 +167,7 @@
                       <thead>
                         <tr>
                           <!-- <th>Code</th> -->
-                          <th >الرقم التسلسلي</th>
+                          <th>الرقم التسلسلي</th>
                           <th>المنتج</th>
                           <th>الباركود</th>
                           <th>المخزن</th>
@@ -199,7 +191,7 @@
                         <!-- <tr v-for="(products, index) in product"> -->
                         <tr v-for="(product, index) in detail" :key="index">
                           <td>
-                            {{ index+1 }}
+                            {{ index + 1 }}
                           </td>
                           <!-- <td><input type="text" value="123" id="codigo0" class="form-control input_codigo" =""></td> -->
                           <td>

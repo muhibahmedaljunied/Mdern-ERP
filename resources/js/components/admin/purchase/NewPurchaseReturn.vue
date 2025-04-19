@@ -38,13 +38,7 @@
 
 
                   </div>
-                  <div class="col-md-2">
-                    <label for="pagoPrevio">الفرع</label>
-
-                    <input v-if='purchase' name="date" type="text" v-model="purchase[0].name" class="form-control" />
-
-
-                  </div>
+             
                   <div class="col-md-4">
                     <label for="pagoPrevio">اجمالي الفاتوره</label>
 

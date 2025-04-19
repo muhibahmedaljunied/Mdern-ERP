@@ -18,45 +18,35 @@ class StorePurchaseRepository extends StoreRepository  implements StoreRepositor
   public function store()
   {
 
+
     $this->get_store_product_tow();
     $this->check_founded_store();
-  
   }
 
-  
+
   public function check_founded_store()
   {
 
 
-      if ($this->core->id_store_product == 0) {
+    if ($this->core->id_store_product == 0) {
 
 
-          $this->init_store_product_table();
-
-      } else {
-
-
-          $this->refresh_store_product();
-      }
+      $this->init_store_product_table();
+    } else {
 
 
-
+      $this->refresh_store_product();
+    }
   }
 
   public function refresh_store_product()
   {
 
 
-
-          $this->refresh_qty_store_product_table();
-          $this->refresh_total_store_product_table();
-          $this->get_store_product_tow();
-          $this->refresh_cost_store_product_table();
+    $this->refresh_store_store_product_table();
+    $this->refresh_qty_store_product_table();
+    $this->refresh_total_store_product_table();
+    $this->get_store_product_tow();
+    $this->refresh_cost_store_product_table();
   }
-
-  
-  
-
-
-
 }

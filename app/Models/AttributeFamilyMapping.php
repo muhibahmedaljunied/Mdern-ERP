@@ -21,10 +21,10 @@ class AttributeFamilyMapping extends Model
     }
 
 
-    public function product_family_attribute()
-    {
-        return $this->hasMany(ProductFamilyAttribute::class);
-    }
+    // public function product_family_attribute()
+    // {
+    //     return $this->hasMany(ProductFamilyAttribute::class);
+    // }
 
     
 

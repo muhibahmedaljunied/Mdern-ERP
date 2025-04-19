@@ -23,7 +23,7 @@ class CreateSupplyReturnDetailsTable extends Migration
  
             $table->integer('store_product_id')->unsigned();
             $table->foreign('store_product_id')->references('id')->on('store_products');
-        
+
             $table->unsignedInteger('unit_id')->unsigned();
             $table->foreign('unit_id')->references('id')->on('units');
 

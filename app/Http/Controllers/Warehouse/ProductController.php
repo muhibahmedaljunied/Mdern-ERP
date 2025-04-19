@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Warehouse;
 
-use App\Services\Product\ProductService;
-use App\Services\ProductService as ProService;
+use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,7 +11,8 @@ use App\Exports\ProductExport;
 use App\Exports\ProductUnitExport;
 use App\Imports\ProductUnitImport;
 use App\Models\Product;
-
+use App\Models\ProductPrice;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,21 +23,23 @@ class ProductController extends Controller
 
 
     public $request;
-    public function __construct(Request $request)
+    public $product_service;
+    public function __construct(Request $request, ProductService $product_service)
     {
 
         $this->request = $request;
+        $this->product_service = $product_service;
     }
 
-    public function init_data($product_service)
+    public function init_data()
     {
 
-        $product_service->request = $this->request->all();
-        $product_service->count = json_decode($this->request['count']);
-        $product_service->data = json_decode($this->request['product_attr']);
+        $this->product_service->request = $this->request->all();
+        $this->product_service->count = $this->request['count'];
+        $this->product_service->data = json_decode($this->request['product_attr']);
     }
 
-    public function index(Request $request) {}
+
 
     protected function random($length = 14)
     {
@@ -109,16 +111,117 @@ class ProductController extends Controller
         ]);
     }
 
+    public function show_product()
+    {
+
+        $product = Product::where(function ($query) {
+
+            return $query->where('status', 'false');
+        })
+            ->with([
+                'store_product.family_attribute_option' => function ($query) {
+
+                    $query->join('attribute_options', 'family_attribute_options.attribute_option_id', '=', 'attribute_options.id');
+                    $query->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id');
+                    $query->select('*');
+                },
+            ])
+            ->get();
+
+        return response()->json(['product' => $product]);
+    }
+
+    public function pricing()
+    {
+        // $units = Unit::where('product_units.product_id', $request->id)
+        //     ->join('product_units', 'units.id', '=', 'product_units.unit_id')
+        //     ->join('products', 'product_units.product_id', '=', 'products.id')
+        //     ->select('units.*', 'product_units.*')
+
+        //     ->get();
 
 
 
-    public function store2(ProService $product_service)
+        $products = DB::table('products')
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->join('product_units', 'product_units.product_id', '=', 'products.id')
+            ->join('units', 'product_units.unit_id', '=', 'units.id')
+
+            ->select(
+                'products.*',
+                'units.name as unit_name',
+                'store_products.id as store_product_id',
+                'product_units.id as product_unit_id',
+                'store_products.desc',
+                'statuses.name',
+
+            )
+            ->get();
+
+        foreach ($products as $value) {
+
+            $value->kk = collect(DB::table('family_attribute_options')
+                ->where('family_attribute_options.store_product_id', $value->store_product_id)
+                ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
+                ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
+                ->get())->toArray();
+
+            $product_prices = ProductPrice::where([
+                'store_product_id' => $value->store_product_id,
+                'product_unit_id' => $value->product_unit_id,
+
+            ])
+                ->get();
+
+            foreach ($product_prices as $value2) {
+
+                if ($value2) {
+
+                    $value->cost = $value2->cost;
+                    $value->supply_price = $value2->supply_price;
+                    $value->small_price = $value2->small_price;
+                    $value->big_price = $value2->big_price;
+                    $value->private_price = $value2->private_price;
+                } else {
+
+                    $value->cost = 0;
+                    $value->supply_price = 0;
+                    $value->small_price = 0;
+                    $value->big_price = 0;
+                    $value->private_price = 0;
+                }
+            }
+        }
+
+        // foreach ($products as $value) {
+
+
+        //     $value->unit = Unit::where('product_units.product_id', $value->id)
+        //         ->join('product_units', 'units.id', '=', 'product_units.unit_id')
+        //         ->join('products', 'product_units.product_id', '=', 'products.id')
+        //         ->select('units.*', 'product_units.*')
+
+        //         ->get();
+        // }
+
+
+        return response()->json([
+            'products' => $products
+        ]);
+    }
+
+
+
+
+    public function store()
     {
 
 
 
 
-        // dd($request->all());
+
+        // dd($this->request->all());
         // $validator = Validator::make($request->all(), [
         //     'text' => 'required',
         //     'hash_rate' => 'required',
@@ -137,28 +240,100 @@ class ProductController extends Controller
 
 
 
-        $this->init_data($product_service);
+
+
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
-            // --------------------------------------------------------------------------------------
-            $product_service->save_product();
-            // --------------------------------------------------------------------------------------
-            $product_service->get_attribute_option();
+            $this->init_data();
+            $this->product();
 
+            if ($this->request['status'] == 'false') {
 
-            foreach ($product_service->count as $value) {
-
-                // --------------------------------this save variant details of every product---------------
-                $product_service->save_product_family_attribute($this->request->file('image'), $value);
-
-                // -----------------------------------this save attributes of every product------------------
-                $product_service->save_family_attribute_option($value);
+                $this->product_variant();
             }
 
+            // dd(ProductUnit::all());
 
 
-            // dd(Product::all());
+
+
+            Cache::forget('tree_product_products');
+            Cache::forget('tree_product_last_nodes');
+            Cache::forget('stock');
+            // ------------------------------------------------------------------------------------------------------
+            DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
+
+
+            return response([
+                'message' => "product created successfully",
+                'status' => "success"
+            ], 200);
+        } catch (\Exception $exp) {
+
+            DB::rollBack(); // Tell Laravel, "It's not you, it's me. Please don't persist to DB"
+
+
+            return response([
+                'message' => $exp->getMessage(),
+                'status' => 'failed'
+            ], 400);
+        }
+
+
+        // return response()->json($request->file('image'));
+    }
+    public function store_price()
+    {
+
+
+
+
+
+        // dd($this->request->all());
+        // $validator = Validator::make($request->all(), [
+        //     'text' => 'required',
+        //     'hash_rate' => 'required',
+        //     'purchase_price' => 'required',
+        // ]);
+
+        // if ($validator->fails()) {
+
+
+        //     return response([
+        //         'message' => $validator->errors(),
+        //         'status' => 'failed'
+        //     ], 401);
+        // }
+
+
+
+
+
+
+
+        try {
+            DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
+
+
+
+            foreach ($this->request['data'] as $key => $value) {
+
+
+                $product = new ProductPrice();
+                $product->product_unit_id = $this->request['data'][$key]['product_unit_id'];
+                $product->store_product_id = $this->request['data'][$key]['store_product_id'];
+                $product->cost = $this->request['data'][$key]['cost'];
+                $product->supply_price = $this->request['data'][$key]['supply_price'];
+                $product->small_price = $this->request['data'][$key]['small_price'];
+                $product->big_price = $this->request['data'][$key]['big_price'];
+                $product->private_price = $this->request['data'][$key]['private_price'];
+
+                $product->save();
+            }
+
+            // dd(ProductPrice::all());
+
             // ------------------------------------------------------------------------------------------------------
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
 
@@ -182,66 +357,29 @@ class ProductController extends Controller
         // return response()->json($request->file('image'));
     }
 
-    public function store(ProductService $product)
+
+    public function product_variant()
     {
 
+        $this->product_service->get_attribute_option();
+        foreach ($this->product_service->count as $value) {
 
+            // --------------------------------this save variant details of every product---------------
+            // $this->product_service->set_image($this->request->file('image'), $value);
 
-
-        // dd($request->all());
-        // $validator = Validator::make($request->all(), [
-        //     'text' => 'required',
-        //     'hash_rate' => 'required',
-        //     'purchase_price' => 'required',
-        // ]);
-
-        // if ($validator->fails()) {
-
-
-        //     return response([
-        //         'message' => $validator->errors(),
-        //         'status' => 'failed'
-        //     ], 401);
-        // }
-
-
-
-
-        try {
-            DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
-
-
-
-            $product
-                ->check()
-                ->product()
-                ->unit();
-
-
-            Cache::forget('tree_product_products');
-            Cache::forget('tree_product_last_nodes');
-            Cache::forget('stock');
-
-
-
-            DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
-
-
-
-            return response([
-                'message' => "product created successfully",
-                'status' => "success"
-            ], 200);
-        } catch (\Exception $exp) {
-            DB::rollBack(); // Tell Laravel, "It's not you, it's me. Please don't persist to DB"
-            return response([
-                'message' => $exp->getMessage(),
-                'status' => 'failed'
-            ], 400);
+            $this->product_service->save_product_family_attribute($this->request->file('image'), $value);
+            // -----------------------------------this save attributes of every product------------------
+            $this->product_service->save_family_attribute_option($value);
         }
+    }
 
+    public function product()
+    {
 
-        // return response()->json($request->file('image'));
+        $this->product_service
+            // ->set_image($this->request->file('image'))
+            ->product()
+            ->unit();
     }
 
 

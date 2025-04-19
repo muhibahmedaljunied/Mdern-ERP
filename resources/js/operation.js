@@ -3,16 +3,16 @@ export default {
     mixins: [calculate],
     data() {
         return {
-
             value_list: {
                 type: Object,
                 default: null,
             },
-            show:'',
+            show: "",
             date: new Date().toISOString().substr(0, 10),
             dateselected: new Date().toISOString().substr(0, 10),
             expiry_date: new Date().toISOString().substr(0, 10),
             purchase_id: [],
+
             discount: [],
             store_product_id: [],
             cost: [],
@@ -53,6 +53,7 @@ export default {
             treasuries: "",
             banks: "",
             products: "",
+            store_products: "",
             stores: "",
             statuses: "",
             stores: "",
@@ -96,6 +97,9 @@ export default {
     },
 
     methods: {
+        set_unit_price(index) {
+            this.unit_price[index] = this.unit[index][2];
+        },
         addComponent(index) {
             this.count += 1;
             this.counts[index] = this.count;
@@ -160,14 +164,14 @@ export default {
         },
 
         handle_top() {
-            if (
-                this.type != "Purchase" &&
-                this.type != "Supply" &&
-                this.type != "OpeningInventory"
-            ) {
+            // if (
+            //     this.type != "Purchase" &&
+            //     this.type != "Supply" &&
+            //     this.type != "OpeningInventory"
+            // ) {
                 this.set_values();
                 this.set_price();
-            }
+            // }
 
             if (this.calculate_total_with_check() == 0) {
                 return 0;

@@ -16,8 +16,8 @@ class CreateCashReturnsTable extends Migration
         Schema::create('cash_returns', function (Blueprint $table) {
             $table->increments('id');
 
-            // $table->unsignedInteger('branch_id');
-            // $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->unsignedInteger('branch_id');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
 
             $table->unsignedInteger('cash_id')->unsigned()->nullable();
             $table->foreign('cash_id')->references('id')->on('cashes')->onDelete('cascade');

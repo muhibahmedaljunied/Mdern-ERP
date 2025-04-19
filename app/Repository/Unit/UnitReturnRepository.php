@@ -34,16 +34,19 @@ class UnitReturnRepository  implements UnitRepositoryInterface
 
         // dd($this->core->unit_array);
         // dd($this->core->unit_array);
-        foreach ($this->core->data['old'][$this->core->value]['units'] as  $value) {
 
-            // dd($value['unit_id'],$this->core->unit_array);
-            if ($value['unit_id'] == $this->core->unit_array[0]) {  //this means unit_type
+        $this->core->micro_unit_qty = $this->core->unit_array[1] * $this->core->data['qty'][$this->core->value];
 
-                $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value] * $value['rate']);
+        // foreach ($this->core->data['old'][$this->core->value]['units'] as  $value) {
 
-            }
+        //     // dd($value['unit_id'],$this->core->unit_array);
+        //     if ($value['unit_id'] == $this->core->unit_array[0]) {  //this means unit_type
+
+        //         $this->core->micro_unit_qty = ($this->core->data['qty'][$this->core->value] * $value['rate']);
+
+        //     }
     
-        }
+        // }
 
 
 
