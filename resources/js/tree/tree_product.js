@@ -73,7 +73,6 @@ export default {
                 this.store_products = response.data.products;
                 console.log("almuhibesssssssssssss", response.data.products);
                 for (const key in count) {
-<<<<<<< HEAD
                    
                     // $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
                     this.productm[key] = data.node.id;
@@ -87,8 +86,6 @@ export default {
                 this.store_products = response.data.products;
                 console.log("almuhibesssssssssssss", response.data.products);
                 for (const key in count) {
-=======
->>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
                     console.log("almuhib", count, count[key]);
                     // $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
                     this.productm[count[key]] = data.node.id;
