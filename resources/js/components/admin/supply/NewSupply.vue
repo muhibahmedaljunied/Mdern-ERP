@@ -348,8 +348,13 @@
                             <div class="custom-search">
 
                               <input style="background-color: beige;font-size: 15px;"
+<<<<<<< HEAD
                                 :id="'Supply_storem_tree' + index" type="text" readonly class="custom-search-input">
                               <input :id="'Supply_storem_tree_id' + index" type="hidden" readonly
+=======
+                                :id="'Purchase_storem_tree' + index" type="text" readonly class="custom-search-input">
+                              <input :id="'Purchase_storem_tree_id' + index" type="hidden" readonly
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
                                 class="custom-search-input">
 
 
@@ -757,7 +762,16 @@ export default {
   methods: {
 
 
+<<<<<<< HEAD
 
+=======
+    set_unit_price(index) {
+
+
+      this.unit_price[index] = this.unit[index][2];
+
+    },
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
     get_search() {
       this.axios
         .post(`/supply/newsupplysearch`, { word_search: this.word_search })

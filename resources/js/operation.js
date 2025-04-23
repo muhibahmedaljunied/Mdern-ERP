@@ -53,7 +53,11 @@ export default {
             treasuries: "",
             banks: "",
             products: "",
+<<<<<<< HEAD
             store_products: "",
+=======
+            store_products:'',
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
             stores: "",
             statuses: "",
             stores: "",
@@ -172,6 +176,7 @@ export default {
                 this.set_values();
                 this.set_price();
             // }
+
 
             if (this.calculate_total_with_check() == 0) {
                 return 0;

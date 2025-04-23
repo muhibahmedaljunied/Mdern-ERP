@@ -22,6 +22,7 @@
                 <div class="row">
 
 
+<<<<<<< HEAD
                   <div class="col-md-4">
                     <label for="pagoPrevio">المنتج</label>
                     <div class="custom-search">
@@ -39,6 +40,10 @@
 
                   </div>
 
+=======
+
+
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
 
 
                   <div class="col-md-4">
@@ -197,7 +202,11 @@
                           <th class="wd-10p border-bottom-0">الوحده</th>
                           <!--<th>التكلفه</th> -->
 
+<<<<<<< HEAD
                           <th class="wd-10p border-bottom-0">سعر الوحده</th>
+=======
+                          <th class="wd-10p border-bottom-0">السعر</th>
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
                           <th class="wd-10p border-bottom-0">الكميه</th>
                           <th class="wd-15p border-bottom-0">الضريبه</th>
                           <th class="wd-15p border-bottom-0">الخصم</th>
@@ -278,15 +287,25 @@
 
                           </td>
                           <td>
+<<<<<<< HEAD
                             <input id="product_status" type="hidden" v-bind:value="sto_pro.status_id">
                             {{ sto_pro.name }}
 
 
+=======
+
+                            {{ sto_pro.name }}
+
+
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
                           </td>
 
                           <td>
 
+<<<<<<< HEAD
                             <input id="product_desc" type="hidden" v-bind:value="sto_pro.desc">
+=======
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
                             {{ sto_pro.desc }}
 
 
@@ -351,8 +370,13 @@
                           </td>
 
 
+<<<<<<< HEAD
 
 
+=======
+                   
+
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
                           <!-- <td v-if="index == 1" rowspan="3">
 
                             <button class="btn btn-info btn-sm waves-effect btn-agregar"
@@ -688,13 +712,23 @@ export default {
 
 
 
+   
 
+<<<<<<< HEAD
     set_values() {
 
       this.counts[this.row_counter] = this.row_counter;
 
     },
 
+=======
+    set_unit_price(index) {
+
+
+      this.unit_price[index] = this.unit[index][2];
+
+    },
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
 
     get_search() {
       this.axios

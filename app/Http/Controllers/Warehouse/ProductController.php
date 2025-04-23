@@ -111,6 +111,7 @@ class ProductController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     public function show_product()
     {
 
@@ -131,6 +132,8 @@ class ProductController extends Controller
         return response()->json(['product' => $product]);
     }
 
+=======
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
     public function pricing()
     {
         // $units = Unit::where('product_units.product_id', $request->id)

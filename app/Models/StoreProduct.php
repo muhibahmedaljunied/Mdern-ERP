@@ -32,6 +32,13 @@ class StoreProduct extends Model
     }
 
 
+
+    public function family_attribute_option()
+    {
+        return $this->hasMany(FamilyAttributeOption::class);
+    }
+
+
     public function stock()
     {
         return $this->hasMany(Stock::class);

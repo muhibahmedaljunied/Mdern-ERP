@@ -48,7 +48,11 @@ class PurchaseController extends Controller
     {
 
 
+<<<<<<< HEAD
 
+=======
+     
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
 
         $this->product();
         $this->product_detail();
@@ -79,12 +83,22 @@ class PurchaseController extends Controller
         $this->products = DB::table('products')
             ->select('products.*',)
             ->get();
+<<<<<<< HEAD
+=======
+
+
+      
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
     }
     public function product_detail()
     {
 
 
+<<<<<<< HEAD
 
+=======
+     
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
 
         $this->store_products = DB::table('products')
             ->join('store_products', 'store_products.product_id', '=', 'products.id')
@@ -93,8 +107,12 @@ class PurchaseController extends Controller
                 'products.*',
                 'store_products.id as store_product_id',
                 'store_products.desc',
+<<<<<<< HEAD
                 'statuses.name',
                 'statuses.id as status_id'
+=======
+                'statuses.name'
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
             )
             ->get();
     }
@@ -184,7 +202,7 @@ class PurchaseController extends Controller
 
 
 
-        // dd($stock->core->data);
+        dd($stock->core->data);
         // $result  = $this->daily->check_account();
 
         // if ($result == 0) {
@@ -201,9 +219,15 @@ class PurchaseController extends Controller
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
+<<<<<<< HEAD
         $stock->handle();
 
         Cache::forget('stock');
+=======
+            $stock->handle();
+
+            Cache::forget('stock');
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
 
         // ------------------------------------------------------------------------------------------------------
         DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB

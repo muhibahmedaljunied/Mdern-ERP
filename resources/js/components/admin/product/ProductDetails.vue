@@ -69,12 +69,17 @@
                                                 <add-product></add-product>
                                             </div> -->
                                             <div class="tab-pane" id="tab4">
+<<<<<<< HEAD
                                                 <new-product></new-product>
                                             </div>
                                             <div class="tab-pane" id="tab5">
                                                 <product></product>
                                             </div>
                                   
+=======
+                                                <product></product>
+                                            </div>
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
 
 
 
@@ -100,7 +105,11 @@ import Attribute from "../Attribute/Attribute";
 import AttributeFamily from "../attribute_family/AttributeFamily";
 import Unit from "../unit/Unit";
 import Product from "./Product";
+<<<<<<< HEAD
 import NewProduct from "./NewProduct.vue";
+=======
+// import Product from "./Product.vue";
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
 
 
 export default {
@@ -109,7 +118,11 @@ export default {
         Attribute,
         AttributeFamily,
         Unit,
+<<<<<<< HEAD
         NewProduct,
+=======
+        // AddProduct,
+>>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
         Product,
 
 
