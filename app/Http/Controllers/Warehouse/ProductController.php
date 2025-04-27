@@ -255,9 +255,6 @@ class ProductController extends Controller
 
             // dd(ProductUnit::all());
 
-
-
-
             Cache::forget('tree_product_products');
             Cache::forget('tree_product_last_nodes');
             Cache::forget('stock');
@@ -362,7 +359,9 @@ class ProductController extends Controller
     {
 
         $this->product_service->get_attribute_option();
-        foreach ($this->product_service->count as $value) {
+        // foreach ($this->product_service->count as $value) {
+
+        for ($value = 0; $value < $this->product_service->count; $value++) {
 
             // --------------------------------this save variant details of every product---------------
             // $this->product_service->set_image($this->request->file('image'), $value);

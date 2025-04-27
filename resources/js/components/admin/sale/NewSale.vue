@@ -333,22 +333,22 @@ temx.name }}</span>
 
                             </div>
                           </td>
-                          <td>
-
-
-                            {{ unit_price[index] }}
-                          </td>
-
                           <!-- <td>
 
 
-      <input v-if="check_state[index] == true" v-model="unit_price[index]"
-        class="form-control input_cantidad" onkeypress="return " readonly />
+                            {{ unit_price[index] }}
+                          </td> -->
+
+                          <td>
 
 
-      <input v-else v-model="unit_price[index]" v-on:input="calculate_total(index)"
-        class="form-control input_cantidad" onkeypress="return " />
-    </td> -->
+                            <input v-if="check_state[index] == true" v-model="unit_price[index]"
+                              class="form-control input_cantidad" onkeypress="return " readonly />
+
+
+                            <input v-else v-model="unit_price[index]" v-on:input="calculate_total(index)"
+                              class="form-control input_cantidad" onkeypress="return " />
+                          </td>
                           <td>
 
 

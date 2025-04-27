@@ -16,23 +16,6 @@
             <div class="card">
 
 
-<<<<<<< HEAD
-=======
-                <span style="font-size: x-large"> شجره المنتجات</span>
-
-              </div> -->
-              <!-- <span> *كيف يتم التعامل مع تعدد الوحدات في حاله المنتجات المتباينه وضبط سعر الشراء وسعر البيع وكذلك ضبط
-                الاجزاء للوحدات مقارنه مع الانظمه الاخري مثل mazerp
-              </span>
-
-              <span> *هل يمكن تفعيل المخازن من الاعدادات في نظام mazerp تأكد لانه في الفيديو هذا موجود
-              </span>
-              <span>
-                *كيف يتم التعامل مع الفروع هل تحدد لاول مره فقط ثم تعين اعتمادا علي ذلك في الواجهات والعمليات وكيف يتم
-                ربط الفروع بباقي جداول النظام تتبع smacc @ MazErp 
-              </span> -->
-
->>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
               <div class="card-body">
 
                 <div class="row justify-content-left">
@@ -90,13 +73,6 @@
 
 
 
-<<<<<<< HEAD
-=======
-                  <div class="col-md-2">
-                    <label for="Product">رقم المنتج</label>
-                    <input style="background-color: beige;" type="text" id='product_number' class="form-control"
-                      required readonly />
->>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
 
 
                                 <div class="row">

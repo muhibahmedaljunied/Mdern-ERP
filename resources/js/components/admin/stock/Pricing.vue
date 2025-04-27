@@ -19,15 +19,9 @@
                                         <h5 class="card-title"> المنتج</h5>
                                         <div class="custom-search">
 
-<<<<<<< HEAD
                                             <input :id="'Price_product_tree' + index" type="text" readonly
                                                 class="custom-search-input">
                                             <input :id="'Price_product_tree_id' + index" type="hidden" readonly
-=======
-                                            <input :id="'Sale_product_tree' + index" type="text" readonly
-                                                class="custom-search-input">
-                                            <input :id="'Sale_product_tree_id' + index" type="hidden" readonly
->>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
                                                 class="custom-search-input">
 
                                             <button class="custom-search-botton" type="button" data-toggle="modal"
@@ -41,15 +35,9 @@
                                         <h5 class="card-title"> المخزن</h5>
                                         <div class="custom-search">
 
-<<<<<<< HEAD
                                             <input :id="'Price_product_tree' + index" type="text" readonly
                                                 class="custom-search-input">
                                             <input :id="'Price_product_tree_id' + index" type="hidden" readonly
-=======
-                                            <input :id="'Sale_product_tree' + index" type="text" readonly
-                                                class="custom-search-input">
-                                            <input :id="'Sale_product_tree_id' + index" type="hidden" readonly
->>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
                                                 class="custom-search-input">
 
                                             <button class="custom-search-botton" type="button" data-toggle="modal"
@@ -228,7 +216,7 @@
                                                         العمليه</span></a>
                                                 </td>
                                             </tr>
-                                      
+
 
 
 
@@ -270,7 +258,7 @@ class="btn btn-info waves-effect">
 
                                 </table>
                                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                            
+
                             </div>
                             <div class="card-footer text-muted">
                                 2 days ago

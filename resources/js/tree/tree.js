@@ -288,77 +288,32 @@ export default {
                 $(`#${localStorage.getItem("table")}_number`).val()
             );
             formData.append("text", this.text);
-            // formData.append(`${localStorage.getItem('table')}_name_en`, this.store_name_en);
             formData.append("parent", $("#parent").val());
-
-            // -------------------I add it muhib---------------
             formData.append("attribute", this.attr_array);
             formData.append("family_id", this.family_attribute);
             formData.append("product_attr", JSON.stringify(this.att_family));
             formData.append("product_type", this.product_type);
-            // ------------------------------------------
-            // formData.append("account", this.account);
             formData.append("rank", $("#rank").val());
             formData.append("unit", this.unit);
-            // formData.append("purchase_price", this.purchase_price);
             formData.append("status", this.status);
             formData.append("status_product", this.status_product_selected);
             formData.append("desc", this.desc);
 
-            // formData.append("status", this.status);
-
-            // console.log("eeeeeeeeeeeeeee", this.status);
-
             if (localStorage.getItem("table") == "product") {
-                // formData.append("count", this.counts);
-                // formData.append("unit", this.unit);
-                // formData.append('purchase_price', this.purchase_price);
 
-                for (var i = 0; i <= this.counts.length; i++) {
-                    if (i != this.counts.length) {
-                        formData.append("count[]", this.counts[i]);
-                    }
+                formData.append('count',this.counts.length)
 
-                    // if (this.purchase_price_for_retail_unit[i] === undefined) {
-                    //     formData.append(
-                    //         "purchase_price_for_retail_unit[]",
-                    //         null
-                    //     );
-                    // } else {
-                    //     formData.append(
-                    //         "purchase_price_for_retail_unit[]",
-                    //         this.purchase_price_for_retail_unit[i]
-                    //     );
-                    // }
-                    if (this.hash_rate[i] === undefined) {
-                        formData.append("hash_rate[]", null);
-                    } else {
-                        formData.append("hash_rate[]", this.hash_rate[i]);
-                    }
-
-                    if (this.retail_unit[i] === undefined) {
-                        formData.append("retail_unit[]", null);
-                    } else {
-                        formData.append("retail_unit[]", this.retail_unit[i]);
-                    }
-
-                    // formData.append('purchase_price_for_retail_unit[]', this.purchase_price_for_retail_unit[i]);
-                    // formData.append('hash_rate[]', this.hash_rate[i]);
-                    // formData.append('retail_unit[]', this.retail_unit[i]);
-                }
 
                 for (let i = 0; i < this.file.length; i++) {
-                    // payload.append('image[]', this.image[i])
                     formData.append("image[]", this.file[i]);
                 }
 
-                // -------------------------I add it muhib----------------------------------
-                for (var i = 0; i <= this.counts_unit.length; i++) {
-                    if (i != this.counts_unit.length) {
-                        formData.append("count_unit[]", this.counts_unit[i]);
-                    }
+                formData.append('count_unit',this.counts_unit.length)
+                for (var i = 1; i <= this.counts_unit.length; i++) {
+                    formData.append("hash_rate[]", this.hash_rate[i]);
+                    formData.append("retail_unit[]", this.retail_unit[i]);
+
                 }
-                // -----------------------------------------------------------------------
 
                 formData.append("product_minimum", this.product_minimum);
             }
@@ -370,23 +325,9 @@ export default {
                     config
                 )
                 .then(function (response) {
-                    // console.log("dfdf", response);
-                    // currentObj.success = response.data.success;
-                    // currentObj.filename = "";
                     // toastMessage("تم الاضافه بنجاح");
                 })
-                .catch((error) => {
-                    // message = {
-                    //     error_text:error.response.data.error.text,
-                    //     error_hash_rate:error.response.data.error.text,
-                    //     error_purchase_price:error.response.data.error.text,
-                    // }
-                    // return message;
-                    // this.error_text = error.response.data.error.text;
-                    // this.error_hash_rate = error.response.data.error.hash_rate;
-                    // this.error_purchase_price =
-                    //     error.response.data.error.purchase_price;
-                });
+                .catch((error) => {});
         },
         addnode_account() {
             let currentObj = this;
