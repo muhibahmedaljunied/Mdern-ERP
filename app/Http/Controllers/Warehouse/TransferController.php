@@ -214,12 +214,12 @@ class TransferController extends Controller
 
                 $stock->stock(); // this handle data in stock table
 
-
+       
 
 
 
             }
-
+  
             // dd(TransferDetail::all());
 
 

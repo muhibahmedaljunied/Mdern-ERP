@@ -80,12 +80,8 @@ class UnitController extends Controller
                 'products.*',
                 'store_products.id as store_product_id',
                 'store_products.desc',
-<<<<<<< HEAD
                 'statuses.name',
                 'statuses.id as status_id'
-=======
-                'statuses.name'
->>>>>>> a4f4730e457ae0c8f9eb984b1a9809da003af1b5
             )
             ->get();
 

@@ -28,7 +28,7 @@
               </span>
               <span>
                 *كيف يتم التعامل مع الفروع هل تحدد لاول مره فقط ثم تعين اعتمادا علي ذلك في الواجهات والعمليات وكيف يتم
-                ربط الفروع بباقي جداول النظام تتبع smacc @ MazErp 
+                ربط الفروع بباقي جداول النظام تتبع smacc @ MazErp
               </span> -->
 
               <div class="card-body">
@@ -194,7 +194,7 @@
                         <input v-model="desc" type="text" class="form-control" /><span style="color:red">{{
                           error_purchase_price[0] }}</span>
 
-                        <!-- <input v-model="rate[0]" type="text" 
+                        <!-- <input v-model="rate[0]" type="text"
                           class="form-control" /> -->
                       </div>
 
@@ -218,7 +218,7 @@
                         <label for="radio-example-one">اضافه وحدات تجزئه </label><br>
 
 
-               
+
 
                         <button type="button" class="btn btn-info btn-sm waves-effect btn-agregar" data-toggle="modal"
                           data-target="#exampleModalUnit">
@@ -345,7 +345,7 @@
                             <!-- <td>
 
 
-                              <input v-model="purchase_price_for_retail_unit[index]" type="text" 
+                              <input v-model="purchase_price_for_retail_unit[index]" type="text"
                                 class="form-control" />
 
 
@@ -464,7 +464,7 @@
 
 
                                 <!-- <input v-on:change="onFileChange(index)"
-            type="file" 
+            type="file"
             class="form-control-file" >
         <img src="" id="previewHolder" width="150px"> -->
                               </td>
@@ -551,7 +551,7 @@
 
                       <th class="wd-15p border-bottom-0"> كميه الشراء</th>
                       <th class="wd-15p border-bottom-0"> السعر </th>
-          
+
 
 
                     </tr>
@@ -591,12 +591,12 @@
                       </td>
 
                       <td>{{ purchase_details.price }}</td>
-                 
+
 
 
 
                     </tr>
-       
+
 
                   </tbody>
                   <tbody v-else>
@@ -648,7 +648,9 @@ export default {
 
       multi_unit: false,
       counts: [],
+      counts_unit: [],
       count: 1,
+      count_unit: 1,
       qty: [],
       price: [],
       desc:'',
@@ -683,7 +685,7 @@ export default {
       id: '',
       trees: "",
       errors: "",
-      counts: [],
+
       // add: 0,
 
 
@@ -696,6 +698,7 @@ export default {
 
     console.log('ffhghghhghhghghhg', window.axios.defaults.baseURL);
     this.counts[0] = 1;
+    this.counts_unit[0] = 1;
     this.type_of_tree = 0;
 
 
@@ -755,7 +758,7 @@ export default {
       if (index != 1) {
         this.count_unit -= 1;
         this.$delete(this.counts_unit, index - 1);
-        console.log("yuuyyusd", index, this.count_unit);
+
       }
     },
 
@@ -765,13 +768,13 @@ export default {
       this.counts[index] = this.count;
 
       this.att_family = Array.from(Array(this.count), () => new Array(2))
-      console.log('kkkkkkkk_addComponentUnit', this.att_family);
+    //   console.log('kkkkkkkk_addComponentUnit', this.att_family);
     },
     disComponent(index) {
       if (index != 1) {
         this.count -= 1;
         this.$delete(this.counts, index - 1);
-        console.log("yuuyyusd", index, this.count);
+
       }
     },
 
