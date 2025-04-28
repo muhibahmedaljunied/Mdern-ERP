@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Warehouse;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ProductUnit;
 use App\Models\Status;
 use Illuminate\Support\Facades\DB;
 
@@ -64,13 +65,6 @@ class UnitController extends Controller
      */
     public function show(Request $request)
     {
-        // $units = Unit::where('product_units.product_id', $request->id)
-        //     ->join('product_units', 'units.id', '=', 'product_units.unit_id')
-        //     ->join('products', 'product_units.product_id', '=', 'products.id')
-        //     ->select('units.*', 'product_units.*')
-
-        //     ->get();
-
 
 
         $products = DB::table('products')
@@ -94,26 +88,29 @@ class UnitController extends Controller
                 ->get())->toArray();
         }
 
+
         foreach ($products as $value) {
 
 
-            $value->unit = Unit::where('product_units.product_id', $value->id)
-                ->join('product_units', 'units.id', '=', 'product_units.unit_id')
-                // ->join('products', 'product_units.product_id', '=', 'products.id')
+            $value->unit = ProductUnit::where([
+                // 'product_prices.product_unit_id' => $value->product_unit_id,
+                'product_prices.store_product_id' => $value->store_product_id
+            ])
+                ->join('units', 'units.id', '=', 'product_units.unit_id')
                 ->join('product_prices', 'product_prices.product_unit_id', '=', 'product_units.id')
                 ->select(
                     'units.*',
                     'product_units.*',
-                    'product_prices.*'
+                    'product_units.id as product_unit_id',
+                    'product_prices.*',
                 )
 
                 ->get();
         }
 
 
-        return response()->json([
-            // 'units' => $units,
 
+        return response()->json([
             'products' => $products
         ]);
     }

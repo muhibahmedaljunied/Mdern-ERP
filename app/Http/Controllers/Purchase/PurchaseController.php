@@ -138,34 +138,34 @@ class PurchaseController extends Controller
         }
     }
 
-    public function price()
-    {
+    // public function price()
+    // {
 
 
-        foreach ($this->store_products as $value) {
+    //     foreach ($this->store_products as $value) {
 
-            // foreach ($value->unit as $value2) {
+    //         // foreach ($value->unit as $value2) {
 
-            $value->price = ProductPrice::where([
-                // 'product_prices.product_unit_id' => $value->product_unit_id,
-                'product_prices.store_product_id' => $value->store_product_id
-            ])
-                ->join('product_units', 'product_units.id', '=', 'product_prices.product_unit_id')
-                ->join('units', 'units.id', '=', 'product_units.unit_id')
+    //         $value->price = ProductPrice::where([
+    //             // 'product_prices.product_unit_id' => $value->product_unit_id,
+    //             'product_prices.store_product_id' => $value->store_product_id
+    //         ])
+    //             ->join('product_units', 'product_units.id', '=', 'product_prices.product_unit_id')
+    //             ->join('units', 'units.id', '=', 'product_units.unit_id')
 
-                ->select(
-                    'product_prices.*',
-                    'product_units.*',
-                    'units.*'
+    //             ->select(
+    //                 'product_prices.*',
+    //                 'product_units.*',
+    //                 'units.*'
 
-                )
+    //             )
 
-                ->get();
+    //             ->get();
 
-            // }
+    //         // }
 
-        }
-    }
+    //     }
+    // }
 
 
 
@@ -221,7 +221,7 @@ class PurchaseController extends Controller
 
 
 
-        // dd($stock->core->data);
+        dd($stock->core->data);
         // $result  = $this->daily->check_account();
 
         // if ($result == 0) {

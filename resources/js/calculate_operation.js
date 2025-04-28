@@ -34,7 +34,7 @@ export default {
                 ) {
 
                     this.check_state[this.row_counter] = true;
-        
+
                 }
 
                 if (this.check_state[this.row_counter] == true) {
@@ -65,22 +65,22 @@ export default {
         },
 
         calculate_total_with_check() {
-            console.log(
-                "yeeeeeeeeeeeeeeeeeez",
+            // console.log(
+            //     "yeeeeeeeeeeeeeeeeeez",
 
-                this.row_counter,
-                this.check_state[this.row_counter],
-                this.unit,
-                this.unit[this.row_counter],
-                this.qty[this.row_counter],
-                this.unit_price[this.row_counter],
+            //     this.row_counter,
+            //     this.check_state[this.row_counter],
+            //     this.unit,
+            //     this.unit[this.row_counter],
+            //     this.qty[this.row_counter],
+            //     this.unit_price[this.row_counter],
 
-                // this.unit[0][0],
-                // this.qty[0],
-                // this.unit_price[0],
+            //     // this.unit[0][0],
+            //     // this.qty[0],
+            //     // this.unit_price[0],
 
-                this.row_counter
-            );
+            //     this.row_counter
+            // );
             if (
                 this.unit[this.row_counter] &&
                 this.qty[this.row_counter] &&

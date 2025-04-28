@@ -128,12 +128,14 @@ export default {
                 this.type == "Supply" ||
                 this.type == "OpeningInventory"
             ) {
-                var count = this.count;
+                // var count = this.count;
+                // console.log('init_init_init_init',this.store_products.length);
+                this.count = this.store_products.length;
             } else {
-                var count = this.detail.length;
+                this.count = this.detail.length;
             }
 
-            return count;
+            return this.count;
         },
 
         take_discount() {
@@ -170,9 +172,19 @@ export default {
             //     this.type != "Supply" &&
             //     this.type != "OpeningInventory"
             // ) {
-                this.set_values();
-                this.set_price();
+                // this.set_values();
+                // this.set_price();
             // }
+
+              // if (
+            //     this.type != "Purchase" &&
+            //     this.type != "Supply" &&
+            //     this.type != "OpeningInventory"
+            // ) {
+                // this.set_values();
+                // this.set_price();
+            // }
+
 
 
             if (this.calculate_total_with_check() == 0) {

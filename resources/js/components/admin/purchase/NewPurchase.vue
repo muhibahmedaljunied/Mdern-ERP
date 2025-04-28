@@ -278,7 +278,7 @@
 
                           </td>
                           <td>
-                            <input id="product_status" type="hidden" v-bind:value="sto_pro.status_id">
+                            <input :id='"product_status"+index' type="hidden" v-bind:value="sto_pro.status_id">
                             {{ sto_pro.name }}
 
 
@@ -286,7 +286,7 @@
 
                           <td>
 
-                            <input id="product_desc" type="hidden" v-bind:value="sto_pro.desc">
+                            <input :id='"product_desc"+index' type="hidden" v-bind:value="sto_pro.desc">
                             {{ sto_pro.desc }}
 
 
@@ -297,7 +297,7 @@
                           <td>
                             <div>
 
-                          
+
 
 
                               <select v-on:change="set_unit_price(index), calculate()" style="background-color: beige;"
@@ -687,11 +687,11 @@ export default {
 
 
 
-    set_values() {
+    // set_values() {
 
-      this.counts[this.row_counter] = this.row_counter;
+    //   this.counts[this.row_counter] = this.row_counter;
 
-    },
+    // },
 
 
     get_search() {
@@ -718,6 +718,7 @@ export default {
         this.temporale = data.temporales;
         this.products = data.products;
         this.store_products = data.store_products;
+        this.count = this.store_products
 
         this.suppliers = data.suppliers;
 
@@ -761,11 +762,11 @@ export default {
       }
       this.To_pay = this.grand_total;
 
-      for (let index = 0; index <= this.count; index++) {
+      for (let index = 0; index < this.count; index++) {
 
 
-        this.desc[index] = $(`#product_desc`).val();
-        this.status[index] = $(`#product_status`).val();
+        this.desc[index] = $(`#product_desc${index}`).val();
+        this.status[index] = $(`#product_status${index}`).val();
 
         if (!this.qty[index] || !this.unit || !this.unit_price[index]) {
           console.log('i here');
@@ -781,7 +782,8 @@ export default {
       this.axios
         .post(`/payPurchase`, {
           type: 'Purchase',
-          count: this.counts,
+        //   count: this.counts,
+          count: this.count,
           product: this.productm,
           unit: this.unit,
           units: this.units,

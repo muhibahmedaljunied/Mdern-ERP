@@ -93,12 +93,7 @@ export default {
                                 gf.To_pay = 0;
                             }
 
-                            // console.log("rrrrrrr", table);
-                            // console.log(
-                            //     "rrrrrrrrr1",
-                            //     gf.type,
-                            //     gf.indexselected
-                            // );
+
                             // indexselected == 0 when operation is sale or what is same when start index from 0
                             if (gf.indexselected || gf.indexselected == 0) {
                                 console.log("nowwwwwwwwwwwwww_first", gf.type);
@@ -126,11 +121,7 @@ export default {
                                     }
                                 }
                             } else {
-                                // console.log(
-                                //     "nowwwwwwwwwwwwww_second",
-                                //     gf.type,
-                                //     gf.indexselected
-                                // );
+
 
                                 $(`#${gf.type}_${table}_tree`).val(
                                     data.node.text + "  " + data.node.id
@@ -167,14 +158,10 @@ export default {
                                 gf.check_account(data);
                             }
                             if (table == "product") {
-                                // console.log("no _productm", gf.counts);
-                                gf.check_prouct(table, data, gf.counts);
+                                gf.check_prouct(table,data);
                             }
 
-                            if (table == "productm") {
-                                console.log("yes _productm", data.node.id);
-                                gf.productm_tree(data);
-                            }
+
 
                             if (table == "store") {
                                 gf.store = data.node.id;

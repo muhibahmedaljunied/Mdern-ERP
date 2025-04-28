@@ -17,7 +17,7 @@ export default {
             }
 
             if (this.type == "Purchase" || this.type == "Supply") {
-                this.product_tree(data, count); //this for get units of product
+                this.product_tree(data); //this for get units of product
             }
             if (this.type == "Price") {
                 this.product_tree_for_price(data, count); //this for get units of product
@@ -67,17 +67,19 @@ export default {
                 );
             });
         },
-        product_tree(data, count = null) {
+        product_tree(data) {
             this.product = data.node.id;
             axios.post(`/get_unit/${data.node.id}`).then((response) => {
                 this.store_products = response.data.products;
                 console.log("almuhibesssssssssssss", response.data.products);
-                for (const key in count) {
-                   
-                    // $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
-                    this.productm[key] = data.node.id;
-                    console.log("almuhib", this.productm,count[key],count);
+                for (let index = 0; index < this.store_products.length; index++) {
+
+                    this.productm[index] = data.node.id;
+                    console.log("productm________almuhibesssssssssssss", this.productm[index]);
+
+
                 }
+
             });
         },
         product_tree_for_opening_inventury(data, count = null) {
@@ -87,7 +89,6 @@ export default {
                 console.log("almuhibesssssssssssss", response.data.products);
                 for (const key in count) {
                     console.log("almuhib", count, count[key]);
-                    // $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
                     this.productm[count[key]] = data.node.id;
                 }
             });
@@ -99,7 +100,6 @@ export default {
                 console.log("almuhibesssssssssssss", response.data.products);
                 for (const key in count) {
                     console.log("almuhib", count, count[key]);
-                    // $(`#${this.type}_productm_tree${ds}`).val(data.node.text);
                     this.productm[count[key]] = data.node.id;
                 }
             });
@@ -131,7 +131,6 @@ export default {
                 .then((responce) => {
                     responce.data.products.data.forEach((element) => {
                         // ----------
-
                         this.unit_price.push(element.cost);
                     });
 

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -14,12 +13,8 @@ use App\Models\Product;
 use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-
 class ProductController extends Controller
 {
-
-
 
     public $request;
     public $product_service;
@@ -196,16 +191,6 @@ class ProductController extends Controller
             }
         }
 
-        // foreach ($products as $value) {
-
-
-        //     $value->unit = Unit::where('product_units.product_id', $value->id)
-        //         ->join('product_units', 'units.id', '=', 'product_units.unit_id')
-        //         ->join('products', 'product_units.product_id', '=', 'products.id')
-        //         ->select('units.*', 'product_units.*')
-
-        //         ->get();
-        // }
 
 
         return response()->json([
