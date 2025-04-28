@@ -297,10 +297,7 @@
                           <td>
                             <div>
 
-                              <!-- <select v-on:change="calculate()" style="background-color: beige;" v-model="unit[index]"
-                                name="type" :id="'select_unit' + index" class="form-control" required>
-
-                              </select> -->
+                          
 
 
                               <select v-on:change="set_unit_price(index), calculate()" style="background-color: beige;"
@@ -688,7 +685,7 @@ export default {
 
 
 
-   
+
 
     set_values() {
 

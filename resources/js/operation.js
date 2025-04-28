@@ -98,6 +98,7 @@ export default {
 
     methods: {
         set_unit_price(index) {
+            console.log('yessssssss',this.unit);
             this.unit_price[index] = this.unit[index][2];
         },
         addComponent(index) {

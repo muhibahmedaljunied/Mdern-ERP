@@ -12,7 +12,6 @@ use App\Exports\ProductUnitExport;
 use App\Imports\ProductUnitImport;
 use App\Models\Product;
 use App\Models\ProductPrice;
-use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +23,9 @@ class ProductController extends Controller
 
     public $request;
     public $product_service;
+    public $data_store_product;
+    public $key;
+
     public function __construct(Request $request, ProductService $product_service)
     {
 
@@ -316,17 +318,27 @@ class ProductController extends Controller
 
             foreach ($this->request['data'] as $key => $value) {
 
+                $this->key = $key;
 
-                $product = new ProductPrice();
-                $product->product_unit_id = $this->request['data'][$key]['product_unit_id'];
-                $product->store_product_id = $this->request['data'][$key]['store_product_id'];
-                $product->cost = $this->request['data'][$key]['cost'];
-                $product->supply_price = $this->request['data'][$key]['supply_price'];
-                $product->small_price = $this->request['data'][$key]['small_price'];
-                $product->big_price = $this->request['data'][$key]['big_price'];
-                $product->private_price = $this->request['data'][$key]['private_price'];
+                $this->get_product_price();
+                // ----------------------------------------------------------------------
+                if ($this->data_store_product[0] != null) {
 
-                $product->save();
+
+                    $this->refresh_product_price();
+                } else {
+
+
+                    $this->init_product_price();
+                }
+
+
+
+
+
+
+                // ---------------------------------------------
+
             }
 
             // dd(ProductPrice::all());
@@ -355,6 +367,50 @@ class ProductController extends Controller
     }
 
 
+    public function get_product_price()
+    {
+
+        // dd($this->request['data'][$key]);
+
+        $this->data_store_product = collect(ProductPrice::where([
+            'product_unit_id' => $this->request['data'][$this->key]['product_unit_id'],
+            'store_product_id' => $this->request['data'][$this->key]['store_product_id'],
+        ])->get())->toArray();
+    }
+
+    public function refresh_product_price()
+    {
+
+
+        DB::table('product_prices')->where([
+            'product_unit_id' => $this->request['data'][$this->key]['product_unit_id'],
+            'store_product_id' => $this->request['data'][$this->key]['store_product_id']
+        ])
+            ->update([
+                'cost' => $this->request['data'][$this->key]['cost'],
+                'supply_price' => $this->request['data'][$this->key]['supply_price'],
+                'small_price' => $this->request['data'][$this->key]['small_price'],
+                'big_price' => $this->request['data'][$this->key]['big_price'],
+                'private_price' => $this->request['data'][$this->key]['private_price']
+
+            ]);
+    }
+
+
+    public function init_product_price()
+    {
+
+
+        $product = new ProductPrice();
+        $product->product_unit_id = $this->request['data'][$this->key]['product_unit_id'];
+        $product->store_product_id = $this->request['data'][$this->key]['store_product_id'];
+        $product->cost = $this->request['data'][$this->key]['cost'];
+        $product->supply_price = $this->request['data'][$this->key]['supply_price'];
+        $product->small_price = $this->request['data'][$this->key]['small_price'];
+        $product->big_price = $this->request['data'][$this->key]['big_price'];
+        $product->private_price = $this->request['data'][$this->key]['private_price'];
+        $product->save();
+    }
     public function product_variant()
     {
 

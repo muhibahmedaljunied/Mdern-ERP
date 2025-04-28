@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\HrAccount;
+use App\Models\ProductPrice;
+use App\Models\ProductUnit;
 use App\Traits\Invoice\InvoiceTrait;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
@@ -53,12 +55,13 @@ class PurchaseController extends Controller
         $this->product_detail();
         $this->variant();
         $this->unit();
+        // $this->price();
 
 
 
 
 
-        // dd($store_products);
+        // dd($this->store_products);
 
 
         return response()->json([
@@ -81,7 +84,6 @@ class PurchaseController extends Controller
     }
     public function product_detail()
     {
-
 
 
         $this->store_products = DB::table('products')
@@ -107,7 +109,8 @@ class PurchaseController extends Controller
                 ->where('family_attribute_options.store_product_id', $value->store_product_id)
                 ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
                 ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
-                ->get())->toArray();
+                ->get())
+                ->toArray();
         }
     }
 
@@ -118,19 +121,55 @@ class PurchaseController extends Controller
         foreach ($this->store_products as $value) {
 
 
-            $value->unit = Unit::where('product_units.product_id', $value->id)
-                ->join('product_units', 'units.id', '=', 'product_units.unit_id')
-                ->join('products', 'product_units.product_id', '=', 'products.id')
+            $value->unit = ProductUnit::where([
+                // 'product_prices.product_unit_id' => $value->product_unit_id,
+                'product_prices.store_product_id' => $value->store_product_id
+            ])
+                ->join('units', 'units.id', '=', 'product_units.unit_id')
                 ->join('product_prices', 'product_prices.product_unit_id', '=', 'product_units.id')
                 ->select(
                     'units.*',
                     'product_units.*',
-                    'product_prices.*'
+                    'product_units.id as product_unit_id',
+                    'product_prices.*',
                 )
 
                 ->get();
         }
     }
+
+    public function price()
+    {
+
+
+        foreach ($this->store_products as $value) {
+
+            // foreach ($value->unit as $value2) {
+
+            $value->price = ProductPrice::where([
+                // 'product_prices.product_unit_id' => $value->product_unit_id,
+                'product_prices.store_product_id' => $value->store_product_id
+            ])
+                ->join('product_units', 'product_units.id', '=', 'product_prices.product_unit_id')
+                ->join('units', 'units.id', '=', 'product_units.unit_id')
+
+                ->select(
+                    'product_prices.*',
+                    'product_units.*',
+                    'units.*'
+
+                )
+
+                ->get();
+
+            // }
+
+        }
+    }
+
+
+
+
 
 
 
@@ -182,7 +221,7 @@ class PurchaseController extends Controller
 
 
 
-        dd($stock->core->data);
+        // dd($stock->core->data);
         // $result  = $this->daily->check_account();
 
         // if ($result == 0) {
@@ -199,18 +238,18 @@ class PurchaseController extends Controller
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
-        $stock->handle();
+            $stock->handle();
 
-        Cache::forget('stock');
+            Cache::forget('stock');
 
-        // ------------------------------------------------------------------------------------------------------
-        DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
+            // ------------------------------------------------------------------------------------------------------
+            DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
 
 
-        return response([
-            'message' => "purchase created successfully",
-            'status' => "success"
-        ], 200);
+            return response([
+                'message' => "purchase created successfully",
+                'status' => "success"
+            ], 200);
         } catch (\Exception $exp) {
 
             DB::rollBack(); // Tell Laravel, "It's not you, it's me. Please don't persist to DB"
