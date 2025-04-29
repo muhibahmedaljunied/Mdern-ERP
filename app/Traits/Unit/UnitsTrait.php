@@ -12,7 +12,7 @@ trait UnitsTrait
 
 
 
-        // dd($this->value);
+     
         $this->value->units = DB::table('product_units')
             ->join('units', 'units.id', '=', 'product_units.unit_id')
             ->join('products', 'products.id', '=', 'product_units.product_id')

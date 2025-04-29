@@ -6,7 +6,7 @@
                 <span class="h2"> المخزون</span>
 
 
-          
+
             </div>
 
             <div class="card-body">
@@ -82,7 +82,31 @@
                                         <tbody>
                                             <tr v-for="(stock, index) in stocks.data" :key="index">
                                                 <td>{{ index + 1 }}</td>
-                                                <td>{{ stock.product }}</td>
+                                                <td>
+
+
+                                                    <div>
+                                                        <input type="hidden" v-model="stock.text" id="desc"
+                                                            class="form-control" />
+
+                                                        <span>{{ stock.product }}</span>
+                                                        <span style="color: blue;" v-if="stock.kk"
+                                                            v-for="ss in stock.kk">
+
+
+                                                            -{{ ss.value }}
+
+
+
+
+
+                                                        </span>
+                                                    </div>
+
+
+
+
+                                                </td>
                                                 <!-- <td>
 
 

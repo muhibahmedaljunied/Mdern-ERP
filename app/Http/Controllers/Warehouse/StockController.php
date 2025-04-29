@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-use Illuminate\Support\Facades\Cache;
+
+use App\Traits\OperationDataTrait;
 use App\Models\Stock;
 use App\Models\StoreProduct;
 use Illuminate\Http\Request;
@@ -15,36 +16,45 @@ use Illuminate\Support\Facades\DB;
 class StockController extends Controller
 {
 
-    use UnitsTrait;
+    use UnitsTrait, OperationDataTrait;
 
+    public $qty;
+    public $request;
+    public function __construct(Request $request, QtyStockRepository $qty)
+    {
 
-    public function index(QtyStockRepository $qty)
+        $this->qty = $qty;
+        $this->qty->request = $request;
+    }
+
+    public function index()
     {
 
 
-        $qty->set_compare_array(['quantity']);
+        $this->qty->set_compare_array(['quantity']);
         // $qty->details = Cache::rememberForever('stock', function () {
+        $this->qty->details = StoreProduct::where('store_products.quantity', '!=', 0)
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->join('stores', 'store_products.store_id', '=', 'stores.id')
+            ->join('products', 'store_products.product_id', '=', 'products.id')
+            ->select(
+                'store_products.quantity',
+                'store_products.*',
+                'store_products.id as store_product_id',
+                'products.id',
+                'products.text as product',
+                'statuses.name as status',
+                'stores.text as store',
 
-            $qty->details = StoreProduct::where('store_products.quantity', '!=', 0)
-                ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-                ->join('stores', 'store_products.store_id', '=', 'stores.id')
-                ->join('products', 'store_products.product_id', '=', 'products.id')
-                ->select(
-                    'store_products.quantity',
-                    'store_products.*',
-                    'products.id',
-                    'products.text as product',
-                    'statuses.name as status',
-                    'stores.text as store',
-
-                )
-                ->paginate(100);
+            )
+            ->paginate(100);
         // });
 
+        $this->variant();
 
-        $qty->handle_qty();
+        $this->qty->handle_qty();
 
-        return response()->json(['stocks' => $qty->details]);
+        return response()->json(['stocks' => $this->qty->details]);
     }
 
 
@@ -150,7 +160,7 @@ class StockController extends Controller
             $select[$count] =  'statuses.name';
         }
 
-        // for ($i=1; $i < 10; $i++) { 
+        // for ($i=1; $i < 10; $i++) {
 
         //     if ($request->type_operation[0] == 2) {
 

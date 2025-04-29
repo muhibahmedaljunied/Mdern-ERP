@@ -47,30 +47,27 @@ class  StockService
         // dd($this->core->data);
         // $this->check_return_qty();
         $this->warehouse->add();
-        foreach ($this->core->data['count'] as $value) {
+        // foreach ($this->core->data['count'] as $value) {
 
+        for ($value = 0; $value < $this->core->data['count']; $value++) {
 
-         
 
             $this->core->setValue($value);
             $this->handle_core();
-
- 
-  
         }
 
 
-    
+
 
         $this->payment->pay();
 
 
-    
+
         // $this->daily->daily()->exicute('debit')->exicute('credit');
 
         // $this->warehouse->refresh(); //this update purchase_return table by daily_id
 
-  
+
     }
 
     public function handle_core()
@@ -89,6 +86,7 @@ class  StockService
     {
 
         foreach ($this->core->data['count'] as $value) {
+            // for ($value = 0; $value < $this->core->data['count']; $value++) {
 
             $result = $this->check->check_return($value);
 

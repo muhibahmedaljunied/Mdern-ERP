@@ -24,7 +24,7 @@
                                 <div class="row">
 
 
-                                    <div class="col-md-2">
+                                    <!-- <div class="col-md-2">
                                         <label for="cliente">الفرع </label>
 
                                         <select v-model="supplier" id="supplier" class="form-control">
@@ -32,7 +32,7 @@
                                                 {{ sup.name }}
                                             </option>
                                         </select>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-2">
                                         <label for="cliente">المورد </label>
@@ -43,7 +43,7 @@
                                             </option>
                                         </select>
                                     </div>
-                                    
+
 
                                     <div class="col-md-2">
                                         <label for="date"> من تاريخ </label><br />
@@ -55,7 +55,7 @@
 
                                         <input name="date" type="date" v-model="date" class="form-control" />
                                     </div>
-                                 
+
 
                                     <div class="col-sm-4 col-md-3" style="margin-top: auto;">
 

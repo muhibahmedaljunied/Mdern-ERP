@@ -158,7 +158,7 @@
                                                     <th class="wd-15p border-bottom-0">المنتج</th>
                                                     <!-- <th>المجموعه</th> -->
                                                     <th class="wd-5p border-bottom-0">المخزن</th>
-                               
+
                                                     <th class="wd-5p border-bottom-0">الموصفات والطراز</th>
                                                     <th class="wd-10p border-bottom-0">الحاله</th>
                                                     <th class="wd-10p border-bottom-0">الوحده</th>
@@ -686,9 +686,6 @@ export default {
                     price: this.unit_price,
                     expiry_date: this.expiry_date,
                     total: this.total,
-                    // old: this.detail,
-
-
                     store: this.storem,
                     description: this.description,
                     type_refresh: this.type_refresh,
@@ -710,20 +707,10 @@ export default {
                     type_daily: 'OpeningInventory',
                     payment_type: this.Way_to_pay_selected,
                     daily_index: 1,
-                    // supplier_id: this.supplier[0],
-                    // supplier_name: this.supplier[1],
                     date: this.date,
-                    // treasury: this.treasury[0],
-                    // ------------------------------------------------------------------------------
                     grand_total: this.grand_total,
                     sub_total: this.sub_total,
-                    // discount: this.discounts,
-                    // total_tax: this.total_tax,
-                    // type_payment: this.type_payment,
-                    // remaining: this.remaining,
                     paid: this.paid,
-                    // ------------------------------------------------------------------------------
-
                     total_quantity: this.total_quantity,
 
 
@@ -756,10 +743,8 @@ export default {
                 .then(({ data }) => {
                     console.log('data.statuses');
 
-                    // this.opening = data.temporales;
                     this.statuses = data.statuses;
                     this.store_products = data.store_products;
-                    // this.opening_inventuries = data.details;
 
                 })
                 .catch(({ response }) => {

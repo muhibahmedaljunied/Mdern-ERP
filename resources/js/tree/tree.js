@@ -93,7 +93,6 @@ export default {
                                 gf.To_pay = 0;
                             }
 
-
                             // indexselected == 0 when operation is sale or what is same when start index from 0
                             if (gf.indexselected || gf.indexselected == 0) {
                                 console.log("nowwwwwwwwwwwwww_first", gf.type);
@@ -110,8 +109,6 @@ export default {
                                         gf.type == "Expence"
                                     ) {
                                         //this if type expence_income accounts
-
-                                        // console.log('accounts',gf.indexselected);
                                         gf.expence_income_account_list[
                                             gf.indexselected
                                         ] = data.node.id;
@@ -121,8 +118,6 @@ export default {
                                     }
                                 }
                             } else {
-
-
                                 $(`#${gf.type}_${table}_tree`).val(
                                     data.node.text + "  " + data.node.id
                                 );
@@ -158,18 +153,16 @@ export default {
                                 gf.check_account(data);
                             }
                             if (table == "product") {
-                                gf.check_prouct(table,data);
+                                gf.check_prouct(table, data);
                             }
-
-
 
                             if (table == "store") {
                                 gf.store = data.node.id;
 
                                 if (gf.type == "Sale") {
-                                    gf.get_product_for_sale(
-                                        data.node.id,
-                                        table
+                                    gf.get_product(
+                                        table,
+                                        `/sale/newsale/${data.node.id}`
                                     );
 
                                     gf.get_account_for_store();
@@ -193,9 +186,9 @@ export default {
                                 }
 
                                 if (gf.type == "Cash") {
-                                    gf.get_product_for_cash(
-                                        data.node.id,
-                                        table
+                                    gf.get_product(
+                                        table,
+                                        `/cash/newcash/${data.node.id}`
                                     );
                                     gf.get_account_for_store();
                                 }
@@ -203,17 +196,11 @@ export default {
                                     gf.store_one = data.node.id;
                                     gf.fromstore = data.node.text;
                                     gf.fromstore_id = data.node.id;
-
-                                    gf.get_product_for_transfer(
-                                        "store",
-                                        data.node.id
+                                    gf.get_product(
+                                        table,
+                                        `/get_product/${data.node.id}`
                                     );
                                 }
-
-                                // if (gf.type == "OpeningInventory") {
-                                //     gf.store[gf.indexselected] = data.node.id;
-
-                                // }
 
                                 if (
                                     gf.type == "Stock" ||
@@ -287,19 +274,16 @@ export default {
             formData.append("desc", this.desc);
 
             if (localStorage.getItem("table") == "product") {
-
-                formData.append('count',this.counts.length)
-
+                formData.append("count", this.counts.length);
 
                 for (let i = 0; i < this.file.length; i++) {
                     formData.append("image[]", this.file[i]);
                 }
 
-                formData.append('count_unit',this.counts_unit.length)
+                formData.append("count_unit", this.counts_unit.length);
                 for (var i = 1; i <= this.counts_unit.length; i++) {
                     formData.append("hash_rate[]", this.hash_rate[i]);
                     formData.append("retail_unit[]", this.retail_unit[i]);
-
                 }
 
                 formData.append("product_minimum", this.product_minimum);

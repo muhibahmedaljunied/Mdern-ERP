@@ -23,7 +23,7 @@
 
                 <div class="row">
 
-
+<!--
                   <div class="col-md-2">
                     <label for="cliente"> الفرع</label>
 
@@ -32,7 +32,7 @@
                         {{ sup.name }}
                       </option>
                     </select>
-                  </div>
+                  </div> -->
                   <div class="col-md-2">
                     <label for="cliente"> العميل</label>
 
@@ -53,7 +53,7 @@
 
                     <input name="date" type="date" v-model="date" class="form-control" />
                   </div>
-               
+
 
                   <div class="col-sm-4 col-md-3" style="margin-top: auto;">
 

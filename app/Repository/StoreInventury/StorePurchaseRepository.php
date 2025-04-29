@@ -2,8 +2,6 @@
 
 
 namespace App\Repository\StoreInventury;
-
-use App\Models\StoreProduct;
 use App\RepositoryInterface\StoreRepositoryInterface;
 use App\Services\CoreService;
 

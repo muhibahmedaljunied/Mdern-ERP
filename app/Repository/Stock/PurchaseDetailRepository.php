@@ -14,21 +14,21 @@ use PurchaseDetailsTrait;
     public function __construct()
     {
 
-      
+
         $this->core = app(CoreService::class);
     }
 
 
 
-    public function details(...$list_data)
+    public function details()
     {
 
         $this->add_into_purchase_details_table();
-  
+
     }
 
-   
- 
 
-   
+
+
+
 }

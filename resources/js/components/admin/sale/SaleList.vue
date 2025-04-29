@@ -18,14 +18,14 @@
             <div class="card-body">
 
               <div class="row">
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                   <label for="inputAddress">الفرع</label>
                   <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
                     <option v-for="branch in branches" v-bind:value="branch.id">
                       {{ branch.name }}
                     </option>
                   </select>
-                </div>
+                </div> -->
                 <div class="col-md-2">
                   <label for="inputAddress">العميل</label>
                   <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
@@ -157,7 +157,7 @@
                      <router-link
                     :to="`/sale_invoice/${sale.paymentable.sale_id}`"
                         class="btn btn-success">
-                    
+
                       <span>فاتوره</span>
                     </router-link> -->
 
@@ -270,7 +270,7 @@ temx.name }}</span>
                     <td colspan="7" style="text-align:center;color:red;font-size:large">الاجمالي</td>
                     <td>{{ total }}</td>
                   </tr> -->
-                      <!-- <a 
+                      <!-- <a
                       @click="$router.go(-1)"
                       class="btn btn-success"
                       ><span> تراجع</span></a

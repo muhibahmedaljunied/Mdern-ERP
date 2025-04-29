@@ -12,6 +12,7 @@ use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\StoreProduct;
 use App\Traits\Unit\UnitsTrait;
+use App\Traits\OperationDataTrait;
 use App\Models\Cash;
 use App\Models\Payment;
 use App\Models\Supply;
@@ -23,6 +24,7 @@ class CashController extends Controller
 {
     use InvoiceTrait,
         UnitsTrait,
+        OperationDataTrait,
         GeneralTrait;
 
 
@@ -42,6 +44,7 @@ class CashController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
+        $this->variant();
         $this->qty->handle_qty();
 
         return response()->json([
@@ -55,7 +58,7 @@ class CashController extends Controller
 
 
         $this->qty->set_compare_array(['quantity']);
-        $this->qty->details = ($request->id) ? $this->get_one($request) : $this->get_all($request);
+        ($request->id) ? $this->operation_data($request) : $this->get_all($request);
         $this->qty->handle_qty();
 
         return response()->json([
@@ -66,7 +69,14 @@ class CashController extends Controller
         ]);
     }
 
+    public function operation_data($request)
+    {
 
+
+        $this->product_detail($request);
+        $this->variant();
+        $this->unit();
+    }
 
     public function customers()
     {
@@ -239,7 +249,7 @@ class CashController extends Controller
     {
 
 
-  
+
 
         $cashes = Payment::with(['Paymentable' => function (MorphTo $morphTo) {
             $morphTo->constrain([

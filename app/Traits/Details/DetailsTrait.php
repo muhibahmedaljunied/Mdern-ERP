@@ -55,7 +55,7 @@ trait DetailsTrait
         $this->qty->details =   DB::table($this->qty->table);
 
         if ($this->qty->request->id) {
-            
+
             $this->qty->details = $this->qty->details->where($this->qty->table . '.' . $this->qty->column . '_id', $this->qty->request->id);
         }
 

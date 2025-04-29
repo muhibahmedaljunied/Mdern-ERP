@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Traits\Purchase;
-
 use App\Models\PurchaseDetail;
-use App\Models\StoreProduct;
 use Illuminate\Support\Facades\DB;
 
 trait PurchaseDetailsTrait
@@ -13,9 +11,6 @@ trait PurchaseDetailsTrait
 
     public function add_into_purchase_details_table()
     {
-
-
-
 
         $Details = new PurchaseDetail();
         $Details->purchase_id = $this->core->purchase_id;

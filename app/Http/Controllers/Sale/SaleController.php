@@ -14,6 +14,7 @@ use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\StoreProduct;
 use App\Traits\Unit\UnitsTrait;
+use App\Traits\OperationDataTrait;
 use App\Models\Sale;
 use App\Repository\Qty\QtyStockRepository;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -22,12 +23,13 @@ class SaleController extends Controller
 {
     use UnitsTrait,
         GeneralTrait,
+        OperationDataTrait,
         InvoiceTrait;
 
     public $qty;
     public $details;
-
-    public function  __construct(Request $request,QtyStockRepository $qty)
+    public $store_products;
+    public function  __construct(Request $request, QtyStockRepository $qty)
     {
 
         $this->qty = $qty;
@@ -39,6 +41,7 @@ class SaleController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json([
             'details' => $this->qty->details,
@@ -51,9 +54,8 @@ class SaleController extends Controller
     {
 
         $this->qty->set_compare_array(['quantity']);
-        $this->qty->details = ($request->id) ? $this->get_one($request, $this->qty) : $this->get_all($this->qty);
+        ($request->id) ? $this->operation_data($request) : $this->get_all($this->qty);
         $this->qty->handle_qty();
-
         return response()->json([
             'products' => $this->qty->details,
             'customers' => $this->customers(),
@@ -61,15 +63,28 @@ class SaleController extends Controller
         ]);
     }
 
+
+    public function operation_data($request)
+    {
+
+
+        $this->product_detail($request);
+        $this->variant();
+        $this->unit();
+    }
+
+
+
+
     public function customers()
     {
 
         $customers = DB::table('customers')
-         
+
             ->select(
                 'customers.*',
                 'customers.name',
-   
+
             )
             ->get();
 
@@ -106,8 +121,6 @@ class SaleController extends Controller
             )
             ->paginate(100);
 
-        // $this->qty->handle_unit($products);
-
         foreach ($details as $value) {
 
 
@@ -115,33 +128,7 @@ class SaleController extends Controller
         }
         return $details;
     }
-    public function get_one($request)
-    {
 
-        $retVal = ($request->type == 'product') ? 'store_products.product_id' : 'store_products.store_id';
-        $details =  StoreProduct::where($retVal, $request->id)
-            ->where('store_products.quantity', '!=', '0')
-            ->joinall()
-            ->select(
-                'products.*',
-                'products.text as product',
-                'stores.text as store',
-                'stores.account_id as store_account_id',
-                'statuses.name as status',
-                'store_products.quantity as availabe_qty',
-                'store_products.*',
-                'store_products.cost as price',
-                'store_products.id as store_product_id'
-            )
-            ->paginate(100);
-
-        foreach ($details as $value) {
-
-
-            $value->unit_id = 0;
-        }
-        return $details;
-    }
 
 
     public function payment(
@@ -168,7 +155,7 @@ class SaleController extends Controller
             // ------------------------------------------------------------------------------------------------------
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
 
-        
+
 
             return response([
                 'message' => "sale created successfully",

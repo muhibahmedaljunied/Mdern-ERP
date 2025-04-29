@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Supply;
 use Illuminate\Support\Facades\Cache;
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
+use App\Traits\OperationDataTrait;
 use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use App\Models\SupplyReturn;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class SupplyReturnController extends Controller
 {
 
-    use GeneralTrait;
+    use GeneralTrait,OperationDataTrait;
     public $qty;
 
 
@@ -57,10 +58,11 @@ class SupplyReturnController extends Controller
         ]);
         $this->init();
         $this->get_details();
+        $this->variant();
         // dd($this->qty->details);
         $this->qty->handle_qty();
 
-      
+
         return response()->json([
             'details' => $this->qty->details,
 

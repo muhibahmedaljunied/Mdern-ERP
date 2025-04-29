@@ -121,7 +121,7 @@ class PurchaseReturnController extends Controller
     }
 
 
-    public function return_invoice(Request $request, $id)
+    public function return_invoice()
     {
 
 

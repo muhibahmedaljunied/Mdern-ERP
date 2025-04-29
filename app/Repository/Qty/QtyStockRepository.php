@@ -34,10 +34,7 @@ class QtyStockRepository
     public function handle_qty()
     {
 
-
-        // dd($this->details);
         foreach ($this->details as $value) {
-
 
             $this->value = $value;
             $this->units();
@@ -78,7 +75,7 @@ class QtyStockRepository
 
 
             if ($this->qty[$value0] != 0) {
-                
+
                 $this->check_qty($value0);
             }
         }

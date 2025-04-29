@@ -15,7 +15,6 @@ trait StoreProductTrait
     return StoreProduct::whereProductCode($number)->exists();
   }
 
-
   public function barecode()
   {
 
@@ -46,8 +45,6 @@ trait StoreProductTrait
 
     $this->core->id_store_product =  $this->core->data_store_product->id;
   }
-
-
 
   public function refresh_store_store_product_table()
   {
@@ -118,8 +115,6 @@ trait StoreProductTrait
 
     // dd($this->core->data_store_product[0]['total']);
   }
-
-
 
   function get_store_product_first()
   {

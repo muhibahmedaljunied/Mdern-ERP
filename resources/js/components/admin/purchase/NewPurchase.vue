@@ -237,18 +237,6 @@
                             </div>
 
 
-                            <!-- <div class="custom-search">
-
-                              <input style="background-color: beige;font-size: 15px;"
-                                :id="'Purchase_productm_tree' + index" type="text" readonly class="custom-search-input">
-                              <input :id="'Purchase_productm_tree_id' + index" type="hidden" readonly
-                                class="custom-search-input">
-
-                              <button class="custom-search-botton" type="button" data-toggle="modal"
-                                data-target="#exampleModalProductm" @click="detect_index(index)">
-                                <i class="fa fa-plus-circle"></i></button>
-                            </div> -->
-
 
 
                           </td>

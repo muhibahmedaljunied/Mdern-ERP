@@ -11,20 +11,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\HrAccount;
-use App\Models\ProductPrice;
-use App\Models\ProductUnit;
 use App\Traits\Invoice\InvoiceTrait;
+use App\Traits\OperationDataTrait;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\status;
 use App\Models\Temporale;
 use App\Models\Purchase;
-use App\Models\Unit;
 use App\Repository\Qty\QtyStockRepository;
 
 class PurchaseController extends Controller
 {
     use InvoiceTrait,
+        OperationDataTrait,
         GeneralTrait;
 
     public $qty;
@@ -41,6 +40,7 @@ class PurchaseController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json(['details' => $this->qty->details]);
     }
@@ -52,17 +52,9 @@ class PurchaseController extends Controller
 
 
         $this->product();
-        $this->product_detail();
+        $this->product_detail($this->qty->request);
         $this->variant();
         $this->unit();
-        // $this->price();
-
-
-
-
-
-        // dd($this->store_products);
-
 
         return response()->json([
             'products' => $this->products,
@@ -82,92 +74,6 @@ class PurchaseController extends Controller
             ->select('products.*',)
             ->get();
     }
-    public function product_detail()
-    {
-
-
-        $this->store_products = DB::table('products')
-            ->join('store_products', 'store_products.product_id', '=', 'products.id')
-            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-            ->select(
-                'products.*',
-                'store_products.id as store_product_id',
-                'store_products.desc',
-                'statuses.name',
-                'statuses.id as status_id'
-            )
-            ->get();
-    }
-
-    public function variant()
-    {
-
-
-        foreach ($this->store_products as $value) {
-
-            $value->kk = collect(DB::table('family_attribute_options')
-                ->where('family_attribute_options.store_product_id', $value->store_product_id)
-                ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
-                ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
-                ->get())
-                ->toArray();
-        }
-    }
-
-    public function unit()
-    {
-
-
-        foreach ($this->store_products as $value) {
-
-
-            $value->unit = ProductUnit::where([
-                // 'product_prices.product_unit_id' => $value->product_unit_id,
-                'product_prices.store_product_id' => $value->store_product_id
-            ])
-                ->join('units', 'units.id', '=', 'product_units.unit_id')
-                ->join('product_prices', 'product_prices.product_unit_id', '=', 'product_units.id')
-                ->select(
-                    'units.*',
-                    'product_units.*',
-                    'product_units.id as product_unit_id',
-                    'product_prices.*',
-                )
-
-                ->get();
-        }
-    }
-
-    // public function price()
-    // {
-
-
-    //     foreach ($this->store_products as $value) {
-
-    //         // foreach ($value->unit as $value2) {
-
-    //         $value->price = ProductPrice::where([
-    //             // 'product_prices.product_unit_id' => $value->product_unit_id,
-    //             'product_prices.store_product_id' => $value->store_product_id
-    //         ])
-    //             ->join('product_units', 'product_units.id', '=', 'product_prices.product_unit_id')
-    //             ->join('units', 'units.id', '=', 'product_units.unit_id')
-
-    //             ->select(
-    //                 'product_prices.*',
-    //                 'product_units.*',
-    //                 'units.*'
-
-    //             )
-
-    //             ->get();
-
-    //         // }
-
-    //     }
-    // }
-
-
 
 
 
@@ -221,7 +127,7 @@ class PurchaseController extends Controller
 
 
 
-        dd($stock->core->data);
+        // dd($stock->core->data);
         // $result  = $this->daily->check_account();
 
         // if ($result == 0) {
