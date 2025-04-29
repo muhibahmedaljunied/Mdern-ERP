@@ -284,6 +284,7 @@ class CashController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
+        $this->variant();
         $this->qty->handle_qty();
 
         return response()->json([

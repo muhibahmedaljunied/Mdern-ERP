@@ -59,6 +59,7 @@ class SaleReturnController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_return_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json([
             'return_details' => $this->qty->details
@@ -182,6 +183,7 @@ class SaleReturnController extends Controller
         ]);
         $this->init();
         $this->get_return_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json([
             'sale_returns' => $this->get_sale_return(),

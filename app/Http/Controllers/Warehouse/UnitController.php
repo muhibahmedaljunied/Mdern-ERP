@@ -44,9 +44,11 @@ class UnitController extends Controller
     }
 
 
-    public function show(Request $request)
+    public function show()
     {
 
+
+        
 
         $products = DB::table('products')
             ->join('store_products', 'store_products.product_id', '=', 'products.id')
@@ -74,7 +76,6 @@ class UnitController extends Controller
 
 
             $value->unit = ProductUnit::where([
-                // 'product_prices.product_unit_id' => $value->product_unit_id,
                 'product_prices.store_product_id' => $value->store_product_id
             ])
                 ->join('units', 'units.id', '=', 'product_units.unit_id')

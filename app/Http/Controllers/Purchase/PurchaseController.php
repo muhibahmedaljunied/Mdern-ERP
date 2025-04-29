@@ -58,7 +58,7 @@ class PurchaseController extends Controller
 
         return response()->json([
             'products' => $this->products,
-            'store_products' => $this->store_products,
+            'store_products' => $this->qty->details,
             'suppliers' => $this->suppliers(),
             'statuses' => Status::all(),
             'stores' => $this->get_store()
@@ -263,6 +263,7 @@ class PurchaseController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
+        $this->variant();
         $this->qty->handle_qty();
 
         return response()->json([

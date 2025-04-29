@@ -140,15 +140,6 @@ class TransferController extends Controller
             ->where('store_products.store_id', $request['id'])
             ->joinall()
             ->select(
-                // 'products.*',
-                // 'store_products.*',
-                // 'store_products.id as store_product_id',
-                // 'products.text as product',
-                // 'statuses.name as status',
-                // 'stores.text as store',
-                // 'store_products.quantity as availabe_qty',
-                // 'store_products.cost as price',
-
                 'products.*',
                 'products.text as product',
                 'stores.text as store',
@@ -274,7 +265,7 @@ class TransferController extends Controller
 
 
 
-    public function show(Request $request)
+    public function show()
     {
 
 

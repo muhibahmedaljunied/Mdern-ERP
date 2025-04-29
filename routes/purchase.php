@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 
 /*------------------------------------------------purchase----------------------------------*/
-
 Route::post('/purchase/newpurchase', 'Purchase\PurchaseController@index');
 Route::post('/Purchase/delete', 'Purchase\PurchaseController@destroy');
 Route::post('/Purchase/delete/{id}', 'Purchase\PurchaseController@destroy');
@@ -32,9 +31,7 @@ Route::post('/payment_bond_list', 'Purchase\PaymentBondController@paymentBondlis
 Route::post('/data_for_payment_bond/{id}', 'Purchase\PaymentBondController@payment_bond');
 Route::post('/payment_bond_daily/{id}', 'Purchase\PaymentBondController@payment_bond_daily');
 Route::post('/store_PaymentBond', 'Purchase\PaymentBondController@store_PaymentBond');
-
 Route::post('/get_purchase_account_setting', 'Purchase\PurchaseController@get_purchase_account_setting');
-
 Route::post('/return_purchase_invoice/{id}', 'Purchase\PurchaseReturnController@return_invoice');
 
 // Route::post('/payment_bond', 'PayableNoteController@index');

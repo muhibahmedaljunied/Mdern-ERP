@@ -7,6 +7,7 @@ use App\Traits\Return\ReturnTrait;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\CashReturnDetail;
+use App\Traits\OperationDataTrait;
 use App\Http\Controllers\Controller;
 use App\Models\CashReturn;
 use App\Models\Payment;
@@ -20,6 +21,7 @@ class CashReturnController extends Controller
 {
 
     use GeneralTrait,
+        OperationDataTrait,
         ReturnTrait;
     public $qty;
 
@@ -28,7 +30,6 @@ class CashReturnController extends Controller
     {
         $this->qty = $qty;
         $this->qty->request = $request;
-
     }
 
 
@@ -37,14 +38,14 @@ class CashReturnController extends Controller
     {
 
 
-  
+
         $this->qty->set_compare_array(['qty', 'quantity', 'qty_remain']);
         $this->init();
         $this->get_details();
         $this->qty->handle_qty();
         return response()->json([
             'details' => $this->qty->details,
-        
+
         ]);
     }
 
@@ -109,7 +110,7 @@ class CashReturnController extends Controller
     public function return_invoice()
     {
 
- 
+
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_return_details();
@@ -145,10 +146,11 @@ class CashReturnController extends Controller
 
 
 
-   
+
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_return_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json(['return_details' => $this->qty->details]);
     }

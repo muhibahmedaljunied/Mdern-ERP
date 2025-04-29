@@ -16,11 +16,18 @@ export default {
             if (
                 this.type == "Purchase" ||
                 this.type == "Supply" ||
-                this.type == "OpeningInventory" ||
-                this.type == "Price"
+                this.type == "OpeningInventory"
             ) {
                 this.product_tree(data); //this for get units of product
             }
+
+            if (
+
+                this.type == "Price"
+            ) {
+                this.product_tree_for_price(data,count); //this for get units of product
+            }
+
 
             if (this.type == "Cash") {
                 this.get_product(table, `/cash/newcash/${data.node.id}`);
@@ -83,6 +90,29 @@ export default {
         },
 
 
+        product_tree_for_price(data, count = null) {
+            this.product = data.node.id;
+            axios
+                .post(`/get_product_price/${data.node.id}`)
+                .then((response) => {
+                    this.store_products = response.data.products;
+
+
+                    for (
+                        let index = 0;
+                        index < this.store_products.length;
+                        index++
+                    ) {
+                        this.productm[index] = data.node.id;
+                        console.log(
+                            "productm________almuhibesssssssssssss",
+                            this.productm[index]
+                        );
+                    }
+
+
+                });
+        },
         get_product(table,uri) {
             axios
                 .post(`${uri}`, {

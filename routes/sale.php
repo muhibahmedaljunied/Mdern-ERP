@@ -18,8 +18,6 @@ Route::post('/Sale/delete', 'Sale\SaleController@destroy');
 Route::post('/Sale/delete/{id}', 'Sale\SaleController@destroy');
 Route::post('/sale_invoice/{id}', 'Sale\SaleController@invoice_sale');
 Route::post('/return_sale_invoice/{id}', 'Sale\SaleReturnController@return_invoice');
-
-// Route::post('/data_for_receivable_bond/{id}', 'Sale\SaleController@receivable_bond');
 Route::post('/sale_details_in_return/{id}', 'Sale\SaleReturnController@details');
 Route::post('/salereturn', 'Sale\SaleReturnController@create');
 Route::post('/listreturn_sale/{id}', 'Sale\SaleReturnController@show');

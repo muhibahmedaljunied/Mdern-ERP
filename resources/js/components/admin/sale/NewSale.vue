@@ -329,7 +329,7 @@
 
                                                         </div>
                                                     </td>
-                        
+
                                                     <td>
 
 
@@ -717,7 +717,9 @@ export default {
                 .post(`/sale/newsale?page=${page}`)
                 .then(({ data }) => {
 
-                    this.products = data.products;
+                    // this.products = data.products;
+                    this.store_products = data.store_products;
+
                     this.customers = data.customers;
 
                 })

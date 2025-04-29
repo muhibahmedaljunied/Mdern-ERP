@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Purchase;
 use Illuminate\Support\Facades\Cache;
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
+use App\Traits\OperationDataTrait;
 use Illuminate\Http\Request;
 use App\Models\PurchaseReturn;
 use App\Repository\Qty\QtyStockRepository;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class PurchaseReturnController extends Controller
 {
 
-    use GeneralTrait;
+    use GeneralTrait, OperationDataTrait;
 
     public $qty;
 
@@ -36,6 +37,7 @@ class PurchaseReturnController extends Controller
         ]);
         $this->init();
         $this->get_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json([
             'details' => $this->qty->details,
@@ -52,6 +54,7 @@ class PurchaseReturnController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_return_details();
+        $this->variant();
         $this->qty->handle_qty();
 
         return response()->json([
@@ -128,6 +131,7 @@ class PurchaseReturnController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_return_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json([
             'purchase_returns' => $this->get_purshace_return(),

@@ -130,14 +130,6 @@ class ProductController extends Controller
 
     public function pricing()
     {
-        // $units = Unit::where('product_units.product_id', $request->id)
-        //     ->join('product_units', 'units.id', '=', 'product_units.unit_id')
-        //     ->join('products', 'product_units.product_id', '=', 'products.id')
-        //     ->select('units.*', 'product_units.*')
-
-        //     ->get();
-
-
 
         $products = DB::table('products')
             ->join('store_products', 'store_products.product_id', '=', 'products.id')

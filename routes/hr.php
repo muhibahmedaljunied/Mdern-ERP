@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/store_staff_account_setting', 'Staff\staffController@store_staff_account_setting');
 Route::post('/get_staff_account_setting', 'Staff\staffController@get_staff_account_setting');
-
 Route::post('/import_staff','Staff\staffController@import');
 Route::post('/export_staff','Staff\staffController@export');
 // ----------------------------------------------------------------------
@@ -13,23 +12,18 @@ Route::post('/import_absence_sanction', 'Absence\AbsenceSanctionController@impor
 Route::post('/import_delay_sanction', 'Delay\DelaySanctionController@import');
 Route::post('/import_extra_sanction', 'Extra\ExtraSanctionController@import');
 Route::post('/import_leave_sanction', 'Leave\LeaveSanctionController@import');
-
 Route::post('/export_absence_sanction', 'Absence\AbsenceSanctionController@export');
 Route::post('/export_delay_sanction', 'Delay\DelaySanctionController@export');
 Route::post('/export_extra_sanction', 'Extra\ExtraSanctionController@export');
 Route::post('/export_leave_sanction', 'Leave\LeaveSanctionController@export');
-
 // ---------------------------------------------------------------------------------
 Route::post('/tree_structure', 'Staff\AdministrativeStructureController@tree_structure');
 Route::post('/structure_details_node/{id}', 'Staff\AdministrativeStructureController@structure_details_node');
 Route::post('/tree_job', 'Staff\AdministrativeStructureController@tree_structure');
 Route::post('/store_structure', 'Staff\AdministrativeStructureController@store');
 Route::post('/delete_structure/{id}', 'Staff\AdministrativeStructureController@destroy');
-
-
 Route::post('import_structure', [AdministrativeStructureController::class, 'import']);
 Route::post('export_structure', [AdministrativeStructureController::class, 'export']);
-
 /* --------------------------------staff---------------------------------------------------------*/
 Route::post('/staff', 'Staff\StaffController@index');
 // Route::post('/staff_delete/{id}', 'Staff\StaffController@destroy');
@@ -77,8 +71,6 @@ Route::post('/attendance/select_staff', 'Attendance\AttendanceController@select_
 Route::post('/attendance/get_time', 'Attendance\AttendanceController@get_time');
 Route::post('/attendance/get_staff_attendance', 'Attendance\AttendanceController@staff_attendance');
 Route::post('/attendance/get_staff_attendance/{id}', 'Attendance\AttendanceController@get_staff_attendance');
-
-
 
 /*  --------------------------------------------------------------------------*/
 Route::post('/salary', 'Staff\SalaryController@index');
