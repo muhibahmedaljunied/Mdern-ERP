@@ -94,9 +94,7 @@ class TransferController extends Controller
 
         $this->qty->set_compare_array(['quantity']);
         $this->init();
-        ($request->post('type') == 'store') ?
-            $this->operation_data($request) :
-            $this->get_store_product_with_product($request);
+        $this->operation_data($request);
         $this->qty->handle_qty();
 
         return response()->json(['products' => $this->qty->details]);
@@ -105,7 +103,7 @@ class TransferController extends Controller
     {
 
 
-        $this->product_detail($request);
+        ($this->qty->request->type == 'store') ? $this->product_detail_by_store($request) : $this->product_detail($request);
         $this->variant();
         $this->unit();
     }
@@ -131,62 +129,62 @@ class TransferController extends Controller
 
         return response()->json(['transfer_details' => $transfer_details]);
     }
-    public function get_store_product_with_store($request)
-    {
+    // public function get_store_product_with_store($request)
+    // {
 
 
 
-        $details =  StoreProduct::where('store_products.quantity', '!=', 0)
-            ->where('store_products.store_id', $request['id'])
-            ->joinall()
-            ->select(
-                'products.*',
-                'products.text as product',
-                'stores.text as store',
-                'stores.account_id as store_account_id',
-                'statuses.name as status',
-                'store_products.quantity as availabe_qty',
-                'store_products.*',
-                'store_products.cost as price',
-                'store_products.id as store_product_id'
+    //     $details =  StoreProduct::where('store_products.quantity', '!=', 0)
+    //         ->where('store_products.store_id', $request['id'])
+    //         ->joinall()
+    //         ->select(
+    //             'products.*',
+    //             'products.text as product',
+    //             'stores.text as store',
+    //             'stores.account_id as store_account_id',
+    //             'statuses.name as status',
+    //             'store_products.quantity as availabe_qty',
+    //             'store_products.*',
+    //             'store_products.cost as price',
+    //             'store_products.id as store_product_id'
 
-            )
-            ->get();
-
-
-        foreach ($details as $value) {
-
-            $value->unit_id = 0;
-        }
-        return $details;
-    }
-
-    public function get_store_product_with_product($request)
-    {
+    //         )
+    //         ->get();
 
 
+    //     foreach ($details as $value) {
+
+    //         $value->unit_id = 0;
+    //     }
+    //     return $details;
+    // }
+
+    // public function get_store_product_with_product($request)
+    // {
 
 
-        $this->details =   StoreProduct::where('store_products.quantity', '!=', 0)
-            ->where('store_products.product_id', $request['id'])
-            ->joinall()
-            ->select(
-                'store_products.quantity',
-                'store_products.*',
-                'products.id',
-                'products.text as product',
-                'statuses.name as status',
-                'stores.text as store'
-            )
-            ->get();
-
-        foreach ($this->details as $value) {
 
 
-            $value->unit_id = 0;
-        }
-        return $this->details;
-    }
+    //     $this->details =   StoreProduct::where('store_products.quantity', '!=', 0)
+    //         ->where('store_products.product_id', $request['id'])
+    //         ->joinall()
+    //         ->select(
+    //             'store_products.quantity',
+    //             'store_products.*',
+    //             'products.id',
+    //             'products.text as product',
+    //             'statuses.name as status',
+    //             'stores.text as store'
+    //         )
+    //         ->get();
+
+    //     foreach ($this->details as $value) {
+
+
+    //         $value->unit_id = 0;
+    //     }
+    //     return $this->details;
+    // }
 
 
 

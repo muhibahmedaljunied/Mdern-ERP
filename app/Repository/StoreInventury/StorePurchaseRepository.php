@@ -18,6 +18,7 @@ class StorePurchaseRepository extends StoreRepository  implements StoreRepositor
 
 
     $this->get_store_product_tow();
+
     $this->check_founded_store();
   }
 

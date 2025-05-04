@@ -39,9 +39,9 @@ class SaleController extends Controller
     {
 
         $this->qty->set_compare_array(['qty']);
-        $this->init();
-        $this->get_details();
-                $this->variant();
+        $this->init()->get_details();
+        // $this->get_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json([
             'details' => $this->qty->details,
@@ -54,7 +54,7 @@ class SaleController extends Controller
     {
 
         $this->qty->set_compare_array(['quantity']);
-        ($request->id) ? $this->operation_data($request) : $this->get_all($this->qty);
+        ($request->id) ? $this->operation_data() : $this->get_all($this->qty);
         $this->qty->handle_qty();
         return response()->json([
             'products' => $this->qty->details,
@@ -62,13 +62,15 @@ class SaleController extends Controller
 
         ]);
     }
+    // Admin123456
+    // Long Distance Cooled Sensor PTZ Thermal Camera  CTC690110-LFZ
 
-
-    public function operation_data($request)
+    public function operation_data()
     {
 
 
-        $this->product_detail($request);
+
+        $this->product_detail();
         $this->variant();
         $this->unit();
     }
@@ -104,6 +106,8 @@ class SaleController extends Controller
     }
     public function get_all()
     {
+
+
 
         $details =  StoreProduct::where('store_products.quantity', '!=', '0')
             ->joinall()
@@ -250,7 +254,7 @@ class SaleController extends Controller
     {
 
         $this->qty->set_compare_array(['qty']);
-        $this->init();
+        $this->init()->get_details();
         $this->get_details();
         $this->qty->handle_qty();
         return response()->json([

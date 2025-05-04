@@ -140,13 +140,14 @@ trait StoreProductTrait
   function get_store_product_tow()
   {
 
-    // dd('123StorePurchaseRepository',$this->core->data);
+    // dd('123StorePurchaseRepository',$this->core->data['status'][$this->core->value]);
 
     $this->core->data_store_product = collect(StoreProduct::where([
       'product_id' => $this->core->data['product'][$this->core->value],
       'status_id' => $this->core->data['status'][$this->core->value],
       'desc' => $this->core->data['desc'][$this->core->value]
     ])->get())->toArray();
+    // dd($this->core->data_store_product);
     // ----------------------------------------------------------------------
     // dd($this->core->data_store_product[0]['store_id']);
     if ($this->core->data_store_product[0]['store_id'] != null) {

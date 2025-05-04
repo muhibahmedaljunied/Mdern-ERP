@@ -292,7 +292,7 @@
                                 v-model="unit[index]" name="type" :id="'select_unit' + index" class="form-control"
                                 required>
 
-                                <option v-for="ssu in sto_pro.unit" v-bind:value="[ssu.id, ssu.rate, ssu.cost]">
+                                <option v-for="ssu in sto_pro.unit" v-bind:value="[ssu.unit_id, ssu.rate, ssu.cost]">
                                   {{ ssu.name }}
                                 </option>
 

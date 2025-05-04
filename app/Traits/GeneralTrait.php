@@ -39,12 +39,12 @@ trait GeneralTrait
 
     // OperationDataTrait انا غيرت اسمه  لانه يتعارض  مع function _unit_  اذا كنت تستعمله غي مكان اخر
     // قم بتغير اسم احداهما في باقي الاماكن التي تستدعيه فيه
-    
+
     public function _unit_($data, $value)   //function unit
     {
 
 
-        return $data;
+
         foreach ($data as $key => $values) {   //this for converts qty_avaliable into big unit
 
             $micro_unit_qty = $data['qty'];

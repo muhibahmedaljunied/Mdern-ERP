@@ -41,6 +41,8 @@ trait DetailsTrait
 
             // dd($this->qty->DB);
         }
+
+        return $this;
     }
 
 

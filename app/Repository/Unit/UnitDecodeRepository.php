@@ -26,13 +26,13 @@ class UnitDecodeRepository  implements UnitRepositoryInterface
     {
 
 
-
+        // dd($this->core->data['unit']);
         // $this->core->unit_array = json_decode($this->core->data['unit'][$this->core->value]);
         $this->core->unit_array = $this->core->data['unit'][$this->core->value];
 
 
 
-        // dd($this->core->unit_array);
+
         return $this;
     }
 

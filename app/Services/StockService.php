@@ -53,10 +53,14 @@ class  StockService
 
 
             $this->core->setValue($value);
+            // if ($value== 2) {
+            //   dd($value);
+            // }
             $this->handle_core();
         }
 
 
+        dd('final');
 
 
         $this->payment->pay();
@@ -79,7 +83,7 @@ class  StockService
 
         $this->detail->details();
 
-        $this->stock->stock();
+        // $this->stock->stock();
     }
 
     public function check_return_qty()

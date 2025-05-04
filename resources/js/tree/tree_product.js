@@ -1,6 +1,7 @@
 export default {
     methods: {
         check_prouct(table, data, count = null) {
+            // this.productm = []; //this for empty productm array when change from product into another by clicking tree
             console.log(
                 "check_prouctcheck_prouctcheck_prouct",
                 table,
@@ -77,6 +78,8 @@ export default {
             this.product = data.node.id;
             axios.post(`/get_unit/${data.node.id}`).then((response) => {
                 this.store_products = response.data.products;
+
+
                 console.log("almuhibesssssssssssss", response.data.products);
                 for (
                     let index = 0;

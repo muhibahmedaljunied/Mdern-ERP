@@ -185,7 +185,7 @@
                               <input :id="'Supply_productm_tree_id' + index" type="hidden" readonly
                                 class="custom-search-input">
 
-                                
+
 
                               <button class="custom-search-botton" type="button" data-toggle="modal"
                                 data-target="#exampleModalProductm" @click="detect_index(index)">

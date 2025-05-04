@@ -37,6 +37,8 @@ class PurchaseController extends Controller
     }
     public function details()
     {
+
+
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
@@ -45,9 +47,35 @@ class PurchaseController extends Controller
         return response()->json(['details' => $this->qty->details]);
     }
 
+    // public function show(Request $request, FilterService $filter)
+    // {
+
+    //     $filter->product_id =  $request->id;
+    //     $product_filterable_attributes = ProductFilterableAttribute::where(function ($query) use ($request) {
+    //         return $query->where('product_filterable_attributes.product_id', '=', $request->id);
+    //     })->with([
+    //         'attribute.attribute_option' => function ($query) {
+    //             $query->select('*');
+    //         }
+    //     ])
+    //         ->get();
+    //     // -----------------------------------------------------------------------------------------------
+    //     $filter->queryfilter($request['type']);
+
+    //     // $filter->queryfilter($request['type'])->filter();
+
+
+    //     return response()->json([
+    //         'products' => $filter->data,
+    //         'product_filterable_attributes' => $product_filterable_attributes
+    //     ]);
+
+    //     // return response()->json($filter->data);
+    // }
 
     public function index()
     {
+
 
 
 

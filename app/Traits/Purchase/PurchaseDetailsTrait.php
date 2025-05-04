@@ -12,6 +12,7 @@ trait PurchaseDetailsTrait
     public function add_into_purchase_details_table()
     {
 
+        // dd($this->core->unit_array);
         $Details = new PurchaseDetail();
         $Details->purchase_id = $this->core->purchase_id;
         $Details->price = $this->core->data['price'][$this->core->value];
@@ -21,6 +22,7 @@ trait PurchaseDetailsTrait
         $Details->qty = $this->core->micro_unit_qty;
 
         $Details->save();
+
         // dd($Details->id);
     }
 

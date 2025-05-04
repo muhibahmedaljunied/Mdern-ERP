@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Warehouse;
 
+use App\Services\FilterService;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -43,14 +44,30 @@ class UnitController extends Controller
         return response()->json();
     }
 
-
-    public function show()
+    public function category_filter(Request $request, FilterService $filter)
     {
 
 
-        
+
+        $filter->product_id =  $request->id;
+        $filter->queryfilter();
+
+
+        return response()->json([
+            'products' => $filter->data,
+        ]);
+    }
+
+
+    public function show(Request $request)
+    {
+
+
+        // dd($request->id);
+
 
         $products = DB::table('products')
+            ->where('products.id', $request->id)
             ->join('store_products', 'store_products.product_id', '=', 'products.id')
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->select(
@@ -82,6 +99,7 @@ class UnitController extends Controller
                 ->join('product_prices', 'product_prices.product_unit_id', '=', 'product_units.id')
                 ->select(
                     'units.*',
+                    'units.id as unit_id',
                     'product_units.*',
                     'product_units.id as product_unit_id',
                     'product_prices.*',
@@ -89,6 +107,7 @@ class UnitController extends Controller
 
                 ->get();
         }
+
 
 
 
