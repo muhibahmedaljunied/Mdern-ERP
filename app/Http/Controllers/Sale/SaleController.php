@@ -54,7 +54,11 @@ class SaleController extends Controller
     {
 
         $this->qty->set_compare_array(['quantity']);
+<<<<<<< HEAD
         $this->operation_data();
+=======
+        ($request->id) ? $this->operation_data() : $this->get_all($this->qty);
+>>>>>>> b8ad28e449a5c1b1f26a009ee09ac1e352d35de9
         $this->qty->handle_qty();
         return response()->json([
             'products' => $this->qty->details,

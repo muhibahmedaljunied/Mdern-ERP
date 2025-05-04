@@ -55,8 +55,47 @@ trait StoreProductTrait
             $this->core->store_product_f =  DB::table('store_products')->where(['id' => $this->core->id_store_product])
                 ->update(['store_id' => $this->core->data['store'][$this->core->value]]);
 
+<<<<<<< HEAD
             $this->core->id_store_product =  $this->core->data_store_product[0]['id'];
         }
+=======
+    ])
+      ->select()
+      ->get())->toArray();
+
+
+
+    $this->core->id_store_product = ($this->core->data_store_product == null) ? 0 : $this->core->data_store_product[0]['id'];
+
+
+    return $this;
+  }
+
+
+  function get_store_product_tow()
+  {
+
+    dd('123StorePurchaseRepository',$this->core->data['status'][$this->core->value]);
+
+    $this->core->data_store_product = collect(StoreProduct::where([
+      'product_id' => $this->core->data['product'][$this->core->value],
+      'status_id' => $this->core->data['status'][$this->core->value],
+      'desc' => $this->core->data['desc'][$this->core->value]
+    ])->get())->toArray();
+    dd($this->core->data_store_product);
+    // ----------------------------------------------------------------------
+    // dd($this->core->data_store_product[0]['store_id']);
+    if ($this->core->data_store_product[0]['store_id'] != null) {
+
+      $this->core->data_store_product = collect(StoreProduct::where([
+        'product_id' => $this->core->data['product'][$this->core->value],
+        'store_id' => $this->core->data['store'][$this->core->value],
+        'status_id' => $this->core->data['status'][$this->core->value],
+        'desc' => $this->core->data['desc'][$this->core->value]
+      ])
+        ->select()
+        ->get())->toArray();
+>>>>>>> b8ad28e449a5c1b1f26a009ee09ac1e352d35de9
     }
 
 
