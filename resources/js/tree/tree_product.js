@@ -13,7 +13,6 @@ export default {
                 this.productselectedname = data.node.text;
             }
 
-
             if (
                 this.type == "Purchase" ||
                 this.type == "Supply" ||
@@ -22,13 +21,9 @@ export default {
                 this.product_tree(data); //this for get units of product
             }
 
-            if (
-
-                this.type == "Price"
-            ) {
-                this.product_tree_for_price(data,count); //this for get units of product
+            if (this.type == "Price") {
+                this.product_tree_for_price(data, count); //this for get units of product
             }
-
 
             if (this.type == "Cash") {
                 this.get_product(table, `/cash/newcash/${data.node.id}`);
@@ -79,7 +74,6 @@ export default {
             axios.post(`/get_unit/${data.node.id}`).then((response) => {
                 this.store_products = response.data.products;
 
-
                 console.log("almuhibesssssssssssss", response.data.products);
                 for (
                     let index = 0;
@@ -87,11 +81,11 @@ export default {
                     index++
                 ) {
                     this.productm[index] = data.node.id;
-
+                    this.store_product_id[index] =
+                        this.store_products[index].store_product_id;
                 }
             });
         },
-
 
         product_tree_for_price(data, count = null) {
             this.product = data.node.id;
@@ -99,7 +93,6 @@ export default {
                 .post(`/get_product_price/${data.node.id}`)
                 .then((response) => {
                     this.store_products = response.data.products;
-
 
                     for (
                         let index = 0;
@@ -112,26 +105,17 @@ export default {
                             this.productm[index]
                         );
                     }
-
-
                 });
         },
-        get_product(table,uri) {
+        get_product(table, uri) {
             axios
                 .post(`${uri}`, {
                     type: table,
                     operation: "StockQty",
                 })
                 .then((responce) => {
-
-
                     this.store_products = responce.data.products;
-
                 });
         },
-
-
-
-
     },
 };

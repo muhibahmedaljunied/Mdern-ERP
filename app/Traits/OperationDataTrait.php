@@ -13,9 +13,15 @@ trait OperationDataTrait
 
 
 
-        $this->qty->details = DB::table('products')
-            ->where('products.id', $this->qty->request->id)
-            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+        $this->qty->details = DB::table('products');
+
+        if ($this->qty->request->id) {
+
+            $this->qty->details =  $this->qty->details->where('products.id', $this->qty->request->id);
+        }
+
+
+        $this->qty->details = $this->qty->details->join('store_products', 'store_products.product_id', '=', 'products.id')
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('stores', 'store_products.store_id', '=', 'stores.id')
             ->select(
@@ -32,7 +38,7 @@ trait OperationDataTrait
             )
             ->get();
 
-            // dd($this->qty->details);
+        // dd($this->qty->details);
     }
 
 
@@ -60,7 +66,7 @@ trait OperationDataTrait
             )
             ->get();
 
-            // dd($this->qty->details);
+        // dd($this->qty->details);
     }
 
     public function variant()

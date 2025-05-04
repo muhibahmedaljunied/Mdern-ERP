@@ -174,17 +174,11 @@
 
                                             <td>
 
-
                                                 <div>
                                                     <input style="background-color: beige;" type="number"
                                                         v-model="sto_pro.cost" id="qty" class="form-control" />
 
                                                 </div>
-
-
-
-
-
 
                                             </td>
 

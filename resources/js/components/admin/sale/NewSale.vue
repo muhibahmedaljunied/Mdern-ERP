@@ -190,7 +190,7 @@
                                                     <th class="wd-10p border-bottom-0">الاجمالي</th>
 
                                                     <th class="wd-10p border-bottom-0">ملاحظه</th>
-                                                    <th class="wd-10p border-bottom-0">اضافه</th>
+                                                    <!-- <th class="wd-10p border-bottom-0">اضافه</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody v-if="store_products && store_products.length > 0">
@@ -295,13 +295,13 @@
 
 
 
-                                                            <select v-if="check_state[index] == true"
+                                                            <select v-on:change="set_unit_price(index), calculate()"
                                                                 style="background-color: beige;"
                                                                 :id="'select_unit' + index" v-model="unit[index]"
                                                                 name="type" class="form-control" required>
 
-                                                                <option disabled v-for="unit in product.units"
-                                                                    v-bind:value="[unit.unit_id, unit.rate]">
+                                                                <option  v-for="unit in product.unit"
+                                                                v-bind:value="[unit.unit_id, unit.rate, unit.cost]">
                                                                     {{ unit.name }}
                                                                 </option>
 
@@ -309,8 +309,8 @@
                                                             </select>
 
 
-                                                            <select
-                                                                v-on:change="set_unit_price(index), calculate_total(index)"
+                                                            <!-- <select
+                                                                v-on:change="set_unit_price(index), calculate()"
                                                                 v-else style="background-color: beige;"
                                                                 :id="'select_unit' + index" v-model="unit[index]"
                                                                 name="type" class="form-control" required>
@@ -321,7 +321,7 @@
                                                                 </option>
 
 
-                                                            </select>
+                                                            </select> -->
 
 
 
@@ -333,51 +333,51 @@
                                                     <td>
 
 
-                                                        <input v-if="check_state[index] == true"
+                                                        <input
                                                             v-model="unit_price[index]"
                                                             class="form-control input_cantidad" onkeypress="return "
-                                                            readonly />
+                                                            />
 
 
-                                                        <input v-else v-model="unit_price[index]"
-                                                            v-on:input="calculate_total(index)"
-                                                            class="form-control input_cantidad" onkeypress="return " />
+                                                        <!-- <input v-else v-model="unit_price[index]"
+                                                            v-on:input="calculate()"
+                                                            class="form-control input_cantidad" onkeypress="return " /> -->
                                                     </td>
                                                     <td>
 
 
 
-                                                        <input v-if="check_state[index] == true"
+                                                        <input
                                                             style="background-color: beige;" type="number"
-                                                            v-model="qty[index]" id="qty"
+                                                            @input="calculate()" v-model="qty[index]" id="qty"
                                                             class="form-control input_cantidad" onkeypress="return "
-                                                            readonly />
+                                                             />
 
-                                                        <input v-else style="background-color: beige;" type="number"
-                                                            @input="calculate_total(index)" v-model="qty[index]"
+                                                        <!-- <input v-else style="background-color: beige;" type="number"
+                                                            @input="calculate()" v-model="qty[index]"
                                                             id="qty" class="form-control input_cantidad"
-                                                            onkeypress="return " />
+                                                            onkeypress="return " /> -->
                                                     </td>
                                                     <td>
-                                                        <input v-if="check_state[index] == true" type="number"
+                                                        <input  type="number"
                                                             v-model="tax[index]" id="qty"
                                                             class="form-control input_cantidad" onkeypress="return "
-                                                            readonly />
+                                                             />
 
-                                                        <input v-else type="number" v-model="tax[index]" id="qty"
+                                                        <!-- <input v-else type="number" v-model="tax[index]" id="qty"
                                                             class="form-control input_cantidad" onkeypress="return "
-                                                            @input="calculate_total(index)" />
+                                                            @input="calculate()" /> -->
                                                     </td>
 
                                                     <td>
 
-                                                        <input v-if="check_state[index] == true" type="number"
-                                                            v-model="total[index]" :id="'total_row' + index"
-                                                            class="form-control" readonly />
+                                                        <input  type="number"
+                                                        @input="calculate()" v-model="total[index]" :id="'total_row' + index"
+                                                            class="form-control"  />
 
-                                                        <input v-else @input="calculate_total(index)" type="number"
+                                                        <!-- <input v-else @input="calculate()" type="number"
                                                             v-model="total[index]" :id="'total_row' + index"
-                                                            class="form-control" />
+                                                            class="form-control" /> -->
                                                     </td>
 
                                                     <td>
@@ -386,11 +386,11 @@
                                                             :id="'message_validation' + index"></span>
 
                                                     </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         <input :id="'check_state' + index" v-model="check_state[index]"
                                                             @change="calculate()" type="checkbox"
                                                             class="btn btn-info waves-effect">
-                                                    </td>
+                                                    </td> -->
 
                                                 </tr>
 
@@ -850,7 +850,7 @@ export default {
             this.axios
                 .post(`/paySale`, {
                     type: 'Sale',
-                    count: this.counts,
+                    count: this.count,
                     unit: this.unit,
                     // units: this.units,
                     qty: this.qty,

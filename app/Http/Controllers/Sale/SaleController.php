@@ -50,11 +50,11 @@ class SaleController extends Controller
     }
 
 
-    public function index(Request $request)
+    public function index()
     {
 
         $this->qty->set_compare_array(['quantity']);
-        ($request->id) ? $this->operation_data() : $this->get_all($this->qty);
+        $this->operation_data();
         $this->qty->handle_qty();
         return response()->json([
             'products' => $this->qty->details,
@@ -81,16 +81,16 @@ class SaleController extends Controller
     public function customers()
     {
 
-        $customers = DB::table('customers')
+        return DB::table('customers')
 
             ->select(
                 'customers.*',
-                'customers.name',
+
 
             )
             ->get();
 
-        return $customers;
+
     }
 
     public function treasuries()
