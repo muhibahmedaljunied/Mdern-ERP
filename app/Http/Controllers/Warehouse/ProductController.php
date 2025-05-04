@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
+
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -13,6 +14,7 @@ use App\Models\Product;
 use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class ProductController extends Controller
 {
 
@@ -132,6 +134,7 @@ class ProductController extends Controller
     {
 
         $products = DB::table('products')
+            ->where('products.id', $this->request->id)
             ->join('store_products', 'store_products.product_id', '=', 'products.id')
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('product_units', 'product_units.product_id', '=', 'products.id')

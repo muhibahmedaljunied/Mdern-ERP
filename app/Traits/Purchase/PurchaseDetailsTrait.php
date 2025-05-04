@@ -21,6 +21,7 @@ trait PurchaseDetailsTrait
         $Details->qty = $this->core->micro_unit_qty;
 
         $Details->save();
+
         // dd($Details->id);
     }
 

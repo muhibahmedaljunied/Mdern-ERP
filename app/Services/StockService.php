@@ -53,10 +53,14 @@ class  StockService
 
 
             $this->core->setValue($value);
+            // if ($value== 1) {
+            //   dd($value);
+            // }
             $this->handle_core();
         }
 
 
+        dd('final');
 
 
         $this->payment->pay();
