@@ -202,7 +202,7 @@
                                                     <th>الكميه</th>
                                                     <th>الاجمالي</th>
                                                     <th>ملاحظه</th>
-                                                    <th>اضافه</th>
+                                                    <!-- <th>اضافه</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody v-if="store_products && store_products.length > 0">
@@ -240,7 +240,7 @@
                                                     </td>
                                                     <td>
                                                         <div id="factura_producto" class="input_nombre"
-                                                            v-if="product.availabe_qty">
+                                                            v-if="product.availabe_qty != 0">
 
 
                                                             <div v-for="temx in product.qty_after_convert['quantity']">
@@ -266,6 +266,9 @@
 
                                                             </div>
 
+                                                        </div>
+                                                        <div v-else>
+0
                                                         </div>
 
                                                     </td>
@@ -361,10 +364,10 @@ index)" v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeyp
                                                             :id="'message_validation' + index"></span>
 
                                                     </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         <input v-model="check_state[index]" @change="calculate()"
                                                             type="checkbox" class="btn btn-info waves-effect">
-                                                    </td>
+                                                    </td> -->
 
                                                 </tr>
 

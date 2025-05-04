@@ -141,19 +141,13 @@ class SaleController extends Controller
 
     ) {
 
-
-
-
         // dd($stock->core->data);
-
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
-
             $stock->handle();
 
-            // dd(SaleDetail::all());
-
+            // dd('finall');
             Cache::forget('stock');
             // dd(12);
             // ------------------------------------------------------------------------------------------------------

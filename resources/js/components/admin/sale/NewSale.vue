@@ -259,7 +259,7 @@
                                                     </td>
                                                     <td>
                                                         <div id="factura_producto" class="input_nombre"
-                                                            v-if="product.availabe_qty">
+                                                            v-if="product.availabe_qty != 0">
 
 
                                                             <div v-for="temx in product.qty_after_convert['quantity']">
@@ -283,6 +283,9 @@
 
                                                             </div>
 
+                                                        </div>
+                                                        <div v-else>
+0
                                                         </div>
 
                                                     </td>

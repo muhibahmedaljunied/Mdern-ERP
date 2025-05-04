@@ -155,7 +155,7 @@ class PurchaseController extends Controller
 
 
 
-        // dd($stock->core->data);
+        dd($stock->core->data);
         // $result  = $this->daily->check_account();
 
         // if ($result == 0) {

@@ -58,7 +58,8 @@ class CashController extends Controller
 
 
         $this->qty->set_compare_array(['quantity']);
-        ($request->id) ? $this->operation_data($request) : $this->get_all($request);
+        // ($request->id) ? $this->operation_data($request) : $this->get_all($request);
+        $this->operation_data();
         $this->qty->handle_qty();
 
         return response()->json([
@@ -69,11 +70,11 @@ class CashController extends Controller
         ]);
     }
 
-    public function operation_data($request)
+    public function operation_data()
     {
 
 
-        $this->product_detail($request);
+        $this->product_detail();
         $this->variant();
         $this->unit();
     }
