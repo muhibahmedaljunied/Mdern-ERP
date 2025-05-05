@@ -326,7 +326,7 @@ data-target="#exampleModalProductm" @click="detect_index(index)">
 
 
                                                             <select v-else style="background-color: beige;"
-                                                                v-on:change="set_unit_price(index), calculate_total(index)"
+                                                                v-on:change="set_unit_price(index), calculate()"
                                                                 :id="'select_unit' + index" v-model="unit[index]"
                                                                 name="type" class="form-control" required>
 
@@ -370,7 +370,7 @@ index)" v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeyp
                                                             class="form-control input_cantidad" onkeypress="return " />
 
                                                         <input v-else style="background-color: beige;" type="number"
-                                                            @input="calculate_total(index)" v-model="qty[index]"
+                                                            @input="calculate()" v-model="qty[index]"
                                                             id="qty" class="form-control input_cantidad"
                                                             onkeypress="return " />
                                                     </td>
@@ -383,7 +383,7 @@ index)" v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeyp
                                                             v-model="total[index]" :id="'total_row' + index"
                                                             class="form-control" />
 
-                                                        <input @input="calculate_total(index)" v-else type="number"
+                                                        <input @input="calculate()" v-else type="number"
                                                             v-model="total[index]" :id="'total_row' + index"
                                                             class="form-control" />
 
