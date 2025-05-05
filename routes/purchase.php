@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 /*------------------------------------------------purchase----------------------------------*/
 Route::post('/purchase/newpurchase', 'Purchase\PurchaseController@index');
+Route::post('/purchase/newpurchase/{id}', 'Purchase\PurchaseController@index');
 Route::post('/Purchase/delete', 'Purchase\PurchaseController@destroy');
 Route::post('/Purchase/delete/{id}', 'Purchase\PurchaseController@destroy');
 Route::post('/purchase/newpurchasesearch', 'Purchase\PurchaseController@search');

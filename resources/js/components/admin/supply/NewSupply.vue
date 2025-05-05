@@ -17,22 +17,6 @@
 
                             <div class="card-body">
                                 <div class="row">
-
-                                    <div class="col-md-4">
-                                        <label for="pagoPrevio">المخزن</label>
-                                        <div class="custom-search">
-
-                                            <input style="background-color: beige;" :id="'Supply_store_tree'"
-                                                type="text" readonly class="custom-search-input">
-                                            <input :id="'Supply_store_tree_id'" type="hidden" readonly>
-                                            <input :id="'select_account_Supply'" type="hidden">
-
-                                            <button class="custom-search-botton" type="button" data-toggle="modal"
-                                                @click="detect_index(null)" data-target="#exampleModalStore">
-                                                <i class="fa fa-plus-circle"></i></button>
-                                        </div>
-
-                                    </div>
                                     <div class="col-md-4">
                                         <label for="pagoPrevio">المنتج</label>
                                         <div class="custom-search">
@@ -52,6 +36,22 @@
                                         </div>
 
                                     </div>
+                                    <div class="col-md-4">
+                                        <label for="pagoPrevio">المخزن</label>
+                                        <div class="custom-search">
+
+                                            <input style="background-color: beige;" :id="'Supply_store_tree'"
+                                                type="text" readonly class="custom-search-input">
+                                            <input :id="'Supply_store_tree_id'" type="hidden" readonly>
+                                            <input :id="'select_account_Supply'" type="hidden">
+
+                                            <button class="custom-search-botton" type="button" data-toggle="modal"
+                                                @click="detect_index(null)" data-target="#exampleModalStore">
+                                                <i class="fa fa-plus-circle"></i></button>
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                                 <br />

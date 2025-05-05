@@ -43,7 +43,7 @@ trait OperationDataTrait
             )
             ->get();
 
-            
+
 
         // dd($this->qty->details);
     }
@@ -51,7 +51,6 @@ trait OperationDataTrait
 
     public function product_detail_by_product()
     {
-
 
 
         $this->qty->details = DB::table('products')
@@ -77,9 +76,10 @@ trait OperationDataTrait
     }
 
 
+   
+
     public function product_detail_by_store()
     {
-
 
 
 
@@ -102,7 +102,7 @@ trait OperationDataTrait
             )
             ->get();
 
-        // dd($this->qty->details);
+
     }
 
     public function variant()

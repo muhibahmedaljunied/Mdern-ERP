@@ -60,22 +60,23 @@ class SupplyController extends Controller
 
 
         $this->product();
-        $this->start($this->qty->request);
-        $this->variant();
-        $this->unit();
-
-
-
+        $this->operation_data();
         return response()->json([
             'products' => $this->products,
-            'store_products' => $this->store_products,
+            'store_products' => $this->qty->details,
             'suppliers' => $this->suppliers(),
             'statuses' => Status::all(),
             'stores' => $this->get_store()
 
         ]);
     }
+    public function operation_data()
+    {
 
+        $this->start();
+        $this->variant();
+        $this->unit();
+    }
 
     public function product()
     {
@@ -104,14 +105,14 @@ class SupplyController extends Controller
     public function suppliers()
     {
 
-        $suppliers =  DB::table('suppliers')
+        return  DB::table('suppliers')
             ->select(
                 'suppliers.*',
 
             )
             ->get();
 
-        return $suppliers;
+      
     }
 
     public function treasuries()

@@ -80,10 +80,7 @@ class PurchaseController extends Controller
 
 
         $this->product();
-        $this->start();
-        $this->variant();
-        $this->unit();
-
+        $this->operation_data();
         return response()->json([
             'products' => $this->products,
             'store_products' => $this->qty->details,
@@ -92,6 +89,13 @@ class PurchaseController extends Controller
             'stores' => $this->get_store()
 
         ]);
+    }
+    public function operation_data()
+    {
+
+        $this->start();
+        $this->variant();
+        $this->unit();
     }
 
     public function product()
@@ -155,13 +159,13 @@ class PurchaseController extends Controller
 
 
 
-        dd($stock->core->data);
+        // dd($stock->core->data);
         // $result  = $this->daily->check_account();
 
         // if ($result == 0) {
 
         //     return response([
-        //         'message' => $this->daily->message,
+
         //         'status' => 'failed'
         //     ], 400);
         // }

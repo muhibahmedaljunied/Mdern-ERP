@@ -246,7 +246,7 @@
                                                     </td>
                                                     <td>
 
-                                                        {{ sto_pro.name }}
+                                                        {{ sto_pro.status }}
 
 
                                                     </td>

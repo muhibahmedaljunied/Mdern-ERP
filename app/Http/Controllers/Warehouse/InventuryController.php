@@ -42,18 +42,22 @@ class InventuryController extends Controller
     {
 
         $this->product();
-        $this->start();
-        $this->variant();
-        $this->unit();
+        $this->operation_data();
 
         return response()->json([
             'products' => $this->products,
-            'store_products' => $this->store_products,
+            'store_products' => $this->qty->details,
             'statuses' => Status::all(),
 
         ]);
     }
+    public function operation_data()
+    {
 
+        $this->start();
+        $this->variant();
+        $this->unit();
+    }
     public function product()
     {
 

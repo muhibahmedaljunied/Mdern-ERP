@@ -32,7 +32,7 @@ Route::post('/delete_product/{id}', 'Warehouse\ProductController@destroy');
 Route::post('/productsearch', 'Warehouse\ProductController@search');
 //-------------------------------------Unit------------------------------------------------------------------------------
 
-Route::post('/get_unit/{id}', 'Warehouse\UnitController@show');
+// Route::post('/get_unit/{id}', 'Warehouse\UnitController@show');
 Route::post('/get_product_price/{id}', 'Warehouse\ProductController@pricing');
 Route::post('/unit', 'Warehouse\UnitController@index');
 Route::post('/create_unit', 'Warehouse\UnitController@create');
@@ -111,6 +111,7 @@ Route::post('/stock_repo', 'Warehouse\StockController@stock_repo');
 // -------------------------------------OpeningInventury----------------------------------------------------------
 Route::post('/payOpening', 'Warehouse\InventuryController@store');
 Route::post('/opening/newopening', 'Warehouse\InventuryController@index');
+Route::post('/opening/newopening/{id}', 'Warehouse\InventuryController@index');
 Route::post('/opening_details', 'Warehouse\InventuryController@details');
 // ---------------------------------------------------------------------------------------------------------------
 Route::post('/Warehouse/pricing', 'Warehouse\InventuryController@pricing');

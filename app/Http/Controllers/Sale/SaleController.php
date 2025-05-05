@@ -62,8 +62,6 @@ class SaleController extends Controller
         return response()->json([
             'products' => $this->qty->details,
             'customers' => $this->customers(),
-
-
         ]);
     }
     // Admin123456

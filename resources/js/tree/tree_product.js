@@ -14,11 +14,24 @@ export default {
             }
 
             if (
-                this.type == "Purchase" ||
-                this.type == "Supply" ||
                 this.type == "OpeningInventory"
             ) {
-                this.product_tree(data); //this for get units of product
+                this.product_tree(data,'/opening/newopening'); //this for get units of product
+            }
+
+            if (
+                this.type == "Purchase"
+            ) {
+                this.product_tree_for_purchase_supply(data,'/purchase/newpurchase'); //this for get units of product
+            }
+
+
+            if (
+
+                this.type == "Supply"
+
+            ) {
+                this.product_tree_for_purchase_supply(data,'/supply/newsupply'); //this for get units of product
             }
 
             if (this.type == "Transfer") {
@@ -73,10 +86,15 @@ export default {
         //         );
         //     });
         // },
-        product_tree(data) {
+        product_tree(data,uri) {
             this.product = data.node.id;
-            axios.post(`/get_unit/${data.node.id}`).then((response) => {
-                this.store_products = response.data.products;
+            axios.post(`${uri}/${data.node.id}`,{
+                type: 'product',
+            }).then((response) => {
+
+                this.statuses = response.data.statuses;
+                // this.store_products = data.store_products;
+                this.store_products = response.data.store_products;
 
                 console.log("almuhibesssssssssssss", response.data.products);
                 for (
@@ -90,12 +108,37 @@ export default {
                 }
             });
         },
+        product_tree_for_purchase_supply(data,uri) {
+            this.product = data.node.id;
+            axios.post(`${uri}/${data.node.id}`,{
+                type: 'product',
+            }).then((response) => {
+                this.store_products = response.data.store_products;
+                this.products = response.data.products;
+                this.suppliers = response.data.suppliers;
+                this.stores = response.data.stores;
+                this.statuses = response.data.statuses;
+                this.treasuries = response.data.treasuries;
+
+                for (
+                    let index = 0;
+                    index < this.store_products.length;
+                    index++
+                ) {
+                    this.productm[index] = data.node.id;
+                    this.store_product_id[index] =
+                        this.store_products[index].store_product_id;
+                }
+
+
+            });
+        },
         product_tree_for_transfer(data) {
             this.product = data.node.id;
             axios.post(`/get_product/${data.node.id}`).then((response) => {
                 this.store_products = response.data.products;
 
-              
+
                 for (
                     let index = 0;
                     index < this.store_products.length;

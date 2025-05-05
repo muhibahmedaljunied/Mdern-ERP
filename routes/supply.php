@@ -10,6 +10,7 @@ Route::post('/suppliersearch', 'Supply\SupplierController@search');
 
 /*------------------------------------------------supply----------------------------------*/
 Route::post('/supply/newsupply', 'Supply\SupplyController@index');
+Route::post('/supply/newsupply/{id}', 'Supply\SupplyController@index');
 Route::post('/Supply/delete', 'Supply\SupplyController@destroy');
 Route::post('/Supply/delete/{id}', 'Supply\SupplyController@destroy');
 Route::post('/supply/newsupplysearch', 'Supply\SupplyController@search');
