@@ -54,9 +54,22 @@ trait OperationDataTrait
 
 
 
+<<<<<<< HEAD
         $this->qty->details = DB::table('products')
             ->where('products.id', $this->qty->request->id)
             ->join('store_products', 'store_products.product_id', '=', 'products.id')
+=======
+<<<<<<< HEAD
+        $this->qty->details = DB::table('products');
+
+        if ($this->qty->request->id) {
+
+            $this->qty->details =  $this->qty->details->where('products.id', $this->qty->request->id);
+        }
+
+
+        $this->qty->details = $this->qty->details->join('store_products', 'store_products.product_id', '=', 'products.id')
+>>>>>>> fa067d02058eb412e603d2152bd282007de27a22
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('stores', 'store_products.store_id', '=', 'stores.id')
             ->select(
@@ -82,6 +95,43 @@ trait OperationDataTrait
 
 
 
+<<<<<<< HEAD
+=======
+        $this->qty->details = DB::table('products')
+            ->where('stores.id', $this->qty->request->id)
+=======
+        $this->qty->details = DB::table('products')
+            ->where('products.id', $this->qty->request->id)
+>>>>>>> b8ad28e449a5c1b1f26a009ee09ac1e352d35de9
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->join('stores', 'store_products.store_id', '=', 'stores.id')
+            ->select(
+                'products.*',
+                'products.text as product',
+                'stores.text as store',
+                'stores.account_id as store_account_id',
+                'statuses.name as status',
+                'store_products.quantity as availabe_qty',
+                'store_products.*',
+                'store_products.cost as price',
+                'store_products.id as store_product_id'
+
+            )
+            ->get();
+
+<<<<<<< HEAD
+        // dd($this->qty->details);
+=======
+            // dd($this->qty->details);
+    }
+
+
+    public function product_detail_by_store()
+    {
+
+
+>>>>>>> fa067d02058eb412e603d2152bd282007de27a22
 
         $this->qty->details = DB::table('products')
             ->where('stores.id', $this->qty->request->id)
@@ -102,7 +152,12 @@ trait OperationDataTrait
             )
             ->get();
 
+<<<<<<< HEAD
         // dd($this->qty->details);
+=======
+            // dd($this->qty->details);
+>>>>>>> b8ad28e449a5c1b1f26a009ee09ac1e352d35de9
+>>>>>>> fa067d02058eb412e603d2152bd282007de27a22
     }
 
     public function variant()
