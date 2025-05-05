@@ -285,7 +285,7 @@
 
                                                         </div>
                                                         <div v-else>
-0
+                                                            0
                                                         </div>
 
                                                     </td>
@@ -303,8 +303,8 @@
                                                                 :id="'select_unit' + index" v-model="unit[index]"
                                                                 name="type" class="form-control" required>
 
-                                                                <option  v-for="unit in product.unit"
-                                                                v-bind:value="[unit.unit_id, unit.rate, unit.cost]">
+                                                                <option v-for="unit in product.unit"
+                                                                    v-bind:value="[unit.unit_id, unit.rate, unit.cost]">
                                                                     {{ unit.name }}
                                                                 </option>
 
@@ -336,10 +336,8 @@
                                                     <td>
 
 
-                                                        <input
-                                                            v-model="unit_price[index]"
-                                                            class="form-control input_cantidad" onkeypress="return "
-                                                            />
+                                                        <input v-model="unit_price[index]"
+                                                            class="form-control input_cantidad" onkeypress="return " />
 
 
                                                         <!-- <input v-else v-model="unit_price[index]"
@@ -350,11 +348,9 @@
 
 
 
-                                                        <input
-                                                            style="background-color: beige;" type="number"
+                                                        <input style="background-color: beige;" type="number"
                                                             @input="calculate()" v-model="qty[index]" id="qty"
-                                                            class="form-control input_cantidad" onkeypress="return "
-                                                             />
+                                                            class="form-control input_cantidad" onkeypress="return " />
 
                                                         <!-- <input v-else style="background-color: beige;" type="number"
                                                             @input="calculate()" v-model="qty[index]"
@@ -362,10 +358,8 @@
                                                             onkeypress="return " /> -->
                                                     </td>
                                                     <td>
-                                                        <input  type="number"
-                                                            v-model="tax[index]" id="qty"
-                                                            class="form-control input_cantidad" onkeypress="return "
-                                                             />
+                                                        <input type="number" v-model="tax[index]" id="qty"
+                                                            class="form-control input_cantidad" onkeypress="return " />
 
                                                         <!-- <input v-else type="number" v-model="tax[index]" id="qty"
                                                             class="form-control input_cantidad" onkeypress="return "
@@ -374,9 +368,8 @@
 
                                                     <td>
 
-                                                        <input  type="number"
-                                                        @input="calculate()" v-model="total[index]" :id="'total_row' + index"
-                                                            class="form-control"  />
+                                                        <input type="number" @input="calculate()" v-model="total[index]"
+                                                            :id="'total_row' + index" class="form-control" />
 
                                                         <!-- <input v-else @input="calculate()" type="number"
                                                             v-model="total[index]" :id="'total_row' + index"
@@ -845,6 +838,24 @@ export default {
             if (this.Way_to_pay_selected == 1) { //this is default if user not detect any way
 
                 this.paid = this.grand_total;
+
+            }
+
+
+
+            for (let index = 0; index < this.count; index++) {
+
+
+
+
+                if (!this.customer[0]) {
+
+
+                    toastMessage("فشل", " ادخل العميل");
+                    return 0;
+                }
+
+
 
             }
 

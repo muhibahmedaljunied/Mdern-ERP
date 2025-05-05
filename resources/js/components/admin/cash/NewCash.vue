@@ -210,11 +210,41 @@
                                                 <tr v-for="(product, index) in store_products" :key="index">
                                                     <td>{{ index + 1 }}</td>
                                                     <td>
-                                                        <div id="factura_producto" class="input_nombre">
-                                                            {{
-                                                                product.product
-                                                            }}<input type="hidden" v-model="product.id" id="id" />
+
+
+                                                        <div>
+                                                            <input type="hidden" v-model="product.text" id="desc"
+                                                                class="form-control" />
+
+                                                            <span>{{ product.text }}</span>
+                                                            <span style="color: blue;" v-if="product.kk"
+                                                                v-for="ss in product.kk">
+
+
+                                                                -{{ ss.value }}
+
+
+
+
+
+                                                            </span>
                                                         </div>
+
+
+                                                        <!-- <div class="custom-search">
+
+<input style="background-color: beige;font-size: 15px;"
+:id="'Purchase_productm_tree' + index" type="text" readonly class="custom-search-input">
+<input :id="'Purchase_productm_tree_id' + index" type="hidden" readonly
+class="custom-search-input">
+
+<button class="custom-search-botton" type="button" data-toggle="modal"
+data-target="#exampleModalProductm" @click="detect_index(index)">
+<i class="fa fa-plus-circle"></i></button>
+</div> -->
+
+
+
                                                     </td>
 
 
@@ -268,7 +298,7 @@
 
                                                         </div>
                                                         <div v-else>
-0
+                                                            0
                                                         </div>
 
                                                     </td>
@@ -301,7 +331,7 @@
                                                                 name="type" class="form-control" required>
 
                                                                 <option v-for="unit in product.unit"
-                                                                    v-bind:value="[unit.unit_id, unit.rate,unit.cost]">
+                                                                    v-bind:value="[unit.unit_id, unit.rate, unit.cost]">
                                                                     {{ unit.name }}
                                                                 </option>
 
@@ -809,18 +839,13 @@ export default {
         payment() {
 
 
+            if (this.Way_to_pay_selected == 1) { //this is default if user not detect any way
 
+                this.paid = this.grand_total;
+
+            }
 
             for (let index = 0; index < this.count; index++) {
-
-
-                if (!this.unit[index]) {
-
-                    toastMessage("فشل", ` ادخل الوحده في الصف رقم ${index + 1}`);
-                    return 0;
-
-                }
-
 
                 if (!this.customer[0]) {
 
@@ -830,25 +855,13 @@ export default {
                 }
 
 
-                if (!this.qty[index]) {
-
-
-                    toastMessage("فشل", ` ادخل الكميه في الصف ${index}`);
-                    return 0;
-                }
-
-
             }
 
 
 
 
 
-            if (this.Way_to_pay_selected == 1) { //this is default if user not detect any way
 
-                this.paid = this.grand_total;
-
-            }
 
 
             this.axios

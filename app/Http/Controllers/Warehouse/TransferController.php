@@ -12,7 +12,6 @@ use App\Traits\Details\DetailsTrait;
 use App\Traits\OperationDataTrait;
 use App\Traits\GeneralTrait;
 use App\Models\Product;
-use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use App\Models\Transfer;
 use App\Models\TransferDetail;
@@ -32,6 +31,7 @@ class TransferController extends Controller
 
     public $qty;
     public $details;
+    public $store_products;
 
 
     public function  __construct(
@@ -44,14 +44,6 @@ class TransferController extends Controller
         $this->qty->request = $request;
         $this->core->setData($request->all());
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -102,8 +94,7 @@ class TransferController extends Controller
     public function operation_data($request)
     {
 
-
-        ($this->qty->request->type == 'store') ? $this->product_detail_by_store($request) : $this->product_detail($request);
+        $this->start();
         $this->variant();
         $this->unit();
     }
@@ -259,6 +250,21 @@ class TransferController extends Controller
         }
     }
 
+
+
+
+    // public function show()
+    // {
+
+
+    //     // dd($this->qty->request);
+    //     $this->qty->set_compare_array(['quantity']);
+    //     $this->operation_data();
+    //     $this->qty->handle_qty();
+    //     return response()->json([
+    //         'products' => $this->qty->details,
+    //     ]);
+    // }
 
 
 

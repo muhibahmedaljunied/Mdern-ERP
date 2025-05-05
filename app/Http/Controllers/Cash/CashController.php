@@ -53,15 +53,13 @@ class CashController extends Controller
         ]);
     }
 
-    public function index(Request $request)
+    public function index()
     {
 
 
         $this->qty->set_compare_array(['quantity']);
-        // ($request->id) ? $this->operation_data($request) : $this->get_all($request);
         $this->operation_data();
         $this->qty->handle_qty();
-
         return response()->json([
             'products' => $this->qty->details,
             'customers' => $this->customers(),
@@ -74,7 +72,7 @@ class CashController extends Controller
     {
 
 
-        $this->product_detail();
+        $this->start();
         $this->variant();
         $this->unit();
     }

@@ -7,11 +7,14 @@ use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ProductUnit;
+use App\Traits\OperationDataTrait;
 use App\Models\Status;
 use Illuminate\Support\Facades\DB;
 
 class UnitController extends Controller
 {
+
+
 
     public function index()
     {
@@ -57,6 +60,8 @@ class UnitController extends Controller
             'products' => $filter->data,
         ]);
     }
+
+
 
 
     public function show(Request $request)

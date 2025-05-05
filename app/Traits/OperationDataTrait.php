@@ -8,20 +8,55 @@ use Illuminate\Support\Facades\DB;
 trait OperationDataTrait
 {
 
+    public function start()
+    {
+
+
+        if ($this->qty->request->id) {
+
+            ($this->qty->request->type == 'store') ? $this->product_detail_by_store() : $this->product_detail_by_product();
+        } else {
+
+            $this->product_detail();
+        }
+    }
+
     public function product_detail()
     {
 
 
+        $this->qty->details = DB::table('products')
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->join('stores', 'store_products.store_id', '=', 'stores.id')
+            ->select(
+                'products.*',
+                'products.text as product',
+                'stores.text as store',
+                'stores.account_id as store_account_id',
+                'statuses.name as status',
+                'store_products.quantity as availabe_qty',
+                'store_products.*',
+                'store_products.cost as price',
+                'store_products.id as store_product_id'
 
-        $this->qty->details = DB::table('products');
+            )
+            ->get();
 
-        if ($this->qty->request->id) {
+            
 
-            $this->qty->details =  $this->qty->details->where('products.id', $this->qty->request->id);
-        }
+        // dd($this->qty->details);
+    }
 
 
-        $this->qty->details = $this->qty->details->join('store_products', 'store_products.product_id', '=', 'products.id')
+    public function product_detail_by_product()
+    {
+
+
+
+        $this->qty->details = DB::table('products')
+            ->where('products.id', $this->qty->request->id)
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('stores', 'store_products.store_id', '=', 'stores.id')
             ->select(
@@ -44,6 +79,7 @@ trait OperationDataTrait
 
     public function product_detail_by_store()
     {
+
 
 
 

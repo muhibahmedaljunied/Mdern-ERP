@@ -60,7 +60,7 @@ class SupplyController extends Controller
 
 
         $this->product();
-        $this->product_detail($this->qty->request);
+        $this->start($this->qty->request);
         $this->variant();
         $this->unit();
 

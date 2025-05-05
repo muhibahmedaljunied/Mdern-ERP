@@ -50,15 +50,19 @@ class SaleController extends Controller
     }
 
 
+
     public function index()
     {
 
+
+        // dd($this->qty->request);
         $this->qty->set_compare_array(['quantity']);
         $this->operation_data();
         $this->qty->handle_qty();
         return response()->json([
             'products' => $this->qty->details,
             'customers' => $this->customers(),
+
 
         ]);
     }
@@ -70,7 +74,7 @@ class SaleController extends Controller
 
 
 
-        $this->product_detail();
+        $this->start();
         $this->variant();
         $this->unit();
     }
@@ -89,8 +93,6 @@ class SaleController extends Controller
 
             )
             ->get();
-
-
     }
 
     public function treasuries()
@@ -141,13 +143,17 @@ class SaleController extends Controller
 
     ) {
 
-        // dd($stock->core->data);
+
+        //// ($stock->core->data);
+
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 
+
             $stock->handle();
 
-            // dd('finall');
+            //// (Sa'finall'
+
             Cache::forget('stock');
             // dd(12);
             // ------------------------------------------------------------------------------------------------------

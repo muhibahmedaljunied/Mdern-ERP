@@ -41,11 +41,8 @@ class InventuryController extends Controller
     public function index()
     {
 
-
-
-
         $this->product();
-        $this->product_detail($this->qty->request);
+        $this->start();
         $this->variant();
         $this->unit();
 

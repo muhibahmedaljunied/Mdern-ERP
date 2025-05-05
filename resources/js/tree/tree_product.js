@@ -21,6 +21,10 @@ export default {
                 this.product_tree(data); //this for get units of product
             }
 
+            if (this.type == "Transfer") {
+                this.get_product(table, `/get_product/${data.node.id}`);
+            }
+
             if (this.type == "Price") {
                 this.product_tree_for_price(data, count); //this for get units of product
             }
@@ -75,6 +79,23 @@ export default {
                 this.store_products = response.data.products;
 
                 console.log("almuhibesssssssssssss", response.data.products);
+                for (
+                    let index = 0;
+                    index < this.store_products.length;
+                    index++
+                ) {
+                    this.productm[index] = data.node.id;
+                    this.store_product_id[index] =
+                        this.store_products[index].store_product_id;
+                }
+            });
+        },
+        product_tree_for_transfer(data) {
+            this.product = data.node.id;
+            axios.post(`/get_product/${data.node.id}`).then((response) => {
+                this.store_products = response.data.products;
+
+              
                 for (
                     let index = 0;
                     index < this.store_products.length;

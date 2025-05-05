@@ -28,9 +28,9 @@
                                                     <h5 class="card-title"> المنتج</h5>
                                                     <div class="custom-search">
 
-                                                        <input :id="'Sale_product_tree'" type="text"
+                                                        <input :id="'Transfer_product_tree'" type="text"
                                                             class="custom-search-input">
-                                                        <input :id="'Sale_product_tree_id'" type="hidden"
+                                                        <input :id="'Transfer_product_tree_id'" type="hidden"
                                                             class="custom-search-input">
 
                                                         <button @click="detect_index(null)" class="custom-search-botton"
@@ -213,7 +213,7 @@
                                                             ملاحظه
                                                         </th>
 
-                                                        <th>اضافه</th>
+                                                        <!-- <th>اضافه</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -262,7 +262,8 @@
                                                         </td>
                                                         <td>
 
-                                                            <div
+                                                            <div  v-if="data_product.availabe_qty != 0">
+                                                                <div
                                                                 v-for="temx in data_product.qty_after_convert['quantity']">
 
 
@@ -285,6 +286,11 @@
 
 
                                                             </div>
+                                                            </div>
+                                                            <div v-else>
+0
+                                                            </div>
+
 
                                                         </td>
                                                         <td>
@@ -355,7 +361,7 @@
                                                                 :id="'message_validation' + index"></span>
 
                                                         </td>
-                                                        <td>
+                                                        <!-- <td>
                                                             <input @change="
                                                                 add_one_transfer(
                                                                     index,
@@ -363,7 +369,7 @@
 
                                                                 )
                                                                 " type="checkbox" v-model="check_state[index]" class="btn btn-info waves-effect" />
-                                                        </td>
+                                                        </td> -->
 
                                                     </tr>
                                                 </tbody>

@@ -779,18 +779,32 @@ export default {
             }
             this.To_pay = this.grand_total;
 
+
+
             for (let index = 0; index < this.count; index++) {
 
 
                 this.desc[index] = $(`#product_desc${index}`).val();
                 this.status[index] = $(`#product_status${index}`).val();
 
-                if (!this.qty[index] || !this.unit || !this.unit_price[index]) {
-                    console.log('i here');
 
-                    this.$delete(this.counts, index);
 
+                if (!this.supplier[0]) {
+
+
+                    toastMessage("فشل", " ادخل المورد");
+                    return 0;
                 }
+
+
+
+
+                // if (!this.qty[index] || !this.unit || !this.unit_price[index]) {
+
+                //     console.log('i here');
+                //     this.$delete(this.counts, index);
+
+                // }
 
             }
 

@@ -80,7 +80,7 @@ class PurchaseController extends Controller
 
 
         $this->product();
-        $this->product_detail();
+        $this->start();
         $this->variant();
         $this->unit();
 
