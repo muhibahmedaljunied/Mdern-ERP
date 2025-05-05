@@ -78,19 +78,7 @@ export default {
                         .on("rename_node.jstree", function (e, data) {})
                         .on("changed.jstree", function (e, data) {
                             this.productm = []; //this for empty productm array when change from product into another by clicking tree
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-                            // this.storem = []; //this for empty storem array when change from storem into another by clicking tree
-=======
-<<<<<<< HEAD
-                            // this.storem = []; //this for empty storem array when change from storem into another by clicking tree
-=======
-                            this.storem = []; //this for empty storem array when change from storem into another by clicking tree
->>>>>>> b8ad28e449a5c1b1f26a009ee09ac1e352d35de9
->>>>>>> fa067d02058eb412e603d2152bd282007de27a22
->>>>>>> ec766f0c11790034adeba36765f6eedac1268802
 
                             if (
                                 gf.type == "Sale" ||
