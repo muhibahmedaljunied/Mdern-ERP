@@ -218,10 +218,23 @@
 
                                                         <th> الوحده </th>
 
+<<<<<<< HEAD
                                                         <th> التكلفه </th>
                                                         <th>الكميه المرتجعه الفعليه </th>
                                                         <th>قيمه المرتجع</th>
                                                         <th>ملاحظه</th>
+=======
+                            <th>الكميه المرتجعه الفعليه </th>
+                            <th>قيمه المرتجع</th>
+                            <th>ملاحظه</th>
+
+                          </tr>
+                        </thead>
+                        <tbody v-if="detail && detail.length > 0">
+                          <tr v-for="(cash_details, index) in detail" :key="index">
+                            <input v-model="id = cash_details.cash_id" type="hidden" name="name" id="name"
+                              class="form-control" />
+>>>>>>> fefe2f000df66ce8bac673a657e72392985ee2eb
 
                                                     </tr>
                                                 </thead>
@@ -330,7 +343,18 @@
 
                                                             </select>
 
+<<<<<<< HEAD
 
+=======
+                              <select v-on:change="calculate()" style="background-color: beige;"
+                                :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control"
+                                required>
+
+                                <option  v-for="unit in cash_details.unit"
+                                  v-bind:value="[unit.unit_id, unit.rate,unit.cost]">
+                                  {{ unit.name }}
+                                </option>
+>>>>>>> fefe2f000df66ce8bac673a657e72392985ee2eb
 
                                                         </td>
 
@@ -340,6 +364,7 @@
                                                                 class="form-control input_cantidad"
                                                                 onkeypress="return " />
 
+<<<<<<< HEAD
                                                             {{ unit_price[index] }}
 
                                                         </td>
@@ -351,9 +376,19 @@
                                                                     style="background-color: beige;"
                                                                     v-model="qty[index]" type="number"
                                                                     class="form-control" />
+=======
+>>>>>>> fefe2f000df66ce8bac673a657e72392985ee2eb
 
 
 
+<<<<<<< HEAD
+=======
+                            <td>
+                              <div class="form-group">
+                                <input @input="calculate()"  style="background-color: beige;"
+                                  v-model="qty[index]" type="number" class="form-control"  />
+
+>>>>>>> fefe2f000df66ce8bac673a657e72392985ee2eb
 
                                                             </div>
                                                         </td>
@@ -365,6 +400,7 @@
                                                         </td>
                                                         <td>
 
+<<<<<<< HEAD
                                                             <span style="color: red;"
                                                                 :id="'message_validation' + index"></span>
 
@@ -372,12 +408,25 @@
 
                                                     </tr>
 
+=======
+
+                              </div>
+                            </td>
+                            <td>
+                              <input @input="calculate()"  v-model="total[index]" name="number"
+                                type="number" class="form-control" />
+
+>>>>>>> fefe2f000df66ce8bac673a657e72392985ee2eb
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+                          </tr>
+>>>>>>> fefe2f000df66ce8bac673a657e72392985ee2eb
 
                                                 </tbody>
                                                 <tbody v-else>
