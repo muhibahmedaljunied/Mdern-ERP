@@ -660,7 +660,7 @@ export default {
             discounts: 0,
             total_tax: 0,
             temporale: 1,
-            type_payment: 0,
+            payment_type: 0,
             show: false,
             show_treasury: true,
             show_bank: false,
@@ -748,7 +748,7 @@ export default {
 
         onwaychange(e) {
             let input = e.target;
-            this.type_payment = input.value;
+            this.payment_type = input.value;
             if (input.value == 2) {
                 this.show = true;
                 this.remaining = this.grand_total;
@@ -857,7 +857,7 @@ export default {
                     sub_total: this.sub_total,
                     discount: this.discounts,
                     total_tax: this.total_tax,
-                    type_payment: this.type_payment,
+                    payment_type: this.payment_type,
                     remaining: this.remaining,
                     paid: this.paid,
                     // ------------------------------------------------------------------------------

@@ -1,60 +1,60 @@
 <template>
-  <div>
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-          <div class="card-header pb-0">
+    <div>
+        <div class="row row-sm">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header pb-0">
 
-            <div class="d-flex justify-content-right">
-              <span class="h2"> مرتجع توريد</span>
-            </div>
-          </div>
-
-
-          <div class="d-flex justify-content-right">
+                        <div class="d-flex justify-content-right">
+                            <span class="h2"> مرتجع توريد</span>
+                        </div>
+                    </div>
 
 
-            <div class="form-group">
-              <input type="search" autocomplete="on" name="search" role="button" placeholder="بحث  بالرقم"
-                v-model="word_search" @input="get_search()" />
-            </div>
-          </div>
+                    <div class="d-flex justify-content-right">
 
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table text-md-nowrap" id="example1">
-                <thead>
-                  <tr>
-                    <!-- <th class="wd-15p border-bottom-0">رقم التوريد</th> -->
-                    <th class="wd-15p border-bottom-0">رقم السند</th>
-                    <th class="wd-15p border-bottom-0">المورد</th>
-                    <!-- <th class="wd-15p border-bottom-0"> الكميه المرتجعه</th> -->
-                    <th class="wd-15p border-bottom-0">تاريخ المرتجع</th>
-                    <th class="wd-15p border-bottom-0">سبب الارجاع </th>
 
-                    <th class="wd-15p border-bottom-0">العمليات</th>
-                  </tr>
-                </thead>
-                <tbody v-if="return_supplys && return_supplys.data.length > 0">
-                  <tr v-for="(return_supply, index) in return_supplys.data" :key="index">
-                    <!-- <td>{{ return_supply.supply_id }}</td> -->
-                    <td>{{ return_supply.return_id }}</td>
-                    <td>{{ return_supply.supplier_name }}</td>
-                    <!-- <td>{{ return_supply.qty_return }}</td> -->
-                    <td>{{ return_supply.return_date }}</td>
-                    <td>{{ return_supply.note }}</td>
-                    <td>
-                      <!-- <button
+                        <div class="form-group">
+                            <input type="search" autocomplete="on" name="search" role="button" placeholder="بحث  بالرقم"
+                                v-model="word_search" @input="get_search()" />
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-md-nowrap" id="example1">
+                                <thead>
+                                    <tr>
+                                        <!-- <th class="wd-15p border-bottom-0">رقم التوريد</th> -->
+                                        <th class="wd-15p border-bottom-0">رقم السند</th>
+                                        <th class="wd-15p border-bottom-0">المورد</th>
+                                        <!-- <th class="wd-15p border-bottom-0"> الكميه المرتجعه</th> -->
+                                        <th class="wd-15p border-bottom-0">تاريخ المرتجع</th>
+                                        <th class="wd-15p border-bottom-0">سبب الارجاع </th>
+
+                                        <th class="wd-15p border-bottom-0">العمليات</th>
+                                    </tr>
+                                </thead>
+                                <tbody v-if="return_supplys && return_supplys.data.length > 0">
+                                    <tr v-for="(return_supply, index) in return_supplys.data" :key="index">
+                                        <!-- <td>{{ return_supply.supply_id }}</td> -->
+                                        <td>{{ return_supply.return_id }}</td>
+                                        <td>{{ return_supply.supplier_name }}</td>
+                                        <!-- <td>{{ return_supply.qty_return }}</td> -->
+                                        <td>{{ return_supply.return_date }}</td>
+                                        <td>{{ return_supply.note }}</td>
+                                        <td>
+                                            <!-- <button
 
                     @click="supply_details(supplies.id)"
                       type="button"
-    
+
                       class="btn btn-danger"
                     >
                       <i class="mdi mdi-account-minus"></i>
                     </button> -->
 
-                      <!-- <router-link
+                                            <!-- <router-link
                       :to="`/return_supply_details/${return_supply.return_id}`"
                       class="btn btn-success"
                     >
@@ -63,110 +63,134 @@
                      <router-link
                     :to="`/return_supply_invoice/${return_supply.return_id}`"
                         class="btn btn-success">
-                    
+
                       <span>فاتوره</span>
                     </router-link> -->
 
 
-                      <div class="optionbox">
+                                            <div class="optionbox">
 
-                        <select @change="changeRoute(index)" v-model="operationselected[index]" name="العمليات"
-                          class="form-control">
-                          <option class="btn btn-success"
-                            v-bind:value="['/returnsupply_details/', return_supply.return_id, 0]">
-                            تفاصيل
-                          </option>
-
-
-                          <option class="btn btn-success"
-                            v-bind:value="['return_supply_invoice', return_supply.return_id, 1]">
-                            سند مرتجع شراء
-                          </option>
-                          <option class="btn btn-success"
-                            v-bind:value="['/return_supply_recive/', return_supply.return_id, 2]">
-                            سند استلام مرتجع شراء
-                          </option>
-                          <option class="btn btn-success"
-                            v-bind:value="['/return_supply_invoice_cancel/', return_supply.supply_id, 3]">
-                            الفاء الفاتوره
-                          </option>
-                          <option class="btn btn-success"
-                            v-bind:value="['/return_supply_invoice_update/', return_supply.supply_id, 4]">
-                            تعديل الفاتوره
-                          </option>
-                          <option class="btn btn-success"
-                            v-bind:value="['return_supply_daily', return_supply.supply_id, 5]">
-                            عرض القيد المحاسبي
-                          </option>
+                                                <select @change="changeRoute(index)" v-model="operationselected[index]"
+                                                    name="العمليات" class="form-control">
+                                                    <option class="btn btn-success"
+                                                        v-bind:value="['/returnsupply_details/', return_supply.return_id, 0]">
+                                                        تفاصيل
+                                                    </option>
 
 
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                                                    <option class="btn btn-success"
+                                                        v-bind:value="['return_supply_invoice', return_supply.return_id, 1]">
+                                                        سند مرتجع شراء
+                                                    </option>
+                                                    <option class="btn btn-success"
+                                                        v-bind:value="['/return_supply_recive/', return_supply.return_id, 2]">
+                                                        سند استلام مرتجع شراء
+                                                    </option>
+                                                    <option class="btn btn-success"
+                                                        v-bind:value="['/return_supply_invoice_cancel/', return_supply.supply_id, 3]">
+                                                        الفاء الفاتوره
+                                                    </option>
+                                                    <option class="btn btn-success"
+                                                        v-bind:value="['/return_supply_invoice_update/', return_supply.supply_id, 4]">
+                                                        تعديل الفاتوره
+                                                    </option>
+                                                    <option class="btn btn-success"
+                                                        v-bind:value="['return_supply_daily', return_supply.supply_id, 5]">
+                                                        عرض القيد المحاسبي
+                                                    </option>
+
+
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination align="center" :data="return_supplys" @pagination-change-page="list"></pagination>
+                    </div>
+                </div>
             </div>
-            <pagination align="center" :data="return_supplys" @pagination-change-page="list"></pagination>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="row row-sm">
-      <div class="col-xl-12">
-        <div class="card">
-          <div class="card-header pb-0">
+        <div class="row row-sm">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header pb-0">
 
-            <span class="h2">تفاصيل مرتجع الشراء</span>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table text-md-nowrap" id="example1">
-                <thead>
-                  <tr>
-                    <th class="wd-15p border-bottom-0">#</th>
-                    <!-- <th class="wd-15p border-bottom-0">رقم المرتجع</th> -->
-                    <th class="wd-15p border-bottom-0">المنتج</th>
-                    <th class="wd-15p border-bottom-0">الحاله</th>
-                    <th>المواصفات والطراز</th>
-                    <th class="wd-15p border-bottom-0"> الكميه المرتجعه</th>
-                    <th class="wd-15p border-bottom-0">المخزن</th>
+                        <span class="h2">تفاصيل مرتجع الشراء</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-md-nowrap" id="example1">
+                                <thead>
+                                    <tr>
+                                        <th class="wd-15p border-bottom-0">#</th>
+                                        <!-- <th class="wd-15p border-bottom-0">رقم المرتجع</th> -->
+                                        <th class="wd-15p border-bottom-0">المنتج</th>
+                                        <th class="wd-15p border-bottom-0">الحاله</th>
+                                        <th>المواصفات والطراز</th>
+                                        <th class="wd-15p border-bottom-0"> الكميه المرتجعه</th>
+                                        <th class="wd-15p border-bottom-0">المخزن</th>
 
 
 
-                  </tr>
-                </thead>
-                <tbody v-if="return_detail && return_detail.length > 0">
-                  <tr v-for="(return_details, index) in return_detail" :key="index">
-                    <td>{{ index + 1 }}</td>
-                    <!-- <td>{{ return_details.supply_return_id }}</td> -->
-                    <td>{{ return_details.product_name }}</td>
-                    <td>{{ return_details.status }}</td>
-                    <td>{{ return_details.desc }}</td>
-                    <!-- <td>{{ return_details.qty_return }}</td> -->
-
-                    <td>
-
-                      <div v-for="temx in return_details.qty_after_convert['qty']">
+                                    </tr>
+                                </thead>
+                                <tbody v-if="return_detail && return_detail.length > 0">
+                                    <tr v-for="(return_details, index) in return_detail" :key="index">
+                                        <td>{{ index + 1 }}</td>
+                                        <!-- <td>{{ return_details.supply_return_id }}</td> -->
+                                        <td>
 
 
+                                            <div>
+                                                <input type="hidden" v-model="return_details.text" id="desc"
+                                                    class="form-control" />
 
-                        <span v-for="temx2 in temx">
+                                                <span>{{ return_details.text }}</span>
+                                                <span style="color: blue;" v-if="return_details.kk"
+                                                    v-for="ss in return_details.kk">
 
 
-                          <span style="float: right;">
-                            {{ temx2[0] }}
-                            <span style="color: red;">
-                              {{ temx2[1] }}
-                            </span>
-
-                          </span>
+                                                    -{{ ss.value }}
 
 
 
-                        </span>
 
-                        <!-- <span v-if="temx.unit_type == 0">
+
+                                                </span>
+                                            </div>
+
+
+
+
+                                        </td>
+                                        <td>{{ return_details.status }}</td>
+                                        <td>{{ return_details.desc }}</td>
+                                        <!-- <td>{{ return_details.qty_return }}</td> -->
+
+                                        <td>
+
+                                            <div v-for="temx in return_details.qty_after_convert['qty']">
+
+
+
+                                                <span v-for="temx2 in temx">
+
+
+                                                    <span style="float: right;">
+                                                        {{ temx2[0] }}
+                                                        <span style="color: red;">
+                                                            {{ temx2[1] }}
+                                                        </span>
+
+                                                    </span>
+
+
+
+                                                </span>
+
+                                                <!-- <span v-if="temx.unit_type == 0">
 
 
 <span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
@@ -176,11 +200,11 @@ temx.name }}</span>
 
 </span> -->
 
-                      </div>
+                                            </div>
 
-                    </td>
+                                        </td>
 
-                    <!-- <td>
+                                        <!-- <td>
                       <div v-for="temx in return_details.units">
 
                         <span v-if="temx.unit_type == 1">
@@ -199,131 +223,131 @@ temx.name }}</span>
                       </div>
 
                     </td> -->
-                    <td>{{ return_details.text }}</td>
+                                        <td>{{ return_details.text }}</td>
 
 
 
 
 
 
-                  </tr>
+                                    </tr>
 
-                </tbody>
-                <tbody v-else>
-                  <tr>
-                    <td align="center" colspan="3">
-                      <h3>لايوجد اي مرتجعات</h3>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                                </tbody>
+                                <tbody v-else>
+                                    <tr>
+                                        <td align="center" colspan="3">
+                                            <h3>لايوجد اي مرتجعات</h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 <script>
 import pagination from "laravel-vue-pagination";
 export default {
-  components: {
-    pagination,
-  },
-  data() {
-    return {
-      // return_supply: "yes",
+    components: {
+        pagination,
+    },
+    data() {
+        return {
+            // return_supply: "yes",
 
-      return_supplys: {
-        type: Object,
-        default: null,
-      },
-      word_search: "",
-      operationselected: [],
-      return_detail: '',
-      table: '',
-
-
-    };
-  },
-  props: ['data'],
-
-  mounted() {
-
-    this.table = 'supply_return_details';
-    this.list();
-  },
-  methods: {
-    changeRoute(index) {
+            return_supplys: {
+                type: Object,
+                default: null,
+            },
+            word_search: "",
+            operationselected: [],
+            return_detail: '',
+            table: '',
 
 
-      // alert(index);
-      console.log(this.operationselected[index][0]);
+        };
+    },
+    props: ['data'],
+
+    mounted() {
+
+        this.table = 'supply_return_details';
+        this.list();
+    },
+    methods: {
+        changeRoute(index) {
 
 
-      if (this.operationselected[index][2] == 0) {
+            // alert(index);
+            console.log(this.operationselected[index][0]);
 
-        this.axios
-          .post(this.operationselected[index][0] + this.operationselected[index][1], {
-            table: this.table,
-            operation: 'OperationQty'
 
-          })
-          .then((response) => {
-            console.log(response.data.return_details);
-            this.return_detail = response.data.return_details;
+            if (this.operationselected[index][2] == 0) {
 
-          })
-          .catch(({ response }) => {
-            console.error(response);
-          });
+                this.axios
+                    .post(this.operationselected[index][0] + this.operationselected[index][1], {
+                        table: this.table,
+                        operation: 'OperationQty'
 
-      } else {
+                    })
+                    .then((response) => {
+                        console.log(response.data.return_details);
+                        this.return_detail = response.data.return_details;
 
-        // this.$router.push(this.operationselected[index][0] + this.operationselected[index][1]);
-        this.$router.push({
-          name: this.operationselected[index][0],
-          params: { data: this.operationselected[index][1] },
-        });
-      }
+                    })
+                    .catch(({ response }) => {
+                        console.error(response);
+                    });
+
+            } else {
+
+                // this.$router.push(this.operationselected[index][0] + this.operationselected[index][1]);
+                this.$router.push({
+                    name: this.operationselected[index][0],
+                    params: { data: this.operationselected[index][1] },
+                });
+            }
+
+        },
+        get_search(word_search) {
+            this.axios
+                .post(`/listreturn_supplysearch`, { word_search: this.word_search })
+                .then(({ data }) => {
+                    this.return_supplys = data.return_supplys;
+
+                    // this.$root.logo = "Category";
+                });
+        },
+        list(page = 1) {
+            this.axios
+                .post(`/listreturn_supply/${this.data}`)
+                .then(({ data }) => {
+                    console.log(data.returns);
+                    this.return_supplys = data.returns;
+
+                })
+                .catch(({ response }) => {
+                    console.error(response);
+                });
+        },
 
     },
-    get_search(word_search) {
-      this.axios
-        .post(`/listreturn_supplysearch`, { word_search: this.word_search })
-        .then(({ data }) => {
-          this.return_supplys = data.return_supplys;
-
-          // this.$root.logo = "Category";
-        });
-    },
-    list(page = 1) {
-      this.axios
-        .post(`/listreturn_supply/${this.data}`)
-        .then(({ data }) => {
-          console.log(data.returns);
-          this.return_supplys = data.returns;
-
-        })
-        .catch(({ response }) => {
-          console.error(response);
-        });
-    },
-
-  },
 };
 </script>
 <style scoped>
 .optionbox select {
-  background: #E62968;
-  color: #fff;
-  padding: 10px;
-  width: 120px;
-  height: 30px;
-  border: none;
-  font-size: 20px;
-  box-shadow: 0 5px 18px rgb(93, 15, 9);
-  -webkit-appearance: button;
-  outline: none;
+    background: #E62968;
+    color: #fff;
+    padding: 10px;
+    width: 120px;
+    height: 30px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 18px rgb(93, 15, 9);
+    -webkit-appearance: button;
+    outline: none;
 }
 </style>

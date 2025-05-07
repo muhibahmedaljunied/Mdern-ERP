@@ -813,7 +813,7 @@ export default {
       this.paid = 0;
       this.remaining = 0;
       let input = e.target;
-      this.type_payment = input.value;
+      this.payment_type = input.value;
       if (input.value == 2) {
         this.show = true;
         // this.remaining = this.grand_total;
@@ -854,7 +854,7 @@ export default {
 
 
           type: this.type,
-          count: this.counts,
+          count: this.count,
           unit: this.unit,
           qty: this.qty,
           total: this.total,

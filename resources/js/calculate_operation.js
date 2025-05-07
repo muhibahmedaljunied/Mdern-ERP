@@ -33,13 +33,9 @@ export default {
                     this.type == "Sale" ||
                     this.type == "SaleReturn" ||
                     this.type == "Cash" ||
-<<<<<<< HEAD
                     this.type == "CashReturn" ||
-=======
-                    this.type == "Casheturn" ||
->>>>>>> fefe2f000df66ce8bac673a657e72392985ee2eb
                     this.type == "Supply" ||
-                    this.type == "Supplyeturn" ||
+                    this.type == "SupplyReturn" ||
                     this.type == "OpeningInventory"
                 ) {
 

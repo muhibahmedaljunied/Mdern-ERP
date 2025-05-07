@@ -673,7 +673,7 @@ export default {
             store_products: '',
             temporale: 1,
             discount: 0,
-            type_payment: 0,
+            payment_type: 0,
             show: false,
 
 
@@ -738,7 +738,7 @@ export default {
             this.paid = 0;
             this.remaining = 0;
             let input = e.target;
-            this.type_payment = input.value;
+            this.payment_type = input.value;
             if (input.value == 2) {
                 this.show = true;
 
@@ -907,7 +907,7 @@ export default {
                     sub_total: this.sub_total,
                     discount: this.discount,
                     total_tax: this.total_tax,
-                    type_payment: this.type_payment,
+                    payment_type: this.payment_type,
                     remaining: this.remaining,
                     paid: this.paid,
                     // -------------------

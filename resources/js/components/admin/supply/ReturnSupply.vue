@@ -175,9 +175,10 @@
                             <th> المواصفات والطراز</th>
                             <th>المخزن</th>
                             <th>الكميه المسموح ارجاعها</th>
-                            <th>التكلفه</th>
+
 
                             <th>الوحده</th>
+                            <th>التكلفه</th>
                             <th>الكميه المرتجعه الفعليه</th>
                             <th>قيمه المرتجع</th>
 
@@ -312,20 +313,17 @@ temx.name }}</span>
 
                             </td>
 
-                            <td>
 
-                              {{ unit_price[index] }}
-                            </td>
 
                             <td>
 
 
-                              <select v-on:change="calculate()" v-if="check_state[index] == true" style="background-color: beige;"
+                              <select v-on:change="set_unit_price(index),calculate()" style="background-color: beige;"
                                 :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control"
                                 required>
 
-                                <option  v-for="unit in supply_details.units"
-                                  v-bind:value="[unit.unit_id, unit.rate]">
+                                <option  v-for="unit in supply_details.unit"
+                                  v-bind:value="[unit.unit_id, unit.rate,unit.cost]">
                                   {{ unit.name }}
                                 </option>
 
@@ -335,6 +333,14 @@ temx.name }}</span>
 
 
                             </td>
+                            <td>
+                                <input v-on:input="calculate()" style="background-color: beige;"
+                                                            type="hidden" v-model="unit_price[index]"
+                                                            class="form-control" />
+
+
+{{ unit_price[index] }}
+</td>
                             <td>
                               <div class="form-group">
                                 <input @input="calculate()"  style="background-color: beige;"
@@ -784,7 +790,7 @@ export default {
       this.axios
         .post(`/supplyreturn`, {
 
-          count: this.counts,
+            count: this.count,
           unit: this.unit,
           qty: this.qty,
           total: this.total,
@@ -804,7 +810,7 @@ export default {
           // -----------------------------------------------------------
 
           type_daily: 'supplyreturn',
-          type_payment: this.Way_to_pay_selected,
+          payment_type: this.Way_to_pay_selected,
           daily_index: 0,
           description: this.description,
           type_refresh: this.type_refresh,
