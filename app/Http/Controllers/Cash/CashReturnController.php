@@ -42,6 +42,7 @@ class CashReturnController extends Controller
         $this->qty->set_compare_array(['qty', 'quantity', 'qty_remain']);
         $this->init();
         $this->get_details();
+        $this->unit();
         $this->qty->handle_qty();
         return response()->json([
             'details' => $this->qty->details,

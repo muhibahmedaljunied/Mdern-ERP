@@ -340,19 +340,9 @@ data-target="#exampleModalProductm" @click="detect_index(index)">
 
                                                     </td>
 
-                                                    <!-- <td>
-
-  {{ unit_price[index] }}
-</td> -->
-                                                    <!-- <td>
-
-  <span style="color: red;" :id="'message_validation' + index"></span>
-
-</td> -->
 
                                                     <td>
-                                                        <!-- <input style="background-color: beige;" type="number" @input="on_input(qty[index], product.availabe_qty), calculate(product.price, qty[index],
-index)" v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeypress="return " /> -->
+
 
 
                                                         <input

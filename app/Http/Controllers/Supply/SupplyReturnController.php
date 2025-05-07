@@ -59,6 +59,7 @@ class SupplyReturnController extends Controller
         $this->init();
         $this->get_details();
         $this->variant();
+        $this->unit();
         // dd($this->qty->details);
         $this->qty->handle_qty();
 

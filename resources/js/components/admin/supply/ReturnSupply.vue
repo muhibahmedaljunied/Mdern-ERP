@@ -181,7 +181,7 @@
                             <th>الكميه المرتجعه الفعليه</th>
                             <th>قيمه المرتجع</th>
 
-                            <th>اضافه</th>
+
                           </tr>
                         </thead>
                         <tbody v-if="detail && detail.length > 0">
@@ -320,11 +320,11 @@ temx.name }}</span>
                             <td>
 
 
-                              <select v-if="check_state[index] == true" style="background-color: beige;"
+                              <select v-on:change="calculate()" v-if="check_state[index] == true" style="background-color: beige;"
                                 :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control"
                                 required>
 
-                                <option disabled v-for="unit in supply_details.units"
+                                <option  v-for="unit in supply_details.units"
                                   v-bind:value="[unit.unit_id, unit.rate]">
                                   {{ unit.name }}
                                 </option>
@@ -333,53 +333,28 @@ temx.name }}</span>
                               </select>
 
 
-                              <select v-on:change="calculate_total(index)" v-else style="background-color: beige;"
-                                :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control"
-                                required>
 
-                                <option v-for="unit in supply_details.units" v-bind:value="[unit.unit_id, unit.rate]">
-                                  {{ unit.name }}
-                                </option>
-
-
-                              </select>
                             </td>
                             <td>
                               <div class="form-group">
-                                <input v-if="check_state[index] == true" readonly style="background-color: beige;"
+                                <input @input="calculate()"  style="background-color: beige;"
                                   v-model="qty[index]" type="number" class="form-control" />
 
 
-                                <input v-else @input="calculate_total(index)" style="background-color: beige;"
-                                  v-model="qty[index]" type="number" min="1" step="1" class="form-control" />
+
 
                               </div>
 
                             </td>
 
                             <td>
-                              <input v-if="check_state[index] == true" readonly v-model="total[index]" name="number"
+                              <input v-on:change="calculate()"   v-model="total[index]" name="number"
                                 type="number" class="form-control" />
 
-                              <input v-else v-on:change="calculate_total(index)" v-model="total[index]" readonly
-                                name="number" type="number" class="form-control" />
 
                             </td>
 
-                            <td v-if="supply_details.qty_remain != 0">
-                              <input v-model="check_state[index]" @change="
 
-                                calculate()
-
-                                " type="checkbox" class="btn btn-info waves-effect">
-                            </td>
-
-                            <td v-else>
-                              <input v-model="check_state[index]" @change="
-
-                                calculate()
-                                " type="checkbox" class="btn btn-info waves-effect" disabled>
-                            </td>
 
 
                           </tr>

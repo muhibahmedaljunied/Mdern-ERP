@@ -29,9 +29,13 @@ export default {
                 this.row_counter = index;
                 if (
                     this.type == "Purchase" ||
+                    this.type == "PurchaseReturn" ||
                     this.type == "Sale" ||
+                    this.type == "SaleReturn" ||
                     this.type == "Cash" ||
+                    this.type == "CashReturn" ||
                     this.type == "Supply" ||
+                    this.type == "Supplyeturn" ||
                     this.type == "OpeningInventory"
                 ) {
 
