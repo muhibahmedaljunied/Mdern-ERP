@@ -42,7 +42,7 @@
 
                     </div>
 
-      
+
 
                     <div class="col-md-4">
                       <label for="pagoPrevio">اجمالي الفاتوره</label>
@@ -90,7 +90,7 @@
                     </div>
 
 
-                    <!-- 
+                    <!--
         <div class="col-md-2" v-else>
 
           <label for="date">طريقه الدفع</label><br />
@@ -250,13 +250,14 @@
                               <th>قيمه المرتجع</th>
 
                               <th>ملاحظه</th>
-                              <th>اضافه</th>
+
                             </tr>
                           </thead>
                           <tbody v-if="detail && detail.length > 0">
                             <tr v-for="(sale_details, index) in detail" :key="index">
                               <input v-model="id = sale_details.sale_id" type="hidden" name="name" id="name"
                                 class="form-control" />
+
 
                               <td>
                                 {{ index + 1 }}
@@ -268,7 +269,7 @@
                                   {{ sale_details.product }}
                                 </div>
                               </td>
-                              <!-- 
+                              <!--
                                 <td>
                                   <div class="form-group">
                                     <vue-barcode :value="sale_details.product_code" tag="svg"></vue-barcode>
@@ -361,10 +362,10 @@ temx.name }}</span>
                               </td>
                               <td>
 
-                                <select v-if="check_state[index] == true" :id="'select_unit' + index"
+                                <select v-on:change="calculate()" :id="'select_unit' + index"
                                   v-model="unit[index]" name="type" class="form-control" required>
 
-                                  <option disabled v-for="unit in sale_details.units"
+                                  <option  v-for="unit in sale_details.units"
                                     v-bind:value="[unit.unit_id, unit.rate]">
                                     {{ unit.name }}
                                   </option>
@@ -372,16 +373,7 @@ temx.name }}</span>
 
                                 </select>
 
-                                <select v-else v-on:change="calculate_total(index)" style="background-color: beige;"
-                                  :id="'select_unit' + index" v-model="unit[index]" name="type" class="form-control"
-                                  required>
 
-                                  <option v-for="unit in sale_details.units" v-bind:value="[unit.unit_id, unit.rate]">
-                                    {{ unit.name }}
-                                  </option>
-
-
-                                </select>
                               </td>
                               <td> {{ unit_price[index] }}
                               </td>
@@ -392,22 +384,19 @@ temx.name }}</span>
 
                               <td>
                                 <div class="form-group">
-                                  <input v-if="check_state[index] == true" v-model="qty[index]" type="number"
-                                    class="form-control" readonly />
+                                  <input @input="calculate()"v-model="qty[index]" type="number"
+                                    class="form-control"  />
 
-                                  <input v-else @input="calculate_total(index)" style="background-color: beige;"
-                                    v-model="qty[index]" type="number" min="1" step="1" class="form-control" />
+
 
                                 </div>
                               </td>
                               <td>
 
-                                <input v-if="check_state[index] == true" readonly v-model="total[index]" name="number"
+                                <input @input="calculate()"   v-model="total[index]" name="number"
                                   type="number" class="form-control" />
 
 
-                                <input v-else @input="calculate_total(index)" v-model="total[index]" name="number"
-                                  type="number" class="form-control" />
 
                               </td>
                               <td>
@@ -415,21 +404,7 @@ temx.name }}</span>
                                 <span style="color: red;" :id="'message_validation' + index"></span>
 
                               </td>
-                              <td v-if="sale_details.qty_remain != 0">
 
-                                <input v-model="check_state[index]" @change="calculate()" type="checkbox"
-                                  class="btn btn-info waves-effect">
-
-                              </td>
-
-
-                              <td v-else>
-
-                                <input v-model="check_state[index]" @change="
-                                  calculate()
-                                  " type="checkbox" disabled class="btn btn-info waves-effect">
-
-                              </td>
 
                             </tr>
 

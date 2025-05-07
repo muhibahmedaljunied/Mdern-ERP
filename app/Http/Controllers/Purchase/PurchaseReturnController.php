@@ -38,6 +38,7 @@ class PurchaseReturnController extends Controller
         $this->init();
         $this->get_details();
         $this->variant();
+        $this->unit();
         $this->qty->handle_qty();
         return response()->json([
             'details' => $this->qty->details,
