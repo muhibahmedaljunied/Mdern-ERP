@@ -1,69 +1,71 @@
 <template>
-  <div class="content-wrapper">
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card" id="printme" style="outline: auto;outline-color:red;border-radius:10;">
-              <div class="card-header">
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" id="printme" style="outline: auto;outline-color:red;border-radius:10;">
+                            <div class="card-header">
 
-                <table style="width: 100% ;outline:double;">
-                  <thead>
-                    <tr>
-                      <td rowspan="4" style="text-align: center; line-height: 1px">
-                        <h2>الجمهوريه اليمنيه</h2>
-                        <br />
-                        <h2>وزاره الشباب والرياضه</h2>
-                        <br />
-                        <!-- <h2>رياسه هيه الاركات</h2>
+                                <table style="width: 100% ;outline:double;">
+                                    <thead>
+                                        <tr>
+                                            <td rowspan="4" style="text-align: center; line-height: 1px">
+                                                <h2>الجمهوريه اليمنيه</h2>
+                                                <br />
+                                                <h2>وزاره الشباب والرياضه</h2>
+                                                <br />
+                                                <!-- <h2>رياسه هيه الاركات</h2>
                         <br />
                         <h2>قياده القوات الجويه والدفاع</h2>
                         <br />
                         <h2>الدراسات والابحاث</h2>
                         <br /> -->
-                        <h2>المخازن</h2>
-                        <br />
-                      </td>
-                      <td rowspan="4" style="text-align: center; line-height: 1px">
-                        <img :src="`/assets/img/images3.jpg`" height="150px" alt="products image" />
-                      </td>
-                      <td rowspan="4" style="text-align: center; line-height: 1px">
-                        <h2>رقم السند :{{ return_sales[0].sale_id }}</h2>
-                        <br />
+                                                <h2>المخازن</h2>
+                                                <br />
+                                            </td>
+                                            <td rowspan="4" style="text-align: center; line-height: 1px">
+                                                <img :src="`/assets/img/images3.jpg`" height="150px"
+                                                    alt="products image" />
+                                            </td>
+                                            <td rowspan="4" style="text-align: center; line-height: 1px">
+                                                <h2>رقم السند :{{ return_sales[0].sale_id }}</h2>
+                                                <br />
 
-                        <h2>تاريخ السند :{{ return_sales[0].date }}</h2>
-                        <br />
+                                                <h2>تاريخ السند :{{ return_sales[0].date }}</h2>
+                                                <br />
 
-                        <h2>اسم العميل : {{ return_sales[0].name }}</h2>
-                      </td>
-                    </tr>
-                    <tr></tr>
+                                                <h2>اسم العميل : {{ return_sales[0].name }}</h2>
+                                            </td>
+                                        </tr>
+                                        <tr></tr>
 
-                    <tr></tr>
-                    <tr>
-                      <td colspan="1"></td>
+                                        <tr></tr>
+                                        <tr>
+                                            <td colspan="1"></td>
 
-                      <td style="text-align: left">
-                        <button @click="printDiv('printme')">
-                          <i class="fas fa-print" style="font-size: 24px; color: rgb(34, 192, 60)"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="1"></td>
+                                            <td style="text-align: left">
+                                                <button @click="printDiv('printme')">
+                                                    <i class="fas fa-print"
+                                                        style="font-size: 24px; color: rgb(34, 192, 60)"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="1"></td>
 
-                      <td style="
+                                            <td style="
                           text-align: center;
                           border-radius: 10px;
                           background-color: red;
                         ">
-                        <h1> فاتوره مرتجع مبيعات </h1>
-                      </td>
-                      <td></td>
-                    </tr>
-                  </thead>
+                                                <h1> فاتوره مرتجع مبيعات </h1>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
 
-                  <!-- <thead>
+                                    <!-- <thead>
                     <tr>
                       <td colspan="5">
                         <h5>رقم السند :{{ return_sales[0].sale_id }}</h5>
@@ -78,8 +80,8 @@
                     <tr>
                       <td colspan="5">
                         <h5>
-                          اسم العميل : {{ return_sales[0].name }} 
-                     
+                          اسم العميل : {{ return_sales[0].name }}
+
                         </h5>
                       </td>
                     </tr>
@@ -94,160 +96,149 @@
                       </td>
                     </tr>
                   </thead> -->
-                </table>
-              </div>
-              <div class="card-body">
-                <table class="table table-bordered text-right" style="width: 100%">
-                  <thead style="background:red">
-                    <tr>
-                      <th >الرقم التسلسلي</th>
-                      <th>اسم المنتج</th>
-                      <!-- <th class="wd-15p border-bottom-0">كميه </th> -->
-                      <th class="wd-15p border-bottom-0">الكميه المرتحعه</th>
-                      <th>الحاله</th>
-                      <th>المخزن</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(sale_details,index) in sale_detail" :key="index">
-                      <td>
-                        {{ index+1 }}
-                      </td>
-                      <td>{{ sale_details.product_name }}</td>
+                                </table>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered text-right" style="width: 100%">
+                                    <thead style="background:red">
+                                        <tr>
+                                            <th>الرقم التسلسلي</th>
+                                            <th>اسم المنتج</th>
+                                            <!-- <th class="wd-15p border-bottom-0">كميه </th> -->
+                                            <th class="wd-15p border-bottom-0">الكميه المرتحعه</th>
+                                            <th>الحاله</th>
+                                            <th>المخزن</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(sale_details, index) in sale_detail" :key="index">
+                                            <td>
+                                                {{ index + 1 }}
+                                            </td>
+                                            <td>{{ sale_details.product_name }}</td>
 
 
-                      <td>
-
-                        <div v-for="temx in sale_details.qty_after_convert['qty']">
+                                            <td>
 
 
+                                                <div>
+                                                    <input type="hidden" v-model="sale_details.text" id="desc"
+                                                        class="form-control" />
 
-                          <span v-for="temx2 in temx">
+                                                    <span>{{ sale_details.text }}</span>
+                                                    <span style="color: blue;" v-if="sale_details.kk"
+                                                        v-for="ss in sale_details.kk">
 
 
-                            <span style="float: right;">
-                              {{ temx2[0] }}
-                              <span style="color: red;">
-                                {{ temx2[1] }}
-                              </span>
-
-                            </span>
+                                                        -{{ ss.value }}
 
 
 
-                          </span>
-
-                          <!-- <span v-if="temx.unit_type == 0">
 
 
-<span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
-temx.name }}</span>
+                                                    </span>
+                                                </div>
 
 
+                                            </td>
+                                            <td>{{ sale_details.name }}</td>
+                                            <td>{{ sale_details.text }}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="7"> الاجمالي:{{ return_sales[0].sub_total }}</th>
 
-</span> -->
 
+                                        </tr>
+                                        <tr>
+                                            <th colspan="7"> اجمالي الضريبه:{{ return_sales[0].tax_amount }}</th>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <th colspan="7"> الخصم:{{ return_sales[0].discount }}</th>
+
+
+                                        </tr>
+                                        <tr style="background-color: aqua;">
+
+                                            <th colspan="7"> الاجمالي الكلي:{{ return_sales[0].grand_total }}</th>
+
+
+                                        </tr>
+
+                                    </tfoot>
+                                </table>
+                                <div id="intro" style="text-align:left;">
+                                    <h5>{{ timestamp }}</h5>
+                                </div>
+                                <div id="intro" style="text-align:right;">
+                                    <h5>امين المخازن:{{ user }}</h5>
+                                </div>
+                            </div>
                         </div>
-
-                      </td>
-                      <td>{{ sale_details.name }}</td>
-                      <td>{{ sale_details.text }}</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th colspan="7"> الاجمالي:{{ return_sales[0].sub_total }}</th>
-
-
-                    </tr>
-                    <tr>
-                      <th colspan="7"> اجمالي الضريبه:{{ return_sales[0].tax_amount }}</th>
-
-
-                    </tr>
-                    <tr>
-
-                      <th colspan="7"> الخصم:{{ return_sales[0].discount }}</th>
-
-
-                    </tr>
-                    <tr style="background-color: aqua;">
-
-                      <th colspan="7"> الاجمالي الكلي:{{ return_sales[0].grand_total }}</th>
-
-
-                    </tr>
-
-                  </tfoot>
-                </table>
-                <div id="intro" style="text-align:left;">
-                  <h5>{{ timestamp }}</h5>
+                    </div>
                 </div>
-                <div id="intro" style="text-align:right;">
-                  <h5>امين المخازن:{{ user }}</h5>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+        </section>
+    </div>
 </template>
 <script>
 export default {
-  data() {
-    return {
+    data() {
+        return {
 
-      return_sales: {
-        type: Object,
-        default: null,
-      },
-      sale_detail: {
-        type: Object,
-        default: null,
-      },
+            return_sales: {
+                type: Object,
+                default: null,
+            },
+            sale_detail: {
+                type: Object,
+                default: null,
+            },
 
 
-      timestamp: "",
-      user: '',
-      table: 'sale_return_details',
-    };
-  },
-  created() {
-    setInterval(this.getNow, 1000);
-  },
-  props: ['data'],
-  mounted() {
-    // console.log('xxxxxxxxxxxxxxxxx',this.data);
-    let uri = `/return_sale_invoice/${this.data}`;
-    this.axios.post(uri, { table: this.table, id: this.data }).then((response) => {
-      console.log('fdfdffd', response.data);
-      this.user = response.data.users.name;
+            timestamp: "",
+            user: '',
+            table: 'sale_return_details',
+        };
+    },
+    created() {
+        setInterval(this.getNow, 1000);
+    },
+    props: ['data'],
+    mounted() {
+        // console.log('xxxxxxxxxxxxxxxxx',this.data);
+        let uri = `/return_sale_invoice/${this.data}`;
+        this.axios.post(uri, { table: this.table, id: this.data }).then((response) => {
+            console.log('fdfdffd', response.data);
+            this.user = response.data.users.name;
 
-      this.sale_detail = response.data.sale_return_details;
-      this.return_sales = response.data.sale_returns;
-    });
-  },
-  methods: {
+            this.sale_detail = response.data.sale_return_details;
+            this.return_sales = response.data.sale_returns;
+        });
+    },
+    methods: {
 
-  },
-  computed: {},
+    },
+    computed: {},
 };
 </script>
 <style scoped>
 .table-bordered {
-  border: 2px solid black;
+    border: 2px solid black;
 }
 
 .table-bordered th,
 .table-bordered td {
-  border: 2px solid black;
-  text-align: center;
-  font-size: 40px;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 40px;
 }
 
 td h2 {
-  line-height: 20px;
+    line-height: 20px;
 }
 </style>

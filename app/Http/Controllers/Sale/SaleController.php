@@ -258,6 +258,7 @@ class SaleController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init()->get_details();
         $this->get_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json([
             'sale_details' => $this->qty->details,
