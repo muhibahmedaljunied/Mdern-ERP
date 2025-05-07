@@ -174,7 +174,10 @@ class PurchaseReturnController extends Controller
 
         $returns = PurchaseReturn::with(['payments'])->paginate(15);
 
-        return response()->json(['returns' => $returns]);
+        return response()->json([
+            'returns' => $returns,
+        //  'suppliers' => $this->suppliers()
+        ]);
     }
 
 

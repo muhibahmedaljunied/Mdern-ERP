@@ -14,6 +14,7 @@ Route::post('import_opening_inventuries', [InventuryController::class, 'import']
 Route::post('export_opening_inventuries', [InventuryController::class, 'export']);
 Route::post('product', 'Warehouse\ProductController@index');
 Route::post('/show_product', 'Warehouse\ProductController@show_product');
+Route::post('/show_product/{id}', 'Warehouse\ProductController@show_product');
 Route::post('/create_product', 'Warehouse\ProductController@create');
 Route::post('/store_product', 'Warehouse\ProductController@store');
 Route::post('/store_price', 'Warehouse\ProductController@store_price');

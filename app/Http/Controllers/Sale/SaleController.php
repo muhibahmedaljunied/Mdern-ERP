@@ -39,7 +39,8 @@ class SaleController extends Controller
     {
 
         $this->qty->set_compare_array(['qty']);
-        $this->init()->get_details();
+        $this->init()
+            ->get_details();
         // $this->get_details();
         $this->variant();
         $this->qty->handle_qty();
@@ -242,7 +243,10 @@ class SaleController extends Controller
             ->paginate(5);
 
 
-        return response()->json(['sales' => $sales]);
+        return response()->json([
+            'sales' => $sales,
+            'customers' => $this->customers()
+        ]);
     }
 
 

@@ -80,6 +80,26 @@ export default {
                             this.productm = []; //this for empty productm array when change from product into another by clicking tree
 
 
+
+                            if ( gf.type == "Product") {
+
+
+                                axios.post(`/show_product/${data.node.id}`, { 'type': gf.type }).then((response) => {
+
+                                    // gf.showCatProduct = response.data.products;
+                                    gf.showCatProduct = response.data.product;
+                   
+
+
+                                });
+
+                                return;
+
+
+                            }
+
+
+
                             if (
                                 gf.type == "Sale" ||
                                 gf.type == "Cash" ||

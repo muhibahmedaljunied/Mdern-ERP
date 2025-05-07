@@ -233,7 +233,9 @@ temx.name }}</span>
   </div>
 </template>
 <script>
+import operation from '../../../operation.js';
 export default {
+    mixins: [operation],
   data() {
     return {
       return_sale: "yes",
@@ -261,6 +263,7 @@ export default {
 
       this.axios.post(`/listreturn_sale`).then(({ data }) => {
         this.return_sale = data.returns;
+        // this.customers = data.customers;
 
       });
 

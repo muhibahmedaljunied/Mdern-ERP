@@ -12,7 +12,6 @@ export default {
             dateselected: new Date().toISOString().substr(0, 10),
             expiry_date: new Date().toISOString().substr(0, 10),
             purchase_id: [],
-
             discount: [],
             store_product_id: [],
             cost: [],

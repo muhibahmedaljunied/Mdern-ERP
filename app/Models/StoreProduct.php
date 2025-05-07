@@ -28,7 +28,7 @@ class StoreProduct extends Model
 
     public function family_attribute_option()
     {
-        return $this->hasMany(StoreProduct::class);
+        return $this->belongsTo(StoreProduct::class);
     }
 
 

@@ -81,6 +81,7 @@ class PurchaseController extends Controller
 
         $this->product();
         $this->operation_data();
+        // $this->operation_data();
         return response()->json([
             'products' => $this->products,
             'store_products' => $this->qty->details,
@@ -244,7 +245,10 @@ class PurchaseController extends Controller
             ->paginate(5);
 
 
-        return response()->json(['purchases' => $purchases]);
+        return response()->json([
+            'purchases' => $purchases,
+            'suppliers' => $this->suppliers()
+        ]);
     }
 
     public function get_purchase_account_setting()

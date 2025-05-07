@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Product;
-use App\Models\Store;
 
 class FilterService
 {
@@ -106,81 +105,29 @@ class FilterService
 
         if ($value['status'] == 'false') {
 
+            $product = Product::where(function ($query) use ($value) {
+                return $query->where('products.id', '=', $value['id']);
+            })
+                ->join('store_products', 'products.id', '=', 'store_products.product_id')
+                ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
 
-            // if (empty($this->array_where)) {
+                // ->select('products.*','store_products.*','store_products.id as store_product_id')
+                ->select(
+                    'products.*',
+                    'products.text as product',
+                    'statuses.name as status',
+                    'store_products.quantity as availabe_qty',
+                    'store_products.*',
+                    'store_products.cost as price',
+                    'store_products.id as store_product_id'
 
-
-                $product = Collect(Product::where(function ($query) use ($value) {
-                    return $query->where('id', '=', $value['id']);
-                })
-                    ->with('product_family_attribute')
-                    ->get())->toArray();
-
-                $this->data[$this->count] = $product[0];
-                $this->count = $this->count + 1;
-            // } else {
-
-
-            //     $product = Collect(Product::where(function ($query) use ($value) {
-            //         return $query->where('id', '=', $value['id']);
-            //     })
-            //         ->with('product_family_attribute.family_attribute_option.attribute_option', function ($query) {
-
-            //             $query->whereIn('value', $this->array_where);
-            //         })
-            //         ->get())->toArray();
+                )
 
 
-            //     $this->filter_by_attribute($product);
-            // }
-        }
-    }
+                // ->with('store_product')
+                ->get();
 
-
-    function filter_by_attribute($value1)
-    {
-
-        foreach ($value1 as $value) {
-
-
-
-
-            foreach ($value['product_family_attribute'] as $key3 => $value3) {
-
-                $count = 0;
-
-                foreach ($value3['family_attribute_option'] as $value4) {
-
-
-
-                    // dd($value3['family_attribute_option']);
-                    if ($value4['attribute_option'] == null) {
-
-                        $this->array_attribute[$count] = null;
-                    } else {
-                        $this->array_attribute[$count] = $value4['attribute_option']['value'];
-                        $this->group_array_attribute[$key3] = $value4['attribute_option']['value'];
-                    }
-
-
-
-
-                    $count = $count + 1;
-                }
-                $diff = array_diff($this->array_where, $this->array_attribute);
-
-                // dd($this->group_array_attribute);
-
-                if (!empty($diff)) {
-
-                    unset($value['product_family_attribute'][$key3]);
-                }
-
-
-                $this->array_attribute = [];
-            }
-
-            $this->data[$this->count] = $value;
+            $this->data[$this->count] = $product[0];
             $this->count = $this->count + 1;
         }
     }

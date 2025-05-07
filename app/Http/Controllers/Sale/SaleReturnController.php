@@ -168,7 +168,10 @@ class SaleReturnController extends Controller
         $returns = SaleReturn::with(['payments'])->paginate(5);
 
 
-        return response()->json(['returns' => $returns]);
+        return response()->json([
+            'returns' => $returns,
+            //  'customers' => $this->customers()
+            ]);
     }
 
 

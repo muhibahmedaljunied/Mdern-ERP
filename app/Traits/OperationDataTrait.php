@@ -15,6 +15,7 @@ trait OperationDataTrait
         if ($this->qty->request->id) {
 
             ($this->qty->request->type == 'store') ? $this->product_detail_by_store() : $this->product_detail_by_product();
+
         } else {
 
             $this->product_detail();
@@ -112,7 +113,8 @@ trait OperationDataTrait
     {
 
 
-        foreach ($this->qty->details as $value) {
+        foreach ($this->qty->details as $key => $value) {
+
 
             $value->kk = collect(DB::table('family_attribute_options')
                 ->where('family_attribute_options.store_product_id', $value->store_product_id)

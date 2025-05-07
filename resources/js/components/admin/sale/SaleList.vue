@@ -28,10 +28,10 @@
                 </div> -->
                                 <div class="col-md-2">
                                     <label for="inputAddress">العميل</label>
-                                    <select style="background-color: beige;" v-model="branchselected"
+                                    <select style="background-color: beige;" v-model="customer"
                                         class="form-control" required>
-                                        <option v-for="branch in branches" v-bind:value="branch.id">
-                                            {{ branch.name }}
+                                        <option v-for="customer in customers" v-bind:value="customer.id">
+                                            {{ customer.name }}
                                         </option>
                                     </select>
                                 </div>
@@ -335,7 +335,9 @@ temx.name }}</span>
 <script>
 import pagination from "laravel-vue-pagination";
 import VueBarcode from '@chenfengyuan/vue-barcode';
+import operation from '../../../operation.js';
 export default {
+    mixins: [operation],
     components: {
         pagination,
         VueBarcode
@@ -416,6 +418,7 @@ export default {
                 .then(({ data }) => {
                     //  console.log(data.sales);
                     this.sales = data.sales;
+                    this.customers = data.customers;
                 })
                 .catch(({ response }) => {
                     console.error(response);

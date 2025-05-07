@@ -37,9 +37,9 @@
                   </div> -->
                   <div class="col-md-2">
                     <label for="inputAddress">المورد</label>
-                    <select style="background-color: beige;" v-model="branchselected" class="form-control" required>
-                      <option v-for="branch in branches" v-bind:value="branch.id">
-                        {{ branch.name }}
+                    <select style="background-color: beige;" v-model="supplier" class="form-control" required>
+                      <option v-for="supplier in suppliers" v-bind:value="supplier.id">
+                        {{ supplier.name }}
                       </option>
                     </select>
                   </div>
@@ -248,7 +248,9 @@ temx.name }}</span>
 </template>
 <script>
 import pagination from "laravel-vue-pagination";
+import operation from '../../../operation.js';
 export default {
+    mixins: [operation],
   components: {
     pagination,
   },
@@ -329,6 +331,7 @@ export default {
           .then(({ data }) => {
             console.log(data.returns);
             this.return_purchases = data.returns;
+            // this.suppliers =data.suppliers;
 
           })
           .catch(({ response }) => {
