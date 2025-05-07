@@ -126,6 +126,7 @@ export default {
             if (
                 this.type == "Purchase" ||
                 this.type == "Sale" ||
+                this.type == "Cash" ||
                 this.type == "Supply" ||
                 this.type == "OpeningInventory"
             ) {

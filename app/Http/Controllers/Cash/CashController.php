@@ -15,7 +15,6 @@ use App\Traits\Unit\UnitsTrait;
 use App\Traits\OperationDataTrait;
 use App\Models\Cash;
 use App\Models\Payment;
-use App\Models\Supply;
 use App\Repository\Qty\QtyStockRepository;
 use App\Services\StockService;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -121,35 +120,7 @@ class CashController extends Controller
         // $units = $this->qtys($products);
 
     }
-    public function get_one($request)
-    {
-
-        $retVal = ($request->type == 'product') ? 'store_products.product_id' : 'store_products.store_id';
-        $details =  StoreProduct::where($retVal, $request->id)
-            ->where('store_products.quantity', '!=', '0')
-            ->joinall()
-            ->select(
-                'products.*',
-                'products.text as product',
-                'stores.text as store',
-                'stores.account_id as store_account_id',
-                'statuses.name as status',
-                'store_products.quantity as availabe_qty',
-                'store_products.*',
-                'store_products.cost as price',
-                'store_products.id as store_product_id'
-            )
-            ->paginate(100);
-
-        foreach ($details as $value) {
-
-
-            $value->unit_id = 0;
-        }
-
-        return $details;
-    }
-
+ 
 
     public function payment(
         StockService $stock

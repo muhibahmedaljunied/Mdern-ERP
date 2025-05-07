@@ -136,6 +136,7 @@ export default {
         product_tree_for_transfer(data) {
             this.product = data.node.id;
             axios.post(`/get_product/${data.node.id}`).then((response) => {
+                this.count = responce.data.products.length;
                 this.store_products = response.data.products;
 
 
@@ -178,6 +179,7 @@ export default {
                     operation: "StockQty",
                 })
                 .then((responce) => {
+                    this.count = responce.data.products.length;
                     this.store_products = responce.data.products;
                 });
         },

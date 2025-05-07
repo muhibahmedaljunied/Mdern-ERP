@@ -323,7 +323,7 @@
 
                                                         <td>
                                                             <div class="input_nombre">
-                                                                <select v-on:change="calculate_total(index)"
+                                                                <select
                                                                     style="background-color: beige;"
                                                                     :id="'select_unit' + index" v-model="unit[index]"
                                                                     name="type" class="form-control" required>
@@ -342,7 +342,7 @@
 
 
                                                             <input style="background-color: beige;"
-                                                                v-on:input="calculate_total(index)" v-model="qty[index]"
+                                                                v-model="qty[index]"
                                                                 type="number" class="form-control input_cantidad" />
 
                                                             <input style="background-color: beige;"
@@ -615,7 +615,7 @@ export default {
 
                 type: this.type,
                 date: this.date,
-                count: this.counts,
+                count: this.count,
                 qty_transfer: this.qty,
                 unit: this.unit,
                 units: this.units,

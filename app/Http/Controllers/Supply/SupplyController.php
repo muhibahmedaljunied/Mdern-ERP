@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Supply;
-
 use Illuminate\Support\Facades\Cache;
 use App\Models\StoreProduct;
 use Illuminate\Support\Facades\DB;
@@ -112,7 +111,7 @@ class SupplyController extends Controller
             )
             ->get();
 
-      
+
     }
 
     public function treasuries()

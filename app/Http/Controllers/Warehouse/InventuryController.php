@@ -111,7 +111,7 @@ class InventuryController extends Controller
     ) {
 
 
-        // dd($request->all());
+        // dd($this->qty->request);
         try {
             DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
 

@@ -14,9 +14,6 @@ trait StoreProductTrait
 
 
         // if ($this->init_status == false) {
-
-
-
         // dd($this->core->data['old'][$this->core->value]);
             $this->core->data_store_product =  new StoreProduct();
             $this->core->data_store_product->product_id = $this->core->data['old'][$this->core->value]['product_id'];
@@ -44,7 +41,7 @@ trait StoreProductTrait
 
     // public function refresh_transfer_total_store_product_table($operation)  //this make increase for store that trasfer into it
     // {
-       
+
     //     // dd($this->core->data_store_product);
     //     DB::table('store_products')
     //         ->where(['id' => $this->core->data_store_product[0]['id']])
@@ -62,12 +59,18 @@ trait StoreProductTrait
 
 
 
+
+
+
+
+
     public function get_store_product_table()  // this check and return store that transfer from it
     {
 
-        
+
         $this->core->data_store_product = collect(
             StoreProduct::where([
+                'store_products.id' => $this->core->data['old'][$this->core->value]['store_product_id'],
                 'store_products.product_id' => $this->core->data['old'][$this->core->value]['product_id'],
                 'store_products.store_id' => $this->store,
                 'store_products.status_id' => $this->core->data['old'][$this->core->value]['status_id'],

@@ -211,10 +211,8 @@ class TransferController extends Controller
 
             $warehouse->add(); // this handle data in transfer table
 
-
-            foreach ($this->core->data['count'] as $value) {
-                // for ($value = 0; $value < $this->core->data['count']; $value++) {
-
+            // foreach ($this->core->data['count'] as $value) {
+            for ($value = 0; $value < $this->core->data['count']; $value++) {
 
 
                 $this->core->setValue($value);  //this set index of data
@@ -231,7 +229,7 @@ class TransferController extends Controller
 
             }
 
-            // dd(TransferDetail::all());
+            // dd('finall');
 
 
             // dd('sdsdsd');
@@ -313,6 +311,8 @@ class TransferController extends Controller
         return response()->json(['transfer_details' => $transfer_details]);
     }
 
+
+
     public function details_transfer()
     {
 
@@ -324,7 +324,10 @@ class TransferController extends Controller
         $this->qty->handle_qty();
 
 
-        return response()->json(['transfer_details' => $this->qty->details]);
+        return response()->json([
+            'transfer_details' => $this->qty->details,
+
+        ]);
     }
 
     public function  get_details()

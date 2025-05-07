@@ -53,31 +53,12 @@ class  StockService
 
 
             $this->core->setValue($value);
-<<<<<<< HEAD
-            // if ($value== 2) {
-=======
-<<<<<<< HEAD
-            // if ($value== 2) {
-=======
-            // if ($value== 1) {
->>>>>>> b8ad28e449a5c1b1f26a009ee09ac1e352d35de9
->>>>>>> fa067d02058eb412e603d2152bd282007de27a22
-            //   dd($value);
-            // }
+
             $this->handle_core();
         }
 
 
-<<<<<<< HEAD
-        // dd('final');
-=======
-<<<<<<< HEAD
-        // dd('final');
-=======
-        dd('final');
->>>>>>> b8ad28e449a5c1b1f26a009ee09ac1e352d35de9
->>>>>>> fa067d02058eb412e603d2152bd282007de27a22
-
+        // dd('finall');
 
         $this->payment->pay();
 

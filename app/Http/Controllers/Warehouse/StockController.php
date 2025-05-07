@@ -33,6 +33,8 @@ class StockController extends Controller
 
         $this->qty->set_compare_array(['quantity']);
         // $qty->details = Cache::rememberForever('stock', function () {
+
+        // $this->operation_data();
         $this->qty->details = StoreProduct::where('store_products.quantity', '!=', 0)
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('stores', 'store_products.store_id', '=', 'stores.id')
@@ -57,7 +59,15 @@ class StockController extends Controller
         return response()->json(['stocks' => $this->qty->details]);
     }
 
+    // public function operation_data()
+    // {
 
+
+
+    //     $this->start();
+    //     $this->variant();
+    //     $this->unit();
+    // }
 
     public function search(Request $request)
     {

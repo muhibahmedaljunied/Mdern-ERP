@@ -311,13 +311,13 @@ data-target="#exampleModalProductm" @click="detect_index(index)">
 
 
 
-                                                            <select v-if="check_state[index] == true"
+                                                            <select  v-on:change="set_unit_price(index), calculate()"
                                                                 style="background-color: beige;"
                                                                 :id="'select_unit' + index" v-model="unit[index]"
                                                                 name="type" class="form-control" required>
 
-                                                                <option disabled v-for="unit in product.units"
-                                                                    v-bind:value="[unit.unit_id, unit.rate]">
+                                                                <option  v-for="unit in product.unit"
+                                                                    v-bind:value="[unit.unit_id, unit.rate,unit.cost]">
                                                                     {{ unit.name }}
                                                                 </option>
 
@@ -325,18 +325,7 @@ data-target="#exampleModalProductm" @click="detect_index(index)">
                                                             </select>
 
 
-                                                            <select v-else style="background-color: beige;"
-                                                                v-on:change="set_unit_price(index), calculate()"
-                                                                :id="'select_unit' + index" v-model="unit[index]"
-                                                                name="type" class="form-control" required>
 
-                                                                <option v-for="unit in product.unit"
-                                                                    v-bind:value="[unit.unit_id, unit.rate, unit.cost]">
-                                                                    {{ unit.name }}
-                                                                </option>
-
-
-                                                            </select>
 
 
 
@@ -346,7 +335,9 @@ data-target="#exampleModalProductm" @click="detect_index(index)">
                                                     </td>
                                                     <td>
 
-                                                        {{ unit_price[index] }}
+                                                        <input v-model="unit_price[index]"
+                                                        class="form-control input_cantidad" onkeypress="return " />
+
                                                     </td>
 
                                                     <!-- <td>
@@ -364,28 +355,22 @@ data-target="#exampleModalProductm" @click="detect_index(index)">
 index)" v-model="qty[index]" id="qty" class="form-control input_cantidad" onkeypress="return " /> -->
 
 
-                                                        <input v-if="check_state[index] == true" readonly
-                                                            style="background-color: beige;" type="number"
+                                                        <input
+                                                        @input="calculate()" style="background-color: beige;" type="number"
                                                             v-model="qty[index]" id="qty"
                                                             class="form-control input_cantidad" onkeypress="return " />
 
-                                                        <input v-else style="background-color: beige;" type="number"
-                                                            @input="calculate()" v-model="qty[index]"
-                                                            id="qty" class="form-control input_cantidad"
-                                                            onkeypress="return " />
+
                                                     </td>
 
 
                                                     <td>
 
 
-                                                        <input v-if="check_state[index] == true" readonly type="number"
+                                                        <input @input="calculate()"  type="number"
                                                             v-model="total[index]" :id="'total_row' + index"
                                                             class="form-control" />
 
-                                                        <input @input="calculate()" v-else type="number"
-                                                            v-model="total[index]" :id="'total_row' + index"
-                                                            class="form-control" />
 
                                                     </td>
                                                     <td>
@@ -867,7 +852,7 @@ export default {
             this.axios
                 .post(`/payCash`, {
                     type: 'Cash',
-                    count: this.counts,
+                    count: this.count,
                     unit: this.unit,
                     qty: this.qty,
                     price: this.unit_price,

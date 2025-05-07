@@ -30,19 +30,22 @@ class OpeningService
 
 
         $this->core->setData($this->request->all());
-       
     }
 
     public function handle()
     {
 
 
-        foreach ($this->core->data['count'] as $value) {
+        // dd($this->core->data);
+        // foreach ($this->core->data['count'] as $value) {
+
+        for ($value = 0; $value < $this->core->data['count']; $value++) {
 
             $this->core->setValue($value);
             $this->handle_core();
         }
-    
+
+        dd('finall');
         // $this->daily->daily()->exicute('debit')->exicute('credit');
 
 
@@ -51,12 +54,14 @@ class OpeningService
 
     public function handle_core()
     {
-      
+
         $this->unit->handle_unit();
+
         $this->store->store();
+
         $this->detail->details();
+
         $this->stock->stock();
-
+        dd(1234);
     }
-
 }

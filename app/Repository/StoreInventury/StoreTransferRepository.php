@@ -2,17 +2,19 @@
 
 namespace App\Repository\StoreInventury;
 
-use App\Services\CoreService;
+use App\Models\FamilyAttributeOption;
 use App\Traits\Transfer\StoreProductTrait;
+use App\Services\CoreService;
 
 class StoreTransferRepository extends StoreRepository
 {
 
     use StoreProductTrait;
     public $store = '';
+    public $family_attribute_option;
     public function __construct(CoreService $core)
     {
-      $this->core = $core;
+        $this->core = $core;
     }
 
     public function store()
@@ -21,30 +23,23 @@ class StoreTransferRepository extends StoreRepository
         // $this->refresh_store_product_transfer(['decrement', 'increment']);
         // --------------------------------------
 
-       
         $this->handle_from_store();
-        
-     
+
         $this->handle_into_store();
-     
-
-
     }
 
 
     public function handle_from_store()
     {
 
+        // dd($this->core->data['old'][$this->core->value]);
+
         $this->operation = 'decrement';
         $this->store = $this->core->data['old'][$this->core->value]['store_id'];
-     
+
         $this->get_store_product_first();
-  
+
         $this->refresh_store_product();
-
-    
-     
-
     }
     public function handle_into_store()
     {
@@ -53,20 +48,20 @@ class StoreTransferRepository extends StoreRepository
         $this->store = $this->core->data['intostore_id'];
         $this->get_store_product_table();
         $this->check_founded_store();
+        $this->family_attribute_option();
     }
+
+
     public function refresh_store_product()
     {
 
-      
 
         $this->refresh_qty_store_product_table();
-      
-     
+
         // $this->refresh_total_store_product_table();
 
         // $this->get_store_product_table();
-    
-  
+
         // $this->refresh_cost_store_product_table();
     }
 
@@ -85,10 +80,44 @@ class StoreTransferRepository extends StoreRepository
         }
     }
 
+    public function family_attribute_option()
+    {
 
 
+        if ($this->core->id_store_product != 0) {
 
-  
+
+            $this->get_family_attribute_option();
+            $this->init_family_attribute_option();
+        }
+    }
+    public function get_family_attribute_option()
+    {
 
 
+        $this->family_attribute_option = collect(
+            FamilyAttributeOption::where([
+                'family_attribute_options.store_product_id' => $this->core->data['old'][$this->core->value]['store_product_id'],
+
+            ])
+                ->select(
+                    'family_attribute_options.*',
+                )
+                ->get()
+        )->toArray();
+    }
+    public function init_family_attribute_option()
+    {
+
+
+        foreach ($this->family_attribute_option as $value) {
+
+
+            $attribute_option = new FamilyAttributeOption();
+            $attribute_option->attribute_family_mapping_id = $value['attribute_family_mapping_id'];
+            $attribute_option->store_product_id = $this->core->id_store_product;
+            $attribute_option->attribute_option_id = $value['attribute_option_id'];
+            $attribute_option->save();
+        }
+    }
 }

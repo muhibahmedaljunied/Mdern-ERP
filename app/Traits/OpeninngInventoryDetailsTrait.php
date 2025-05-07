@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Traits;
-
-use App\Models\OpeningInventury;
-
+use Illuminate\Support\Facades\DB;
 trait OpeninngInventoryDetailsTrait
 {
 
@@ -13,28 +11,30 @@ trait OpeninngInventoryDetailsTrait
     {
 
 
-        // $Details = new OpeningInventury();
-        // $Details->cost = $this->core->data['price'][$this->core->value];
-        // // $Details->total = $this->core->data['total'][$this->core->value];
-        // $Details->store_product_id = $this->core->id_store_product;
-        // $Details->unit_id = $this->core->unit_array[0];
-        // $Details->qty = $this->core->micro_unit_qty;
-        // // $Details->qty = $this->core->data['qty'][$this->core->value];
 
-        // $Details->save();
-        // dd($Details->id);
 
-        $opening_inventury = OpeningInventury::create(
-            [
-                'cost' => $this->core->data['price'][$this->core->value],
-                // 'supplier_name' => $this->core->data['supplier_name'],
-                'store_product_id' => $this->core->id_store_product,
-                'unit_id' => $this->core->unit_array[0],
+        $opening_inventury = DB::table('opening_inventuries')
+            ->where(['id' => $this->core->data_store_product[0]['id']])
+            ->update([
                 'qty' => $this->core->micro_unit_qty,
+                'cost' => $this->core->data['cost'][$this->core->value]
+            ]);
+
+            dd($opening_inventury);
 
 
-            ]
-        );
+
+        // $opening_inventury = OpeningInventury::create(
+        //     [
+        //         'cost' => $this->core->data['cost'][$this->core->value],
+        //         // 'supplier_name' => $this->core->data['supplier_name'],
+        //         'store_product_id' => $this->core->id_store_product,
+        //         'unit_id' => $this->core->unit_array[0],
+        //         'qty' => $this->core->micro_unit_qty,
+
+
+        //     ]
+        // );
 
 
 

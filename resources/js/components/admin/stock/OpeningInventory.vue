@@ -230,8 +230,8 @@
                                                             <input style="background-color: beige;font-size: 15px;"
                                                                 :id="'OpeningInventory_storem_tree' + index" type="text"
                                                                 readonly class="custom-search-input">
-                                                            <input :id="'OpeningInventory_storem_tree_id' + index" type="hidden"
-                                                                readonly class="custom-search-input">
+                                                            <input :id="'OpeningInventory_storem_tree_id' + index"
+                                                                type="hidden" readonly class="custom-search-input">
 
 
                                                             <button class="custom-search-botton" type="button"
@@ -330,6 +330,18 @@
 
 
                           </td> -->
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="9">
+
+                                                    </td>
+
+                                                    <td >
+                                                        <button @click="add_opening()" type="button"
+                                                            class="tn btn-info btn-lg waves-effect btn-agregar">
+                                                            اضافه
+                                                        </button>
+                                                    </td>
                                                 </tr>
 
 
@@ -441,6 +453,7 @@
 
 
                                                 </tr>
+
 
 
                                             </tbody>
@@ -672,9 +685,10 @@ export default {
 
             this.axios
                 .post("/payOpening", {
-                    count: this.counts,
+                    count: this.count,
                     date: this.date,
                     product: this.productm,
+                    store_product_id: this.store_product_id,
                     store: this.storem,
                     type: this.type,
                     type_refresh: this.type_refresh,
@@ -683,7 +697,7 @@ export default {
                     unit: this.unit,
                     units: this.units,
                     status: this.status,
-                    price: this.unit_price,
+                    cost: this.unit_price,
                     expiry_date: this.expiry_date,
                     total: this.total,
                     store: this.storem,
