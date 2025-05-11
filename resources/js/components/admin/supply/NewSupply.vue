@@ -378,7 +378,7 @@
 
                                                         <input :id='"product_status" + index' type="hidden"
                                                         v-bind:value="sto_pro.status_id">
-                                                        {{ sto_pro.name }}
+                                                        {{ sto_pro.status }}
 
 
                                                     </td>

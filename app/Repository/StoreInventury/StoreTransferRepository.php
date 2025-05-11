@@ -3,6 +3,7 @@
 namespace App\Repository\StoreInventury;
 
 use App\Models\FamilyAttributeOption;
+use App\Models\ProductPrice;
 use App\Traits\Transfer\StoreProductTrait;
 use App\Services\CoreService;
 
@@ -12,6 +13,7 @@ class StoreTransferRepository extends StoreRepository
     use StoreProductTrait;
     public $store = '';
     public $family_attribute_option;
+    public $product_price;
     public function __construct(CoreService $core)
     {
         $this->core = $core;
@@ -49,6 +51,7 @@ class StoreTransferRepository extends StoreRepository
         $this->get_store_product_table();
         $this->check_founded_store();
         $this->family_attribute_option();
+        $this->product_price();
     }
 
 
@@ -90,6 +93,56 @@ class StoreTransferRepository extends StoreRepository
             $this->get_family_attribute_option();
             $this->init_family_attribute_option();
         }
+    }
+
+    public function product_price()
+    {
+
+        if ($this->core->id_store_product != 0) {
+
+
+            $this->get_product_price();
+            $this->init_product_price();
+        }
+    }
+
+
+    public function init_product_price()
+    {
+
+
+        foreach ($this->product_price as $value) {
+
+
+
+
+
+            $attribute_option = new ProductPrice();
+            $attribute_option->cost = $value['cost'];
+            $attribute_option->product_unit_id = $value['product_unit_id'];
+            $attribute_option->store_product_id = $this->core->id_store_product;
+            $attribute_option->supply_price = $value['supply_price'];
+            $attribute_option->small_price = $value['small_price'];
+            $attribute_option->big_price = $value['big_price'];
+            $attribute_option->private_price = $value['private_price'];
+            $attribute_option->save();
+        }
+    }
+
+    public function get_product_price()
+    {
+
+
+        $this->product_price = collect(
+            ProductPrice::where([
+                'product_prices.store_product_id' => $this->core->data['old'][$this->core->value]['store_product_id'],
+
+            ])
+                ->select(
+                    'product_prices.*',
+                )
+                ->get()
+        )->toArray();
     }
     public function get_family_attribute_option()
     {

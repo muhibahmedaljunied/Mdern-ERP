@@ -7,6 +7,7 @@ export default {
                 type: Object,
                 default: null,
             },
+            stocks:'',
             show: "",
             date: new Date().toISOString().substr(0, 10),
             dateselected: new Date().toISOString().substr(0, 10),

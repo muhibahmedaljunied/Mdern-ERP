@@ -17,6 +17,7 @@ use App\Traits\Unit\UnitsTrait;
 use App\Traits\OperationDataTrait;
 use App\Models\Sale;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class SaleController extends Controller
@@ -29,18 +30,26 @@ class SaleController extends Controller
     public $qty;
     public $details;
     public $store_products;
-    public function  __construct(Request $request, QtyStockRepository $qty)
-    {
+    public $filter;
+    public $request;
+    public function  __construct(
+        Request $request,
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
 
         $this->qty = $qty;
         $this->qty->request = $request;
+        $this->request = $request;
+        $this->filter = $filter;
+        $this->filter->product_id =  $this->request->id;
+        $this->filter->type =  $this->request->type;
     }
     public function details()
     {
 
         $this->qty->set_compare_array(['qty']);
-        $this->init()
-            ->get_details();
+        $this->init()->get_details();
         // $this->get_details();
         $this->variant();
         $this->qty->handle_qty();

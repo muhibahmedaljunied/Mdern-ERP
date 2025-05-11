@@ -18,6 +18,7 @@ use App\Models\TransferDetail;
 use App\Services\CoreService;
 use App\Http\Controllers\Controller;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use Illuminate\Support\Facades\DB;
 
 class TransferController extends Controller
@@ -32,16 +33,24 @@ class TransferController extends Controller
     public $qty;
     public $details;
     public $store_products;
+    public $filter;
+
+
 
 
     public function  __construct(
         Request $request,
         QtyStockRepository $qty,
-        public CoreService $core
+        public CoreService $core,
+        FilterService $filter,
+
     ) {
 
         $this->qty = $qty;
         $this->qty->request = $request;
+        $this->filter = $filter;
+        $this->filter->product_id =  $this->qty->request->id;
+
         $this->core->setData($request->all());
     }
 

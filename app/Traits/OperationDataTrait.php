@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\DB;
 trait OperationDataTrait
 {
 
+
     public function start()
     {
-
+        // dd($this->qty->request);
 
         if ($this->qty->request->id) {
 
-            ($this->qty->request->type == 'store') ? $this->product_detail_by_store() : $this->product_detail_by_product();
+            $this->qty->details =  $this->filter->queryfilter($this->qty->request);
 
         } else {
 
@@ -50,69 +51,13 @@ trait OperationDataTrait
     }
 
 
-    public function product_detail_by_product()
-    {
 
-
-
-
-        $this->qty->details = DB::table('products')
-            ->where('products.id', $this->qty->request->id)
-            ->join('store_products', 'store_products.product_id', '=', 'products.id')
-            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-            ->join('stores', 'store_products.store_id', '=', 'stores.id')
-            ->select(
-                'products.*',
-                'products.text as product',
-                'stores.text as store',
-                'stores.account_id as store_account_id',
-                'statuses.name as status',
-                'store_products.quantity as availabe_qty',
-                'store_products.*',
-                'store_products.cost as price',
-                'store_products.id as store_product_id'
-
-            )
-            ->get();
-
-        // dd($this->qty->details);
-    }
-
-
-
-
-
-
-    public function product_detail_by_store()
-    {
-
-
-        $this->qty->details = DB::table('products')
-            ->where('stores.id', $this->qty->request->id)
-            ->join('store_products', 'store_products.product_id', '=', 'products.id')
-            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-            ->join('stores', 'store_products.store_id', '=', 'stores.id')
-            ->select(
-                'products.*',
-                'products.text as product',
-                'stores.text as store',
-                'stores.account_id as store_account_id',
-                'statuses.name as status',
-                'store_products.quantity as availabe_qty',
-                'store_products.*',
-                'store_products.cost as price',
-                'store_products.id as store_product_id'
-
-            )
-            ->get();
-
-
-    }
 
     public function variant()
     {
 
 
+        // dd($this->qty->details);
         foreach ($this->qty->details as $key => $value) {
 
 

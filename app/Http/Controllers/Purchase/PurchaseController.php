@@ -10,6 +10,7 @@ use App\Models\StoreProduct;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use ReflectionClass;
 use App\Models\HrAccount;
 use App\Traits\Invoice\InvoiceTrait;
 use App\Traits\OperationDataTrait;
@@ -19,6 +20,7 @@ use App\Models\status;
 use App\Models\Temporale;
 use App\Models\Purchase;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 
 class PurchaseController extends Controller
 {
@@ -29,11 +31,22 @@ class PurchaseController extends Controller
     public $qty;
     public $products;
     public $store_products;
-    public function __construct(Request $request, QtyStockRepository $qty)
-    {
+    public $filter;
+    public $request;
+    public function __construct(
+        Request $request,
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
 
+        // dd($request->segment(2));
         $this->qty = $qty;
         $this->qty->request = $request;
+        $this->request = $request;
+        $this->filter = $filter;
+        // $this->filter->product_id =  $this->request->id;
+        // $this->filter->product_id =  $this->request->id;
+        // $this->filter->type =  $this->request->type;
     }
     public function details()
     {
@@ -78,6 +91,8 @@ class PurchaseController extends Controller
 
 
 
+        // $class = new ReflectionClass(get_class());
+        // $class = $class->getShortName();
 
         $this->product();
         $this->operation_data();
@@ -94,10 +109,15 @@ class PurchaseController extends Controller
     public function operation_data()
     {
 
+
         $this->start();
+        // dd($this->qty->details);
         $this->variant();
         $this->unit();
     }
+
+
+
 
     public function product()
     {

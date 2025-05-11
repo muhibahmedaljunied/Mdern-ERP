@@ -34,6 +34,7 @@ class QtyStockRepository
     public function handle_qty()
     {
 
+
         foreach ($this->details as $value) {
 
             $this->value = $value;

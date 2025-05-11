@@ -45,6 +45,7 @@ class ProductController extends Controller
         // -----------------------------------------------------------
         $this->request = $request;
         $this->product_service = $product_service;
+        $this->filter->product_id =  $this->request->id;
     }
 
 
@@ -132,8 +133,6 @@ class ProductController extends Controller
     public function show_product()
     {
 
-        // dd($this->request->id);
-
         $this->operation_data();
 
         return response()->json(['product' => $this->qty->details]);
@@ -143,10 +142,8 @@ class ProductController extends Controller
     {
 
         ($this->request->id) ? $this->category_filter() : $this->get_product();
-        // dd($this->qty->details);
         $this->variant();
 
-        // dd($this->qty->details);
     }
 
 
@@ -155,14 +152,8 @@ class ProductController extends Controller
 
 
 
-        $this->filter->product_id =  $this->request->id;
-        $this->filter->queryfilter($this->request['type']);
-        $this->qty->details = $this->filter->data;
 
-        // dd($this->filter->data);
-            // return response()->json([
-        //     'products' => $this->filter->data,
-        // ]);
+        $this->qty->details = $this->filter->queryfilter();
 
     }
 
@@ -183,12 +174,9 @@ class ProductController extends Controller
                 'store_products.id as store_product_id'
 
             )
+
             ->get();
     }
-
-
-
-
 
 
     public function pricing()

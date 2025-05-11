@@ -44,6 +44,7 @@ Route::post('/delete_unit/{id}', 'Warehouse\UnitController@destroy');
 Route::post('/store_store_account_setting', 'Warehouse\StoreController@store_store_account_setting');
 Route::post('/get_store_account_setting', 'Warehouse\StoreController@get_store_account_setting');
 Route::post('/stock', 'Warehouse\StockController@index');
+Route::post('/stock/{id}', 'Warehouse\StockController@index');
 Route::post('/stocksearch', 'Warehouse\StockController@search');
 
 

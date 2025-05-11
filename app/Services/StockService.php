@@ -12,6 +12,7 @@ use App\RepositoryInterface\UnitRepositoryInterface;
 use App\RepositoryInterface\WarehouseRepositoryInterface;
 use App\Services\DailyStockService;
 
+
 class  StockService
 {
 
@@ -28,6 +29,7 @@ class  StockService
         public WarehouseRepositoryInterface $warehouse,
         public PaymentService $payment,
         public CheckSaleReturnRepository $check,
+
 
 
 
@@ -52,9 +54,17 @@ class  StockService
         for ($value = 0; $value < $this->core->data['count']; $value++) {
 
 
-            $this->core->setValue($value);
+            if ($this->core->data['total'][$value] > 0) {
 
-            $this->handle_core();
+
+                // dd($value);
+
+                $this->core->setValue($value);
+
+                $this->handle_core();
+            }
+
+
         }
 
 

@@ -8,6 +8,7 @@ export default {
             },
             error_text:'',
             // count_row : '',
+            stocks:'',
             first_row: "",
             purchase_id: [],
             discount: [],
@@ -95,7 +96,7 @@ export default {
             }
         },
 
-      
+
 
         init() {
             this.grand_total = 0;

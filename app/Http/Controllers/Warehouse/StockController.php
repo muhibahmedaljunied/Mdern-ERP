@@ -10,6 +10,7 @@ use App\Traits\Unit\UnitsTrait;
 use App\Http\Controllers\Controller;
 use App\Models\Status;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -20,24 +21,56 @@ class StockController extends Controller
 
     public $qty;
     public $request;
-    public function __construct(Request $request, QtyStockRepository $qty)
-    {
+    public $filter;
+    public $pds;
+    public function __construct(
+
+        Request $request,
+        QtyStockRepository $qty,
+        FilterService $filter,
+
+
+    ) {
 
         $this->qty = $qty;
+        $this->filter = $filter;
         $this->qty->request = $request;
+        $this->filter->product_id =  $this->qty->request->id;
     }
 
     public function index()
     {
 
-
         $this->qty->set_compare_array(['quantity']);
         // $qty->details = Cache::rememberForever('stock', function () {
+        ($this->qty->request->id) ? $this->category_filter() : $this->get_details();
+        // });
+                // dd( $this->qty->details);
 
-        // $this->operation_data();
+        $this->variant();
+        $this->qty->handle_qty();
+        // dd( $this->qty->details);
+        return response()->json([
+
+            'stocks' => $this->qty->details
+
+        ]);
+    }
+
+
+    public function category_filter()
+    {
+
+        $this->qty->details = $this->filter->queryfilter();
+    }
+
+    
+    public function get_details()
+    {
+
         $this->qty->details = StoreProduct::where('store_products.quantity', '!=', 0)
-            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('stores', 'store_products.store_id', '=', 'stores.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('products', 'store_products.product_id', '=', 'products.id')
             ->select(
                 'store_products.quantity',
@@ -49,25 +82,11 @@ class StockController extends Controller
                 'stores.text as store',
 
             )
-            ->paginate(100);
-        // });
+            ->get();
 
-        $this->variant();
-
-        $this->qty->handle_qty();
-
-        return response()->json(['stocks' => $this->qty->details]);
     }
 
-    // public function operation_data()
-    // {
 
-
-
-    //     $this->start();
-    //     $this->variant();
-    //     $this->unit();
-    // }
 
     public function search(Request $request)
     {
