@@ -16,6 +16,7 @@ use App\Traits\OperationDataTrait;
 use App\Models\Cash;
 use App\Models\Payment;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use App\Services\StockService;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
@@ -29,11 +30,16 @@ class CashController extends Controller
 
     public $qty;
     public $request;
+    public $filter;
 
-    public function  __construct(Request $request, QtyStockRepository $qty)
-    {
+    public function  __construct(
+        Request $request,
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
         $this->qty = $qty;
-        $this->qty->request = $request;
+        $this->request = $request;
+        $this->filter = $filter;
     }
 
     public function details()
@@ -67,14 +73,7 @@ class CashController extends Controller
         ]);
     }
 
-    public function operation_data()
-    {
-
-
-        $this->start();
-        $this->variant();
-        $this->unit();
-    }
+ 
 
     public function customers()
     {
@@ -120,7 +119,7 @@ class CashController extends Controller
         // $units = $this->qtys($products);
 
     }
- 
+
 
     public function payment(
         StockService $stock

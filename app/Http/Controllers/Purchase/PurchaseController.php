@@ -19,6 +19,7 @@ use App\Models\status;
 use App\Models\Temporale;
 use App\Models\Purchase;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 
 class PurchaseController extends Controller
 {
@@ -29,11 +30,17 @@ class PurchaseController extends Controller
     public $qty;
     public $products;
     public $store_products;
-    public function __construct(Request $request, QtyStockRepository $qty)
-    {
+    public $filter;
+    public $request;
+    public function __construct(
+        Request $request,
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
 
         $this->qty = $qty;
-        $this->qty->request = $request;
+        $this->request = $request;
+        $this->filter = $filter;
     }
     public function details()
     {
@@ -47,41 +54,14 @@ class PurchaseController extends Controller
         return response()->json(['details' => $this->qty->details]);
     }
 
-    // public function show(Request $request, FilterService $filter)
-    // {
 
-    //     $filter->product_id =  $request->id;
-    //     $product_filterable_attributes = ProductFilterableAttribute::where(function ($query) use ($request) {
-    //         return $query->where('product_filterable_attributes.product_id', '=', $request->id);
-    //     })->with([
-    //         'attribute.attribute_option' => function ($query) {
-    //             $query->select('*');
-    //         }
-    //     ])
-    //         ->get();
-    //     // -----------------------------------------------------------------------------------------------
-    //     $filter->queryfilter($request['type']);
-
-    //     // $filter->queryfilter($request['type'])->filter();
-
-
-    //     return response()->json([
-    //         'products' => $filter->data,
-    //         'product_filterable_attributes' => $product_filterable_attributes
-    //     ]);
-
-    //     // return response()->json($filter->data);
-    // }
 
     public function index()
     {
 
 
-
-
         $this->product();
         $this->operation_data();
-        // $this->operation_data();
         return response()->json([
             'products' => $this->products,
             'store_products' => $this->qty->details,
@@ -91,14 +71,7 @@ class PurchaseController extends Controller
 
         ]);
     }
-    public function operation_data()
-    {
-
-        $this->start();
-        $this->variant();
-        $this->unit();
-    }
-
+  
     public function product()
     {
 

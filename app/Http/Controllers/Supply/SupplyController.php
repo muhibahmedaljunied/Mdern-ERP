@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Supply;
+
 use Illuminate\Support\Facades\Cache;
 use App\Models\StoreProduct;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ use App\Models\status;
 use App\Models\Temporale;
 use App\Models\Supply;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use App\Services\StockService;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
@@ -27,13 +29,19 @@ class SupplyController extends Controller
     public $qty;
     public $products;
     public $store_products;
+    public $filter;
+    public $request;
 
 
-    public function __construct(Request $request, QtyStockRepository $qty)
-    {
+    public function __construct(
+        Request $request,
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
 
         $this->qty = $qty;
-        $this->qty->request = $request;
+        $this->request = $request;
+        $this->filter = $filter;
     }
     public function details()
     {
@@ -69,13 +77,7 @@ class SupplyController extends Controller
 
         ]);
     }
-    public function operation_data()
-    {
 
-        $this->start();
-        $this->variant();
-        $this->unit();
-    }
 
     public function product()
     {
@@ -110,8 +112,6 @@ class SupplyController extends Controller
 
             )
             ->get();
-
-
     }
 
     public function treasuries()

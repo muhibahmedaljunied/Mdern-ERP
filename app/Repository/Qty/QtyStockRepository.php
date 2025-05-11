@@ -3,6 +3,7 @@
 namespace App\Repository\Qty;
 
 use App\Traits\Unit\UnitsTrait;
+use Illuminate\Http\Request;
 
 class QtyStockRepository
 {
@@ -24,7 +25,13 @@ class QtyStockRepository
 
 
 
+    public function __construct(
+        Request $request,
 
+    ) {
+
+        $this->request = $request;
+    }
     public function set_compare_array($arr)
     {
 
@@ -33,6 +40,7 @@ class QtyStockRepository
 
     public function handle_qty()
     {
+
 
         foreach ($this->details as $value) {
 

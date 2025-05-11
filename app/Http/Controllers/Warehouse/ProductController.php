@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -25,7 +24,6 @@ class ProductController extends Controller
     public $qty;
     public $products;
     public $store_products;
-    // ---------------------------------------------------------
     public $request;
     public $product_service;
     public $data_store_product;
@@ -41,8 +39,6 @@ class ProductController extends Controller
 
         $this->qty = $qty;
         $this->filter = $filter;
-        $this->qty->request = $request;
-        // -----------------------------------------------------------
         $this->request = $request;
         $this->product_service = $product_service;
     }
@@ -132,63 +128,36 @@ class ProductController extends Controller
     public function show_product()
     {
 
-        // dd($this->request->id);
-
-        $this->operation_data();
-
-        return response()->json(['product' => $this->qty->details]);
-    }
-
-    public function operation_data()
-    {
-
-        ($this->request->id) ? $this->category_filter() : $this->get_product();
-        // dd($this->qty->details);
+        $this->start();
         $this->variant();
 
-        // dd($this->qty->details);
-    }
+        return response()->json(['product' => $this->qty->details]);
+    
 
-
-    public function category_filter()
-    {
-
-
-
-        $this->filter->product_id =  $this->request->id;
-        $this->filter->queryfilter($this->request['type']);
-        $this->qty->details = $this->filter->data;
-
-        // dd($this->filter->data);
-            // return response()->json([
-        //     'products' => $this->filter->data,
-        // ]);
 
     }
 
 
-    public function get_product()
-    {
 
-        $this->qty->details = DB::table('products')
-            ->join('store_products', 'store_products.product_id', '=', 'products.id')
-            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-            ->select(
-                'products.*',
-                'products.text as product',
-                'statuses.name as status',
-                'store_products.quantity as availabe_qty',
-                'store_products.*',
-                'store_products.cost as price',
-                'store_products.id as store_product_id'
+    // public function get_product()
+    // {
 
-            )
-            ->get();
-    }
+    //     $this->qty->details = DB::table('products')
+    //         ->join('store_products', 'store_products.product_id', '=', 'products.id')
+    //         ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+    //         ->select(
+    //             'products.*',
+    //             'products.text as product',
+    //             'statuses.name as status',
+    //             'store_products.quantity as availabe_qty',
+    //             'store_products.*',
+    //             'store_products.cost as price',
+    //             'store_products.id as store_product_id'
 
+    //         )
 
-
-
+    //         ->get();
+    // }
 
 
     public function pricing()

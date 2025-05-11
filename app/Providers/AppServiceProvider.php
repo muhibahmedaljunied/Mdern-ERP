@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repository\Qty\QtyStockRepository;
 use App\Repository\Sanction\DelayRepository;
 use App\Repository\Sanction\LeaveRepository;
 use App\Repository\Sanction\AbsenceRepository;
@@ -31,9 +32,10 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-       
-   
+
+
         $this->app->singleton(CoreStaffAttendanceService::class);
+        $this->app->singleton(QtyStockRepository::class);
 
         $this->app->singleton('delay_sanction', function () {
 

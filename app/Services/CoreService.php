@@ -24,6 +24,7 @@ class CoreService extends CoreDailyService
     public $value;
     public $discount;
     public $core_daily;
+    // -------------------------------------------
 
 
 

@@ -79,26 +79,35 @@ export default {
                         .on("changed.jstree", function (e, data) {
                             this.productm = []; //this for empty productm array when change from product into another by clicking tree
 
-
-
-                            if ( gf.type == "Product") {
-
-
-                                axios.post(`/show_product/${data.node.id}`, { 'type': gf.type }).then((response) => {
-
-                                    // gf.showCatProduct = response.data.products;
-                                    gf.showCatProduct = response.data.product;
-                   
-
-
-                                });
+                            if (gf.type == "Product") {
+                                axios
+                                    .post(`/show_product/${data.node.id}`, {
+                                        type: gf.type,
+                                    })
+                                    .then((response) => {
+                                        // gf.showCatProduct = response.data.products;
+                                        gf.showCatProduct =
+                                            response.data.product;
+                                    });
 
                                 return;
-
-
                             }
 
+                            if (gf.type == "Stock") {
 
+                                axios
+                                    .post(`/stock/${data.node.id}`, {
+                                        type_qty: gf.type,
+                                        operation: "StockQty",
+                                    })
+                                    .then(({ data }) => {
+                                        gf.stocks = data.stocks;
+                                    })
+                                    .catch(({ response }) => {
+                                        console.error(response);
+                                    });
+                                return;
+                            }
 
                             if (
                                 gf.type == "Sale" ||
@@ -180,7 +189,6 @@ export default {
                             }
 
                             if (table == "store") {
-
                                 gf.store = data.node.id;
 
                                 if (gf.type == "Sale") {

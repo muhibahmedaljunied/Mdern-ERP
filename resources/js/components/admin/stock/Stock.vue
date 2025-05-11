@@ -80,7 +80,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(stock, index) in stocks.data" :key="index">
+                                            <tr v-for="(stock, index) in stocks" :key="index">
+
                                                 <td>{{ index + 1 }}</td>
                                                 <td>
 
@@ -107,18 +108,7 @@
 
 
                                                 </td>
-                                                <!-- <td>
 
-
-
-                                                    <vue-barcode :value="stock.product_code" tag="canvas"></vue-barcode>
-
-
-
-
-
-
-                                                </td> -->
                                                 <td>{{ stock.status }}</td>
                                                 <td>{{ stock.desc }}</td>
 
@@ -140,6 +130,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -157,7 +148,7 @@
 </template>
 <script>
 import pagination from "laravel-vue-pagination";
-import operation from "../../../operation1.js";
+import operation from "../../../operation.js";
 import tree from "../../../../js/tree/tree.js";
 import VueBarcode from '@chenfengyuan/vue-barcode';
 
@@ -171,13 +162,13 @@ export default {
     },
     data() {
         return {
-            stocks: {
-                type: Object,
-                default: null,
-            },
+            // stocks: {
+            //     type: Object,
+            //     default: null,
+            // },
 
 
-
+            stocks: '',
             word_search: "",
             trees: "",
         };
@@ -192,16 +183,16 @@ export default {
         this.showtree("product", "tree_product");
     },
     methods: {
-        get_search(word_search) {
+        // get_search(word_search) {
+        //     this.axios
+        //         .post(`/stocksearch`, { word_search: this.word_search })
+        //         .then(({ data }) => {
+        //             this.stocks = data;
+        //         });
+        // },
+        list() {
             this.axios
-                .post(`/stocksearch`, { word_search: this.word_search })
-                .then(({ data }) => {
-                    this.stocks = data;
-                });
-        },
-        list(page = 1) {
-            this.axios
-                .post(`/stock?page=${page}`, {
+                .post(`/stock`, {
                     type_qty: this.type,
                     operation: "StockQty",
                 })

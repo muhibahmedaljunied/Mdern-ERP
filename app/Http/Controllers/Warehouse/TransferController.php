@@ -18,6 +18,7 @@ use App\Models\TransferDetail;
 use App\Services\CoreService;
 use App\Http\Controllers\Controller;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use Illuminate\Support\Facades\DB;
 
 class TransferController extends Controller
@@ -32,16 +33,24 @@ class TransferController extends Controller
     public $qty;
     public $details;
     public $store_products;
+    public $filter;
+    public $core;
 
 
     public function  __construct(
         Request $request,
         QtyStockRepository $qty,
-        public CoreService $core
+        CoreService $core,
+        FilterService $filter,
+
     ) {
 
         $this->qty = $qty;
         $this->qty->request = $request;
+        $this->filter = $filter;
+        $this->core = $core;
+
+
         $this->core->setData($request->all());
     }
 
@@ -64,39 +73,17 @@ class TransferController extends Controller
         return $transfer->id;
     }
 
-    public function get_product(Request $request)
+    public function get_product()
     {
-
-
-        // --------------------------------------------------------------------------
-        // $this->qty->set_compare_array(['quantity']);
-        // $this->qty->details = ($request->id) ? $this->get_one($request, $this->qty) : $this->get_all($this->qty);
-        // $this->qty->handle_qty();
-
-        // return response()->json([
-        //     'products' => $this->qty->details,
-        //     'customers' => $this->customers(),
-
-        // ]);
-
-
-        // --------------------------------------------------------------------------
 
 
 
         $this->qty->set_compare_array(['quantity']);
         $this->init();
-        $this->operation_data($request);
+        $this->operation_data();
         $this->qty->handle_qty();
 
         return response()->json(['products' => $this->qty->details]);
-    }
-    public function operation_data($request)
-    {
-
-        $this->start();
-        $this->variant();
-        $this->unit();
     }
 
 
@@ -120,63 +107,6 @@ class TransferController extends Controller
 
         return response()->json(['transfer_details' => $transfer_details]);
     }
-    // public function get_store_product_with_store($request)
-    // {
-
-
-
-    //     $details =  StoreProduct::where('store_products.quantity', '!=', 0)
-    //         ->where('store_products.store_id', $request['id'])
-    //         ->joinall()
-    //         ->select(
-    //             'products.*',
-    //             'products.text as product',
-    //             'stores.text as store',
-    //             'stores.account_id as store_account_id',
-    //             'statuses.name as status',
-    //             'store_products.quantity as availabe_qty',
-    //             'store_products.*',
-    //             'store_products.cost as price',
-    //             'store_products.id as store_product_id'
-
-    //         )
-    //         ->get();
-
-
-    //     foreach ($details as $value) {
-
-    //         $value->unit_id = 0;
-    //     }
-    //     return $details;
-    // }
-
-    // public function get_store_product_with_product($request)
-    // {
-
-
-
-
-    //     $this->details =   StoreProduct::where('store_products.quantity', '!=', 0)
-    //         ->where('store_products.product_id', $request['id'])
-    //         ->joinall()
-    //         ->select(
-    //             'store_products.quantity',
-    //             'store_products.*',
-    //             'products.id',
-    //             'products.text as product',
-    //             'statuses.name as status',
-    //             'stores.text as store'
-    //         )
-    //         ->get();
-
-    //     foreach ($this->details as $value) {
-
-
-    //         $value->unit_id = 0;
-    //     }
-    //     return $this->details;
-    // }
-
 
 
 
@@ -232,7 +162,6 @@ class TransferController extends Controller
             // dd('finall');
 
 
-            // dd('sdsdsd');
 
             DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
             return response([
@@ -251,19 +180,6 @@ class TransferController extends Controller
 
 
 
-    // public function show()
-    // {
-
-
-    //     // dd($this->qty->request);
-    //     $this->qty->set_compare_array(['quantity']);
-    //     $this->operation_data();
-    //     $this->qty->handle_qty();
-    //     return response()->json([
-    //         'products' => $this->qty->details,
-    //     ]);
-    // }
-
 
 
 
@@ -274,33 +190,12 @@ class TransferController extends Controller
 
         $transfer_details = DB::table('transfer_details')
             ->join('store_products', 'transfer_details.store_product_id', '=', 'store_products.id')
-            // ->join('statuses', 'transfer_details.status_id', '=', 'statuses.id')
-            // ->join('stores', 'transfer_details.store_id', '=', 'stores.id')
-            // ->join('units', 'transfer_details.unit_id', '=', 'units.id')
             ->select(
                 'store_products.*',
-                // 'units.name as unit',
                 'transfer_details.*',
-                // 'statuses.*',
-                // 'statuses.name as status',
-                // 'stores.*'
+
             )
             ->get();
-
-        // $transfer_details = DB::table('transfer_details')
-        //     ->join('products', 'transfer_details.product_id', '=', 'products.id')
-        //     ->join('statuses', 'transfer_details.status_id', '=', 'statuses.id')
-        //     ->join('stores', 'transfer_details.store_id', '=', 'stores.id')
-        //     ->join('units', 'transfer_details.unit_id', '=', 'units.id')
-        //     ->select(
-        //         'products.*',
-        //         'units.name as unit',
-        //         'transfer_details.*',
-        //         'statuses.*',
-        //         'statuses.name as status',
-        //         'stores.*'
-        //     )
-        //     ->get();
 
         foreach ($transfer_details as $value) {
 
@@ -332,9 +227,6 @@ class TransferController extends Controller
 
     public function  get_details()
     {
-
-
-
 
         $this->qty->details = TransferDetail::where('transfer_details.transfer_id', $this->qty->request->id)
             ->jointransfer()

@@ -84,10 +84,10 @@
                                                                             <thead>
 
                                                                                 <tr>
-<th>الرقم التسلسلي</th>
-<th>المنتج</th>
-<th>الطراز</th>
-<th>الحاله</th>
+                                                                                    <th>الرقم التسلسلي</th>
+                                                                                    <th>المنتج</th>
+                                                                                    <th>الطراز</th>
+                                                                                    <th>الحاله</th>
 
 
 
@@ -111,7 +111,7 @@
 
                                                                                             <span>{{
                                                                                                 productss.text
-                                                                                                }}</span>
+                                                                                            }}</span>
                                                                                             <span style="color: blue;"
                                                                                                 v-if="productss.kk"
                                                                                                 v-for="ss in productss.kk">
