@@ -10,6 +10,7 @@ use App\Models\StoreProduct;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use ReflectionClass;
 use App\Models\HrAccount;
 use App\Traits\Invoice\InvoiceTrait;
 use App\Traits\OperationDataTrait;
@@ -38,9 +39,19 @@ class PurchaseController extends Controller
         FilterService $filter
     ) {
 
+        // dd($request->segment(2));
         $this->qty = $qty;
+<<<<<<< HEAD
         $this->request = $request;
         $this->filter = $filter;
+=======
+        $this->qty->request = $request;
+        $this->request = $request;
+        $this->filter = $filter;
+        // $this->filter->product_id =  $this->request->id;
+        // $this->filter->product_id =  $this->request->id;
+        // $this->filter->type =  $this->request->type;
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
     }
     public function details()
     {
@@ -60,6 +71,13 @@ class PurchaseController extends Controller
     {
 
 
+<<<<<<< HEAD
+=======
+
+        // $class = new ReflectionClass(get_class());
+        // $class = $class->getShortName();
+
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
         $this->product();
         $this->operation_data();
         return response()->json([
@@ -71,7 +89,23 @@ class PurchaseController extends Controller
 
         ]);
     }
+<<<<<<< HEAD
   
+=======
+    public function operation_data()
+    {
+
+
+        $this->start();
+        // dd($this->qty->details);
+        $this->variant();
+        $this->unit();
+    }
+
+
+
+
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
     public function product()
     {
 

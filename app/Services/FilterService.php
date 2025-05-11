@@ -21,6 +21,10 @@ class FilterService
     public $root;
     public $link;
     public $type;
+<<<<<<< HEAD
+=======
+    // public $qty;
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
     public $request;
     public $data = [
         [
@@ -231,15 +235,24 @@ class FilterService
 
 
 
+<<<<<<< HEAD
             if (
                 $this->request->segment(2) == 'newpurchase' ||
                 $this->request->segment(2) == 'newsupply' ||
                 $this->request->segment(1) == 'show_product'
             ) {
+=======
+            if ($this->request->segment(2) == 'newpurchase' ||  $this->request->segment(2) == 'newsupply' ) {
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
 
 
                 $this->data[$this->count] = $product[0];
                 $this->count = $this->count + 1;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
             } else {
 
                 foreach ($product as  $value) {
@@ -287,6 +300,7 @@ class FilterService
 
 
 
+<<<<<<< HEAD
             if ($this->request->segment(1) == 'show_product') {
 
 
@@ -302,6 +316,21 @@ class FilterService
                 }
             }
 
+=======
+
+            // if ($this->) {
+            //     # code...
+            // }
+            foreach ($product as  $value) {
+
+                $this->data[$this->count] = $value;
+                #
+                $this->count = $this->count + 1;
+            }
+
+            // $this->data[$this->count] = $product[0];
+            // $this->count = $this->count + 1;
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
 
         }
     }

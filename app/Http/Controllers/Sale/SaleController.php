@@ -39,15 +39,27 @@ class SaleController extends Controller
     ) {
 
         $this->qty = $qty;
+<<<<<<< HEAD
         $this->request = $request;
         $this->filter = $filter;
 
+=======
+        $this->qty->request = $request;
+        $this->request = $request;
+        $this->filter = $filter;
+        $this->filter->product_id =  $this->request->id;
+        $this->filter->type =  $this->request->type;
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
     }
     public function details()
     {
 
         $this->qty->set_compare_array(['qty']);
         $this->init()->get_details();
+<<<<<<< HEAD
+=======
+        // $this->get_details();
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
         $this->variant();
         $this->qty->handle_qty();
         return response()->json([

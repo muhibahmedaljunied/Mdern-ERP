@@ -9,6 +9,7 @@ trait OperationDataTrait
 {
 
 
+<<<<<<< HEAD
     public function operation_data()
     {
 
@@ -20,6 +21,11 @@ trait OperationDataTrait
 
     public function start()
     {
+=======
+    public function start()
+    {
+        // dd($this->qty->request);
+>>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
 
         if ($this->qty->request->id) {
 
