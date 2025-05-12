@@ -62,6 +62,10 @@ class PurchaseController extends Controller
 
         $this->product();
         $this->operation_data();
+
+
+
+        // dd($this->qty->details);
         return response()->json([
             'products' => $this->products,
             'store_products' => $this->qty->details,

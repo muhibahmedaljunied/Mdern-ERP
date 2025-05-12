@@ -16,6 +16,8 @@ class CreateStoreProductsTable extends Migration
         Schema::create('store_products', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->string('qr_code')->nullable(); // Stores the QR code path
+
             $table->unsignedInteger('branch_id');
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
 
@@ -30,7 +32,7 @@ class CreateStoreProductsTable extends Migration
 
             $table->unsignedInteger('status_id')->unsigned()->nullable();
             $table->foreign('status_id')->references('id')->on('statuses');
-            
+
             $table->string('desc')->default('default');
 
             $table->string('image')->nullable();

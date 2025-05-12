@@ -79,29 +79,46 @@
                                                                 <div class="row">
 
                                                                     <div class="table-responsive">
-                                                                        <table class="table text-md-nowrap"
-                                                                            id="example1">
+                                                                        <table class="table table-bordered text-right"
+                                                                            style="width: 100%; font-size: large;">
                                                                             <thead>
 
                                                                                 <tr>
-                                                                                    <th>الرقم التسلسلي</th>
-                                                                                    <th>المنتج</th>
-                                                                                    <th>الطراز</th>
-                                                                                    <th>الحاله</th>
+                                                                                    <th class="wd-5p border-bottom-0">
+                                                                                        الرقم التسلسلي</th>
+                                                                                    <th class="wd-10p border-bottom-0">
+                                                                                        الباركود</th>
+
+                                                                                    <th class="wd-5p border-bottom-0">
+                                                                                        المنتج</th>
+                                                                                    <th class="wd-5p border-bottom-0">
+                                                                                        الطراز</th>
+                                                                                    <th class="wd-5p border-bottom-0">
+                                                                                        الحاله</th>
 
 
 
 
                                                                                 </tr>
                                                                             </thead>
-                                                                            <tbody
-                                                                                v-if="showCatProduct && showCatProduct.length > 0">
+
+                                                                            <tbody v-if="showCatProduct">
 
                                                                                 <tr v-for="(productss, index) in showCatProduct"
                                                                                     :key="index">
 
 
                                                                                     <td> {{ index + 1 }}</td>
+
+
+                                                                                    <td> <img
+                                                                                            :src="`/ERP/storage/app/${productss.qr_code}`"
+                                                                                            alt="QR Code" height='60px'>
+
+
+
+                                                                                    </td>
+
                                                                                     <td>
                                                                                         <div>
                                                                                             <input type="hidden"
@@ -111,7 +128,7 @@
 
                                                                                             <span>{{
                                                                                                 productss.text
-                                                                                            }}</span>
+                                                                                                }}</span>
                                                                                             <span style="color: blue;"
                                                                                                 v-if="productss.kk"
                                                                                                 v-for="ss in productss.kk">
@@ -134,7 +151,7 @@
                                                                                         <img class="card-img"
                                                                                             :src="`/Ecommerce/assets/upload/${product_family.image}`"
                                                                                             alt="Product Image"
-                                                                                            height='200px' />
+                                                                                            height='100px' />
                                                                                     </td> -->
 
 

@@ -174,8 +174,9 @@
                                                 <tr>
                                                     <!-- <th>Code</th> -->
                                                     <th class="wd-5p border-bottom-0">الرقم التسلسلي</th>
+                                                                          <th class="wd-10p border-bottom-0">الباركود</th>
                                                     <th class="wd-15p border-bottom-0">المنتج</th>
-                                                    <!-- <th>الباركود</th> -->
+
                                                     <th class="wd-5p border-bottom-0">المخزن</th>
                                                     <th class="wd-5p border-bottom-0">الحاله</th>
                                                     <th class="wd-10p border-bottom-0"> المواصفات والطراز</th>
@@ -197,6 +198,12 @@
                                                 <tr v-for="(product, index) in store_products" :key="index">
                                                     <td>
                                                         {{ index + 1 }}
+                                                    </td>
+                                                    <td> <img :src="`/ERP/storage/app/${product.qr_code}`" alt="QR Code"
+                                                            height='60px'>
+
+
+
                                                     </td>
                                                     <td>
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
+
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -16,6 +17,8 @@ use App\Services\FilterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Traits\OperationDataTrait;
+
+
 
 class ProductController extends Controller
 {
@@ -129,12 +132,14 @@ class ProductController extends Controller
     {
 
         $this->start();
+        $this->check_duplicate();
         $this->variant();
 
-        return response()->json(['product' => $this->qty->details]);
+        return response()->json([
 
+            'product' => $this->qty->details
 
-
+        ]);
     }
 
 
@@ -248,6 +253,8 @@ class ProductController extends Controller
         //         'status' => 'failed'
         //     ], 401);
         // }
+
+
 
 
 

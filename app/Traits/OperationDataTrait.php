@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\ProductUnit;
 use Illuminate\Support\Facades\DB;
 
 trait OperationDataTrait
@@ -13,6 +12,7 @@ trait OperationDataTrait
     {
 
         $this->start();
+        $this->check_duplicate();
         $this->variant();
         $this->unit();
     }
@@ -21,22 +21,58 @@ trait OperationDataTrait
     public function start()
     {
 
-        if ($this->qty->request->id) {
 
-            $this->qty->details =  $this->filter->queryfilter($this->qty->request);
-        } else {
-
-            $this->product_detail();
-        }
+        $this->qty->details = ($this->qty->request->id) ? $this->filter->queryfilter() : $this->product_detail();
     }
 
+    public function check_duplicate()
+    {
+
+
+        $this->qty->details = (
+            $this->request->segment(2) == 'newpurchase' ||
+            $this->request->segment(2) == 'newsupply' ||
+            $this->request->segment(1) == 'show_product'
+        ) ? collect($this->qty->details)->unique('qr_code') : $this->qty->details;
+    }
+
+
     public function product_detail()
+    {
+
+        return (
+            $this->request->segment(2) == 'newpurchase' ||
+            $this->request->segment(2) == 'newsupply' ||
+            $this->request->segment(1) == 'show_product') ? $this->product_detail_for_product() : $this->product_detail_for_another();
+    }
+    public function product_detail_for_product()
+    {
+
+
+
+        return DB::table('products')
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->select(
+                'products.*',
+                'products.text as product',
+                'statuses.name as status',
+                'store_products.quantity as availabe_qty',
+                'store_products.*',
+                'store_products.cost as price',
+                'store_products.id as store_product_id'
+
+            )
+            ->get();
+    }
+
+    public function product_detail_for_another()
     {
 
 
 
 
-        $this->qty->details = DB::table('products')
+        return DB::table('products')
             ->join('store_products', 'store_products.product_id', '=', 'products.id')
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('stores', 'store_products.store_id', '=', 'stores.id')
@@ -53,12 +89,6 @@ trait OperationDataTrait
 
             )
             ->get();
-
-
-
-
-
-        // dd($this->qty->details);
     }
 
 
@@ -89,7 +119,7 @@ trait OperationDataTrait
 
         foreach ($this->qty->details as $value) {
 
-            $value->unit = ProductUnit::where([
+            $value->unit = DB::table('product_units')->where([
                 'product_prices.store_product_id' => $value->store_product_id
             ])
                 ->join('units', 'units.id', '=', 'product_units.unit_id')

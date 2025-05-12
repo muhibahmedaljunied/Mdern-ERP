@@ -224,8 +224,8 @@
 
 
                                                             <div>
-                                                                <input type="hidden" v-model="data_product.text" id="desc"
-                                                                    class="form-control" />
+                                                                <input type="hidden" v-model="data_product.text"
+                                                                    id="desc" class="form-control" />
 
                                                                 <span>{{ data_product.text }}</span>
                                                                 <span style="color: blue;" v-if="data_product.kk"
@@ -262,33 +262,33 @@
                                                         </td>
                                                         <td>
 
-                                                            <div  v-if="data_product.availabe_qty != 0">
+                                                            <div v-if="data_product.availabe_qty != 0">
                                                                 <div
-                                                                v-for="temx in data_product.qty_after_convert['quantity']">
+                                                                    v-for="temx in data_product.qty_after_convert['quantity']">
 
 
 
-                                                                <span v-for="temx2 in temx">
+                                                                    <span v-for="temx2 in temx">
 
 
-                                                                    <span style="float: right;">
-                                                                        {{ temx2[0] }}
-                                                                        <span style="color: red;">
-                                                                            {{ temx2[1] }}
+                                                                        <span style="float: right;">
+                                                                            {{ temx2[0] }}
+                                                                            <span style="color: red;">
+                                                                                {{ temx2[1] }}
+                                                                            </span>
+
                                                                         </span>
+
+
 
                                                                     </span>
 
 
 
-                                                                </span>
-
-
-
-                                                            </div>
+                                                                </div>
                                                             </div>
                                                             <div v-else>
-0
+                                                                0
                                                             </div>
 
 
@@ -323,8 +323,7 @@
 
                                                         <td>
                                                             <div class="input_nombre">
-                                                                <select
-                                                                    style="background-color: beige;"
+                                                                <select style="background-color: beige;"
                                                                     :id="'select_unit' + index" v-model="unit[index]"
                                                                     name="type" class="form-control" required>
                                                                     <option v-for="unit in data_product.units"
@@ -341,8 +340,7 @@
                                                         <td>
 
 
-                                                            <input style="background-color: beige;"
-                                                                v-model="qty[index]"
+                                                            <input style="background-color: beige;" v-model="qty[index]"
                                                                 type="number" class="form-control input_cantidad" />
 
                                                             <input style="background-color: beige;"
@@ -492,6 +490,7 @@ export default {
         this.first_row = 0;
 
 
+        this.list();
         this.showtree("product", 'tree_product');
         this.showtree("store", 'tree_store');
         this.showtree("intostore", 'tree_store');
@@ -499,6 +498,17 @@ export default {
     },
 
     methods: {
+
+        list(page =1) {
+
+
+            this.axios.post(`/newtransfer?page=${page}`).then((responce) => {
+                this.count = responce.data.products.length;
+                this.store_products = responce.data.products;
+            });
+
+        },
+
 
         get_transfer() {
             let uri = `/transfer_before`;

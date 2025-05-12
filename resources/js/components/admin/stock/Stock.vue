@@ -57,23 +57,23 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="wd-15p border-bottom-0">
-الرقم التسلسلي                                                </th>
-                                                <th class="wd-15p border-bottom-0">
+                                                <th class="wd-5p border-bottom-0">
+                                                    الرقم التسلسلي </th>
+                                                <th class="wd-10p border-bottom-0">
                                                     المنتج
                                                 </th>
-                                                <!-- <th class="wd-15p border-bottom-0">
-                                                    الباركود
-                                                </th> -->
                                                 <th class="wd-15p border-bottom-0">
+                                                    الباركود
+                                                </th>
+                                                <th class="wd-5p border-bottom-0">
                                                     الحاله
                                                 </th>
-                                                <th>المواصفات والطراز</th>
-                                                <th class="wd-15p border-bottom-0">
+                                                <th class="wd-5p border-bottom-0">المواصفات والطراز</th>
+                                                <th class="wd-5p border-bottom-0">
                                                     المخزن
                                                 </th>
 
-                                                <th class="wd-15p border-bottom-0">
+                                                <th class="wd-5p border-bottom-0">
                                                     الكميه المتوفره
                                                 </th>
                                             </tr>
@@ -107,6 +107,7 @@
 
 
                                                 </td>
+                                                <td></td>
 
                                                 <td>{{ stock.status }}</td>
                                                 <td>{{ stock.desc }}</td>

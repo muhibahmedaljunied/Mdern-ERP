@@ -4,11 +4,13 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\FamilyAttributeOption;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\QrCode;
 use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use App\Models\ProductUnit;
 use App\Models\Unit;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
@@ -53,16 +55,46 @@ class ProductService
 
 
 
+    public function bar_code()
+    {
+
+        $qrCode = QrCode::create('https://example.com')
+            ->setSize(300)
+            ->setMargin(10);
+
+        $writer = new PngWriter();
+        $result = $writer->write($qrCode);
+
+        $this->file_name = 'qrcodes/qrcode_' . time() . '.png';
+
+        Storage::put($this->file_name, $result->getString()); // Save QR code in storage
+
+
+
+
+    }
+
     public function save_product_family_attribute()
     {
 
+        $this->bar_code();
+        $this->store_product();
+    }
+
+    public function store_product()
+    {
+
+
         $product_attribute = new StoreProduct();
         $product_attribute->product_id = $this->product->id;
+        $product_attribute->qr_code = $this->file_name;
         $product_attribute->status_id = $this->request['status_product'];
         $product_attribute->desc = $this->request['desc'];
         $product_attribute->save();
         $this->product_attribute = $product_attribute;
     }
+
+
 
 
     public function save_family_attribute_option($value)
@@ -105,10 +137,6 @@ class ProductService
         return $this;
     }
 
-    public function productCodeExists($number)
-    {
-        return product::whereProductCode($number)->exists();
-    }
 
     public function product()
     {

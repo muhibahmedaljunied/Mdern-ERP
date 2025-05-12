@@ -35,6 +35,7 @@ class TransferController extends Controller
     public $store_products;
     public $filter;
     public $core;
+    public $request;
 
 
     public function  __construct(
@@ -46,6 +47,7 @@ class TransferController extends Controller
     ) {
 
         $this->qty = $qty;
+        $this->request = $request;
         $this->filter = $filter;
         $this->core = $core;
 

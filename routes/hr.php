@@ -1,6 +1,4 @@
 <?php
-
-use App\Http\Controllers\Staff\AdministrativeStructureController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/store_staff_account_setting', 'Staff\staffController@store_staff_account_setting');
@@ -22,8 +20,8 @@ Route::post('/structure_details_node/{id}', 'Staff\AdministrativeStructureContro
 Route::post('/tree_job', 'Staff\AdministrativeStructureController@tree_structure');
 Route::post('/store_structure', 'Staff\AdministrativeStructureController@store');
 Route::post('/delete_structure/{id}', 'Staff\AdministrativeStructureController@destroy');
-Route::post('import_structure', [AdministrativeStructureController::class, 'import']);
-Route::post('export_structure', [AdministrativeStructureController::class, 'export']);
+Route::post('import_structure', 'Staff\AdministrativeStructureController@import');
+Route::post('export_structure','Staff\AdministrativeStructureController@export');
 /* --------------------------------staff---------------------------------------------------------*/
 Route::post('/staff', 'Staff\StaffController@index');
 // Route::post('/staff_delete/{id}', 'Staff\StaffController@destroy');

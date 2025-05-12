@@ -10,6 +10,7 @@ class StoreProduct extends Model
         'product_id',
         'store_id',
         "status_id",
+        'qr_code',
         "desc",
         "cost",
         "qr_code",

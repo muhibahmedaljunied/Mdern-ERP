@@ -104,6 +104,8 @@ Route::post('/delete_transfer/{id}', 'Warehouse\TransferController@destroy');
 
 Route::post('/data_for_transfer', 'Warehouse\TransferController@data_for_transfer');
 Route::post('/get_product/{id}', 'Warehouse\TransferController@get_product');
+Route::post('/newtransfer', 'Warehouse\TransferController@get_product');
+
 
 
 Route::post('/transfersearch', 'Warehouse\TransferController@search');

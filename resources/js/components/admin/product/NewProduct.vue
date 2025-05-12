@@ -405,9 +405,7 @@
                           <thead>
                             <tr>
                               <th>الرقم التسلسلي</th>
-                              <!-- <th>السعر</th> -->
-
-
+                              <th>الباركود</th>
                               <th>الخصائص</th>
                               <th>صوره المنتج</th>
                               <th>الوصف</th>
@@ -420,6 +418,10 @@
 
                               <td>
                                 {{ index }}
+                              </td>
+                              <td>
+                                <input v-model='qr_code[index - 1]' type="text" class="form-control">
+
                               </td>
                               <!-- <td>
                                 <input v-model="price[index - 1]" type="text" class="form-control" name="name" id="name"
@@ -667,6 +669,7 @@ export default {
       error_hash_rate: '',
       error_purchase_price: '',
       units: '',
+      qr_code:[],
       unit: '',
       retail_unit: [],
       hash_rate: [],

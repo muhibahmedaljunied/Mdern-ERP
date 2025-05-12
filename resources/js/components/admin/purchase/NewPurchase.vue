@@ -199,6 +199,8 @@
                                             <thead>
                                                 <tr>
                                                     <th class="wd-5p border-bottom-0">الرقم التسلسلي</th>
+                                                    <th class="wd-10p border-bottom-0">الباركود</th>
+
                                                     <th class="wd-10p border-bottom-0">المنتج</th>
                                                     <th class="wd-10p border-bottom-0">المخزن</th>
 
@@ -224,6 +226,12 @@
                                             <tbody id="show_pro">
                                                 <tr v-for="(sto_pro, index) in store_products" :key="index">
                                                     <td>{{ index + 1 }}
+
+
+
+                                                    </td>
+                                                    <td> <img :src="`/ERP/storage/app/${sto_pro.qr_code}`" alt="QR Code"
+                                                            height='60px'>
 
 
 

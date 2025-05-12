@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Sale;
-
 use App\Services\StockService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
@@ -61,8 +60,6 @@ class SaleController extends Controller
     public function index()
     {
 
-
-        // dd($this->qty->request);
         $this->qty->set_compare_array(['quantity']);
         $this->operation_data();
         $this->qty->handle_qty();

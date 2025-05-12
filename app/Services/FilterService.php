@@ -90,7 +90,7 @@ class FilterService
 
         if ($value['children'] == null) {
 
-            ($this->type == 'store') ? $this->product_detail_by_store($value) : $this->product_detail_by_product($value);
+            ($this->type == 'store') ? $this->product_detail_by_store($value) : $this->product_detail($value);
         } else {
             $this->foreach_root($value['children']);
         }
@@ -103,8 +103,6 @@ class FilterService
 
 
         ($this->type == 'store') ? $this->store() : $this->product();
-
-        // dd($this->data);
         return $this->data;
     }
 
@@ -172,15 +170,64 @@ class FilterService
                 #
                 $this->count = $this->count + 1;
             }
-            // $this->data[$this->count] = $product[0];
-            // $this->count = $this->count + 1;
+
         }
     }
 
 
 
+    public function product_detail($value = null)
+    {
+
+        return (
+            $this->request->segment(2) == 'newpurchase' ||
+            $this->request->segment(2) == 'newsupply' ||
+            $this->request->segment(1) == 'show_product') ? $this->product_detail_by_product($value) : $this->product_detail_by_another($value);
+    }
 
     public function product_detail_by_product($value = null)
+    {
+
+
+        if ($value['status'] == 'false') {
+
+            $product = DB::table('products')
+                ->where('products.id', $value['id'])
+                ->join('store_products', 'store_products.product_id', '=', 'products.id')
+                ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+                // ->join('stores', 'store_products.store_id', '=', 'stores.id')
+                ->select(
+                    'products.*',
+                    'products.text as product',
+                    // 'stores.text as store',
+                    // 'stores.account_id as store_account_id',
+                    'statuses.name as status',
+                    'store_products.quantity as availabe_qty',
+                    'store_products.*',
+                    'store_products.cost as price',
+                    'store_products.id as store_product_id'
+
+                )
+                ->get();
+
+
+
+
+
+                foreach ($product as  $value) {
+
+                    $this->data[$this->count] = $value;
+                    $this->count = $this->count + 1;
+                }
+
+        }
+
+
+
+
+        // dd($this->qty->details);
+    }
+    public function product_detail_by_another($value = null)
     {
 
 
@@ -208,27 +255,21 @@ class FilterService
 
 
 
-            // if (
-            //     $this->request->segment(2) == 'newpurchase' ||
-            //     $this->request->segment(2) == 'newsupply' ||
-            //     $this->request->segment(1) == 'show_product'
-            // ) {
-
-
-            //     $this->data[$this->count] = $product[0];
-            //     $this->count = $this->count + 1;
-            // } else {
 
                 foreach ($product as  $value) {
 
                     $this->data[$this->count] = $value;
                     $this->count = $this->count + 1;
                 }
-            // }
+
         }
+
+
+
 
         // dd($this->qty->details);
     }
+
 
 
     public function product_detail_by_store($value = null)
@@ -259,12 +300,6 @@ class FilterService
 
 
 
-            if ($this->request->segment(1) == 'show_product') {
-
-
-                $this->data[$this->count] = $product[0];
-                $this->count = $this->count + 1;
-            } else {
 
                 foreach ($product as  $value) {
 
@@ -272,8 +307,6 @@ class FilterService
                     #
                     $this->count = $this->count + 1;
                 }
-            }
-
 
         }
     }
