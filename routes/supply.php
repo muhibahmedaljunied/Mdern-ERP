@@ -2,13 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*--------------------------Supplier---------------------------------------*/
 Route::post('/update_supplier/{id}', 'Supply\SupplierController@update');
 Route::post('/supplier/{id}', 'Supply\SupplierController@edit');
 Route::post('/delete_supplier/{id}', 'Supply\SupplierController@destroy');
 Route::post('/suppliersearch', 'Supply\SupplierController@search');
-
-/*------------------------------------------------supply----------------------------------*/
 Route::post('/supply/newsupply', 'Supply\SupplyController@index');
 Route::post('/supply/newsupply/{id}', 'Supply\SupplyController@index');
 Route::post('/Supply/delete', 'Supply\SupplyController@destroy');
@@ -24,10 +21,8 @@ Route::post('/return_supply_daily/{id}', 'Supply\SupplyReturnController@return_s
 // Route::post('/data_for_payment_bond/{id}', 'Supply\PaymentBondController@payment_bond');
 // Route::post('/store_PaymentBond', 'Supply\SupplyController@store_PaymentBond');
 // Route::post('/payment_bond_list', 'Supply\SupplyController@paymentBondlist');
-
-// ------------------------------------------------------------------------------------------
 Route::post('/supply_details_in_return/{id}', 'Supply\SupplyReturnController@details');
-Route::post('/supply_return_details/{id}', 'Supply\SupplyReturnController@index');
+// Route::post('/supply_return_details/{id}', 'Supply\SupplyReturnController@index');
 Route::post('/supplyreturn', 'Supply\SupplyReturnController@create');
 Route::post('/listreturn_supply/{id}', 'Supply\SupplyReturnController@show');
 Route::post('/listreturn_supplysearch', 'Supply\SupplyReturnController@search');

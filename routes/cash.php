@@ -11,7 +11,7 @@ Route::post('/payCash', 'Cash\CashController@payment');
 Route::post('/cash_details/{id}', 'Cash\CashController@details');
 Route::post('/cash_daily/{id}', 'Cash\CashController@cash_daily');
 Route::post('/return_cash_daily/{id}', 'Cash\CashReturnController@return_cash_daily');
-Route::post('/cash_return_details/{id}', 'Cash\CashReturnController@index');
+// Route::post('/cash_return_details/{id}', 'Cash\CashReturnController@index');
 Route::post('/Cash/delete', 'Cash\CashController@destroy');
 Route::post('/Cash/delete/{id}', 'Cash\CashController@destroy');
 Route::post('/invoice_cash/{id}', 'Cash\CashController@invoice_cash');

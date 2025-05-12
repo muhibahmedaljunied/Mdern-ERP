@@ -11,15 +11,6 @@
                     </div>
 
 
-                    <div class="d-flex justify-content-right">
-
-
-                        <div class="form-group">
-                            <input type="search" autocomplete="on" name="search" role="button" placeholder="بحث  بالرقم"
-                                v-model="word_search" @input="get_search()" />
-                        </div>
-                    </div>
-
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table text-md-nowrap" id="example1">
@@ -144,10 +135,10 @@
 
 
                                             <div>
-                                                <input type="hidden" v-model="return_details.text" id="desc"
+                                                <input type="hidden" v-model="return_details.product_name" id="desc"
                                                     class="form-control" />
 
-                                                <span>{{ return_details.text }}</span>
+                                                <span>{{ return_details.product_name }}</span>
                                                 <span style="color: blue;" v-if="return_details.kk"
                                                     v-for="ss in return_details.kk">
 
@@ -160,8 +151,6 @@
 
                                                 </span>
                                             </div>
-
-
 
 
                                         </td>

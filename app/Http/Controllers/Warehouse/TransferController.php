@@ -34,35 +34,21 @@ class TransferController extends Controller
     public $details;
     public $store_products;
     public $filter;
-<<<<<<< HEAD
     public $core;
-=======
-
-
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
 
 
     public function  __construct(
         Request $request,
         QtyStockRepository $qty,
-<<<<<<< HEAD
         CoreService $core,
-=======
-        public CoreService $core,
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
         FilterService $filter,
 
     ) {
 
         $this->qty = $qty;
-        $this->qty->request = $request;
         $this->filter = $filter;
-<<<<<<< HEAD
         $this->core = $core;
 
-=======
-        $this->filter->product_id =  $this->qty->request->id;
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
 
         $this->core->setData($request->all());
     }

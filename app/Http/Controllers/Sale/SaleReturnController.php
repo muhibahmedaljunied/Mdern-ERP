@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SaleReturn;
 use App\Traits\OperationDataTrait;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,18 +23,20 @@ class SaleReturnController extends Controller
         ReturnTrait;
 
     public $qty;
-    public function  __construct(Request $request, QtyStockRepository $qty)
-    {
+    public $filter;
+
+    public function  __construct(
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
         $this->qty = $qty;
-        $this->qty->request = $request;
+        $this->filter = $filter;
+
     }
 
 
     public function details()
     {
-
-
-        // dd($this->qty->request->all());
 
         $this->qty->set_compare_array([
             'qty',
@@ -84,18 +87,6 @@ class SaleReturnController extends Controller
             ->get();
     }
 
-    public function index(Request $request, $id)
-    {
-
-        $this->qty->set_compare_array(['qty', 'quantity', 'qty_remain']);
-        $this->init();
-        $this->details();
-        return response()->json([
-            'sale_details' => $this->qty->details,
-            'customers' => $this->customers(),
-            'treasuries' => $this->treasuries()
-        ]);
-    }
 
     public function customers()
     {
@@ -294,3 +285,17 @@ class SaleReturnController extends Controller
         return response()->json(['daily_details' => $sales]);
     }
 }
+
+
+    // public function index(Request $request, $id)
+    // {
+
+    //     $this->qty->set_compare_array(['qty', 'quantity', 'qty_remain']);
+    //     $this->init();
+    //     $this->details();
+    //     return response()->json([
+    //         'sale_details' => $this->qty->details,
+    //         'customers' => $this->customers(),
+    //         'treasuries' => $this->treasuries()
+    //     ]);
+    // }

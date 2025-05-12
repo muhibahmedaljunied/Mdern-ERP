@@ -16,15 +16,11 @@ class FilterService
     public $array_attribute = [];
     public $group_array_attribute = [];
     public $count = 0;
-    public  $product_id;
+    public  $tree_id;
     public $array_data;
     public $root;
     public $link;
     public $type;
-<<<<<<< HEAD
-=======
-    // public $qty;
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
     public $request;
     public $data = [
         [
@@ -42,7 +38,7 @@ class FilterService
     ) {
 
         $this->request = $request;
-        $this->product_id =  $this->request->id;
+        $this->tree_id =  $this->request->id;
         $this->type =  $this->request->type;
     }
 
@@ -108,7 +104,7 @@ class FilterService
 
         ($this->type == 'store') ? $this->store() : $this->product();
 
-
+        // dd($this->data);
         return $this->data;
     }
 
@@ -119,8 +115,8 @@ class FilterService
 
         $store = Store::where(function ($query) {
 
-            return $query->where('parent_id', '=', $this->product_id)
-                ->orWhere('id', '=', $this->product_id)->where('status', '=', 'false');
+            return $query->where('parent_id', '=', $this->tree_id)
+                ->orWhere('id', '=', $this->tree_id)->where('status', '=', 'false');
         })
             ->with('children')
             ->get();
@@ -133,8 +129,8 @@ class FilterService
 
         $product = Product::where(function ($query) {
 
-            return $query->where('parent_id', '=', $this->product_id)
-                ->orWhere('id', '=', $this->product_id)->where('status', '=', 'false');
+            return $query->where('parent_id', '=', $this->tree_id)
+                ->orWhere('id', '=', $this->tree_id)->where('status', '=', 'false');
         })
             ->with('children')
             ->get();
@@ -183,29 +179,6 @@ class FilterService
 
 
 
-    function get_details_for_tree($value)
-    {
-
-        if ($value['status'] == 'false') {
-            $product = DB::table('products')
-                ->join('store_products', 'store_products.product_id', '=', 'products.id')
-                ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-                ->select(
-                    'products.*',
-                    'products.text as product',
-                    'statuses.name as status',
-                    'store_products.quantity as availabe_qty',
-                    'store_products.*',
-                    'store_products.cost as price',
-                    'store_products.id as store_product_id'
-
-                )
-                ->get();
-
-            $this->data[$this->count] = $product[0];
-            $this->count = $this->count + 1;
-        }
-    }
 
     public function product_detail_by_product($value = null)
     {
@@ -235,41 +208,27 @@ class FilterService
 
 
 
-<<<<<<< HEAD
-            if (
-                $this->request->segment(2) == 'newpurchase' ||
-                $this->request->segment(2) == 'newsupply' ||
-                $this->request->segment(1) == 'show_product'
-            ) {
-=======
-            if ($this->request->segment(2) == 'newpurchase' ||  $this->request->segment(2) == 'newsupply' ) {
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
+            // if (
+            //     $this->request->segment(2) == 'newpurchase' ||
+            //     $this->request->segment(2) == 'newsupply' ||
+            //     $this->request->segment(1) == 'show_product'
+            // ) {
 
 
-                $this->data[$this->count] = $product[0];
-                $this->count = $this->count + 1;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
-            } else {
+            //     $this->data[$this->count] = $product[0];
+            //     $this->count = $this->count + 1;
+            // } else {
 
                 foreach ($product as  $value) {
 
                     $this->data[$this->count] = $value;
-                    #
                     $this->count = $this->count + 1;
                 }
-            }
+            // }
         }
 
         // dd($this->qty->details);
     }
-
-
-
-
 
 
     public function product_detail_by_store($value = null)
@@ -300,7 +259,6 @@ class FilterService
 
 
 
-<<<<<<< HEAD
             if ($this->request->segment(1) == 'show_product') {
 
 
@@ -316,21 +274,6 @@ class FilterService
                 }
             }
 
-=======
-
-            // if ($this->) {
-            //     # code...
-            // }
-            foreach ($product as  $value) {
-
-                $this->data[$this->count] = $value;
-                #
-                $this->count = $this->count + 1;
-            }
-
-            // $this->data[$this->count] = $product[0];
-            // $this->count = $this->count + 1;
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
 
         }
     }

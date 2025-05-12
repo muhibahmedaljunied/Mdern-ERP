@@ -6,11 +6,10 @@ use Illuminate\Support\Facades\Cache;
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
 use App\Traits\OperationDataTrait;
-use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use App\Models\SupplyReturn;
-use App\Models\SupplyReturnDetail;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use App\Services\StockService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,32 +17,19 @@ use Illuminate\Support\Facades\DB;
 class SupplyReturnController extends Controller
 {
 
-    use GeneralTrait,OperationDataTrait;
+    use GeneralTrait, OperationDataTrait;
     public $qty;
+    public $filter;
 
 
-    public function  __construct(Request $request,  QtyStockRepository $qty)
-    {
+    public function  __construct(
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
         $this->qty = $qty;
-        $this->qty->request = $request;
+        $this->filter = $filter;
     }
 
-
-
-
-    public function index()
-    {
-
-
-
-        $details = $this->details();
-
-        return response()->json([
-            'supply_details' => $details,
-            'suppliers' => $this->suppliers(),
-            'treasuries' => $this->treasuries()
-        ]);
-    }
 
     public function details()
     {
@@ -60,10 +46,7 @@ class SupplyReturnController extends Controller
         $this->get_details();
         $this->variant();
         $this->unit();
-        // dd($this->qty->details);
         $this->qty->handle_qty();
-
-
         return response()->json([
             'details' => $this->qty->details,
 
@@ -142,6 +125,7 @@ class SupplyReturnController extends Controller
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_return_details();
+        $this->variant();
         $this->qty->handle_qty();
         return response()->json([
             'return_details' => $this->qty->details
@@ -245,3 +229,19 @@ class SupplyReturnController extends Controller
         return response()->json(['daily_details' => $supplies]);
     }
 }
+
+
+
+    // public function index()
+    // {
+
+
+
+    //     $details = $this->details();
+
+    //     return response()->json([
+    //         'supply_details' => $details,
+    //         'suppliers' => $this->suppliers(),
+    //         'treasuries' => $this->treasuries()
+    //     ]);
+    // }

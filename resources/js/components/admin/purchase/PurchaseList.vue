@@ -70,7 +70,6 @@
                                                 <!-- <th class="wd-15p border-bottom-0">الكميه </th>
                   <th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
                                                 <th class="wd-15p border-bottom-0">تاريخ الشراء</th>
-                                                <th class="wd-15p border-bottom-0"> الفرع</th>
                                                 <th class="wd-15p border-bottom-0"> المدفوع</th>
                                                 <th class="wd-15p border-bottom-0">المتبقي</th>
                                                 <th class="wd-15p border-bottom-0">اجمالي الفاتوره</th>
@@ -85,7 +84,6 @@
                                                 <td>{{ purchase.paymentable.supplier_name }}</td>
                                                 <!-- <td>{{ purchase.quantity }}</td>
                   <td>{{ purchase.qty_return }}</td> -->
-                                                <td>{{ purchase.paymentable.date }}</td>
                                                 <td>{{ purchase.paymentable.date }}</td>
                                                 <td>{{ purchase.paid }}</td>
                                                 <td>{{ purchase.remaining }}</td>

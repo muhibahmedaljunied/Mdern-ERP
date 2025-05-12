@@ -67,7 +67,7 @@
                                                     <th class="wd-15p border-bottom-0">رقم السند</th>
                                                     <!-- <th class="wd-15p border-bottom-0">العميل</th> -->
                                                     <!-- <th class="wd-15p border-bottom-0">الكميه</th> -->
-                                                    <th class="wd-15p border-bottom-0">الفرع</th>
+                                                    <!-- <th class="wd-15p border-bottom-0">الفرع</th> -->
                                                     <th class="wd-15p border-bottom-0">تاريخ المردود</th>
                                                     <th class="wd-15p border-bottom-0">سبب الارجاع </th>
                                                     <th class="wd-15p border-bottom-0">العمليات</th>
@@ -83,7 +83,7 @@
 
                                                     <!-- <td>{{ return_sales.quantity_return }}</td> -->
 
-                                                    <td></td>
+                                                    <!-- <td></td> -->
                                                     <td>{{ return_sales.date }}</td>
                                                     <td>{{ return_sales.note }}</td>
                                                     <td>
@@ -169,10 +169,10 @@
 
 
                                                             <div>
-                                                                <input type="hidden" v-model="return_details.text"
+                                                                <input type="hidden" v-model="return_details.product_name"
                                                                     id="desc" class="form-control" />
 
-                                                                <span>{{ return_details.text }}</span>
+                                                                <span>{{ return_details.product_name }}</span>
                                                                 <span style="color: blue;" v-if="return_details.kk"
                                                                     v-for="ss in return_details.kk">
 
@@ -190,7 +190,7 @@
 
 
                                                         </td>
-                                                        <td>{{ return_details.status }}</td>
+                                                        <td>{{ return_details.name }}</td>
                                                         <td>{{ return_details.desc }}</td>
                                                         <!-- <td>{{ return_details.qty_return }}</td> -->
                                                         <td>

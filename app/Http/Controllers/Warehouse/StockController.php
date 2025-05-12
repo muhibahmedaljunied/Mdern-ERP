@@ -24,7 +24,6 @@ class StockController extends Controller
     public $pds;
     public function __construct(
 
-        Request $request,
         QtyStockRepository $qty,
         FilterService $filter,
 
@@ -33,8 +32,6 @@ class StockController extends Controller
 
         $this->qty = $qty;
         $this->filter = $filter;
-        $this->qty->request = $request;
-        $this->filter->product_id =  $this->qty->request->id;
     }
 
     public function index()
@@ -42,15 +39,8 @@ class StockController extends Controller
 
         $this->qty->set_compare_array(['quantity']);
         // $qty->details = Cache::rememberForever('stock', function () {
-<<<<<<< HEAD
         $this->start();
         // });
-=======
-        ($this->qty->request->id) ? $this->category_filter() : $this->get_details();
-        // });
-                // dd( $this->qty->details);
-
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
         $this->variant();
         $this->qty->handle_qty();
         // dd( $this->qty->details);
@@ -59,38 +49,6 @@ class StockController extends Controller
             'stocks' => $this->qty->details
 
         ]);
-<<<<<<< HEAD
-=======
-    }
-
-
-    public function category_filter()
-    {
-
-        $this->qty->details = $this->filter->queryfilter();
-    }
-
-    
-    public function get_details()
-    {
-
-        $this->qty->details = StoreProduct::where('store_products.quantity', '!=', 0)
-            ->join('stores', 'store_products.store_id', '=', 'stores.id')
-            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-            ->join('products', 'store_products.product_id', '=', 'products.id')
-            ->select(
-                'store_products.quantity',
-                'store_products.*',
-                'store_products.id as store_product_id',
-                'products.id',
-                'products.text as product',
-                'statuses.name as status',
-                'stores.text as store',
-
-            )
-            ->get();
-
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
     }
 
 

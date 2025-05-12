@@ -58,8 +58,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="wd-15p border-bottom-0">
-                                                    #
-                                                </th>
+الرقم التسلسلي                                                </th>
                                                 <th class="wd-15p border-bottom-0">
                                                     المنتج
                                                 </th>

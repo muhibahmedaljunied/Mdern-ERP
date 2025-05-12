@@ -9,6 +9,7 @@ use App\Traits\OperationDataTrait;
 use Illuminate\Http\Request;
 use App\Models\PurchaseReturn;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use App\Services\StockService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +20,17 @@ class PurchaseReturnController extends Controller
     use GeneralTrait, OperationDataTrait;
 
     public $qty;
-
-
-
-    public function  __construct(Request $request, QtyStockRepository $qty)
-    {
+    public $filter;
+    public function  __construct(
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
         $this->qty = $qty;
-        $this->qty->request = $request;
+        $this->filter = $filter;
+
     }
+
+
     public function details()
     {
 
@@ -80,19 +84,6 @@ class PurchaseReturnController extends Controller
             ->get();
     }
 
-    public function index()
-    {
-
-
-
-        $this->qty->set_compare_array(['qty', 'available_qty', 'qty_remain']);
-        $this->details();
-        return response()->json([
-            'purchase_details' => $this->qty->details,
-            'suppliers' => $this->suppliers(),
-            'treasuries' => $this->treasuries()
-        ]);
-    }
 
     public function suppliers()
     {
@@ -177,7 +168,7 @@ class PurchaseReturnController extends Controller
 
         return response()->json([
             'returns' => $returns,
-        //  'suppliers' => $this->suppliers()
+            //  'suppliers' => $this->suppliers()
         ]);
     }
 
@@ -244,3 +235,19 @@ class PurchaseReturnController extends Controller
         return response()->json(['daily_details' => $purchase_returns]);
     }
 }
+
+
+
+    // public function index()
+    // {
+
+
+
+    //     $this->qty->set_compare_array(['qty', 'available_qty', 'qty_remain']);
+    //     $this->details();
+    //     return response()->json([
+    //         'purchase_details' => $this->qty->details,
+    //         'suppliers' => $this->suppliers(),
+    //         'treasuries' => $this->treasuries()
+    //     ]);
+    // }

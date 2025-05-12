@@ -78,7 +78,7 @@
                                                 <th class="wd-15p border-bottom-0">رقم السند</th>
                                                 <!-- <th class="wd-15p border-bottom-0">المورد</th> -->
                                                 <!-- <th class="wd-15p border-bottom-0"> الكميه المردوده</th> -->
-                                                <th class="wd-15p border-bottom-0">الفرع</th>
+                                                <!-- <th class="wd-15p border-bottom-0">الفرع</th> -->
                                                 <th class="wd-15p border-bottom-0">تاريخ المردود</th>
                                                 <th class="wd-15p border-bottom-0">سبب الارجاع </th>
 
@@ -92,7 +92,7 @@
                                                     {{ index + 1 }}
                                                 </td>
                                                 <td>{{ return_purchase.id }}</td>
-                                                <td></td>
+                                                <!-- <td></td> -->
                                                 <td>{{ return_purchase.date }}</td>
                                                 <td>{{ return_purchase.note }}</td>
                                                 <td>
@@ -205,7 +205,7 @@
 
 
                                                 </td>
-                                                <td>{{ return_details.status }}</td>
+                                                <td>{{ return_details.name }}</td>
                                                 <td>{{ return_details.desc }}</td>
                                                 <!-- <td>{{ return_details.qty_return }}</td> -->
 

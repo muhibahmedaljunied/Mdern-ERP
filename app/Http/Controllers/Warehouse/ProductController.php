@@ -41,7 +41,6 @@ class ProductController extends Controller
         $this->filter = $filter;
         $this->request = $request;
         $this->product_service = $product_service;
-        $this->filter->product_id =  $this->request->id;
     }
 
 
@@ -129,68 +128,20 @@ class ProductController extends Controller
     public function show_product()
     {
 
-<<<<<<< HEAD
         $this->start();
         $this->variant();
 
         return response()->json(['product' => $this->qty->details]);
-    
+
 
 
     }
 
 
-=======
-        $this->operation_data();
-
-        return response()->json(['product' => $this->qty->details]);
-    }
-
-    public function operation_data()
-    {
-
-        ($this->request->id) ? $this->category_filter() : $this->get_product();
-        $this->variant();
-
-    }
-
-
-    public function category_filter()
-    {
-
-
-
-
-        $this->qty->details = $this->filter->queryfilter();
-
-    }
-
-
-    public function get_product()
-    {
-
-        $this->qty->details = DB::table('products')
-            ->join('store_products', 'store_products.product_id', '=', 'products.id')
-            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-            ->select(
-                'products.*',
-                'products.text as product',
-                'statuses.name as status',
-                'store_products.quantity as availabe_qty',
-                'store_products.*',
-                'store_products.cost as price',
-                'store_products.id as store_product_id'
-
-            )
-
-            ->get();
-    }
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
 
     // public function get_product()
     // {
 
-<<<<<<< HEAD
     //     $this->qty->details = DB::table('products')
     //         ->join('store_products', 'store_products.product_id', '=', 'products.id')
     //         ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
@@ -209,8 +160,6 @@ class ProductController extends Controller
     // }
 
 
-=======
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
     public function pricing()
     {
 

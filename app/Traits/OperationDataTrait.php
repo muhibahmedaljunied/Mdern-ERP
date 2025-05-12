@@ -9,7 +9,6 @@ trait OperationDataTrait
 {
 
 
-<<<<<<< HEAD
     public function operation_data()
     {
 
@@ -21,16 +20,10 @@ trait OperationDataTrait
 
     public function start()
     {
-=======
-    public function start()
-    {
-        // dd($this->qty->request);
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
 
         if ($this->qty->request->id) {
 
             $this->qty->details =  $this->filter->queryfilter($this->qty->request);
-
         } else {
 
             $this->product_detail();
@@ -79,11 +72,13 @@ trait OperationDataTrait
         foreach ($this->qty->details as $key => $value) {
 
 
-            $value->kk = collect(DB::table('family_attribute_options')
-                ->where('family_attribute_options.store_product_id', $value->store_product_id)
-                ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
-                ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
-                ->get())
+            $value->kk = collect(
+                DB::table('family_attribute_options')
+                    ->where('family_attribute_options.store_product_id', $value->store_product_id)
+                    ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
+                    ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
+                    ->get()
+            )
                 ->toArray();
         }
     }

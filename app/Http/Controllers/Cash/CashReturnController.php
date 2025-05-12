@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Cash;
-
 use Illuminate\Support\Facades\Cache;
 use App\Traits\Return\ReturnTrait;
 use App\Traits\GeneralTrait;
@@ -12,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CashReturn;
 use App\Models\Payment;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use App\Services\StockService;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\DB;
@@ -24,12 +24,16 @@ class CashReturnController extends Controller
         OperationDataTrait,
         ReturnTrait;
     public $qty;
+    public $filter;
 
 
-    public function  __construct(Request $request, QtyStockRepository $qty)
-    {
+
+    public function  __construct(
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
         $this->qty = $qty;
-        $this->qty->request = $request;
+        $this->filter = $filter;
     }
 
 
@@ -42,6 +46,7 @@ class CashReturnController extends Controller
         $this->qty->set_compare_array(['qty', 'quantity', 'qty_remain']);
         $this->init();
         $this->get_details();
+        $this->variant();
         $this->unit();
         $this->qty->handle_qty();
         return response()->json([
@@ -52,15 +57,7 @@ class CashReturnController extends Controller
 
 
 
-    public function index()
-    {
 
-        $this->details();
-        return response()->json([
-            'cash_details' => $this->qty->details,
-            'customers' => $this->customers(),
-        ]);
-    }
 
     public function customers()
     {
@@ -266,3 +263,14 @@ class CashReturnController extends Controller
         return response()->json(['cashes' => $cashes]);
     }
 }
+
+
+   // public function index()
+    // {
+
+    //     $this->details();
+    //     return response()->json([
+    //         'cash_details' => $this->qty->details,
+    //         'customers' => $this->customers(),
+    //     ]);
+    // }

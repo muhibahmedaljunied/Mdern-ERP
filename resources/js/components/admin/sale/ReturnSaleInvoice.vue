@@ -102,12 +102,12 @@
                                 <table class="table table-bordered text-right" style="width: 100%">
                                     <thead style="background:red">
                                         <tr>
-                                            <th>الرقم التسلسلي</th>
-                                            <th>اسم المنتج</th>
+                                            <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
+                                            <th class="wd-15p border-bottom-0"> المنتج</th>
                                             <!-- <th class="wd-15p border-bottom-0">كميه </th> -->
                                             <th class="wd-15p border-bottom-0">الكميه المرتحعه</th>
-                                            <th>الحاله</th>
-                                            <th>المخزن</th>
+                                            <th class="wd-15p border-bottom-0">الحاله</th>
+                                            <th class="wd-15p border-bottom-0">المخزن</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,17 +115,48 @@
                                             <td>
                                                 {{ index + 1 }}
                                             </td>
-                                            <td>{{ sale_details.product_name }}</td>
 
+                                            <td>
+                                                <div v-for="temx in sale_details.qty_after_convert['qty']">
+
+
+
+<span v-for="temx2 in temx">
+
+
+    <span style="float: right;">
+        {{ temx2[0] }}
+        <span style="color: red;">
+            {{ temx2[1] }}
+        </span>
+
+    </span>
+
+
+
+</span>
+
+<!-- <span v-if="temx.unit_type == 0">
+
+
+<span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
+temx.name }}</span>
+
+
+
+</span> -->
+
+</div>
+                                            </td>
 
                                             <td>
 
 
                                                 <div>
-                                                    <input type="hidden" v-model="sale_details.text" id="desc"
+                                                    <input type="hidden" v-model="sale_details.product_name"
                                                         class="form-control" />
 
-                                                    <span>{{ sale_details.text }}</span>
+                                                    <span>{{ sale_details.product_name }}</span>
                                                     <span style="color: blue;" v-if="sale_details.kk"
                                                         v-for="ss in sale_details.kk">
 

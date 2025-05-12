@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 
-/*------------------------------------------------purchase----------------------------------*/
 Route::post('/purchase/newpurchase', 'Purchase\PurchaseController@index');
 Route::post('/purchase/newpurchase/{id}', 'Purchase\PurchaseController@index');
 Route::post('/Purchase/delete', 'Purchase\PurchaseController@destroy');
@@ -16,9 +15,8 @@ Route::post('/payPurchase', 'Purchase\purchaseController@payment');
 Route::post('/purchase_details/{id}', 'Purchase\PurchaseController@details');
 Route::post('/purchase_daily/{id}', 'Purchase\PurchaseController@purchase_daily');
 Route::post('/return_purchase_daily/{id}', 'Purchase\PurchaseReturnController@return_purchase_daily');
-// ------------------------------------------------------------------------------------------
 Route::post('/purchase_details_in_return/{id}', 'Purchase\PurchaseReturnController@details');
-Route::post('/purchase_return_details/{id}', 'Purchase\PurchaseReturnController@index');
+// Route::post('/purchase_return_details/{id}', 'Purchase\PurchaseReturnController@index');
 Route::post('/purchasereturn', 'Purchase\PurchaseReturnController@create');
 Route::post('/listreturn_purchase/{id}', 'Purchase\PurchaseReturnController@show');
 Route::post('/listreturn_purchase', 'Purchase\PurchaseReturnController@return_purchase_list');

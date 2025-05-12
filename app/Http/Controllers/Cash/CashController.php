@@ -32,7 +32,6 @@ class CashController extends Controller
     public $request;
     public $filter;
 
-<<<<<<< HEAD
     public function  __construct(
         Request $request,
         QtyStockRepository $qty,
@@ -41,19 +40,6 @@ class CashController extends Controller
         $this->qty = $qty;
         $this->request = $request;
         $this->filter = $filter;
-=======
-    public function  __construct(Request $request, QtyStockRepository $qty,FilterService $filter)
-    {
-        $this->qty = $qty;
-        $this->qty->request = $request;
-        $this->request = $request;
-
-        $this->filter = $filter;
-
-        $this->filter->product_id =  $this->request->id;
-        $this->filter->type =  $this->request->type;
-
->>>>>>> a0453f59696fe492f2f043f4027ec1b69f3e1beb
     }
 
     public function details()
@@ -87,7 +73,7 @@ class CashController extends Controller
         ]);
     }
 
- 
+
 
     public function customers()
     {

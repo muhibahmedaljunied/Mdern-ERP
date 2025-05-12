@@ -12,7 +12,7 @@ Route::post('/paySale', 'Sale\SaleController@payment');
 Route::post('/sale_details/{id}', 'Sale\SaleController@details');
 Route::post('/sale_daily/{id}', 'Sale\SaleController@sale_daily');
 Route::post('/return_sale_daily/{id}', 'Sale\SaleReturnController@return_sale_daily');
-Route::post('/sale_return_details/{id}', 'Sale\SaleReturnController@index');
+// Route::post('/sale_return_details/{id}', 'Sale\SaleReturnController@index');
 
 Route::post('/Sale/delete', 'Sale\SaleController@destroy');
 Route::post('/Sale/delete/{id}', 'Sale\SaleController@destroy');

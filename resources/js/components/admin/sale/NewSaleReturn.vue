@@ -195,13 +195,13 @@
 
 
                     </div>
-
+<!--
                     <div class="col-md-4">
                       <label for="pagoPrevio">اختيار الكل</label> <br>
 
                       <input v-model="check_state_all" @change="check_all_return()" type="checkbox"
                         class="btn btn-info waves-effect">
-                    </div>
+                    </div> -->
 
                   </div>
 
@@ -263,12 +263,31 @@
                                 {{ index + 1 }}
                               </td>
                               <td>
-                                <div class="form-group">
-                                  <!-- <input v-model="sale_details.product"  type="text" name="name" id="name"
-              class="form-control" /> -->
-                                  {{ sale_details.product }}
-                                </div>
-                              </td>
+
+
+<div>
+    <input type="hidden" v-model="sale_details.text"
+        id="desc" class="form-control" />
+
+    <span>{{ sale_details.text }}</span>
+    <span style="color: blue;" v-if="sale_details.kk"
+        v-for="ss in sale_details.kk">
+
+
+        -{{ ss.value }}
+
+
+
+
+
+    </span>
+</div>
+
+
+
+
+</td>
+
                               <!--
                                 <td>
                                   <div class="form-group">

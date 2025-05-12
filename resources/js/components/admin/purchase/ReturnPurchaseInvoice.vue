@@ -92,10 +92,10 @@
 
 
                                                 <div>
-                                                    <input type="hidden" v-model="return_details.text" id="desc"
+                                                    <input type="hidden" v-model="return_details.product" id="desc"
                                                         class="form-control" />
 
-                                                    <span>{{ return_details.text }}</span>
+                                                    <span>{{ return_details.product_name }}</span>
                                                     <span style="color: blue;" v-if="return_details.kk"
                                                         v-for="ss in return_details.kk">
 
@@ -111,29 +111,30 @@
 
 
                                             </td>
-                                            <td>{{ return_details.status }}</td>
+                                            <td>{{ return_details.name }}</td>
                                             <!-- <td>{{ return_details.qty }}</td> -->
                                             <!-- <td>{{ return_details.qty_return }}</td> -->
+                                        <td>
                                             <div v-for="temx in return_details.qty_after_convert['qty']">
 
 
 
-                                                <span v-for="temx2 in temx">
+<span v-for="temx2 in temx">
 
 
-                                                    <span style="float: right;">
-                                                        {{ temx2[0] }}
-                                                        <span style="color: red;">
-                                                            {{ temx2[1] }}
-                                                        </span>
+    <span style="float: right;">
+        {{ temx2[0] }}
+        <span style="color: red;">
+            {{ temx2[1] }}
+        </span>
 
-                                                    </span>
+    </span>
 
 
 
-                                                </span>
+</span>
 
-                                                <!-- <span v-if="temx.unit_type == 0">
+<!-- <span v-if="temx.unit_type == 0">
 
 
 <span>{{ Math.floor((stock.quantity)) }}</span><span style="color: red;"> {{
@@ -143,9 +144,10 @@ temx.name }}</span>
 
 </span> -->
 
-                                            </div>
+</div>
+                                        </td>
 
-                                            <td>{{ return_details.store }}</td>
+                                            <td>{{ return_details.text }}</td>
 
                                         </tr>
                                     </tbody>

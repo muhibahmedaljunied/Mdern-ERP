@@ -69,7 +69,6 @@
                                                 <th class="wd-15p border-bottom-0">العميل</th>
                                                 <!-- <th class="wd-15p border-bottom-0">الكميه </th> -->
                                                 <!-- <th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
-                                                <th class="wd-15p border-bottom-0">الفرع </th>
 
                                                 <th class="wd-15p border-bottom-0">تاريخ البيع </th>
                                                 <th class="wd-15p border-bottom-0"> المدفوع</th>
@@ -86,7 +85,6 @@
                                                     {{ index + 1 }}
                                                 </td>
                                                 <td>{{ sale.paymentable.sale_id }}</td>
-                                                <td>{{ sale.paymentable.customer_name }}</td>
                                                 <td>{{ sale.paymentable.customer_name }}</td>
                                                 <!-- <td>{{ sale.quantity }}</td>
                   <td>{{ sale.qty_return }}</td> -->

@@ -231,12 +231,31 @@
                                                             name="name" id="name" class="form-control" />
 
                                                         <td>
-                                                            <div class="form-group">
-                                                                <!-- <input v-model="cash_details.product"  type="text" name="name" id="name"
-                                  class="form-control" /> -->
-                                                                {{ cash_details.product }}
+
+
+                                                            <div>
+                                                                <input type="hidden" v-model="cash_details.text"
+                                                                    id="desc" class="form-control" />
+
+                                                                <span>{{ cash_details.text }}</span>
+                                                                <span style="color: blue;" v-if="cash_details.kk"
+                                                                    v-for="ss in cash_details.kk">
+
+
+                                                                    -{{ ss.value }}
+
+
+
+
+
+                                                                </span>
                                                             </div>
+
+
+
+
                                                         </td>
+
                                                         <td>{{ cash_details.desc }}</td>
                                                         <td>{{ cash_details.status }}</td>
                                                         <td>{{ cash_details.store }}
