@@ -35,15 +35,10 @@ class StorePurchaseReturnRepository extends StoreRepository implements StoreRepo
   {
 
 
-    if ($this->core->id_store_product == 0) {
+    ($this->core->id_store_product == 0) ? $this->init_store_product_table() : $this->refresh_store_product() ;
 
 
-      $this->init_store_product_table();
-    } else {
 
-
-      $this->refresh_store_product();
-    }
   }
 
 
@@ -68,7 +63,7 @@ class StorePurchaseReturnRepository extends StoreRepository implements StoreRepo
 
 
   // }
-  
+
 
 
 

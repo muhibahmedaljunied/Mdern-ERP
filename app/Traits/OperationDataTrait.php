@@ -21,8 +21,15 @@ trait OperationDataTrait
     public function start()
     {
 
+        if ($this->qty->request->id) {
 
-        $this->qty->details = ($this->qty->request->id) ? $this->filter->queryfilter() : $this->product_detail();
+            $this->qty->details = $this->filter->queryfilter();
+        } else {
+
+            $this->qty->details = ($this->request->segment(1) == 'get_product_price') ? $this->product_for_price() : $this->product_detail();
+        }
+
+
     }
 
     public function check_duplicate()
@@ -32,7 +39,8 @@ trait OperationDataTrait
         $this->qty->details = (
             $this->request->segment(2) == 'newpurchase' ||
             $this->request->segment(2) == 'newsupply' ||
-            $this->request->segment(1) == 'show_product'
+            $this->request->segment(1) == 'show_product' ||
+            $this->request->segment(1) == 'opening'
         ) ? collect($this->qty->details)->unique('qr_code') : $this->qty->details;
     }
 
@@ -41,12 +49,38 @@ trait OperationDataTrait
     {
 
         return (
+
             $this->request->segment(2) == 'newpurchase' ||
             $this->request->segment(2) == 'newsupply' ||
-            $this->request->segment(1) == 'show_product') ? $this->product_detail_for_product() : $this->product_detail_for_another();
+            $this->request->segment(1) == 'show_product' ||
+            $this->request->segment(1) == 'opening'
+        ) ? $this->product_detail_for_product() : $this->product_detail_for_another();
+    }
+
+    public function product_for_price()
+    {
+
+
+        return DB::table('products')
+            ->join('store_products', 'store_products.product_id', '=', 'products.id')
+            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+            ->join('product_units', 'product_units.product_id', '=', 'products.id')
+            ->join('units', 'product_units.unit_id', '=', 'units.id')
+
+            ->select(
+                'products.*',
+                'units.name as unit_name',
+                'store_products.id as store_product_id',
+                'product_units.id as product_unit_id',
+                'store_products.desc',
+                'statuses.name',
+
+            )
+            ->get();
     }
     public function product_detail_for_product()
     {
+
 
 
 

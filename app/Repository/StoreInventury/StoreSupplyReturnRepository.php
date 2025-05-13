@@ -34,16 +34,9 @@ class StoreSupplyReturnRepository extends StoreRepository implements StoreReposi
   public function check_founded_store()
   {
 
-
-    if ($this->core->id_store_product == 0) {
-
-
-      $this->init_store_product_table();
-    } else {
+    ($this->core->id_store_product == 0) ? $this->init_store_product_table() : $this->refresh_store_product() ;
 
 
-      $this->refresh_store_product();
-    }
   }
 
 
@@ -69,7 +62,7 @@ class StoreSupplyReturnRepository extends StoreRepository implements StoreReposi
 
 
   // }
-  
+
 
 
 

@@ -41,6 +41,8 @@ class SaleController extends Controller
         $this->request = $request;
         $this->filter = $filter;
 
+
+
     }
     public function details()
     {

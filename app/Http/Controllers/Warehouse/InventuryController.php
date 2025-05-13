@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-
 use App\Exports\OpeningInventuryExport;
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
@@ -14,9 +13,9 @@ use Illuminate\Http\Request;
 use App\Models\Temporale;
 use App\Models\Status;
 use App\Repository\Qty\QtyStockRepository;
+use App\Services\FilterService;
 use App\Services\OpeningService;
 use Illuminate\Support\Facades\DB;
-
 class InventuryController extends Controller
 {
     use InvoiceTrait,
@@ -24,16 +23,24 @@ class InventuryController extends Controller
         OperationDataTrait,
         GeneralTrait;
 
-
-
     public $qty;
     public $products;
     public $store_products;
-    public function __construct(Request $request, QtyStockRepository $qty)
-    {
+    public $request;
+    public $filter;
+    public function __construct(
+        Request $request,
+        QtyStockRepository $qty,
+        FilterService $filter
+    ) {
 
         $this->qty = $qty;
-        $this->qty->request = $request;
+        $this->request = $request;
+        $this->filter = $filter;
+
+
+
+
     }
 
 
@@ -41,9 +48,9 @@ class InventuryController extends Controller
     public function index()
     {
 
+
         $this->product();
         $this->operation_data();
-
         return response()->json([
             'products' => $this->products,
             'store_products' => $this->qty->details,
@@ -112,7 +119,7 @@ class InventuryController extends Controller
 
 
 
-     
+
 
 
         // dd($this->qty->request);

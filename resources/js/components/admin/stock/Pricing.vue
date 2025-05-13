@@ -327,21 +327,17 @@ export default {
 
 
         calculate_price(price, index) {
-            // console.log(this.unit[index][2]);
-
 
             this.total[index] = price * this.unit[index][1];
-
-
 
         },
         list(page = 1) {
 
-            this.axios.post(`/Warehouse/pricing?page=${page}`).then((responce) => {
+            this.axios.post(`/get_product_price?page=${page}`).then((responce) => {
 
 
-                console.log(responce.data);
-                this.all_products = responce.data.products.data;
+
+                this.store_products = responce.data.products;
 
             });
 

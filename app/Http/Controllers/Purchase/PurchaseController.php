@@ -37,7 +37,7 @@ class PurchaseController extends Controller
         FilterService $filter
     ) {
 
-        // dd($request->segment(2));
+ 
         $this->qty = $qty;
         $this->request = $request;
         $this->filter = $filter;

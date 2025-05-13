@@ -24,6 +24,7 @@ class StockController extends Controller
     public $pds;
     public function __construct(
 
+        Request $request,
         QtyStockRepository $qty,
         FilterService $filter,
 
@@ -32,6 +33,8 @@ class StockController extends Controller
 
         $this->qty = $qty;
         $this->filter = $filter;
+        $this->request = $request;
+
     }
 
     public function index()

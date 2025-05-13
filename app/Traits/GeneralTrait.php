@@ -3,14 +3,13 @@
 namespace App\Traits;
 
 use App\Traits\ConditionTrait;
-use App\Traits\Stock\StockTrait;
 use App\Traits\Details\DetailsTrait;
 use App\Traits\Return\ReturnTrait;
 use App\Models\PaymentPurchase;
 
 trait GeneralTrait
 {
-    use StockTrait, ConditionTrait, DetailsTrait, ReturnTrait;
+    use ConditionTrait, DetailsTrait, ReturnTrait;
 
 
 

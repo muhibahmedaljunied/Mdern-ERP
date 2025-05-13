@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-
+use App\Traits\ProductPriceTrait;
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -17,13 +17,13 @@ use App\Services\FilterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Traits\OperationDataTrait;
-
-
-
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\QrCode;
+use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
 
-    use OperationDataTrait;
+    use OperationDataTrait,ProductPriceTrait;
     public $qty;
     public $products;
     public $store_products;
@@ -40,9 +40,9 @@ class ProductController extends Controller
         FilterService $filter
     ) {
 
+        $this->request = $request;
         $this->qty = $qty;
         $this->filter = $filter;
-        $this->request = $request;
         $this->product_service = $product_service;
     }
 
@@ -63,7 +63,6 @@ class ProductController extends Controller
         $pool = '123456789';
         return substr(str_shuffle(str_repeat($pool, $length)), 0, $length - 2);
     }
-
 
 
     public function search(Request $request)
@@ -168,31 +167,23 @@ class ProductController extends Controller
     public function pricing()
     {
 
-        $products = DB::table('products')
-            ->where('products.id', $this->request->id)
-            ->join('store_products', 'store_products.product_id', '=', 'products.id')
-            ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-            ->join('product_units', 'product_units.product_id', '=', 'products.id')
-            ->join('units', 'product_units.unit_id', '=', 'units.id')
+        $this->start();
+        $this->check_duplicate();
+        $this->unit();
+        return response()->json([
+            'products' => $this->qty->details
+        ]);
+    }
 
-            ->select(
-                'products.*',
-                'units.name as unit_name',
-                'store_products.id as store_product_id',
-                'product_units.id as product_unit_id',
-                'store_products.desc',
-                'statuses.name',
 
-            )
-            ->get();
+    public function unit()
+    {
 
-        foreach ($products as $value) {
 
-            $value->kk = collect(DB::table('family_attribute_options')
-                ->where('family_attribute_options.store_product_id', $value->store_product_id)
-                ->join('attribute_options', 'attribute_options.id', '=', 'family_attribute_options.attribute_option_id')
-                ->join('attributes', 'attributes.id', '=', 'attribute_options.attribute_id')
-                ->get())->toArray();
+
+        foreach ($this->qty->details as $value) {
+
+
 
             $product_prices = ProductPrice::where([
                 'store_product_id' => $value->store_product_id,
@@ -220,23 +211,103 @@ class ProductController extends Controller
                 }
             }
         }
-
-
-
-        return response()->json([
-            'products' => $products
-        ]);
     }
 
 
 
-
-    public function store()
+    public function store_price()
     {
 
 
 
 
+
+        // dd($this->request->all());
+        // $validator = Validator::make($request->all(), [
+        //     'text' => 'required',
+        //     'hash_rate' => 'required',
+        //     'purchase_price' => 'required',
+        // ]);
+
+        // if ($validator->fails()) {
+
+
+        //     return response([
+        //         'message' => $validator->errors(),
+        //         'status' => 'failed'
+        //     ], 401);
+        // }
+
+
+
+        try {
+            DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
+
+
+            foreach ($this->request['data'] as $key => $value) {
+
+                $this->key = $key;
+
+                $this->get_product_price();
+
+                if ($this->data_store_product != null) {
+
+                    $this->refresh_product_price();
+
+                } else {
+
+                    $this->init_product_price();
+                }
+
+
+
+            }
+
+            // dd(ProductPrice::all());
+
+            // ------------------------------------------------------------------------------------------------------
+            DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
+
+
+            return response([
+                'message' => "product created successfully",
+                'status' => "success"
+            ], 200);
+        } catch (\Exception $exp) {
+
+            DB::rollBack(); // Tell Laravel, "It's not you, it's me. Please don't persist to DB"
+
+
+            return response([
+                'message' => $exp->getMessage(),
+                'status' => 'failed'
+            ], 400);
+        }
+
+
+        // return response()->json($request->file('image'));
+    }
+    public function store()
+    {
+
+
+
+        $qrCode = QrCode::create('https://example.com')
+            ->setSize(300)
+            ->setMargin(10);
+
+        $writer = new PngWriter();
+        $result = $writer->write($qrCode);
+
+        $file_name = 'qrcodes/qrcode_' . time() . '.png';
+
+        Storage::put($file_name, $result->getString()); // Save QR code in storage
+
+
+        return response([
+            'message' => 'dddddddddd',
+            'status' => 'failed'
+        ], 400);
 
         // dd($this->request->all());
         // $validator = Validator::make($request->all(), [
@@ -299,135 +370,7 @@ class ProductController extends Controller
 
         // return response()->json($request->file('image'));
     }
-    public function store_price()
-    {
 
-
-
-
-
-        // dd($this->request->all());
-        // $validator = Validator::make($request->all(), [
-        //     'text' => 'required',
-        //     'hash_rate' => 'required',
-        //     'purchase_price' => 'required',
-        // ]);
-
-        // if ($validator->fails()) {
-
-
-        //     return response([
-        //         'message' => $validator->errors(),
-        //         'status' => 'failed'
-        //     ], 401);
-        // }
-
-
-
-
-
-
-
-        try {
-            DB::beginTransaction(); // Tell Laravel all the code beneath this is a transaction
-
-
-
-            foreach ($this->request['data'] as $key => $value) {
-
-                $this->key = $key;
-
-                $this->get_product_price();
-                // ----------------------------------------------------------------------
-                if ($this->data_store_product[0] != null) {
-
-
-                    $this->refresh_product_price();
-                } else {
-
-
-                    $this->init_product_price();
-                }
-
-
-
-
-
-
-                // ---------------------------------------------
-
-            }
-
-            // dd(ProductPrice::all());
-
-            // ------------------------------------------------------------------------------------------------------
-            DB::commit(); // Tell Laravel this transacion's all good and it can persist to DB
-
-
-            return response([
-                'message' => "product created successfully",
-                'status' => "success"
-            ], 200);
-        } catch (\Exception $exp) {
-
-            DB::rollBack(); // Tell Laravel, "It's not you, it's me. Please don't persist to DB"
-
-
-            return response([
-                'message' => $exp->getMessage(),
-                'status' => 'failed'
-            ], 400);
-        }
-
-
-        // return response()->json($request->file('image'));
-    }
-
-
-    public function get_product_price()
-    {
-
-        // dd($this->request['data'][$key]);
-
-        $this->data_store_product = collect(ProductPrice::where([
-            'product_unit_id' => $this->request['data'][$this->key]['product_unit_id'],
-            'store_product_id' => $this->request['data'][$this->key]['store_product_id'],
-        ])->get())->toArray();
-    }
-
-    public function refresh_product_price()
-    {
-
-
-        DB::table('product_prices')->where([
-            'product_unit_id' => $this->request['data'][$this->key]['product_unit_id'],
-            'store_product_id' => $this->request['data'][$this->key]['store_product_id']
-        ])
-            ->update([
-                'cost' => $this->request['data'][$this->key]['cost'],
-                'supply_price' => $this->request['data'][$this->key]['supply_price'],
-                'small_price' => $this->request['data'][$this->key]['small_price'],
-                'big_price' => $this->request['data'][$this->key]['big_price'],
-                'private_price' => $this->request['data'][$this->key]['private_price']
-
-            ]);
-    }
-
-
-    public function init_product_price()
-    {
-
-
-        $product = new ProductPrice();
-        $product->product_unit_id = $this->request['data'][$this->key]['product_unit_id'];
-        $product->store_product_id = $this->request['data'][$this->key]['store_product_id'];
-        $product->cost = $this->request['data'][$this->key]['cost'];
-        $product->supply_price = $this->request['data'][$this->key]['supply_price'];
-        $product->small_price = $this->request['data'][$this->key]['small_price'];
-        $product->big_price = $this->request['data'][$this->key]['big_price'];
-        $product->private_price = $this->request['data'][$this->key]['private_price'];
-        $product->save();
-    }
     public function product_variant()
     {
 
@@ -471,12 +414,6 @@ class ProductController extends Controller
         return response()->json(['childs' => $childs, 'details' => $details]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $data = Product::find($id);

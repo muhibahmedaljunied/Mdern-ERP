@@ -64,8 +64,8 @@
                                     <table class="table text-md-nowrap" id="example1">
                                         <thead>
                                             <tr>
-                                                <th class="wd-15p border-bottom-0">الرقم التسلسلي</th>
-                                                <th class="wd-15p border-bottom-0">رقم الفاتوره</th>
+                                                <th class="wd-5p border-bottom-0">الرقم التسلسلي</th>
+                                                <th class="wd-5p border-bottom-0">رقم الفاتوره</th>
                                                 <th class="wd-15p border-bottom-0">المورد</th>
                                                 <!-- <th class="wd-15p border-bottom-0">الكميه </th>
                   <th class="wd-15p border-bottom-0">الكميه المرتحعه</th> -->
@@ -191,17 +191,17 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>الرقم التسلسلي</th>
+                                                <th class="wd-5p border-bottom-0">الرقم التسلسلي</th>
                                                 <!-- <th>  رقم الفاتوره </th> -->
-                                                <th>اسم المنتج</th>
+                                                <th class="wd-15p border-bottom-0">اسم المنتج</th>
                                                 <!-- <th> الباركود</th> -->
-                                                <th> المواصفات والطراز</th>
-                                                <th>الحاله</th>
-                                                <th>المخزن</th>
+                                                <th class="wd-15p border-bottom-0"> المواصفات والطراز</th>
+                                                <th class="wd-5p border-bottom-0">الحاله</th>
+                                                <th class="wd-5p border-bottom-0">المخزن</th>
 
-                                                <th class="wd-15p border-bottom-0"> كميه الشراء</th>
+                                                <th class="wd-5p border-bottom-0"> كميه الشراء</th>
                                                 <!-- <th>الوحده</th> -->
-                                                <th class="wd-15p border-bottom-0"> سعر الوحده </th>
+                                                <th class="wd-5p border-bottom-0"> سعر الوحده </th>
                                                 <!-- <th class="wd-15p border-bottom-0"> الاجمالي </th> -->
 
                                                 <!-- <th class="wd-15p border-bottom-0">  الكميه المرتحعه</th> -->

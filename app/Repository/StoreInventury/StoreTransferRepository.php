@@ -76,6 +76,7 @@ class StoreTransferRepository extends StoreRepository
 
 
             $this->init_store_product_table();
+            
         } else {
 
 

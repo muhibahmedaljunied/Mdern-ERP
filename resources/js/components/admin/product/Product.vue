@@ -86,8 +86,9 @@
                                                                                 <tr>
                                                                                     <th class="wd-5p border-bottom-0">
                                                                                         الرقم التسلسلي</th>
-                                                                                    <th class="wd-10p border-bottom-0">
-                                                                                        الباركود</th>
+                                                                                    <th class="wd-5p border-bottom-0">
+                                                                                        الباركود
+                                                                                    </th>
 
                                                                                     <th class="wd-5p border-bottom-0">
                                                                                         المنتج</th>
@@ -111,7 +112,8 @@
                                                                                     <td> {{ index + 1 }}</td>
 
 
-                                                                                    <td> <img
+                                                                                    <td>
+                                                                                         <img style="width: auto;"
                                                                                             :src="`/ERP/storage/app/${productss.qr_code}`"
                                                                                             alt="QR Code" height='60px'>
 

@@ -199,7 +199,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="wd-5p border-bottom-0">الرقم التسلسلي</th>
-                                                    <th class="wd-10p border-bottom-0">الباركود</th>
+                                                    <th class="wd-5p border-bottom-0">الباركود</th>
 
                                                     <th class="wd-10p border-bottom-0">المنتج</th>
                                                     <th class="wd-10p border-bottom-0">المخزن</th>

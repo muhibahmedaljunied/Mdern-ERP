@@ -4,14 +4,11 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\Store;
-use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FilterService
 {
-
-
     public $array_where = [];
     public $array_attribute = [];
     public $group_array_attribute = [];
@@ -102,7 +99,9 @@ class FilterService
 
 
 
+
         ($this->type == 'store') ? $this->store() : $this->product();
+
         return $this->data;
     }
 
@@ -137,52 +136,64 @@ class FilterService
         $this->foreach_root($this->root);
     }
 
-    function get_details($value)
-    {
+    // function get_details($value)
+    // {
 
 
-        if ($value['status'] == 'false') {
+    //     if ($value['status'] == 'false') {
 
 
-            $product = StoreProduct::where('store_products.quantity', '!=', 0)
-                ->where('store_products.product_id', '=', $value['id'])
-                ->join('stores', 'store_products.store_id', '=', 'stores.id')
-                ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-                ->join('products', 'store_products.product_id', '=', 'products.id')
-                ->select(
-                    'products.*',
-                    'products.text as product',
-                    'statuses.name as status',
-                    'store_products.quantity as availabe_qty',
-                    'store_products.*',
-                    'store_products.cost as price',
-                    'store_products.id as store_product_id',
-                    'stores.text as store',
+    //         $product = StoreProduct::where('store_products.quantity', '!=', 0)
+    //             ->where('store_products.product_id', '=', $value['id'])
+    //             ->join('stores', 'store_products.store_id', '=', 'stores.id')
+    //             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+    //             ->join('products', 'store_products.product_id', '=', 'products.id')
+    //             ->select(
+    //                 'products.*',
+    //                 'products.text as product',
+    //                 'statuses.name as status',
+    //                 'store_products.quantity as availabe_qty',
+    //                 'store_products.*',
+    //                 'store_products.cost as price',
+    //                 'store_products.id as store_product_id',
+    //                 'stores.text as store',
 
-                )
-                ->get();
+    //             )
+    //             ->get();
 
-            // dd($product);
+    //         // dd($product);
 
-            foreach ($product as  $value) {
+    //         foreach ($product as  $value) {
 
-                $this->data[$this->count] = $value;
-                #
-                $this->count = $this->count + 1;
-            }
-
-        }
-    }
+    //             $this->data[$this->count] = $value;
+    //             #
+    //             $this->count = $this->count + 1;
+    //         }
+    //     }
+    // }
 
 
 
     public function product_detail($value = null)
     {
 
-        return (
+
+        if (
             $this->request->segment(2) == 'newpurchase' ||
             $this->request->segment(2) == 'newsupply' ||
-            $this->request->segment(1) == 'show_product') ? $this->product_detail_by_product($value) : $this->product_detail_by_another($value);
+            $this->request->segment(1) == 'show_product' ||
+            $this->request->segment(1) == 'opening'
+        ) {
+
+            $this->product_detail_by_product($value);
+        } elseif ($this->request->segment(1) == 'get_product_price') {
+
+            $this->product_detail_by_price($value);
+        } else {
+
+            $this->product_detail_by_another($value);
+        }
+
     }
 
     public function product_detail_by_product($value = null)
@@ -191,16 +202,14 @@ class FilterService
 
         if ($value['status'] == 'false') {
 
+
             $product = DB::table('products')
                 ->where('products.id', $value['id'])
                 ->join('store_products', 'store_products.product_id', '=', 'products.id')
                 ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
-                // ->join('stores', 'store_products.store_id', '=', 'stores.id')
                 ->select(
                     'products.*',
                     'products.text as product',
-                    // 'stores.text as store',
-                    // 'stores.account_id as store_account_id',
                     'statuses.name as status',
                     'store_products.quantity as availabe_qty',
                     'store_products.*',
@@ -214,12 +223,53 @@ class FilterService
 
 
 
-                foreach ($product as  $value) {
+            foreach ($product as  $value) {
 
-                    $this->data[$this->count] = $value;
-                    $this->count = $this->count + 1;
-                }
+                $this->data[$this->count] = $value;
+                $this->count = $this->count + 1;
+            }
+        }
 
+
+
+
+        // dd($this->qty->details);
+    }
+
+    public function product_detail_by_price($value = null)
+    {
+
+
+        if ($value['status'] == 'false') {
+
+
+            $product = DB::table('products')
+                ->where('products.id', $value['id'])
+                ->join('store_products', 'store_products.product_id', '=', 'products.id')
+                ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
+                ->join('product_units', 'product_units.product_id', '=', 'products.id')
+                ->join('units', 'product_units.unit_id', '=', 'units.id')
+
+                ->select(
+                    'products.*',
+                    'units.name as unit_name',
+                    'store_products.id as store_product_id',
+                    'product_units.id as product_unit_id',
+                    'store_products.desc',
+                    'statuses.name',
+
+                )
+                ->get();
+
+
+
+
+
+            foreach ($product as  $value) {
+
+                $this->data[$this->count] = $value;
+                $this->count = $this->count + 1;
+            }
         }
 
 
@@ -256,12 +306,11 @@ class FilterService
 
 
 
-                foreach ($product as  $value) {
+            foreach ($product as  $value) {
 
-                    $this->data[$this->count] = $value;
-                    $this->count = $this->count + 1;
-                }
-
+                $this->data[$this->count] = $value;
+                $this->count = $this->count + 1;
+            }
         }
 
 
@@ -301,13 +350,12 @@ class FilterService
 
 
 
-                foreach ($product as  $value) {
+            foreach ($product as  $value) {
 
-                    $this->data[$this->count] = $value;
-                    #
-                    $this->count = $this->count + 1;
-                }
-
+                $this->data[$this->count] = $value;
+                #
+                $this->count = $this->count + 1;
+            }
         }
     }
 }

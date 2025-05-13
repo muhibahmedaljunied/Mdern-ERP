@@ -100,7 +100,6 @@ trait StoreProductTrait
     {
 
 
-        // dd($this->core->data_store_product[0]['total'] , $this->core->data_store_product[0]['quantity'],($this->core->data_store_product[0]['total'] / $this->core->data_store_product[0]['quantity']));
         if ($this->core->data_store_product[0]['total'] == 0 || $this->core->data_store_product[0]['quantity'] == 0) {
 
             DB::table('store_products')
@@ -124,7 +123,6 @@ trait StoreProductTrait
         // dd('we',$this->core);
         $this->core->data_store_product =  collect(StoreProduct::where([
             'store_products.id' => $this->core->data['old'][$this->core->value]['store_product_id'],
-
         ])
             ->select()
             ->get())
@@ -135,6 +133,43 @@ trait StoreProductTrait
 
 
         return $this;
+    }
+    function get_store_product_when_return_to_another_store()
+    {
+
+
+        // dd('we',$this->core);
+        $this->core->data_store_product = collect(StoreProduct::where([
+            'store_products.qr_code' => $this->core->data['old'][$this->core->value]['qr_code'],
+            'store_products.store_id' => $this->core->data['store'][$this->core->value],
+        ])
+            ->select()
+            ->get())
+            ->toArray();
+
+        $this->core->id_store_product = ($this->core->data_store_product == null) ? 0 : $this->core->data_store_product[0]['id'];
+
+
+        return $this;
+    }
+
+    public function get_store_product_table()
+    {
+
+
+        $this->core->data_store_product = collect(
+            StoreProduct::where([
+                'store_products.store_id' => $this->core->id_store_product,
+
+            ])
+                ->select(
+                    'store_products.*',
+                )
+                ->get()
+        )->toArray();
+
+
+        $this->core->id_store_product = ($this->core->data_store_product == null) ? 0 : $this->core->data_store_product[0]['id'];
     }
 
 
@@ -147,19 +182,7 @@ trait StoreProductTrait
             'id' => $this->core->data['store_product_id'][$this->core->value],
         ])->get())
             ->toArray();
-        // dd($this->core->data_store_product);
-        // ----------------------------------------------------------------------
-        // dd($this->core->data_store_product[0]['store_id']);
-        // if ($this->core->data_store_product[0]['store_id'] != null) {
 
-        //     $this->core->data_store_product = collect(StoreProduct::where([
-        //         'id' => $this->core->data['store_product_id'][$this->core->value],
-
-        //     ])
-        //         ->select()
-        //         ->get())
-        //         ->toArray();
-        // }
 
         $this->core->id_store_product = ($this->core->data_store_product == null) ? 0 : $this->core->data_store_product[0]['id'];
     }
@@ -167,37 +190,5 @@ trait StoreProductTrait
 
 
 
-    // function get_store_product_one_table()
-    // {
 
-
-
-    //     $this->core->data_store_product = collect(StoreProduct::where([
-    //         'product_id' => $this->core->data['product'][$this->core->value],
-    //         'store_id' => $this->core->data['store'][$this->core->value],
-    //         'status_id' => $this->core->data['status'][$this->core->value],
-    //         'desc' => $this->core->data['desc'][$this->core->value]
-    //     ])
-    //         ->select()
-    //         ->get())->toArray();
-
-
-    //     $this->core->id_store_product = ($this->core->data_store_product == null) ? 0 : $this->core->data_store_product[0]['id'];
-    // }
-
-
-    // function get_store_product_tow_table()
-    // {
-
-    //     $this->core->data_store_product  = collect(StoreProduct::where([
-    //         'store_products.id' => $this->core->data['old'][$this->core->value]['store_product_id'],
-
-    //     ])
-    //         ->select()
-    //         ->get())->toArray();
-
-    //     // dd($this->core->data_store_product);
-
-    //     $this->core->id_store_product = ($this->core->data_store_product == null) ? 0 : $this->core->data_store_product[0]['id'];
-    // }
 }
