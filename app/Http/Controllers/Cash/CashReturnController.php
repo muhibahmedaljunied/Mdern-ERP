@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Cash;
 use Illuminate\Support\Facades\Cache;
-use App\Traits\Return\ReturnTrait;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\CashReturnDetail;
-use App\Traits\OperationDataTrait;
 use App\Http\Controllers\Controller;
 use App\Models\CashReturn;
 use App\Models\Payment;
@@ -20,9 +18,7 @@ use Illuminate\Support\Facades\Auth;
 class CashReturnController extends Controller
 {
 
-    use GeneralTrait,
-        OperationDataTrait,
-        ReturnTrait;
+    use GeneralTrait;
     public $qty;
     public $filter;
 

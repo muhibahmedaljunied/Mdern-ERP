@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Sale;
-
 use App\Services\StockService;
 use Illuminate\Support\Facades\Cache;
-use App\Traits\Return\ReturnTrait;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\SaleReturn;
-use App\Traits\OperationDataTrait;
 use App\Repository\Qty\QtyStockRepository;
 use App\Services\FilterService;
 use Illuminate\Support\Facades\DB;
@@ -18,10 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class SaleReturnController extends Controller
 {
 
-    use GeneralTrait,
-        OperationDataTrait,
-        ReturnTrait;
-
+    use GeneralTrait;
     public $qty;
     public $filter;
 

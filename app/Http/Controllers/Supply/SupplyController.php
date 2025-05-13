@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
-use App\Traits\Invoice\InvoiceTrait;
 use App\Traits\GeneralTrait;
-use App\Traits\OperationDataTrait;
 use Illuminate\Http\Request;
 use App\Models\status;
 use App\Models\Temporale;
@@ -22,9 +20,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class SupplyController extends Controller
 {
-    use InvoiceTrait,
-        OperationDataTrait,
-        GeneralTrait;
+    use GeneralTrait;
 
     public $qty;
     public $products;

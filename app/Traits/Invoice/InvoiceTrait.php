@@ -20,7 +20,6 @@ trait InvoiceTrait
             ->join('products', 'store_products.product_id', '=', 'products.id')
             ->join('statuses', 'store_products.status_id', '=', 'statuses.id')
             ->join('stores', 'store_products.store_id', '=', 'stores.id')
-            // ->join('units', $table . '.unit_id', '=', 'units.id')
             ->select('store_products.*','products.*', 'products.text as product', 'units.name as unit', $table . '.*', 'statuses.name as status', 'stores.text as store', 'store_products.quantity as avilable_qty', 'store_products.desc', DB::raw($table . '.qty-' . $table . '.qty_return AS qty_remain'))
             // ->select('products.*','products.text as product', 'purchase_details.*', 'statuses.*', 'statuses.name as status','units.name as unit', 'stores.*','stores.text as store', 'store_products.quantity as avilable_qty', 'store_products.desc', DB::raw('purchase_details.qty-purchase_details.qty_return AS qty_remain'))
             ->get();

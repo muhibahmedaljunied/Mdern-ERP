@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\HrAccount;
-use App\Traits\Invoice\InvoiceTrait;
-use App\Traits\OperationDataTrait;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\status;
@@ -22,9 +20,7 @@ use App\Services\FilterService;
 
 class PurchaseController extends Controller
 {
-    use InvoiceTrait,
-        OperationDataTrait,
-        GeneralTrait;
+    use GeneralTrait;
 
     public $qty;
     public $products;
@@ -37,15 +33,13 @@ class PurchaseController extends Controller
         FilterService $filter
     ) {
 
- 
+
         $this->qty = $qty;
         $this->request = $request;
         $this->filter = $filter;
     }
     public function details()
     {
-
-
         $this->qty->set_compare_array(['qty']);
         $this->init();
         $this->get_details();
@@ -62,10 +56,6 @@ class PurchaseController extends Controller
 
         $this->product();
         $this->operation_data();
-
-
-
-        // dd($this->qty->details);
         return response()->json([
             'products' => $this->products,
             'store_products' => $this->qty->details,

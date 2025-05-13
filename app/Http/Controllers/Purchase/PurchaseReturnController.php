@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Purchase;
-
 use Illuminate\Support\Facades\Cache;
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
-use App\Traits\OperationDataTrait;
 use Illuminate\Http\Request;
 use App\Models\PurchaseReturn;
 use App\Repository\Qty\QtyStockRepository;
@@ -17,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class PurchaseReturnController extends Controller
 {
 
-    use GeneralTrait, OperationDataTrait;
+    use GeneralTrait;
 
     public $qty;
     public $filter;

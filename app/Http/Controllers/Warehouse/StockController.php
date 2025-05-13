@@ -1,23 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-use App\Traits\OperationDataTrait;
 use App\Models\Stock;
 use App\Models\StoreProduct;
 use Illuminate\Http\Request;
-use App\Traits\Unit\UnitsTrait;
 use App\Http\Controllers\Controller;
 use App\Models\Status;
 use App\Repository\Qty\QtyStockRepository;
 use App\Services\FilterService;
+use App\Traits\GeneralTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
 {
-
-    use UnitsTrait, OperationDataTrait;
-
+    use GeneralTrait;
     public $qty;
     public $request;
     public $filter;

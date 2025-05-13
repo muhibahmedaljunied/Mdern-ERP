@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Sale;
 use App\Services\StockService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
-use App\Traits\Invoice\InvoiceTrait;
 use App\Http\Controllers\Controller;
 use App\Models\HrAccount;
 use App\Models\Payment;
@@ -12,8 +11,6 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\StoreProduct;
-use App\Traits\Unit\UnitsTrait;
-use App\Traits\OperationDataTrait;
 use App\Models\Sale;
 use App\Repository\Qty\QtyStockRepository;
 use App\Services\FilterService;
@@ -21,10 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class SaleController extends Controller
 {
-    use UnitsTrait,
-        GeneralTrait,
-        OperationDataTrait,
-        InvoiceTrait;
+    use GeneralTrait;
 
     public $qty;
     public $details;

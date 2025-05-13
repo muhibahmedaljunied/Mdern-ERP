@@ -1,18 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Cash;
-
 use App\Repository\CheckData\CheckCashReturnRepository;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
-use App\Traits\Invoice\InvoiceTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Models\StoreProduct;
-use App\Traits\Unit\UnitsTrait;
-use App\Traits\OperationDataTrait;
 use App\Models\Cash;
 use App\Models\Payment;
 use App\Repository\Qty\QtyStockRepository;
@@ -22,12 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class CashController extends Controller
 {
-    use InvoiceTrait,
-        UnitsTrait,
-        OperationDataTrait,
-        GeneralTrait;
-
-
+    use GeneralTrait;
     public $qty;
     public $request;
     public $filter;

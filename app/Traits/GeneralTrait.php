@@ -6,10 +6,18 @@ use App\Traits\ConditionTrait;
 use App\Traits\Details\DetailsTrait;
 use App\Traits\Return\ReturnTrait;
 use App\Models\PaymentPurchase;
+use App\Traits\Invoice\InvoiceTrait;
+use App\Traits\Unit\UnitsTrait;
 
 trait GeneralTrait
 {
-    use ConditionTrait, DetailsTrait, ReturnTrait;
+    use ConditionTrait,
+        DetailsTrait,
+        ReturnTrait,
+        OperationDataTrait,
+        InvoiceTrait,
+        ProductPriceTrait,
+        UnitsTrait;
 
 
 
@@ -18,11 +26,16 @@ trait GeneralTrait
 
         $payment_status = 'pendding';
         $payment_info = $data['type'];
-        if ($data['paid'] == 0) { $payment_status = 'pendding';}
-        if ($data['paid'] != 0 && $data['remaining'] != 0) {$payment_status = 'Partially';}
-        ($data['remaining'] == 1) ? $payment_info = $data['type'] : $payment_info = 'credit' ;$payment_status = 'paiding';
+        if ($data['paid'] == 0) {
+            $payment_status = 'pendding';
+        }
+        if ($data['paid'] != 0 && $data['remaining'] != 0) {
+            $payment_status = 'Partially';
+        }
+        ($data['remaining'] == 1) ? $payment_info = $data['type'] : $payment_info = 'credit';
+        $payment_status = 'paiding';
         // -----------------------------------------------------------------------------------------
-        $payment = ($data['type'] == 'Purchase') ? $this->payment_purchase() : $this->payment_sale() ;
+        $payment = ($data['type'] == 'Purchase') ? $this->payment_purchase() : $this->payment_sale();
 
         $payment = new PaymentPurchase();
         $payment->purchase_id = $id;

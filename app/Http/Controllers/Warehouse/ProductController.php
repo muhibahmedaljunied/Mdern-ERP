@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-use App\Traits\ProductPriceTrait;
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -14,16 +13,16 @@ use App\Models\Product;
 use App\Models\ProductPrice;
 use App\Repository\Qty\QtyStockRepository;
 use App\Services\FilterService;
+use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Traits\OperationDataTrait;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\QrCode;
 use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
 
-    use OperationDataTrait,ProductPriceTrait;
+    use GeneralTrait;
     public $qty;
     public $products;
     public $store_products;

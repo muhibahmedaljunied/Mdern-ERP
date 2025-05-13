@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Supply;
 use Illuminate\Support\Facades\Cache;
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
-use App\Traits\OperationDataTrait;
 use Illuminate\Http\Request;
 use App\Models\SupplyReturn;
 use App\Repository\Qty\QtyStockRepository;
@@ -17,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class SupplyReturnController extends Controller
 {
 
-    use GeneralTrait, OperationDataTrait;
+    use GeneralTrait;
     public $qty;
     public $filter;
 

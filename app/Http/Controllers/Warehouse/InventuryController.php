@@ -5,9 +5,6 @@ use App\Exports\OpeningInventuryExport;
 use App\Traits\GeneralTrait;
 use App\Http\Controllers\Controller;
 use App\Imports\OpeningInventuryImport;
-use App\Traits\Invoice\InvoiceTrait;
-use App\Traits\Details\DetailsTrait;
-use App\Traits\OperationDataTrait;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Temporale;
@@ -18,10 +15,7 @@ use App\Services\OpeningService;
 use Illuminate\Support\Facades\DB;
 class InventuryController extends Controller
 {
-    use InvoiceTrait,
-        DetailsTrait,
-        OperationDataTrait,
-        GeneralTrait;
+    use GeneralTrait;
 
     public $qty;
     public $products;
