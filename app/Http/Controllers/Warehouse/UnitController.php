@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Warehouse;
-
 use App\Services\FilterService;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\ProductUnit;
 use App\Models\Status;
-use Illuminate\Support\Facades\DB;
+
 
 class UnitController extends Controller
 {

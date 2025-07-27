@@ -187,12 +187,12 @@
 
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                         <label for="pagoPrevio">اختيار الكل</label> <br>
 
                                         <input v-model="check_state_all" @change="check_all_return()" type="checkbox"
                                             class="btn btn-info waves-effect">
-                                    </div>
+                                    </div> -->
 
                                 </div>
                                 <hr>
@@ -675,38 +675,6 @@ export default {
         },
 
 
-        // check_all_return() {
-
-
-
-
-        //   for (let index = 0; index < this.detail.length; index++) {
-
-        //     if (this.check_state_all == true) {
-
-
-        //       this.check_state[index] = true;
-
-        //     } else {
-
-        //       this.check_state[index] = false;
-        //     }
-
-        //     this.detail.forEach(element => {
-
-        //       this.calculate_total(index,element);
-        //     });
-
-
-
-
-
-        //   }
-
-
-
-
-        // },
         set_values() {
 
             this.counts[this.row_counter] = this.row_counter;
@@ -767,6 +735,7 @@ export default {
                     count: this.count,
                     unit: this.unit,
                     qty: this.qty,
+                    store: this.storem, //this store that we was returned into it
                     total: this.total,
                     credit: {
                         account_id: $(`#CashReturn_account_tree_id`).val(),

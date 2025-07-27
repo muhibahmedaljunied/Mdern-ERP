@@ -102,6 +102,7 @@ class FilterService
 
         ($this->type == 'store') ? $this->store() : $this->product();
 
+        // dd($this->data);
         return $this->data;
     }
 

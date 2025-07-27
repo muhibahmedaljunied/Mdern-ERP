@@ -129,10 +129,10 @@
 
 
                                             <div>
-                                                <input type="hidden" v-model="return_details.text" id="desc"
+                                                <input type="hidden" v-model="return_details.product_name"
                                                     class="form-control" />
 
-                                                <span>{{ return_details.text }}</span>
+                                                <span>{{ return_details.product_name }}</span>
                                                 <span style="color: blue;" v-if="return_details.kk" v-for="ss in return_details.kk">
 
 

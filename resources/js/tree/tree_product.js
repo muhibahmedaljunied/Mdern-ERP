@@ -2,12 +2,12 @@ export default {
     methods: {
         check_prouct(table, data, count = null) {
             // this.productm = []; //this for empty productm array when change from product into another by clicking tree
-            console.log(
-                "check_prouctcheck_prouctcheck_prouct",
-                table,
-                data,
-                count
-            );
+            // console.log(
+            //     "check_prouctcheck_prouctcheck_prouct",
+            //     table,
+            //     data,
+            //     count
+            // );
             if (this.type == "Stock" || this.type == "Movement") {
                 this.productselected = data.node.id;
                 this.productselectedname = data.node.text;

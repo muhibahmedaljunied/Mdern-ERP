@@ -140,7 +140,6 @@ class SaleController extends Controller
 
             $stock->handle();
 
-            //// (Sa'finall'
 
             Cache::forget('stock');
             // dd(12);

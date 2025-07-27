@@ -12,8 +12,11 @@ trait OperationDataTrait
     {
 
         $this->start();
+        // dd($this->qty->details);
         $this->check_duplicate();
+        // dd($this->qty->details);
         $this->variant();
+        // dd($this->qty->details);
         $this->unit();
     }
 

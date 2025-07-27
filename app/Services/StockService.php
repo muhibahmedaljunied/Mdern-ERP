@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-
+use App\Models\FamilyAttributeOption;
+use App\Models\ProductPrice;
+use App\Models\StoreProduct;
 use App\Repository\CheckData\CheckSaleReturnRepository;
 use Illuminate\Http\Request;
 use App\Repository\StockInventury\StockRepository;
@@ -50,25 +52,22 @@ class  StockService
         // $this->check_return_qty();
         $this->warehouse->add();
         // foreach ($this->core->data['count'] as $value) {
-
+            // dd(ProductPrice::all());
         for ($value = 0; $value < $this->core->data['count']; $value++) {
-
 
             if ($this->core->data['total'][$value] > 0) {
 
-
                 // dd($value);
-
                 $this->core->setValue($value);
-
                 $this->handle_core();
+
             }
 
 
         }
 
-
-        // dd('finall');
+        // dd(ProductPrice::all());
+        dd('finall');
 
         $this->payment->pay();
 

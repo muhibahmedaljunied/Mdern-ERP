@@ -8,7 +8,6 @@
                     <span class="h2">المنتجات</span>
                 </div>
             </div>
-
             <div class="card-body">
                 <div class="row row-sm">
 
@@ -105,11 +104,9 @@
 
                                                                             <tbody v-if="showCatProduct">
 
-                                                                                <tr v-for="(productss, index) in showCatProduct"
-                                                                                    :key="index">
+                                                                                <tr v-for="(productss, index) in showCatProduct" :key="index">
+                                                                                    <td>{{ index + 1 }}  </td>
 
-
-                                                                                    <td> {{ index + 1 }}</td>
 
 
                                                                                     <td>

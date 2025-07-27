@@ -137,8 +137,7 @@ trait StoreProductTrait
     function get_store_product_when_return_to_another_store()
     {
 
-
-        // dd('we',$this->core);
+        // dd('we',$this->core->data['old'][$this->core->value]['qr_code'],$this->core->data['store'][$this->core->value]);
         $this->core->data_store_product = collect(StoreProduct::where([
             'store_products.qr_code' => $this->core->data['old'][$this->core->value]['qr_code'],
             'store_products.store_id' => $this->core->data['store'][$this->core->value],

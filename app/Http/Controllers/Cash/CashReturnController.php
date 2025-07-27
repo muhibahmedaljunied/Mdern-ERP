@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Cash;
+
 use Illuminate\Support\Facades\Cache;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
@@ -147,7 +148,9 @@ class CashReturnController extends Controller
         $this->get_return_details();
         $this->variant();
         $this->qty->handle_qty();
-        return response()->json(['return_details' => $this->qty->details]);
+        return response()->json([
+            'return_details' => $this->qty->details
+        ]);
     }
 
     public function get_cash_return_detail()

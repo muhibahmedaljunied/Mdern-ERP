@@ -7,6 +7,7 @@ use App\Traits\Details\DetailsTrait;
 use App\Traits\Return\ReturnTrait;
 use App\Models\PaymentPurchase;
 use App\Traits\Invoice\InvoiceTrait;
+use App\Traits\Transfer\StoreProductTrait;
 use App\Traits\Unit\UnitsTrait;
 
 trait GeneralTrait
@@ -17,6 +18,7 @@ trait GeneralTrait
         OperationDataTrait,
         InvoiceTrait,
         ProductPriceTrait,
+        StoreProductTrait,
         UnitsTrait;
 
 

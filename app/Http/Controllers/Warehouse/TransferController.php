@@ -5,7 +5,6 @@ use App\Repository\Unit\UnitTransferRepository;
 use App\Repository\StoreInventury\StoreTransferRepository;
 use App\Repository\StockInventury\StockTransferRepository;
 use App\Repository\CheckData\CheckTransferRepository;
-use App\Traits\Transfer\StoreProductTrait;
 use App\Repository\Stock\TransferRepository;
 use App\Traits\GeneralTrait;
 use App\Models\Product;
@@ -21,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 class TransferController extends Controller
 {
 
-    use StoreProductTrait, GeneralTrait;
+    use  GeneralTrait;
 
     public $qty;
     public $details;

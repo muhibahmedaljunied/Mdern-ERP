@@ -42,7 +42,7 @@ export default {
         get_account_for_store(length) {
             //this called when selected store in top
 
-            console.log("whyyyyyyyyyyy", length);
+            // console.log("whyyyyyyyyyyy", length);
             axios.post(`/get_account_store/${this.store}`).then((response) => {
                 var arrayLength = response.data.accounts.length;
 
@@ -79,6 +79,27 @@ export default {
 
                 // -----------------------------------------------------------------------------------
                 if (this.type == "SaleReturn") {
+                    for (const key in length) {
+                        if (length.hasOwnProperty.call(length, key)) {
+                            let element = 0;
+
+                            element = key;
+                            if (!response.data.accounts.account_id) {
+                                this.get_storem_by_store(
+                                    element,
+                                    response.data.accounts
+                                );
+                            } else {
+                                this.get_account_for_storem_by_store(
+                                    element,
+                                    response.data.accounts
+                                );
+                            }
+                        }
+                    }
+                }
+
+                if (this.type == "CashReturn") {
                     for (const key in length) {
                         if (length.hasOwnProperty.call(length, key)) {
                             let element = 0;
@@ -183,7 +204,7 @@ export default {
                     for (var i = 0; i < arrayLength; i++) {
                         html =
                             html +
-                            `<option 
+                            `<option
                                             value=${response.data.result_data[i].id}>${response.data.result_data[i].name}
                                     </option>`;
 
