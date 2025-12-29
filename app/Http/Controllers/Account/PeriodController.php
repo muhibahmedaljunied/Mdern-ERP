@@ -54,17 +54,44 @@ class PeriodController extends Controller
     public function create_new_year($year)
     {
 
-        $new_database = env('DB_DATABASE') . $year;
-        $old_database = env('DB_DATABASE_second');
-        $path = base_path('.env');
-        $test = file_get_contents($path);
+        // $new_database = env('DB_DATABASE') . $year;
+        // $old_database = env('DB_DATABASE_second');
+        // $path = base_path('.env');
+        // $test = file_get_contents($path);
 
-        if (file_exists($path)) {
-            file_put_contents($path, str_replace("DB_DATABASE_second=$old_database", "DB_DATABASE_second=$new_database", $test));
-        }
+        // if (file_exists($path)) {
+        //     file_put_contents($path, str_replace("DB_DATABASE_second=$old_database", "DB_DATABASE_second=$new_database", $test));
+        // }
 
-        Config::set("database.connections.mysql2.database", env('DB_DATABASE_second', 'forge'));
-        DB::connection('mysql')->statement("CREATE DATABASE $new_database");
+        // Config::set("database.connections.mysql2.database", env('DB_DATABASE_second', 'forge'));
+        // DB::connection('mysql')->statement("CREATE DATABASE $new_database");
+
+
+
+        // Refactored Version (No .env Editing) from co_pilot 
+
+
+        // Step 1: Generate new database name
+        $newDatabase = env('DB_DATABASE') . $year;
+
+        // Step 2: Set it dynamically in Laravel's config
+        Config::set('database.connections.mysql_dynamic.database', $newDatabase);
+
+        // Step 3: Create the new database
+        DB::connection('mysql')->statement("CREATE DATABASE `$newDatabase`");
+
+        // Step 4 Laravel cache
+        cache()->put('active_database', $newDatabase);
+
+        // Then retrieve it later with:
+        $active_database = cache('active_database');
+        Config::set('database.connections.mysql_dynamic.database', $active_database);
+
+
+
+
+
+        // ---------------------------------------------------------------------------------
     }
 
     public function init_new_year_data($data)

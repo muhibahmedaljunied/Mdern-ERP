@@ -1,0 +1,851 @@
+/* #########################################################################
+   RESPONSIVE STYLES - Mobile First Approach
+   ######################################################################### */
+
+/* ============================================
+   Base Responsive Utilities
+   ============================================ */
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive video embeds */
+iframe,
+embed,
+object,
+video {
+  max-width: 100%;
+}
+
+/* ============================================
+   Container & Layout Responsive
+   ============================================ */
+
+@media (max-width: 991.98px) {
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .main-content {
+    .container,
+    .container-fluid {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .main-content {
+    .container,
+    .container-fluid {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+/* ============================================
+   Tables Responsive
+   ============================================ */
+
+/* Make tables horizontally scrollable on mobile */
+@media (max-width: 767.98px) {
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+
+  .table {
+    font-size: 0.875rem;
+
+    th,
+    td {
+      padding: 0.5rem 0.75rem;
+      white-space: nowrap;
+    }
+
+    thead th {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Stack table on very small screens */
+  @media (max-width: 575.98px) {
+    .table-stack {
+      thead {
+        display: none;
+      }
+
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      tr {
+        border: 1px solid #dee2e6;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border-radius: 4px;
+      }
+
+      td {
+        border: none;
+        padding: 0.5rem;
+        text-align: right !important;
+        position: relative;
+        padding-right: 50%;
+
+        &::before {
+          content: attr(data-label);
+          position: absolute;
+          right: 0.5rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+}
+
+/* ============================================
+   Forms Responsive
+   ============================================ */
+
+@media (max-width: 767.98px) {
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .input-group {
+    flex-wrap: wrap;
+
+    .form-control,
+    .input-group-text {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    .input-group-append,
+    .input-group-prepend {
+      width: 100%;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+
+  .form-row {
+    .col,
+    [class*="col-"] {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .form-inline {
+    .form-control,
+    .form-select {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .btn-group-vertical {
+    width: 100%;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+/* ============================================
+   Cards Responsive
+   ============================================ */
+
+@media (max-width: 767.98px) {
+  .card {
+    margin-bottom: 1rem;
+
+    .card-header {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-footer {
+      padding: 0.75rem 1rem;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+    }
+  }
+
+  .card-deck {
+    display: block;
+
+    .card {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .card-group {
+    display: block;
+
+    .card {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .card-columns {
+    column-count: 1;
+  }
+}
+
+/* ============================================
+   Buttons Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .btn {
+      width: 100%;
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem !important;
+    }
+  }
+
+  .btn-toolbar {
+    flex-direction: column;
+
+    .btn-group {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+/* ============================================
+   Navigation & Sidebar Responsive
+   ============================================ */
+
+@media (max-width: 991.98px) {
+  .main-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    &.show {
+      transform: translateX(0);
+    }
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    padding-top: 64px;
+  }
+
+  .app-sidebar__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+
+    &.show {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .main-header {
+    .main-header-left {
+      .main-logo {
+        font-size: 1rem;
+      }
+    }
+
+    .main-header-right {
+      .nav-item {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}
+
+/* ============================================
+   Typography Responsive
+   ============================================ */
+
+@media (max-width: 767.98px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.9rem;
+  }
+
+  .display-1 {
+    font-size: 2.5rem;
+  }
+
+  .display-2 {
+    font-size: 2rem;
+  }
+
+  .display-3 {
+    font-size: 1.75rem;
+  }
+
+  .display-4 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .display-1 {
+    font-size: 2rem;
+  }
+
+  .display-2 {
+    font-size: 1.75rem;
+  }
+
+  .display-3 {
+    font-size: 1.5rem;
+  }
+
+  .display-4 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ============================================
+   Modals Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .modal-dialog {
+    margin: 0.5rem;
+    max-width: calc(100% - 1rem);
+  }
+
+  .modal-content {
+    border-radius: 0.25rem;
+  }
+
+  .modal-header {
+    padding: 0.75rem 1rem;
+
+    .close {
+      padding: 0.75rem 1rem;
+      margin: -0.75rem -1rem -0.75rem auto;
+    }
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .modal-footer {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* ============================================
+   Dropdowns Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* ============================================
+   Pagination Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .page-item {
+      margin-bottom: 0.5rem;
+    }
+
+    .page-link {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+}
+
+/* ============================================
+   Breadcrumbs Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .breadcrumb {
+    flex-wrap: wrap;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+
+    .breadcrumb-item {
+      & + .breadcrumb-item::before {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+      }
+    }
+  }
+}
+
+/* ============================================
+   Badges & Labels Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* ============================================
+   Alerts Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .alert {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+
+    .alert-heading {
+      font-size: 1rem;
+    }
+  }
+}
+
+/* ============================================
+   List Groups Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .list-group-item {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ============================================
+   Utilities - Spacing Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  /* Reduce padding on mobile */
+  .p-5 {
+    padding: 1.5rem !important;
+  }
+
+  .p-4 {
+    padding: 1.25rem !important;
+  }
+
+  .px-5 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .px-4 {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  .py-5 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .py-4 {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  /* Reduce margins on mobile */
+  .m-5 {
+    margin: 1.5rem !important;
+  }
+
+  .m-4 {
+    margin: 1.25rem !important;
+  }
+
+  .mx-5 {
+    margin-left: 1.5rem !important;
+    margin-right: 1.5rem !important;
+  }
+
+  .mx-4 {
+    margin-left: 1.25rem !important;
+    margin-right: 1.25rem !important;
+  }
+
+  .my-5 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .my-4 {
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+}
+
+/* ============================================
+   DataTables Responsive
+   ============================================ */
+
+@media (max-width: 767.98px) {
+  .dataTables_wrapper {
+    .dataTables_length,
+    .dataTables_filter {
+      margin-bottom: 1rem;
+    }
+
+    .dataTables_info,
+    .dataTables_paginate {
+      margin-top: 1rem;
+      text-align: center;
+    }
+  }
+
+  .dataTable {
+    font-size: 0.875rem;
+  }
+}
+
+/* ============================================
+   Invoice & Print Styles Responsive
+   ============================================ */
+
+@media (max-width: 767.98px) {
+  .invoice {
+    padding: 15px;
+
+    .invoice-header {
+      flex-direction: column;
+      text-align: center;
+
+      .invoice-logo {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .invoice-details {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    table {
+      font-size: 0.875rem;
+
+      th,
+      td {
+        padding: 0.5rem;
+      }
+    }
+  }
+}
+
+/* ============================================
+   Dashboard & Widgets Responsive
+   ============================================ */
+
+@media (max-width: 991.98px) {
+  .row {
+    > [class*="col-"] {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .card-dashboard {
+    margin-bottom: 1rem;
+  }
+
+  .widget-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* ============================================
+   Charts Responsive
+   ============================================ */
+
+@media (max-width: 767.98px) {
+  .chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+
+    canvas {
+      max-width: 100%;
+      height: auto !important;
+    }
+  }
+}
+
+/* ============================================
+   Tabs Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .nav-tabs {
+    flex-wrap: wrap;
+    border-bottom: 1px solid #dee2e6;
+
+    .nav-item {
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-link {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  .tab-content {
+    padding: 1rem 0;
+  }
+}
+
+/* ============================================
+   Accordion Responsive
+   ============================================ */
+
+@media (max-width: 575.98px) {
+  .accordion {
+    .card-header {
+      padding: 0.75rem 1rem;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+  }
+}
+
+/* ============================================
+   Custom Responsive Classes
+   ============================================ */
+
+/* Hide on mobile */
+@media (max-width: 767.98px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Show only on mobile */
+@media (min-width: 768px) {
+  .show-mobile-only {
+    display: none !important;
+  }
+}
+
+/* Hide on tablet and below */
+@media (max-width: 991.98px) {
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+/* Show only on desktop */
+@media (max-width: 991.98px) {
+  .show-desktop-only {
+    display: none !important;
+  }
+}
+
+/* Text alignment on mobile */
+@media (max-width: 575.98px) {
+  .text-center-mobile {
+    text-align: center !important;
+  }
+
+  .text-left-mobile {
+    text-align: left !important;
+  }
+
+  .text-right-mobile {
+    text-align: right !important;
+  }
+}
+
+/* Full width on mobile */
+@media (max-width: 575.98px) {
+  .w-100-mobile {
+    width: 100% !important;
+  }
+}
+
+/* ============================================
+   RTL Support Responsive
+   ============================================ */
+
+[dir="rtl"] {
+  @media (max-width: 575.98px) {
+    .text-right-mobile {
+      text-align: left !important;
+    }
+
+    .text-left-mobile {
+      text-align: right !important;
+    }
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  .main-sidebar,
+  .main-header,
+  .btn,
+  .pagination,
+  .dataTables_wrapper .dataTables_filter,
+  .dataTables_wrapper .dataTables_length {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+
+  .card {
+    border: 1px solid #000 !important;
+    page-break-inside: avoid;
+  }
+
+  .table {
+    font-size: 10pt;
+
+    th,
+    td {
+      padding: 0.25rem;
+    }
+  }
+}
+

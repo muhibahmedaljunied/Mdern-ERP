@@ -21,4 +21,5 @@
 <script src="{{URL::asset('assets/js/sticky.js')}}" defer></script>
 <script src="{{URL::asset('assets/js/custom.js')}}" defer></script>
 <script src="{{URL::asset('assets/plugins/side-menu/sidemenu.js')}}" defer></script>
+<script src="{{URL::asset('assets/js/responsive.js')}}"></script>
 
